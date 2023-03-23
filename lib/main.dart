@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/pages/home.dart';
+import 'package:once_power/provider/action.dart';
+import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -7,9 +9,11 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions options = const WindowOptions(
-    size: Size(1000, 700),
-    minimumSize: Size(1000, 700),
+    size: Size(1000, 600),
+    minimumSize: Size(1000, 600),
     center: true,
+    title: 'OncePower',
+    // titleBarStyle: TitleBarStyle.hidden,
   );
 
   windowManager.waitUntilReadyToShow(options, () async {
@@ -24,9 +28,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'OncePower',
-      home: HomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ActionProvider()),
+      ],
+      child: MaterialApp(
+        title: 'OncePower',
+        debugShowCheckedModeBanner: false,
+        home: const HomePage(),
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+      ),
     );
   }
 }
