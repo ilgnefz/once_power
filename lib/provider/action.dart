@@ -85,16 +85,19 @@ class ActionProvider extends ChangeNotifier {
       allowMultiple: true,
     );
     if (result != null) {
-      var value = result.files.single;
-      addFile(value);
+      var files = result.files;
+      for (var value in files) {
+        addFile(value);
+      }
       notifyListeners();
     }
   }
 
-  getAllFile(dir) {
+  getAllFile(dir, [String? newPath]) {
     Directory directory = Directory(dir);
     List<FileSystemEntity> allFile = directory.listSync();
     if (allFile.isNotEmpty) {
+      if (newPath != null) return allFile.any((e) => e.path == newPath);
       for (var value in allFile) {
         if (value.statSync().type == FileSystemEntityType.directory) {
           getAllFile(value.path);
@@ -106,8 +109,9 @@ class ActionProvider extends ChangeNotifier {
   }
 
   addFile(value) {
-    var id = nanoid(10);
     String name = path.basename(value.path).split('.').first;
+    if (_files.any((e) => e.name == name)) return;
+    var id = nanoid(10);
     String extension = path.extension(value.path).replaceFirst('.', '');
     _files.add(
       MyFile(
@@ -121,6 +125,11 @@ class ActionProvider extends ChangeNotifier {
         checked: true,
       ),
     );
+  }
+
+  clearFiles() {
+    _files.clear();
+    notifyListeners();
   }
 
   getFileType(String extension) {
@@ -301,11 +310,25 @@ class ActionProvider extends ChangeNotifier {
 
   applyChange() {
     for (var file in _files) {
-      var oldPath = path.join(file.parent, file.name, file.extension);
-      var newPath = path.join(file.parent, file.newName, file.extension);
-      debugPrint(oldPath);
-      debugPrint(newPath);
-      // File(oldPath).renameSync(newPath);
+      if (file.checked) {
+        var oldPath = path.join(file.parent, '${file.name}.${file.extension}');
+        var newPath =
+            path.join(file.parent, '${file.newName.trim()}.${file.extension}');
+        debugPrint(oldPath);
+        debugPrint(newPath);
+        try {
+          if (getAllFile(file.parent, newPath)) {
+            print('更名失败，目录下已存在同名文件');
+            return;
+          }
+          File(oldPath).renameSync(newPath);
+          print('文件名更改成功');
+        } catch (e) {
+          print('文件名更改失败');
+        }
+        file.name = path.basename(newPath).split('.').first;
+      }
     }
+    notifyListeners();
   }
 }

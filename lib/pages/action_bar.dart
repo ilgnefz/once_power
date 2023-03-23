@@ -23,7 +23,7 @@ class ActionBar extends StatelessWidget {
               onChange: (v) => provider.switchUse('appendMode'),
             ),
             SimpleCheckbox(
-              title: '更改文件夹',
+              title: '添加文件夹',
               checked: provider.folderMode,
               onChange: (v) => provider.switchUse('folderMode'),
             ),
@@ -44,6 +44,10 @@ class ActionBar extends StatelessWidget {
         Row(
           children: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+            IconButton(
+              onPressed: provider.clearFiles,
+              icon: const Icon(Icons.delete),
+            ),
             const Spacer(),
             ElevatedButton(
               onPressed: provider.applyChange,
