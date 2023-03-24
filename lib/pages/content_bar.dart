@@ -37,7 +37,6 @@ class ContentBar extends StatelessWidget {
                 return [
                   PopupMenuItem(
                     child: MyText('删除未选中'),
-                    enabled: provider.unselectedFilesCount != 0,
                     onTap: provider.removeUnselected,
                   ),
                   PopupMenuItem(

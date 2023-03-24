@@ -126,6 +126,7 @@ class ActionProvider extends ChangeNotifier {
   ModeType get modeType => _modeType;
   toggleModeType(ModeType value) {
     _modeType = value;
+    updateName();
     notifyListeners();
   }
 
@@ -133,6 +134,7 @@ class ActionProvider extends ChangeNotifier {
   UseType get useType => _useType;
   toggleUseType(UseType value) {
     _useType = value;
+    updateName();
     notifyListeners();
   }
 
@@ -155,16 +157,25 @@ class ActionProvider extends ChangeNotifier {
         if (_files.any((e) => text.contains(e.extension))) CustomFileType.text,
         if (_files.any((e) => audio.contains(e.extension)))
           CustomFileType.audio,
-        if (_files.any((e) => ['dir'].contains(e.extension)))
+        if (_files.any((e) => folder.contains(e.extension)))
           CustomFileType.folder,
         if (_files.isNotEmpty &&
-            !_files.any((e) => [...image, ...video, ...text, ...audio, 'dir']
-                .contains(e.extension)))
+            !_files.any((e) => [
+                  ...image,
+                  ...video,
+                  ...text,
+                  ...audio,
+                  ...folder
+                ].contains(e.extension)))
           CustomFileType.other,
       };
 
   removeUnselected() {
-    _files.removeWhere((value) => value.checked == false);
+    if (unselectedFilesCount != 0) {
+      _files.removeWhere((value) => value.checked == false);
+    } else {
+      Toast.show('删除失败，因为没有可以删除的内容...', MessageType.failure);
+    }
     notifyListeners();
   }
 
@@ -315,6 +326,7 @@ class ActionProvider extends ChangeNotifier {
 
   doubleTapAdd(String value) {
     matchText.text = value;
+    updateName();
     notifyListeners();
   }
 
@@ -381,6 +393,7 @@ class ActionProvider extends ChangeNotifier {
         file.checked = true;
       }
     }
+    updateName();
     notifyListeners();
   }
 
@@ -392,14 +405,42 @@ class ActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  updateFileContent(List<String> list, UseType type, int index) {
+    var value = list.first;
+    if (list.length > 1) {
+      if (_useType == UseType.no || _useType == type) {
+        value = index < list.length ? list[index] : '';
+      } else {
+        value = list[index % list.length];
+      }
+    }
+    return value;
+  }
+
   updateName() {
     var index = 0;
     for (var file in _files) {
       if (file.checked) {
         index++;
-        if (modeType == ModeType.general) generalMode(file, index);
-        if (modeType == ModeType.reserved) {}
-        if (modeType == ModeType.length) {}
+        var fileName = file.name;
+        if (modeType == ModeType.general) fileName = generalMode(file);
+        if (modeType == ModeType.reserved) fileName = useReservedMode(file);
+        if (modeType == ModeType.length) fileName = lengthMode(file);
+        List<String> prefixContent = _prefixUploadContent.isNotEmpty
+            ? _prefixUploadContent
+            : [prefixText.text];
+        List<String> suffixContent = _suffixUploadContent.isNotEmpty
+            ? _suffixUploadContent
+            : [suffixText.text];
+        String prefix = updateFileContent(prefixContent, UseType.suffix, index);
+        String suffix = updateFileContent(suffixContent, UseType.prefix, index);
+        String prefixNum = formatNumber(index, prefixNumText.text.length);
+        String suffixNum = formatNumber(index, suffixNumText.text.length);
+        if (changePosition) {
+          file.newName = prefix + prefixNum + fileName + suffixNum + suffix;
+        } else {
+          file.newName = prefixNum + prefix + fileName + suffix + suffixNum;
+        }
       } else {
         file.newName = file.name;
       }
@@ -407,51 +448,66 @@ class ActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  generalMode(MyFile file, int index) {
-    List<String> prefixContent = _prefixUploadContent.isNotEmpty
-        ? _prefixUploadContent
-        : [prefixText.text];
-    List<String> suffixContent = _suffixUploadContent.isNotEmpty
-        ? _suffixUploadContent
-        : [suffixText.text];
-    // _prefixUploadContent当index小于数组长度时不循环
-    if (prefixContent.length > 1) {
-      if (_useType == UseType.suffix && index < prefixContent.length) {}
-    }
-    // _prefixUploadContent当index小于数组长度时循环
-    // _suffixUploadContent当index小于数组长度时不循环
-    // _suffixUploadContent当index小于数组长度时循环
-    // 全部循环
-    if (changePosition) {
-      file.newName = prefixContent.first +
-          formatNumber(index, prefixNumText.text.length) +
-          file.name +
-          formatNumber(index, suffixNumText.text.length) +
-          suffixContent.first;
-    } else {
-      file.newName = formatNumber(index, prefixNumText.text.length) +
-          prefixContent.first +
-          file.name +
-          suffixContent.first +
-          formatNumber(index, suffixNumText.text.length);
-    }
+  String generalMode(MyFile file) {
+    var fileName = file.name;
     if (matchText.text.isNotEmpty) {
       var index = caseSensitive
-          ? file.newName.indexOf(matchText.text)
-          : file.newName.toLowerCase().indexOf(matchText.text.toLowerCase());
+          ? file.name.indexOf(matchText.text)
+          : file.name.toLowerCase().indexOf(matchText.text.toLowerCase());
       if (index != -1) {
         var splitString = caseSensitive
             ? matchText.text
-            : file.newName.substring(index, index + matchText.text.length);
-        var arr = file.newName.split(splitString);
+            : file.name.substring(index, index + matchText.text.length);
+        var arr = file.name.split(splitString);
         var createText = createDateRename
             ? formatDateTime(file.createDate)
             : targetText.text;
         arr.insert(1, createText);
-        file.newName = arr.join('');
+        fileName = arr.join('');
       }
     }
-    notifyListeners();
+    return fileName;
+  }
+
+  String useReservedMode(MyFile file) {
+    var fileName = '';
+    if (matchText.text.isNotEmpty) {
+      var index = caseSensitive
+          ? file.name.indexOf(matchText.text)
+          : file.name.toLowerCase().indexOf(matchText.text.toLowerCase());
+      if (index != -1) {
+        var splitString = caseSensitive
+            ? matchText.text
+            : file.name.substring(index, index + matchText.text.length);
+        fileName = splitString;
+      }
+    }
+    if (createDateRename) fileName = formatDateTime(file.createDate);
+    return fileName;
+  }
+
+  String lengthMode(MyFile file) {
+    var fileName = file.name;
+    if (matchText.text.isNotEmpty) {
+      int num = file.name.length;
+      if (matchText.text.startsWith('*')) {
+        var value = matchText.text.substring(1);
+        if (value.isNotEmpty) {
+          if (int.tryParse(value) != null) {
+            num = int.parse(value);
+          } else if (double.tryParse(value) != null) {
+            num = double.parse(value).toInt();
+          } else {
+            Toast.show('请输入正确的数字', MessageType.failure);
+          }
+        }
+      } else {
+        num = matchText.text.length;
+      }
+      fileName =
+          file.name.substring(0, num > fileName.length ? fileName.length : num);
+    }
+    return fileName;
   }
 
   applyChange() {

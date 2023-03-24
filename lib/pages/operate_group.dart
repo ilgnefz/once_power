@@ -56,9 +56,13 @@ class OperateGroup extends StatelessWidget {
         ),
         const SpaceBox(),
         AbsorbPointer(
-          absorbing: provider.createDateRename,
+          absorbing: provider.modeType != ModeType.general ||
+              provider.createDateRename,
           child: SimpleInput(
-            hintText: provider.createDateRename ? '输入已禁用' : '修改为',
+            hintText: provider.modeType != ModeType.general ||
+                    provider.createDateRename
+                ? '输入已禁用'
+                : '修改为',
             controller: provider.targetText,
             hidden: provider.targetNull,
             onClear: () => provider.clearInput(provider.targetText),
@@ -66,15 +70,16 @@ class OperateGroup extends StatelessWidget {
           ),
         ),
         const SpaceBox(),
-        Row(
-          children: [
-            SimpleCheckbox(
-              title: '以创建日期命名',
-              checked: provider.createDateRename,
-              onChange: (v) => provider.switchUse('createDateRename'),
-            ),
-          ],
-        ),
+        if (provider.modeType != ModeType.length)
+          Row(
+            children: [
+              SimpleCheckbox(
+                title: '以创建日期命名',
+                checked: provider.createDateRename,
+                onChange: (v) => provider.switchUse('createDateRename'),
+              ),
+            ],
+          ),
         const SpaceBox(),
         LabelSimpleInput(
           label: '前缀',
@@ -114,7 +119,7 @@ class OperateGroup extends StatelessWidget {
         Row(
           children: [
             SimpleCheckbox(
-              title: '前缀数字递增',
+              title: '前缀数字递增:',
               checked: provider.addPrefixNum,
               onChange: (v) => provider.switchUse('addPrefixNum'),
             ),
@@ -135,7 +140,7 @@ class OperateGroup extends StatelessWidget {
         Row(
           children: [
             SimpleCheckbox(
-              title: '后缀数字递增',
+              title: '后缀数字递增:',
               checked: provider.addSuffixNum,
               onChange: (v) => provider.switchUse('addSuffixNum'),
             ),

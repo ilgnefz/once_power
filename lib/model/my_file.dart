@@ -79,3 +79,4 @@ final video = [
 ];
 final text = ['txt', 'doc', 'docx', 'pdf', 'xlsx', 'md', 'pptx'];
 final audio = ['mp3', 'wma', 'wav', 'ape', 'flac', 'ogg', 'aac'];
+final folder = ['dir'];
