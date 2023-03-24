@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/pages/home.dart';
 import 'package:once_power/provider/action.dart';
@@ -35,6 +36,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'OncePower',
         debugShowCheckedModeBanner: false,
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
         home: const HomePage(),
         theme: ThemeData(
           useMaterial3: true,

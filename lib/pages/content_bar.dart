@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/provider/action.dart';
 import 'package:once_power/widgets/my_text.dart';
+import 'package:once_power/widgets/simple_checkbox.dart';
 import 'package:provider/provider.dart';
 
 class ContentBar extends StatelessWidget {
@@ -25,11 +26,54 @@ class ContentBar extends StatelessWidget {
             selected: provider.selectedAll,
             onChanged: (v) => provider.switchSelectedAll(),
             color: Colors.black,
-            originName: '原始名称',
+            originName:
+                '原始名称[${provider.selectedFilesCount}/${provider.filesCount}]',
             targetName: '重命名称',
-            action: IconButton(
-              onPressed: () {},
+            action: PopupMenuButton(
               icon: const Icon(Icons.filter_alt),
+              iconSize: 24,
+              surfaceTintColor: Colors.white,
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    child: MyText('删除未选中'),
+                    enabled: provider.unselectedFilesCount != 0,
+                    onTap: provider.removeUnselected,
+                  ),
+                  PopupMenuItem(
+                    child: StatefulBuilder(
+                      builder: (context, setState) {
+                        return SimpleCheckbox(
+                          title: '显示未选中',
+                          checked: provider.showUnselected,
+                          onChange: (v) {
+                            provider.switchUse('showUnselected');
+                            setState(() {});
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  ...provider.fileTypeList
+                      .map(
+                        (e) => PopupMenuItem(
+                          child: StatefulBuilder(
+                            builder: (context, setState) {
+                              return SimpleCheckbox(
+                                title: e.name,
+                                checked: provider.adaptSelect(e.name),
+                                onChange: (v) {
+                                  provider.switchUse(e.name);
+                                  setState(() {});
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ];
+              },
             ),
           ),
           Expanded(

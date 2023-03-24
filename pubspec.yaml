@@ -36,6 +36,8 @@ dependencies:
   file_picker: ^5.2.6
   nanoid: ^1.0.0
   chinese_font_library: ^1.0.0
+  bot_toast: ^4.0.3
+
 
 
   # The following adds the Cupertino Icons font to your application.

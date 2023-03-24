@@ -18,3 +18,5 @@ enum ModeType {
 }
 
 enum UploadType { prefix, suffix }
+
+enum MessageType { failure, success }

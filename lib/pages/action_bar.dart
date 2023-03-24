@@ -43,7 +43,13 @@ class ActionBar extends StatelessWidget {
         ),
         Row(
           children: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+            Hero(
+              tag: 'setting',
+              child: IconButton(
+                onPressed: () => provider.toSetting(context),
+                icon: const Icon(Icons.settings),
+              ),
+            ),
             IconButton(
               onPressed: provider.clearFiles,
               icon: const Icon(Icons.delete),
