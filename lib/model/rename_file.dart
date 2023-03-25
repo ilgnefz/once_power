@@ -1,14 +1,14 @@
-class MyFile {
+class RenameFile {
   String id;
   String name;
   String newName;
   String parent;
   String extension;
   DateTime createDate;
-  CustomFileType type;
+  FileClassify type;
   bool checked;
 
-  MyFile({
+  RenameFile({
     required this.id,
     required this.name,
     required this.newName,
@@ -21,11 +21,11 @@ class MyFile {
 
   @override
   String toString() {
-    return 'MyFile(id: $id, name: $name, newName: $newName, parent: $parent, extension: $extension, createDate: $createDate, type: $type, checked: $checked)';
+    return 'RenameFile(id: $id, name: $name, newName: $newName, parent: $parent, extension: $extension, createDate: $createDate, type: $type, checked: $checked)';
   }
 }
 
-enum CustomFileType {
+enum FileClassify {
   image('图片'),
   video('视频'),
   text('文档'),
@@ -34,7 +34,7 @@ enum CustomFileType {
   other('其他');
 
   final String name;
-  const CustomFileType(this.name);
+  const FileClassify(this.name);
 }
 
 final filter = ['ini', 'lnk'];

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/provider/action.dart';
+import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
+import 'package:once_power/widgets/space_box.dart';
 import 'package:provider/provider.dart';
 
 class ContentBar extends StatelessWidget {
@@ -9,7 +10,7 @@ class ContentBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ActionProvider>(context);
+    final provider = Provider.of<RenameProvider>(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -24,7 +25,7 @@ class ContentBar extends StatelessWidget {
           FileList(
             height: 40,
             selected: provider.selectedAll,
-            onChanged: (v) => provider.switchSelectedAll(),
+            onChanged: (v) => provider.toggleSelectAll(),
             color: Colors.black,
             originName:
                 '原始名称[${provider.selectedFilesCount}/${provider.filesCount}]',
@@ -37,7 +38,7 @@ class ContentBar extends StatelessWidget {
                 return [
                   PopupMenuItem(
                     child: MyText('删除未选中'),
-                    onTap: provider.removeUnselected,
+                    onTap: provider.deleteUnselected,
                   ),
                   PopupMenuItem(
                     child: StatefulBuilder(
@@ -46,7 +47,7 @@ class ContentBar extends StatelessWidget {
                           title: '显示未选中',
                           checked: provider.showUnselected,
                           onChange: (v) {
-                            provider.switchUse('showUnselected');
+                            provider.toggleCheck('showUnselected');
                             setState(() {});
                           },
                         );
@@ -60,9 +61,9 @@ class ContentBar extends StatelessWidget {
                             builder: (context, setState) {
                               return SimpleCheckbox(
                                 title: e.name,
-                                checked: provider.adaptSelect(e.name),
+                                checked: provider.popupTypeSelect(e.name),
                                 onChange: (v) {
-                                  provider.switchUse(e.name);
+                                  provider.toggleCheck(e.name);
                                   setState(() {});
                                 },
                               );
@@ -88,7 +89,7 @@ class ContentBar extends StatelessWidget {
                   child: FileList(
                     selected: provider.files[index].checked,
                     onChanged: (v) =>
-                        provider.switchCheck(provider.files[index].id),
+                        provider.listSwitchCheck(provider.files[index].id),
                     onDoubleTap: () =>
                         provider.doubleTapAdd(provider.files[index].name),
                     originName: provider.files[index].name,
@@ -143,7 +144,7 @@ class FileList extends StatelessWidget {
           children: [
             Checkbox(value: selected, onChanged: onChanged),
             ShowTitle(originName, color: color ?? Colors.black54),
-            const SizedBox(width: 8),
+            const SpaceBoxWidth(),
             ShowTitle(targetName),
             action,
           ],

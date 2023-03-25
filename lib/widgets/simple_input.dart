@@ -1,7 +1,7 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/model/my_type.dart';
-import 'package:once_power/provider/action.dart';
+import 'package:once_power/model/types.dart';
+import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/upload_button.dart';
 
 import 'my_text.dart';
@@ -89,7 +89,7 @@ class LabelSimpleInput extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final UploadType uploadType;
-  final ActionProvider provider;
+  final RenameProvider provider;
   final bool readOnly;
   final bool hidden;
   final void Function(String) onChanged;
@@ -107,8 +107,8 @@ class LabelSimpleInput extends StatelessWidget {
             hidden: hidden,
             onClear: () => provider.clearInput(controller, uploadType),
             onChanged: onChanged,
-            action:
-                UploadButton(() => provider.uploadText(controller, uploadType)),
+            action: UploadButton(
+                () => provider.uploadContent(controller, uploadType)),
           ),
         ),
       ],

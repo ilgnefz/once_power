@@ -1,11 +1,11 @@
-enum UseType {
+enum LoopType {
   no('不使用'),
   all('全部使用'),
   prefix('仅前缀'),
   suffix('仅后缀');
 
   final String name;
-  const UseType(this.name);
+  const LoopType(this.name);
 }
 
 enum ModeType {
@@ -19,4 +19,4 @@ enum ModeType {
 
 enum UploadType { prefix, suffix }
 
-enum MessageType { failure, success }
+enum MessageType { failure, success, warning }

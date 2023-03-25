@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/pages/action_bar.dart';
-import 'package:once_power/pages/content_bar.dart';
+import 'package:once_power/pages/home/action_bar.dart';
+
+import 'content_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

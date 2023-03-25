@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/pages/operate_group.dart';
-import 'package:once_power/provider/action.dart';
+import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
 import 'package:provider/provider.dart';
+
+import 'operate_group.dart';
 
 class ActionBar extends StatelessWidget {
   const ActionBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ActionProvider>(context);
+    final provider = Provider.of<RenameProvider>(context);
     return Column(
       children: [
         Expanded(child: SingleChildScrollView(child: OperateGroup(provider))),
@@ -20,12 +21,12 @@ class ActionBar extends StatelessWidget {
             SimpleCheckbox(
               title: '追加模式',
               checked: provider.appendMode,
-              onChange: (v) => provider.switchUse('appendMode'),
+              onChange: (v) => provider.toggleCheck('appendMode'),
             ),
             SimpleCheckbox(
               title: '添加文件夹',
               checked: provider.folderMode,
-              onChange: (v) => provider.switchUse('folderMode'),
+              onChange: (v) => provider.toggleCheck('folderMode'),
             ),
           ],
         ),
@@ -46,7 +47,7 @@ class ActionBar extends StatelessWidget {
             Hero(
               tag: 'setting',
               child: IconButton(
-                onPressed: () => provider.toSetting(context),
+                onPressed: () => provider.toOther(context),
                 icon: const Icon(Icons.settings),
               ),
             ),

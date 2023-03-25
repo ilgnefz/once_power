@@ -1,10 +1,10 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/model/my_type.dart';
+import 'package:once_power/model/types.dart';
 import 'package:once_power/widgets/my_text.dart';
 
 class Toast {
-  static show(String message, MessageType type) {
+  static show(String title, String message, MessageType type) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(
@@ -25,11 +25,14 @@ class Toast {
               Row(
                 children: [
                   MyText(
-                    type == MessageType.failure ? '更新失败' : '更新成功',
+                    title,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color:
-                        type == MessageType.failure ? Colors.red : Colors.green,
+                    color: type == MessageType.failure
+                        ? Colors.red
+                        : type == MessageType.success
+                            ? Colors.green
+                            : Colors.orangeAccent,
                   ),
                   const Spacer(),
                   IconButton(

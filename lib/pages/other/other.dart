@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/widgets/my_text.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+class OtherPage extends StatelessWidget {
+  const OtherPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +24,20 @@ class SettingPage extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: ListView(
                       children: [
-                        MyText('设置', fontSize: 18, fontWeight: FontWeight.bold),
+                        MyText('其他', fontSize: 18, fontWeight: FontWeight.bold),
                         // 语言 主题  关于
                         Container(
                           height: 48,
                           margin: EdgeInsets.only(top: 16),
                           alignment: Alignment.centerLeft,
-                          child: MyText('主题', fontSize: 14),
+                          child: MyText('整理文件', fontSize: 14),
+                        ),
+                        // 语言 主题  关于
+                        Container(
+                          height: 48,
+                          margin: EdgeInsets.only(top: 16),
+                          alignment: Alignment.centerLeft,
+                          child: MyText('设置', fontSize: 14),
                         ),
                         Container(
                           height: 48,
@@ -43,7 +50,7 @@ class SettingPage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 8,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
