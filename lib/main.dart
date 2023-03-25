@@ -18,7 +18,6 @@ void main() async {
     minimumSize: Size(1000, 600),
     center: true,
     title: 'OncePower',
-    // titleBarStyle: TitleBarStyle.hidden,
   );
 
   windowManager.waitUntilReadyToShow(options, () async {

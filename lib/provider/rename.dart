@@ -21,10 +21,6 @@ class RenameProvider extends ChangeNotifier {
   bool get numAddBefore => _numAddBefore;
   bool _numAddAfter = false;
   bool get numAddAfter => _numAddAfter;
-  // bool _addPrefixNum = false;
-  // bool get addPrefixNum => _addPrefixNum;
-  // bool _addSuffixNum = false;
-  // bool get addSuffixNum => _addSuffixNum;
   bool _appendMode = false;
   bool get appendMode => _appendMode;
   bool _exchangeSeat = false;
@@ -100,8 +96,6 @@ class RenameProvider extends ChangeNotifier {
     if (key == 'useLoop') _useLoop = !_useLoop;
     if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
     if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
-    // if (key == 'addPrefixNum') _addPrefixNum = !_addPrefixNum;
-    // if (key == 'addSuffixNum') _addSuffixNum = !_addSuffixNum;
     if (key == 'appendMode') _appendMode = !_appendMode;
     if (key == 'folderMode') _folderMode = !_folderMode;
     if (key == 'openUseType') _openLoopType = !_openLoopType;

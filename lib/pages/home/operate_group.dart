@@ -83,7 +83,6 @@ class OperateGroup extends StatelessWidget {
           controller: provider.prefixTextController,
           uploadType: UploadType.prefix,
           provider: provider,
-          // readOnly: provider.uploadPrefixText,
           hidden: provider.prefixEmpty,
           onChanged: (v) => provider.updateName(),
         ),
@@ -93,7 +92,6 @@ class OperateGroup extends StatelessWidget {
           controller: provider.suffixTextController,
           uploadType: UploadType.suffix,
           provider: provider,
-          // readOnly: provider.uploadSuffixText,
           hidden: provider.suffixEmpty,
           onChanged: (v) => provider.updateName(),
         ),
@@ -115,19 +113,10 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         Row(
           children: [
-            // SimpleCheckbox(
-            //   title: '${S.of(context).prefixDigitIncrement}:',
-            //   checked: provider.addPrefixNum,
-            //   onChange: (v) => provider.toggleCheck('addPrefixNum'),
-            // ),
             MyText('${S.of(context).prefixDigitIncrement}:'),
             const SpaceBoxWidth(),
             Expanded(
               child: SimpleInput(
-                // readOnly: !provider.addPrefixNum,
-                // hintText: provider.addPrefixNum
-                //     ? S.of(context).digitIncrementHint
-                //     : '输入已禁用',
                 hintText: S.of(context).digitIncrementHint,
                 controller: provider.prefixNumController,
                 hidden: provider.prefixNumEmpty,
@@ -141,19 +130,10 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         Row(
           children: [
-            // SimpleCheckbox(
-            //   title: '${S.of(context).suffixDigitIncrement}:',
-            //   checked: provider.addSuffixNum,
-            //   onChange: (v) => provider.toggleCheck('addSuffixNum'),
-            // ),
             MyText('${S.of(context).suffixDigitIncrement}:'),
             const SpaceBoxWidth(),
             Expanded(
               child: SimpleInput(
-                // readOnly: !provider.addSuffixNum,
-                // hintText: provider.addSuffixNum
-                //     ? S.of(context).digitIncrementHint
-                //     : '输入已禁用',
                 hintText: S.of(context).digitIncrementHint,
                 controller: provider.suffixNumController,
                 hidden: provider.suffixNumEmpty,
