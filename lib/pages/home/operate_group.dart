@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
@@ -14,7 +15,7 @@ final List<ModeType> modeTypeList = [
 ];
 
 final List<LoopType> useTypeList = [
-  LoopType.no,
+  LoopType.disable,
   LoopType.all,
   LoopType.prefix,
   LoopType.suffix,
@@ -31,8 +32,8 @@ class OperateGroup extends StatelessWidget {
       children: [
         SimpleInput(
           hintText: provider.modeType == ModeType.length
-              ? '输入指定长度字符串或 *N（N为数字）'
-              : '匹配内容',
+              ? S.of(context).lengthMatchText
+              : S.of(context).matchText,
           controller: provider.matchTextController,
           hidden: provider.matchEmpty,
           onClear: () => provider.clearInput(provider.matchTextController),
@@ -41,7 +42,7 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         SimpleDropdown(
           leading: SimpleCheckbox(
-            title: '区分大小写',
+            title: S.of(context).caseSensitive,
             checked: provider.caseSensitive,
             onChange: (v) => provider.toggleCheck('caseSensitive'),
           ),
@@ -50,7 +51,7 @@ class OperateGroup extends StatelessWidget {
           items: modeTypeList.map<DropdownMenuItem<ModeType>>((ModeType value) {
             return DropdownMenuItem<ModeType>(
               value: value,
-              child: MyText(value.name),
+              child: MyText(value.value),
             );
           }).toList(),
         ),
@@ -61,8 +62,8 @@ class OperateGroup extends StatelessWidget {
           child: SimpleInput(
             hintText: provider.modeType != ModeType.general ||
                     provider.createDateRename
-                ? '输入已禁用'
-                : '修改为',
+                ? S.of(context).inputDisabled
+                : S.of(context).updateText,
             controller: provider.updateTextController,
             hidden: provider.updateEmpty,
             onClear: () => provider.clearInput(provider.updateTextController),
@@ -72,13 +73,13 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         if (provider.modeType != ModeType.length)
           SimpleCheckbox(
-            title: '以创建日期命名',
+            title: S.of(context).createDateRename,
             checked: provider.createDateRename,
             onChange: (v) => provider.toggleCheck('createDateRename'),
           ),
         const SpaceBoxHeight(),
         LabelSimpleInput(
-          label: '前缀',
+          label: S.of(context).prefix,
           controller: provider.prefixTextController,
           uploadType: UploadType.prefix,
           provider: provider,
@@ -88,7 +89,7 @@ class OperateGroup extends StatelessWidget {
         ),
         const SpaceBoxHeight(),
         LabelSimpleInput(
-          label: '后缀',
+          label: S.of(context).suffix,
           controller: provider.suffixTextController,
           uploadType: UploadType.suffix,
           provider: provider,
@@ -98,7 +99,7 @@ class OperateGroup extends StatelessWidget {
         ),
         const SpaceBoxHeight(),
         SimpleDropdown(
-          label: '循环文件内容',
+          label: S.of(context).loopFileContent,
           color: !provider.openLoopType ? Colors.grey : null,
           value: provider.loopType,
           onChanged: provider.openLoopType
@@ -107,23 +108,27 @@ class OperateGroup extends StatelessWidget {
           items: useTypeList.map<DropdownMenuItem<LoopType>>((LoopType value) {
             return DropdownMenuItem<LoopType>(
               value: value,
-              child: MyText(value.name),
+              child: MyText(value.value),
             );
           }).toList(),
         ),
         const SpaceBoxHeight(),
         Row(
           children: [
-            SimpleCheckbox(
-              title: '前缀数字递增:',
-              checked: provider.addPrefixNum,
-              onChange: (v) => provider.toggleCheck('addPrefixNum'),
-            ),
+            // SimpleCheckbox(
+            //   title: '${S.of(context).prefixDigitIncrement}:',
+            //   checked: provider.addPrefixNum,
+            //   onChange: (v) => provider.toggleCheck('addPrefixNum'),
+            // ),
+            MyText('${S.of(context).prefixDigitIncrement}:'),
             const SpaceBoxWidth(),
             Expanded(
               child: SimpleInput(
-                readOnly: !provider.addPrefixNum,
-                hintText: provider.addPrefixNum ? '输入n位数个字符' : '输入已禁用',
+                // readOnly: !provider.addPrefixNum,
+                // hintText: provider.addPrefixNum
+                //     ? S.of(context).digitIncrementHint
+                //     : '输入已禁用',
+                hintText: S.of(context).digitIncrementHint,
                 controller: provider.prefixNumController,
                 hidden: provider.prefixNumEmpty,
                 onClear: () =>
@@ -136,16 +141,20 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         Row(
           children: [
-            SimpleCheckbox(
-              title: '后缀数字递增:',
-              checked: provider.addSuffixNum,
-              onChange: (v) => provider.toggleCheck('addSuffixNum'),
-            ),
+            // SimpleCheckbox(
+            //   title: '${S.of(context).suffixDigitIncrement}:',
+            //   checked: provider.addSuffixNum,
+            //   onChange: (v) => provider.toggleCheck('addSuffixNum'),
+            // ),
+            MyText('${S.of(context).suffixDigitIncrement}:'),
             const SpaceBoxWidth(),
             Expanded(
               child: SimpleInput(
-                readOnly: !provider.addSuffixNum,
-                hintText: provider.addSuffixNum ? '输入n位数个字符' : '输入已禁用',
+                // readOnly: !provider.addSuffixNum,
+                // hintText: provider.addSuffixNum
+                //     ? S.of(context).digitIncrementHint
+                //     : '输入已禁用',
+                hintText: S.of(context).digitIncrementHint,
                 controller: provider.suffixNumController,
                 hidden: provider.suffixNumEmpty,
                 onClear: () =>
@@ -157,7 +166,7 @@ class OperateGroup extends StatelessWidget {
         ),
         const SpaceBoxHeight(),
         SimpleCheckbox(
-          title: '交换递增数字位置',
+          title: S.of(context).exchangeSeat,
           checked: provider.exchangeSeat,
           onChange: (v) => provider.toggleCheck('changePosition'),
         ),

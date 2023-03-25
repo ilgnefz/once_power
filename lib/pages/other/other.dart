@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/pages/other/menu.dart';
+import 'package:once_power/pages/other/organize_file.dart';
+import 'package:once_power/pages/other/setting.dart';
+import 'package:once_power/provider/other.dart';
 import 'package:once_power/widgets/my_text.dart';
+import 'package:provider/provider.dart';
+
+final List<String> titles = [S.current.organizeFile, S.current.setting];
+const List<Widget> menus = [OrganizeFileMenu(), SettingMenu()];
 
 class OtherPage extends StatelessWidget {
   const OtherPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<OtherProvider>(context);
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width * .8,
@@ -16,49 +26,54 @@ class OtherPage extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+            Material(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              child: Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 200),
                     child: ListView(
                       children: [
-                        MyText('其他', fontSize: 18, fontWeight: FontWeight.bold),
-                        // 语言 主题  关于
                         Container(
-                          height: 48,
-                          margin: EdgeInsets.only(top: 16),
+                          height: 40,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
                           alignment: Alignment.centerLeft,
-                          child: MyText('整理文件', fontSize: 14),
+                          child: MyText(
+                            S.of(context).other,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         // 语言 主题  关于
-                        Container(
-                          height: 48,
-                          margin: EdgeInsets.only(top: 16),
-                          alignment: Alignment.centerLeft,
-                          child: MyText('设置', fontSize: 14),
-                        ),
-                        Container(
-                          height: 48,
-                          margin: EdgeInsets.only(top: 16),
-                          alignment: Alignment.centerLeft,
-                          child: MyText('关于', fontSize: 14),
+                        ...List.generate(
+                          titles.length,
+                          (index) => OtherMenu(
+                            title: titles[index],
+                            provider: provider,
+                            selected: provider.currentIndex == index,
+                            onTap: () => provider.toggleIndex(index),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 8,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: IndexedStack(
+                        index: provider.currentIndex,
+                        children: menus,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Align(
               alignment: Alignment.topRight,

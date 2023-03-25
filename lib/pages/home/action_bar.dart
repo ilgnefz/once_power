@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
@@ -19,12 +20,12 @@ class ActionBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SimpleCheckbox(
-              title: '追加模式',
+              title: S.of(context).appendMode,
               checked: provider.appendMode,
               onChange: (v) => provider.toggleCheck('appendMode'),
             ),
             SimpleCheckbox(
-              title: '添加文件夹',
+              title: S.of(context).addFolder,
               checked: provider.folderMode,
               onChange: (v) => provider.toggleCheck('folderMode'),
             ),
@@ -34,22 +35,19 @@ class ActionBar extends StatelessWidget {
           children: [
             TextButton(
               onPressed: provider.folderMode ? null : provider.getFile,
-              child: const MyText('选择文件'),
+              child: MyText(S.of(context).selectFile),
             ),
             TextButton(
               onPressed: provider.getDir,
-              child: const MyText('选择文件夹'),
+              child: MyText(S.of(context).selectFolder),
             ),
           ],
         ),
         Row(
           children: [
-            Hero(
-              tag: 'setting',
-              child: IconButton(
-                onPressed: () => provider.toOther(context),
-                icon: const Icon(Icons.settings),
-              ),
+            IconButton(
+              onPressed: () => provider.toOther(context),
+              icon: const Icon(Icons.settings),
             ),
             IconButton(
               onPressed: provider.clearFiles,
@@ -58,7 +56,7 @@ class ActionBar extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: provider.applyChange,
-              child: const MyText('应用更改'),
+              child: MyText(S.of(context).applyChange),
             ),
           ],
         ),

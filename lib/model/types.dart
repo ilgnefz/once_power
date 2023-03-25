@@ -1,22 +1,60 @@
-enum LoopType {
-  no('不使用'),
-  all('全部使用'),
-  prefix('仅前缀'),
-  suffix('仅后缀');
+import 'package:once_power/generated/l10n.dart';
 
-  final String name;
-  const LoopType(this.name);
+enum LoopType { disable, all, prefix, suffix }
+
+extension LoopTypeExtension on LoopType {
+  String get value {
+    switch (this) {
+      case LoopType.disable:
+        return S.current.disable;
+      case LoopType.all:
+        return S.current.useAll;
+      case LoopType.prefix:
+        return S.current.onlyPrefix;
+      case LoopType.suffix:
+        return S.current.onlySuffix;
+    }
+  }
 }
 
-enum ModeType {
-  general('默认模式'),
-  reserved('保留模式'),
-  length('长度模式');
+enum ModeType { general, reserved, length }
 
-  final String name;
-  const ModeType(this.name);
+extension ModeTypeExtension on ModeType {
+  String get value {
+    switch (this) {
+      case ModeType.general:
+        return S.current.defaultMode;
+      case ModeType.reserved:
+        return S.current.reservedMode;
+      case ModeType.length:
+        return S.current.lengthMode;
+    }
+  }
 }
 
 enum UploadType { prefix, suffix }
 
 enum MessageType { failure, success, warning }
+
+enum LanguageType {
+  chinese('中文'),
+  english('English');
+
+  final String value;
+  const LanguageType(this.value);
+}
+
+enum ThemeType { light, dark, system }
+
+extension ThemeTypeExtension on ThemeType {
+  String get value {
+    switch (this) {
+      case ThemeType.light:
+        return S.current.lightTheme;
+      case ThemeType.dark:
+        return S.current.darkTheme;
+      case ThemeType.system:
+        return S.current.followSystem;
+    }
+  }
+}

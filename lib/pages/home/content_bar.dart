@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
@@ -28,8 +29,8 @@ class ContentBar extends StatelessWidget {
             onChanged: (v) => provider.toggleSelectAll(),
             color: Colors.black,
             originName:
-                '原始名称[${provider.selectedFilesCount}/${provider.filesCount}]',
-            targetName: '重命名称',
+                '${S.of(context).originalName}[${provider.selectedFilesCount}/${provider.filesCount}]',
+            targetName: S.of(context).renameName,
             action: PopupMenuButton(
               icon: const Icon(Icons.filter_alt),
               iconSize: 24,
@@ -37,14 +38,14 @@ class ContentBar extends StatelessWidget {
               itemBuilder: (BuildContext context) {
                 return [
                   PopupMenuItem(
-                    child: MyText('删除未选中'),
                     onTap: provider.deleteUnselected,
+                    child: MyText(S.of(context).deleteUnselected),
                   ),
                   PopupMenuItem(
                     child: StatefulBuilder(
                       builder: (context, setState) {
                         return SimpleCheckbox(
-                          title: '显示未选中',
+                          title: S.of(context).showUnselected,
                           checked: provider.showUnselected,
                           onChange: (v) {
                             provider.toggleCheck('showUnselected');

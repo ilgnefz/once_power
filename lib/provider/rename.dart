@@ -21,10 +21,10 @@ class RenameProvider extends ChangeNotifier {
   bool get numAddBefore => _numAddBefore;
   bool _numAddAfter = false;
   bool get numAddAfter => _numAddAfter;
-  bool _addPrefixNum = false;
-  bool get addPrefixNum => _addPrefixNum;
-  bool _addSuffixNum = false;
-  bool get addSuffixNum => _addSuffixNum;
+  // bool _addPrefixNum = false;
+  // bool get addPrefixNum => _addPrefixNum;
+  // bool _addSuffixNum = false;
+  // bool get addSuffixNum => _addSuffixNum;
   bool _appendMode = false;
   bool get appendMode => _appendMode;
   bool _exchangeSeat = false;
@@ -100,8 +100,8 @@ class RenameProvider extends ChangeNotifier {
     if (key == 'useLoop') _useLoop = !_useLoop;
     if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
     if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
-    if (key == 'addPrefixNum') _addPrefixNum = !_addPrefixNum;
-    if (key == 'addSuffixNum') _addSuffixNum = !_addSuffixNum;
+    // if (key == 'addPrefixNum') _addPrefixNum = !_addPrefixNum;
+    // if (key == 'addSuffixNum') _addSuffixNum = !_addSuffixNum;
     if (key == 'appendMode') _appendMode = !_appendMode;
     if (key == 'folderMode') _folderMode = !_folderMode;
     if (key == 'openUseType') _openLoopType = !_openLoopType;
@@ -127,7 +127,7 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
-  LoopType _loopType = LoopType.no;
+  LoopType _loopType = LoopType.disable;
   LoopType get loopType => _loopType;
   void toggleLoopType(LoopType type) {
     _loopType = type;
@@ -385,7 +385,7 @@ class RenameProvider extends ChangeNotifier {
   String updateExtraName(List<String> list, LoopType type, int index) {
     String value = list.first;
     if (list.length > 1) {
-      if (_loopType == LoopType.no || _loopType == type) {
+      if (_loopType == LoopType.disable || _loopType == type) {
         value = index < list.length ? list[index] : '';
       } else {
         value = list[index % list.length];
