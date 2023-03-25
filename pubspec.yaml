@@ -39,6 +39,7 @@ dependencies:
   nanoid: ^1.0.0
   chinese_font_library: ^1.0.0
   bot_toast: ^4.0.3
+  shared_preferences: ^2.0.20
 
 
 

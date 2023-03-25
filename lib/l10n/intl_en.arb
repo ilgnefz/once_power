@@ -37,5 +37,20 @@
   "lightTheme": "Light Theme",
   "darkTheme": "Dark Theme",
   "followSystem": "Follow System",
-  "about": "About"
+  "about": "About",
+  "image": "image",
+  "video": "video",
+  "audio": "audio",
+  "text": "text",
+  "folder": "folder",
+  "renameSucceeded": "Rename Succeeded",
+  "renameSucceededText": "The selected {num} files have been renamed successfully \uD83C\uDF89",
+  "renameFailed": "Rename failed",
+  "renameFailedText": "A file with the same name already exists in the directory. Please rename it and try again \uD83D\uDE25",
+  "inputError": "Input error",
+  "inputErrorText": "Please enter the correct number \uD83D\uDE44",
+  "uploadFailed": "Upload failed",
+  "uploadFailedText": "Please upload a file that uses line breaks or spaces to separate the content \uD83E\uDD71",
+  "deleteFailed": "Delete failed",
+  "deleteFailedText": "Deletion failed because there is nothing to delete...\uD83D\uDE13"
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/pages/other/other.dart';
@@ -46,12 +47,12 @@ class RenameProvider extends ChangeNotifier {
       _files.any((e) => e.type == FileClassify.other && e.checked);
 
   bool popupTypeSelect(value) {
-    if (value == '图片') return _popupSelectedImage;
-    if (value == '音频') return _popupSelectedAudio;
-    if (value == '文档') return _popupSelectedText;
-    if (value == '视频') return _popupSelectedVideo;
-    if (value == '文件夹') return _popupSelectedFolder;
-    if (value == '其他') return _popupSelectedOther;
+    if (value == S.current.image) return _popupSelectedImage;
+    if (value == S.current.audio) return _popupSelectedAudio;
+    if (value == S.current.text) return _popupSelectedText;
+    if (value == S.current.video) return _popupSelectedVideo;
+    if (value == S.current.folder) return _popupSelectedFolder;
+    if (value == S.current.other) return _popupSelectedOther;
     return false;
   }
 
@@ -81,12 +82,18 @@ class RenameProvider extends ChangeNotifier {
   }
 
   void toggleCheck(String key) {
-    popupSwitchCheck(key, '图片', FileClassify.image, _popupSelectedImage);
-    popupSwitchCheck(key, '音频', FileClassify.audio, _popupSelectedAudio);
-    popupSwitchCheck(key, '文档', FileClassify.text, _popupSelectedText);
-    popupSwitchCheck(key, '视频', FileClassify.video, _popupSelectedVideo);
-    popupSwitchCheck(key, '文件夹', FileClassify.folder, _popupSelectedFolder);
-    popupSwitchCheck(key, '其他', FileClassify.other, _popupSelectedOther);
+    popupSwitchCheck(
+        key, S.current.image, FileClassify.image, _popupSelectedImage);
+    popupSwitchCheck(
+        key, S.current.audio, FileClassify.audio, _popupSelectedAudio);
+    popupSwitchCheck(
+        key, S.current.text, FileClassify.text, _popupSelectedText);
+    popupSwitchCheck(
+        key, S.current.video, FileClassify.video, _popupSelectedVideo);
+    popupSwitchCheck(
+        key, S.current.folder, FileClassify.folder, _popupSelectedFolder);
+    popupSwitchCheck(
+        key, S.current.other, FileClassify.other, _popupSelectedOther);
     if (key == 'caseSensitive') _caseSensitive = !_caseSensitive;
     if (key == 'createDateRename') _createDateRename = !_createDateRename;
     if (key == 'changePosition') _exchangeSeat = !_exchangeSeat;
@@ -161,7 +168,8 @@ class RenameProvider extends ChangeNotifier {
       _files.removeWhere((e) => e.checked == false);
       notifyListeners();
     } else {
-      Toast.show('删除失败', '删除失败，因为没有可以删除的内容...', MessageType.failure);
+      Toast.show(S.current.deleteFailed, S.current.deleteFailedText,
+          MessageType.failure);
     }
   }
 
@@ -343,7 +351,8 @@ class RenameProvider extends ChangeNotifier {
     } else if (content.contains(' ')) {
       list.addAll(content.split(' '));
     } else {
-      Toast.show('上传失败', '请上传使用换行或空格进行分隔了内容的文件', MessageType.failure);
+      Toast.show(S.current.uploadFailed, S.current.uploadFailedText,
+          MessageType.warning);
     }
   }
 
@@ -433,8 +442,8 @@ class RenameProvider extends ChangeNotifier {
           file.newName = file.name;
         }
       }
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   String generalMode(RenameFile file) {
@@ -479,7 +488,8 @@ class RenameProvider extends ChangeNotifier {
           } else if (double.tryParse(value) != null) {
             num = double.parse(value).toInt();
           } else {
-            Toast.show('输入出错', '请输入正确的数字', MessageType.failure);
+            Toast.show(S.current.inputError, S.current.inputErrorText,
+                MessageType.warning);
           }
         }
       } else {
@@ -515,7 +525,8 @@ class RenameProvider extends ChangeNotifier {
             path.join(file.parent, '${file.newName.trim()}$extension');
         try {
           if (getAllFile(file.parent, newPath)) {
-            Toast.show('重命名失败', '目录下已存在同名文件，请重新更名后再试', MessageType.failure);
+            Toast.show(S.current.renameFailed, S.current.renameFailedText,
+                MessageType.failure);
             return;
           }
           if (file.extension == 'dir') {
@@ -524,10 +535,12 @@ class RenameProvider extends ChangeNotifier {
             File(oldPath).renameSync(newPath);
           }
           Toast.show(
-              '重命名成功', '所选$selectedFilesCount个文件已更名成功', MessageType.success);
+              S.current.renameSucceeded,
+              S.current.renameSucceededText(selectedFilesCount),
+              MessageType.success);
           file.name = path.basename(newPath).split('.').first;
         } catch (e) {
-          Toast.show('', '更名失败！报错信息：$e', MessageType.failure);
+          Toast.show(S.current.renameFailed, '$e', MessageType.failure);
         }
       }
     }
@@ -535,6 +548,8 @@ class RenameProvider extends ChangeNotifier {
   }
 
   void toOther(BuildContext context) {
-    showDialog(context: context, builder: (context) => const OtherPage());
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const OtherPage()),
+    );
   }
 }

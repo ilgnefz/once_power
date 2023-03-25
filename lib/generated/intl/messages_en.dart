@@ -20,17 +20,24 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(num) =>
+      "The selected ${num} files have been renamed successfully 🎉";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "addFolder": MessageLookupByLibrary.simpleMessage("Add Folder"),
         "appendMode": MessageLookupByLibrary.simpleMessage("Append Mode"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply Change"),
+        "audio": MessageLookupByLibrary.simpleMessage("audio"),
         "caseSensitive": MessageLookupByLibrary.simpleMessage("Case Sensitive"),
         "createDateRename":
             MessageLookupByLibrary.simpleMessage("Creation Date Naming"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("Default Mode"),
+        "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
+        "deleteFailedText": MessageLookupByLibrary.simpleMessage(
+            "Deletion failed because there is nothing to delete...😓"),
         "deleteUnselected":
             MessageLookupByLibrary.simpleMessage("Delete Unselected"),
         "digitIncrementHint": MessageLookupByLibrary.simpleMessage(
@@ -38,8 +45,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage(
             "Swap Incremental Digit Position"),
+        "folder": MessageLookupByLibrary.simpleMessage("folder"),
         "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
+        "image": MessageLookupByLibrary.simpleMessage("image"),
         "inputDisabled": MessageLookupByLibrary.simpleMessage("Input Disabled"),
+        "inputError": MessageLookupByLibrary.simpleMessage("Input error"),
+        "inputErrorText": MessageLookupByLibrary.simpleMessage(
+            "Please enter the correct number 🙄"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lengthMatchText": MessageLookupByLibrary.simpleMessage(
             "Enter a random length string Or *Num"),
@@ -56,7 +68,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
         "prefixDigitIncrement":
             MessageLookupByLibrary.simpleMessage("Prefix Digit Increment"),
+        "renameFailed": MessageLookupByLibrary.simpleMessage("Rename failed"),
+        "renameFailedText": MessageLookupByLibrary.simpleMessage(
+            "A file with the same name already exists in the directory. Please rename it and try again 😥"),
         "renameName": MessageLookupByLibrary.simpleMessage("Rename Name"),
+        "renameSucceeded":
+            MessageLookupByLibrary.simpleMessage("Rename Succeeded"),
+        "renameSucceededText": m0,
         "reservedMode": MessageLookupByLibrary.simpleMessage("Reserved Mode"),
         "selectFile": MessageLookupByLibrary.simpleMessage("Select File"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select Folder"),
@@ -66,8 +84,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
         "suffixDigitIncrement":
             MessageLookupByLibrary.simpleMessage("Suffix Digit Increment"),
+        "text": MessageLookupByLibrary.simpleMessage("text"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "updateText": MessageLookupByLibrary.simpleMessage("Update Text"),
-        "useAll": MessageLookupByLibrary.simpleMessage("Use All")
+        "uploadFailed": MessageLookupByLibrary.simpleMessage("Upload failed"),
+        "uploadFailedText": MessageLookupByLibrary.simpleMessage(
+            "Please upload a file that uses line breaks or spaces to separate the content 🥱"),
+        "useAll": MessageLookupByLibrary.simpleMessage("Use All"),
+        "video": MessageLookupByLibrary.simpleMessage("video")
       };
 }

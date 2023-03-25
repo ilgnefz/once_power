@@ -37,5 +37,20 @@
   "lightTheme": "浅色主题",
   "darkTheme": "深色主题",
   "followSystem": "跟随系统",
-  "about": "关于"
+  "about": "关于",
+  "image": "图片",
+  "video": "视频",
+  "audio": "音频",
+  "text": "文本",
+  "folder": "文件夹",
+  "renameSucceeded": "重命名成功",
+  "renameSucceededText": "所选{num}个文件已更名成功 \uD83C\uDF89",
+  "renameFailed": "重命名失败",
+  "renameFailedText": "目录下已存在同名文件，请重新更名后再试 \uD83D\uDE25",
+  "inputError": "输入出错了",
+  "inputErrorText": "请输入正确的数字 \uD83D\uDE23",
+  "uploadFailed": "上传失败",
+  "uploadFailedText": "请上传使用换行或空格进行分隔了内容的文件 \uD83E\uDD71",
+  "deleteFailed": "删除失败",
+  "deleteFailedText": "删除失败，因为没有可以删除的内容...\uD83D\uDE13"
 }

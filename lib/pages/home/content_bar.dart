@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
@@ -39,7 +40,10 @@ class ContentBar extends StatelessWidget {
                 return [
                   PopupMenuItem(
                     onTap: provider.deleteUnselected,
-                    child: MyText(S.of(context).deleteUnselected),
+                    child: MyText(
+                      S.of(context).deleteUnselected,
+                      color: Colors.red,
+                    ),
                   ),
                   PopupMenuItem(
                     child: StatefulBuilder(
@@ -61,10 +65,10 @@ class ContentBar extends StatelessWidget {
                           child: StatefulBuilder(
                             builder: (context, setState) {
                               return SimpleCheckbox(
-                                title: e.name,
-                                checked: provider.popupTypeSelect(e.name),
+                                title: e.value,
+                                checked: provider.popupTypeSelect(e.value),
                                 onChange: (v) {
-                                  provider.toggleCheck(e.name);
+                                  provider.toggleCheck(e.value);
                                   setState(() {});
                                 },
                               );

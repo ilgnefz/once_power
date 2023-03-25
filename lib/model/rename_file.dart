@@ -1,3 +1,5 @@
+import 'package:once_power/generated/l10n.dart';
+
 class RenameFile {
   String id;
   String name;
@@ -35,6 +37,25 @@ enum FileClassify {
 
   final String name;
   const FileClassify(this.name);
+}
+
+extension FileClassifyExtension on FileClassify {
+  String get value {
+    switch (this) {
+      case FileClassify.image:
+        return S.current.image;
+      case FileClassify.video:
+        return S.current.video;
+      case FileClassify.text:
+        return S.current.text;
+      case FileClassify.audio:
+        return S.current.audio;
+      case FileClassify.folder:
+        return S.current.folder;
+      case FileClassify.other:
+        return S.current.other;
+    }
+  }
 }
 
 final filter = ['ini', 'lnk'];

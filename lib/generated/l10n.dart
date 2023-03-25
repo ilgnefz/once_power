@@ -429,6 +429,156 @@ class S {
       args: [],
     );
   }
+
+  /// `image`
+  String get image {
+    return Intl.message(
+      'image',
+      name: 'image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `video`
+  String get video {
+    return Intl.message(
+      'video',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `audio`
+  String get audio {
+    return Intl.message(
+      'audio',
+      name: 'audio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `text`
+  String get text {
+    return Intl.message(
+      'text',
+      name: 'text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `folder`
+  String get folder {
+    return Intl.message(
+      'folder',
+      name: 'folder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rename Succeeded`
+  String get renameSucceeded {
+    return Intl.message(
+      'Rename Succeeded',
+      name: 'renameSucceeded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected {num} files have been renamed successfully 🎉`
+  String renameSucceededText(Object num) {
+    return Intl.message(
+      'The selected $num files have been renamed successfully 🎉',
+      name: 'renameSucceededText',
+      desc: '',
+      args: [num],
+    );
+  }
+
+  /// `Rename failed`
+  String get renameFailed {
+    return Intl.message(
+      'Rename failed',
+      name: 'renameFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A file with the same name already exists in the directory. Please rename it and try again 😥`
+  String get renameFailedText {
+    return Intl.message(
+      'A file with the same name already exists in the directory. Please rename it and try again 😥',
+      name: 'renameFailedText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input error`
+  String get inputError {
+    return Intl.message(
+      'Input error',
+      name: 'inputError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the correct number 🙄`
+  String get inputErrorText {
+    return Intl.message(
+      'Please enter the correct number 🙄',
+      name: 'inputErrorText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload failed`
+  String get uploadFailed {
+    return Intl.message(
+      'Upload failed',
+      name: 'uploadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please upload a file that uses line breaks or spaces to separate the content 🥱`
+  String get uploadFailedText {
+    return Intl.message(
+      'Please upload a file that uses line breaks or spaces to separate the content 🥱',
+      name: 'uploadFailedText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete failed`
+  String get deleteFailed {
+    return Intl.message(
+      'Delete failed',
+      name: 'deleteFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deletion failed because there is nothing to delete...😓`
+  String get deleteFailedText {
+    return Intl.message(
+      'Deletion failed because there is nothing to delete...😓',
+      name: 'deleteFailedText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
