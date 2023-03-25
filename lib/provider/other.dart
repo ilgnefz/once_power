@@ -28,43 +28,4 @@ class OtherProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  final List<ThemeType> themeList = [
-    ThemeType.light,
-    ThemeType.dark,
-    ThemeType.system,
-  ];
-
-  ThemeType _currentTheme = ThemeType.light;
-  ThemeType get currentTheme => _currentTheme;
-  void toggleTheme(ThemeType type) {
-    _currentTheme = type;
-    notifyListeners();
-  }
-
-  ThemeData lightTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.light,
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-      },
-    ),
-  );
-
-  ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-      },
-    ),
-  );
-
-  ThemeMode get currentThemeMode {
-    if (_currentTheme == ThemeType.light) return ThemeMode.light;
-    if (_currentTheme == ThemeType.dark) return ThemeMode.dark;
-    return ThemeMode.system;
-  }
 }

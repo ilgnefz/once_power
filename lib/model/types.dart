@@ -43,18 +43,3 @@ enum LanguageType {
   final String value;
   const LanguageType(this.value);
 }
-
-enum ThemeType { light, dark, system }
-
-extension ThemeTypeExtension on ThemeType {
-  String get value {
-    switch (this) {
-      case ThemeType.light:
-        return S.current.lightTheme;
-      case ThemeType.dark:
-        return S.current.darkTheme;
-      case ThemeType.system:
-        return S.current.followSystem;
-    }
-  }
-}

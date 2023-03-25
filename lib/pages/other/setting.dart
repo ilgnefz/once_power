@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/other.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:provider/provider.dart';
@@ -24,19 +23,6 @@ class SettingMenu extends StatelessWidget {
                     value: e.value,
                     groupValue: provider.currentLanguage.value,
                     onChange: (v) => provider.toggleLanguage(e),
-                  ),
-                )
-                .toList(),
-          ),
-          SettingItem(
-            title: S.of(context).theme,
-            action: provider.themeList
-                .map(
-                  (e) => RadioButton(
-                    title: e.value,
-                    value: e.value,
-                    groupValue: provider.currentTheme.value,
-                    onChange: (v) => provider.toggleTheme(e),
                   ),
                 )
                 .toList(),

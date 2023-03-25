@@ -49,9 +49,16 @@ class MyApp extends StatelessWidget {
           builder: BotToastInit(),
           navigatorObservers: [BotToastNavigatorObserver()],
           home: const HomePage(),
-          theme: context.watch<OtherProvider>().lightTheme,
-          darkTheme: context.watch<OtherProvider>().darkTheme,
-          themeMode: context.watch<OtherProvider>().currentThemeMode,
+          theme: ThemeData(
+            useMaterial3: true,
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+                TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+                TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+                TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+              },
+            ),
+          ),
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
