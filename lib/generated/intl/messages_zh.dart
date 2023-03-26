@@ -20,23 +20,35 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  static String m0(num) => "所选${num}个文件已更名成功 🎉";
+  static String m0(name, num, reason) =>
+      "[ ${name} ] ${num} 个文件因为 [ ${reason} ] 更新失败。";
+
+  static String m1(num) => "所选${num}个文件已更名成功 🎉";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "LICENSE": MessageLookupByLibrary.simpleMessage("开源许可证"),
         "about": MessageLookupByLibrary.simpleMessage("关于"),
         "addFolder": MessageLookupByLibrary.simpleMessage("添加文件夹"),
         "appendMode": MessageLookupByLibrary.simpleMessage("追加模式"),
         "applyChange": MessageLookupByLibrary.simpleMessage("应用更改"),
         "audio": MessageLookupByLibrary.simpleMessage("音频"),
         "caseSensitive": MessageLookupByLibrary.simpleMessage("区分大小写"),
+        "copyErrorMessage": MessageLookupByLibrary.simpleMessage("复制错误信息"),
+        "copySucceeded": MessageLookupByLibrary.simpleMessage("复制成功"),
+        "copySucceededText":
+            MessageLookupByLibrary.simpleMessage("错误内容已成功复制到剪贴板 😃"),
         "createDateRename": MessageLookupByLibrary.simpleMessage("以创建日期命名"),
+        "currentVersion": MessageLookupByLibrary.simpleMessage("当前版本"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("默认模式"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("删除失败"),
         "deleteFailedText":
             MessageLookupByLibrary.simpleMessage("删除失败，因为没有可以删除的内容...😓"),
+        "deleteLength": MessageLookupByLibrary.simpleMessage("删除指定长度"),
         "deleteUnselected": MessageLookupByLibrary.simpleMessage("删除未选中"),
+        "desc":
+            MessageLookupByLibrary.simpleMessage("使用 Flutter 开发的用于批量重命名的工具"),
         "digitIncrementHint": MessageLookupByLibrary.simpleMessage("输入N位数个字符"),
         "disable": MessageLookupByLibrary.simpleMessage("不使用"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage("交换递增数字位置"),
@@ -47,12 +59,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "inputError": MessageLookupByLibrary.simpleMessage("输入出错了"),
         "inputErrorText": MessageLookupByLibrary.simpleMessage("请输入正确的数字 😣"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
+        "latestVersion": MessageLookupByLibrary.simpleMessage("最新版本"),
         "lengthMatchText":
             MessageLookupByLibrary.simpleMessage("输入指定长度字符串或 *N（N为数字）"),
         "lengthMode": MessageLookupByLibrary.simpleMessage("长度模式"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
         "loopFileContent": MessageLookupByLibrary.simpleMessage("循环文件内容"),
         "matchText": MessageLookupByLibrary.simpleMessage("匹配内容"),
+        "multiFailedText": m0,
         "onlyPrefix": MessageLookupByLibrary.simpleMessage("仅前缀"),
         "onlySuffix": MessageLookupByLibrary.simpleMessage("仅后缀"),
         "organizeFile": MessageLookupByLibrary.simpleMessage("整理文件"),
@@ -60,12 +74,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "other": MessageLookupByLibrary.simpleMessage("其他"),
         "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
         "prefixDigitIncrement": MessageLookupByLibrary.simpleMessage("前缀数字递增"),
+        "projectUrl": MessageLookupByLibrary.simpleMessage("项目地址"),
         "renameFailed": MessageLookupByLibrary.simpleMessage("重命名失败"),
-        "renameFailedText":
+        "renameFailedExists":
             MessageLookupByLibrary.simpleMessage("目录下已存在同名文件，请重新更名后再试 😥"),
+        "renameFailedUnmodified":
+            MessageLookupByLibrary.simpleMessage("新文件名和原名称一样 😤"),
         "renameName": MessageLookupByLibrary.simpleMessage("重命名名称"),
         "renameSucceeded": MessageLookupByLibrary.simpleMessage("重命名成功"),
-        "renameSucceededText": m0,
+        "renameSucceededText": m1,
         "reservedMode": MessageLookupByLibrary.simpleMessage("保留模式"),
         "selectFile": MessageLookupByLibrary.simpleMessage("选择文件"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),

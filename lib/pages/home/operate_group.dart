@@ -41,11 +41,17 @@ class OperateGroup extends StatelessWidget {
         ),
         const SpaceBoxHeight(),
         SimpleDropdown(
-          leading: SimpleCheckbox(
-            title: S.of(context).caseSensitive,
-            checked: provider.caseSensitive,
-            onChange: (v) => provider.toggleCheck('caseSensitive'),
-          ),
+          leading: provider.modeType != ModeType.length
+              ? SimpleCheckbox(
+                  title: S.of(context).caseSensitive,
+                  checked: provider.caseSensitive,
+                  onChange: (v) => provider.toggleCheck('caseSensitive'),
+                )
+              : SimpleCheckbox(
+                  title: S.of(context).deleteLength,
+                  checked: provider.deleteLength,
+                  onChange: (v) => provider.toggleCheck('deleteLength'),
+                ),
           value: provider.modeType,
           onChanged: (value) => provider.switchModeType(value!),
           items: modeTypeList.map<DropdownMenuItem<ModeType>>((ModeType value) {
@@ -56,28 +62,29 @@ class OperateGroup extends StatelessWidget {
           }).toList(),
         ),
         const SpaceBoxHeight(),
-        AbsorbPointer(
-          absorbing: provider.modeType != ModeType.general ||
-              provider.createDateRename,
-          child: SimpleInput(
-            hintText: provider.modeType != ModeType.general ||
-                    provider.createDateRename
-                ? S.of(context).inputDisabled
-                : S.of(context).updateText,
-            controller: provider.updateTextController,
-            hidden: provider.updateEmpty,
-            onClear: () => provider.clearInput(provider.updateTextController),
-            onChanged: (v) => provider.updateName(),
+        if (provider.modeType != ModeType.length) ...[
+          AbsorbPointer(
+            absorbing: provider.modeType != ModeType.general ||
+                provider.createDateRename,
+            child: SimpleInput(
+              hintText: provider.modeType != ModeType.general ||
+                      provider.createDateRename
+                  ? S.of(context).inputDisabled
+                  : S.of(context).updateText,
+              controller: provider.updateTextController,
+              hidden: provider.updateEmpty,
+              onClear: () => provider.clearInput(provider.updateTextController),
+              onChanged: (v) => provider.updateName(),
+            ),
           ),
-        ),
-        const SpaceBoxHeight(),
-        if (provider.modeType != ModeType.length)
+          const SpaceBoxHeight(),
           SimpleCheckbox(
             title: S.of(context).createDateRename,
             checked: provider.createDateRename,
             onChange: (v) => provider.toggleCheck('createDateRename'),
           ),
-        const SpaceBoxHeight(),
+          const SpaceBoxHeight(),
+        ],
         LabelSimpleInput(
           label: S.of(context).prefix,
           controller: provider.prefixTextController,

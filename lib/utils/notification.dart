@@ -1,15 +1,18 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/widgets/my_text.dart';
 
-class Toast {
-  static show(String title, String message, MessageType type) {
+class NotificationMessage {
+  static show(String title, String message, MessageType type,
+      [void Function()? onPressed]) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(
           width: 600,
-          padding: const EdgeInsets.only(left: 16, right: 12, bottom: 12),
+          padding: EdgeInsets.only(
+              left: 16, right: 12, bottom: onPressed == null ? 12 : 0),
           margin: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -42,12 +45,22 @@ class Toast {
                   ),
                 ],
               ),
+              // MyText(message, fontSize: 14),
               MyText(message, fontSize: 14),
+              if (onPressed != null)
+                ButtonBar(
+                  children: [
+                    TextButton(
+                      onPressed: onPressed,
+                      child: MyText(S.current.copyErrorMessage),
+                    ),
+                  ],
+                ),
             ],
           ),
         );
       },
-      duration: const Duration(seconds: 5),
+      duration: type == MessageType.failure ? null : const Duration(seconds: 5),
       align: Alignment.topRight,
     );
   }

@@ -3,17 +3,21 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/error_message.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/pages/other/other.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:once_power/utils/toast.dart';
+import 'package:once_power/utils/notification.dart';
+import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as path;
 
 class RenameProvider extends ChangeNotifier {
   bool _caseSensitive = false;
   bool get caseSensitive => _caseSensitive;
+  bool _deleteLength = false;
+  bool get deleteLength => _deleteLength;
   bool _createDateRename = false;
   bool get createDateRename => _createDateRename;
   bool _useLoop = false;
@@ -95,6 +99,7 @@ class RenameProvider extends ChangeNotifier {
     popupSwitchCheck(
         key, S.current.other, FileClassify.other, _popupSelectedOther);
     if (key == 'caseSensitive') _caseSensitive = !_caseSensitive;
+    if (key == 'deleteLength') _deleteLength = !_deleteLength;
     if (key == 'createDateRename') _createDateRename = !_createDateRename;
     if (key == 'changePosition') _exchangeSeat = !_exchangeSeat;
 
@@ -168,8 +173,8 @@ class RenameProvider extends ChangeNotifier {
       _files.removeWhere((e) => e.checked == false);
       notifyListeners();
     } else {
-      Toast.show(S.current.deleteFailed, S.current.deleteFailedText,
-          MessageType.failure);
+      NotificationMessage.show(S.current.deleteFailed,
+          S.current.deleteFailedText, MessageType.failure);
     }
   }
 
@@ -221,6 +226,10 @@ class RenameProvider extends ChangeNotifier {
     String name = type == FileClassify.folder
         ? path.basename(file.path)
         : path.basename(file.path).split('.').first;
+    if (type != FileClassify.folder && extension == '') {
+      name = '';
+      extension = file.path.split('.').last;
+    }
     if (_files.any((e) => e.name == name)) return;
     String id = nanoid(10);
     DateTime createDateTime = type == FileClassify.folder
@@ -351,8 +360,8 @@ class RenameProvider extends ChangeNotifier {
     } else if (content.contains(' ')) {
       list.addAll(content.split(' '));
     } else {
-      Toast.show(S.current.uploadFailed, S.current.uploadFailedText,
-          MessageType.warning);
+      NotificationMessage.show(S.current.uploadFailed,
+          S.current.uploadFailedText, MessageType.warning);
     }
   }
 
@@ -488,15 +497,20 @@ class RenameProvider extends ChangeNotifier {
           } else if (double.tryParse(value) != null) {
             num = double.parse(value).toInt();
           } else {
-            Toast.show(S.current.inputError, S.current.inputErrorText,
-                MessageType.warning);
+            NotificationMessage.show(S.current.inputError,
+                S.current.inputErrorText, MessageType.warning);
           }
         }
       } else {
         num = matchTextController.text.length;
       }
-      fileName =
-          file.name.substring(0, num > fileName.length ? fileName.length : num);
+      if (_deleteLength) {
+        fileName =
+            file.name.substring(num > fileName.length ? fileName.length : num);
+      } else {
+        fileName = file.name
+            .substring(0, num > fileName.length ? fileName.length : num);
+      }
     }
     return fileName;
   }
@@ -515,35 +529,87 @@ class RenameProvider extends ChangeNotifier {
         : file.name.substring(index, index + matchTextController.text.length);
   }
 
+  final List<ErrorMessage> _errorList = [];
+  List<ErrorMessage> get errorList => _errorList;
+
+  String _errorMessage = '';
+
   void applyChange() {
     for (RenameFile file in _files) {
       if (file.checked) {
-        if (file.name == file.newName) return;
+        if (file.name == file.newName) {
+          _errorList.add(
+            ErrorMessage(
+              fileName: file.name,
+              reason: S.current.renameFailedUnmodified,
+              time: DateTime.now(),
+            ),
+          );
+          continue;
+        }
         var extension = file.extension == 'dir' ? '' : '.${file.extension}';
         var oldPath = path.join(file.parent, '${file.name}$extension');
         var newPath =
             path.join(file.parent, '${file.newName.trim()}$extension');
         try {
           if (getAllFile(file.parent, newPath)) {
-            Toast.show(S.current.renameFailed, S.current.renameFailedText,
-                MessageType.failure);
-            return;
-          }
-          if (file.extension == 'dir') {
-            Directory(oldPath).renameSync(newPath);
+            _errorList.add(ErrorMessage(
+                fileName: file.name,
+                reason: S.current.renameFailedExists,
+                time: DateTime.now()));
+            continue;
           } else {
-            File(oldPath).renameSync(newPath);
+            if (file.extension == 'dir') {
+              Directory(oldPath).renameSync(newPath);
+            } else {
+              File(oldPath).renameSync(newPath);
+            }
+            file.name = path.basename(newPath).split('.').first;
           }
-          Toast.show(
-              S.current.renameSucceeded,
-              S.current.renameSucceededText(selectedFilesCount),
-              MessageType.success);
-          file.name = path.basename(newPath).split('.').first;
         } catch (e) {
-          Toast.show(S.current.renameFailed, '$e', MessageType.failure);
+          _errorList.add(ErrorMessage(
+              fileName: file.name, reason: '$e', time: DateTime.now()));
         }
       }
     }
+    NotificationMessage.show(
+      S.current.renameSucceeded,
+      S.current.renameSucceededText(selectedFilesCount),
+      MessageType.success,
+    );
+    if (_errorList.isNotEmpty) {
+      if (_errorList.length == 1) {
+        NotificationMessage.show(S.current.renameFailed,
+            _errorList.single.reason, MessageType.failure);
+      } else {
+        Map<String, List<String>> errorGroup = {};
+        for (ErrorMessage error in _errorList) {
+          if (!errorGroup.containsKey(error.reason)) {
+            errorGroup[error.reason] = [];
+          }
+          errorGroup[error.reason]?.add(error.fileName);
+        }
+        int index = 1;
+        for (var key in errorGroup.keys) {
+          List<String>? value = errorGroup[key];
+          _errorMessage += S.current.multiFailedText(
+              value?.join('、') as Object, value?.length as Object, key);
+          index++;
+          if (index < errorGroup.length) _errorMessage += '\n';
+        }
+        NotificationMessage.show(S.current.renameFailed, _errorMessage,
+            MessageType.failure, copyError);
+        _errorList.clear();
+      }
+    }
+    notifyListeners();
+  }
+
+  void copyError() {
+    Pasteboard.writeText(_errorMessage);
+    _errorMessage = '';
+    NotificationMessage.show(S.current.copySucceeded,
+        S.current.copySucceededText, MessageType.success);
     notifyListeners();
   }
 

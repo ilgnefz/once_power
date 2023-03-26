@@ -27,17 +27,7 @@ class RenameFile {
   }
 }
 
-enum FileClassify {
-  image('图片'),
-  video('视频'),
-  text('文档'),
-  audio('音频'),
-  folder('文件夹'),
-  other('其他');
-
-  final String name;
-  const FileClassify(this.name);
-}
+enum FileClassify { image, video, text, audio, folder, other }
 
 extension FileClassifyExtension on FileClassify {
   String get value {

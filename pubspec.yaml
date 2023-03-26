@@ -40,6 +40,10 @@ dependencies:
   chinese_font_library: ^1.0.0
   bot_toast: ^4.0.3
   shared_preferences: ^2.0.20
+  package_info_plus: ^3.0.3
+  url_launcher: ^6.1.10
+  intl: ^0.17.0
+  pasteboard: ^0.2.0
 
 
 

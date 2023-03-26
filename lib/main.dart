@@ -5,6 +5,7 @@ import 'package:once_power/model/types.dart';
 import 'package:once_power/pages/home/home.dart';
 import 'package:once_power/provider/other.dart';
 import 'package:once_power/provider/rename.dart';
+import 'package:once_power/utils/package_info.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
@@ -15,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   await StorageUtil.init();
+  await PackageDesc.init();
 
   WindowOptions options = const WindowOptions(
     size: Size(1000, 600),
@@ -79,9 +81,13 @@ class MyApp extends StatelessWidget {
               }
               return const Locale('en', 'US');
             }
-            return locale?.languageCode == 'zh'
-                ? const Locale('zh', 'CN')
-                : const Locale('en', 'US');
+            if (locale?.languageCode == 'zh') {
+              context
+                  .watch<OtherProvider>()
+                  .toggleLanguage(LanguageType.chinese);
+              return const Locale('zh', 'CN');
+            }
+            return const Locale('en', 'US');
           },
         );
       },

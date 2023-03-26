@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Delete Specified Length`
+  String get deleteLength {
+    return Intl.message(
+      'Delete Specified Length',
+      name: 'deleteLength',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Default Mode`
   String get defaultMode {
     return Intl.message(
@@ -430,6 +440,56 @@ class S {
     );
   }
 
+  /// `A tool developed by flutter for bulk renaming.`
+  String get desc {
+    return Intl.message(
+      'A tool developed by flutter for bulk renaming.',
+      name: 'desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Url`
+  String get projectUrl {
+    return Intl.message(
+      'Project Url',
+      name: 'projectUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LICENSE`
+  String get LICENSE {
+    return Intl.message(
+      'LICENSE',
+      name: 'LICENSE',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Version`
+  String get currentVersion {
+    return Intl.message(
+      'Current Version',
+      name: 'currentVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest Version`
+  String get latestVersion {
+    return Intl.message(
+      'Latest Version',
+      name: 'latestVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `image`
   String get image {
     return Intl.message(
@@ -511,19 +571,29 @@ class S {
   }
 
   /// `A file with the same name already exists in the directory. Please rename it and try again 😥`
-  String get renameFailedText {
+  String get renameFailedExists {
     return Intl.message(
       'A file with the same name already exists in the directory. Please rename it and try again 😥',
-      name: 'renameFailedText',
+      name: 'renameFailedExists',
       desc: '',
       args: [],
     );
   }
 
-  /// `Input error`
+  /// `The new file name is the same as the original file 😤`
+  String get renameFailedUnmodified {
+    return Intl.message(
+      'The new file name is the same as the original file 😤',
+      name: 'renameFailedUnmodified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input Error`
   String get inputError {
     return Intl.message(
-      'Input error',
+      'Input Error',
       name: 'inputError',
       desc: '',
       args: [],
@@ -540,10 +610,10 @@ class S {
     );
   }
 
-  /// `Upload failed`
+  /// `Upload Failed`
   String get uploadFailed {
     return Intl.message(
-      'Upload failed',
+      'Upload Failed',
       name: 'uploadFailed',
       desc: '',
       args: [],
@@ -560,10 +630,10 @@ class S {
     );
   }
 
-  /// `Delete failed`
+  /// `Delete Failed`
   String get deleteFailed {
     return Intl.message(
-      'Delete failed',
+      'Delete Failed',
       name: 'deleteFailed',
       desc: '',
       args: [],
@@ -575,6 +645,46 @@ class S {
     return Intl.message(
       'Deletion failed because there is nothing to delete...😓',
       name: 'deleteFailedText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `[{name}] {num} files failed to update because of [{reason}].`
+  String multiFailedText(Object name, Object num, Object reason) {
+    return Intl.message(
+      '[$name] $num files failed to update because of [$reason].',
+      name: 'multiFailedText',
+      desc: '',
+      args: [name, num, reason],
+    );
+  }
+
+  /// `Copy error message`
+  String get copyErrorMessage {
+    return Intl.message(
+      'Copy error message',
+      name: 'copyErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy Succeeded`
+  String get copySucceeded {
+    return Intl.message(
+      'Copy Succeeded',
+      name: 'copySucceeded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error content successfully copied to Clipboard 😃`
+  String get copySucceededText {
+    return Intl.message(
+      'Error content successfully copied to Clipboard 😃',
+      name: 'copySucceededText',
       desc: '',
       args: [],
     );

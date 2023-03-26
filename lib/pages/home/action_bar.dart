@@ -55,7 +55,9 @@ class ActionBar extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: provider.applyChange,
+              onPressed: provider.selectedFilesCount == 0
+                  ? null
+                  : provider.applyChange,
               child: MyText(S.of(context).applyChange),
             ),
           ],

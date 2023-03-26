@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/other.dart';
+import 'package:once_power/utils/package_info.dart';
+import 'package:once_power/widgets/click_text.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:provider/provider.dart';
+
+Widget settingText(String data, [color]) =>
+    MyText(data, fontSize: 14, fontWeight: FontWeight.w600, color: color);
 
 class SettingMenu extends StatelessWidget {
   const SettingMenu({Key? key}) : super(key: key);
@@ -29,7 +34,44 @@ class SettingMenu extends StatelessWidget {
           ),
           SettingItem(
             title: S.of(context).about,
-            action: [],
+            action: [
+              MyText(S.of(context).desc, fontSize: 14),
+            ],
+          ),
+          SettingItem(
+            title: S.of(context).projectUrl,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            action: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  ClickText(
+                    title: 'Github',
+                    url: 'https://github.com/ilgnefz/once_power',
+                  ),
+                  ClickText(
+                    title: 'Gitee',
+                    url: 'https://gitee.com/ilgnefz/once_power',
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SettingItem(
+            title: S.of(context).LICENSE,
+            action: [settingText('MIT LICENSE', Colors.teal)],
+          ),
+          SettingItem(
+            title: S.of(context).currentVersion,
+            action: [
+              settingText('OnePower ${PackageDesc.getVersion()}'),
+            ],
+          ),
+          SettingItem(
+            title: S.of(context).latestVersion,
+            action: [
+              settingText('OnePower ${PackageDesc.getVersion()}'),
+            ],
           ),
         ],
       ),
@@ -42,19 +84,22 @@ class SettingItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.action,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
   final String title;
   final List<Widget> action;
+  final CrossAxisAlignment crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 12),
+      margin: const EdgeInsets.only(top: 12),
       child: Row(
+        crossAxisAlignment: crossAxisAlignment,
         children: [
           MyText('$title:', fontSize: 14),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           ...action,
         ],
       ),
