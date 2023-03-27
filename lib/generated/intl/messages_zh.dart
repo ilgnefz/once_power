@@ -39,18 +39,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySucceededText":
             MessageLookupByLibrary.simpleMessage("错误内容已成功复制到剪贴板 😃"),
         "createDateRename": MessageLookupByLibrary.simpleMessage("以创建日期命名"),
+        "currentLatest": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
         "currentVersion": MessageLookupByLibrary.simpleMessage("当前版本"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
+        "defaultFolder":
+            MessageLookupByLibrary.simpleMessage("默认为除根目录以外的最大父文件夹"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("默认模式"),
+        "deleteEmptyFolder": MessageLookupByLibrary.simpleMessage("删除空文件夹"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("删除失败"),
         "deleteFailedText":
             MessageLookupByLibrary.simpleMessage("删除失败，因为没有可以删除的内容...😓"),
         "deleteLength": MessageLookupByLibrary.simpleMessage("删除指定长度"),
         "deleteUnselected": MessageLookupByLibrary.simpleMessage("删除未选中"),
-        "desc":
-            MessageLookupByLibrary.simpleMessage("使用 Flutter 开发的用于批量重命名的工具"),
+        "desc": MessageLookupByLibrary.simpleMessage(
+            "🛠 一款基于 Flutter 开发的用于批量重命名文件的工具，还有移除无用嵌套文件夹的功能"),
+        "detectError": MessageLookupByLibrary.simpleMessage("检测失败"),
+        "detectVersions": MessageLookupByLibrary.simpleMessage("检测新版本"),
+        "detecting": MessageLookupByLibrary.simpleMessage("检测中..."),
         "digitIncrementHint": MessageLookupByLibrary.simpleMessage("输入N位数个字符"),
         "disable": MessageLookupByLibrary.simpleMessage("不使用"),
+        "dropFile": MessageLookupByLibrary.simpleMessage("拖动文件夹到这里"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage("交换递增数字位置"),
         "folder": MessageLookupByLibrary.simpleMessage("文件夹"),
         "followSystem": MessageLookupByLibrary.simpleMessage("跟随系统"),
@@ -59,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inputError": MessageLookupByLibrary.simpleMessage("输入出错了"),
         "inputErrorText": MessageLookupByLibrary.simpleMessage("请输入正确的数字 😣"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
+        "languageTip": MessageLookupByLibrary.simpleMessage("重启生效"),
         "latestVersion": MessageLookupByLibrary.simpleMessage("最新版本"),
         "lengthMatchText":
             MessageLookupByLibrary.simpleMessage("输入指定长度字符串或 *N（N为数字）"),
@@ -67,9 +76,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "loopFileContent": MessageLookupByLibrary.simpleMessage("循环文件内容"),
         "matchText": MessageLookupByLibrary.simpleMessage("匹配内容"),
         "multiFailedText": m0,
+        "name": MessageLookupByLibrary.simpleMessage("名称"),
+        "newVersion": MessageLookupByLibrary.simpleMessage("有新版本"),
         "onlyPrefix": MessageLookupByLibrary.simpleMessage("仅前缀"),
         "onlySuffix": MessageLookupByLibrary.simpleMessage("仅后缀"),
+        "organizeFailed": MessageLookupByLibrary.simpleMessage("文件整理失败"),
         "organizeFile": MessageLookupByLibrary.simpleMessage("整理文件"),
+        "organizeSuccess": MessageLookupByLibrary.simpleMessage("文件整理成功"),
+        "organizeTip":
+            MessageLookupByLibrary.simpleMessage("注意：如果添加的是系统盘下的文件，必须选择目标文件夹"),
         "originalName": MessageLookupByLibrary.simpleMessage("原始名称"),
         "other": MessageLookupByLibrary.simpleMessage("其他"),
         "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
@@ -88,8 +103,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
         "setting": MessageLookupByLibrary.simpleMessage("设置"),
         "showUnselected": MessageLookupByLibrary.simpleMessage("显示未选中"),
+        "startOrganizing": MessageLookupByLibrary.simpleMessage("开始整理"),
         "suffix": MessageLookupByLibrary.simpleMessage("后缀"),
         "suffixDigitIncrement": MessageLookupByLibrary.simpleMessage("后缀数字递增"),
+        "targetFolder": MessageLookupByLibrary.simpleMessage("目标文件夹"),
         "text": MessageLookupByLibrary.simpleMessage("文本"),
         "theme": MessageLookupByLibrary.simpleMessage("主题"),
         "updateText": MessageLookupByLibrary.simpleMessage("修改为"),
@@ -97,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadFailedText":
             MessageLookupByLibrary.simpleMessage("请上传使用换行或空格进行分隔了内容的文件 🥱"),
         "useAll": MessageLookupByLibrary.simpleMessage("全部使用"),
+        "versionDesc": MessageLookupByLibrary.simpleMessage("版本描述"),
         "video": MessageLookupByLibrary.simpleMessage("视频")
       };
 }

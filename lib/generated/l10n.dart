@@ -440,10 +440,10 @@ class S {
     );
   }
 
-  /// `A tool developed by flutter for bulk renaming.`
+  /// `🛠 A tool based on Flutter for bulk renaming files and the ability to remove useless nested folders`
   String get desc {
     return Intl.message(
-      'A tool developed by flutter for bulk renaming.',
+      '🛠 A tool based on Flutter for bulk renaming files and the ability to remove useless nested folders',
       name: 'desc',
       desc: '',
       args: [],
@@ -485,6 +485,66 @@ class S {
     return Intl.message(
       'Latest Version',
       name: 'latestVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version Description`
+  String get versionDesc {
+    return Intl.message(
+      'Version Description',
+      name: 'versionDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is the latest version`
+  String get currentLatest {
+    return Intl.message(
+      'This is the latest version',
+      name: 'currentLatest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detect new versions`
+  String get detectVersions {
+    return Intl.message(
+      'Detect new versions',
+      name: 'detectVersions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detecting...`
+  String get detecting {
+    return Intl.message(
+      'Detecting...',
+      name: 'detecting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New version available`
+  String get newVersion {
+    return Intl.message(
+      'New version available',
+      name: 'newVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detection Failed`
+  String get detectError {
+    return Intl.message(
+      'Detection Failed',
+      name: 'detectError',
       desc: '',
       args: [],
     );
@@ -685,6 +745,106 @@ class S {
     return Intl.message(
       'Error content successfully copied to Clipboard 😃',
       name: 'copySucceededText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Organizing`
+  String get startOrganizing {
+    return Intl.message(
+      'Start Organizing',
+      name: 'startOrganizing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Empty Folder`
+  String get deleteEmptyFolder {
+    return Intl.message(
+      'Delete Empty Folder',
+      name: 'deleteEmptyFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Folder`
+  String get targetFolder {
+    return Intl.message(
+      'Target Folder',
+      name: 'targetFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Default is the largest parent folder except the root directory`
+  String get defaultFolder {
+    return Intl.message(
+      'Default is the largest parent folder except the root directory',
+      name: 'defaultFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NOTICE: If you want to add files from the system disk, you must select the destination folder`
+  String get organizeTip {
+    return Intl.message(
+      'NOTICE: If you want to add files from the system disk, you must select the destination folder',
+      name: 'organizeTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drag The Folder Here`
+  String get dropFile {
+    return Intl.message(
+      'Drag The Folder Here',
+      name: 'dropFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organize Files Successfully`
+  String get organizeSuccess {
+    return Intl.message(
+      'Organize Files Successfully',
+      name: 'organizeSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organize Files Failed`
+  String get organizeFailed {
+    return Intl.message(
+      'Organize Files Failed',
+      name: 'organizeFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restart to take effect`
+  String get languageTip {
+    return Intl.message(
+      'Restart to take effect',
+      name: 'languageTip',
       desc: '',
       args: [],
     );

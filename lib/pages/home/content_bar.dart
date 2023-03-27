@@ -1,3 +1,4 @@
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/rename_file.dart';
@@ -82,32 +83,35 @@ class ContentBar extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ReorderableListView.builder(
-              buildDefaultDragHandles: false,
-              itemCount: provider.files.length,
-              onReorder: (oldIndex, newIndex) =>
-                  provider.reorderList(oldIndex, newIndex),
-              itemBuilder: (context, index) {
-                return ReorderableDragStartListener(
-                  index: index,
-                  key: ValueKey(provider.files[index].id),
-                  child: FileList(
-                    selected: provider.files[index].checked,
-                    onChanged: (v) =>
-                        provider.listSwitchCheck(provider.files[index].id),
-                    onDoubleTap: () =>
-                        provider.doubleTapAdd(provider.files[index].name),
-                    originName: provider.files[index].name,
-                    targetName: provider.files[index].newName,
-                    action: Container(
-                      width: 36,
-                      height: 40,
-                      alignment: Alignment.center,
-                      child: Text(provider.files[index].extension),
+            child: DropTarget(
+              onDragDone: (detail) => provider.dropFiles(detail),
+              child: ReorderableListView.builder(
+                buildDefaultDragHandles: false,
+                itemCount: provider.files.length,
+                onReorder: (oldIndex, newIndex) =>
+                    provider.reorderList(oldIndex, newIndex),
+                itemBuilder: (context, index) {
+                  return ReorderableDragStartListener(
+                    index: index,
+                    key: ValueKey(provider.files[index].id),
+                    child: FileList(
+                      selected: provider.files[index].checked,
+                      onChanged: (v) =>
+                          provider.listSwitchCheck(provider.files[index].id),
+                      onDoubleTap: () =>
+                          provider.doubleTapAdd(provider.files[index].name),
+                      originName: provider.files[index].name,
+                      targetName: provider.files[index].newName,
+                      action: Container(
+                        width: 36,
+                        height: 40,
+                        alignment: Alignment.center,
+                        child: Text(provider.files[index].extension),
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ],

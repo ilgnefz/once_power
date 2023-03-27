@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/pages/home/home.dart';
 import 'package:once_power/pages/other/menu.dart';
 import 'package:once_power/pages/other/organize_file.dart';
 import 'package:once_power/pages/other/setting.dart';
@@ -21,60 +20,54 @@ class OtherPage extends StatelessWidget {
       S.of(context).setting
     ];
     return Scaffold(
-      body: Stack(
+      body: Row(
         children: [
-          Row(
-            children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 240),
-                child: ListView(
-                  children: [
-                    Container(
-                      height: 40,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
+          Container(
+            padding: const EdgeInsets.all(12.0),
+            constraints: const BoxConstraints(maxWidth: 240),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Container(
+                        height: 40,
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
+                        alignment: Alignment.centerLeft,
+                        child: MyText(
+                          S.of(context).other,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      alignment: Alignment.centerLeft,
-                      child: MyText(
-                        S.of(context).other,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 12),
+                      // 语言 主题  关于
+                      ...List.generate(
+                        titles.length,
+                        (index) => OtherMenu(
+                          title: titles[index],
+                          provider: provider,
+                          selected: provider.currentIndex == index,
+                          onTap: () => provider.toggleIndex(index),
+                        ),
                       ),
-                    ),
-                    // 语言 主题  关于
-                    ...List.generate(
-                      titles.length,
-                      (index) => OtherMenu(
-                        title: titles[index],
-                        provider: provider,
-                        selected: provider.currentIndex == index,
-                        onTap: () => provider.toggleIndex(index),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(color: Colors.white),
-                  child: IndexedStack(
-                    index: provider.currentIndex,
-                    children: menus,
+                    ],
                   ),
                 ),
-              ),
-            ],
+                IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () => provider.back(context),
+                ),
+              ],
+            ),
           ),
-          Align(
-            alignment: Alignment.topRight,
+          Expanded(
             child: Container(
-              margin: const EdgeInsets.all(12),
-              // child: const CloseButton(),
-              child: IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const HomePage())),
+              decoration: const BoxDecoration(color: Colors.white),
+              child: IndexedStack(
+                index: provider.currentIndex,
+                children: menus,
               ),
             ),
           ),

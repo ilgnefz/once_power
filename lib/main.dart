@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/pages/home/home.dart';
+import 'package:once_power/provider/organize_file.dart';
 import 'package:once_power/provider/other.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/utils/package_info.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => RenameProvider()),
         ChangeNotifierProvider(create: (_) => OtherProvider()),
+        ChangeNotifierProvider(create: (_) => OrganizeFileProvider()),
       ],
       builder: (context, child) {
         return MaterialApp(

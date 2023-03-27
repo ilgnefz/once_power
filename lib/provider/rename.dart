@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cross_file/cross_file.dart';
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -181,6 +183,7 @@ class RenameProvider extends ChangeNotifier {
   void getDir() async {
     if (!appendMode) _files.clear();
     String? dir = await FilePicker.platform.getDirectoryPath();
+    if (folderMode) addToFiles(Directory(dir!), 'dir', FileClassify.folder);
     if (dir != null) getAllFile(dir);
     updateName();
   }
@@ -199,7 +202,7 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
-  getAllFile(dir, [String? newPath]) {
+  dynamic getAllFile(dir, [String? newPath]) {
     Directory directory = Directory(dir);
     List<FileSystemEntity> files = directory.listSync();
     if (files.isNotEmpty) {
@@ -222,10 +225,28 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
+  void dropFiles(DropDoneDetails detail) {
+    final List<XFile> files = detail.files;
+    for (XFile file in files) {
+      if (File(file.path).statSync().type == FileSystemEntityType.file) {
+        verifyExtension(file);
+        updateName();
+      } else {
+        if (folderMode) addToFiles(File(file.path), 'dir', FileClassify.folder);
+        getAllFile(file.path);
+      }
+    }
+    notifyListeners();
+  }
+
   void addToFiles(dynamic file, String extension, FileClassify type) {
-    String name = type == FileClassify.folder
-        ? path.basename(file.path)
-        : path.basename(file.path).split('.').first;
+    String name = '';
+    if (type == FileClassify.folder) {
+      name = path.basename(file.path);
+    } else {
+      int index = path.basename(file.path).lastIndexOf('.');
+      name = path.basename(file.path).substring(0, index);
+    }
     if (type != FileClassify.folder && extension == '') {
       name = '';
       extension = file.path.split('.').last;
