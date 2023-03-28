@@ -1,0 +1,36 @@
+display_name: OncePower
+
+icon: assets/logo.png
+
+keywords:
+  - Rename
+  - Application
+
+generic_name: OncePower
+
+#actions:
+#  - name: Say Hi
+#    label: say-hi
+#    arguments:
+#      - --say
+#      - hi
+#  - name: Say Bye
+#    label: say-bye
+#    arguments:
+#      - --say
+#      - bye
+
+categories:
+  - Tool
+
+startup_notify: true
+
+# 您可以指定要与您的应用捆绑的共享库
+#
+# flutter_distributor 会自动检测您的应用所依赖的共享库，但您也可以在此处手动指定它们。
+#
+# 以下示例展示了如何将 libcurl 库与您的应用捆绑在一起
+#
+# include:
+#   - libcurl.so.4
+include: []

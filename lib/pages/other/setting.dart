@@ -23,6 +23,9 @@ class SettingMenu extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SpaceBoxHeight(),
+            Image.asset('assets/flag.png', height: 80),
+            const SpaceBoxHeight(),
             SettingItem(
               title: S.of(context).language,
               action: [
