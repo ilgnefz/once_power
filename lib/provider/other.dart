@@ -9,6 +9,13 @@ import 'package:once_power/utils/notification.dart';
 import 'package:once_power/utils/storage.dart';
 
 class OtherProvider extends ChangeNotifier {
+  bool _currentPage = false;
+  bool get currentPage => _currentPage;
+  void switchPage(bool value) {
+    _currentPage = value;
+    notifyListeners();
+  }
+
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
   void toggleIndex(int index) {
@@ -68,6 +75,7 @@ class OtherProvider extends ChangeNotifier {
   back(BuildContext context) {
     // Navigator.of(context).pushReplacement(
     //     MaterialPageRoute(builder: (context) => const HomePage()));
+    switchPage(false);
     Navigator.of(context).pop();
   }
 }

@@ -6,15 +6,17 @@ import 'package:once_power/widgets/upload_button.dart';
 
 import 'my_text.dart';
 
-final TextStyle style = const TextStyle(fontSize: 13).useSystemChineseFont();
+final TextStyle myStyle = const TextStyle(fontSize: 14).useSystemChineseFont();
 
 class SimpleInput extends StatelessWidget {
   const SimpleInput({
     super.key,
     required this.controller,
     this.readOnly = false,
+    this.decoration,
     this.hintText,
     required this.hidden,
+    this.textStyle,
     this.action,
     required this.onClear,
     required this.onChanged,
@@ -23,7 +25,9 @@ class SimpleInput extends StatelessWidget {
   final TextEditingController controller;
   final bool hidden;
   final bool readOnly;
+  final Decoration? decoration;
   final String? hintText;
+  final TextStyle? textStyle;
   final Widget? action;
   final void Function() onClear;
   final void Function(String) onChanged;
@@ -32,26 +36,27 @@ class SimpleInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 32,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(.1), blurRadius: 1)
-        ],
-      ),
+      decoration: decoration ??
+          BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(.1), blurRadius: 1)
+            ],
+          ),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: controller,
-              style: style,
+              style: myStyle,
               readOnly: readOnly,
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: style,
+                hintStyle: textStyle ?? myStyle,
                 contentPadding: const EdgeInsets.only(left: 8.0),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide.none,

@@ -251,7 +251,8 @@ class RenameProvider extends ChangeNotifier {
       name = '';
       extension = file.path.split('.').last;
     }
-    if (_files.any((e) => e.name == name)) return;
+    if (_files.any(
+        (e) => e.name == name && e.parent == path.dirname(file.path))) return;
     String id = nanoid(10);
     DateTime createDateTime = type == FileClassify.folder
         ? file.statSync().changed
@@ -331,6 +332,17 @@ class RenameProvider extends ChangeNotifier {
       _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
       notifyListeners();
     });
+  }
+
+  @override
+  void dispose() {
+    matchTextController.dispose();
+    updateTextController.dispose();
+    prefixTextController.dispose();
+    suffixTextController.dispose();
+    prefixNumController.dispose();
+    suffixNumController.dispose();
+    super.dispose();
   }
 
   void doubleTapAdd(String value) {

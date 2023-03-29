@@ -2,7 +2,10 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/organize_file.dart';
+import 'package:once_power/widgets/loading.dart';
 import 'package:once_power/widgets/my_text.dart';
+import 'package:once_power/widgets/simple_checkbox.dart';
+import 'package:once_power/widgets/simple_input.dart';
 import 'package:once_power/widgets/space_box.dart';
 import 'package:provider/provider.dart';
 
@@ -22,65 +25,49 @@ class _OrganizeFileMenuState extends State<OrganizeFileMenu> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MyText(
-            '*${S.of(context).organizeTip}',
-            color: Theme.of(context).primaryColor,
-          ),
-          const SpaceBoxHeight(),
           Expanded(
-            child: DropTarget(
-              onDragDone: (detail) => provider.dropFile(detail),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                ),
-                child: provider.showFileList.isEmpty
-                    ? const EmptyContent()
-                    : FileList(provider),
-              ),
-            ),
+            child: provider.total != 0
+                ? LoadingPage(
+                    count: provider.count,
+                    total: provider.total,
+                    onPressed: provider.cancelAdd,
+                  )
+                : DropTarget(
+                    onDragDone: (detail) => provider.dropFile(detail),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: provider.showList.isEmpty
+                          ? const EmptyContent()
+                          : FileList(provider),
+                    ),
+                  ),
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              MyText('${S.of(context).targetFolder}: ', fontSize: 14),
+              MyText('${S.of(context).targetFolder}: '),
               Expanded(
-                child: Container(
-                  height: 32,
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: SimpleInput(
+                  controller: provider.targetController,
+                  hidden: false,
                   decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                   ),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: MyText(
-                          provider.targetFolder == ''
-                              ? S.of(context).defaultFolder
-                              : provider.targetFolder,
-                          fontSize: 14,
-                          color: provider.targetFolder == ''
-                              ? Colors.grey
-                              : Colors.black,
-                        ),
-                      ),
-                      if (provider.targetFolder != '')
-                        InkWell(
-                          onTap: provider.clearTargetFolder,
-                          child: const Icon(Icons.close,
-                              size: 18, color: Colors.grey),
-                        ),
-                    ],
-                  ),
+                  readOnly: true,
+                  hintText: S.of(context).defaultFolder,
+                  // textStyle: TextStyle(fontSize: 18, color: Colors.black),
+                  onClear: provider.deleteTargetFolder,
+                  onChanged: (v) {},
                 ),
               ),
               TextButton(
-                onPressed: () => provider.addFolder(true),
-                child: MyText(S.of(context).selectFolder, fontSize: 14),
+                onPressed: provider.selectedTargetFolder,
+                child: MyText(S.of(context).selectFolder),
               ),
             ],
           ),
@@ -89,17 +76,29 @@ class _OrganizeFileMenuState extends State<OrganizeFileMenu> {
             children: [
               TextButton(
                 onPressed: provider.addFolder,
-                child: MyText(S.of(context).addFolder, fontSize: 14),
+                child: MyText(S.of(context).addFolder),
+              ),
+              const SizedBox(width: 16),
+              SimpleCheckbox(
+                title: S.of(context).log,
+                checked: provider.saveLog,
+                onChange: (v) => provider.toggleCheck(),
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: provider.deleteEmptyFolder,
-                child: MyText(S.of(context).deleteEmptyFolder, fontSize: 14),
+                onPressed: provider.showList.isEmpty ||
+                        provider.targetController.text == ''
+                    ? null
+                    : provider.deleteEmptyFolder,
+                child: MyText(S.of(context).deleteEmptyFolder),
               ),
               const SizedBox(width: 16),
               ElevatedButton(
-                onPressed: provider.startOrganize,
-                child: MyText(S.of(context).startOrganizing, fontSize: 14),
+                onPressed: provider.showList.isEmpty ||
+                        provider.targetController.text == ''
+                    ? null
+                    : provider.organizeFile,
+                child: MyText(S.of(context).startOrganizing),
               ),
             ],
           ),
@@ -149,9 +148,11 @@ class FileList extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Row(
             children: [
-              Expanded(child: MyText(S.of(context).name)),
+              Expanded(
+                  child: MyText(
+                      '${S.of(context).name} [${provider.showList.length}]')),
               InkWell(
-                onTap: provider.clearAllFiles,
+                onTap: provider.clearList,
                 child: Icon(
                   Icons.delete_rounded,
                   size: 20,
@@ -163,7 +164,7 @@ class FileList extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: provider.showFileList.length,
+            itemCount: provider.showList.length,
             itemBuilder: (context, index) {
               return Container(
                 height: 36,
@@ -172,16 +173,16 @@ class FileList extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(
-                      provider.showFileList[index].icon,
+                      provider.showList[index].icon,
                       color: Theme.of(context).primaryColor,
                     ),
                     const SpaceBoxWidth(),
                     Expanded(
-                        child: MyText(provider.showFileList[index].name,
-                            fontSize: 14)),
+                      child: MyText(provider.showList[index].name),
+                    ),
                     InkWell(
                       onTap: () =>
-                          provider.clearFiles(provider.showFileList[index].id),
+                          provider.clearList(provider.showList[index].id),
                       child: const Icon(Icons.delete_outline_rounded,
                           size: 20, color: Colors.redAccent),
                     ),

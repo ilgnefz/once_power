@@ -66,6 +66,8 @@
   "uploadFailedText": "Please upload a file that uses line breaks or spaces to separate the content \uD83E\uDD71",
   "deleteFailed": "Delete Failed",
   "deleteFailedText": "Deletion failed because there is nothing to delete...\uD83D\uDE13",
+  "deleteSucceeded": "Delete Succeeded",
+  "deleteSucceededText": "All empty folders have been successfully deleted \uD83D\uDE01",
   "multiFailedText": "[{name}] {num} files failed to update because of [{reason}].",
   "copyErrorMessage": "Copy error message",
   "copySucceeded": "Copy Succeeded",
@@ -74,10 +76,14 @@
   "deleteEmptyFolder": "Delete Empty Folder",
   "targetFolder": "Target Folder",
   "name": "Name",
-  "defaultFolder": "Default is the largest parent folder except the root directory",
-  "organizeTip": "NOTICE: If you want to add files from the system disk, you must select the destination folder",
+  "defaultFolder": "Please select a folder",
+  "log": "Record Log (in the target folder)",
   "dropFile": "Drag The Folder Here",
   "organizeSuccess": "Organize Files Successfully",
   "organizeFailed": "Organize Files Failed",
-  "languageTip": "Restart to take effect"
+  "languageTip": "Restart to take effect",
+  "adding": "Adding",
+  "processing": "Processing",
+  "cancelAdd": "Cancel Add",
+  "cancelProcessing": "Cancel Processing"
 }

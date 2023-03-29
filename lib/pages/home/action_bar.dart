@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/provider/other.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
@@ -13,6 +14,7 @@ class ActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<RenameProvider>(context);
+    final otherProvider = Provider.of<OtherProvider>(context);
     return Column(
       children: [
         Expanded(child: SingleChildScrollView(child: OperateGroup(provider))),
@@ -46,8 +48,11 @@ class ActionBar extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              onPressed: () => provider.toOther(context),
-              icon: const Icon(Icons.settings),
+              onPressed: () {
+                otherProvider.switchPage(true);
+                provider.toOther(context);
+              },
+              icon: const Icon(Icons.menu_rounded),
             ),
             IconButton(
               onPressed: provider.clearFiles,

@@ -30,9 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "LICENSE": MessageLookupByLibrary.simpleMessage("开源许可证"),
         "about": MessageLookupByLibrary.simpleMessage("关于"),
         "addFolder": MessageLookupByLibrary.simpleMessage("添加文件夹"),
+        "adding": MessageLookupByLibrary.simpleMessage("正在添加"),
         "appendMode": MessageLookupByLibrary.simpleMessage("追加模式"),
         "applyChange": MessageLookupByLibrary.simpleMessage("应用更改"),
         "audio": MessageLookupByLibrary.simpleMessage("音频"),
+        "cancelAdd": MessageLookupByLibrary.simpleMessage("取消添加"),
+        "cancelProcessing": MessageLookupByLibrary.simpleMessage("取消处理"),
         "caseSensitive": MessageLookupByLibrary.simpleMessage("区分大小写"),
         "copyErrorMessage": MessageLookupByLibrary.simpleMessage("复制错误信息"),
         "copySucceeded": MessageLookupByLibrary.simpleMessage("复制成功"),
@@ -42,14 +45,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentLatest": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
         "currentVersion": MessageLookupByLibrary.simpleMessage("当前版本"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
-        "defaultFolder":
-            MessageLookupByLibrary.simpleMessage("默认为除根目录以外的最大父文件夹"),
+        "defaultFolder": MessageLookupByLibrary.simpleMessage("请选择一个文件夹"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("默认模式"),
         "deleteEmptyFolder": MessageLookupByLibrary.simpleMessage("删除空文件夹"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("删除失败"),
         "deleteFailedText":
             MessageLookupByLibrary.simpleMessage("删除失败，因为没有可以删除的内容...😓"),
         "deleteLength": MessageLookupByLibrary.simpleMessage("删除指定长度"),
+        "deleteSucceeded": MessageLookupByLibrary.simpleMessage("删除成功"),
+        "deleteSucceededText":
+            MessageLookupByLibrary.simpleMessage("已成功删除所有空文件夹 😁"),
         "deleteUnselected": MessageLookupByLibrary.simpleMessage("删除未选中"),
         "desc": MessageLookupByLibrary.simpleMessage(
             "🛠 一款基于 Flutter 开发的用于批量重命名文件的工具，还有移除无用嵌套文件夹的功能"),
@@ -73,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("输入指定长度字符串或 *N（N为数字）"),
         "lengthMode": MessageLookupByLibrary.simpleMessage("长度模式"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
+        "log": MessageLookupByLibrary.simpleMessage("记录日志(默认在目标文件夹)"),
         "loopFileContent": MessageLookupByLibrary.simpleMessage("循环文件内容"),
         "matchText": MessageLookupByLibrary.simpleMessage("匹配内容"),
         "multiFailedText": m0,
@@ -83,12 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizeFailed": MessageLookupByLibrary.simpleMessage("文件整理失败"),
         "organizeFile": MessageLookupByLibrary.simpleMessage("整理文件"),
         "organizeSuccess": MessageLookupByLibrary.simpleMessage("文件整理成功"),
-        "organizeTip":
-            MessageLookupByLibrary.simpleMessage("注意：如果添加的是系统盘下的文件，必须选择目标文件夹"),
         "originalName": MessageLookupByLibrary.simpleMessage("原始名称"),
         "other": MessageLookupByLibrary.simpleMessage("其他"),
         "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
         "prefixDigitIncrement": MessageLookupByLibrary.simpleMessage("前缀数字递增"),
+        "processing": MessageLookupByLibrary.simpleMessage("正在处理"),
         "projectUrl": MessageLookupByLibrary.simpleMessage("项目地址"),
         "renameFailed": MessageLookupByLibrary.simpleMessage("重命名失败"),
         "renameFailedExists":

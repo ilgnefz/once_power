@@ -9,7 +9,7 @@ import 'package:once_power/widgets/space_box.dart';
 import 'package:provider/provider.dart';
 
 Widget settingText(String data, [color]) =>
-    MyText(data, fontSize: 14, fontWeight: FontWeight.w600, color: color);
+    MyText(data, fontWeight: FontWeight.w600, color: color);
 
 class SettingMenu extends StatelessWidget {
   const SettingMenu({Key? key}) : super(key: key);
@@ -45,9 +45,7 @@ class SettingMenu extends StatelessWidget {
             ),
             SettingItem(
               title: S.of(context).about,
-              action: [
-                MyText(S.of(context).desc, fontSize: 14),
-              ],
+              action: [MyText(S.of(context).desc)],
             ),
             SettingItem(
               title: S.of(context).projectUrl,
@@ -139,7 +137,7 @@ class SettingItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: crossAxisAlignment,
         children: [
-          MyText('$title:', fontSize: 14),
+          MyText('$title:'),
           const SizedBox(width: 12),
           ...action,
         ],
@@ -169,7 +167,7 @@ class RadioButton extends StatelessWidget {
       child: Row(
         children: [
           Radio(value: value, groupValue: groupValue, onChanged: onChange),
-          MyText(title, fontSize: 14),
+          MyText(title),
         ],
       ),
     );

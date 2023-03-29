@@ -29,7 +29,6 @@ class NotificationMessage {
                 children: [
                   MyText(
                     title,
-                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: type == MessageType.failure
                         ? Colors.red
@@ -45,8 +44,7 @@ class NotificationMessage {
                   ),
                 ],
               ),
-              // MyText(message, fontSize: 14),
-              MyText(message, fontSize: 14),
+              MyText(message),
               if (onPressed != null)
                 ButtonBar(
                   children: [

@@ -2,6 +2,7 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/provider/other.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/my_text.dart';
 import 'package:once_power/widgets/simple_checkbox.dart';
@@ -14,6 +15,7 @@ class ContentBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<RenameProvider>(context);
+    final otherProvider = Provider.of<OtherProvider>(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -84,6 +86,7 @@ class ContentBar extends StatelessWidget {
           ),
           Expanded(
             child: DropTarget(
+              enable: !otherProvider.currentPage,
               onDragDone: (detail) => provider.dropFiles(detail),
               child: ReorderableListView.builder(
                 buildDefaultDragHandles: false,

@@ -25,7 +25,7 @@ class MyText extends StatelessWidget {
       data,
       style: style ??
           TextStyle(
-            fontSize: fontSize ?? 13,
+            fontSize: fontSize ?? 14,
             color: color,
             fontWeight: fontWeight,
           ).useSystemChineseFont(),

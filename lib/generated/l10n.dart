@@ -710,6 +710,26 @@ class S {
     );
   }
 
+  /// `Delete Succeeded`
+  String get deleteSucceeded {
+    return Intl.message(
+      'Delete Succeeded',
+      name: 'deleteSucceeded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All empty folders have been successfully deleted 😁`
+  String get deleteSucceededText {
+    return Intl.message(
+      'All empty folders have been successfully deleted 😁',
+      name: 'deleteSucceededText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `[{name}] {num} files failed to update because of [{reason}].`
   String multiFailedText(Object name, Object num, Object reason) {
     return Intl.message(
@@ -790,21 +810,21 @@ class S {
     );
   }
 
-  /// `Default is the largest parent folder except the root directory`
+  /// `Please select a folder`
   String get defaultFolder {
     return Intl.message(
-      'Default is the largest parent folder except the root directory',
+      'Please select a folder',
       name: 'defaultFolder',
       desc: '',
       args: [],
     );
   }
 
-  /// `NOTICE: If you want to add files from the system disk, you must select the destination folder`
-  String get organizeTip {
+  /// `Record Log (in the target folder)`
+  String get log {
     return Intl.message(
-      'NOTICE: If you want to add files from the system disk, you must select the destination folder',
-      name: 'organizeTip',
+      'Record Log (in the target folder)',
+      name: 'log',
       desc: '',
       args: [],
     );
@@ -845,6 +865,46 @@ class S {
     return Intl.message(
       'Restart to take effect',
       name: 'languageTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adding`
+  String get adding {
+    return Intl.message(
+      'Adding',
+      name: 'adding',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing`
+  String get processing {
+    return Intl.message(
+      'Processing',
+      name: 'processing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Add`
+  String get cancelAdd {
+    return Intl.message(
+      'Cancel Add',
+      name: 'cancelAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Processing`
+  String get cancelProcessing {
+    return Intl.message(
+      'Cancel Processing',
+      name: 'cancelProcessing',
       desc: '',
       args: [],
     );

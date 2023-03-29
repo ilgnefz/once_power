@@ -66,6 +66,8 @@
   "uploadFailedText": "请上传使用换行或空格进行分隔了内容的文件 \uD83E\uDD71",
   "deleteFailed": "删除失败",
   "deleteFailedText": "删除失败，因为没有可以删除的内容...\uD83D\uDE13",
+  "deleteSucceeded": "删除成功",
+  "deleteSucceededText": "已成功删除所有空文件夹 \uD83D\uDE01",
   "multiFailedText": "[ {name} ] {num} 个文件因为 [ {reason} ] 更新失败。",
   "copyErrorMessage": "复制错误信息",
   "copySucceeded": "复制成功",
@@ -74,10 +76,14 @@
   "deleteEmptyFolder": "删除空文件夹",
   "targetFolder": "目标文件夹",
   "name": "名称",
-  "defaultFolder": "默认为除根目录以外的最大父文件夹",
-  "organizeTip": "注意：如果添加的是系统盘下的文件，必须选择目标文件夹",
+  "defaultFolder": "请选择一个文件夹",
+  "log": "记录日志(默认在目标文件夹)",
   "dropFile": "拖动文件夹到这里",
   "organizeSuccess": "文件整理成功",
   "organizeFailed": "文件整理失败",
-  "languageTip": "重启生效"
+  "languageTip": "重启生效",
+  "adding": "正在添加",
+  "processing": "正在处理",
+  "cancelAdd": "取消添加",
+  "cancelProcessing": "取消处理"
 }

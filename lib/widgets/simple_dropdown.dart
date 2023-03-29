@@ -1,3 +1,4 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/widgets/my_text.dart';
 
@@ -28,7 +29,8 @@ class SimpleDropdown extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 32),
           child: DropdownButton<dynamic>(
-            style: const TextStyle(color: Colors.black, fontSize: 14),
+            style: const TextStyle(color: Colors.black, fontSize: 14)
+                .useSystemChineseFont(),
             icon: const Icon(Icons.arrow_drop_down),
             iconSize: 20,
             elevation: 1,

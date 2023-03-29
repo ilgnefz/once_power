@@ -31,9 +31,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "LICENSE": MessageLookupByLibrary.simpleMessage("LICENSE"),
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "addFolder": MessageLookupByLibrary.simpleMessage("Add Folder"),
+        "adding": MessageLookupByLibrary.simpleMessage("Adding"),
         "appendMode": MessageLookupByLibrary.simpleMessage("Append Mode"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply Change"),
         "audio": MessageLookupByLibrary.simpleMessage("audio"),
+        "cancelAdd": MessageLookupByLibrary.simpleMessage("Cancel Add"),
+        "cancelProcessing":
+            MessageLookupByLibrary.simpleMessage("Cancel Processing"),
         "caseSensitive": MessageLookupByLibrary.simpleMessage("Case Sensitive"),
         "copyErrorMessage":
             MessageLookupByLibrary.simpleMessage("Copy error message"),
@@ -47,8 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentVersion":
             MessageLookupByLibrary.simpleMessage("Current Version"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
-        "defaultFolder": MessageLookupByLibrary.simpleMessage(
-            "Default is the largest parent folder except the root directory"),
+        "defaultFolder":
+            MessageLookupByLibrary.simpleMessage("Please select a folder"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("Default Mode"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete Empty Folder"),
@@ -57,6 +61,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Deletion failed because there is nothing to delete...😓"),
         "deleteLength":
             MessageLookupByLibrary.simpleMessage("Delete Specified Length"),
+        "deleteSucceeded":
+            MessageLookupByLibrary.simpleMessage("Delete Succeeded"),
+        "deleteSucceededText": MessageLookupByLibrary.simpleMessage(
+            "All empty folders have been successfully deleted 😁"),
         "deleteUnselected":
             MessageLookupByLibrary.simpleMessage("Delete Unselected"),
         "desc": MessageLookupByLibrary.simpleMessage(
@@ -87,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter a random length string Or *Num"),
         "lengthMode": MessageLookupByLibrary.simpleMessage("Length Mode"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
+        "log": MessageLookupByLibrary.simpleMessage(
+            "Record Log (in the target folder)"),
         "loopFileContent":
             MessageLookupByLibrary.simpleMessage("Loop file Content"),
         "matchText": MessageLookupByLibrary.simpleMessage("Match Text"),
@@ -101,13 +111,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizeFile": MessageLookupByLibrary.simpleMessage("Organize File"),
         "organizeSuccess":
             MessageLookupByLibrary.simpleMessage("Organize Files Successfully"),
-        "organizeTip": MessageLookupByLibrary.simpleMessage(
-            "NOTICE: If you want to add files from the system disk, you must select the destination folder"),
         "originalName": MessageLookupByLibrary.simpleMessage("Original Name"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
         "prefixDigitIncrement":
             MessageLookupByLibrary.simpleMessage("Prefix Digit Increment"),
+        "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "projectUrl": MessageLookupByLibrary.simpleMessage("Project Url"),
         "renameFailed": MessageLookupByLibrary.simpleMessage("Rename failed"),
         "renameFailedExists": MessageLookupByLibrary.simpleMessage(

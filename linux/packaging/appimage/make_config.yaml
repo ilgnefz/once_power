@@ -3,22 +3,21 @@ display_name: OncePower
 icon: assets/logo.png
 
 keywords:
+  - Tool
+  - File
+  - Folder
   - Rename
   - Application
 
 generic_name: OncePower
 
-#actions:
-#  - name: Say Hi
-#    label: say-hi
-#    arguments:
-#      - --say
-#      - hi
-#  - name: Say Bye
-#    label: say-bye
-#    arguments:
-#      - --say
-#      - bye
+actions:
+  - name: Say Hi
+    label: say-hi
+    arguments:
+      - --say
+      - hi
+
 
 categories:
   - Tool

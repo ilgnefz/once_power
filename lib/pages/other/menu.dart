@@ -37,7 +37,6 @@ class OtherMenu extends StatelessWidget {
           ),
           child: MyText(
             title,
-            fontSize: 14,
             color: selected ? Colors.white : Colors.black,
           ),
         ),

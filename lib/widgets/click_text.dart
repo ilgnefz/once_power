@@ -29,13 +29,12 @@ class _ClickTextState extends State<ClickText> {
       },
       child: Row(
         children: [
-          MyText('${widget.title}:', fontSize: 14, fontWeight: FontWeight.w600),
+          MyText('${widget.title}:', fontWeight: FontWeight.w600),
           const SpaceBoxWidth(),
           MyText(
             widget.url,
             style: TextStyle(
               color: _hovering ? Colors.blue : Theme.of(context).primaryColor,
-              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),

@@ -1,0 +1,29 @@
+display_name: OncePower
+package_name: OncePower
+maintainer:
+  name: ilgnefz
+  email: ilgnefz@foxmail.com
+priority: optional
+section: x11
+installed_size: 6604
+essential: false
+icon: assets/logo.png
+
+postinstall_scripts:
+  - echo `Thank you for using OncePower`
+postuninstall_scripts:
+  - echo `Goodbye, friend`
+
+keywords:
+  - Tool
+  - File
+  - Folder
+  - Rename
+  - Application
+
+generic_name: OncePower
+
+categories:
+  - Tool
+
+startup_notify: true
