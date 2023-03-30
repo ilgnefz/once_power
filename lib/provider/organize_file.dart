@@ -29,10 +29,11 @@ class OrganizeFileProvider extends ChangeNotifier {
   String _loadingMessage = S.current.adding;
   String get loadingMessage => _loadingMessage;
 
-  final StreamController<String> _addStream = StreamController<String>();
+  final StreamController<String> _addStream =
+      StreamController<String>.broadcast();
   StreamSubscription<String>? _addSubscription;
   final StreamController<FileInfo> _organizeStream =
-      StreamController<FileInfo>();
+      StreamController<FileInfo>.broadcast();
   StreamSubscription<FileInfo>? _organizeSubscription;
 
   TextEditingController targetController = TextEditingController();
@@ -42,7 +43,15 @@ class OrganizeFileProvider extends ChangeNotifier {
   final List<FileInfo> _realList = [];
   List<FileInfo> get realList => _realList;
 
-  OrganizeFileProvider() {
+  @override
+  void dispose() {
+    _addSubscription?.cancel();
+    _organizeSubscription?.cancel();
+    targetController.dispose();
+    super.dispose();
+  }
+
+  void subscriptionAddStream() {
     _addSubscription = _addStream.stream.listen((String filePath) {
       FileSystemEntity file = File(filePath);
       String name = path.basename(filePath);
@@ -53,6 +62,9 @@ class OrganizeFileProvider extends ChangeNotifier {
       if (extension == 'dir') targetController.text = filePath;
       addList(name, filePath, extension);
     });
+  }
+
+  void subscriptionOrganizeStream() {
     _organizeSubscription = _organizeStream.stream.listen((FileInfo fileInfo) {
       String newPath =
           path.join(targetController.text, path.basename(fileInfo.filePath));
@@ -81,19 +93,11 @@ class OrganizeFileProvider extends ChangeNotifier {
     return '${newPath.substring(0, index)} - $num${newPath.substring(index)}';
   }
 
-  @override
-  void dispose() {
-    _addSubscription?.cancel();
-    _organizeSubscription?.cancel();
-    targetController.dispose();
-    super.dispose();
-  }
-
   void dropFile(DropDoneDetails detail) {
     _loadingMessage = S.current.adding;
     List<XFile> files = detail.files;
     _total = files.length;
-    if (_addSubscription!.isPaused) _addSubscription!.resume();
+    if (_addSubscription == null) subscriptionAddStream();
     for (XFile xFile in files) {
       _count++;
       _addStream.add(xFile.path);
@@ -107,7 +111,7 @@ class OrganizeFileProvider extends ChangeNotifier {
     _loadingMessage = S.current.adding;
     String? folder = await FilePicker.platform.getDirectoryPath();
     if (folder != null) {
-      if (_addSubscription!.isPaused) _addSubscription!.resume();
+      if (_addSubscription == null) subscriptionAddStream();
       _addStream.add(folder);
     }
   }
@@ -131,9 +135,14 @@ class OrganizeFileProvider extends ChangeNotifier {
     }
   }
 
-  void cancelAdd() {
-    if (!_addSubscription!.isPaused) _addSubscription!.pause();
-    if (!_organizeSubscription!.isPaused) _organizeSubscription!.pause();
+  void cancelOperate() async {
+    if (_loadingMessage == S.current.adding) {
+      await _addSubscription!.cancel().then((value) => _addSubscription = null);
+    } else {
+      _organizeSubscription!
+          .cancel()
+          .then((value) => _organizeSubscription = null);
+    }
     _total = 0;
     _count = 0;
     notifyListeners();
@@ -222,7 +231,7 @@ class OrganizeFileProvider extends ChangeNotifier {
     _loadingMessage = S.current.processing;
     getRealList();
     _total = _realList.length;
-    if (_organizeSubscription!.isPaused) _organizeSubscription!.resume();
+    if (_organizeSubscription == null) subscriptionOrganizeStream();
     try {
       for (FileInfo fileInfo in _realList) {
         _count++;

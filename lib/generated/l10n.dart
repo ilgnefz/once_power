@@ -140,11 +140,11 @@ class S {
     );
   }
 
-  /// `Creation Date Naming`
-  String get createDateRename {
+  /// `Date Naming`
+  String get dateRename {
     return Intl.message(
-      'Creation Date Naming',
-      name: 'createDateRename',
+      'Date Naming',
+      name: 'dateRename',
       desc: '',
       args: [],
     );
@@ -610,13 +610,13 @@ class S {
     );
   }
 
-  /// `The selected {num} files have been renamed successfully 🎉`
-  String renameSucceededText(Object num) {
+  /// `{all} of the selected {done} files have been renamed successfully 🎉`
+  String renameSucceededText(Object all, Object done) {
     return Intl.message(
-      'The selected $num files have been renamed successfully 🎉',
+      '$all of the selected $done files have been renamed successfully 🎉',
       name: 'renameSucceededText',
       desc: '',
-      args: [num],
+      args: [all, done],
     );
   }
 
@@ -905,6 +905,56 @@ class S {
     return Intl.message(
       'Cancel Processing',
       name: 'cancelProcessing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Date`
+  String get createDate {
+    return Intl.message(
+      'Create Date',
+      name: 'createDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify Date`
+  String get modifyDate {
+    return Intl.message(
+      'Modify Date',
+      name: 'modifyDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exif Date`
+  String get exifDate {
+    return Intl.message(
+      'Exif Date',
+      name: 'exifDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Earliest Date`
+  String get earliestDate {
+    return Intl.message(
+      'Earliest Date',
+      name: 'earliestDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest Date`
+  String get latestDate {
+    return Intl.message(
+      'Latest Date',
+      name: 'latestDate',
       desc: '',
       args: [],
     );

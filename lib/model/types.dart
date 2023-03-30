@@ -32,6 +32,25 @@ extension ModeTypeExtension on ModeType {
   }
 }
 
+enum DateType { createDate, modifyDate, exifDate, earliestDate, latestDate }
+
+extension DateTypeExtension on DateType {
+  String get value {
+    switch (this) {
+      case DateType.createDate:
+        return S.current.createDate;
+      case DateType.modifyDate:
+        return S.current.modifyDate;
+      case DateType.exifDate:
+        return S.current.exifDate;
+      case DateType.earliestDate:
+        return S.current.earliestDate;
+      case DateType.latestDate:
+        return S.current.latestDate;
+    }
+  }
+}
+
 enum UploadType { prefix, suffix }
 
 enum MessageType { failure, success, warning }

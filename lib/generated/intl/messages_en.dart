@@ -23,8 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(name, num, reason) =>
       "[${name}] ${num} files failed to update because of [${reason}].";
 
-  static String m1(num) =>
-      "The selected ${num} files have been renamed successfully 🎉";
+  static String m1(all, done) =>
+      "${all} of the selected ${done} files have been renamed successfully 🎉";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -44,13 +44,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySucceeded": MessageLookupByLibrary.simpleMessage("Copy Succeeded"),
         "copySucceededText": MessageLookupByLibrary.simpleMessage(
             "Error content successfully copied to Clipboard 😃"),
-        "createDateRename":
-            MessageLookupByLibrary.simpleMessage("Creation Date Naming"),
+        "createDate": MessageLookupByLibrary.simpleMessage("Create Date"),
         "currentLatest":
             MessageLookupByLibrary.simpleMessage("This is the latest version"),
         "currentVersion":
             MessageLookupByLibrary.simpleMessage("Current Version"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
+        "dateRename": MessageLookupByLibrary.simpleMessage("Date Naming"),
         "defaultFolder":
             MessageLookupByLibrary.simpleMessage("Please select a folder"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("Default Mode"),
@@ -78,8 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
         "dropFile":
             MessageLookupByLibrary.simpleMessage("Drag The Folder Here"),
+        "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest Date"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage(
             "Swap Incremental Digit Position"),
+        "exifDate": MessageLookupByLibrary.simpleMessage("Exif Date"),
         "folder": MessageLookupByLibrary.simpleMessage("folder"),
         "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
         "image": MessageLookupByLibrary.simpleMessage("image"),
@@ -90,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "languageTip":
             MessageLookupByLibrary.simpleMessage("Restart to take effect"),
+        "latestDate": MessageLookupByLibrary.simpleMessage("Latest Date"),
         "latestVersion": MessageLookupByLibrary.simpleMessage("Latest Version"),
         "lengthMatchText": MessageLookupByLibrary.simpleMessage(
             "Enter a random length string Or *Num"),
@@ -100,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loopFileContent":
             MessageLookupByLibrary.simpleMessage("Loop file Content"),
         "matchText": MessageLookupByLibrary.simpleMessage("Match Text"),
+        "modifyDate": MessageLookupByLibrary.simpleMessage("Modify Date"),
         "multiFailedText": m0,
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newVersion":

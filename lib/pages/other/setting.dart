@@ -68,7 +68,7 @@ class SettingMenu extends StatelessWidget {
             ),
             SettingItem(
               title: S.of(context).LICENSE,
-              action: [settingText('GPL2.0 LICENSE', Colors.teal)],
+              action: [settingText('GPL 2.0 LICENSE', Colors.teal)],
             ),
             SettingItem(
               title: S.of(context).currentVersion,

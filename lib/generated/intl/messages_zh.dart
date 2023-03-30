@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(name, num, reason) =>
       "[ ${name} ] ${num} 个文件因为 [ ${reason} ] 更新失败。";
 
-  static String m1(num) => "所选${num}个文件已更名成功 🎉";
+  static String m1(all, done) => "所选${all}个文件中${done}个已更名成功 🎉";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -41,10 +41,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySucceeded": MessageLookupByLibrary.simpleMessage("复制成功"),
         "copySucceededText":
             MessageLookupByLibrary.simpleMessage("错误内容已成功复制到剪贴板 😃"),
-        "createDateRename": MessageLookupByLibrary.simpleMessage("以创建日期命名"),
+        "createDate": MessageLookupByLibrary.simpleMessage("创建日期"),
         "currentLatest": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
         "currentVersion": MessageLookupByLibrary.simpleMessage("当前版本"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
+        "dateRename": MessageLookupByLibrary.simpleMessage("日期命名"),
         "defaultFolder": MessageLookupByLibrary.simpleMessage("请选择一个文件夹"),
         "defaultMode": MessageLookupByLibrary.simpleMessage("默认模式"),
         "deleteEmptyFolder": MessageLookupByLibrary.simpleMessage("删除空文件夹"),
@@ -64,7 +65,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "digitIncrementHint": MessageLookupByLibrary.simpleMessage("输入N位数个字符"),
         "disable": MessageLookupByLibrary.simpleMessage("不使用"),
         "dropFile": MessageLookupByLibrary.simpleMessage("拖动文件夹到这里"),
+        "earliestDate": MessageLookupByLibrary.simpleMessage("最早日期"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage("交换递增数字位置"),
+        "exifDate": MessageLookupByLibrary.simpleMessage("拍摄日期"),
         "folder": MessageLookupByLibrary.simpleMessage("文件夹"),
         "followSystem": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "image": MessageLookupByLibrary.simpleMessage("图片"),
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inputErrorText": MessageLookupByLibrary.simpleMessage("请输入正确的数字 😣"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "languageTip": MessageLookupByLibrary.simpleMessage("重启生效"),
+        "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
         "latestVersion": MessageLookupByLibrary.simpleMessage("最新版本"),
         "lengthMatchText":
             MessageLookupByLibrary.simpleMessage("输入指定长度字符串或 *N（N为数字）"),
@@ -81,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "log": MessageLookupByLibrary.simpleMessage("记录日志(默认在目标文件夹)"),
         "loopFileContent": MessageLookupByLibrary.simpleMessage("循环文件内容"),
         "matchText": MessageLookupByLibrary.simpleMessage("匹配内容"),
+        "modifyDate": MessageLookupByLibrary.simpleMessage("修改日期"),
         "multiFailedText": m0,
         "name": MessageLookupByLibrary.simpleMessage("名称"),
         "newVersion": MessageLookupByLibrary.simpleMessage("有新版本"),

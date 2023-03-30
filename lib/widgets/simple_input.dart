@@ -1,5 +1,6 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/rename.dart';
 import 'package:once_power/widgets/upload_button.dart';
@@ -17,6 +18,7 @@ class SimpleInput extends StatelessWidget {
     this.hintText,
     required this.hidden,
     this.textStyle,
+    this.inputFormatters,
     this.action,
     required this.onClear,
     required this.onChanged,
@@ -28,6 +30,7 @@ class SimpleInput extends StatelessWidget {
   final Decoration? decoration;
   final String? hintText;
   final TextStyle? textStyle;
+  final List<TextInputFormatter>? inputFormatters;
   final Widget? action;
   final void Function() onClear;
   final void Function(String) onChanged;
@@ -51,6 +54,7 @@ class SimpleInput extends StatelessWidget {
               controller: controller,
               style: myStyle,
               readOnly: readOnly,
+              inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: textStyle ?? myStyle,

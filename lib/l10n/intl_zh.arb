@@ -9,7 +9,7 @@
   "lengthMode": "长度模式",
   "updateText":"修改为",
   "inputDisabled": "输入已禁用",
-  "createDateRename": "以创建日期命名",
+  "dateRename": "日期命名",
   "prefix": "前缀",
   "suffix": "后缀",
   "loopFileContent": "循环文件内容",
@@ -56,7 +56,7 @@
   "text": "文本",
   "folder": "文件夹",
   "renameSucceeded": "重命名成功",
-  "renameSucceededText": "所选{num}个文件已更名成功 \uD83C\uDF89",
+  "renameSucceededText": "所选{all}个文件中{done}个已更名成功 \uD83C\uDF89",
   "renameFailed": "重命名失败",
   "renameFailedExists": "目录下已存在同名文件，请重新更名后再试 \uD83D\uDE25",
   "renameFailedUnmodified": "新文件名和原名称一样 \uD83D\uDE24",
@@ -85,5 +85,10 @@
   "adding": "正在添加",
   "processing": "正在处理",
   "cancelAdd": "取消添加",
-  "cancelProcessing": "取消处理"
+  "cancelProcessing": "取消处理",
+  "createDate": "创建日期",
+  "modifyDate": "修改日期",
+  "exifDate": "拍摄日期",
+  "earliestDate": "最早日期",
+  "latestDate": "最晚日期"
 }

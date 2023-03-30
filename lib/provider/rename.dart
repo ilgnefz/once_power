@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:exif/exif.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -16,12 +18,183 @@ import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as path;
 
 class RenameProvider extends ChangeNotifier {
+  // 定义进度条相关数据
+  int _total = 0;
+  int get total => _total;
+  int _count = 0;
+  int get count => _count;
+  // 控制添加进度
+  final StreamController<String> _addStream =
+      StreamController<String>.broadcast();
+  StreamSubscription<String>? _addSubscription;
+  final StreamController<RenameFile> _renameStream =
+      StreamController<RenameFile>.broadcast();
+  StreamSubscription<RenameFile>? _renameSubscription;
+  // 加载界面的提示信息
+  String _loadingMessage = S.current.adding;
+  String get loadingMessage => _loadingMessage;
+  // 输入框的控制器
+  final TextEditingController matchTextController = TextEditingController();
+  final TextEditingController updateTextController = TextEditingController();
+  final TextEditingController prefixTextController = TextEditingController();
+  final TextEditingController suffixTextController = TextEditingController();
+  final TextEditingController prefixNumController = TextEditingController();
+  final TextEditingController suffixNumController = TextEditingController();
+  // 监听输入
+  RenameProvider() {
+    matchTextController.addListener(() {
+      _matchEmpty = !matchTextController.text.isNotEmpty;
+      notifyListeners();
+    });
+    updateTextController.addListener(() {
+      _updateEmpty = !updateTextController.text.isNotEmpty;
+      notifyListeners();
+    });
+    prefixTextController.addListener(() {
+      _prefixEmpty = !prefixTextController.text.isNotEmpty;
+      _openLoopType = prefixTextController.text.isNotEmpty;
+      notifyListeners();
+    });
+    suffixTextController.addListener(() {
+      _suffixEmpty = !suffixTextController.text.isNotEmpty;
+      _openLoopType = suffixTextController.text.isNotEmpty;
+      notifyListeners();
+    });
+    prefixNumController.addListener(() {
+      _prefixNumEmpty = !prefixNumController.text.isNotEmpty;
+      notifyListeners();
+    });
+    suffixNumController.addListener(() {
+      _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
+      notifyListeners();
+    });
+  }
+  // 退出时销毁控制器
+  @override
+  void dispose() {
+    matchTextController.dispose();
+    updateTextController.dispose();
+    prefixTextController.dispose();
+    suffixTextController.dispose();
+    prefixNumController.dispose();
+    suffixNumController.dispose();
+    _addSubscription?.cancel();
+    _renameSubscription?.cancel();
+    super.dispose();
+  }
+
+  // 订阅监听添加流
+  void subscriptionAddStream() {
+    _addSubscription = _addStream.stream.listen((String filePath) async {
+      if (_files.any((e) => e.filePath == filePath)) return;
+      FileSystemEntity file = File(filePath);
+      // 如果是文件就获取文件扩展名，否则扩展名为'dir'
+      String extension = 'dir';
+      String name = path.basename(filePath);
+      DateTime? exifDate;
+      if (FileSystemEntity.isFileSync(filePath)) {
+        extension = path.extension(filePath);
+        if (extension != '') {
+          extension = extension.replaceFirst('.', '');
+          int extensionIndex = name.lastIndexOf('.');
+          name = name.substring(0, extensionIndex);
+        }
+      }
+      // 如果文件不是过滤文件里的
+      if (!filter.contains(extension)) {
+        String id = nanoid(10);
+        FileClassify type = getFileClassify(extension);
+        DateTime createDate = file.statSync().changed;
+        DateTime modifyDate = file.statSync().modified;
+        // 获取图片拍摄日期
+        if (image.contains(extension)) exifDate = await imageExifInfo(filePath);
+        _files.add(
+          RenameFile(
+            id: id,
+            name: name,
+            newName: name,
+            parent: path.dirname(filePath),
+            filePath: filePath,
+            extension: extension,
+            createDate: createDate,
+            modifyDate: modifyDate,
+            exifDate: exifDate,
+            type: type,
+            checked: true,
+          ),
+        );
+        notifyListeners();
+      }
+    });
+  }
+
+  Future<DateTime?> imageExifInfo(String imagePath) async {
+    final fileBytes = File(imagePath).readAsBytesSync();
+    final data = await readExifFromBytes(fileBytes);
+    if (!data.containsKey('Image DateTime')) return null;
+    String? dateTime = data['Image DateTime'].toString();
+    if (dateTime == '') return null;
+    return exifDateFormat(dateTime);
+  }
+
+  int _doneCount = 0;
+  // 订阅重命名流
+  void subscriptionRenameStream() {
+    _renameSubscription = _renameStream.stream.listen((file) {
+      if (file.name == file.newName) {
+        return _errorList.add(
+          ErrorMessage(
+            fileName: file.name,
+            reason: S.current.renameFailedUnmodified,
+            time: DateTime.now(),
+          ),
+        );
+      }
+      var extension = file.extension == 'dir' ? '' : '.${file.extension}';
+      var oldPath = path.join(file.parent, '${file.name}$extension');
+      var newPath = path.join(file.parent, '${file.newName.trim()}$extension');
+      try {
+        if (File(newPath).existsSync()) {
+          return _errorList.add(ErrorMessage(
+            fileName: file.name,
+            reason: S.current.renameFailedExists,
+            time: DateTime.now(),
+          ));
+        }
+        if (file.extension == 'dir') Directory(oldPath).renameSync(newPath);
+        if (file.extension != 'dir') File(oldPath).renameSync(newPath);
+        _doneCount++;
+        file.name = path.basename(newPath).split('.').first;
+        notifyListeners();
+      } catch (e) {
+        _errorList.add(ErrorMessage(
+            fileName: file.name, reason: '$e', time: DateTime.now()));
+      }
+    });
+  }
+
+  // 取消监听
+  void cancelOperate() async {
+    if (loadingMessage == S.current.adding) {
+      await _addSubscription?.cancel().then((value) => _addSubscription = null);
+    } else {
+      await _renameSubscription
+          ?.cancel()
+          .then((value) => _renameSubscription = null);
+    }
+    _total = 0;
+    _count = 0;
+    updateName();
+    // notifyListeners();
+  }
+
+  // 控制是否选中
   bool _caseSensitive = false;
   bool get caseSensitive => _caseSensitive;
   bool _deleteLength = false;
   bool get deleteLength => _deleteLength;
-  bool _createDateRename = false;
-  bool get createDateRename => _createDateRename;
+  bool _dateRename = false;
+  bool get dateRename => _dateRename;
   bool _useLoop = false;
   bool get useLoop => _useLoop;
   bool _numAddBefore = false;
@@ -62,6 +235,7 @@ class RenameProvider extends ChangeNotifier {
     return false;
   }
 
+  // 弹窗切换选中逻辑
   void popupSwitchCheck(
       String key, String name, FileClassify type, bool checked) {
     if (key == name) {
@@ -102,11 +276,9 @@ class RenameProvider extends ChangeNotifier {
         key, S.current.other, FileClassify.other, _popupSelectedOther);
     if (key == 'caseSensitive') _caseSensitive = !_caseSensitive;
     if (key == 'deleteLength') _deleteLength = !_deleteLength;
-    if (key == 'createDateRename') _createDateRename = !_createDateRename;
+    if (key == 'dateRename') _dateRename = !_dateRename;
     if (key == 'changePosition') _exchangeSeat = !_exchangeSeat;
-
     updateName();
-
     if (key == 'useLoop') _useLoop = !_useLoop;
     if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
     if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
@@ -127,6 +299,7 @@ class RenameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // 切换使用模式
   ModeType _modeType = ModeType.general;
   ModeType get modeType => _modeType;
   void switchModeType(ModeType type) {
@@ -135,6 +308,16 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
+  // 切换使用模式
+  DateType _dateType = DateType.createDate;
+  DateType get dateType => _dateType;
+  void switchDateType(DateType type) {
+    _dateType = type;
+    updateTextController.clear();
+    updateName();
+  }
+
+  // 循环模式
   LoopType _loopType = LoopType.disable;
   LoopType get loopType => _loopType;
   void toggleLoopType(LoopType type) {
@@ -142,6 +325,7 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
+  // 存储上传内容的数组
   final List<RenameFile> _folders = [];
   List<RenameFile> get folders => _folders;
   final List<RenameFile> _tempFiles = [];
@@ -152,6 +336,7 @@ class RenameProvider extends ChangeNotifier {
   int get selectedFilesCount => _files.where((e) => e.checked == true).length;
   int get unselectedFilesCount => selectedFilesCount - filesCount;
 
+  // 设置文件的类型
   Set<FileClassify> get fileTypeList => {
         if (_files.any((e) => image.contains(e.extension))) FileClassify.image,
         if (_files.any((e) => video.contains(e.extension))) FileClassify.video,
@@ -170,6 +355,7 @@ class RenameProvider extends ChangeNotifier {
           FileClassify.other,
       };
 
+  // 删除未选中项
   void deleteUnselected() {
     if (unselectedFilesCount != 0) {
       _files.removeWhere((e) => e.checked == false);
@@ -180,103 +366,84 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
-  void getDir() async {
+  void initAdd() {
+    _loadingMessage = S.current.adding;
     if (!appendMode) _files.clear();
-    String? dir = await FilePicker.platform.getDirectoryPath();
-    if (folderMode) addToFiles(Directory(dir!), 'dir', FileClassify.folder);
-    if (dir != null) getAllFile(dir);
-    updateName();
+    if (_addSubscription == null) subscriptionAddStream();
   }
 
+  // 通过“选择文件”按钮添加文件
   void getFile() async {
-    if (!appendMode) _files.clear();
+    initAdd();
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
     );
-    if (result != null) {
-      List<PlatformFile> files = result.files;
-      for (PlatformFile file in files) {
-        verifyExtension(file);
-      }
-      updateName();
-    }
+    if (result != null) addFile(result.files);
   }
 
-  dynamic getAllFile(dir, [String? newPath]) {
-    Directory directory = Directory(dir);
-    List<FileSystemEntity> files = directory.listSync();
-    if (files.isNotEmpty) {
-      if (newPath != null) return files.any((e) => e.path == newPath);
-      for (FileSystemEntity file in files) {
-        if (file.statSync().type == FileSystemEntityType.directory) {
-          if (folderMode) addToFiles(file, 'dir', FileClassify.folder);
-          getAllFile(file.path);
+  // 通过“选择文件夹”按钮添加文件
+  void getDir() async {
+    initAdd();
+    String? dir = await FilePicker.platform.getDirectoryPath();
+    if (dir != null) addFile([Directory(dir)]);
+  }
+
+  // 通过拖动添加文件
+  void dropFiles(DropDoneDetails detail) async {
+    initAdd();
+    final List<XFile> files = detail.files;
+    addFile(files);
+  }
+
+  void addFile(List<dynamic> fileList) {
+    final List<String> filePathList = [];
+    for (var file in fileList) {
+      if (folderMode) {
+        filePathList.add(file.path);
+      } else {
+        if (FileSystemEntity.isDirectorySync(file.path)) {
+          List<String> children = getAllFile(file.path);
+          filePathList.addAll(children);
         } else {
-          verifyExtension(file);
+          filePathList.add(file.path);
         }
       }
     }
-  }
-
-  void verifyExtension(file) {
-    String extension = path.extension(file.path).replaceFirst('.', '');
-    if (!filter.contains(extension) && !folderMode) {
-      addToFiles(file, extension, getFileClassify(extension));
+    _total = filePathList.length;
+    for (String filePath in filePathList) {
+      _count++;
+      _addStream.add(filePath);
     }
+    _total = 0;
+    _count = 0;
+    updateName();
   }
 
-  void dropFiles(DropDoneDetails detail) {
-    final List<XFile> files = detail.files;
-    for (XFile file in files) {
-      if (File(file.path).statSync().type == FileSystemEntityType.file) {
-        verifyExtension(file);
-        updateName();
-      } else {
-        if (folderMode) addToFiles(File(file.path), 'dir', FileClassify.folder);
-        getAllFile(file.path);
+  // 获取文件夹下的所有子文件
+  List<String> getAllFile(dir) {
+    Directory directory = Directory(dir);
+    List<FileSystemEntity> files = directory.listSync(recursive: true);
+    List<String> list = [];
+    // 获取文件夹下的所有子文件夹
+    if (files.isNotEmpty) {
+      for (FileSystemEntity file in files) {
+        if (FileSystemEntity.isFileSync(file.path)) {
+          String extension = path.extension(file.path).replaceFirst('.', '');
+          if (!filter.contains(extension)) list.add(file.path);
+        }
       }
     }
-    notifyListeners();
+    return list;
   }
 
-  void addToFiles(dynamic file, String extension, FileClassify type) {
-    String name = '';
-    if (type == FileClassify.folder) {
-      name = path.basename(file.path);
-    } else {
-      int index = path.basename(file.path).lastIndexOf('.');
-      name = path.basename(file.path).substring(0, index);
-    }
-    if (type != FileClassify.folder && extension == '') {
-      name = '';
-      extension = file.path.split('.').last;
-    }
-    if (_files.any(
-        (e) => e.name == name && e.parent == path.dirname(file.path))) return;
-    String id = nanoid(10);
-    DateTime createDateTime = type == FileClassify.folder
-        ? file.statSync().changed
-        : File(file.path).statSync().changed;
-    _files.add(
-      RenameFile(
-        id: id,
-        name: name,
-        newName: name,
-        parent: path.dirname(file.path),
-        extension: extension,
-        createDate: createDateTime,
-        type: type,
-        checked: true,
-      ),
-    );
-  }
-
+  // 清除所有文件
   void clearFiles() {
     _files.clear();
     _tempFiles.clear();
     notifyListeners();
   }
 
+  // 获取文件类型
   FileClassify getFileClassify(String extension) {
     if (image.contains(extension)) return FileClassify.image;
     if (video.contains(extension)) return FileClassify.video;
@@ -284,13 +451,6 @@ class RenameProvider extends ChangeNotifier {
     if (audio.contains(extension)) return FileClassify.audio;
     return FileClassify.other;
   }
-
-  final TextEditingController matchTextController = TextEditingController();
-  final TextEditingController updateTextController = TextEditingController();
-  final TextEditingController prefixTextController = TextEditingController();
-  final TextEditingController suffixTextController = TextEditingController();
-  final TextEditingController prefixNumController = TextEditingController();
-  final TextEditingController suffixNumController = TextEditingController();
 
   bool _matchEmpty = true;
   bool get matchEmpty => _matchEmpty;
@@ -305,51 +465,13 @@ class RenameProvider extends ChangeNotifier {
   bool _suffixNumEmpty = true;
   bool get suffixNumEmpty => _suffixNumEmpty;
 
-  RenameProvider() {
-    matchTextController.addListener(() {
-      _matchEmpty = !matchTextController.text.isNotEmpty;
-      notifyListeners();
-    });
-    updateTextController.addListener(() {
-      _updateEmpty = !updateTextController.text.isNotEmpty;
-      notifyListeners();
-    });
-    prefixTextController.addListener(() {
-      _prefixEmpty = !prefixTextController.text.isNotEmpty;
-      _openLoopType = prefixTextController.text.isNotEmpty;
-      notifyListeners();
-    });
-    suffixTextController.addListener(() {
-      _suffixEmpty = !suffixTextController.text.isNotEmpty;
-      _openLoopType = suffixTextController.text.isNotEmpty;
-      notifyListeners();
-    });
-    prefixNumController.addListener(() {
-      _prefixNumEmpty = !prefixNumController.text.isNotEmpty;
-      notifyListeners();
-    });
-    suffixNumController.addListener(() {
-      _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
-      notifyListeners();
-    });
-  }
-
-  @override
-  void dispose() {
-    matchTextController.dispose();
-    updateTextController.dispose();
-    prefixTextController.dispose();
-    suffixTextController.dispose();
-    prefixNumController.dispose();
-    suffixNumController.dispose();
-    super.dispose();
-  }
-
+  // 双击添加
   void doubleTapAdd(String value) {
     matchTextController.text = value;
     updateName();
   }
 
+  // 清除输入
   void clearInput(TextEditingController controller, [UploadType? type]) {
     controller.clear();
     if (type == UploadType.prefix) _prefixUploadContent.clear();
@@ -362,6 +484,7 @@ class RenameProvider extends ChangeNotifier {
   final List<String> _suffixUploadContent = [];
   String _suffixFileName = '';
 
+  // 上传文件读取内容
   void uploadContent(TextEditingController controller, UploadType type) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -386,6 +509,7 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
+  // 将读取的内容添加进来
   void uploadContentAdd(List<String> list, String content) {
     list.clear();
     if (content.contains('\n')) {
@@ -398,6 +522,7 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
+  // 是否选中文件
   void listSwitchCheck(String id) {
     for (RenameFile file in _files) {
       if (file.id == id) file.checked = !file.checked;
@@ -405,6 +530,7 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
+  // 全选
   bool get _selectAll => _files.every((element) => element.checked == true);
   bool get selectedAll => _selectAll;
   void toggleSelectAll() {
@@ -420,6 +546,7 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
+  // 更换添加的文件位置
   void reorderList(int oldIndex, int newIndex) {
     if (newIndex > oldIndex) newIndex -= 1;
     RenameFile item = _files.removeAt(oldIndex);
@@ -427,6 +554,7 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
+  // 更新扩展名
   String updateExtraName(List<String> list, LoopType type, int index) {
     String value = list.first;
     if (list.length > 1) {
@@ -439,6 +567,115 @@ class RenameProvider extends ChangeNotifier {
     return value;
   }
 
+  String getFileDate(RenameFile file) {
+    List<DateTime> list = [file.createDate, file.modifyDate];
+    if (file.exifDate != null) list.add(file.exifDate!);
+    list.sort();
+    if (dateType == DateType.modifyDate) {
+      return formatDateTime(file.modifyDate);
+    }
+    if (dateType == DateType.exifDate) {
+      DateTime dateTime = file.exifDate ?? list.first;
+      return formatDateTime(dateTime);
+    }
+    if (dateType == DateType.earliestDate) {
+      return formatDateTime(list.first);
+    }
+    if (dateType == DateType.latestDate) {
+      return formatDateTime(list.last);
+    }
+    return formatDateTime(file.createDate);
+  }
+
+  // 默认模式
+  String generalMode(RenameFile file) {
+    String fileName = file.name;
+    if (matchTextController.text.isNotEmpty) {
+      // 获取匹配的内容是不是在选中的文件名中
+      int index = getMatchPosition(file);
+      if (index != -1) {
+        String splitString = getSplitString(index, file);
+        int splitIndex = file.name.indexOf(splitString);
+        List<String> arr = [
+          file.name.substring(0, splitIndex),
+          file.name.substring(splitIndex + splitString.length),
+        ];
+        String dateText =
+            dateRename ? getFileDate(file) : updateTextController.text;
+        arr.insert(1, dateText);
+        fileName = arr.join('');
+      }
+    }
+    return fileName;
+  }
+
+  // 保留模式
+  String reservedMode(RenameFile file) {
+    String fileName = '';
+    if (matchTextController.text.isNotEmpty) {
+      int index = getMatchPosition(file);
+      if (index != -1) {
+        String splitString = getSplitString(index, file);
+        fileName = splitString;
+      }
+    }
+    if (dateRename) fileName = getFileDate(file);
+    return fileName;
+  }
+
+  // 长度模式
+  String lengthMode(RenameFile file) {
+    var fileName = file.name;
+    if (matchTextController.text.isNotEmpty) {
+      int num = file.name.length;
+      if (matchTextController.text.startsWith('*')) {
+        String value = matchTextController.text.substring(1);
+        if (value.isNotEmpty) {
+          if (int.tryParse(value) != null) {
+            num = int.parse(value);
+          } else if (double.tryParse(value) != null) {
+            num = double.parse(value).toInt();
+          } else {
+            NotificationMessage.show(S.current.inputError,
+                S.current.inputErrorText, MessageType.warning);
+          }
+        }
+      } else {
+        num = matchTextController.text.length;
+      }
+      if (_deleteLength) {
+        fileName =
+            file.name.substring(num > fileName.length ? fileName.length : num);
+      } else {
+        fileName = file.name
+            .substring(0, num > fileName.length ? fileName.length : num);
+      }
+    }
+    return fileName;
+  }
+
+  // 获取匹配的位置
+  int getMatchPosition(RenameFile file) {
+    return caseSensitive
+        ? file.name.indexOf(matchTextController.text)
+        : file.name
+            .toLowerCase()
+            .indexOf(matchTextController.text.toLowerCase());
+  }
+
+  // 获取分割的字符
+  String getSplitString(int index, RenameFile file) {
+    return caseSensitive
+        ? matchTextController.text
+        : file.name.substring(index, index + matchTextController.text.length);
+  }
+
+  final List<ErrorMessage> _errorList = [];
+  List<ErrorMessage> get errorList => _errorList;
+
+  String _errorMessage = '';
+
+  // 更新名称
   void updateName() {
     if (_files.isNotEmpty) {
       int index = 0;
@@ -488,156 +725,61 @@ class RenameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String generalMode(RenameFile file) {
-    String fileName = file.name;
-    if (matchTextController.text.isNotEmpty) {
-      int index = getMatchPosition(file);
-      if (index != -1) {
-        String splitString = getSplitString(index, file);
-        List<String> arr = file.name.split(splitString);
-        String createText = createDateRename
-            ? formatDateTime(file.createDate)
-            : updateTextController.text;
-        arr.insert(1, createText);
-        fileName = arr.join('');
-      }
-    }
-    return fileName;
-  }
-
-  String reservedMode(RenameFile file) {
-    String fileName = '';
-    if (matchTextController.text.isNotEmpty) {
-      int index = getMatchPosition(file);
-      if (index != -1) {
-        String splitString = getSplitString(index, file);
-        fileName = splitString;
-      }
-    }
-    if (createDateRename) fileName = formatDateTime(file.createDate);
-    return fileName;
-  }
-
-  String lengthMode(RenameFile file) {
-    var fileName = file.name;
-    if (matchTextController.text.isNotEmpty) {
-      int num = file.name.length;
-      if (matchTextController.text.startsWith('*')) {
-        String value = matchTextController.text.substring(1);
-        if (value.isNotEmpty) {
-          if (int.tryParse(value) != null) {
-            num = int.parse(value);
-          } else if (double.tryParse(value) != null) {
-            num = double.parse(value).toInt();
-          } else {
-            NotificationMessage.show(S.current.inputError,
-                S.current.inputErrorText, MessageType.warning);
-          }
-        }
-      } else {
-        num = matchTextController.text.length;
-      }
-      if (_deleteLength) {
-        fileName =
-            file.name.substring(num > fileName.length ? fileName.length : num);
-      } else {
-        fileName = file.name
-            .substring(0, num > fileName.length ? fileName.length : num);
-      }
-    }
-    return fileName;
-  }
-
-  int getMatchPosition(RenameFile file) {
-    return caseSensitive
-        ? file.name.indexOf(matchTextController.text)
-        : file.name
-            .toLowerCase()
-            .indexOf(matchTextController.text.toLowerCase());
-  }
-
-  String getSplitString(int index, RenameFile file) {
-    return caseSensitive
-        ? matchTextController.text
-        : file.name.substring(index, index + matchTextController.text.length);
-  }
-
-  final List<ErrorMessage> _errorList = [];
-  List<ErrorMessage> get errorList => _errorList;
-
-  String _errorMessage = '';
-
+  // 应用改变
   void applyChange() {
+    _loadingMessage = S.current.processing;
+    if (_renameSubscription == null) subscriptionRenameStream();
+    _total = _files.where((e) => e.checked == true).toList().length;
     for (RenameFile file in _files) {
       if (file.checked) {
-        if (file.name == file.newName) {
-          _errorList.add(
-            ErrorMessage(
-              fileName: file.name,
-              reason: S.current.renameFailedUnmodified,
-              time: DateTime.now(),
-            ),
-          );
-          continue;
-        }
-        var extension = file.extension == 'dir' ? '' : '.${file.extension}';
-        var oldPath = path.join(file.parent, '${file.name}$extension');
-        var newPath =
-            path.join(file.parent, '${file.newName.trim()}$extension');
-        try {
-          if (getAllFile(file.parent, newPath)) {
-            _errorList.add(ErrorMessage(
-                fileName: file.name,
-                reason: S.current.renameFailedExists,
-                time: DateTime.now()));
-            continue;
-          } else {
-            if (file.extension == 'dir') {
-              Directory(oldPath).renameSync(newPath);
-            } else {
-              File(oldPath).renameSync(newPath);
-            }
-            file.name = path.basename(newPath).split('.').first;
-          }
-        } catch (e) {
-          _errorList.add(ErrorMessage(
-              fileName: file.name, reason: '$e', time: DateTime.now()));
-        }
+        _count++;
+        _renameStream.add(file);
+        notifyListeners();
       }
     }
-    NotificationMessage.show(
-      S.current.renameSucceeded,
-      S.current.renameSucceededText(selectedFilesCount),
-      MessageType.success,
-    );
     if (_errorList.isNotEmpty) {
-      if (_errorList.length == 1) {
-        NotificationMessage.show(S.current.renameFailed,
-            _errorList.single.reason, MessageType.failure);
-      } else {
-        Map<String, List<String>> errorGroup = {};
-        for (ErrorMessage error in _errorList) {
-          if (!errorGroup.containsKey(error.reason)) {
-            errorGroup[error.reason] = [];
-          }
-          errorGroup[error.reason]?.add(error.fileName);
-        }
-        int index = 1;
-        for (var key in errorGroup.keys) {
-          List<String>? value = errorGroup[key];
-          _errorMessage += S.current.multiFailedText(
-              value?.join('、') as Object, value?.length as Object, key);
-          index++;
-          if (index < errorGroup.length) _errorMessage += '\n';
-        }
-        NotificationMessage.show(S.current.renameFailed, _errorMessage,
-            MessageType.failure, copyError);
-        _errorList.clear();
-      }
+      showError();
+    } else {
+      NotificationMessage.show(
+        S.current.renameSucceeded,
+        S.current.renameSucceededText(selectedFilesCount, _doneCount),
+        MessageType.success,
+      );
     }
+    _total = 0;
+    _count = 0;
+    _doneCount = 0;
     notifyListeners();
   }
 
+  void showError() {
+    if (_errorList.length == 1) {
+      NotificationMessage.show(S.current.renameFailed, _errorList.single.reason,
+          MessageType.failure);
+    } else {
+      Map<String, List<String>> errorGroup = {};
+      for (ErrorMessage error in _errorList) {
+        if (!errorGroup.containsKey(error.reason)) {
+          errorGroup[error.reason] = [];
+        }
+        errorGroup[error.reason]?.add(error.fileName);
+      }
+      int index = 1;
+      for (var key in errorGroup.keys) {
+        List<String>? value = errorGroup[key];
+        _errorMessage += S.current.multiFailedText(
+            value?.join('、') as Object, value?.length as Object, key);
+        index++;
+        if (index < errorGroup.length) _errorMessage += '\n';
+      }
+      NotificationMessage.show(S.current.renameFailed, _errorMessage,
+          MessageType.failure, copyError);
+      _errorList.clear();
+      _errorMessage = '';
+    }
+  }
+
+  // 复制错误内容
   void copyError() {
     Pasteboard.writeText(_errorMessage);
     _errorMessage = '';

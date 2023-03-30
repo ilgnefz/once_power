@@ -9,7 +9,7 @@
   "lengthMode": "Length Mode",
   "updateText":"Update Text",
   "inputDisabled": "Input Disabled",
-  "createDateRename": "Creation Date Naming",
+  "dateRename": "Date Naming",
   "prefix": "Prefix",
   "suffix": "Suffix",
   "loopFileContent": "Loop file Content",
@@ -56,7 +56,7 @@
   "text": "text",
   "folder": "folder",
   "renameSucceeded": "Rename Succeeded",
-  "renameSucceededText": "The selected {num} files have been renamed successfully \uD83C\uDF89",
+  "renameSucceededText": "{all} of the selected {done} files have been renamed successfully \uD83C\uDF89",
   "renameFailed": "Rename failed",
   "renameFailedExists": "A file with the same name already exists in the directory. Please rename it and try again \uD83D\uDE25",
   "renameFailedUnmodified": "The new file name is the same as the original file \uD83D\uDE24",
@@ -85,5 +85,10 @@
   "adding": "Adding",
   "processing": "Processing",
   "cancelAdd": "Cancel Add",
-  "cancelProcessing": "Cancel Processing"
+  "cancelProcessing": "Cancel Processing",
+  "createDate": "Create Date",
+  "modifyDate": "Modify Date",
+  "exifDate": "Exif Date",
+  "earliestDate": "Earliest Date",
+  "latestDate": "Latest Date"
 }

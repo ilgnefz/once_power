@@ -14,6 +14,14 @@ final List<ModeType> modeTypeList = [
   ModeType.length,
 ];
 
+final List<DateType> dateTypeList = [
+  DateType.createDate,
+  DateType.modifyDate,
+  DateType.exifDate,
+  DateType.earliestDate,
+  DateType.latestDate
+];
+
 final List<LoopType> useTypeList = [
   LoopType.disable,
   LoopType.all,
@@ -64,13 +72,13 @@ class OperateGroup extends StatelessWidget {
         const SpaceBoxHeight(),
         if (provider.modeType != ModeType.length) ...[
           AbsorbPointer(
-            absorbing: provider.modeType != ModeType.general ||
-                provider.createDateRename,
+            absorbing:
+                provider.modeType != ModeType.general || provider.dateRename,
             child: SimpleInput(
-              hintText: provider.modeType != ModeType.general ||
-                      provider.createDateRename
-                  ? S.of(context).inputDisabled
-                  : S.of(context).updateText,
+              hintText:
+                  provider.modeType != ModeType.general || provider.dateRename
+                      ? S.of(context).inputDisabled
+                      : S.of(context).updateText,
               controller: provider.updateTextController,
               hidden: provider.updateEmpty,
               onClear: () => provider.clearInput(provider.updateTextController),
@@ -78,10 +86,23 @@ class OperateGroup extends StatelessWidget {
             ),
           ),
           const SpaceBoxHeight(),
-          SimpleCheckbox(
-            title: S.of(context).createDateRename,
-            checked: provider.createDateRename,
-            onChange: (v) => provider.toggleCheck('createDateRename'),
+          SimpleDropdown(
+            leading: SimpleCheckbox(
+              title: S.of(context).dateRename,
+              checked: provider.dateRename,
+              onChange: (v) => provider.toggleCheck('dateRename'),
+            ),
+            value: provider.dateType,
+            onChanged: provider.dateRename
+                ? (value) => provider.switchDateType(value!)
+                : null,
+            items:
+                dateTypeList.map<DropdownMenuItem<DateType>>((DateType value) {
+              return DropdownMenuItem<DateType>(
+                value: value,
+                child: MyText(value.value),
+              );
+            }).toList(),
           ),
           const SpaceBoxHeight(),
         ],

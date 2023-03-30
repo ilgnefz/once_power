@@ -137,6 +137,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.1.0"
+  exif:
+    dependency: "direct main"
+    description:
+      name: exif
+      sha256: c154e074234eb6ac4a09831072b4783b55f5f9e84c4b344a472a6d6aa83a9982
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.4"
   fake_async:
     dependency: transitive
     description:
@@ -514,6 +522,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.9.1"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:

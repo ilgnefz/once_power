@@ -13,3 +13,10 @@ String formatNumber(int n, int width) {
   if (width == 0) return '';
   return n.toString().padLeft(width, '0');
 }
+
+DateTime exifDateFormat(String date) {
+  List<String> list = date.split(' ');
+  String ymd = list.first.replaceAll(':', '-');
+  list.replaceRange(0, 1, [ymd]);
+  return DateTime.parse(list.join(' '));
+}

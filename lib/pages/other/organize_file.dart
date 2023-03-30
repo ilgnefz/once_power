@@ -30,7 +30,8 @@ class _OrganizeFileMenuState extends State<OrganizeFileMenu> {
                 ? LoadingPage(
                     count: provider.count,
                     total: provider.total,
-                    onPressed: provider.cancelAdd,
+                    tip: provider.loadingMessage,
+                    onPressed: provider.cancelOperate,
                   )
                 : DropTarget(
                     onDragDone: (detail) => provider.dropFile(detail),
