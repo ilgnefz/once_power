@@ -21,40 +21,42 @@ class NotificationMessage {
               BoxShadow(color: Colors.black.withOpacity(.1), blurRadius: 12),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  MyText(
-                    title,
-                    fontWeight: FontWeight.w600,
-                    color: type == MessageType.failure
-                        ? Colors.red
-                        : type == MessageType.success
-                            ? Colors.green
-                            : Colors.orangeAccent,
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: context.call,
-                    icon: const Icon(Icons.close),
-                    iconSize: 16,
-                  ),
-                ],
-              ),
-              MyText(message),
-              if (onPressed != null)
-                ButtonBar(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
                   children: [
-                    TextButton(
-                      onPressed: onPressed,
-                      child: MyText(S.current.copyErrorMessage),
+                    MyText(
+                      title,
+                      fontWeight: FontWeight.w600,
+                      color: type == MessageType.failure
+                          ? Colors.red
+                          : type == MessageType.success
+                              ? Colors.green
+                              : Colors.orangeAccent,
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: context.call,
+                      icon: const Icon(Icons.close),
+                      iconSize: 16,
                     ),
                   ],
                 ),
-            ],
+                MyText(message),
+                if (onPressed != null)
+                  ButtonBar(
+                    children: [
+                      TextButton(
+                        onPressed: onPressed,
+                        child: MyText(S.current.copyErrorMessage),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
           ),
         );
       },

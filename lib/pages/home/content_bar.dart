@@ -96,7 +96,7 @@ class ContentBar extends StatelessWidget {
                 Expanded(
                   child: DropTarget(
                     enable: !otherProvider.currentPage,
-                    onDragDone: (detail) => provider.dropFiles(detail),
+                    onDragDone: (details) => provider.dropAdd(details),
                     child: ReorderableListView.builder(
                       buildDefaultDragHandles: false,
                       itemCount: provider.files.length,

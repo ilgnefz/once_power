@@ -27,9 +27,7 @@ class RenameProvider extends ChangeNotifier {
   final StreamController<String> _addStream =
       StreamController<String>.broadcast();
   StreamSubscription<String>? _addSubscription;
-  final StreamController<RenameFile> _renameStream =
-      StreamController<RenameFile>.broadcast();
-  StreamSubscription<RenameFile>? _renameSubscription;
+
   // 加载界面的提示信息
   String _loadingMessage = S.current.adding;
   String get loadingMessage => _loadingMessage;
@@ -79,55 +77,53 @@ class RenameProvider extends ChangeNotifier {
     prefixNumController.dispose();
     suffixNumController.dispose();
     _addSubscription?.cancel();
-    _renameSubscription?.cancel();
     super.dispose();
   }
 
   // 订阅监听添加流
-  void subscriptionAddStream() {
+  void listenAddStream() {
     _addSubscription = _addStream.stream.listen((String filePath) async {
+      // 如果推荐的文件已经存在列表就返回
       if (_files.any((e) => e.filePath == filePath)) return;
-      FileSystemEntity file = File(filePath);
-      // 如果是文件就获取文件扩展名，否则扩展名为'dir'
-      String extension = 'dir';
+      String id = nanoid(10);
       String name = path.basename(filePath);
+      // 默认设置为 dir（文件夹）
+      String extension = 'dir';
+      DateTime createDate = File(filePath).statSync().changed;
+      DateTime modifyDate = File(filePath).statSync().modified;
+      // 图片类型以为的默认设置为 null
       DateTime? exifDate;
+      // 如果是文件就获取扩展名
       if (FileSystemEntity.isFileSync(filePath)) {
         extension = path.extension(filePath);
+        // 有可能文件没有扩展名
         if (extension != '') {
-          extension = extension.replaceFirst('.', '');
-          int extensionIndex = name.lastIndexOf('.');
-          name = name.substring(0, extensionIndex);
+          name = name.split(extension).first;
+          extension = extension.substring(1);
         }
+        // 如果是图片就获取 exif 中的拍摄日期
+        if (image.contains(filePath)) exifDate = await imageExifInfo(filePath);
       }
-      // 如果文件不是过滤文件里的
-      if (!filter.contains(extension)) {
-        String id = nanoid(10);
-        FileClassify type = getFileClassify(extension);
-        DateTime createDate = file.statSync().changed;
-        DateTime modifyDate = file.statSync().modified;
-        // 获取图片拍摄日期
-        if (image.contains(extension)) exifDate = await imageExifInfo(filePath);
-        _files.add(
-          RenameFile(
-            id: id,
-            name: name,
-            newName: name,
-            parent: path.dirname(filePath),
-            filePath: filePath,
-            extension: extension,
-            createDate: createDate,
-            modifyDate: modifyDate,
-            exifDate: exifDate,
-            type: type,
-            checked: true,
-          ),
-        );
-        notifyListeners();
-      }
+      _files.add(
+        RenameFile(
+          id: id,
+          name: name,
+          newName: name,
+          parent: path.dirname(filePath),
+          filePath: filePath,
+          extension: extension,
+          createDate: createDate,
+          modifyDate: modifyDate,
+          exifDate: exifDate,
+          type: getFileClassify(extension),
+          checked: true,
+        ),
+      );
+      notifyListeners();
     });
   }
 
+  // 获取图片的exif信息
   Future<DateTime?> imageExifInfo(String imagePath) async {
     final fileBytes = File(imagePath).readAsBytesSync();
     final data = await readExifFromBytes(fileBytes);
@@ -137,55 +133,12 @@ class RenameProvider extends ChangeNotifier {
     return exifDateFormat(dateTime);
   }
 
-  int _doneCount = 0;
-  // 订阅重命名流
-  void subscriptionRenameStream() {
-    _renameSubscription = _renameStream.stream.listen((file) {
-      if (file.name == file.newName) {
-        return _errorList.add(
-          ErrorMessage(
-            fileName: file.name,
-            reason: S.current.renameFailedUnmodified,
-            time: DateTime.now(),
-          ),
-        );
-      }
-      var extension = file.extension == 'dir' ? '' : '.${file.extension}';
-      var oldPath = path.join(file.parent, '${file.name}$extension');
-      var newPath = path.join(file.parent, '${file.newName.trim()}$extension');
-      try {
-        if (File(newPath).existsSync()) {
-          return _errorList.add(ErrorMessage(
-            fileName: file.name,
-            reason: S.current.renameFailedExists,
-            time: DateTime.now(),
-          ));
-        }
-        if (file.extension == 'dir') Directory(oldPath).renameSync(newPath);
-        if (file.extension != 'dir') File(oldPath).renameSync(newPath);
-        _doneCount++;
-        file.name = path.basename(newPath).split('.').first;
-        notifyListeners();
-      } catch (e) {
-        _errorList.add(ErrorMessage(
-            fileName: file.name, reason: '$e', time: DateTime.now()));
-      }
-    });
-  }
-
   // 取消监听
   void cancelOperate() async {
-    if (loadingMessage == S.current.adding) {
-      await _addSubscription?.cancel().then((value) => _addSubscription = null);
-    } else {
-      await _renameSubscription
-          ?.cancel()
-          .then((value) => _renameSubscription = null);
-    }
+    await _addSubscription?.cancel().then((value) => _addSubscription = null);
     _total = 0;
     _count = 0;
     updateName();
-    // notifyListeners();
   }
 
   // 控制是否选中
@@ -205,8 +158,8 @@ class RenameProvider extends ChangeNotifier {
   bool get appendMode => _appendMode;
   bool _exchangeSeat = false;
   bool get exchangeSeat => _exchangeSeat;
-  bool _folderMode = false;
-  bool get folderMode => _folderMode;
+  bool _addFolder = false;
+  bool get addFolder => _addFolder;
   bool _openLoopType = false;
   bool get openLoopType => _openLoopType;
   bool _popupShowUnselected = true;
@@ -225,6 +178,7 @@ class RenameProvider extends ChangeNotifier {
   bool get _popupSelectedOther =>
       _files.any((e) => e.type == FileClassify.other && e.checked);
 
+  // 列表右上角弹出菜单选项
   bool popupTypeSelect(value) {
     if (value == S.current.image) return _popupSelectedImage;
     if (value == S.current.audio) return _popupSelectedAudio;
@@ -239,9 +193,9 @@ class RenameProvider extends ChangeNotifier {
   void popupSwitchCheck(
       String key, String name, FileClassify type, bool checked) {
     if (key == name) {
-      // 点击时判断当前是true还是false
-      // 如果是true，判断子元素是不是全部是true，全部是true就全变成false，全部不是就变成true
-      // 如果是是false，就全变成true
+      // 点击时判断当前是 true 还是 false
+      // 如果是 true，判断子元素是不是全部是 true，全部是 true 就全变成 false，全部不是就变成 true
+      // 如果全是 false，就全变成 true
       var typeList = _files.where((e) => e.type == type).toList();
       if (checked) {
         if (typeList.every((e) => e.checked)) {
@@ -283,7 +237,7 @@ class RenameProvider extends ChangeNotifier {
     if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
     if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
     if (key == 'appendMode') _appendMode = !_appendMode;
-    if (key == 'folderMode') _folderMode = !_folderMode;
+    if (key == 'addFolder') _addFolder = !_addFolder;
     if (key == 'openUseType') _openLoopType = !_openLoopType;
     if (key == 'showUnselected') {
       _popupShowUnselected = !_popupShowUnselected;
@@ -325,13 +279,13 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
-  // 存储上传内容的数组
-  final List<RenameFile> _folders = [];
-  List<RenameFile> get folders => _folders;
+  // 临时文件数组，用来存储数据来实现显示和隐藏效果
   final List<RenameFile> _tempFiles = [];
+  // 所有上传的文件或文件夹
   final List<RenameFile> _files = [];
   List<RenameFile> get files => _files;
 
+  // 统计文件数量
   int get filesCount => _files.length;
   int get selectedFilesCount => _files.where((e) => e.checked == true).length;
   int get unselectedFilesCount => selectedFilesCount - filesCount;
@@ -366,14 +320,15 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
+  // 添加前初始化内容
   void initAdd() {
     _loadingMessage = S.current.adding;
     if (!appendMode) _files.clear();
-    if (_addSubscription == null) subscriptionAddStream();
+    if (_addSubscription == null) listenAddStream();
   }
 
-  // 通过“选择文件”按钮添加文件
-  void getFile() async {
+  // 选择文件添加
+  void selectFileAdd() async {
     initAdd();
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
@@ -381,59 +336,57 @@ class RenameProvider extends ChangeNotifier {
     if (result != null) addFile(result.files);
   }
 
-  // 通过“选择文件夹”按钮添加文件
-  void getDir() async {
+  // 选择文件夹添加
+  void selectFolderAdd() async {
     initAdd();
     String? dir = await FilePicker.platform.getDirectoryPath();
     if (dir != null) addFile([Directory(dir)]);
   }
 
-  // 通过拖动添加文件
-  void dropFiles(DropDoneDetails detail) async {
+  // 拖动文件添加
+  void dropAdd(DropDoneDetails details) {
     initAdd();
-    final List<XFile> files = detail.files;
-    addFile(files);
+    List<XFile> xFileList = details.files;
+    addFile(xFileList);
   }
 
-  void addFile(List<dynamic> fileList) {
-    final List<String> filePathList = [];
-    for (var file in fileList) {
-      if (folderMode) {
-        filePathList.add(file.path);
+  // 处理所有文件
+  void addFile(List<dynamic> files) {
+    List<String> filePathList = [];
+    for (var file in files) {
+      if (!addFolder) {
+        // 没有选择添加文件夹时，根据是不是文件夹来处理不同逻辑
+        FileSystemEntity.isDirectorySync(file.path)
+            ? filePathList.addAll(getAllFile(file.path))
+            : filePathList.add(file.path);
       } else {
-        if (FileSystemEntity.isDirectorySync(file.path)) {
-          List<String> children = getAllFile(file.path);
-          filePathList.addAll(children);
-        } else {
-          filePathList.add(file.path);
-        }
+        // 选择了添加文件夹直接处理
+        filePathList.add(file.path);
       }
     }
-    _total = filePathList.length;
     for (String filePath in filePathList) {
-      _count++;
       _addStream.add(filePath);
     }
-    _total = 0;
-    _count = 0;
-    updateName();
   }
 
-  // 获取文件夹下的所有子文件
-  List<String> getAllFile(dir) {
-    Directory directory = Directory(dir);
+  // 获取所有子文件
+  List<String> getAllFile(String filePath) {
+    Directory directory = Directory(filePath);
+    List<String> children = [];
+    // recursive 可以直接获取所有子文件和文件夹，不用循环
     List<FileSystemEntity> files = directory.listSync(recursive: true);
-    List<String> list = [];
-    // 获取文件夹下的所有子文件夹
     if (files.isNotEmpty) {
       for (FileSystemEntity file in files) {
+        // 过滤文件（过滤的文件类型定义在 model/types 中）
+        // 不过滤会造成修改时报错【无权限】
         if (FileSystemEntity.isFileSync(file.path)) {
-          String extension = path.extension(file.path).replaceFirst('.', '');
-          if (!filter.contains(extension)) list.add(file.path);
+          String extension = path.extension(file.path);
+          extension = extension == '' ? extension : extension.substring(1);
+          if (!filter.contains(extension)) children.add(file.path);
         }
       }
     }
-    return list;
+    return children;
   }
 
   // 清除所有文件
@@ -465,7 +418,7 @@ class RenameProvider extends ChangeNotifier {
   bool _suffixNumEmpty = true;
   bool get suffixNumEmpty => _suffixNumEmpty;
 
-  // 双击添加
+  // 双击将名称添加到匹配内容输入框
   void doubleTapAdd(String value) {
     matchTextController.text = value;
     updateName();
@@ -484,7 +437,7 @@ class RenameProvider extends ChangeNotifier {
   final List<String> _suffixUploadContent = [];
   String _suffixFileName = '';
 
-  // 上传文件读取内容
+  // 前缀和后缀上传的文件读取其内容
   void uploadContent(TextEditingController controller, UploadType type) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -512,6 +465,7 @@ class RenameProvider extends ChangeNotifier {
   // 将读取的内容添加进来
   void uploadContentAdd(List<String> list, String content) {
     list.clear();
+    // 如果内容包含换行就以换行进行分割，否则使用空格分割
     if (content.contains('\n')) {
       list.addAll(content.split('\r\n'));
     } else if (content.contains(' ')) {
@@ -530,7 +484,7 @@ class RenameProvider extends ChangeNotifier {
     }
   }
 
-  // 全选
+  // 全选切换
   bool get _selectAll => _files.every((element) => element.checked == true);
   bool get selectedAll => _selectAll;
   void toggleSelectAll() {
@@ -546,7 +500,7 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
-  // 更换添加的文件位置
+  // 拖动更换添加的文件排序位置
   void reorderList(int oldIndex, int newIndex) {
     if (newIndex > oldIndex) newIndex -= 1;
     RenameFile item = _files.removeAt(oldIndex);
@@ -567,7 +521,9 @@ class RenameProvider extends ChangeNotifier {
     return value;
   }
 
+  // 获取文件用日期命名时需要的日期
   String getFileDate(RenameFile file) {
+    // 因为 exifDate 可能为空，所以这里暂时只排序其他两个
     List<DateTime> list = [file.createDate, file.modifyDate];
     if (file.exifDate != null) list.add(file.exifDate!);
     list.sort();
@@ -596,10 +552,12 @@ class RenameProvider extends ChangeNotifier {
       if (index != -1) {
         String splitString = getSplitString(index, file);
         int splitIndex = file.name.indexOf(splitString);
+        // 使用第一个匹配的内容分割文件名
         List<String> arr = [
           file.name.substring(0, splitIndex),
           file.name.substring(splitIndex + splitString.length),
         ];
+        // 如果选了以日期命名就用日期代替匹配的内容
         String dateText =
             dateRename ? getFileDate(file) : updateTextController.text;
         arr.insert(1, dateText);
@@ -628,9 +586,11 @@ class RenameProvider extends ChangeNotifier {
     var fileName = file.name;
     if (matchTextController.text.isNotEmpty) {
       int num = file.name.length;
+      // 如果输入的内容以 * 开头
       if (matchTextController.text.startsWith('*')) {
         String value = matchTextController.text.substring(1);
         if (value.isNotEmpty) {
+          // 判断输入的是不是 int 和 double 类型
           if (int.tryParse(value) != null) {
             num = int.parse(value);
           } else if (double.tryParse(value) != null) {
@@ -641,6 +601,7 @@ class RenameProvider extends ChangeNotifier {
           }
         }
       } else {
+        // 不是 * 开头就直接使用输入文本的长度
         num = matchTextController.text.length;
       }
       if (_deleteLength) {
@@ -670,6 +631,7 @@ class RenameProvider extends ChangeNotifier {
         : file.name.substring(index, index + matchTextController.text.length);
   }
 
+  // 存储错误信息
   final List<ErrorMessage> _errorList = [];
   List<ErrorMessage> get errorList => _errorList;
 
@@ -678,10 +640,13 @@ class RenameProvider extends ChangeNotifier {
   // 更新名称
   void updateName() {
     if (_files.isNotEmpty) {
-      int index = 0;
+      // 重命名前后显示的序列
+      int index = 1;
       for (RenameFile file in _files) {
+        // 只重命名选中的文件
         if (file.checked) {
           String fileName = file.name;
+          // 根据不同的模式获取文件名
           if (modeType == ModeType.general) fileName = generalMode(file);
           if (modeType == ModeType.reserved) fileName = reservedMode(file);
           if (modeType == ModeType.length) fileName = lengthMode(file);
@@ -699,6 +664,7 @@ class RenameProvider extends ChangeNotifier {
               formatNumber(index, prefixNumController.text.length);
           String suffixNum =
               formatNumber(index, suffixNumController.text.length);
+          // 将上传的文件内容放进文件名中
           if (_prefixUploadContent.isNotEmpty) {
             List<String> extraMark =
                 prefixTextController.text.split(_prefixFileName);
@@ -711,6 +677,7 @@ class RenameProvider extends ChangeNotifier {
             extraMark.insert(1, suffix);
             suffix = extraMark.join('');
           }
+          // 交换前缀（后缀）和前缀（后缀）数字系列的位置
           if (exchangeSeat) {
             file.newName = prefix + prefixNum + fileName + suffixNum + suffix;
           } else {
@@ -725,15 +692,49 @@ class RenameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _doneCount = 0;
   // 应用改变
   void applyChange() {
     _loadingMessage = S.current.processing;
-    if (_renameSubscription == null) subscriptionRenameStream();
+    // 统计所以的选择内容
     _total = _files.where((e) => e.checked == true).toList().length;
     for (RenameFile file in _files) {
       if (file.checked) {
         _count++;
-        _renameStream.add(file);
+        // 如果文件名没有更改
+        if (file.name == file.newName) {
+          _errorList.add(
+            ErrorMessage(
+              fileName: file.name,
+              reason: S.current.renameFailedUnmodified,
+              time: DateTime.now(),
+            ),
+          );
+          continue;
+        }
+        var extension = file.extension == 'dir' ? '' : '.${file.extension}';
+        var oldPath = path.join(file.parent, '${file.name}$extension');
+        var newPath =
+            path.join(file.parent, '${file.newName.trim()}$extension');
+        try {
+          // 如果新文件名已经存在就跳过
+          if (File(newPath).existsSync()) {
+            _errorList.add(ErrorMessage(
+              fileName: file.name,
+              reason: S.current.renameFailedExists,
+              time: DateTime.now(),
+            ));
+            continue;
+          }
+          // 文件和文件夹重命名需要不同的方法
+          if (file.extension == 'dir') Directory(oldPath).renameSync(newPath);
+          if (file.extension != 'dir') File(oldPath).renameSync(newPath);
+          _doneCount++;
+          file.name = path.basename(newPath).split('.').first;
+        } catch (e) {
+          _errorList.add(ErrorMessage(
+              fileName: file.name, reason: '$e', time: DateTime.now()));
+        }
         notifyListeners();
       }
     }
@@ -769,8 +770,8 @@ class RenameProvider extends ChangeNotifier {
         List<String>? value = errorGroup[key];
         _errorMessage += S.current.multiFailedText(
             value?.join('、') as Object, value?.length as Object, key);
-        index++;
         if (index < errorGroup.length) _errorMessage += '\n';
+        index++;
       }
       NotificationMessage.show(S.current.renameFailed, _errorMessage,
           MessageType.failure, copyError);

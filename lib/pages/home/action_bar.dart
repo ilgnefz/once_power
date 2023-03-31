@@ -28,19 +28,19 @@ class ActionBar extends StatelessWidget {
             ),
             SimpleCheckbox(
               title: S.of(context).addFolder,
-              checked: provider.folderMode,
-              onChange: (v) => provider.toggleCheck('folderMode'),
+              checked: provider.addFolder,
+              onChange: (v) => provider.toggleCheck('addFolder'),
             ),
           ],
         ),
         Row(
           children: [
             TextButton(
-              onPressed: provider.folderMode ? null : provider.getFile,
+              onPressed: provider.addFolder ? null : provider.selectFileAdd,
               child: MyText(S.of(context).selectFile),
             ),
             TextButton(
-              onPressed: provider.getDir,
+              onPressed: provider.selectFolderAdd,
               child: MyText(S.of(context).selectFolder),
             ),
           ],
