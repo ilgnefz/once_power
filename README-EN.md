@@ -1,6 +1,6 @@
 <div align=center><img alt="OncePower" src="https://github.com/ilgnefz/once_power/blob/master/doc/logo.png"></div>
 
-English | [简体中文](./README.md)
+[简体中文](./README.md) | English
 
 OncePower is a tool for batch renaming files or folders. It integrates installation free, foolproof, and quick to use, with clear functions and low learning costs.
 
