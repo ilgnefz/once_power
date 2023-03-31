@@ -73,8 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "detectVersions":
             MessageLookupByLibrary.simpleMessage("Detect new versions"),
         "detecting": MessageLookupByLibrary.simpleMessage("Detecting..."),
-        "digitIncrementHint": MessageLookupByLibrary.simpleMessage(
-            "Enter N Digits Of Characters"),
+        "digitIncrementHint":
+            MessageLookupByLibrary.simpleMessage("Enter Some Word"),
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
         "dropFile":
             MessageLookupByLibrary.simpleMessage("Drag The Folder Here"),
@@ -101,7 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "log": MessageLookupByLibrary.simpleMessage(
             "Record Log (in the target folder)"),
         "loopFileContent":
-            MessageLookupByLibrary.simpleMessage("Loop file Content"),
+            MessageLookupByLibrary.simpleMessage("Loop File Content"),
         "matchText": MessageLookupByLibrary.simpleMessage("Match Text"),
         "modifyDate": MessageLookupByLibrary.simpleMessage("Modify Date"),
         "multiFailedText": m0,

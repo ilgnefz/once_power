@@ -170,10 +170,10 @@ class S {
     );
   }
 
-  /// `Loop file Content`
+  /// `Loop File Content`
   String get loopFileContent {
     return Intl.message(
-      'Loop file Content',
+      'Loop File Content',
       name: 'loopFileContent',
       desc: '',
       args: [],
@@ -240,10 +240,10 @@ class S {
     );
   }
 
-  /// `Enter N Digits Of Characters`
+  /// `Enter Some Word`
   String get digitIncrementHint {
     return Intl.message(
-      'Enter N Digits Of Characters',
+      'Enter Some Word',
       name: 'digitIncrementHint',
       desc: '',
       args: [],
