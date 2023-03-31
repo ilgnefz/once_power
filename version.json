@@ -1,6 +1,13 @@
 {
   "info": [
     {
+      "version": "1.1.0",
+      "desc": {
+        "zh": "添加了更多日期命名的类型",
+        "en": "Added more date naming types"
+      }
+    },
+    {
       "version": "1.0.0",
       "desc": {
         "zh": "",
