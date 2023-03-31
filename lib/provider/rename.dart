@@ -23,10 +23,6 @@ class RenameProvider extends ChangeNotifier {
   int get total => _total;
   int _count = 0;
   int get count => _count;
-  // 控制添加进度
-  final StreamController<String> _addStream =
-      StreamController<String>.broadcast();
-  StreamSubscription<String>? _addSubscription;
 
   // 加载界面的提示信息
   String _loadingMessage = S.current.adding;
@@ -76,51 +72,7 @@ class RenameProvider extends ChangeNotifier {
     suffixTextController.dispose();
     prefixNumController.dispose();
     suffixNumController.dispose();
-    _addSubscription?.cancel();
     super.dispose();
-  }
-
-  // 订阅监听添加流
-  void listenAddStream() {
-    _addSubscription = _addStream.stream.listen((String filePath) async {
-      // 如果推荐的文件已经存在列表就返回
-      if (_files.any((e) => e.filePath == filePath)) return;
-      String id = nanoid(10);
-      String name = path.basename(filePath);
-      // 默认设置为 dir（文件夹）
-      String extension = 'dir';
-      DateTime createDate = File(filePath).statSync().changed;
-      DateTime modifyDate = File(filePath).statSync().modified;
-      // 图片类型以为的默认设置为 null
-      DateTime? exifDate;
-      // 如果是文件就获取扩展名
-      if (FileSystemEntity.isFileSync(filePath)) {
-        extension = path.extension(filePath);
-        // 有可能文件没有扩展名
-        if (extension != '') {
-          name = name.split(extension).first;
-          extension = extension.substring(1);
-        }
-        // 如果是图片就获取 exif 中的拍摄日期
-        if (image.contains(filePath)) exifDate = await imageExifInfo(filePath);
-      }
-      _files.add(
-        RenameFile(
-          id: id,
-          name: name,
-          newName: name,
-          parent: path.dirname(filePath),
-          filePath: filePath,
-          extension: extension,
-          createDate: createDate,
-          modifyDate: modifyDate,
-          exifDate: exifDate,
-          type: getFileClassify(extension),
-          checked: true,
-        ),
-      );
-      notifyListeners();
-    });
   }
 
   // 获取图片的exif信息
@@ -133,9 +85,7 @@ class RenameProvider extends ChangeNotifier {
     return exifDateFormat(dateTime);
   }
 
-  // 取消监听
   void cancelOperate() async {
-    await _addSubscription?.cancel().then((value) => _addSubscription = null);
     _total = 0;
     _count = 0;
     updateName();
@@ -324,7 +274,6 @@ class RenameProvider extends ChangeNotifier {
   void initAdd() {
     _loadingMessage = S.current.adding;
     if (!appendMode) _files.clear();
-    if (_addSubscription == null) listenAddStream();
   }
 
   // 选择文件添加
@@ -348,6 +297,7 @@ class RenameProvider extends ChangeNotifier {
     initAdd();
     List<XFile> xFileList = details.files;
     addFile(xFileList);
+    updateName();
   }
 
   // 处理所有文件
@@ -365,8 +315,9 @@ class RenameProvider extends ChangeNotifier {
       }
     }
     for (String filePath in filePathList) {
-      _addStream.add(filePath);
+      fileToList(filePath);
     }
+    updateName();
   }
 
   // 获取所有子文件
@@ -387,6 +338,45 @@ class RenameProvider extends ChangeNotifier {
       }
     }
     return children;
+  }
+
+  fileToList(String filePath) async {
+    // 如果推荐的文件已经存在列表就返回
+    if (_files.any((e) => e.filePath == filePath)) return;
+    String id = nanoid(10);
+    String name = path.basename(filePath);
+    // 默认设置为 dir（文件夹）
+    String extension = 'dir';
+    DateTime createDate = File(filePath).statSync().changed;
+    DateTime modifyDate = File(filePath).statSync().modified;
+    // 图片类型以为的默认设置为 null
+    DateTime? exifDate;
+    // 如果是文件就获取扩展名
+    if (FileSystemEntity.isFileSync(filePath)) {
+      extension = path.extension(filePath);
+      // 有可能文件没有扩展名
+      if (extension != '') {
+        name = name.split(extension).first;
+        extension = extension.substring(1);
+      }
+      // 如果是图片就获取 exif 中的拍摄日期
+      if (image.contains(filePath)) exifDate = await imageExifInfo(filePath);
+    }
+    _files.add(
+      RenameFile(
+        id: id,
+        name: name,
+        newName: name,
+        parent: path.dirname(filePath),
+        filePath: filePath,
+        extension: extension,
+        createDate: createDate,
+        modifyDate: modifyDate,
+        exifDate: exifDate,
+        type: getFileClassify(extension),
+        checked: true,
+      ),
+    );
   }
 
   // 清除所有文件
