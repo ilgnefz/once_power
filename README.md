@@ -1,6 +1,6 @@
 <div align=center><img alt="OncePower" src="https://github.com/ilgnefz/once_power/blob/master/doc/logo.png"></div>
 
-[English](./README-EN.md) | 简体中文
+ 简体中文 | [English](./README-EN.md)
 
 OncePower 是一个批量重命名文件或文件夹的工具。集免安装、傻瓜式、快速上手于一身，功能清晰明了，学习成本低。
 
@@ -95,7 +95,7 @@ April
 
 主要是用来移动嵌套文件夹里的文件。比如我有一下文件夹，第一层和最里面一层各有一个同名的文件。
 
-![微信截图_20230331114922](https://github.com/ilgnefz/once_power/blob/master/doc/20230331114922.png)
+![20230331114922](https://github.com/ilgnefz/once_power/blob/master/doc/20230331114922.png)
 
 我们可以选择最外面的父文件夹，然后进行整理：
 
