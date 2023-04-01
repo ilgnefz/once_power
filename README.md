@@ -1,4 +1,4 @@
-<div align=center><img alt="OncePower" src="https://github.com/ilgnefz/once_power/blob/master/doc/logo.png"></div>
+<div align=center><img alt="OncePower" src="doc/logo.png"></div>
 
  简体中文 | [English](./README-EN.md)
 
