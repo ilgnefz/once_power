@@ -70,42 +70,41 @@ class OperateGroup extends StatelessWidget {
           }).toList(),
         ),
         const SpaceBoxHeight(),
-        if (provider.modeType != ModeType.length) ...[
-          AbsorbPointer(
-            absorbing:
-                provider.modeType != ModeType.general || provider.dateRename,
-            child: SimpleInput(
-              hintText:
-                  provider.modeType != ModeType.general || provider.dateRename
-                      ? S.of(context).inputDisabled
-                      : S.of(context).updateText,
-              controller: provider.updateTextController,
-              hidden: provider.updateEmpty,
-              onClear: () => provider.clearInput(provider.updateTextController),
-              onChanged: (v) => provider.updateName(),
-            ),
+        AbsorbPointer(
+          absorbing: provider.modeType == ModeType.reserved ||
+              provider.dateRename ||
+              !provider.deleteLength,
+          child: SimpleInput(
+            hintText: provider.modeType == ModeType.reserved ||
+                    provider.dateRename ||
+                    !provider.deleteLength
+                ? S.of(context).inputDisabled
+                : S.of(context).updateText,
+            controller: provider.updateTextController,
+            hidden: provider.updateEmpty,
+            onClear: () => provider.clearInput(provider.updateTextController),
+            onChanged: (v) => provider.updateName(),
           ),
-          const SpaceBoxHeight(),
-          SimpleDropdown(
-            leading: SimpleCheckbox(
-              title: S.of(context).dateRename,
-              checked: provider.dateRename,
-              onChange: (v) => provider.toggleCheck('dateRename'),
-            ),
-            value: provider.dateType,
-            onChanged: provider.dateRename
-                ? (value) => provider.switchDateType(value!)
-                : null,
-            items:
-                dateTypeList.map<DropdownMenuItem<DateType>>((DateType value) {
-              return DropdownMenuItem<DateType>(
-                value: value,
-                child: MyText(value.value),
-              );
-            }).toList(),
+        ),
+        const SpaceBoxHeight(),
+        SimpleDropdown(
+          leading: SimpleCheckbox(
+            title: S.of(context).dateRename,
+            checked: provider.dateRename,
+            onChange: (v) => provider.toggleCheck('dateRename'),
           ),
-          const SpaceBoxHeight(),
-        ],
+          value: provider.dateType,
+          onChanged: provider.dateRename
+              ? (value) => provider.switchDateType(value!)
+              : null,
+          items: dateTypeList.map<DropdownMenuItem<DateType>>((DateType value) {
+            return DropdownMenuItem<DateType>(
+              value: value,
+              child: MyText(value.value),
+            );
+          }).toList(),
+        ),
+        const SpaceBoxHeight(),
         LabelSimpleInput(
           label: S.of(context).prefix,
           controller: provider.prefixTextController,

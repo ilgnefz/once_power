@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: chinese_font_library
-      sha256: fececb64280a955fe5ff1af83744eed85c752778cbdf69b89881ffbbc3f33fcf
+      sha256: "533c78bab2765476131181e7bc4e53b66ac6be2fed7c8c43ec81c55535ceb7b7"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   cli_util:
     dependency: transitive
     description:
@@ -133,10 +133,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: f7c26ddb3a10ff033cf1bfbf2c668feb3472327f48385775f7cf25b104f8bfce
+      sha256: "0894a098594263fe1caaba3520e3016d8a855caeb010a882273189cca10f11e9"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.1.0"
+    version: "5.1.1"
   exif:
     dependency: "direct main"
     description:

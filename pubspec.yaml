@@ -37,14 +37,14 @@ dependencies:
   provider: ^6.0.5
   file_picker: ^5.2.6
   nanoid: ^1.0.0
-  chinese_font_library: ^1.0.0
+  chinese_font_library: ^1.0.1
   bot_toast: ^4.0.3
   shared_preferences: ^2.0.20
   package_info_plus: ^3.0.3
   url_launcher: ^6.1.10
   intl: ^0.17.0
   pasteboard: ^0.2.0
-  dio: ^5.1.0
+  dio: ^5.1.1
   desktop_drop: ^0.4.1
   cross_file: ^0.3.3+4
   flutter_launcher_icons: ^0.12.0

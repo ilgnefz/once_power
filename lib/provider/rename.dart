@@ -575,34 +575,57 @@ class RenameProvider extends ChangeNotifier {
   String lengthMode(RenameFile file) {
     var fileName = file.name;
     if (matchTextController.text.isNotEmpty) {
-      int num = file.name.length;
+      int startNum = 0;
+      int endNum = file.name.length;
       // 如果输入的内容以 * 开头
       if (matchTextController.text.startsWith('*')) {
         String value = matchTextController.text.substring(1);
         if (value.isNotEmpty) {
-          // 判断输入的是不是 int 和 double 类型
-          if (int.tryParse(value) != null) {
-            num = int.parse(value);
-          } else if (double.tryParse(value) != null) {
-            num = double.parse(value).toInt();
+          // 判断是否还有 *
+          int index = value.indexOf('*');
+          if (index == -1) {
+            // 判断输入的是不是 int 和 double 类型
+            endNum = verifyNum(value) ?? 0;
           } else {
-            NotificationMessage.show(S.current.inputError,
-                S.current.inputErrorText, MessageType.warning);
+            List<String> arr = value.split('*');
+            if (arr.length > 2) arr.sublist(0, 2);
+            startNum = verifyNum(arr[0]) - 1 ?? 0;
+            endNum = verifyNum(arr[1]) ?? endNum;
           }
         }
       } else {
         // 不是 * 开头就直接使用输入文本的长度
-        num = matchTextController.text.length;
+        endNum = matchTextController.text.length;
       }
+      // 删除指定长度，如果 startNum 大于数组长度，就等于数组长度
+      startNum =
+          startNum > fileName.length - 1 ? fileName.length - 1 : startNum;
+      endNum = endNum > fileName.length ? fileName.length : endNum;
       if (_deleteLength) {
-        fileName =
-            file.name.substring(num > fileName.length ? fileName.length : num);
+        // 如果是删除就截取两边的值
+        String startStr = file.name.substring(0, startNum);
+        String endStr = file.name.substring(endNum);
+        fileName = startStr + updateTextController.text + endStr;
       } else {
-        fileName = file.name
-            .substring(0, num > fileName.length ? fileName.length : num);
+        fileName = file.name.substring(startNum, endNum);
       }
     }
     return fileName;
+  }
+
+  // 判断 * 后输入的是否是数字
+  dynamic verifyNum(String value) {
+    if (int.tryParse(value) != null) {
+      return int.parse(value);
+    } else if (double.tryParse(value) != null) {
+      return double.parse(value).toInt();
+    } else {
+      // if (value != '*') {
+      //   NotificationMessage.show(S.current.inputError, S.current.inputErrorText,
+      //       MessageType.warning);
+      // }
+      return null;
+    }
   }
 
   // 获取匹配的位置
