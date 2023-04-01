@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/widgets/my_text.dart';
-import 'package:once_power/widgets/space_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ClickText extends StatefulWidget {
-  const ClickText({Key? key, required this.title, required this.url})
+  const ClickText(
+      {Key? key, required this.title, required this.content, required this.url})
       : super(key: key);
   final String title;
+  final String content;
   final String url;
 
   @override
@@ -30,9 +31,9 @@ class _ClickTextState extends State<ClickText> {
       child: Row(
         children: [
           MyText('${widget.title}:', fontWeight: FontWeight.w600),
-          const SpaceBoxWidth(),
+          const SizedBox(width: 4),
           MyText(
-            widget.url,
+            widget.content,
             style: TextStyle(
               color: _hovering ? Colors.blue : Theme.of(context).primaryColor,
               fontWeight: FontWeight.w600,

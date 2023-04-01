@@ -37,6 +37,10 @@ OncePower 是一个批量重命名文件或文件夹的工具。集免安装、�
 
 保留模式下匹配的内容会保留，其他内容删除。
 
+也可以通过选项选择不同的类型保留。
+
+![12](https://github.com/ilgnefz/once_power/blob/master/doc/12.gif)
+
 选择**以创建日期命名**会将匹配的内容更改为创建日期。可以选择不同的日期命名。如果选择了**拍摄日期**（只有携带 exif 信息的图片才有）而图片没有的话，会使用几个日期里最早的日期。
 
 ![3](https://github.com/ilgnefz/once_power/blob/master/doc/3.gif)
@@ -46,6 +50,10 @@ OncePower 是一个批量重命名文件或文件夹的工具。集免安装、�
 长度模式下可以随机输入一个长度的字符串，或者使用 ***数字**，就会保留（选择了删除指定长度会删除）和随机字符串一样长或指定数字的前几位名称。
 
 ![4](https://github.com/ilgnefz/once_power/blob/master/doc/4.gif)
+
+如果想要获取中间一部分的内容，可以输入两次 ***数字**，例如输入`*8*12`，将会截取第8个开始的字符到第12个开始的字符。
+
+![13](https://github.com/ilgnefz/once_power/blob/master/doc/413.gif)
 
 ### 前缀和后缀
 

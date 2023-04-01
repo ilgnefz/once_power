@@ -8,19 +8,21 @@ class SimpleCheckbox extends StatelessWidget {
     required this.checked,
     required this.onChange,
     this.action,
+    this.color,
   });
 
   final String title;
   final bool checked;
   final void Function(bool?)? onChange;
   final Widget? action;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Checkbox(value: checked, onChanged: onChange),
-        MyText(title),
+        MyText(title, color: color),
         if (action != null) action!
       ],
     );

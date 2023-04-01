@@ -1,6 +1,13 @@
 {
   "info": [
     {
+      "version": "1.2.0",
+      "desc": {
+        "zh": "1.保留模式可以自动匹配不同类型的内容\n2.长度模式支持匹配中间内容",
+        "en": "1. Reserved Mode can automatically match different types of content\n2. Length Mode matches the intermediate content"
+      }
+    },
+    {
       "version": "1.1.0",
       "desc": {
         "zh": "添加了更多日期命名的类型",

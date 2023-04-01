@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelAdd": MessageLookupByLibrary.simpleMessage("Cancel Add"),
         "cancelProcessing":
             MessageLookupByLibrary.simpleMessage("Cancel Processing"),
+        "capitalLetter": MessageLookupByLibrary.simpleMessage("ABC"),
         "caseSensitive": MessageLookupByLibrary.simpleMessage("Case Sensitive"),
         "copyErrorMessage":
             MessageLookupByLibrary.simpleMessage("Copy error message"),
@@ -73,9 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "detectVersions":
             MessageLookupByLibrary.simpleMessage("Detect new versions"),
         "detecting": MessageLookupByLibrary.simpleMessage("Detecting..."),
+        "digit": MessageLookupByLibrary.simpleMessage("123"),
         "digitIncrementHint":
             MessageLookupByLibrary.simpleMessage("Enter Some Word"),
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
+        "downloadLink": MessageLookupByLibrary.simpleMessage("Download Link"),
         "dropFile":
             MessageLookupByLibrary.simpleMessage("Drag The Folder Here"),
         "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest Date"),
@@ -98,16 +101,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter a random length string Or *Num"),
         "lengthMode": MessageLookupByLibrary.simpleMessage("Length Mode"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
+        "link": MessageLookupByLibrary.simpleMessage("Link"),
         "log": MessageLookupByLibrary.simpleMessage(
             "Record Log (in the target folder)"),
         "loopFileContent":
             MessageLookupByLibrary.simpleMessage("Loop File Content"),
+        "lowercaseLetter": MessageLookupByLibrary.simpleMessage("abc"),
         "matchText": MessageLookupByLibrary.simpleMessage("Match Text"),
         "modifyDate": MessageLookupByLibrary.simpleMessage("Modify Date"),
         "multiFailedText": m0,
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newVersion":
             MessageLookupByLibrary.simpleMessage("New version available"),
+        "nonLetter": MessageLookupByLibrary.simpleMessage("NonLetter"),
         "onlyPrefix": MessageLookupByLibrary.simpleMessage("Only Prefix"),
         "onlySuffix": MessageLookupByLibrary.simpleMessage("Only Suffix"),
         "organizeFailed":
@@ -122,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Prefix Digit Increment"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "projectUrl": MessageLookupByLibrary.simpleMessage("Project Url"),
+        "punctuation": MessageLookupByLibrary.simpleMessage("Punctuation"),
         "renameFailed": MessageLookupByLibrary.simpleMessage("Rename failed"),
         "renameFailedExists": MessageLookupByLibrary.simpleMessage(
             "A file with the same name already exists in the directory. Please rename it and try again 😥"),

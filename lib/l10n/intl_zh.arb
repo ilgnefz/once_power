@@ -45,6 +45,8 @@
   "currentVersion": "当前版本",
   "latestVersion": "最新版本",
   "versionDesc": "版本描述",
+  "downloadLink": "下载链接",
+  "link": "链接",
   "currentLatest": "当前已是最新版本",
   "detectVersions": "检测新版本",
   "detecting": "检测中...",
@@ -90,5 +92,10 @@
   "modifyDate": "修改日期",
   "exifDate": "拍摄日期",
   "earliestDate": "最早日期",
-  "latestDate": "最晚日期"
+  "latestDate": "最晚日期",
+  "capitalLetter": "大写字母",
+  "lowercaseLetter": "小写字母",
+  "nonLetter": "非字母",
+  "digit": "数字",
+  "punctuation": "标点符号"
 }

@@ -212,6 +212,18 @@ class RenameProvider extends ChangeNotifier {
     updateName();
   }
 
+  // 保留精准模式
+  final List<ReservedType> _reservedTypeList = [];
+  List<ReservedType> get reservedTypeList => _reservedTypeList;
+  void toggleReservedType(ReservedType type) {
+    if (_reservedTypeList.contains(type)) {
+      _reservedTypeList.remove(type);
+    } else {
+      _reservedTypeList.add(type);
+    }
+    updateName();
+  }
+
   // 切换使用模式
   DateType _dateType = DateType.createDate;
   DateType get dateType => _dateType;
@@ -548,9 +560,9 @@ class RenameProvider extends ChangeNotifier {
           file.name.substring(splitIndex + splitString.length),
         ];
         // 如果选了以日期命名就用日期代替匹配的内容
-        String dateText =
+        String addText =
             dateRename ? getFileDate(file) : updateTextController.text;
-        arr.insert(1, dateText);
+        arr.insert(1, addText);
         fileName = arr.join('');
       }
     }
@@ -566,6 +578,24 @@ class RenameProvider extends ChangeNotifier {
         String splitString = getSplitString(index, file);
         fileName = splitString;
       }
+    } else {
+      bool lowercase = _reservedTypeList.contains(ReservedType.lowercaseLetter);
+      bool capital = _reservedTypeList.contains(ReservedType.capitalLetter);
+      bool digit = _reservedTypeList.contains(ReservedType.digit);
+      bool nonLetter = _reservedTypeList.contains(ReservedType.nonLetter);
+      bool punctuation = _reservedTypeList.contains(ReservedType.punctuation);
+      String pattern = "";
+      if (!lowercase) pattern += "a-z";
+      if (!capital) pattern += "A-Z";
+      if (!digit) pattern += "0-9";
+      if (!nonLetter) {
+        // 中文、日文、朝鲜文、藏文
+        pattern +=
+            r"\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u0f00-\u0fff";
+      }
+      if (!punctuation) pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+";
+      RegExp reg = RegExp("[$pattern]");
+      fileName = file.name.replaceAll(reg, "");
     }
     if (dateRename) fileName = getFileDate(file);
     return fileName;
@@ -591,6 +621,7 @@ class RenameProvider extends ChangeNotifier {
             if (arr.length > 2) arr.sublist(0, 2);
             startNum = verifyNum(arr[0]) - 1 ?? 0;
             endNum = verifyNum(arr[1]) ?? endNum;
+            if (startNum > endNum) endNum = startNum + 1;
           }
         }
       } else {
@@ -605,7 +636,9 @@ class RenameProvider extends ChangeNotifier {
         // 如果是删除就截取两边的值
         String startStr = file.name.substring(0, startNum);
         String endStr = file.name.substring(endNum);
-        fileName = startStr + updateTextController.text + endStr;
+        String addText =
+            dateRename ? getFileDate(file) : updateTextController.text;
+        fileName = startStr + addText + endStr;
       } else {
         fileName = file.name.substring(startNum, endNum);
       }
@@ -620,10 +653,10 @@ class RenameProvider extends ChangeNotifier {
     } else if (double.tryParse(value) != null) {
       return double.parse(value).toInt();
     } else {
-      // if (value != '*') {
-      //   NotificationMessage.show(S.current.inputError, S.current.inputErrorText,
-      //       MessageType.warning);
-      // }
+      if (value != '') {
+        NotificationMessage.show(S.current.inputError, S.current.inputErrorText,
+            MessageType.warning);
+      }
       return null;
     }
   }

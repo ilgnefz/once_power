@@ -45,6 +45,8 @@
   "currentVersion": "Current Version",
   "latestVersion": "Latest Version",
   "versionDesc": "Version Description",
+  "downloadLink": "Download Link",
+  "link": "Link",
   "currentLatest": "This is the latest version",
   "detectVersions": "Detect new versions",
   "detecting": "Detecting...",
@@ -90,5 +92,10 @@
   "modifyDate": "Modify Date",
   "exifDate": "Exif Date",
   "earliestDate": "Earliest Date",
-  "latestDate": "Latest Date"
+  "latestDate": "Latest Date",
+  "capitalLetter": "ABC",
+  "lowercaseLetter": "abc",
+  "nonLetter": "NonLetter",
+  "digit": "123",
+  "punctuation": "Punctuation"
 }

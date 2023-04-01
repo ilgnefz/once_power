@@ -37,6 +37,10 @@ The content entered in the input box of **Update Text(修改为)** will replace 
 
 The matching content in the retention mode will be retained, and other content will be deleted.
 
+You can also select different types of reservations through options.
+
+![12](https://github.com/ilgnefz/once_power/blob/master/doc/12.gif)
+
 Selecting  **Date Naming(日期命名)** will change the match to the date it was created. You can choose different date names. If **Exif Date** is selected (only images with exif information are available) and images are not, the earliest of several dates will be used.
 
 ![3](https://github.com/ilgnefz/once_power/blob/master/doc/3.gif)
@@ -46,6 +50,10 @@ Selecting  **Date Naming(日期命名)** will change the match to the date it wa
 In the Length Mode, you can randomly enter a string of length, or use ***digits** to retain (if you choose to delete the specified length, it will be deleted) the same length as the random string or the first few digits of the specified number.
 
 ![4](https://github.com/ilgnefz/once_power/blob/master/doc/4.gif)
+
+If you want to get the middle part of the content, you can type ***digits*** twice. For example, if you type '*8*12', it will cut the beginning of the 8th character to the beginning of the 12th character.
+
+![13](https://github.com/ilgnefz/once_power/blob/master/doc/13.gif)
 
 ### Prefix and Suffix
 

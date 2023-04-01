@@ -56,10 +56,12 @@ class SettingMenu extends StatelessWidget {
                   children: const [
                     ClickText(
                       title: 'Github',
+                      content: 'https://github.com/ilgnefz/once_power',
                       url: 'https://github.com/ilgnefz/once_power',
                     ),
                     ClickText(
                       title: 'Gitee',
+                      content: 'https://gitee.com/ilgnefz/once_power',
                       url: 'https://gitee.com/ilgnefz/once_power',
                     ),
                   ],
@@ -100,6 +102,7 @@ class SettingMenu extends StatelessWidget {
               if (provider.versionDescZH != '')
                 SettingItem(
                   title: S.of(context).versionDesc,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   action: provider.currentLanguage == LanguageType.chinese
                       ? provider.versionDescZH
                           .split(',')
@@ -110,6 +113,22 @@ class SettingMenu extends StatelessWidget {
                           .map((e) => settingText(e))
                           .toList(),
                 ),
+              SettingItem(
+                title: S.of(context).downloadLink,
+                action: [
+                  ClickText(
+                    title: 'Github',
+                    content: '${S.of(context).link} 1',
+                    url: 'https://github.com/ilgnefz/once_power/releases',
+                  ),
+                  const SizedBox(width: 12),
+                  ClickText(
+                    title: 'Gitee',
+                    content: '${S.of(context).link} 2',
+                    url: 'https://gitee.com/ilgnefz/once_power/releases',
+                  ),
+                ],
+              ),
             ]
           ],
         ),

@@ -51,6 +51,31 @@ extension DateTypeExtension on DateType {
   }
 }
 
+enum ReservedType {
+  capitalLetter,
+  lowercaseLetter,
+  nonLetter,
+  digit,
+  punctuation
+}
+
+extension ReservedTypeExtension on ReservedType {
+  String get value {
+    switch (this) {
+      case ReservedType.capitalLetter:
+        return S.current.capitalLetter;
+      case ReservedType.lowercaseLetter:
+        return S.current.lowercaseLetter;
+      case ReservedType.nonLetter:
+        return S.current.nonLetter;
+      case ReservedType.digit:
+        return S.current.digit;
+      case ReservedType.punctuation:
+        return S.current.punctuation;
+    }
+  }
+}
+
 enum UploadType { prefix, suffix }
 
 enum MessageType { failure, success, warning }
