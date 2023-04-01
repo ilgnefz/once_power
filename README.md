@@ -23,7 +23,7 @@ OncePower 是一个批量重命名文件或文件夹的工具。集免安装、�
 
 ![1](https://github.com/ilgnefz/once_power/blob/master/doc/1.gif)
 
-本软件一共分为3中模式：默认模式、保留模式、长度模式。
+本软件一共分为3种模式：默认模式、保留模式、长度模式。
 
 ### 默认模式
 
@@ -53,7 +53,7 @@ OncePower 是一个批量重命名文件或文件夹的工具。集免安装、�
 
 如果想要获取中间一部分的内容，可以输入两次 ***数字**，例如输入`*8*12`，将会截取第8个开始的字符到第12个开始的字符。
 
-![13](https://github.com/ilgnefz/once_power/blob/master/doc/413.gif)
+![13](https://github.com/ilgnefz/once_power/blob/master/doc/13.gif)
 
 ### 前缀和后缀
 

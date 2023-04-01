@@ -4,6 +4,8 @@
 
 OncePower is a tool for batch renaming files or folders. It integrates installation free, foolproof, and quick to use, with clear functions and low learning costs.
 
+This software supports English, in order to be lazy so use the Chinese interface of the demo gif.
+
 ## Language Support
 
 - 中文
@@ -23,7 +25,7 @@ To add a file or folder to rename, you can drag it directly onto the software (i
 
 ![1](https://github.com/ilgnefz/once_power/blob/master/doc/1.gif)
 
-The software is divided into three modes: default mode, reserved mode, and length mode.
+This software has three modes: Default Mode, Reserved Mode and Length Mode.
 
 ### Default Mode(默认模式)
 
