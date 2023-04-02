@@ -355,6 +355,7 @@ class RenameProvider extends ChangeNotifier {
   fileToList(String filePath) async {
     // 如果推荐的文件已经存在列表就返回
     if (_files.any((e) => e.filePath == filePath)) return;
+    _order = true;
     String id = nanoid(10);
     String name = path.basename(filePath);
     // 默认设置为 dir（文件夹）
