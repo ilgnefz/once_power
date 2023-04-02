@@ -2,8 +2,8 @@
   "info": [{
     "version": "1.2.1.1",
     "desc": {
-      "zh": "修复了第多次使用从小到大排序要点两次的bug",
-      "en": "Fixed a bug that caused the second use of sorting points from small to large"
+      "zh": "修复了多次使用从小到大排序要点两次的bug",
+      "en": "Fixed a bug that repeatedly used small to large sorting points twice"
     }
   },
     {
