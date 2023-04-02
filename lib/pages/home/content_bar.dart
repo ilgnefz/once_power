@@ -43,6 +43,11 @@ class ContentBar extends StatelessWidget {
                   originName:
                       '${S.of(context).originalName}[${provider.selectedFilesCount}/${provider.filesCount}]',
                   targetName: S.of(context).renameName,
+                  titleAction: IconButton(
+                    icon: const Icon(Icons.sort_by_alpha_rounded),
+                    iconSize: 20,
+                    onPressed: provider.sortFiles,
+                  ),
                   action: PopupMenuButton(
                     icon: const Icon(Icons.filter_alt),
                     iconSize: 24,

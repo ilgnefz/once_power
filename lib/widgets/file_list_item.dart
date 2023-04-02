@@ -11,6 +11,7 @@ class FileListItem extends StatelessWidget {
     required this.originName,
     required this.targetName,
     required this.action,
+    this.titleAction,
     this.color,
     required this.onChanged,
     this.onDoubleTap,
@@ -21,6 +22,7 @@ class FileListItem extends StatelessWidget {
   final String originName;
   final String targetName;
   final Widget action;
+  final Widget? titleAction;
   final Color? color;
   final void Function(bool?)? onChanged;
   final void Function()? onDoubleTap;
@@ -35,7 +37,11 @@ class FileListItem extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(value: selected, onChanged: onChanged),
-            ShowTitle(originName, color: color ?? Colors.black54),
+            ShowTitle(
+              originName,
+              color: color ?? Colors.black54,
+              action: titleAction,
+            ),
             const SpaceBoxWidth(),
             ShowTitle(targetName),
             action,
@@ -47,20 +53,27 @@ class FileListItem extends StatelessWidget {
 }
 
 class ShowTitle extends StatelessWidget {
-  const ShowTitle(this.title, {super.key, this.color});
+  const ShowTitle(this.title, {super.key, this.color, this.action});
 
   final String title;
   final Color? color;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: MyText(
-        title,
-        color: color ?? Colors.black,
-        fontSize: 13,
-        fontWeight: FontWeight.normal,
-        maxLines: 1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MyText(
+            title,
+            color: color ?? Colors.black,
+            fontSize: 13,
+            fontWeight: FontWeight.normal,
+            maxLines: 1,
+          ),
+          if (action != null) action!,
+        ],
       ),
     );
   }

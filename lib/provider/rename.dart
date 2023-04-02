@@ -398,6 +398,19 @@ class RenameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // 排序
+  bool _order = true;
+  bool get order => _order;
+  void sortFiles() {
+    if (_order) {
+      _files.sort((a, b) => a.name.compareTo(b.name));
+    } else {
+      _files.sort((a, b) => b.name.compareTo(a.name));
+    }
+    _order = !_order;
+    notifyListeners();
+  }
+
   // 获取文件类型
   FileClassify getFileClassify(String extension) {
     if (image.contains(extension)) return FileClassify.image;

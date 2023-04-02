@@ -1,6 +1,13 @@
 {
   "info": [
     {
+      "version": "1.2.1",
+      "desc": {
+        "zh": "添加了给名称自动排序的功能",
+        "en": "Added the ability to automatically sort names"
+      }
+    },
+    {
       "version": "1.2.0",
       "desc": {
         "zh": "1.保留模式可以自动匹配不同类型的内容\n2.长度模式支持匹配中间内容",
