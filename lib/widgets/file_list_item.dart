@@ -65,12 +65,14 @@ class ShowTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyText(
-            title,
-            color: color ?? Colors.black,
-            fontSize: 13,
-            fontWeight: FontWeight.normal,
-            maxLines: 1,
+          Expanded(
+            child: MyText(
+              title,
+              color: color ?? Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              maxLines: 1,
+            ),
           ),
           if (action != null) action!,
         ],
