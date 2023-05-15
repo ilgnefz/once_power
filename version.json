@@ -1,12 +1,20 @@
 {
   "info": [
     {
+      "version": "1.2.2.0",
+      "desc": {
+        "zh": "添加了前缀和后缀自定义开始数字的功能",
+        "en": "Added custom prefix and suffix start digit functionality"
+      }
+    },
+    {
       "version": "1.2.1.2",
       "desc": {
         "zh": "修复了文字溢出的bug",
         "en": "Fixed a bug with text overflow"
       }
-    },{
+    },
+    {
     "version": "1.2.1.1",
     "desc": {
       "zh": "修复了多次使用从小到大排序要点两次的bug",
