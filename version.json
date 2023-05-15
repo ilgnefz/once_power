@@ -1,7 +1,7 @@
 {
   "info": [
     {
-      "version": "1.2.2.0",
+      "version": "1.2.2",
       "desc": {
         "zh": "添加了前缀和后缀自定义开始数字的功能",
         "en": "Added custom prefix and suffix start digit functionality"
