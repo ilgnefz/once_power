@@ -82,12 +82,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "dropFile":
             MessageLookupByLibrary.simpleMessage("Drag The Folder Here"),
         "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest Date"),
+        "enterNumbers": MessageLookupByLibrary.simpleMessage("Enter numbers"),
         "exchangeSeat": MessageLookupByLibrary.simpleMessage(
             "Swap Incremental Digit Position"),
         "exifDate": MessageLookupByLibrary.simpleMessage("Exif Date"),
         "folder": MessageLookupByLibrary.simpleMessage("folder"),
         "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
         "image": MessageLookupByLibrary.simpleMessage("image"),
+        "incrementalStartNumber":
+            MessageLookupByLibrary.simpleMessage("Incremental Start Number"),
         "inputDisabled": MessageLookupByLibrary.simpleMessage("Input Disabled"),
         "inputError": MessageLookupByLibrary.simpleMessage("Input Error"),
         "inputErrorText": MessageLookupByLibrary.simpleMessage(
@@ -102,8 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lengthMode": MessageLookupByLibrary.simpleMessage("Length Mode"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
         "link": MessageLookupByLibrary.simpleMessage("Link"),
-        "log": MessageLookupByLibrary.simpleMessage(
-            "Record Log (in the target folder)"),
+        "log": MessageLookupByLibrary.simpleMessage("Save Log (target folder)"),
         "loopFileContent":
             MessageLookupByLibrary.simpleMessage("Loop File Content"),
         "lowercaseLetter": MessageLookupByLibrary.simpleMessage("abc"),

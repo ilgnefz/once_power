@@ -240,6 +240,26 @@ class S {
     );
   }
 
+  /// `Incremental Start Number`
+  String get incrementalStartNumber {
+    return Intl.message(
+      'Incremental Start Number',
+      name: 'incrementalStartNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter numbers`
+  String get enterNumbers {
+    return Intl.message(
+      'Enter numbers',
+      name: 'enterNumbers',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter Some Word`
   String get digitIncrementHint {
     return Intl.message(
@@ -840,10 +860,10 @@ class S {
     );
   }
 
-  /// `Record Log (in the target folder)`
+  /// `Save Log (target folder)`
   String get log {
     return Intl.message(
-      'Record Log (in the target folder)',
+      'Save Log (target folder)',
       name: 'log',
       desc: '',
       args: [],

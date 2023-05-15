@@ -6,13 +6,13 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:exif/exif.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/error_message.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/pages/other/other.dart';
 import 'package:once_power/utils/format.dart';
-import 'package:nanoid/nanoid.dart';
 import 'package:once_power/utils/notification.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as path;
@@ -34,6 +34,7 @@ class RenameProvider extends ChangeNotifier {
   final TextEditingController suffixTextController = TextEditingController();
   final TextEditingController prefixNumController = TextEditingController();
   final TextEditingController suffixNumController = TextEditingController();
+  final TextEditingController startNumController = TextEditingController();
   // 监听输入
   RenameProvider() {
     matchTextController.addListener(() {
@@ -62,6 +63,10 @@ class RenameProvider extends ChangeNotifier {
       _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
       notifyListeners();
     });
+    startNumController.addListener(() {
+      _startNumEmpty = !startNumController.text.isNotEmpty;
+      notifyListeners();
+    });
   }
   // 退出时销毁控制器
   @override
@@ -72,6 +77,7 @@ class RenameProvider extends ChangeNotifier {
     suffixTextController.dispose();
     prefixNumController.dispose();
     suffixNumController.dispose();
+    startNumController.dispose();
     super.dispose();
   }
 
@@ -433,6 +439,8 @@ class RenameProvider extends ChangeNotifier {
   bool get prefixNumEmpty => _prefixNumEmpty;
   bool _suffixNumEmpty = true;
   bool get suffixNumEmpty => _suffixNumEmpty;
+  bool _startNumEmpty = true;
+  bool get startNumEmpty => _startNumEmpty;
 
   // 双击将名称添加到匹配内容输入框
   void doubleTapAdd(String value) {
@@ -701,7 +709,9 @@ class RenameProvider extends ChangeNotifier {
   void updateName() {
     if (_files.isNotEmpty) {
       // 重命名前后显示的序列
-      int index = 1;
+      int index = startNumController.text == ''
+          ? 1
+          : int.parse(startNumController.text);
       for (RenameFile file in _files) {
         // 只重命名选中的文件
         if (file.checked) {

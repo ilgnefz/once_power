@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/rename.dart';
@@ -223,6 +224,23 @@ class OperateGroup extends StatelessWidget {
                 hidden: provider.suffixNumEmpty,
                 onClear: () =>
                     provider.clearInput(provider.suffixNumController),
+                onChanged: (v) => provider.updateName(),
+              ),
+            ),
+          ],
+        ),
+        const SpaceBoxHeight(),
+        Row(
+          children: [
+            MyText('${S.of(context).incrementalStartNumber}:'),
+            const SpaceBoxWidth(),
+            Expanded(
+              child: SimpleInput(
+                hintText: S.of(context).enterNumbers,
+                controller: provider.startNumController,
+                hidden: provider.startNumEmpty,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                onClear: () => provider.clearInput(provider.startNumController),
                 onChanged: (v) => provider.updateName(),
               ),
             ),

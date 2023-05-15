@@ -6,6 +6,9 @@ OncePower is a tool for batch renaming files or folders. It integrates installat
 
 This software supports English, in order to be lazy so use the Chinese interface of the demo gif.
 
+## New features
+Custom prefix and suffix start number
+
 ## Language Support
 
 - 中文
@@ -90,6 +93,10 @@ Any content entered in the **Prefix Digit Increment(前缀数字递增)** and **
 ![8](doc/8.gif)
 
 **Swap Incremental Digital Positions(交换递增数字位置)** You can place a prefix before the incremented number or a suffix after the incremented number.
+
+### Custom prefix and suffix numbers
+
+![1](doc/1.png)
 
 ### Append Model
 

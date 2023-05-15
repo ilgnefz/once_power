@@ -19,6 +19,8 @@
   "onlySuffix": "仅后缀",
   "prefixDigitIncrement": "前缀数字递增",
   "suffixDigitIncrement": "后缀数字递增",
+  "incrementalStartNumber": "递增开始数字",
+  "enterNumbers": "输入数字",
   "digitIncrementHint": "输入N位数个字符",
   "exchangeSeat": "交换递增数字位置",
   "appendMode": "追加模式",
