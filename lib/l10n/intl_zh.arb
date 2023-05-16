@@ -95,9 +95,5 @@
   "exifDate": "拍摄日期",
   "earliestDate": "最早日期",
   "latestDate": "最晚日期",
-  "capitalLetter": "大写字母",
-  "lowercaseLetter": "小写字母",
-  "nonLetter": "非字母",
-  "digit": "数字",
-  "punctuation": "标点符号"
+  "digits": "位数"
 }

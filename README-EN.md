@@ -7,6 +7,9 @@ OncePower is a tool for batch renaming files or folders. It integrates installat
 This software supports English, in order to be lazy so use the Chinese interface of the demo gif.
 
 ## New features
+
+The retention mode can be named with a date, and the specified length can be truncated when naming the date.
+
 Custom prefix and suffix start number
 
 ## Language Support
@@ -49,6 +52,10 @@ You can also select different types of reservations through options.
 Selecting **Date Naming(日期命名)** will change the match to the date it was created. You can choose different date names. If **Exif Date** is selected (only images with exif information are available) and images are not, the earliest of several dates will be used.
 
 ![3](doc/3.gif)
+
+When naming with a date, you can choose to retain the number of date digits (default is year, month, day, hour, minute, second)
+
+![14](doc/14.gif)
 
 ### Length Mode
 

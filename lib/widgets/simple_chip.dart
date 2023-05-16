@@ -32,25 +32,16 @@ class SimpleChip extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.check_rounded,
-                size: 20,
-                color: color ??
-                    (selected ? Colors.white : Theme.of(context).primaryColor),
-              ),
-              const SizedBox(width: 4),
-              MyText(
-                label,
-                color: color ??
-                    (selected ? Colors.white : Theme.of(context).primaryColor),
-              ),
-            ],
+        child: UnconstrainedBox(
+          child: Container(
+            height: 32,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            alignment: Alignment.center,
+            child: MyText(
+              label,
+              color: color ??
+                  (selected ? Colors.white : Theme.of(context).primaryColor),
+            ),
           ),
         ),
       ),

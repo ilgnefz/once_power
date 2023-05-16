@@ -1,12 +1,19 @@
 {
-  "info": [
+  "info": [{
+    "version": "1.3.0",
+    "desc": {
+      "zh": "1.保留模式添加了以日期命令的功能\n2.以日期命名可以指定长度\n3.修复了无法获取照片拍摄日期的功能",
+      "en": "1. The retention mode has added the function of using date commands\n2. Named after a date can specify a length\n3. Fixed the function of not being able to obtain photo shooting dates"
+    }
+  },
     {
       "version": "1.2.1.2",
       "desc": {
         "zh": "修复了文字溢出的bug",
         "en": "Fixed a bug with text overflow"
       }
-    },{
+    },
+    {
     "version": "1.2.1.1",
     "desc": {
       "zh": "修复了多次使用从小到大排序要点两次的bug",

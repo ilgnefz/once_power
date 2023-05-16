@@ -95,9 +95,5 @@
   "exifDate": "Exif Date",
   "earliestDate": "Earliest Date",
   "latestDate": "Latest Date",
-  "capitalLetter": "ABC",
-  "lowercaseLetter": "abc",
-  "nonLetter": "NonLetter",
-  "digit": "123",
-  "punctuation": "Punctuation"
+  "digits": "digits"
 }

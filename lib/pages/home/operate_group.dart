@@ -46,8 +46,13 @@ class OperateGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = provider.modeType == ModeType.length && !provider.deleteLength
+        ? Colors.grey
+        : null;
+
     return Column(
       children: [
+        // 输入匹配的内容
         AbsorbPointer(
           absorbing: provider.modeType == ModeType.reserved &&
               provider.reservedTypeList.isNotEmpty,
@@ -65,6 +70,7 @@ class OperateGroup extends StatelessWidget {
           ),
         ),
         const SpaceBoxHeight(),
+        // 选择模式
         SimpleDropdown(
           leading: provider.modeType != ModeType.length
               ? SimpleCheckbox(
@@ -86,14 +92,14 @@ class OperateGroup extends StatelessWidget {
             );
           }).toList(),
         ),
-        const SpaceBoxHeight(),
-        if (provider.modeType == ModeType.reserved)
+        // 保存模式的自动匹配 chip
+        if (provider.modeType == ModeType.reserved) ...[
+          const SpaceBoxHeight(),
           AbsorbPointer(
             absorbing: provider.modeType == ModeType.reserved &&
                 provider.matchTextController.text.isNotEmpty,
             child: SizedBox(
               width: 320,
-              height: 72,
               child: Wrap(
                 alignment: WrapAlignment.start,
                 spacing: 8,
@@ -114,7 +120,10 @@ class OperateGroup extends StatelessWidget {
               ),
             ),
           ),
+        ],
+        // 输入要修改的内容
         if (provider.modeType != ModeType.reserved) ...[
+          const SpaceBoxHeight(),
           AbsorbPointer(
             absorbing: provider.modeType == ModeType.general
                 ? provider.dateRename
@@ -131,38 +140,43 @@ class OperateGroup extends StatelessWidget {
               onChanged: (v) => provider.updateName(),
             ),
           ),
-          const SpaceBoxHeight(),
-          AbsorbPointer(
-            absorbing:
-                provider.modeType == ModeType.length && !provider.deleteLength,
-            child: SimpleDropdown(
-              leading: SimpleCheckbox(
-                title: S.of(context).dateRename,
-                checked: provider.dateRename,
-                color: provider.modeType == ModeType.length &&
-                        !provider.deleteLength
-                    ? Colors.grey
-                    : null,
-                onChange: provider.modeType == ModeType.length &&
-                        !provider.deleteLength
-                    ? null
-                    : (v) => provider.toggleCheck('dateRename'),
-              ),
-              value: provider.dateType,
-              onChanged: provider.dateRename
-                  ? (value) => provider.switchDateType(value!)
-                  : null,
-              items: dateTypeList
-                  .map<DropdownMenuItem<DateType>>((DateType value) {
-                return DropdownMenuItem<DateType>(
-                  value: value,
-                  child: MyText(value.value),
-                );
-              }).toList(),
-            ),
-          )
         ],
         const SpaceBoxHeight(),
+        // 以日期命名的选项框
+        AbsorbPointer(
+          absorbing:
+              provider.modeType == ModeType.length && !provider.deleteLength,
+          child: SimpleDropdown(
+            leading: Row(
+              children: [
+                SimpleCheckbox(
+                  title: S.of(context).dateRename,
+                  checked: provider.dateRename,
+                  color: color,
+                  onChange: provider.modeType == ModeType.length &&
+                          !provider.deleteLength
+                      ? null
+                      : (v) => provider.toggleCheck('dateRename'),
+                ),
+                const SpaceBoxWidth(),
+                DateDigit(provider: provider, color: color),
+              ],
+            ),
+            value: provider.dateType,
+            onChanged: provider.dateRename
+                ? (value) => provider.switchDateType(value!)
+                : null,
+            items:
+                dateTypeList.map<DropdownMenuItem<DateType>>((DateType value) {
+              return DropdownMenuItem<DateType>(
+                value: value,
+                child: MyText(value.value),
+              );
+            }).toList(),
+          ),
+        ),
+        const SpaceBoxHeight(),
+        // 前缀输入框
         LabelSimpleInput(
           label: S.of(context).prefix,
           controller: provider.prefixTextController,
@@ -172,6 +186,7 @@ class OperateGroup extends StatelessWidget {
           onChanged: (v) => provider.updateName(),
         ),
         const SpaceBoxHeight(),
+        // 后缀输入框
         LabelSimpleInput(
           label: S.of(context).suffix,
           controller: provider.suffixTextController,
@@ -181,6 +196,7 @@ class OperateGroup extends StatelessWidget {
           onChanged: (v) => provider.updateName(),
         ),
         const SpaceBoxHeight(),
+        // 循环前缀和后缀的模式
         SimpleDropdown(
           label: S.of(context).loopFileContent,
           color: !provider.openLoopType ? Colors.grey : null,
@@ -196,6 +212,7 @@ class OperateGroup extends StatelessWidget {
           }).toList(),
         ),
         const SpaceBoxHeight(),
+        // 前缀递增数字
         Row(
           children: [
             MyText('${S.of(context).prefixDigitIncrement}:'),
@@ -213,6 +230,7 @@ class OperateGroup extends StatelessWidget {
           ],
         ),
         const SpaceBoxHeight(),
+        // 后缀递增数字
         Row(
           children: [
             MyText('${S.of(context).suffixDigitIncrement}:'),
@@ -230,6 +248,7 @@ class OperateGroup extends StatelessWidget {
           ],
         ),
         const SpaceBoxHeight(),
+        // 自定义前缀和后缀递增开始的数字
         Row(
           children: [
             MyText('${S.of(context).incrementalStartNumber}:'),
@@ -247,12 +266,48 @@ class OperateGroup extends StatelessWidget {
           ],
         ),
         const SpaceBoxHeight(),
+        // 交换前后缀和前后缀递增数字位置
         SimpleCheckbox(
           title: S.of(context).exchangeSeat,
           checked: provider.exchangeSeat,
           onChange: (v) => provider.toggleCheck('changePosition'),
         ),
       ],
+    );
+  }
+}
+
+class DateDigit extends StatelessWidget {
+  const DateDigit({super.key, required this.provider, required this.color});
+
+  final RenameProvider provider;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 56,
+      height: 24,
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: provider.dateDigitsController,
+              style: TextStyle(fontSize: 14, color: color),
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.only(left: 4.0),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+            ),
+          ),
+          MyText(S.of(context).digits, color: color),
+        ],
+      ),
     );
   }
 }

@@ -63,15 +63,15 @@ extension ReservedTypeExtension on ReservedType {
   String get value {
     switch (this) {
       case ReservedType.capitalLetter:
-        return S.current.capitalLetter;
+        return 'ABC';
       case ReservedType.lowercaseLetter:
-        return S.current.lowercaseLetter;
+        return 'abc';
       case ReservedType.nonLetter:
-        return S.current.nonLetter;
+        return '中あ조བོད';
       case ReservedType.digit:
-        return S.current.digit;
+        return '123';
       case ReservedType.punctuation:
-        return S.current.punctuation;
+        return '!.?';
     }
   }
 }

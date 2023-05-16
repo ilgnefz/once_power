@@ -8,11 +8,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(12.0),
         child: Row(
-          children: const [
+          children: [
             SizedBox(width: 320, child: ActionBar()),
             SizedBox(width: 8),
             Expanded(child: ContentBar()),

@@ -50,10 +50,10 @@ class SettingMenu extends StatelessWidget {
             SettingItem(
               title: S.of(context).projectUrl,
               crossAxisAlignment: CrossAxisAlignment.start,
-              action: [
+              action: const [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     ClickText(
                       title: 'Github',
                       content: 'https://github.com/ilgnefz/once_power',

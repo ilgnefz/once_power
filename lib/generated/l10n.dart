@@ -1000,51 +1000,11 @@ class S {
     );
   }
 
-  /// `ABC`
-  String get capitalLetter {
+  /// `digits`
+  String get digits {
     return Intl.message(
-      'ABC',
-      name: 'capitalLetter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `abc`
-  String get lowercaseLetter {
-    return Intl.message(
-      'abc',
-      name: 'lowercaseLetter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `NonLetter`
-  String get nonLetter {
-    return Intl.message(
-      'NonLetter',
-      name: 'nonLetter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `123`
-  String get digit {
-    return Intl.message(
-      '123',
-      name: 'digit',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Punctuation`
-  String get punctuation {
-    return Intl.message(
-      'Punctuation',
-      name: 'punctuation',
+      'digits',
+      name: 'digits',
       desc: '',
       args: [],
     );

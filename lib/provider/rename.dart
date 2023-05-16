@@ -30,6 +30,8 @@ class RenameProvider extends ChangeNotifier {
   // 输入框的控制器
   final TextEditingController matchTextController = TextEditingController();
   final TextEditingController updateTextController = TextEditingController();
+  final TextEditingController dateDigitsController =
+      TextEditingController(text: '14');
   final TextEditingController prefixTextController = TextEditingController();
   final TextEditingController suffixTextController = TextEditingController();
   final TextEditingController prefixNumController = TextEditingController();
@@ -44,6 +46,9 @@ class RenameProvider extends ChangeNotifier {
     updateTextController.addListener(() {
       _updateEmpty = !updateTextController.text.isNotEmpty;
       notifyListeners();
+    });
+    dateDigitsController.addListener(() {
+      updateName();
     });
     prefixTextController.addListener(() {
       _prefixEmpty = !prefixTextController.text.isNotEmpty;
@@ -73,6 +78,7 @@ class RenameProvider extends ChangeNotifier {
   void dispose() {
     matchTextController.dispose();
     updateTextController.dispose();
+    dateDigitsController.dispose();
     prefixTextController.dispose();
     suffixTextController.dispose();
     prefixNumController.dispose();
@@ -88,6 +94,7 @@ class RenameProvider extends ChangeNotifier {
     if (!data.containsKey('Image DateTime')) return null;
     String? dateTime = data['Image DateTime'].toString();
     if (dateTime == '') return null;
+    debugPrint('$imagePath拍摄日期: ${exifDateFormat(dateTime)}');
     return exifDateFormat(dateTime);
   }
 
@@ -379,7 +386,9 @@ class RenameProvider extends ChangeNotifier {
         extension = extension.substring(1);
       }
       // 如果是图片就获取 exif 中的拍摄日期
-      if (image.contains(filePath)) exifDate = await imageExifInfo(filePath);
+      if (image.contains(extension)) {
+        exifDate = await imageExifInfo(filePath);
+      }
     }
     _files.add(
       RenameFile(
@@ -551,20 +560,33 @@ class RenameProvider extends ChangeNotifier {
     List<DateTime> list = [file.createDate, file.modifyDate];
     if (file.exifDate != null) list.add(file.exifDate!);
     list.sort();
+    late String date;
+    late int dateDigit;
+    if (dateDigitsController.text == '' ||
+        int.parse(dateDigitsController.text) < 0 ||
+        int.parse(dateDigitsController.text) > 14) {
+      dateDigit = 14;
+    } else {
+      dateDigit = int.parse(dateDigitsController.text);
+    }
     if (dateType == DateType.modifyDate) {
-      return formatDateTime(file.modifyDate);
+      date = formatDateTime(file.modifyDate);
     }
     if (dateType == DateType.exifDate) {
       DateTime dateTime = file.exifDate ?? list.first;
-      return formatDateTime(dateTime);
+      date = formatDateTime(dateTime);
     }
     if (dateType == DateType.earliestDate) {
-      return formatDateTime(list.first);
+      date = formatDateTime(list.first);
     }
     if (dateType == DateType.latestDate) {
-      return formatDateTime(list.last);
+      date = formatDateTime(list.last);
     }
-    return formatDateTime(file.createDate);
+    if (dateType == DateType.createDate) {
+      date = formatDateTime(file.createDate);
+    }
+    // notifyListeners();
+    return date.substring(0, dateDigit);
   }
 
   // 默认模式
@@ -615,7 +637,9 @@ class RenameProvider extends ChangeNotifier {
         pattern +=
             r"\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u0f00-\u0fff";
       }
-      if (!punctuation) pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+";
+      if (!punctuation) {
+        pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”【】{}<>《》「」";
+      }
       RegExp reg = RegExp("[$pattern]");
       fileName = file.name.replaceAll(reg, "");
     }
