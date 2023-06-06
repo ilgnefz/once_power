@@ -95,5 +95,6 @@
   "exifDate": "拍摄日期",
   "earliestDate": "最早日期",
   "latestDate": "最晚日期",
-  "digits": "位数"
+  "digits": "位数",
+  "save": "保存配置"
 }

@@ -48,6 +48,17 @@ class SettingMenu extends StatelessWidget {
               action: [MyText(S.of(context).desc)],
             ),
             SettingItem(
+              title: S.of(context).save,
+              action: [
+                Transform.scale(
+                  scale: .8,
+                  child: Switch(
+                      value: provider.save,
+                      onChanged: (v) => provider.toggleSave()),
+                )
+              ],
+            ),
+            SettingItem(
               title: S.of(context).projectUrl,
               crossAxisAlignment: CrossAxisAlignment.start,
               action: const [

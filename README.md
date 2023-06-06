@@ -5,6 +5,7 @@
 OncePower 是一个批量重命名文件或文件夹的工具。集免安装、傻瓜式、快速上手于一身，功能清晰明了，学习成本低。
 
 ## 新功能
+记录上一次的使用配置
 
 保留模式可以以日期命名，并且日期命名时可以截取指定长度。
 
@@ -19,7 +20,7 @@ OncePower 是一个批量重命名文件或文件夹的工具。集免安装、�
 
 - **Windows**
 - **macOS**（需要自己打包）
-- **Linux**
+- **Linux**（暂停打包，需要的自己打包或留言）
 
 ## 快速上手
 
@@ -131,15 +132,23 @@ April
 
 因为使用了 [flutter_distributor](https://distributor.leanflutter.org/zh/docs/getting-started)，打包的配置文件已经配置好了。想打包的要依次执行一下命令：
 
-```
+```shell
 dart pub global activate flutter_distributor
 ```
 
+**Ubuntu**
+
+```shell
+flutter_distributor package --platform linux --targets deb
 ```
+
+**macOS**
+
+```shell
 npm install -g appdmg
 ```
 
-```
+```shell
 flutter_distributor package --platform macos --targets dmg
 ```
 

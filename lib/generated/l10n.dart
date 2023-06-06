@@ -1009,6 +1009,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Save Config`
+  String get save {
+    return Intl.message(
+      'Save Config',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

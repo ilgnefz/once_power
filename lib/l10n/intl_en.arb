@@ -95,5 +95,6 @@
   "exifDate": "Exif Date",
   "earliestDate": "Earliest Date",
   "latestDate": "Latest Date",
-  "digits": "digits"
+  "digits": "digits",
+  "save": "Save Config"
 }

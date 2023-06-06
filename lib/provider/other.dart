@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/global.dart';
 import 'package:once_power/model/types.dart';
+import 'package:once_power/model/values.dart';
 import 'package:once_power/model/version.dart';
 import 'package:once_power/utils/notification.dart';
 import 'package:once_power/utils/storage.dart';
@@ -33,11 +35,35 @@ class OtherProvider extends ChangeNotifier {
     _currentLanguage = type;
     if (type == LanguageType.english) {
       S.load(const Locale('en', 'US'));
-      await StorageUtil().setString('language', 'en');
+      await StorageUtil().setString(AppValue.language, 'en');
     } else {
       S.load(const Locale('zh', 'CN'));
-      await StorageUtil().setString('language', 'zh');
+      await StorageUtil().setString(AppValue.language, 'zh');
     }
+    notifyListeners();
+  }
+
+  bool _save = Global.save;
+  bool get save => _save;
+  toggleSave() async {
+    _save = !_save;
+    // if (!_save) {
+    //   StorageUtil().remove(AppValue.caseSensitive);
+    //   StorageUtil().remove(AppValue.dateRename);
+    //   StorageUtil().remove(AppValue.exchangeSeat);
+    //   StorageUtil().remove(AppValue.appendMode);
+    //   StorageUtil().remove(AppValue.addFolder);
+    //   StorageUtil().remove(AppValue.lowercase);
+    //   StorageUtil().remove(AppValue.capital);
+    //   StorageUtil().remove(AppValue.digit);
+    //   StorageUtil().remove(AppValue.nonLetter);
+    //   StorageUtil().remove(AppValue.punctuation);
+    //   StorageUtil().remove(AppValue.deleteLength);
+    //   StorageUtil().remove(AppValue.prefixNum);
+    //   StorageUtil().remove(AppValue.suffixNum);
+    //   StorageUtil().remove(AppValue.startNum);
+    // }
+    await StorageUtil().setBool(AppValue.save, _save);
     notifyListeners();
   }
 

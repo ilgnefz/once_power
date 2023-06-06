@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rename Succeeded"),
         "renameSucceededText": m1,
         "reservedMode": MessageLookupByLibrary.simpleMessage("Reserved Mode"),
+        "save": MessageLookupByLibrary.simpleMessage("Save Config"),
         "selectFile": MessageLookupByLibrary.simpleMessage("Select File"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select Folder"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),

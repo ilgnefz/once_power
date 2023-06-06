@@ -115,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "renameSucceeded": MessageLookupByLibrary.simpleMessage("重命名成功"),
         "renameSucceededText": m1,
         "reservedMode": MessageLookupByLibrary.simpleMessage("保留模式"),
+        "save": MessageLookupByLibrary.simpleMessage("保存配置"),
         "selectFile": MessageLookupByLibrary.simpleMessage("选择文件"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
         "setting": MessageLookupByLibrary.simpleMessage("设置"),

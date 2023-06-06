@@ -1,5 +1,12 @@
 {
-  "info": [{
+  "info": [
+    {
+    "version": "1.4.0",
+    "desc": {
+      "zh": "1.添加了记录上一次使用配置的功能\n2.修正了添加文件不能实时更新文件名的bug",
+      "en": "1. Added the function of recording the last usage configuration\n2. Fixed a bug where adding files cannot update file names in real-time"
+    }
+  },{
     "version": "1.3.0",
     "desc": {
       "zh": "1.保留模式添加了以日期命令的功能\n2.以日期命名可以指定长度\n3.修复了无法获取照片拍摄日期的功能",

@@ -7,6 +7,7 @@ OncePower is a tool for batch renaming files or folders. It integrates installat
 This software supports English, in order to be lazy so use the Chinese interface of the demo gif.
 
 ## New features
+Recording the last usage configuration
 
 The retention mode can be named with a date, and the specified length can be truncated when naming the date.
 
@@ -20,8 +21,8 @@ Custom prefix and suffix start number
 ## Platform Support
 
 - **Windows**
-- **macOS**（Need to pack yourself）
-- **Linux**
+- **macOS** (Need to pack yourself)
+- **Linux** (Pause packaging, pack or leave a message if needed)
 
 ## Quick Start
 
@@ -133,15 +134,23 @@ This project has only been tested in Win10 and Ubuntu. macOS needs to test itsel
 
 Because use the [flutter_distributor](https://distributor.leanflutter.org/zh/docs/getting-started), packaging configuration file has been configured. If you want to pack, execute the following commands:
 
-```
+```shell
 dart pub global activate flutter_distributor
 ```
 
+**Ubuntu**
+
+```shell
+flutter_distributor package --platform linux --targets deb
 ```
+
+**macOS**
+
+```shell
 npm install -g appdmg
 ```
 
-```
+```shell
 flutter_distributor package --platform macos --targets dmg
 ```
 

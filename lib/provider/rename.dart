@@ -8,12 +8,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/global.dart';
 import 'package:once_power/model/error_message.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/model/types.dart';
+import 'package:once_power/model/values.dart';
 import 'package:once_power/pages/other/other.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/notification.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as path;
 
@@ -31,12 +34,15 @@ class RenameProvider extends ChangeNotifier {
   final TextEditingController matchTextController = TextEditingController();
   final TextEditingController updateTextController = TextEditingController();
   final TextEditingController dateDigitsController =
-      TextEditingController(text: '14');
+      TextEditingController(text: Global.dateLength ?? '14');
   final TextEditingController prefixTextController = TextEditingController();
   final TextEditingController suffixTextController = TextEditingController();
-  final TextEditingController prefixNumController = TextEditingController();
-  final TextEditingController suffixNumController = TextEditingController();
-  final TextEditingController startNumController = TextEditingController();
+  final TextEditingController prefixNumController =
+      TextEditingController(text: Global.prefixNum);
+  final TextEditingController suffixNumController =
+      TextEditingController(text: Global.suffixNum);
+  final TextEditingController startNumController =
+      TextEditingController(text: Global.startNum);
   // 监听输入
   RenameProvider() {
     matchTextController.addListener(() {
@@ -48,7 +54,9 @@ class RenameProvider extends ChangeNotifier {
       notifyListeners();
     });
     dateDigitsController.addListener(() {
+      StorageUtil().setString(AppValue.dateLength, dateDigitsController.text);
       updateName();
+      notifyListeners();
     });
     prefixTextController.addListener(() {
       _prefixEmpty = !prefixTextController.text.isNotEmpty;
@@ -62,14 +70,17 @@ class RenameProvider extends ChangeNotifier {
     });
     prefixNumController.addListener(() {
       _prefixNumEmpty = !prefixNumController.text.isNotEmpty;
+      StorageUtil().setString(AppValue.prefixNum, prefixNumController.text);
       notifyListeners();
     });
     suffixNumController.addListener(() {
       _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
+      StorageUtil().setString(AppValue.suffixNum, suffixNumController.text);
       notifyListeners();
     });
     startNumController.addListener(() {
       _startNumEmpty = !startNumController.text.isNotEmpty;
+      StorageUtil().setString(AppValue.startNum, startNumController.text);
       notifyListeners();
     });
   }
@@ -105,23 +116,23 @@ class RenameProvider extends ChangeNotifier {
   }
 
   // 控制是否选中
-  bool _caseSensitive = false;
+  bool _caseSensitive = Global.caseSensitive ?? false;
   bool get caseSensitive => _caseSensitive;
-  bool _deleteLength = false;
+  bool _deleteLength = Global.deleteLength ?? false;
   bool get deleteLength => _deleteLength;
-  bool _dateRename = false;
+  bool _dateRename = Global.dateRename ?? false;
   bool get dateRename => _dateRename;
   bool _useLoop = false;
   bool get useLoop => _useLoop;
-  bool _numAddBefore = false;
-  bool get numAddBefore => _numAddBefore;
-  bool _numAddAfter = false;
-  bool get numAddAfter => _numAddAfter;
-  bool _appendMode = false;
+  // bool _numAddBefore = false;
+  // bool get numAddBefore => _numAddBefore;
+  // bool _numAddAfter = false;
+  // bool get numAddAfter => _numAddAfter;
+  bool _appendMode = Global.appendMode ?? false;
   bool get appendMode => _appendMode;
-  bool _exchangeSeat = false;
+  bool _exchangeSeat = Global.exchangeSeat ?? false;
   bool get exchangeSeat => _exchangeSeat;
-  bool _addFolder = false;
+  bool _addFolder = Global.addFolder ?? false;
   bool get addFolder => _addFolder;
   bool _openLoopType = false;
   bool get openLoopType => _openLoopType;
@@ -191,16 +202,34 @@ class RenameProvider extends ChangeNotifier {
         key, S.current.folder, FileClassify.folder, _popupSelectedFolder);
     popupSwitchCheck(
         key, S.current.other, FileClassify.other, _popupSelectedOther);
-    if (key == 'caseSensitive') _caseSensitive = !_caseSensitive;
-    if (key == 'deleteLength') _deleteLength = !_deleteLength;
-    if (key == 'dateRename') _dateRename = !_dateRename;
-    if (key == 'changePosition') _exchangeSeat = !_exchangeSeat;
+    if (key == 'caseSensitive') {
+      _caseSensitive = !_caseSensitive;
+      StorageUtil().setBool(AppValue.caseSensitive, _caseSensitive);
+    }
+    if (key == 'deleteLength') {
+      _deleteLength = !_deleteLength;
+      StorageUtil().setBool(AppValue.deleteLength, _deleteLength);
+    }
+    if (key == 'dateRename') {
+      _dateRename = !_dateRename;
+      StorageUtil().setBool(AppValue.dateRename, _dateRename);
+    }
+    if (key == 'changePosition') {
+      _exchangeSeat = !_exchangeSeat;
+      StorageUtil().setBool(AppValue.exchangeSeat, _exchangeSeat);
+    }
     updateName();
     if (key == 'useLoop') _useLoop = !_useLoop;
-    if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
-    if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
-    if (key == 'appendMode') _appendMode = !_appendMode;
-    if (key == 'addFolder') _addFolder = !_addFolder;
+    // if (key == 'numAddBefore') _numAddBefore = !_numAddBefore;
+    // if (key == 'numAddAfter') _numAddAfter = !_numAddAfter;
+    if (key == 'appendMode') {
+      _appendMode = !_appendMode;
+      StorageUtil().setBool(AppValue.appendMode, _appendMode);
+    }
+    if (key == 'addFolder') {
+      _addFolder = !_addFolder;
+      StorageUtil().setBool(AppValue.addFolder, _addFolder);
+    }
     if (key == 'openUseType') _openLoopType = !_openLoopType;
     if (key == 'showUnselected') {
       _popupShowUnselected = !_popupShowUnselected;
@@ -217,10 +246,11 @@ class RenameProvider extends ChangeNotifier {
   }
 
   // 切换使用模式
-  ModeType _modeType = ModeType.general;
+  ModeType _modeType = Global.modeType ?? ModeType.general;
   ModeType get modeType => _modeType;
-  void switchModeType(ModeType type) {
+  void switchModeType(ModeType type) async {
     _modeType = type;
+    await StorageUtil().setInt(AppValue.modeType, _modeType.index);
     updateTextController.clear();
     updateName();
   }
@@ -308,6 +338,7 @@ class RenameProvider extends ChangeNotifier {
       allowMultiple: true,
     );
     if (result != null) addFile(result.files);
+    // updateName();
   }
 
   // 选择文件夹添加
@@ -315,6 +346,7 @@ class RenameProvider extends ChangeNotifier {
     initAdd();
     String? dir = await FilePicker.platform.getDirectoryPath();
     if (dir != null) addFile([Directory(dir)]);
+    // updateName();
   }
 
   // 拖动文件添加
@@ -322,11 +354,10 @@ class RenameProvider extends ChangeNotifier {
     initAdd();
     List<XFile> xFileList = details.files;
     addFile(xFileList);
-    updateName();
   }
 
   // 处理所有文件
-  void addFile(List<dynamic> files) {
+  void addFile(List<dynamic> files) async {
     List<String> filePathList = [];
     for (var file in files) {
       if (!addFolder) {
@@ -340,7 +371,17 @@ class RenameProvider extends ChangeNotifier {
       }
     }
     for (String filePath in filePathList) {
-      fileToList(filePath);
+      try {
+        await fileToList(filePath);
+      } catch (e) {
+        _errorList.add(
+          ErrorMessage(
+            fileName: filePath,
+            reason: S.current.renameFailedUnmodified,
+            time: DateTime.now(),
+          ),
+        );
+      }
     }
     updateName();
   }
@@ -405,6 +446,7 @@ class RenameProvider extends ChangeNotifier {
         checked: true,
       ),
     );
+    // notifyListeners();
   }
 
   // 清除所有文件
@@ -424,6 +466,7 @@ class RenameProvider extends ChangeNotifier {
       _files.sort((a, b) => b.name.compareTo(a.name));
     }
     _order = !_order;
+    updateName();
     notifyListeners();
   }
 
