@@ -7,7 +7,7 @@ OncePower is a tool for batch renaming files or folders. It integrates installat
 This software supports English, in order to be lazy so use the Chinese interface of the demo gif.
 
 ## New features
-Recording the last usage configuration
+Recording the last usage configuration (Off by default, you can go to Settings to open)
 
 The retention mode can be named with a date, and the specified length can be truncated when naming the date.
 
