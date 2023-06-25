@@ -64,7 +64,7 @@ class OperateGroup extends StatelessWidget {
                     ? S.of(context).lengthMatchText
                     : S.of(context).matchText,
             controller: provider.matchTextController,
-            hidden: provider.matchEmpty,
+            hidden: provider.matchTextController.text.isEmpty,
             onClear: () => provider.clearInput(provider.matchTextController),
             onChanged: (v) => provider.updateName(),
           ),
@@ -135,7 +135,7 @@ class OperateGroup extends StatelessWidget {
                   ? S.of(context).inputDisabled
                   : S.of(context).updateText,
               controller: provider.updateTextController,
-              hidden: provider.updateEmpty,
+              hidden: provider.updateTextController.text.isEmpty,
               onClear: () => provider.clearInput(provider.updateTextController),
               onChanged: (v) => provider.updateName(),
             ),
@@ -182,7 +182,7 @@ class OperateGroup extends StatelessWidget {
           controller: provider.prefixTextController,
           uploadType: UploadType.prefix,
           provider: provider,
-          hidden: provider.prefixEmpty,
+          hidden: provider.prefixTextController.text.isEmpty,
           onChanged: (v) => provider.updateName(),
         ),
         const SpaceBoxHeight(),
@@ -192,7 +192,7 @@ class OperateGroup extends StatelessWidget {
           controller: provider.suffixTextController,
           uploadType: UploadType.suffix,
           provider: provider,
-          hidden: provider.suffixEmpty,
+          hidden: provider.suffixTextController.text.isEmpty,
           onChanged: (v) => provider.updateName(),
         ),
         const SpaceBoxHeight(),
@@ -221,11 +221,16 @@ class OperateGroup extends StatelessWidget {
               child: SimpleInput(
                 hintText: S.of(context).digitIncrementHint,
                 controller: provider.prefixNumController,
-                hidden: provider.prefixNumEmpty,
+                hidden: provider.prefixNumController.text.isEmpty,
                 onClear: () =>
                     provider.clearInput(provider.prefixNumController),
                 onChanged: (v) => provider.updateName(),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0, right: 8.0),
+              child: MyText(
+                  '${provider.prefixNumController.text.length} ${S.of(context).digits}'),
             ),
           ],
         ),
@@ -239,11 +244,16 @@ class OperateGroup extends StatelessWidget {
               child: SimpleInput(
                 hintText: S.of(context).digitIncrementHint,
                 controller: provider.suffixNumController,
-                hidden: provider.suffixNumEmpty,
+                hidden: provider.suffixNumController.text.isEmpty,
                 onClear: () =>
                     provider.clearInput(provider.suffixNumController),
                 onChanged: (v) => provider.updateName(),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0, right: 8.0),
+              child: MyText(
+                  '${provider.suffixNumController.text.length} ${S.of(context).digits}'),
             ),
           ],
         ),
@@ -257,7 +267,7 @@ class OperateGroup extends StatelessWidget {
               child: SimpleInput(
                 hintText: S.of(context).enterNumbers,
                 controller: provider.startNumController,
-                hidden: provider.startNumEmpty,
+                hidden: provider.startNumController.text.isEmpty,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onClear: () => provider.clearInput(provider.startNumController),
                 onChanged: (v) => provider.updateName(),

@@ -1,6 +1,12 @@
 {
   "info": [
     {
+      "version": "1.5.0",
+      "desc": {
+        "zh": "1.修复了读取文件时从第二个值开始的问题\n2.修复了当有默认值后不显示清除按钮的问题\n3.修复了重命名后当文件有多个“.”时文件名显示错误的问题",
+        "en": "1. Fixed issue with starting from the second value when reading files\n2. Fixed the issue of not displaying the clear button when there is a default value\n3. Fixed the issue of incorrect file name display when there are multiple '.' files after renaming"
+      }
+    },{
     "version": "1.4.0",
     "desc": {
       "zh": "1.添加了记录上一次使用配置的功能\n2.修正了添加文件不能实时更新文件名的bug",
@@ -12,50 +18,43 @@
       "zh": "1.保留模式添加了以日期命令的功能\n2.以日期命名可以指定长度\n3.修复了无法获取照片拍摄日期的功能",
       "en": "1. The retention mode has added the function of using date commands\n2. Named after a date can specify a length\n3. Fixed the function of not being able to obtain photo shooting dates"
     }
-  },
-    {
+  },{
       "version": "1.2.2",
       "desc": {
         "zh": "添加了前缀和后缀自定义开始数字的功能",
         "en": "Added custom prefix and suffix start digit functionality"
       }
-    },
-    {
+    }, {
       "version": "1.2.1.2",
       "desc": {
         "zh": "修复了文字溢出的bug",
         "en": "Fixed a bug with text overflow"
       }
-    },
-    {
+    },{
     "version": "1.2.1.1",
     "desc": {
       "zh": "修复了多次使用从小到大排序要点两次的bug",
       "en": "Fixed a bug that repeatedly used small to large sorting points twice"
     }
-  },
-    {
+  },{
       "version": "1.2.1",
       "desc": {
         "zh": "添加了给名称自动排序的功能",
         "en": "Added the ability to automatically sort names"
       }
-    },
-    {
+    },{
       "version": "1.2.0",
       "desc": {
         "zh": "1.保留模式可以自动匹配不同类型的内容\n2.长度模式支持匹配中间内容",
         "en": "1. Reserved Mode can automatically match different types of content\n2. Length Mode matches the intermediate content"
       }
-    },
-    {
+    },{
       "version": "1.1.0",
       "desc": {
         "zh": "添加了更多日期命名的类型",
         "en": "Added more date naming types"
       }
-    },
-    {
+    },{
       "version": "1.0.0",
       "desc": {
         "zh": "",

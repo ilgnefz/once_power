@@ -46,11 +46,11 @@ class RenameProvider extends ChangeNotifier {
   // 监听输入
   RenameProvider() {
     matchTextController.addListener(() {
-      _matchEmpty = !matchTextController.text.isNotEmpty;
+      // _matchEmpty = !matchTextController.text.isNotEmpty;
       notifyListeners();
     });
     updateTextController.addListener(() {
-      _updateEmpty = !updateTextController.text.isNotEmpty;
+      // _updateEmpty = !updateTextController.text.isNotEmpty;
       notifyListeners();
     });
     dateDigitsController.addListener(() {
@@ -59,27 +59,27 @@ class RenameProvider extends ChangeNotifier {
       notifyListeners();
     });
     prefixTextController.addListener(() {
-      _prefixEmpty = !prefixTextController.text.isNotEmpty;
+      // _prefixEmpty = !prefixTextController.text.isNotEmpty;
       _openLoopType = prefixTextController.text.isNotEmpty;
       notifyListeners();
     });
     suffixTextController.addListener(() {
-      _suffixEmpty = !suffixTextController.text.isNotEmpty;
+      // _suffixEmpty = !suffixTextController.text.isNotEmpty;
       _openLoopType = suffixTextController.text.isNotEmpty;
       notifyListeners();
     });
     prefixNumController.addListener(() {
-      _prefixNumEmpty = !prefixNumController.text.isNotEmpty;
+      // _prefixNumEmpty = !prefixNumController.text.isNotEmpty;
       StorageUtil().setString(AppValue.prefixNum, prefixNumController.text);
       notifyListeners();
     });
     suffixNumController.addListener(() {
-      _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
+      // _suffixNumEmpty = !suffixNumController.text.isNotEmpty;
       StorageUtil().setString(AppValue.suffixNum, suffixNumController.text);
       notifyListeners();
     });
     startNumController.addListener(() {
-      _startNumEmpty = !startNumController.text.isNotEmpty;
+      // _startNumEmpty = !startNumController.text.isNotEmpty;
       StorageUtil().setString(AppValue.startNum, startNumController.text);
       notifyListeners();
     });
@@ -97,6 +97,21 @@ class RenameProvider extends ChangeNotifier {
     startNumController.dispose();
     super.dispose();
   }
+
+  // bool _matchEmpty = true;
+  // bool get matchEmpty => _matchEmpty;
+  // bool _updateEmpty = true;
+  // bool get updateEmpty => _updateEmpty;
+  // bool _prefixEmpty = true;
+  // bool get prefixEmpty => _prefixEmpty;
+  // bool _suffixEmpty = true;
+  // bool get suffixEmpty => _suffixEmpty;
+  // bool _prefixNumEmpty = true;
+  // bool get prefixNumEmpty => _prefixNumEmpty;
+  // bool _suffixNumEmpty = true;
+  // bool get suffixNumEmpty => _suffixNumEmpty;
+  // bool _startNumEmpty = true;
+  // bool get startNumEmpty => _startNumEmpty;
 
   // 获取图片的exif信息
   Future<DateTime?> imageExifInfo(String imagePath) async {
@@ -479,21 +494,6 @@ class RenameProvider extends ChangeNotifier {
     return FileClassify.other;
   }
 
-  bool _matchEmpty = true;
-  bool get matchEmpty => _matchEmpty;
-  bool _updateEmpty = true;
-  bool get updateEmpty => _updateEmpty;
-  bool _prefixEmpty = true;
-  bool get prefixEmpty => _prefixEmpty;
-  bool _suffixEmpty = true;
-  bool get suffixEmpty => _suffixEmpty;
-  bool _prefixNumEmpty = true;
-  bool get prefixNumEmpty => _prefixNumEmpty;
-  bool _suffixNumEmpty = true;
-  bool get suffixNumEmpty => _suffixNumEmpty;
-  bool _startNumEmpty = true;
-  bool get startNumEmpty => _startNumEmpty;
-
   // 双击将名称添加到匹配内容输入框
   void doubleTapAdd(String value) {
     matchTextController.text = value;
@@ -681,7 +681,7 @@ class RenameProvider extends ChangeNotifier {
             r"\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u0f00-\u0fff";
       }
       if (!punctuation) {
-        pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”【】{}<>《》「」";
+        pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”（）【】{}<>《》「」";
       }
       RegExp reg = RegExp("[$pattern]");
       fileName = file.name.replaceAll(reg, "");
@@ -794,9 +794,9 @@ class RenameProvider extends ChangeNotifier {
               ? _suffixUploadContent
               : [suffixTextController.text];
           String prefix =
-              updateExtraName(prefixContent, LoopType.suffix, index);
+              updateExtraName(prefixContent, LoopType.suffix, index - 1);
           String suffix =
-              updateExtraName(suffixContent, LoopType.prefix, index);
+              updateExtraName(suffixContent, LoopType.prefix, index - 1);
           String prefixNum =
               formatNumber(index, prefixNumController.text.length);
           String suffixNum =
@@ -867,7 +867,7 @@ class RenameProvider extends ChangeNotifier {
           if (file.extension == 'dir') Directory(oldPath).renameSync(newPath);
           if (file.extension != 'dir') File(oldPath).renameSync(newPath);
           _doneCount++;
-          file.name = path.basename(newPath).split('.').first;
+          file.name = path.basenameWithoutExtension(newPath);
         } catch (e) {
           _errorList.add(ErrorMessage(
               fileName: file.name, reason: '$e', time: DateTime.now()));
