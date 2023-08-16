@@ -326,6 +326,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hooks:
+    dependency: "direct main"
+    description:
+      name: flutter_hooks
+      sha256: "9eab8fd7aa752c3c1c0a364f9825851d410eb935243411682f4b1b0a4c569d71"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.20.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -356,7 +364,7 @@ packages:
     source: hosted
     version: "2.0.15"
   flutter_riverpod:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_riverpod
       sha256: b83ac5827baadefd331ea1d85110f34645827ea234ccabf53a655f41901a9bf4
@@ -413,6 +421,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.1"
+  hooks_riverpod:
+    dependency: "direct main"
+    description:
+      name: hooks_riverpod
+      sha256: "117edbe7e5cfc02e31a94f97e2acd4581f54bc37fcda9dce1f606f8ac851ba24"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.7"
   hotreloader:
     dependency: transitive
     description:

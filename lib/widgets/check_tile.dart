@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 
-import 'my_text.dart';
-
 class CheckTile extends StatelessWidget {
   const CheckTile(this.label, {super.key});
 
@@ -17,7 +15,7 @@ class CheckTile extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(value: true, onChanged: (v) {}),
-            MyText(label, maxLines: 1),
+            Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

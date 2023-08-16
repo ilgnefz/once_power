@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
@@ -34,7 +36,15 @@ class ContentBar extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(child: Center(child: Text('文件在这'))),
+            Expanded(
+              child: Center(
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    return Text(ref.watch(matchTextProvider));
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
