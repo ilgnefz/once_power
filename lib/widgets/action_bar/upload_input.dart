@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/widgets/base_input.dart';
 import 'package:once_power/widgets/click_icon.dart';
+import 'package:once_power/widgets/easy_tooltip.dart';
 
 class UploadInput extends StatelessWidget {
   const UploadInput({
@@ -21,10 +22,13 @@ class UploadInput extends StatelessWidget {
       controller: controller,
       hintText: hintText,
       show: show,
-      action: ClickIcon(
-        icon: Icons.upload_file_rounded,
-        color: AppColors.select,
-        onTap: () {},
+      action: EasyTooltip(
+        message: '上传 .txt 文件',
+        child: ClickIcon(
+          icon: Icons.upload_file_rounded,
+          color: AppColors.select,
+          onTap: () {},
+        ),
       ),
     );
   }

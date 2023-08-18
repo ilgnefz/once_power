@@ -31,7 +31,7 @@ class CommonInputMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (label != null) ...[Text('$label:'), const SizedBox(width: 4)],
+        if (label != null) ...[Text('$label:'), const SizedBox(width: 8)],
         Expanded(
           child: slot ??
               BaseInput(

@@ -36,6 +36,21 @@ final modifyTextProvider =
 );
 
 typedef _$ModifyText = AutoDisposeNotifier<String>;
+String _$dateLengthHash() => r'bf343e35cf4c6d3c7741411e01d0aaa78c1c4e2c';
+
+/// See also [DateLength].
+@ProviderFor(DateLength)
+final dateLengthProvider =
+    AutoDisposeNotifierProvider<DateLength, int>.internal(
+  DateLength.new,
+  name: r'dateLengthProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$dateLengthHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DateLength = AutoDisposeNotifier<int>;
 String _$prefixTextHash() => r'92d4a68d9eaf5e71cafea7268ffd66489ca1aa34';
 
 /// See also [PrefixText].
@@ -51,38 +66,38 @@ final prefixTextProvider =
 );
 
 typedef _$PrefixText = AutoDisposeNotifier<String>;
-String _$prefixPlaceNumHash() => r'8f7cde770ea2c3ecaf06201c8a255edb2f41ce7c';
+String _$prefixNumLengthHash() => r'f23d7214908222d636cf32a421a9046acf81b192';
 
-/// See also [PrefixPlaceNum].
-@ProviderFor(PrefixPlaceNum)
-final prefixPlaceNumProvider =
-    AutoDisposeNotifierProvider<PrefixPlaceNum, int>.internal(
-  PrefixPlaceNum.new,
-  name: r'prefixPlaceNumProvider',
+/// See also [PrefixNumLength].
+@ProviderFor(PrefixNumLength)
+final prefixNumLengthProvider =
+    AutoDisposeNotifierProvider<PrefixNumLength, int>.internal(
+  PrefixNumLength.new,
+  name: r'prefixNumLengthProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$prefixPlaceNumHash,
+      : _$prefixNumLengthHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PrefixPlaceNum = AutoDisposeNotifier<int>;
-String _$prefixStartNumHash() => r'66f3d2f4ecfaaebcd1660f311b093a461d66a05b';
+typedef _$PrefixNumLength = AutoDisposeNotifier<int>;
+String _$prefixNumStartHash() => r'41f8f734f90ffa1384d7f87330a508a1bd8b944a';
 
-/// See also [PrefixStartNum].
-@ProviderFor(PrefixStartNum)
-final prefixStartNumProvider =
-    AutoDisposeNotifierProvider<PrefixStartNum, int>.internal(
-  PrefixStartNum.new,
-  name: r'prefixStartNumProvider',
+/// See also [PrefixNumStart].
+@ProviderFor(PrefixNumStart)
+final prefixNumStartProvider =
+    AutoDisposeNotifierProvider<PrefixNumStart, int>.internal(
+  PrefixNumStart.new,
+  name: r'prefixNumStartProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$prefixStartNumHash,
+      : _$prefixNumStartHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PrefixStartNum = AutoDisposeNotifier<int>;
+typedef _$PrefixNumStart = AutoDisposeNotifier<int>;
 String _$suffixTextHash() => r'3f19a99c4040ee7dbd28c0731215283174fbf7d1';
 
 /// See also [SuffixText].
@@ -98,38 +113,38 @@ final suffixTextProvider =
 );
 
 typedef _$SuffixText = AutoDisposeNotifier<String>;
-String _$suffixPlaceNumHash() => r'eaee13f8a248adb724b7148b3f87840aba5fdb52';
+String _$suffixNumLengthHash() => r'3b26f3c87199c7eea34316151b51e327c2933809';
 
-/// See also [SuffixPlaceNum].
-@ProviderFor(SuffixPlaceNum)
-final suffixPlaceNumProvider =
-    AutoDisposeNotifierProvider<SuffixPlaceNum, int>.internal(
-  SuffixPlaceNum.new,
-  name: r'suffixPlaceNumProvider',
+/// See also [SuffixNumLength].
+@ProviderFor(SuffixNumLength)
+final suffixNumLengthProvider =
+    AutoDisposeNotifierProvider<SuffixNumLength, int>.internal(
+  SuffixNumLength.new,
+  name: r'suffixNumLengthProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$suffixPlaceNumHash,
+      : _$suffixNumLengthHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SuffixPlaceNum = AutoDisposeNotifier<int>;
-String _$suffixStartNumHash() => r'24fe94c7f4b7fa2ee8b42d1bbb3ba66c61aaa50f';
+typedef _$SuffixNumLength = AutoDisposeNotifier<int>;
+String _$suffixNumStartHash() => r'c06fdb162c631b0ad6c4a27fb9ea6856456bd51c';
 
-/// See also [SuffixStartNum].
-@ProviderFor(SuffixStartNum)
-final suffixStartNumProvider =
-    AutoDisposeNotifierProvider<SuffixStartNum, int>.internal(
-  SuffixStartNum.new,
-  name: r'suffixStartNumProvider',
+/// See also [SuffixNumStart].
+@ProviderFor(SuffixNumStart)
+final suffixNumStartProvider =
+    AutoDisposeNotifierProvider<SuffixNumStart, int>.internal(
+  SuffixNumStart.new,
+  name: r'suffixNumStartProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$suffixStartNumHash,
+      : _$suffixNumStartHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SuffixStartNum = AutoDisposeNotifier<int>;
+typedef _$SuffixNumStart = AutoDisposeNotifier<int>;
 String _$fileExtensionHash() => r'18e0aa3846eadb529cf1d62e7a6222a99c2c04d1';
 
 /// See also [FileExtension].

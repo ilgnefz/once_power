@@ -12,6 +12,7 @@ class EasyTooltip extends StatelessWidget {
     return Tooltip(
       message: message,
       // preferBelow: false,
+      verticalOffset: 16,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.all(Radius.circular(4)),

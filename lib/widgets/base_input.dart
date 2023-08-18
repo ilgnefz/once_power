@@ -13,6 +13,9 @@ class BaseInput extends StatelessWidget {
     this.hintText,
     this.textAlign = TextAlign.start,
     this.inputFormatters,
+    this.focusNode,
+    this.onEditingComplete,
+    this.onSubmitted,
     required this.show,
     this.action,
   });
@@ -23,6 +26,9 @@ class BaseInput extends StatelessWidget {
   final String? hintText;
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
+  final FocusNode? focusNode;
+  final void Function()? onEditingComplete;
+  final void Function(String)? onSubmitted;
   final bool show;
   final Widget? action;
 
@@ -53,6 +59,9 @@ class BaseInput extends StatelessWidget {
               ),
               textAlign: textAlign,
               inputFormatters: inputFormatters,
+              focusNode: focusNode,
+              onEditingComplete: onEditingComplete,
+              onSubmitted: onSubmitted,
             ),
           ),
           if (show) ...[

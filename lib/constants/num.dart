@@ -1,7 +1,7 @@
 class AppNum {
   static const double actionBarW = 320;
   static const double actionBarP = 12;
-  static const double gapW = 12;
+  static const double gapW = 8;
   static const double gapH = 8;
   static const double bottomBarH = 28;
   static const double topMenuH = 40;

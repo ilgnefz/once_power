@@ -7,7 +7,7 @@ import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 
-import '../../widgets/easy_chip.dart';
+import '../../../widgets/easy_chip.dart';
 
 class DifferMenu extends HookConsumerWidget {
   const DifferMenu({super.key});
@@ -16,6 +16,7 @@ class DifferMenu extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(currentModeProvider);
 
+    // 保留模式时也应该出现修改输入框
     if (mode == FunctionMode.reserve) {
       final currentReserveType = ref.watch(currentReserveTypeProvider);
 

@@ -17,6 +17,13 @@ class ModifyText extends _$ModifyText {
 }
 
 @riverpod
+class DateLength extends _$DateLength {
+  @override
+  int build() => 8;
+  void update(int value) => state = value;
+}
+
+@riverpod
 class PrefixText extends _$PrefixText {
   @override
   String build() => '';
@@ -24,14 +31,14 @@ class PrefixText extends _$PrefixText {
 }
 
 @riverpod
-class PrefixPlaceNum extends _$PrefixPlaceNum {
+class PrefixNumLength extends _$PrefixNumLength {
   @override
   int build() => 0;
   void update(int value) => state = value;
 }
 
 @riverpod
-class PrefixStartNum extends _$PrefixStartNum {
+class PrefixNumStart extends _$PrefixNumStart {
   @override
   int build() => 0;
   void update(int value) => state = value;
@@ -45,14 +52,14 @@ class SuffixText extends _$SuffixText {
 }
 
 @riverpod
-class SuffixPlaceNum extends _$SuffixPlaceNum {
+class SuffixNumLength extends _$SuffixNumLength {
   @override
   int build() => 0;
   void update(int value) => state = value;
 }
 
 @riverpod
-class SuffixStartNum extends _$SuffixStartNum {
+class SuffixNumStart extends _$SuffixNumStart {
   @override
   int build() => 0;
   void update(int value) => state = value;

@@ -1,26 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:once_power/widgets/base_input.dart';
+import 'package:once_power/widgets/easy_tooltip.dart';
 
 import 'my_text.dart';
 
-class DigitInput extends StatelessWidget {
-  const DigitInput({super.key});
+class DigitInput extends StatefulWidget {
+  const DigitInput({
+    super.key,
+    required this.controller,
+    required this.value,
+    required this.label,
+    this.length,
+  });
+
+  final TextEditingController controller;
+  final int value;
+  final String label;
+  final int? length;
+
+  @override
+  State<DigitInput> createState() => _DigitInputState();
+}
+
+class _DigitInputState extends State<DigitInput> {
+  // late TextEditingController controller;
+  final FocusNode focusNode = FocusNode();
+
+  late String tip;
+
+  @override
+  void initState() {
+    super.initState();
+    tip = "${widget.value}${widget.label}";
+    // controller = TextEditingController(text: '${widget.value}${widget.label}');
+    focusNode.addListener(() {
+      final text = widget.controller.text;
+      if (focusNode.hasFocus) {
+        widget.controller.text = text.replaceAll(widget.label, '');
+        widget.controller.selection = TextSelection(
+            baseOffset: 0, extentOffset: widget.controller.text.length);
+      } else {
+        widget.controller.text = widget.controller.text.isEmpty
+            ? '${widget.value}${widget.label}'
+            : "${int.parse(text)}${widget.label}";
+        tip = widget.controller.text;
+      }
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    // widget.controller.dispose();
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  onSubmitted(value) {
+    widget.controller.text = '${int.parse(value)}${widget.label}';
+    setState(() {});
+  }
+
+  increment() {
+    final num = widget.controller.text.replaceAll(widget.label, '');
+    widget.controller.text = "${int.parse(num) + 1}${widget.label}";
+    setState(() {});
+  }
+
+  reduce() {
+    final num = widget.controller.text.replaceAll(widget.label, '');
+    if (num == "0") return;
+    widget.controller.text = "${int.parse(num) - 1}${widget.label}";
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BaseInput(
-      padding: EdgeInsets.zero,
-      controller: TextEditingController(text: '222开始'),
-      show: false,
-      textAlign: TextAlign.center,
-      inputFormatters: [
-        LengthLimitingTextInputFormatter(2),
-        FilteringTextInputFormatter.digitsOnly
-      ],
-      // contentPadding: const EdgeInsets.only(left: 4.0),
-      leading: OperatorButton('-', onTap: () {}),
-      action: OperatorButton('+', start: false, onTap: () {}),
+    return EasyTooltip(
+      message: tip,
+      child: BaseInput(
+        padding: EdgeInsets.zero,
+        controller: widget.controller,
+        show: false,
+        textAlign: TextAlign.center,
+        inputFormatters: [
+          if (widget.length != null)
+            LengthLimitingTextInputFormatter(widget.length),
+          FilteringTextInputFormatter.digitsOnly
+        ],
+        onSubmitted: onSubmitted,
+        focusNode: focusNode,
+        leading: OperatorButton('-', onTap: reduce),
+        action: OperatorButton('+', start: false, onTap: increment),
+      ),
     );
   }
 }
