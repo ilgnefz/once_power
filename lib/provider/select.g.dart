@@ -249,5 +249,20 @@ final currentRemoveTypeProvider =
 );
 
 typedef _$CurrentRemoveType = AutoDisposeNotifier<RemoveType>;
+String _$fileSortTypeHash() => r'3e9cd57ec5e6ac51c6bf1b4219a9bb478adeb334';
+
+/// See also [FileSortType].
+@ProviderFor(FileSortType)
+final fileSortTypeProvider =
+    AutoDisposeNotifierProvider<FileSortType, SortType>.internal(
+  FileSortType.new,
+  name: r'fileSortTypeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$fileSortTypeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$FileSortType = AutoDisposeNotifier<SortType>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

@@ -1,3 +1,5 @@
+import 'package:once_power/constants/constants.dart';
+
 enum FunctionMode { replace, reserve, remove }
 
 enum DateType {
@@ -49,6 +51,31 @@ extension RemoveTypeExtension on RemoveType {
         return '中间的';
       case RemoveType.after:
         return '之后的';
+    }
+  }
+}
+
+enum SortType {
+  defaultSort,
+  nameDescending,
+  nameAscending,
+  checkDescending,
+  checkAscending
+}
+
+extension SortTypeExtension on SortType {
+  String get value {
+    switch (this) {
+      case SortType.defaultSort:
+        return AppIcons.sort;
+      case SortType.nameDescending:
+        return AppIcons.nameDescending;
+      case SortType.nameAscending:
+        return AppIcons.nameAscending;
+      case SortType.checkDescending:
+        return AppIcons.checkDescending;
+      case SortType.checkAscending:
+        return AppIcons.checkAscending;
     }
   }
 }

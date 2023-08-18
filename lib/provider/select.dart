@@ -116,3 +116,10 @@ class CurrentRemoveType extends _$CurrentRemoveType {
   RemoveType build() => RemoveType.match;
   void update(RemoveType type) => state = type;
 }
+
+@riverpod
+class FileSortType extends _$FileSortType {
+  @override
+  SortType build() => SortType.defaultSort;
+  void update(SortType type) => state = type;
+}
