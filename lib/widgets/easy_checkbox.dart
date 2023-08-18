@@ -15,7 +15,7 @@ class EasyCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [Checkbox(value: true, onChanged: onChanged), Text(label)],
+      children: [Checkbox(value: checked, onChanged: onChanged), Text(label)],
     );
   }
 }

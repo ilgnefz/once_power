@@ -40,7 +40,7 @@ class CommonInputMenu extends StatelessWidget {
                 show: show,
               ),
         ),
-        const SizedBox(width: AppNum.gapH),
+        const SizedBox(width: AppNum.gapW),
         BoxCard(icon, message: message, selected: selected, onTap: onTap),
       ],
     );

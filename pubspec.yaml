@@ -54,9 +54,10 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   exif: ^3.1.4
   flutter_svg: ^2.0.7
-  riverpod_annotation: ^2.1.1
-  hooks_riverpod: ^2.3.7
+  riverpod_annotation: ^2.1.2
+  hooks_riverpod: ^2.3.8
   flutter_hooks: ^0.20.0
+  dropdown_button2: ^2.3.8
 
 dev_dependencies:
   flutter_test:
@@ -68,10 +69,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.2
-  custom_lint: ^0.5.1
-  riverpod_lint: ^2.0.0
+  custom_lint: ^0.5.2
+  riverpod_lint: ^2.0.1
   build_runner: ^2.4.6
-  riverpod_generator: ^2.2.5
+  riverpod_generator: ^2.2.6
 
 flutter_icons:
   #  web:

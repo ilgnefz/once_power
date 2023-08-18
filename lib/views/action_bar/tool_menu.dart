@@ -4,10 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/views/action_bar/date_selected.dart';
+import 'package:once_power/views/action_bar/differ_menu.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 import 'package:once_power/widgets/action_bar/upload_input.dart';
 import 'package:once_power/widgets/digit_input.dart';
-import 'package:once_power/widgets/easy_radio.dart';
 
 class ToolMenu extends HookConsumerWidget {
   const ToolMenu({super.key});
@@ -15,8 +16,8 @@ class ToolMenu extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String matchTextHint = '请输入内容';
-    const String matchCaseTip = '区分大小写';
-    const String modifyTextHint = '修改为';
+    const String lengthTip = '输入内容长度';
+    const String dateLabel = '日期';
     const String dateTip = '以日期命名';
     const String prefixLabel = '前缀';
     const String prefixTextHint = '添加前缀内容';
@@ -37,14 +38,6 @@ class ToolMenu extends HookConsumerWidget {
     matchTextController.addListener(() {
       matchInputShow.value = matchTextController.text.isNotEmpty;
       ref.read(matchTextProvider.notifier).update(matchTextController.text);
-    });
-
-    // 修改内容
-    final modifyTextController = useTextEditingController();
-    final modifyInputShow = useState(false);
-    modifyTextController.addListener(() {
-      modifyInputShow.value = modifyTextController.text.isNotEmpty;
-      ref.read(modifyTextProvider.notifier).update(modifyTextController.text);
     });
 
     // 前缀
@@ -79,33 +72,31 @@ class ToolMenu extends HookConsumerWidget {
           controller: matchTextController,
           hintText: matchTextHint,
           show: matchInputShow.value,
-          message: matchCaseTip,
-          icon: AppIcons.cases,
-          selected: ref.watch(matchCaseProvider),
-          onTap: ref.read(matchCaseProvider.notifier).update,
+          message: lengthTip,
+          icon: AppIcons.ruler,
+          selected: ref.watch(inputLengthProvider),
+          onTap: ref.read(inputLengthProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            EasyRadio('替换', value: 0, groupValue: 0, onChanged: (v) {}),
-            EasyRadio('保留', value: 1, groupValue: 0, onChanged: (v) {}),
-            EasyRadio('删除', value: 2, groupValue: 0, onChanged: (v) {}),
-            EasyRadio('长度', value: 3, groupValue: 0, onChanged: (v) {}),
-          ],
-        ),
-        const SizedBox(height: AppNum.gapH),
-        // 修改内容
+        const SizedBox(height: AppNum.gapW),
+        // 不同菜单
+        const DifferMenu(),
+        const SizedBox(height: AppNum.gapW),
+        // 日期命名方式
         CommonInputMenu(
-          controller: modifyTextController,
-          hintText: modifyTextHint,
-          show: modifyInputShow.value,
+          label: dateLabel,
+          slot: const Row(
+            children: [
+              Expanded(child: DigitInput()),
+              SizedBox(width: 8),
+              DateSelected(),
+            ],
+          ),
           message: dateTip,
           icon: AppIcons.date,
           selected: ref.watch(dateRenameProvider),
           onTap: ref.read(dateRenameProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
+        const SizedBox(height: AppNum.gapW),
         // 前缀
         CommonInputMenu(
           label: prefixLabel,
@@ -119,7 +110,7 @@ class ToolMenu extends HookConsumerWidget {
           selected: ref.watch(cyclePrefixProvider),
           onTap: ref.read(cyclePrefixProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
+        const SizedBox(height: AppNum.gapW),
         // 前缀递增数
         CommonInputMenu(
           label: increaseLabel,
@@ -135,7 +126,7 @@ class ToolMenu extends HookConsumerWidget {
           selected: ref.watch(swapPrefixProvider),
           onTap: ref.read(swapPrefixProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
+        const SizedBox(height: AppNum.gapW),
         // 后缀
         CommonInputMenu(
           label: suffixLabel,
@@ -149,7 +140,7 @@ class ToolMenu extends HookConsumerWidget {
           selected: ref.watch(cycleSuffixProvider),
           onTap: ref.read(cycleSuffixProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
+        const SizedBox(height: AppNum.gapW),
         // 后缀递增数
         CommonInputMenu(
           label: increaseLabel,
@@ -165,7 +156,7 @@ class ToolMenu extends HookConsumerWidget {
           selected: ref.watch(swapSuffixProvider),
           onTap: ref.read(swapSuffixProvider.notifier).update,
         ),
-        const SizedBox(height: AppNum.gapH),
+        const SizedBox(height: AppNum.gapW),
         // 文件后缀名
         CommonInputMenu(
           label: fileExtensionLabel,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
@@ -40,7 +40,7 @@ class ContentBar extends StatelessWidget {
               child: Center(
                 child: Consumer(
                   builder: (context, ref, child) {
-                    return Text(ref.watch(matchTextProvider));
+                    return Text(ref.watch(currentDateTypeProvider).value);
                   },
                 ),
               ),

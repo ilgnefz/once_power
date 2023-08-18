@@ -2,9 +2,9 @@ import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 
 class EasyTooltip extends StatelessWidget {
-  const EasyTooltip({super.key, required this.message, required this.child});
+  const EasyTooltip({super.key, this.message, required this.child});
 
-  final String message;
+  final String? message;
   final Widget child;
 
   @override
