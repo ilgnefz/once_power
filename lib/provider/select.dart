@@ -123,3 +123,10 @@ class FileSortType extends _$FileSortType {
   SortType build() => SortType.defaultSort;
   void update(SortType type) => state = type;
 }
+
+@riverpod
+class Cancel extends _$Cancel {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}

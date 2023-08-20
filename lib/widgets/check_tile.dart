@@ -16,8 +16,9 @@ class CheckTile extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(value: true, onChanged: (v) {}),
-            Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
-            const Spacer(),
+            Expanded(
+              child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+            ),
             if (action != null) action!,
           ],
         ),

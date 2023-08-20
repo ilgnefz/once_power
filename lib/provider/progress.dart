@@ -1,0 +1,14 @@
+import 'package:once_power/provider/get_file.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'progress.g.dart';
+
+@riverpod
+class Total extends _$Total {
+  @override
+  int build() => 0;
+  void update(int value) => state = value;
+}
+
+@riverpod
+int count(CountRef ref) => ref.watch(fileListProvider).length;

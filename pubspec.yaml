@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   path: any
   window_manager: ^0.3.5
-  file_picker: ^5.3.3
+  file_selector: ^1.0.0
   nanoid: ^1.0.0
   chinese_font_library: ^1.0.1
   bot_toast: ^4.0.4

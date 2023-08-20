@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/colors.dart';
 
 class ClickText extends StatelessWidget {
-  const ClickText(this.label, {super.key, required this.onTap});
+  const ClickText(this.label, {super.key, this.style, required this.onTap});
 
   final String label;
+  final TextStyle? style;
   final void Function() onTap;
 
   @override
@@ -18,7 +19,10 @@ class ClickText extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Center(
-            child: Text(label, style: const TextStyle(color: AppColors.select)),
+            child: Text(
+              label,
+              style: style ?? const TextStyle(color: AppColors.select),
+            ),
           ),
         ),
       ),

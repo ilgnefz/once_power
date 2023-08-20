@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/views/action_bar/apply_menu/apply_menu.dart';
 import 'package:once_power/views/action_bar/tool_menu/tool_menu.dart';
-import 'package:once_power/widgets/click_text.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
 import 'package:once_power/widgets/mode_card.dart';
 
@@ -19,9 +19,6 @@ class ActionBar extends StatelessWidget {
 
     const String appendMode = '追加模式';
     const String addFolder = '添加文件夹';
-    const String selectFile = '选择文件';
-    const String selectFolder = '选择文件夹';
-    const String applyChange = '应用更改';
 
     return Column(
       children: [
@@ -64,18 +61,7 @@ class ActionBar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppNum.gapW),
-                Row(
-                  children: [
-                    ClickText(selectFile, onTap: () {}),
-                    ClickText(selectFolder, onTap: () {}),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(applyChange),
-                      // style: ButtonStyle(elevation: MaterialStateProperty.all(0)),
-                    ),
-                  ],
-                ),
+                const ApplyMenu(),
               ],
             ),
           ),

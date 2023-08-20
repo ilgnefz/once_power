@@ -4,6 +4,7 @@ class AppNum {
   static const double gapW = 8;
   static const double gapH = 8;
   static const double bottomBarH = 28;
+  static const double bottomBarP = 12;
   static const double topMenuH = 40;
   // static const double modeCardW = 56;
   static const double modeCardP = 12;

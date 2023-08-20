@@ -264,5 +264,19 @@ final fileSortTypeProvider =
 );
 
 typedef _$FileSortType = AutoDisposeNotifier<SortType>;
+String _$cancelHash() => r'228db33fc50e652898879dd449bf8fb3b09eb881';
+
+/// See also [Cancel].
+@ProviderFor(Cancel)
+final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
+  Cancel.new,
+  name: r'cancelProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cancelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Cancel = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
