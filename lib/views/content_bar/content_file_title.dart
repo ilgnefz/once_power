@@ -16,6 +16,13 @@ class ContentFileTitle extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String name = '原名称';
+    const String newName = '重命名';
+    const String folder = '文件夹';
+    const String createTime = '创建日期';
+    const String modifyDate = '修改日期';
+    const String exifDate = '拍摄日期';
+
     const double fontSize = 12;
 
     final hover = useState(false);
@@ -26,7 +33,27 @@ class ContentFileTitle extends HookConsumerWidget {
     }
 
     return EasyTooltip(
-      message: file.name,
+      margin: const EdgeInsets.only(left: 240),
+      richMessage: WidgetSpan(
+        child: DefaultTextStyle(
+          style: const TextStyle(fontSize: 12, color: Color(0xFF666666)),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 280),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('$name：${file.name}.${file.extension}'),
+                Text('$newName：${file.newName}.${file.extension}'),
+                Text('$folder：${file.parent}'),
+                Text('$createTime：${file.createDate}'),
+                Text('$modifyDate：${file.modifyDate}'),
+                if (file.exifDate != null) Text('$exifDate：${file.exifDate}'),
+              ],
+            ),
+          ),
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         onHover: (_) => hover.value = true,

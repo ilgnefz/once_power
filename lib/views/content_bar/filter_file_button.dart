@@ -20,13 +20,23 @@ class FilterFileButton extends ConsumerWidget {
       return ref.watch(selectFolderProvider);
     }
 
-    // void onChange(FileClassify classify) {
-    //   // if (classify == FileClassify.audio) return ref.watch(selectAudioProvider);
-    //   // if (classify == FileClassify.other) return ref.watch(selectOtherProvider);
-    //   // if (classify == FileClassify.image) return ref.watch(selectImageProvider);
-    //   // if (classify == FileClassify.text) return ref.watch(selectTextProvider);
-    //   // if (classify == FileClassify.video) return ref.watch(selectVideoProvider);
-    // }
+    void remove() {
+      ref.read(fileListProvider.notifier).removeUncheck();
+      Navigator.of(context).pop();
+    }
+
+    DropdownMenuItem deleteUncheck() {
+      return DropdownMenuItem(
+        value: 0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
+          child: InkWell(
+            onTap: remove,
+            child: const Text('删除未选择', style: TextStyle(color: Colors.red)),
+          ),
+        ),
+      );
+    }
 
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
@@ -36,46 +46,30 @@ class FilterFileButton extends ConsumerWidget {
           color: AppColors.icon,
         ),
         items: [
-          DropdownMenuItem(
-            value: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
-              child: InkWell(
-                onTap: () {
-                  ref.read(fileListProvider.notifier).removeUncheck();
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  '删除未选择',
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            ),
-          ),
-          ...ref
-              .watch(classifyListProvider)
-              .map(
-                (e) => DropdownMenuItem(
-                  value: e,
-                  child: StatefulBuilder(
-                    builder: (context, setState) => Row(
-                      children: [
-                        Checkbox(
-                          value: isCheck(e),
-                          onChanged: (v) {
-                            ref
-                                .read(fileListProvider.notifier)
-                                .checkPart(e, !isCheck(e));
-                            setState(() {});
-                          },
-                        ),
-                        Text(e.value),
-                      ],
-                    ),
+          deleteUncheck(),
+          ...ref.watch(classifyListProvider).map(
+            (e) {
+              return DropdownMenuItem(
+                value: e,
+                child: StatefulBuilder(
+                  builder: (context, setState) => Row(
+                    children: [
+                      Checkbox(
+                        value: isCheck(e),
+                        onChanged: (v) {
+                          ref
+                              .read(fileListProvider.notifier)
+                              .checkPart(e, !isCheck(e));
+                          setState(() {});
+                        },
+                      ),
+                      Text(e.value),
+                    ],
                   ),
                 ),
-              )
-              .toList(),
+              );
+            },
+          ).toList(),
         ],
         onChanged: (value) {},
         dropdownStyleData: DropdownStyleData(

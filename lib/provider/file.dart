@@ -117,10 +117,11 @@ List<String> getAllFile(GetAllFileRef ref, String folder) {
 @riverpod
 FileClassify getFileClassify(GetFileClassifyRef ref, String extension) {
   FileClassify classify = FileClassify.other;
-  if (image.contains(extension)) classify = FileClassify.image;
-  if (video.contains(extension)) classify = FileClassify.video;
-  if (text.contains(extension)) classify = FileClassify.text;
   if (audio.contains(extension)) classify = FileClassify.audio;
+  if (folder.contains(extension)) classify = FileClassify.folder;
+  if (image.contains(extension)) classify = FileClassify.image;
+  if (text.contains(extension)) classify = FileClassify.text;
+  if (video.contains(extension)) classify = FileClassify.video;
   return classify;
 }
 

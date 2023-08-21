@@ -30,16 +30,16 @@ class BottomBar extends StatelessWidget {
           return Row(
             children: [
               Text('$count/$total', style: style),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppNum.gapW),
-                width: 100,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                  child: LinearProgressIndicator(
-                    value: count == total ? 1 : count / total,
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.symmetric(horizontal: AppNum.gapW),
+              //   width: 100,
+              //   child: ClipRRect(
+              //     borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+              //     child: LinearProgressIndicator(
+              //       value: count == total ? 1 : count / total,
+              //     ),
+              //   ),
+              // ),
               Text(count == total ? over : loading, style: style),
               ClickText(
                 '取消',

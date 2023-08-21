@@ -138,7 +138,7 @@ class GetAllFileProvider extends AutoDisposeProvider<List<String>> {
   }
 }
 
-String _$getFileClassifyHash() => r'a89d0aa33741ca379dd7c27342a9d019a88f46dc';
+String _$getFileClassifyHash() => r'deabace088aa9297b3998d327ae8fe434b774e8f';
 typedef GetFileClassifyRef = AutoDisposeProviderRef<FileClassify>;
 
 /// See also [getFileClassify].
