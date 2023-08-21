@@ -4,8 +4,9 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/rename_file.dart';
-import 'package:once_power/provider/get_file.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/image.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
@@ -29,9 +30,7 @@ class ApplyMenu extends HookConsumerWidget {
     void fileFormat(String filePath) async {
       final files = ref.watch(fileListProvider);
       if (files.any((e) => e.filePath == filePath)) {
-        int total = ref.watch(totalProvider);
-        ref.read(totalProvider.notifier).update(--total);
-        return;
+        return ref.read(totalProvider.notifier).reduce();
       }
       String id = nanoid(10);
       String name = path.basename(filePath);
@@ -51,6 +50,10 @@ class ApplyMenu extends HookConsumerWidget {
         // }
       }
 
+      FileClassify type = ref.read(getFileClassifyProvider(extension));
+      // if (!ref.watch(classifyListProvider).contains(type)) {
+      //   ref.read(classifyListProvider.notifier).add(type);
+      // }
       RenameFile renameFile = RenameFile(
         id: id,
         name: name,
@@ -61,7 +64,7 @@ class ApplyMenu extends HookConsumerWidget {
         createDate: createDate,
         modifyDate: modifyDate,
         exifDate: ref.watch(exifDateProvider),
-        type: ref.read(getFileClassifyProvider(extension)),
+        type: type,
         checked: true,
       );
       ref.read(fileListProvider.notifier).add(renameFile);

@@ -79,3 +79,24 @@ extension SortTypeExtension on SortType {
     }
   }
 }
+
+enum FileClassify { image, video, text, audio, folder, other }
+
+extension FileClassifyExtension on FileClassify {
+  String get value {
+    switch (this) {
+      case FileClassify.image:
+        return '图片';
+      case FileClassify.video:
+        return '视频';
+      case FileClassify.text:
+        return '文本';
+      case FileClassify.audio:
+        return '音频';
+      case FileClassify.folder:
+        return '文件夹';
+      case FileClassify.other:
+        return '其他';
+    }
+  }
+}

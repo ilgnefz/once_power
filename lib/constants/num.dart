@@ -10,6 +10,8 @@ class AppNum {
   static const double modeCardP = 12;
   static const double inputH = 32;
   static const double inputP = 8;
+  static const double extensionW = 48;
+  static const double deleteW = 40;
   static const double fileCardH = 40;
   static const double fileCardP = 8;
 }

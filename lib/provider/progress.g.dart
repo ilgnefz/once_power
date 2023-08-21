@@ -20,7 +20,7 @@ final countProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef CountRef = AutoDisposeProviderRef<int>;
-String _$totalHash() => r'36d3ac44b850542d7fcc163ef29c2e1a63d3c434';
+String _$totalHash() => r'7a711f9c6caf80d01d63f492fbe1d2d54950a4a8';
 
 /// See also [Total].
 @ProviderFor(Total)

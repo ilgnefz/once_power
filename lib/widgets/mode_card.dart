@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
 
 class ModeCard extends ConsumerWidget {
   const ModeCard({super.key, required this.label, required this.mode});

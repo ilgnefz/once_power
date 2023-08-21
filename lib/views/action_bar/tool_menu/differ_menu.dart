@@ -5,6 +5,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 
 import '../../../widgets/easy_chip.dart';

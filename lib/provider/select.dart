@@ -1,14 +1,9 @@
 import 'package:once_power/model/enum.dart';
+import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'select.g.dart';
-
-@riverpod
-class CurrentMode extends _$CurrentMode {
-  @override
-  FunctionMode build() => FunctionMode.replace;
-  void update(FunctionMode mode) => state = mode;
-}
 
 @riverpod
 class InputLength extends _$InputLength {
@@ -80,53 +75,70 @@ class AddFolder extends _$AddFolder {
   void update() => state = !state;
 }
 
-@riverpod
-class CurrentDate extends _$CurrentDate {
-  @override
-  DateTime build() => DateTime.now();
-  void update(DateTime date) => state = date;
-}
-
-@riverpod
-class CurrentTime extends _$CurrentTime {
-  @override
-  DateTime build() => DateTime.now();
-  void update(DateTime date) => state = date;
-}
-
-@riverpod
-class CurrentDateType extends _$CurrentDateType {
-  @override
-  DateType build() => DateType.createDate;
-  void update(DateType type) => state = type;
-}
-
-@riverpod
-class CurrentReserveType extends _$CurrentReserveType {
-  @override
-  List<ReserveType> build() => [];
-  void update(ReserveType type) => state.contains(type)
-      ? state = state.where((e) => e != type).toList()
-      : state = [...state, type];
-}
-
-@riverpod
-class CurrentRemoveType extends _$CurrentRemoveType {
-  @override
-  RemoveType build() => RemoveType.match;
-  void update(RemoveType type) => state = type;
-}
-
-@riverpod
-class FileSortType extends _$FileSortType {
-  @override
-  SortType build() => SortType.defaultSort;
-  void update(SortType type) => state = type;
-}
-
+/// TODO 底部取消按钮，似乎没用
 @riverpod
 class Cancel extends _$Cancel {
   @override
   bool build() => false;
   void update() => state = !state;
+}
+
+@riverpod
+bool selectAudio(SelectAudioRef ref) {
+  List<RenameFile> audioList = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.audio)
+      .toList();
+  int check = audioList.where((e) => e.checked == true).length;
+  return check >= audioList.length;
+}
+
+@riverpod
+bool selectFolder(SelectFolderRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.folder)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
+}
+
+@riverpod
+bool selectImage(SelectImageRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.image)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
+}
+
+@riverpod
+bool selectOther(SelectOtherRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.other)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
+}
+
+@riverpod
+bool selectText(SelectTextRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.text)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
+}
+
+@riverpod
+bool selectVideo(SelectVideoRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.video)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
 }

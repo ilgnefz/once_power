@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/get_file.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/normal_tile.dart';
@@ -20,8 +22,18 @@ class TopTitleBar extends ConsumerWidget {
       int index = SortType.values.indexOf(ref.read(fileSortTypeProvider));
       ++index;
       if (index > SortType.values.length - 1) index = 0;
-      ref.read(fileSortTypeProvider.notifier).update(SortType.values[index]);
+      SortType type = SortType.values[index];
+      ref.read(fileSortTypeProvider.notifier).update(type);
+      ref.read(fileListProvider.notifier).sort();
     }
+
+    void deleteAll() {
+      ref.read(fileListProvider.notifier).clear();
+      ref.read(totalProvider.notifier).clear();
+    }
+
+    int selected = ref.watch(selectFileProvider);
+    int total = ref.watch(fileListProvider).length;
 
     return SizedBox(
       height: AppNum.fileCardH,
@@ -29,7 +41,9 @@ class TopTitleBar extends ConsumerWidget {
       child: Row(
         children: [
           CheckTile(
-            originName,
+            check: ref.watch(selectAllProvider),
+            label: '$originName ($selected/$total)',
+            onChanged: (v) => ref.read(selectAllProvider.notifier).update(),
             action: ClickIcon(
               svg: ref.watch(fileSortTypeProvider).value,
               size: AppNum.fileCardH,
@@ -38,22 +52,16 @@ class TopTitleBar extends ConsumerWidget {
               onTap: toggleSortType,
             ),
           ),
-          const NormalTile(renameName),
-          SizedBox(
-            width: 64,
-            child: Center(
-              child: IconButton(
-                onPressed: () {},
-                color: AppColors.icon,
-                icon: const Icon(Icons.filter_alt_rounded),
-              ),
-            ),
+          const NormalTile(label: renameName),
+          const SizedBox(
+            width: AppNum.extensionW,
+            child: Center(child: FilterFileButton()),
           ),
           SizedBox(
-            width: 48,
+            width: AppNum.deleteW,
             child: Center(
               child: IconButton(
-                onPressed: ref.read(fileListProvider.notifier).clear,
+                onPressed: deleteAll,
                 color: AppColors.icon,
                 icon: const Icon(Icons.delete_forever_rounded),
               ),

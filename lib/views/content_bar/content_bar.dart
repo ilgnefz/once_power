@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/model/rename_file.dart';
-import 'package:once_power/provider/get_file.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:once_power/views/content_bar/top_title_bar.dart';
 
 import 'content_file_title.dart';
@@ -20,8 +20,7 @@ class ContentBar extends StatelessWidget {
             Expanded(
               child: Consumer(
                 builder: (context, ref, child) {
-                  List<RenameFile> files = ref.watch(fileListProvider);
-
+                  List<RenameFile> files = ref.watch(sortListProvider);
                   void reorderList(int oldIndex, int newIndex) {
                     if (newIndex > oldIndex) newIndex -= 1;
                     RenameFile item = files.removeAt(oldIndex);

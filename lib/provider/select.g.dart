@@ -6,21 +6,90 @@ part of 'select.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentModeHash() => r'4e5b92d9b3403c01268d590c7ccfcc079a64e14e';
+String _$selectAudioHash() => r'9fad9af3a8b835bfee6184778cf81c98b7cf844a';
 
-/// See also [CurrentMode].
-@ProviderFor(CurrentMode)
-final currentModeProvider =
-    AutoDisposeNotifierProvider<CurrentMode, FunctionMode>.internal(
-  CurrentMode.new,
-  name: r'currentModeProvider',
+/// See also [selectAudio].
+@ProviderFor(selectAudio)
+final selectAudioProvider = AutoDisposeProvider<bool>.internal(
+  selectAudio,
+  name: r'selectAudioProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentModeHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectAudioHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CurrentMode = AutoDisposeNotifier<FunctionMode>;
+typedef SelectAudioRef = AutoDisposeProviderRef<bool>;
+String _$selectFolderHash() => r'7134a3bc4ea37427338ece1aee3bebfd8b623236';
+
+/// See also [selectFolder].
+@ProviderFor(selectFolder)
+final selectFolderProvider = AutoDisposeProvider<bool>.internal(
+  selectFolder,
+  name: r'selectFolderProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectFolderHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectFolderRef = AutoDisposeProviderRef<bool>;
+String _$selectImageHash() => r'1dad323d13bde566a3e5c0ac994f733a71db187a';
+
+/// See also [selectImage].
+@ProviderFor(selectImage)
+final selectImageProvider = AutoDisposeProvider<bool>.internal(
+  selectImage,
+  name: r'selectImageProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectImageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectImageRef = AutoDisposeProviderRef<bool>;
+String _$selectOtherHash() => r'bf2d3df17e360040e375e65d58525f0f83308f68';
+
+/// See also [selectOther].
+@ProviderFor(selectOther)
+final selectOtherProvider = AutoDisposeProvider<bool>.internal(
+  selectOther,
+  name: r'selectOtherProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectOtherHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectOtherRef = AutoDisposeProviderRef<bool>;
+String _$selectTextHash() => r'9c1be49c7764fb98a48a23be31bdeab849914d64';
+
+/// See also [selectText].
+@ProviderFor(selectText)
+final selectTextProvider = AutoDisposeProvider<bool>.internal(
+  selectText,
+  name: r'selectTextProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectTextHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectTextRef = AutoDisposeProviderRef<bool>;
+String _$selectVideoHash() => r'156029a63ed00d9830beb863c0987fb98209acf9';
+
+/// See also [selectVideo].
+@ProviderFor(selectVideo)
+final selectVideoProvider = AutoDisposeProvider<bool>.internal(
+  selectVideo,
+  name: r'selectVideoProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectVideoHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
 String _$inputLengthHash() => r'bf31aa784244d47bea7c39bac57248837236d9e2';
 
 /// See also [InputLength].
@@ -170,103 +239,11 @@ final addFolderProvider = AutoDisposeNotifierProvider<AddFolder, bool>.internal(
 );
 
 typedef _$AddFolder = AutoDisposeNotifier<bool>;
-String _$currentDateHash() => r'8904bee0939bc154beb91bbf7c7c38a19f2f9a95';
-
-/// See also [CurrentDate].
-@ProviderFor(CurrentDate)
-final currentDateProvider =
-    AutoDisposeNotifierProvider<CurrentDate, DateTime>.internal(
-  CurrentDate.new,
-  name: r'currentDateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentDateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentDate = AutoDisposeNotifier<DateTime>;
-String _$currentTimeHash() => r'ab7c8e91bda4ec1462a499359a518d606b0a231a';
-
-/// See also [CurrentTime].
-@ProviderFor(CurrentTime)
-final currentTimeProvider =
-    AutoDisposeNotifierProvider<CurrentTime, DateTime>.internal(
-  CurrentTime.new,
-  name: r'currentTimeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentTimeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentTime = AutoDisposeNotifier<DateTime>;
-String _$currentDateTypeHash() => r'67a6e550943527599229b4b7a81fe3cf1134787d';
-
-/// See also [CurrentDateType].
-@ProviderFor(CurrentDateType)
-final currentDateTypeProvider =
-    AutoDisposeNotifierProvider<CurrentDateType, DateType>.internal(
-  CurrentDateType.new,
-  name: r'currentDateTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentDateTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
-String _$currentReserveTypeHash() =>
-    r'e5c354bd7375202e4f68d65c380510fbc4b6bb93';
-
-/// See also [CurrentReserveType].
-@ProviderFor(CurrentReserveType)
-final currentReserveTypeProvider =
-    AutoDisposeNotifierProvider<CurrentReserveType, List<ReserveType>>.internal(
-  CurrentReserveType.new,
-  name: r'currentReserveTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentReserveTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentReserveType = AutoDisposeNotifier<List<ReserveType>>;
-String _$currentRemoveTypeHash() => r'bb985225ad9cf5d23b5840e89a9d7d3d492bcf25';
-
-/// See also [CurrentRemoveType].
-@ProviderFor(CurrentRemoveType)
-final currentRemoveTypeProvider =
-    AutoDisposeNotifierProvider<CurrentRemoveType, RemoveType>.internal(
-  CurrentRemoveType.new,
-  name: r'currentRemoveTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentRemoveTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentRemoveType = AutoDisposeNotifier<RemoveType>;
-String _$fileSortTypeHash() => r'3e9cd57ec5e6ac51c6bf1b4219a9bb478adeb334';
-
-/// See also [FileSortType].
-@ProviderFor(FileSortType)
-final fileSortTypeProvider =
-    AutoDisposeNotifierProvider<FileSortType, SortType>.internal(
-  FileSortType.new,
-  name: r'fileSortTypeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fileSortTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$FileSortType = AutoDisposeNotifier<SortType>;
 String _$cancelHash() => r'228db33fc50e652898879dd449bf8fb3b09eb881';
 
-/// See also [Cancel].
+/// TODO 底部取消按钮，似乎没用
+///
+/// Copied from [Cancel].
 @ProviderFor(Cancel)
 final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
   Cancel.new,
