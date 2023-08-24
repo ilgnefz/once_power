@@ -32,10 +32,13 @@ void updateName(dynamic ref) {
   int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;
   int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
+  int fileIndex = 0;
   for (var file in files) {
     if (file.checked) {
-      String newName = matchContent(ref, file, prefixIndex, suffixIndex);
+      String newName =
+          matchContent(ref, file, fileIndex, prefixIndex, suffixIndex);
       ref.read(fileListProvider.notifier).updateName(file.id, newName);
+      fileIndex++;
       prefixIndex++;
       suffixIndex++;
     } else {
@@ -44,8 +47,8 @@ void updateName(dynamic ref) {
   }
 }
 
-String matchContent(
-    dynamic ref, RenameFile file, int prefixIndex, int suffixIndex) {
+String matchContent(dynamic ref, RenameFile file, int fileIndex,
+    int prefixIndex, int suffixIndex) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool isLength = ref.watch(inputLengthProvider);
   bool matchCase = ref.watch(matchCaseProvider);
@@ -69,7 +72,9 @@ String matchContent(
     name = removeName(removeType, matchText, name, isLength, matchCase);
   }
 
-  name = prefixName(ref, prefixIndex) + name + suffixName(ref, suffixIndex);
+  name = prefixName(ref, fileIndex, prefixIndex) +
+      name +
+      suffixName(ref, fileIndex, suffixIndex);
   return name;
 }
 
@@ -94,21 +99,49 @@ String dateName(WidgetRef ref, RenameFile file) {
 }
 
 /// 获取前缀
-String prefixName(WidgetRef ref, int index) {
+String prefixName(WidgetRef ref, int fileIndex, int prefixIndex) {
   bool swap = ref.watch(swapPrefixProvider);
   String widthStr = ref.watch(prefixLengthControllerProvider).text;
   int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
-  String indexStr = formatNumber(index, width);
+  String num = formatNumber(prefixIndex, width);
   String prefixText = ref.watch(prefixControllerProvider).text;
-  return swap ? prefixText + indexStr : indexStr + prefixText;
+  if (prefixText != '') {
+    bool cycle = ref.watch(cyclePrefixProvider);
+    List<String> list = [];
+    if (prefixText.contains('\n')) list.addAll(prefixText.split('\r\n'));
+    if (!prefixText.contains('\n') && prefixText.contains(' ')) {
+      list.addAll(prefixText.trim().split(' '));
+    }
+    String indexStr = cycle
+        ? list[fileIndex % list.length]
+        : fileIndex >= list.length
+            ? ''
+            : list[fileIndex];
+    prefixText = list.length < 2 ? prefixText : indexStr;
+  }
+  return swap ? prefixText + num : num + prefixText;
 }
 
 /// 获取后缀
-String suffixName(WidgetRef ref, int index) {
+String suffixName(WidgetRef ref, int fileIndex, int suffixIndex) {
   bool swap = ref.watch(swapSuffixProvider);
   String widthStr = ref.watch(suffixLengthControllerProvider).text;
   int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
-  String indexStr = formatNumber(index, width);
+  String num = formatNumber(suffixIndex, width);
   String suffixText = ref.watch(suffixControllerProvider).text;
-  return swap ? indexStr + suffixText : suffixText + indexStr;
+  if (suffixText != '') {
+    bool cycle = ref.watch(cycleSuffixProvider);
+    List<String> list = [];
+    if (suffixText.contains('\n')) list.addAll(suffixText.split('\r\n'));
+    if (!suffixText.contains('\n') && suffixText.contains(' ')) {
+      list.addAll(suffixText.trim().split(' '));
+    }
+    String indexStr = cycle
+        ? list[fileIndex % list.length]
+        : fileIndex >= list.length
+            ? ''
+            : list[fileIndex];
+    suffixText = list.length < 2 ? suffixText : indexStr;
+  }
+  return swap ? num + suffixText : suffixText + num;
 }

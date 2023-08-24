@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/base_input.dart';
 import 'package:once_power/widgets/click_icon.dart';
@@ -35,15 +36,12 @@ class UploadInput extends ConsumerWidget {
         List<String> list = [];
         File file = File(result.path);
         var content = file.readAsStringSync();
-        if (content.contains(' ')) list.addAll(content.split(' '));
-        // if (type == FileUploadType.prefix) {
-        //   ref.read(prefixFileValueProvider.notifier).update(list);
-        //   ref.watch(prefixControllerProvider).text = path.basename(file.path);
-        // }
-        // if (type == FileUploadType.suffix) {
-        //   ref.read(suffixFileValueProvider.notifier).update(list);
-        //   ref.watch(suffixControllerProvider).text = path.basename(file.path);
-        // }
+        if (type == FileUploadType.prefix) {
+          ref.watch(prefixControllerProvider).text = content;
+        }
+        if (type == FileUploadType.suffix) {
+          ref.watch(suffixControllerProvider).text = content;
+        }
       }
       updateName(ref);
     }
@@ -62,14 +60,13 @@ class UploadInput extends ConsumerWidget {
         ),
       ),
       callback: () {
-        // if (type == FileUploadType.prefix) {
-        //   ref.read(prefixFileValueProvider.notifier).update([]);
-        //   ref.read(prefixFileNameProvider.notifier).update('');
-        // }
-        // if (type == FileUploadType.suffix) {
-        //   ref.read(suffixFileValueProvider.notifier).update([]);
-        //   ref.read(suffixFileNameProvider.notifier).update('');
-        // }
+        if (type == FileUploadType.prefix) {
+          ref.read(prefixControllerProvider).clear();
+        }
+        if (type == FileUploadType.suffix) {
+          ref.read(suffixControllerProvider).clear();
+        }
+        updateName(ref);
       },
     );
   }
