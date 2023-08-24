@@ -7,7 +7,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/content_bar/top_title_bar.dart';
 
-import 'content_file_title.dart';
+import 'content_file_tile.dart';
 
 class ContentBar extends StatelessWidget {
   const ContentBar({super.key});
@@ -46,7 +46,7 @@ class ContentBar extends StatelessWidget {
                         return ReorderableDragStartListener(
                           index: index,
                           key: ValueKey(files[index].id),
-                          child: ContentFileTitle(file: files[index]),
+                          child: ContentFileTile(file: files[index]),
                         );
                       },
                     ),

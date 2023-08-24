@@ -24,7 +24,6 @@ class TopTitleBar extends ConsumerWidget {
       if (index > SortType.values.length - 1) index = 0;
       SortType type = SortType.values[index];
       ref.read(fileSortTypeProvider.notifier).update(type);
-      ref.read(fileListProvider.notifier).sort();
     }
 
     void deleteAll() {

@@ -100,3 +100,5 @@ extension FileClassifyExtension on FileClassify {
     }
   }
 }
+
+enum FileUploadType { prefix, suffix }

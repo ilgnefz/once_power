@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/rename.dart';
 
 class ModeCard extends ConsumerWidget {
   const ModeCard({super.key, required this.label, required this.mode});
@@ -17,7 +18,10 @@ class ModeCard extends ConsumerWidget {
     return Flexible(
       flex: 1,
       child: InkWell(
-        onTap: () => ref.read(currentModeProvider.notifier).update(mode),
+        onTap: () {
+          ref.read(currentModeProvider.notifier).update(mode);
+          updateName(ref);
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           // width: AppNum.modeCardW,

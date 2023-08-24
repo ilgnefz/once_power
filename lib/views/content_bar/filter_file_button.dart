@@ -5,6 +5,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/utils/rename.dart';
 
 class FilterFileButton extends ConsumerWidget {
   const FilterFileButton({super.key});
@@ -20,6 +21,7 @@ class FilterFileButton extends ConsumerWidget {
       return ref.watch(selectFolderProvider);
     }
 
+    // TODO 当没有要删除的文件时，应该显示一个提示
     void remove() {
       ref.read(fileListProvider.notifier).removeUncheck();
       Navigator.of(context).pop();
@@ -60,6 +62,8 @@ class FilterFileButton extends ConsumerWidget {
                           ref
                               .read(fileListProvider.notifier)
                               .checkPart(e, !isCheck(e));
+                          updateName(ref);
+                          updateExtension(ref);
                           setState(() {});
                         },
                       ),

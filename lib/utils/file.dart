@@ -88,6 +88,7 @@ void fileFormat(WidgetRef ref, String filePath) async {
     parent: path.dirname(filePath),
     filePath: filePath,
     extension: extension,
+    newExtension: extension,
     createDate: createDate,
     modifyDate: modifyDate,
     exifDate: exifDate,
@@ -95,4 +96,6 @@ void fileFormat(WidgetRef ref, String filePath) async {
     checked: true,
   );
   ref.read(fileListProvider.notifier).add(renameFile);
+  updateName(ref);
+  updateExtension(ref);
 }

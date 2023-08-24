@@ -8,9 +8,11 @@ class CommonInputMenu extends StatelessWidget {
     super.key,
     this.label,
     this.slot,
+    this.disable = false,
     this.controller,
     this.hintText = '',
     this.show = false,
+    this.onChanged,
     required this.message,
     required this.icon,
     required this.selected,
@@ -19,9 +21,11 @@ class CommonInputMenu extends StatelessWidget {
 
   final String? label;
   final Widget? slot;
+  final bool disable;
   final TextEditingController? controller;
   final String hintText;
   final bool show;
+  final void Function(String)? onChanged;
   final String message;
   final String icon;
   final bool selected;
@@ -35,9 +39,11 @@ class CommonInputMenu extends StatelessWidget {
         Expanded(
           child: slot ??
               BaseInput(
+                disable: disable,
                 controller: controller,
                 hintText: hintText,
                 show: show,
+                onChanged: onChanged,
               ),
         ),
         const SizedBox(width: AppNum.gapW),

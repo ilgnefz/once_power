@@ -7,6 +7,7 @@ class RenameFile {
   String parent;
   String filePath;
   String extension;
+  String newExtension;
   DateTime createDate;
   DateTime modifyDate;
   DateTime? exifDate;
@@ -20,6 +21,7 @@ class RenameFile {
     required this.parent,
     required this.filePath,
     required this.extension,
+    required this.newExtension,
     required this.createDate,
     required this.modifyDate,
     this.exifDate,
@@ -29,6 +31,6 @@ class RenameFile {
 
   @override
   String toString() {
-    return 'RenameFile(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, createDate: $createDate, modifyDate: $modifyDate, exifDate: $exifDate, type: $type, checked: $checked)';
+    return 'RenameFile(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, createDate: $createDate, modifyDate: $modifyDate, exifDate: $exifDate, type: $type, checked: $checked)';
   }
 }

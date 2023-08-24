@@ -12,12 +12,16 @@ class DigitInput extends StatefulWidget {
     required this.value,
     required this.label,
     this.length,
+    this.callback,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final int value;
   final String label;
   final int? length;
+  final VoidCallback? callback;
+  final void Function(String)? onChanged;
 
   @override
   State<DigitInput> createState() => _DigitInputState();
@@ -65,6 +69,7 @@ class _DigitInputState extends State<DigitInput> {
   increment() {
     final num = widget.controller.text.replaceAll(widget.label, '');
     widget.controller.text = "${int.parse(num) + 1}${widget.label}";
+    widget.callback!();
     setState(() {});
   }
 
@@ -72,6 +77,7 @@ class _DigitInputState extends State<DigitInput> {
     final num = widget.controller.text.replaceAll(widget.label, '');
     if (num == "0") return;
     widget.controller.text = "${int.parse(num) - 1}${widget.label}";
+    widget.callback!();
     setState(() {});
   }
 
@@ -89,6 +95,7 @@ class _DigitInputState extends State<DigitInput> {
             LengthLimitingTextInputFormatter(widget.length),
           FilteringTextInputFormatter.digitsOnly
         ],
+        onChanged: widget.onChanged,
         onSubmitted: onSubmitted,
         focusNode: focusNode,
         leading: OperatorButton('-', onTap: reduce),

@@ -37,9 +37,15 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
-  void sort() {
-    state = state..sort((a, b) => a.name.compareTo(b.name));
-  }
+  void updateName(String id, String name) => state = state.map((e) {
+        if (e.id == id) e.newName = name;
+        return e;
+      }).toList();
+
+  void updateExtension(String id, String extension) => state = state.map((e) {
+        if (e.id == id) e.newExtension = extension;
+        return e;
+      }).toList();
 }
 
 @riverpod

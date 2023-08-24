@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/rename.dart';
 
 final List<String> dateTypeList = [
   DateType.createDate.value,
@@ -25,9 +26,11 @@ class DateSelected extends ConsumerWidget {
                 DropdownMenuItem<String>(value: item, child: Text(item)))
             .toList(),
         value: ref.watch(currentDateTypeProvider).value,
-        onChanged: (value) => ref
-            .read(currentDateTypeProvider.notifier)
-            .update(DateType.values.firstWhere((e) => e.value == value)),
+        onChanged: (value) {
+          DateType type = DateType.values.firstWhere((e) => e.value == value);
+          ref.read(currentDateTypeProvider.notifier).update(type);
+          updateName(ref);
+        },
         buttonStyleData: ButtonStyleData(
           height: 32,
           width: 96,

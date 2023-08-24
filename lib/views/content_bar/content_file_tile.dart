@@ -5,12 +5,13 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
+import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class ContentFileTitle extends HookConsumerWidget {
-  const ContentFileTitle({super.key, required this.file});
+class ContentFileTile extends HookConsumerWidget {
+  const ContentFileTile({super.key, required this.file});
 
   final RenameFile file;
 
@@ -43,7 +44,7 @@ class ContentFileTitle extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('$name：${file.name}.${file.extension}'),
-                Text('$newName：${file.newName}.${file.extension}'),
+                Text('$newName：${file.newName}.${file.newExtension}'),
                 Text('$folder：${file.parent}'),
                 Text('$createTime：${file.createDate}'),
                 Text('$modifyDate：${file.modifyDate}'),
@@ -69,8 +70,11 @@ class ContentFileTitle extends HookConsumerWidget {
                 check: file.checked,
                 label: file.name,
                 fontSize: fontSize,
-                onChanged: (v) =>
-                    ref.read(fileListProvider.notifier).check(file.id),
+                onChanged: (v) {
+                  ref.read(fileListProvider.notifier).check(file.id);
+                  updateName(ref);
+                  updateExtension(ref);
+                },
                 color: Colors.grey,
               ),
               NormalTile(label: file.newName, fontSize: fontSize),
@@ -78,7 +82,7 @@ class ContentFileTitle extends HookConsumerWidget {
                 width: AppNum.extensionW,
                 child: Center(
                   child: Text(
-                    file.extension,
+                    file.newExtension,
                     style: const TextStyle(fontSize: fontSize),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
