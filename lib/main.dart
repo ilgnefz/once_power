@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
           // labelSmall: TextStyle(fontSize: 14, color: Colors.black),
         ).useSystemChineseFont(),
       ),
+      builder: BotToastInit(), //1.调用BotToastInit
+      navigatorObservers: [BotToastNavigatorObserver()],
       home: const HomePage(),
     );
   }

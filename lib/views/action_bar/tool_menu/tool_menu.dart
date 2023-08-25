@@ -4,6 +4,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/views/action_bar/tool_menu/date_text_input.dart';
 import 'package:once_power/views/action_bar/tool_menu/differ_menu.dart';
 import 'package:once_power/views/action_bar/tool_menu/file_extension_input.dart';
+import 'package:once_power/views/action_bar/tool_menu/modify_text_input.dart';
 import 'package:once_power/views/action_bar/tool_menu/prefix_num_input.dart';
 import 'package:once_power/views/action_bar/tool_menu/prefix_text_input.dart';
 import 'package:once_power/views/action_bar/tool_menu/suffix_num_input.dart';
@@ -24,6 +25,8 @@ class ToolMenu extends HookConsumerWidget {
         SizedBox(height: AppNum.gapW),
         // 不同菜单
         DifferMenu(),
+        SizedBox(height: AppNum.gapW),
+        ModifyTextInput(),
         SizedBox(height: AppNum.gapW),
         // 日期命名方式
         DateTextInput(),

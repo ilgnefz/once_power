@@ -18,18 +18,61 @@ import 'package:once_power/provider/toggle.dart';
 }
 
 /// 替换模式
-String replaceName(String match, String modify, String name, bool isLength,
-    bool matchCase, String? dateText) {
-  if (match.trim() == '') return name;
-  modify = dateText ?? modify;
-  if (isLength) {
-    var (start, end) = lengthMatchNum(match, name);
-    name = start == 0
-        ? modify + name.substring(end)
-        : name.substring(0, start) + modify + name.substring(end);
+String replaceName(RemoveType type, String match, String modify, String name,
+    bool isLength, bool matchCase, String? dateText) {
+  int start = 0, end = 0;
+  if (isLength) (start, end) = lengthMatchNum(match, name);
+  // 匹配的
+  if (type == RemoveType.match) {
+    if (isLength) {
+      name = start == 0
+          ? name.substring(end)
+          : name.substring(0, start) + name.substring(end);
+    }
+    if (!isLength) {
+      name = removeAndReplaceMatchedStrings(match, modify, name, matchCase);
+    }
   }
-  if (!isLength) {
-    name = removeAndReplaceMatchedStrings(match, modify, name, matchCase);
+  // 之前的
+  if (type == RemoveType.before) {
+    if (isLength) name = name.substring(start);
+    if (!isLength) {
+      int index = matchCase
+          ? name.lastIndexOf(match)
+          : name.toLowerCase().lastIndexOf(match.toLowerCase());
+      if (index != -1) name = modify + name.substring(index);
+    }
+  }
+  // 之后的
+  if (type == RemoveType.after) {
+    if (isLength) name = name.substring(0, end);
+    if (!isLength) {
+      int index = matchCase
+          ? name.indexOf(match)
+          : name.toLowerCase().indexOf(match.toLowerCase());
+      if (index != -1) name = name.substring(0, index + match.length) + modify;
+    }
+  }
+  // 中间的
+  if (type == RemoveType.middle) {
+    if (isLength) {
+      String front = name.substring(0, start);
+      String back = name.substring(end);
+      name = front + modify + back;
+    }
+    if (!isLength) {
+      int index = matchCase
+          ? name.indexOf(match)
+          : name.toLowerCase().indexOf(match.toLowerCase());
+      int lastIndex = matchCase
+          ? name.lastIndexOf(match)
+          : name.toLowerCase().lastIndexOf(match.toLowerCase());
+      if (index != -1 && index != lastIndex) {
+        String front = name.substring(0, index + match.length);
+        String back = name.substring(lastIndex);
+        name = front + modify + back;
+      }
+    }
   }
   return name;
 }
@@ -93,66 +136,4 @@ String reserveTypeString(List<ReserveType> typeList, String name) {
   }
   RegExp reg = RegExp("[$pattern]");
   return name.replaceAll(reg, "");
-}
-
-/// 删除模式
-String removeName(
-    RemoveType type, String match, String name, bool isLength, bool matchCase) {
-  int start = 0, end = 0;
-  if (isLength) (start, end) = lengthMatchNum(match, name);
-  if (type == RemoveType.match) {
-    if (isLength) {
-      name = start == 0
-          ? name.substring(end)
-          : name.substring(0, start) + name.substring(end);
-    }
-    if (!isLength) name = removeMatchedStrings(match, name, matchCase);
-  }
-  if (type == RemoveType.before) {
-    if (isLength) name = name.substring(start);
-    if (!isLength) {
-      int index = matchCase
-          ? name.lastIndexOf(match)
-          : name.toLowerCase().lastIndexOf(match.toLowerCase());
-      if (index != -1) name = name.substring(index);
-    }
-  }
-  if (type == RemoveType.after) {
-    if (isLength) name = name.substring(0, end);
-    if (!isLength) {
-      int index = matchCase
-          ? name.indexOf(match)
-          : name.toLowerCase().indexOf(match.toLowerCase());
-      if (index != -1) name = name.substring(0, index + 1);
-    }
-  }
-  if (type == RemoveType.middle) {
-    if (isLength) {
-      String front = name.substring(0, start);
-      String back = name.substring(end);
-      name = front + back;
-    }
-    if (!isLength) {
-      int index = matchCase
-          ? name.indexOf(match)
-          : name.toLowerCase().indexOf(match.toLowerCase());
-      int lastIndex = matchCase
-          ? name.lastIndexOf(match)
-          : name.toLowerCase().lastIndexOf(match.toLowerCase());
-      if (index != -1 && index != lastIndex) {
-        String front = name.substring(0, index + match.length);
-        String back = name.substring(lastIndex);
-        name = front + back;
-      }
-    }
-  }
-  return name;
-}
-
-String removeMatchedStrings(String pattern, String input, bool caseSensitive) {
-  // 创建正则表达式，设置为不区分大小写
-  RegExp regex = RegExp(pattern, caseSensitive: caseSensitive);
-  // 使用replaceAll方法将匹配到的字符串替换为空字符串
-  String result = input.replaceAll(regex, '');
-  return result;
 }

@@ -1,6 +1,6 @@
 import 'package:once_power/constants/constants.dart';
 
-enum FunctionMode { replace, reserve, remove }
+enum FunctionMode { replace, reserve }
 
 enum DateType {
   createDate('创建日期'),
@@ -102,3 +102,5 @@ extension FileClassifyExtension on FileClassify {
 }
 
 enum FileUploadType { prefix, suffix }
+
+enum MessageType { failure, success, warning }

@@ -234,7 +234,7 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
 );
 
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
-String _$fileListHash() => r'8ac234c2520270e43db6778f1b6659f6fc41bb1b';
+String _$fileListHash() => r'8d06cf0b8a1a9748bd5fa0fd9e3fc167f71a2ef0';
 
 /// See also [FileList].
 @ProviderFor(FileList)

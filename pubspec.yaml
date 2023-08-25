@@ -41,22 +41,20 @@ dependencies:
   window_manager: ^0.3.5
   file_selector: ^1.0.0
   nanoid: ^1.0.0
-  chinese_font_library: ^1.0.1
+  chinese_font_library: ^1.0.2
   bot_toast: ^4.0.4
   shared_preferences: ^2.2.0
   package_info_plus: ^4.1.0
   url_launcher: ^6.1.12
   intl: ^0.18.0
-  pasteboard: ^0.2.0
   dio: ^5.3.2
-  desktop_drop: ^0.4.1
+  desktop_drop: 0.4.3
   cross_file: ^0.3.3+4
   flutter_launcher_icons: ^0.13.1
   exif: ^3.1.4
   flutter_svg: ^2.0.7
   riverpod_annotation: ^2.1.2
   hooks_riverpod: ^2.3.8
-  flutter_hooks: ^0.20.0
   dropdown_button2: ^2.3.8
 
 dev_dependencies:

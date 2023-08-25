@@ -9,12 +9,10 @@ import 'package:once_power/utils/format.dart';
 
 import 'mode.dart';
 
-// part 'rename.g.dart';
-
 void updateExtension(dynamic ref) {
   List<RenameFile> files = ref.read(fileListProvider);
   for (var file in files) {
-    if (file.checked) {
+    if (file.checked && file.type != FileClassify.folder) {
       String newExtension = ref.watch(extensionControllerProvider).text;
       String newExt = newExtension == '' ? file.extension : newExtension;
       ref.read(fileListProvider.notifier).updateExtension(file.id, newExt);
@@ -59,17 +57,13 @@ String matchContent(dynamic ref, RenameFile file, int fileIndex,
   String name = file.name;
 
   if (mode == FunctionMode.replace) {
-    name =
-        replaceName(matchText, modifyText, name, isLength, matchCase, dateText);
+    RemoveType removeType = ref.watch(currentRemoveTypeProvider);
+    name = replaceName(
+        removeType, matchText, modifyText, name, isLength, matchCase, dateText);
   }
 
   if (mode == FunctionMode.reserve) {
     name = reserveName(ref, matchText, name, isLength, matchCase, dateText);
-  }
-
-  if (mode == FunctionMode.remove) {
-    RemoveType removeType = ref.watch(currentRemoveTypeProvider);
-    name = removeName(removeType, matchText, name, isLength, matchCase);
   }
 
   name = prefixName(ref, fileIndex, prefixIndex) +

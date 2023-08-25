@@ -15,7 +15,6 @@ class ActionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const String replaceLabel = '替换';
     const String reserveLabel = '保留';
-    const String removeLabel = '删除';
 
     const String appendMode = '追加模式';
     const String addFolder = '添加文件夹';
@@ -30,7 +29,6 @@ class ActionBar extends StatelessWidget {
             children: [
               ModeCard(label: replaceLabel, mode: FunctionMode.replace),
               ModeCard(label: reserveLabel, mode: FunctionMode.reserve),
-              ModeCard(label: removeLabel, mode: FunctionMode.remove),
             ],
           ),
         ),

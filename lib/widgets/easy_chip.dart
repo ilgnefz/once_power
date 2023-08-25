@@ -32,7 +32,7 @@ class EasyChip extends StatelessWidget {
         borderRadius: borderRadius,
         child: Container(
           height: 32,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           alignment: Alignment.center,
           child: Text(
             label,

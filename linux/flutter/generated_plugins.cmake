@@ -5,7 +5,6 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   file_selector_linux
-  pasteboard
   screen_retriever
   url_launcher_linux
   window_manager

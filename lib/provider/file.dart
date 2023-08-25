@@ -37,8 +37,19 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
+  void updateOriginName(String id, String name) => state = state.map((e) {
+        if (e.id == id) e.name = name;
+        return e;
+      }).toList();
+
   void updateName(String id, String name) => state = state.map((e) {
         if (e.id == id) e.newName = name;
+        return e;
+      }).toList();
+
+  void updateOriginExtension(String id, String extension) =>
+      state = state.map((e) {
+        if (e.id == id) e.extension = extension;
         return e;
       }).toList();
 
