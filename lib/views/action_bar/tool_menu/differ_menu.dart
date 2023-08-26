@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';

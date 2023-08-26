@@ -2,11 +2,14 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/utils/package_desc.dart';
 import 'package:once_power/views/home.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PackageDesc.init();
+
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(

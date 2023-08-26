@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/click_icon.dart';
@@ -24,6 +25,8 @@ class TopTitleBar extends ConsumerWidget {
       if (index > SortType.values.length - 1) index = 0;
       SortType type = SortType.values[index];
       ref.read(fileSortTypeProvider.notifier).update(type);
+      updateName(ref);
+      updateExtension(ref);
     }
 
     void deleteAll() {
@@ -42,7 +45,11 @@ class TopTitleBar extends ConsumerWidget {
           CheckTile(
             check: ref.watch(selectAllProvider),
             label: '$originName ($selected/$total)',
-            onChanged: (v) => ref.read(selectAllProvider.notifier).update(),
+            onChanged: (v) {
+              ref.read(selectAllProvider.notifier).update();
+              updateName(ref);
+              updateExtension(ref);
+            },
             action: ClickIcon(
               svg: ref.watch(fileSortTypeProvider).value,
               size: AppNum.fileCardH,

@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
 
@@ -22,12 +22,12 @@ String replaceName(RemoveType type, String match, String modify, String name,
     bool isLength, bool matchCase, String? dateText) {
   int start = 0, end = 0;
   if (isLength) (start, end) = lengthMatchNum(match, name);
-  // 匹配的
+  // 匹配的 TODO 匹配中间内容
   if (type == RemoveType.match) {
     if (isLength) {
-      name = start == 0
-          ? name.substring(end)
-          : name.substring(0, start) + name.substring(end);
+      String front = name.substring(0, start);
+      String back = name.substring(end);
+      name = front + modify + back;
     }
     if (!isLength) {
       name = removeAndReplaceMatchedStrings(match, modify, name, matchCase);
@@ -56,8 +56,9 @@ String replaceName(RemoveType type, String match, String modify, String name,
   // 中间的
   if (type == RemoveType.middle) {
     if (isLength) {
-      String front = name.substring(0, start);
-      String back = name.substring(end);
+      String front = name.substring(0, start + 1);
+      String back =
+          name.substring(end + 1 > name.length ? name.length : end + 1);
       name = front + modify + back;
     }
     if (!isLength) {

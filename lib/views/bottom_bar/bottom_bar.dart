@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/bottom_bar/repo_url.dart';
 import 'package:once_power/widgets/click_text.dart';
 
-import '../constants/constants.dart';
+import '../../constants/constants.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -13,7 +15,7 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const String over = '加载完成';
     const String loading = '加载中';
-    const TextStyle style = TextStyle(fontSize: 12, color: Colors.grey);
+    const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
 
     return Container(
       height: AppNum.bottomBarH,
@@ -46,6 +48,22 @@ class BottomBar extends StatelessWidget {
                 style: style,
                 onTap: ref.read(cancelProvider.notifier).update,
               ),
+              const Spacer(),
+              const RepoUrl(
+                icon: AppIcons.gitee,
+                url: 'https://gitee.com/ilgnefz/once_power',
+              ),
+              const SizedBox(width: 8),
+              const RepoUrl(
+                icon: AppIcons.github,
+                url: 'https://github.com/ilgnefz/once_power',
+              ),
+              ClickText(
+                '检测更新',
+                style: style,
+                onTap: ref.read(cancelProvider.notifier).update,
+              ),
+              Text('v${PackageDesc.getVersion()}', style: style),
             ],
           );
         },

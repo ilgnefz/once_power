@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:exif/exif.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/rename_file.dart';
@@ -60,7 +60,6 @@ void fileFormat(WidgetRef ref, String filePath) async {
     }
     return;
   }
-
   String id = nanoid(10);
   String name = path.basename(filePath);
   String extension = 'dir';

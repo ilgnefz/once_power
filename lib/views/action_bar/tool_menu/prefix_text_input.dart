@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
@@ -8,7 +8,7 @@ import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 import 'package:once_power/widgets/action_bar/upload_input.dart';
 
-class PrefixTextInput extends HookConsumerWidget {
+class PrefixTextInput extends ConsumerWidget {
   const PrefixTextInput({super.key});
 
   @override
@@ -16,13 +16,6 @@ class PrefixTextInput extends HookConsumerWidget {
     const String prefixLabel = '前缀';
     const String prefixTextHint = '添加前缀内容';
     const String prefixCycleTip = '循环前缀文件内容';
-
-    // final prefixTextController = useTextEditingController();
-    // final prefixInputShow = useState(false);
-    // prefixTextController.addListener(() {
-    //   prefixInputShow.value = prefixTextController.text.isNotEmpty;
-    //   ref.read(prefixTextProvider.notifier).update(prefixTextController.text);
-    // });
 
     return CommonInputMenu(
       label: prefixLabel,

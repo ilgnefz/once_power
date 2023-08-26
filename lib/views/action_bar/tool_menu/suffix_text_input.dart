@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
@@ -8,7 +8,7 @@ import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 import 'package:once_power/widgets/action_bar/upload_input.dart';
 
-class SuffixTextInput extends HookConsumerWidget {
+class SuffixTextInput extends ConsumerWidget {
   const SuffixTextInput({super.key});
 
   @override

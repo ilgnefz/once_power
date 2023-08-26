@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/file.dart';
@@ -25,7 +25,7 @@ void updateExtension(dynamic ref) {
 }
 
 void updateName(dynamic ref) {
-  List<RenameFile> files = ref.read(fileListProvider);
+  List<RenameFile> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
   int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;

@@ -8,6 +8,8 @@ class AppIcons {
   static const String date = '${basePath}date.svg';
   static const String delete = '${basePath}delete.svg';
   static const String error = '${basePath}error.svg';
+  static const String gitee = '${basePath}gitee.svg';
+  static const String github = '${basePath}github.svg';
   static const String nameAscending = '${basePath}name-ascending.svg';
   static const String nameDescending = '${basePath}name-descending.svg';
   static const String ruler = '${basePath}ruler.svg';

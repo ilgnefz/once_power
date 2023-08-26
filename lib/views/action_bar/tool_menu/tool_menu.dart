@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/views/action_bar/tool_menu/date_text_input.dart';
 import 'package:once_power/views/action_bar/tool_menu/differ_menu.dart';
@@ -12,7 +12,7 @@ import 'package:once_power/views/action_bar/tool_menu/suffix_text_input.dart';
 
 import 'match_text_input.dart';
 
-class ToolMenu extends HookConsumerWidget {
+class ToolMenu extends ConsumerWidget {
   const ToolMenu({super.key});
 
   @override

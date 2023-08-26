@@ -1,7 +1,7 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
@@ -32,6 +32,8 @@ class ContentBar extends StatelessWidget {
                   if (newIndex > oldIndex) newIndex -= 1;
                   RenameFile item = files.removeAt(oldIndex);
                   files.insert(newIndex, item);
+                  updateName(ref);
+                  updateExtension(ref);
                 }
 
                 return Expanded(

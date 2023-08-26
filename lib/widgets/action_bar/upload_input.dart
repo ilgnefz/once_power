@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
@@ -33,7 +33,6 @@ class UploadInput extends ConsumerWidget {
       const xType = XTypeGroup(label: '文本', extensions: ['txt']);
       final XFile? result = await openFile(acceptedTypeGroups: [xType]);
       if (result != null) {
-        List<String> list = [];
         File file = File(result.path);
         var content = file.readAsStringSync();
         if (type == FileUploadType.prefix) {

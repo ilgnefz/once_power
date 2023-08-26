@@ -1,6 +1,6 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
@@ -8,18 +8,13 @@ import 'package:once_power/utils/file.dart';
 import 'package:once_power/views/action_bar/apply_menu/apply_button.dart';
 import 'package:once_power/widgets/click_text.dart';
 
-class ApplyMenu extends HookConsumerWidget {
+class ApplyMenu extends ConsumerWidget {
   const ApplyMenu({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String selectFile = '选择文件';
     const String selectFolder = '选择文件夹';
-
-    // final controller = useStreamController<RenameFile>();
-    // controller.stream.listen((RenameFile file) {
-    //   ref.read(fileListProvider.notifier).add(file);
-    // });
 
     void addFile() async {
       final List<XFile> files = await openFiles();
