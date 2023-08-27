@@ -19,11 +19,14 @@ class ModifyTextInput extends ConsumerWidget {
 
     bool dateRename = ref.watch(dateRenameProvider);
     bool reverseMode = ref.watch(currentModeProvider) == FunctionMode.reserve;
-
+    bool inputNotEmpty = ref.watch(matchClearProvider);
+    bool reserveTypeEmpty = ref.watch(currentReserveTypeProvider).isNotEmpty;
+    bool disable =
+        dateRename || (reverseMode && (inputNotEmpty || reserveTypeEmpty));
     return CommonInputMenu(
-      disable: dateRename || reverseMode,
+      disable: disable,
       controller: ref.watch(modifyControllerProvider),
-      hintText: dateRename || reverseMode ? disableHint : modifyTextHint,
+      hintText: disable ? disableHint : modifyTextHint,
       show: ref.watch(modifyClearProvider),
       onChanged: (v) => updateName(ref),
       message: matchCaseTip,

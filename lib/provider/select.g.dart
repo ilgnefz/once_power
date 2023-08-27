@@ -90,7 +90,7 @@ final selectVideoProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
-String _$inputLengthHash() => r'bf31aa784244d47bea7c39bac57248837236d9e2';
+String _$inputLengthHash() => r'36efc24b2769d6ee735b56c27ae432bc4b6afbb9';
 
 /// See also [InputLength].
 @ProviderFor(InputLength)
@@ -105,7 +105,7 @@ final inputLengthProvider =
 );
 
 typedef _$InputLength = AutoDisposeNotifier<bool>;
-String _$matchCaseHash() => r'10e45cfec508bac97012d63cb73137c8fe4b99cc';
+String _$matchCaseHash() => r'4ee0c6ea873aba23941da88c011e00d01c3eea17';
 
 /// See also [MatchCase].
 @ProviderFor(MatchCase)
@@ -119,7 +119,7 @@ final matchCaseProvider = AutoDisposeNotifierProvider<MatchCase, bool>.internal(
 );
 
 typedef _$MatchCase = AutoDisposeNotifier<bool>;
-String _$dateRenameHash() => r'c81bfdcaf90821e1c0d9f22b32656831e835e9d8';
+String _$dateRenameHash() => r'a3524f666fe18d35bdb1c614e070da2b93b0f123';
 
 /// See also [DateRename].
 @ProviderFor(DateRename)
@@ -134,7 +134,7 @@ final dateRenameProvider =
 );
 
 typedef _$DateRename = AutoDisposeNotifier<bool>;
-String _$cyclePrefixHash() => r'4c7bbb10e455a9f49652c4a4187660d484072770';
+String _$cyclePrefixHash() => r'300c7b7ce219f22f0900485d18b7d7287b39b53d';
 
 /// See also [CyclePrefix].
 @ProviderFor(CyclePrefix)
@@ -149,7 +149,7 @@ final cyclePrefixProvider =
 );
 
 typedef _$CyclePrefix = AutoDisposeNotifier<bool>;
-String _$cycleSuffixHash() => r'074a07e678ef1b7ddca63924ac6ad43e390afe31';
+String _$cycleSuffixHash() => r'98817a749078d9cf93f80af49019eaa1a520500f';
 
 /// See also [CycleSuffix].
 @ProviderFor(CycleSuffix)
@@ -164,7 +164,7 @@ final cycleSuffixProvider =
 );
 
 typedef _$CycleSuffix = AutoDisposeNotifier<bool>;
-String _$swapPrefixHash() => r'5f21e2bbc8998ae23812f8de6f56ceda8a7262dd';
+String _$swapPrefixHash() => r'6e6b9ab67e4a85dcebfe55dca44bab828b93fab5';
 
 /// See also [SwapPrefix].
 @ProviderFor(SwapPrefix)
@@ -179,7 +179,7 @@ final swapPrefixProvider =
 );
 
 typedef _$SwapPrefix = AutoDisposeNotifier<bool>;
-String _$swapSuffixHash() => r'0a08e49621788b9b39ed409913355140a400b82e';
+String _$swapSuffixHash() => r'cb9ca237e35362890c268500c69b6ebb8f9d7001';
 
 /// See also [SwapSuffix].
 @ProviderFor(SwapSuffix)
@@ -210,7 +210,7 @@ final modifyExtensionProvider =
 );
 
 typedef _$ModifyExtension = AutoDisposeNotifier<bool>;
-String _$appendModeHash() => r'41a637542040f374e484b68a62a420a97ccd1edb';
+String _$appendModeHash() => r'001e0fd387111ad0778e3d14c438f6c066c1c873';
 
 /// See also [AppendMode].
 @ProviderFor(AppendMode)
@@ -225,7 +225,7 @@ final appendModeProvider =
 );
 
 typedef _$AppendMode = AutoDisposeNotifier<bool>;
-String _$addFolderHash() => r'eb5e431213981787615c1af8cf3862e226df7f9f';
+String _$addFolderHash() => r'256c58cc97721dc008eedcfd5f25ed331ffd394c';
 
 /// See also [AddFolder].
 @ProviderFor(AddFolder)
@@ -239,11 +239,24 @@ final addFolderProvider = AutoDisposeNotifierProvider<AddFolder, bool>.internal(
 );
 
 typedef _$AddFolder = AutoDisposeNotifier<bool>;
+String _$saveConfigHash() => r'75f973a43293af3d65623a751f42f81a68e436c2';
+
+/// See also [SaveConfig].
+@ProviderFor(SaveConfig)
+final saveConfigProvider =
+    AutoDisposeNotifierProvider<SaveConfig, bool>.internal(
+  SaveConfig.new,
+  name: r'saveConfigProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$saveConfigHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SaveConfig = AutoDisposeNotifier<bool>;
 String _$cancelHash() => r'228db33fc50e652898879dd449bf8fb3b09eb881';
 
-/// TODO 底部取消按钮，似乎没用
-///
-/// Copied from [Cancel].
+/// See also [Cancel].
 @ProviderFor(Cancel)
 final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
   Cancel.new,

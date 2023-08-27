@@ -3,19 +3,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/bottom_bar/bottom_click_text.dart';
 import 'package:once_power/views/bottom_bar/repo_url.dart';
-import 'package:once_power/widgets/click_text.dart';
+import 'package:once_power/widgets/click_icon.dart';
+import 'package:once_power/widgets/easy_tooltip.dart';
 
 import '../../constants/constants.dart';
 
-class BottomBar extends StatelessWidget {
+class BottomBar extends ConsumerWidget {
   const BottomBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // const String saveInput = '保存配置';
     const String over = '加载完成';
     const String loading = '加载中';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
+    bool save = ref.watch(saveConfigProvider);
+
+    int count = ref.watch(countProvider);
+    int total = ref.watch(totalProvider);
 
     return Container(
       height: AppNum.bottomBarH,
@@ -24,49 +31,32 @@ class BottomBar extends StatelessWidget {
         color: Colors.white,
         border: Border(top: BorderSide(color: AppColors.line, width: 1)),
       ),
-      child: Consumer(
-        builder: (context, ref, child) {
-          int count = ref.watch(countProvider);
-          int total = ref.watch(totalProvider);
-
-          return Row(
-            children: [
-              Text('$count/$total', style: style),
-              // Container(
-              //   margin: const EdgeInsets.symmetric(horizontal: AppNum.gapW),
-              //   width: 100,
-              //   child: ClipRRect(
-              //     borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-              //     child: LinearProgressIndicator(
-              //       value: count == total ? 1 : count / total,
-              //     ),
-              //   ),
-              // ),
-              Text(count == total ? over : loading, style: style),
-              ClickText(
-                '取消',
-                style: style,
-                onTap: ref.read(cancelProvider.notifier).update,
-              ),
-              const Spacer(),
-              const RepoUrl(
-                icon: AppIcons.gitee,
-                url: 'https://gitee.com/ilgnefz/once_power',
-              ),
-              const SizedBox(width: 8),
-              const RepoUrl(
-                icon: AppIcons.github,
-                url: 'https://github.com/ilgnefz/once_power',
-              ),
-              ClickText(
-                '检测更新',
-                style: style,
-                onTap: ref.read(cancelProvider.notifier).update,
-              ),
-              Text('v${PackageDesc.getVersion()}', style: style),
-            ],
-          );
-        },
+      child: Row(
+        children: [
+          EasyTooltip(
+            message: save ? '已开启保存配置' : '未开启保存配置',
+            child: ClickIcon(
+              size: 24,
+              svg: AppIcons.save,
+              color: save ? Theme.of(context).primaryColor : Colors.grey,
+              onTap: ref.read(saveConfigProvider.notifier).update,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(count == total ? over : '$loading $count/$total', style: style),
+          const Spacer(),
+          const RepoUrl(
+            icon: AppIcons.gitee,
+            url: 'https://gitee.com/ilgnefz/once_power',
+          ),
+          const SizedBox(width: 12),
+          const RepoUrl(
+            icon: AppIcons.github,
+            url: 'https://github.com/ilgnefz/once_power',
+          ),
+          const BottomClickText(),
+          Text('v${PackageDesc.getVersion()}', style: style),
+        ],
       ),
     );
   }

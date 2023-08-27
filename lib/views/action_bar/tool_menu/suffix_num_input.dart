@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/rename.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 import 'package:once_power/widgets/digit_input.dart';
 
@@ -18,28 +20,15 @@ class SuffixNumInput extends ConsumerWidget {
     // 数字位数
     const int defaultSuffixNumLength = 0;
     const String suffixNumLengthLabel = '位';
-    // final suffixNumLengthController = useTextEditingController(
-    //   text: '$defaultSuffixNumLength$suffixNumLengthLabel',
-    // );
-    // suffixNumLengthController.addListener(() {
-    //   String num = suffixNumLengthController.text.isEmpty
-    //       ? defaultSuffixNumLength.toString()
-    //       : suffixNumLengthController.text.replaceAll(suffixNumLengthLabel, '');
-    //   ref.read(suffixNumLengthProvider.notifier).update(int.parse(num));
-    // });
 
     // 数字开始数
     const int defaultSuffixNumStart = 0;
     const String suffixNumStartLabel = '开始';
-    // final suffixNumStartController = useTextEditingController(
-    //   text: '$defaultSuffixNumStart$suffixNumStartLabel',
-    // );
-    // suffixNumStartController.addListener(() {
-    //   String num = suffixNumStartController.text.isEmpty
-    //       ? defaultSuffixNumStart.toString()
-    //       : suffixNumStartController.text.replaceAll(suffixNumStartLabel, '');
-    //   ref.read(suffixNumStartProvider.notifier).update(int.parse(num));
-    // });
+
+    TextEditingController lengthController =
+        ref.watch(suffixLengthControllerProvider);
+    TextEditingController startController =
+        ref.watch(suffixStartControllerProvider);
 
     return CommonInputMenu(
       label: increaseLabel,
@@ -47,21 +36,35 @@ class SuffixNumInput extends ConsumerWidget {
         children: [
           Expanded(
             child: DigitInput(
-              controller: ref.watch(suffixLengthControllerProvider),
+              controller: lengthController,
               value: defaultSuffixNumLength,
               label: suffixNumLengthLabel,
-              callback: () => updateName(ref),
-              onChanged: (v) => updateName(ref),
+              callback: () async {
+                updateName(ref);
+                int num = int.parse(lengthController.text.replaceAll('位', ''));
+                await StorageUtil.setInt(AppKeys.suffixLength, num);
+              },
+              onChanged: (v) async {
+                updateName(ref);
+                await StorageUtil.setInt(AppKeys.suffixLength, int.parse(v));
+              },
             ),
           ),
           const SizedBox(width: 8.0),
           Expanded(
             child: DigitInput(
-              controller: ref.watch(suffixStartControllerProvider),
+              controller: startController,
               value: defaultSuffixNumStart,
               label: suffixNumStartLabel,
-              callback: () => updateName(ref),
-              onChanged: (v) => updateName(ref),
+              callback: () async {
+                updateName(ref);
+                int num = int.parse(startController.text.replaceAll('开始', ''));
+                await StorageUtil.setInt(AppKeys.suffixStart, num);
+              },
+              onChanged: (v) async {
+                updateName(ref);
+                await StorageUtil.setInt(AppKeys.suffixStart, int.parse(v));
+              },
             ),
           ),
         ],

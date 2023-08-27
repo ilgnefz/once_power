@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/keys.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'input.g.dart';
-
-// @riverpod
-// class MatchText extends _$MatchText {
-//   @override
-//   String build() => '';
-//   void update(String value) => state = value;
-// }
-//
-// @riverpod
-// class ModifyText extends _$ModifyText {
-//   @override
-//   String build() => '';
-//   void update(String value) => state = value;
-// }
 
 @riverpod
 class MatchController extends _$MatchController {
@@ -55,24 +43,13 @@ class ModifyClear extends _$ModifyClear {
   void update(bool value) => state = value;
 }
 
-// @riverpod
-// class MatchLength extends _$MatchLength {
-//   @override
-//   int build() => 0;
-//   void update(int value) => state = value;
-// }
-
-// @riverpod
-// class DateLength extends _$DateLength {
-//   @override
-//   int build() => 8;
-//   void update(int value) => state = value;
-// }
-
 @riverpod
 class DateLengthController extends _$DateLengthController {
   @override
-  TextEditingController build() => TextEditingController(text: '8位');
+  TextEditingController build() {
+    int text = StorageUtil.getInt(AppKeys.dateLength) ?? 8;
+    return TextEditingController(text: '$text位');
+  }
 }
 
 @riverpod
@@ -94,66 +71,23 @@ class PrefixClear extends _$PrefixClear {
   void update(bool value) => state = value;
 }
 
-// @riverpod
-// class PrefixFileValue extends _$PrefixFileValue {
-//   @override
-//   List<String> build() => state;
-//   void update(List<String> value) => state = value;
-// }
-//
-// @riverpod
-// class PrefixFileName extends _$PrefixFileName {
-//   @override
-//   String build() => '';
-//   void update(String value) => state = value;
-// }
-
 @riverpod
 class PrefixLengthController extends _$PrefixLengthController {
   @override
-  TextEditingController build() => TextEditingController(text: '0位');
+  TextEditingController build() {
+    int text = StorageUtil.getInt(AppKeys.prefixLength) ?? 0;
+    return TextEditingController(text: '$text位');
+  }
 }
 
 @riverpod
 class PrefixStartController extends _$PrefixStartController {
   @override
-  TextEditingController build() => TextEditingController(text: '0开始');
+  TextEditingController build() {
+    int text = StorageUtil.getInt(AppKeys.prefixStart) ?? 0;
+    return TextEditingController(text: '$text开始');
+  }
 }
-
-// @riverpod
-// class PrefixNumLength extends _$PrefixNumLength {
-//   @override
-//   int build() => 0;
-//   void update(int value) => state = value;
-// }
-//
-// @riverpod
-// class PrefixNumStart extends _$PrefixNumStart {
-//   @override
-//   int build() => 0;
-//   void update(int value) => state = value;
-// }
-
-// @riverpod
-// class SuffixText extends _$SuffixText {
-//   @override
-//   String build() => '';
-//   void update(String value) => state = value;
-// }
-//
-// @riverpod
-// class SuffixNumLength extends _$SuffixNumLength {
-//   @override
-//   int build() => 0;
-//   void update(int value) => state = value;
-// }
-//
-// @riverpod
-// class SuffixNumStart extends _$SuffixNumStart {
-//   @override
-//   int build() => 0;
-//   void update(int value) => state = value;
-// }
 
 @riverpod
 class SuffixController extends _$SuffixController {
@@ -174,30 +108,22 @@ class SuffixClear extends _$SuffixClear {
   void update(bool value) => state = value;
 }
 
-// @riverpod
-// class SuffixFileValue extends _$SuffixFileValue {
-//   @override
-//   List<String> build() => state;
-//   void update(List<String> value) => state = value;
-// }
-//
-// @riverpod
-// class SuffixFileName extends _$SuffixFileName {
-//   @override
-//   String build() => '';
-//   void update(String value) => state = value;
-// }
-
 @riverpod
 class SuffixLengthController extends _$SuffixLengthController {
   @override
-  TextEditingController build() => TextEditingController(text: '0位');
+  TextEditingController build() {
+    int text = StorageUtil.getInt(AppKeys.suffixLength) ?? 0;
+    return TextEditingController(text: '$text位');
+  }
 }
 
 @riverpod
 class SuffixStartController extends _$SuffixStartController {
   @override
-  TextEditingController build() => TextEditingController(text: '0开始');
+  TextEditingController build() {
+    int text = StorageUtil.getInt(AppKeys.suffixStart) ?? 0;
+    return TextEditingController(text: '$text开始');
+  }
 }
 
 @riverpod

@@ -26,8 +26,8 @@ class DateSelected extends ConsumerWidget {
                 DropdownMenuItem<String>(value: item, child: Text(item)))
             .toList(),
         value: ref.watch(currentDateTypeProvider).value,
-        onChanged: (value) {
-          DateType type = DateType.values.firstWhere((e) => e.value == value);
+        onChanged: (v) {
+          DateType type = DateType.values.firstWhere((e) => e.value == v);
           ref.read(currentDateTypeProvider.notifier).update(type);
           updateName(ref);
         },

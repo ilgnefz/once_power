@@ -102,7 +102,7 @@ class NotificationMessage {
         );
       },
       wrapToastAnimation: notificationAnimation,
-      duration: type == MessageType.success ? const Duration(seconds: 2) : null,
+      duration: type == MessageType.success ? const Duration(seconds: 3) : null,
       align: Alignment.bottomRight,
     );
   }

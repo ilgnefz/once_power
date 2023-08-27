@@ -19,7 +19,8 @@ class MatchTextInput extends ConsumerWidget {
     const String lengthTip = '输入长度截取（两个数字之间加空格截取中间部分）';
     bool disable = ref.watch(currentModeProvider) == FunctionMode.reserve &&
         (ref.watch(currentReserveTypeProvider).isNotEmpty ||
-            ref.watch(dateRenameProvider));
+            ref.watch(dateRenameProvider) ||
+            ref.watch(modifyClearProvider));
 
     return CommonInputMenu(
       disable: disable,

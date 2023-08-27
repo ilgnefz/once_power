@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/rename.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/action_bar/common_input_menu.dart';
 import 'package:once_power/widgets/digit_input.dart';
 
@@ -22,27 +24,46 @@ class PrefixNumInput extends ConsumerWidget {
     const int defaultPrefixNumStart = 0;
     const String prefixNumStartLabel = '开始';
 
+    TextEditingController lengthController =
+        ref.watch(prefixLengthControllerProvider);
+    TextEditingController startController =
+        ref.watch(prefixStartControllerProvider);
+
     return CommonInputMenu(
       label: increaseLabel,
       slot: Row(
         children: [
           Expanded(
             child: DigitInput(
-              controller: ref.watch(prefixLengthControllerProvider),
+              controller: lengthController,
               value: defaultPrefixNumLength,
               label: prefixNumLengthLabel,
-              callback: () => updateName(ref),
-              onChanged: (v) => updateName(ref),
+              callback: () async {
+                updateName(ref);
+                int num = int.parse(lengthController.text.replaceAll('位', ''));
+                await StorageUtil.setInt(AppKeys.prefixLength, num);
+              },
+              onChanged: (v) async {
+                updateName(ref);
+                await StorageUtil.setInt(AppKeys.prefixLength, int.parse(v));
+              },
             ),
           ),
           const SizedBox(width: 8.0),
           Expanded(
             child: DigitInput(
-              controller: ref.watch(prefixStartControllerProvider),
+              controller: startController,
               value: defaultPrefixNumStart,
               label: prefixNumStartLabel,
-              callback: () => updateName(ref),
-              onChanged: (v) => updateName(ref),
+              callback: () async {
+                updateName(ref);
+                int num = int.parse(startController.text.replaceAll('开始', ''));
+                await StorageUtil.setInt(AppKeys.prefixStart, num);
+              },
+              onChanged: (v) async {
+                updateName(ref);
+                await StorageUtil.setInt(AppKeys.prefixStart, int.parse(v));
+              },
             ),
           ),
         ],

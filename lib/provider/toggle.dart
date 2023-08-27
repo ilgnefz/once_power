@@ -1,4 +1,6 @@
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/model/enum.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'toggle.g.dart';
@@ -6,15 +8,29 @@ part 'toggle.g.dart';
 @riverpod
 class CurrentMode extends _$CurrentMode {
   @override
-  FunctionMode build() => FunctionMode.replace;
-  void update(FunctionMode mode) => state = mode;
+  FunctionMode build() {
+    int index = StorageUtil.getInt(AppKeys.functionMode) ?? 0;
+    return FunctionMode.values[index];
+  }
+
+  Future<void> update(FunctionMode mode) async {
+    state = mode;
+    await StorageUtil.setInt(AppKeys.functionMode, mode.index);
+  }
 }
 
 @riverpod
 class CurrentDateType extends _$CurrentDateType {
   @override
-  DateType build() => DateType.createDate;
-  void update(DateType type) => state = type;
+  DateType build() {
+    int index = StorageUtil.getInt(AppKeys.dateType) ?? 0;
+    return DateType.values[index];
+  }
+
+  Future<void> update(DateType type) async {
+    state = type;
+    await StorageUtil.setInt(AppKeys.dateType, type.index);
+  }
 }
 
 @riverpod
@@ -36,6 +52,13 @@ class CurrentRemoveType extends _$CurrentRemoveType {
 @riverpod
 class FileSortType extends _$FileSortType {
   @override
-  SortType build() => SortType.defaultSort;
-  void update(SortType type) => state = type;
+  SortType build() {
+    int index = StorageUtil.getInt(AppKeys.sortType) ?? 0;
+    return SortType.values[index];
+  }
+
+  void update(SortType type) async {
+    state = type;
+    await StorageUtil.setInt(AppKeys.sortType, type.index);
+  }
 }

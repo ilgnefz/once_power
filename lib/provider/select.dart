@@ -1,6 +1,8 @@
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'select.g.dart';
@@ -8,50 +10,71 @@ part 'select.g.dart';
 @riverpod
 class InputLength extends _$InputLength {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isLength) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isLength, state);
+  }
 }
 
 @riverpod
 class MatchCase extends _$MatchCase {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isCase) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isCase, state);
+  }
 }
 
 @riverpod
 class DateRename extends _$DateRename {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isDate) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isDate, state);
+  }
 }
 
 @riverpod
 class CyclePrefix extends _$CyclePrefix {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isPrefixCycle) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isPrefixCycle, state);
+  }
 }
 
 @riverpod
 class CycleSuffix extends _$CycleSuffix {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isSuffixCycle) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSuffixCycle, state);
+  }
 }
 
 @riverpod
 class SwapPrefix extends _$SwapPrefix {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isPrefixSwap) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isPrefixSwap, state);
+  }
 }
 
 @riverpod
 class SwapSuffix extends _$SwapSuffix {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isSuffixSwap) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSuffixSwap, state);
+  }
 }
 
 @riverpod
@@ -64,18 +87,34 @@ class ModifyExtension extends _$ModifyExtension {
 @riverpod
 class AppendMode extends _$AppendMode {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isAppend) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isAppend, state);
+  }
 }
 
 @riverpod
 class AddFolder extends _$AddFolder {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isFolder) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isFolder, state);
+  }
 }
 
-/// TODO 底部取消按钮，似乎没用
+@riverpod
+class SaveConfig extends _$SaveConfig {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isSave) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSave, state);
+  }
+}
+
+// TODO 底部取消按钮，似乎没用
 @riverpod
 class Cancel extends _$Cancel {
   @override
