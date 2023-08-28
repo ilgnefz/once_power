@@ -30,7 +30,19 @@ String replaceName(RemoveType type, String match, String modify, String name,
       name = front + modify + back;
     }
     if (!isLength) {
-      name = removeAndReplaceMatchedStrings(match, modify, name, matchCase);
+      if (matchCase) name = name.replaceAll(match, modify);
+      // // 不区分大小写时情况很多
+      if (!matchCase && match != '') {
+        int index = name.toLowerCase().indexOf(match.toLowerCase());
+        while (index != -1) {
+          name = name.substring(0, index) +
+              modify +
+              name.substring(index + match.length);
+          index = name
+              .toLowerCase()
+              .indexOf(match.toLowerCase(), index + modify.length);
+        }
+      }
     }
   }
   // 之前的
@@ -76,18 +88,6 @@ String replaceName(RemoveType type, String match, String modify, String name,
     }
   }
   return name;
-}
-
-String removeAndReplaceMatchedStrings(
-    String pattern, String replacement, String input, bool matchCase) {
-  // 创建正则表达式，设置为不区分大小写
-  RegExp regex = RegExp(pattern, caseSensitive: matchCase);
-  // 使用replaceAllMapped方法将匹配到的字符串替换，并执行自定义操作
-  String result = input.replaceAllMapped(regex, (Match match) {
-    // 替换为指定的replacement字符串，并将其转为小写形式
-    return replacement.toLowerCase();
-  });
-  return result;
 }
 
 /// 保留模式

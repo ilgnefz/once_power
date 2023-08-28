@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(child: Row(children: [ActionBar(), ContentBar()])),
