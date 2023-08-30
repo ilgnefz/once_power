@@ -4,7 +4,6 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
@@ -28,7 +27,6 @@ class ContentFileTile extends ConsumerWidget {
 
     void delete() {
       ref.read(fileListProvider.notifier).remove(file.id);
-      ref.read(totalProvider.notifier).reduce();
     }
 
     String dot = file.extension == '' ? '' : '.';

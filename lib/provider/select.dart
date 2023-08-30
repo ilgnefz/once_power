@@ -181,3 +181,13 @@ bool selectVideo(SelectVideoRef ref) {
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
+
+@riverpod
+bool selectZip(SelectZipRef ref) {
+  List<RenameFile> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type == FileClassify.zip)
+      .toList();
+  int check = list.where((e) => e.checked == true).toList().length;
+  return check >= list.length / 2;
+}

@@ -6,7 +6,7 @@ part of 'toggle.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentModeHash() => r'4e5b92d9b3403c01268d590c7ccfcc079a64e14e';
+String _$currentModeHash() => r'b34f5ae2ee5f4a9ebda79e16b0be3e6d42dc2092';
 
 /// See also [CurrentMode].
 @ProviderFor(CurrentMode)
@@ -21,7 +21,7 @@ final currentModeProvider =
 );
 
 typedef _$CurrentMode = AutoDisposeNotifier<FunctionMode>;
-String _$currentDateTypeHash() => r'67a6e550943527599229b4b7a81fe3cf1134787d';
+String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
 
 /// See also [CurrentDateType].
 @ProviderFor(CurrentDateType)
@@ -70,7 +70,7 @@ final currentRemoveTypeProvider =
 );
 
 typedef _$CurrentRemoveType = AutoDisposeNotifier<RemoveType>;
-String _$fileSortTypeHash() => r'3e9cd57ec5e6ac51c6bf1b4219a9bb478adeb334';
+String _$fileSortTypeHash() => r'004bb4e8d65374df0807f4a06a990ef44a87d278';
 
 /// See also [FileSortType].
 @ProviderFor(FileSortType)

@@ -19,18 +19,20 @@ class ClickText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      height: height ?? 32,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8.0),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding ?? 12.0),
-          child: Center(
-            child: Text(
-              label,
-              style: style ?? const TextStyle(color: AppColors.select),
+    return Material(
+      child: Ink(
+        height: height ?? 32,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8.0),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: padding ?? 12.0),
+            child: Center(
+              child: Text(
+                label,
+                style: style ?? const TextStyle(color: AppColors.select),
+              ),
             ),
           ),
         ),

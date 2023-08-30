@@ -18,6 +18,7 @@ class FilterFileButton extends ConsumerWidget {
       if (classify == FileClassify.image) return ref.watch(selectImageProvider);
       if (classify == FileClassify.text) return ref.watch(selectTextProvider);
       if (classify == FileClassify.video) return ref.watch(selectVideoProvider);
+      if (classify == FileClassify.zip) return ref.watch(selectZipProvider);
       return ref.watch(selectFolderProvider);
     }
 

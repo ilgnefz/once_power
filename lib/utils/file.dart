@@ -9,7 +9,6 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/rename_file.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
@@ -26,12 +25,8 @@ Future<DateTime?> getExifDate(String filePath) async {
 
 void xFileFormat(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
-  if (!append) {
-    ref.read(fileListProvider.notifier).clear();
-    ref.read(totalProvider.notifier).clear();
-  }
-  int total = append ? ref.watch(totalProvider) : 0;
-  ref.read(totalProvider.notifier).update(total + files.length);
+  if (!append) ref.read(fileListProvider.notifier).clear();
+  // ref.read(totalProvider.notifier).update(files.length);
   for (var file in files) {
     fileFormat(ref, file.path);
   }
@@ -40,26 +35,25 @@ void xFileFormat(WidgetRef ref, List<XFile> files) async {
 void fileFormat(WidgetRef ref, String filePath) async {
   bool append = ref.watch(appendModeProvider);
   bool addFolder = ref.watch(addFolderProvider);
-
+  // if (!append) ref.read(countProvider.notifier).clear();
   if (append) {
     final files = ref.watch(fileListProvider);
-    if (files.any((e) => e.filePath == filePath)) {
-      return ref.read(totalProvider.notifier).reduce();
-    }
+    if (files.any((e) => e.filePath == filePath)) return;
   }
 
   bool isFile = FileSystemEntity.isFileSync(filePath);
 
   if (!addFolder && !isFile) {
     final list = ref.read(getAllFileProvider(filePath));
-    ref.read(totalProvider.notifier).reduce();
-    int total = ref.watch(totalProvider);
-    ref.read(totalProvider.notifier).update(total + list.length);
+    // ref.read(totalProvider.notifier).update(list.length);
     for (var file in list) {
       fileFormat(ref, file);
     }
     return;
   }
+  await Future.delayed(const Duration(microseconds: 1));
+  // ref.read(countProvider.notifier).increment();
+
   String id = nanoid(10);
   String name = path.basename(filePath);
   String extension = 'dir';
@@ -78,7 +72,6 @@ void fileFormat(WidgetRef ref, String filePath) async {
       exifDate = await getExifDate(filePath);
     }
   }
-
   FileClassify type = ref.read(getFileClassifyProvider(extension));
   RenameFile renameFile = RenameFile(
     id: id,

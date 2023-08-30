@@ -80,7 +80,7 @@ extension SortTypeExtension on SortType {
   }
 }
 
-enum FileClassify { image, video, text, audio, folder, other }
+enum FileClassify { image, video, text, audio, folder, zip, other }
 
 extension FileClassifyExtension on FileClassify {
   String get value {
@@ -95,6 +95,8 @@ extension FileClassifyExtension on FileClassify {
         return '音频';
       case FileClassify.folder:
         return '文件夹';
+      case FileClassify.zip:
+        return '压缩包';
       case FileClassify.other:
         return '其他';
     }

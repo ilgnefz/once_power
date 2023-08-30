@@ -90,6 +90,20 @@ final selectVideoProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
+String _$selectZipHash() => r'c02f3a3483cee2e56c7fcf9fe8edf82d5e8351d3';
+
+/// See also [selectZip].
+@ProviderFor(selectZip)
+final selectZipProvider = AutoDisposeProvider<bool>.internal(
+  selectZip,
+  name: r'selectZipProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectZipHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SelectZipRef = AutoDisposeProviderRef<bool>;
 String _$inputLengthHash() => r'36efc24b2769d6ee735b56c27ae432bc4b6afbb9';
 
 /// See also [InputLength].

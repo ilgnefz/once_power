@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
@@ -31,7 +30,6 @@ class TopTitleBar extends ConsumerWidget {
 
     void deleteAll() {
       ref.read(fileListProvider.notifier).clear();
-      ref.read(totalProvider.notifier).clear();
     }
 
     int selected = ref.watch(selectFileProvider);

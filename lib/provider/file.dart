@@ -139,6 +139,7 @@ FileClassify getFileClassify(GetFileClassifyRef ref, String extension) {
   if (image.contains(extension)) classify = FileClassify.image;
   if (text.contains(extension)) classify = FileClassify.text;
   if (video.contains(extension)) classify = FileClassify.video;
+  if (zip.contains(extension)) classify = FileClassify.zip;
   return classify;
 }
 

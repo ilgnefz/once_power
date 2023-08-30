@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/bottom_click_text.dart';
@@ -15,14 +14,8 @@ class BottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // const String saveInput = '保存配置';
-    const String over = '加载完成';
-    const String loading = '加载中';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
     bool save = ref.watch(saveConfigProvider);
-
-    int count = ref.watch(countProvider);
-    int total = ref.watch(totalProvider);
 
     return Container(
       height: AppNum.bottomBarH,
@@ -42,8 +35,6 @@ class BottomBar extends ConsumerWidget {
               onTap: ref.read(saveConfigProvider.notifier).update,
             ),
           ),
-          const SizedBox(width: 12),
-          Text(count == total ? over : '$loading $count/$total', style: style),
           const Spacer(),
           const RepoUrl(
             icon: AppIcons.gitee,

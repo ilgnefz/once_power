@@ -2,7 +2,6 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/file.dart';
 import 'package:once_power/views/action_bar/apply_menu/apply_button.dart';
@@ -25,12 +24,9 @@ class ApplyMenu extends ConsumerWidget {
       final List<String?> folders = await getDirectoryPaths();
       if (folders.isNotEmpty) {
         bool append = ref.watch(appendModeProvider);
-        if (!append) {
-          ref.read(fileListProvider.notifier).clear();
-          ref.read(totalProvider.notifier).clear();
-        }
-        int total = append ? ref.watch(totalProvider) : 0;
-        ref.read(totalProvider.notifier).update(total + folders.length);
+        if (!append) ref.read(fileListProvider.notifier).clear();
+        // bool addFolder = ref.watch(addFolderProvider);
+        // if (addFolder) ref.read(totalProvider.notifier).update(folders.length);
         for (var folder in folders) {
           fileFormat(ref, folder!);
         }
