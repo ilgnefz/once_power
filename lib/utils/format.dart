@@ -20,3 +20,9 @@ DateTime exifDateFormat(String date) {
   list.replaceRange(0, 1, [ymd]);
   return DateTime.parse(list.join(' '));
 }
+
+int getExtendedVersionNumber(String version) {
+  List versionCells = version.split('.');
+  versionCells = versionCells.map((i) => int.parse(i)).toList();
+  return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
+}

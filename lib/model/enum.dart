@@ -1,6 +1,6 @@
 import 'package:once_power/constants/constants.dart';
 
-enum FunctionMode { replace, reserve }
+enum FunctionMode { replace, reserve, organize }
 
 enum DateType {
   createDate('创建日期'),

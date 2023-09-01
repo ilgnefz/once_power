@@ -2,7 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/rename_info.dart';
+import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/svg_icon.dart';
 
@@ -26,8 +26,8 @@ class NotificationMessage {
             : AppIcons.warning;
   }
 
-  static show(
-      String title, String message, List<RenameInfo> info, MessageType type) {
+  static show(String title, String message, List<NotificationInfo> info,
+      MessageType type) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(
@@ -91,7 +91,7 @@ class NotificationMessage {
                                     TextSpan(text: e.message, style: infoStyle)
                                   ]),
                             );
-                          }).toList()
+                          }).toList(),
                         ],
                       ),
                     ),

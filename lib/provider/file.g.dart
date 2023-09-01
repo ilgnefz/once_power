@@ -6,11 +6,11 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sortListHash() => r'7cd70b2377d16594a7952ffb6617563823d9c6e7';
+String _$sortListHash() => r'0938e9913b7eab8331ae3615aea90d1bbc432bde';
 
 /// See also [sortList].
 @ProviderFor(sortList)
-final sortListProvider = AutoDisposeProvider<List<RenameFile>>.internal(
+final sortListProvider = AutoDisposeProvider<List<FileInfo>>.internal(
   sortList,
   name: r'sortListProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final sortListProvider = AutoDisposeProvider<List<RenameFile>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef SortListRef = AutoDisposeProviderRef<List<RenameFile>>;
+typedef SortListRef = AutoDisposeProviderRef<List<FileInfo>>;
 String _$selectFileHash() => r'4b923f6166c9029bd60fcd235bb69dae1b9cd00c';
 
 /// See also [selectFile].
@@ -34,7 +34,7 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$getAllFileHash() => r'c4c4d5e04a471ac08f8cfc0f0eb0b02eb3801ef1';
+String _$getFileClassifyHash() => r'06e7975cee32e4b3b3eec8979ead427d56e0e5ec';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -57,88 +57,6 @@ class _SystemHash {
   }
 }
 
-typedef GetAllFileRef = AutoDisposeProviderRef<List<String>>;
-
-/// See also [getAllFile].
-@ProviderFor(getAllFile)
-const getAllFileProvider = GetAllFileFamily();
-
-/// See also [getAllFile].
-class GetAllFileFamily extends Family<List<String>> {
-  /// See also [getAllFile].
-  const GetAllFileFamily();
-
-  /// See also [getAllFile].
-  GetAllFileProvider call(
-    String folder,
-  ) {
-    return GetAllFileProvider(
-      folder,
-    );
-  }
-
-  @override
-  GetAllFileProvider getProviderOverride(
-    covariant GetAllFileProvider provider,
-  ) {
-    return call(
-      provider.folder,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'getAllFileProvider';
-}
-
-/// See also [getAllFile].
-class GetAllFileProvider extends AutoDisposeProvider<List<String>> {
-  /// See also [getAllFile].
-  GetAllFileProvider(
-    this.folder,
-  ) : super.internal(
-          (ref) => getAllFile(
-            ref,
-            folder,
-          ),
-          from: getAllFileProvider,
-          name: r'getAllFileProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getAllFileHash,
-          dependencies: GetAllFileFamily._dependencies,
-          allTransitiveDependencies:
-              GetAllFileFamily._allTransitiveDependencies,
-        );
-
-  final String folder;
-
-  @override
-  bool operator ==(Object other) {
-    return other is GetAllFileProvider && other.folder == folder;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, folder.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-String _$getFileClassifyHash() => r'06e7975cee32e4b3b3eec8979ead427d56e0e5ec';
 typedef GetFileClassifyRef = AutoDisposeProviderRef<FileClassify>;
 
 /// See also [getFileClassify].
@@ -234,12 +152,12 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
 );
 
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
-String _$fileListHash() => r'8d06cf0b8a1a9748bd5fa0fd9e3fc167f71a2ef0';
+String _$fileListHash() => r'dc5e9ab712f3264a01c511b8bfdb48734e77c948';
 
 /// See also [FileList].
 @ProviderFor(FileList)
 final fileListProvider =
-    AutoDisposeNotifierProvider<FileList, List<RenameFile>>.internal(
+    AutoDisposeNotifierProvider<FileList, List<FileInfo>>.internal(
   FileList.new,
   name: r'fileListProvider',
   debugGetCreateSourceHash:
@@ -248,7 +166,7 @@ final fileListProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$FileList = AutoDisposeNotifier<List<RenameFile>>;
+typedef _$FileList = AutoDisposeNotifier<List<FileInfo>>;
 String _$selectAllHash() => r'bb39801d68715244071f9e67dda3c91743b3204c';
 
 /// See also [SelectAll].

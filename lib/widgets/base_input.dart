@@ -9,6 +9,7 @@ class BaseInput extends StatelessWidget {
   const BaseInput({
     super.key,
     this.disable = false,
+    this.readOnly = false,
     this.padding,
     this.leading,
     this.controller,
@@ -25,6 +26,7 @@ class BaseInput extends StatelessWidget {
   });
 
   final bool disable;
+  final bool readOnly;
   final EdgeInsets? padding;
   final Widget? leading;
   final TextEditingController? controller;
@@ -61,6 +63,7 @@ class BaseInput extends StatelessWidget {
             Expanded(
               child: TextField(
                 controller: controller,
+                readOnly: readOnly,
                 decoration: InputDecoration(
                   hintText: hintText,
                   isDense: true,

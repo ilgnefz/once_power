@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
@@ -10,7 +10,7 @@ import 'package:once_power/utils/format.dart';
 import 'mode.dart';
 
 void updateExtension(dynamic ref) {
-  List<RenameFile> files = ref.read(fileListProvider);
+  List<FileInfo> files = ref.read(fileListProvider);
   for (var file in files) {
     if (file.checked && file.type != FileClassify.folder) {
       String newExtension = ref.watch(extensionControllerProvider).text;
@@ -25,7 +25,7 @@ void updateExtension(dynamic ref) {
 }
 
 void updateName(dynamic ref) {
-  List<RenameFile> files = ref.read(sortListProvider);
+  List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
   int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;
@@ -45,8 +45,8 @@ void updateName(dynamic ref) {
   }
 }
 
-String matchContent(dynamic ref, RenameFile file, int fileIndex,
-    int prefixIndex, int suffixIndex) {
+String matchContent(dynamic ref, FileInfo file, int fileIndex, int prefixIndex,
+    int suffixIndex) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool isLength = ref.watch(inputLengthProvider);
   bool matchCase = ref.watch(matchCaseProvider);
@@ -73,7 +73,7 @@ String matchContent(dynamic ref, RenameFile file, int fileIndex,
 }
 
 /// 获取日期
-String dateName(WidgetRef ref, RenameFile file) {
+String dateName(WidgetRef ref, FileInfo file) {
   List<DateTime> list = [file.createDate, file.modifyDate];
   if (file.exifDate != null) list.add(file.exifDate!);
   list.sort();

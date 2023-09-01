@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:path/path.dart' as path;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file.g.dart';
@@ -12,9 +9,9 @@ part 'file.g.dart';
 @riverpod
 class FileList extends _$FileList {
   @override
-  List<RenameFile> build() => [];
+  List<FileInfo> build() => [];
 
-  void add(RenameFile file) => state = [...state, file];
+  void add(FileInfo file) => state = [...state, file];
 
   void clear() => state = [];
 
@@ -60,11 +57,11 @@ class FileList extends _$FileList {
 }
 
 @riverpod
-List<RenameFile> sortList(SortListRef ref) {
+List<FileInfo> sortList(SortListRef ref) {
   final type = ref.watch(fileSortTypeProvider);
   final list = ref.watch(fileListProvider);
 
-  List<RenameFile> sortedList;
+  List<FileInfo> sortedList;
 
   switch (type) {
     case SortType.nameDescending:
@@ -114,21 +111,6 @@ class SelectAll extends _$SelectAll {
     state = !state;
     ref.read(fileListProvider.notifier).checkAll(state);
   }
-}
-
-@riverpod
-List<String> getAllFile(GetAllFileRef ref, String folder) {
-  Directory directory = Directory(folder);
-  List<String> children = [];
-  List<FileSystemEntity> files = directory.listSync(recursive: true);
-  for (var file in files) {
-    if (FileSystemEntity.isFileSync(file.path)) {
-      String extension = path.extension(file.path);
-      extension = extension == '' ? extension : extension.substring(1);
-      if (!filter.contains(extension)) children.add(file.path);
-    }
-  }
-  return children;
 }
 
 @riverpod

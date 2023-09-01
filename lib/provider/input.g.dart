@@ -248,5 +248,36 @@ final extensionClearProvider =
 );
 
 typedef _$ExtensionClear = AutoDisposeNotifier<bool>;
+String _$targetControllerHash() => r'd4d6329b7456e37e9fa87657e45bae51342a2d38';
+
+/// See also [TargetController].
+@ProviderFor(TargetController)
+final targetControllerProvider = AutoDisposeNotifierProvider<TargetController,
+    TextEditingController>.internal(
+  TargetController.new,
+  name: r'targetControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$targetControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TargetController = AutoDisposeNotifier<TextEditingController>;
+String _$targetClearHash() => r'f35b70c431e475e1ab1284dc977fb6290b7d7479';
+
+/// See also [TargetClear].
+@ProviderFor(TargetClear)
+final targetClearProvider =
+    AutoDisposeNotifierProvider<TargetClear, bool>.internal(
+  TargetClear.new,
+  name: r'targetClearProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$targetClearHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TargetClear = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

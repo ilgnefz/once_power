@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/file.dart';
-import 'package:once_power/views/action_bar/apply_menu/apply_button.dart';
 import 'package:once_power/widgets/click_text.dart';
+
+import 'apply_button.dart';
 
 class ApplyMenu extends ConsumerWidget {
   const ApplyMenu({super.key});

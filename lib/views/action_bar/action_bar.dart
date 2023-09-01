@@ -3,21 +3,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/views/action_bar/apply_menu/apply_menu.dart';
-import 'package:once_power/views/action_bar/tool_menu/tool_menu.dart';
-import 'package:once_power/widgets/easy_checkbox.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/views/action_bar/organize_menu/organize_menu.dart';
 import 'package:once_power/widgets/mode_card.dart';
 
-class ActionBar extends StatelessWidget {
+import 'rename_menu/rename_menu.dart';
+
+class ActionBar extends ConsumerWidget {
   const ActionBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const String replaceLabel = '替换';
     const String reserveLabel = '保留';
+    const String organize = '整理';
 
-    const String appendMode = '追加模式';
-    const String addFolder = '添加文件夹';
+    bool enableOrganize = ref.watch(useOrganizeProvider);
 
     return Column(
       children: [
@@ -25,10 +26,12 @@ class ActionBar extends StatelessWidget {
           width: AppNum.actionBarW,
           height: AppNum.topMenuH,
           color: Colors.white,
-          child: const Row(
+          child: Row(
             children: [
-              ModeCard(label: replaceLabel, mode: FunctionMode.replace),
-              ModeCard(label: reserveLabel, mode: FunctionMode.reserve),
+              const ModeCard(label: replaceLabel, mode: FunctionMode.replace),
+              const ModeCard(label: reserveLabel, mode: FunctionMode.reserve),
+              if (enableOrganize)
+                const ModeCard(label: organize, mode: FunctionMode.organize),
             ],
           ),
         ),
@@ -36,32 +39,9 @@ class ActionBar extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(AppNum.actionBarP),
             width: AppNum.actionBarW,
-            child: Column(
-              children: [
-                const Expanded(child: SingleChildScrollView(child: ToolMenu())),
-                Consumer(
-                  builder: (context, ref, child) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      EasyCheckbox(
-                        appendMode,
-                        checked: ref.watch(appendModeProvider),
-                        onChanged: (v) =>
-                            ref.read(appendModeProvider.notifier).update(),
-                      ),
-                      EasyCheckbox(
-                        addFolder,
-                        checked: ref.watch(addFolderProvider),
-                        onChanged: (v) =>
-                            ref.read(addFolderProvider.notifier).update(),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: AppNum.gapW),
-                const ApplyMenu(),
-              ],
-            ),
+            child: ref.watch(currentModeProvider) == FunctionMode.organize
+                ? const OrganizeMenu()
+                : const RenameMenu(),
           ),
         ),
       ],

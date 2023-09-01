@@ -1,6 +1,6 @@
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -124,7 +124,7 @@ class Cancel extends _$Cancel {
 
 @riverpod
 bool selectAudio(SelectAudioRef ref) {
-  List<RenameFile> audioList = ref
+  List<FileInfo> audioList = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.audio)
       .toList();
@@ -134,7 +134,7 @@ bool selectAudio(SelectAudioRef ref) {
 
 @riverpod
 bool selectFolder(SelectFolderRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.folder)
       .toList();
@@ -144,7 +144,7 @@ bool selectFolder(SelectFolderRef ref) {
 
 @riverpod
 bool selectImage(SelectImageRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.image)
       .toList();
@@ -154,7 +154,7 @@ bool selectImage(SelectImageRef ref) {
 
 @riverpod
 bool selectOther(SelectOtherRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.other)
       .toList();
@@ -164,7 +164,7 @@ bool selectOther(SelectOtherRef ref) {
 
 @riverpod
 bool selectText(SelectTextRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.text)
       .toList();
@@ -174,7 +174,7 @@ bool selectText(SelectTextRef ref) {
 
 @riverpod
 bool selectVideo(SelectVideoRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.video)
       .toList();
@@ -184,10 +184,37 @@ bool selectVideo(SelectVideoRef ref) {
 
 @riverpod
 bool selectZip(SelectZipRef ref) {
-  List<RenameFile> list = ref
+  List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.zip)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
+}
+
+@riverpod
+class UseOrganize extends _$UseOrganize {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isUseOrganize, state);
+  }
+}
+
+@riverpod
+class SaveLog extends _$SaveLog {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isSaveLog) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSaveLog, state);
+  }
+}
+
+@riverpod
+class NewVersion extends _$NewVersion {
+  @override
+  bool build() => false;
+  void update() => state = !state;
 }

@@ -4,8 +4,7 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/rename.dart';
-
-import '../../../widgets/easy_chip.dart';
+import 'package:once_power/widgets/easy_chip.dart';
 
 class DifferMenu extends ConsumerWidget {
   const DifferMenu({super.key});

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/rename_file.dart';
-import 'package:once_power/model/rename_info.dart';
+import 'package:once_power/model/file_info.dart';
+import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
@@ -16,14 +16,14 @@ class ApplyButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const String applyChange = '应用更改';
 
-    List<RenameFile> fileList = ref.watch(fileListProvider);
+    List<FileInfo> fileList = ref.watch(fileListProvider);
 
     applyRename() {
       int total = fileList.where((e) => e.checked).toList().length;
       int count = 0;
-      List<RenameInfo> errorList = [];
-      List<RenameInfo> warningList = [];
-      for (RenameFile file in fileList) {
+      List<NotificationInfo> errorList = [];
+      List<NotificationInfo> warningList = [];
+      for (FileInfo file in fileList) {
         bool sameName = file.name == file.newName;
         bool sameExtension = file.extension == file.newExtension;
         if (file.checked) {
@@ -35,7 +35,7 @@ class ApplyButton extends ConsumerWidget {
           String newPath =
               path.join(file.parent, '${file.newName}$newExtension');
           if (sameName && sameExtension) {
-            warningList.add(RenameInfo(
+            warningList.add(NotificationInfo(
               file: '${file.name}$extension',
               message: ' 没有更改名称' * 5,
             ));
@@ -44,7 +44,7 @@ class ApplyButton extends ConsumerWidget {
           if (File(newPath).existsSync()) {
             final oldFile = '${file.name}$extension';
             final newFile = '${file.newName}$newExtension';
-            warningList.add(RenameInfo(
+            warningList.add(NotificationInfo(
               file: oldFile,
               message: ' 重命名为 $newFile 的文件已存在',
             ));
@@ -61,7 +61,7 @@ class ApplyButton extends ConsumerWidget {
             fileInfo.updateOriginExtension(file.id, file.newExtension);
             count++;
           } catch (e) {
-            errorList.add(RenameInfo(
+            errorList.add(NotificationInfo(
               file: '${file.name}$extension',
               message: ' 因为 $e 重命名失败',
             ));
@@ -75,7 +75,7 @@ class ApplyButton extends ConsumerWidget {
           : warningList.isNotEmpty
               ? MessageType.warning
               : MessageType.success;
-      List<RenameInfo> list = type == MessageType.failure
+      List<NotificationInfo> list = type == MessageType.failure
           ? errorList
           : type == MessageType.warning
               ? warningList
@@ -90,7 +90,8 @@ class ApplyButton extends ConsumerWidget {
   }
 }
 
-void showToast(MessageType type, List<RenameInfo> list, int total, int count) {
+void showToast(
+    MessageType type, List<NotificationInfo> list, int total, int count) {
   if (type == MessageType.success) {
     NotificationMessage.show('重命名成功', '选中的 $total 个已全部重命名成功', [], type);
   }
@@ -98,7 +99,7 @@ void showToast(MessageType type, List<RenameInfo> list, int total, int count) {
     String message = list.isEmpty
         ? '请先更改文件名称后再继续操作'
         : '选中 $total 个中 ${total - count} 个重命名失败';
-    List<RenameInfo> infoList = list.isEmpty ? [] : list;
+    List<NotificationInfo> infoList = list.isEmpty ? [] : list;
     NotificationMessage.show('重命名失败', message, infoList, type);
   }
   if (type == MessageType.warning) {

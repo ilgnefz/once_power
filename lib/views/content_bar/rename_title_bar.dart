@@ -10,8 +10,8 @@ import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class TopTitleBar extends ConsumerWidget {
-  const TopTitleBar({super.key});
+class RenameTitleBar extends ConsumerWidget {
+  const RenameTitleBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,44 +35,40 @@ class TopTitleBar extends ConsumerWidget {
     int selected = ref.watch(selectFileProvider);
     int total = ref.watch(fileListProvider).length;
 
-    return SizedBox(
-      height: AppNum.fileCardH,
-      // width: double.infinity,
-      child: Row(
-        children: [
-          CheckTile(
-            check: ref.watch(selectAllProvider),
-            label: '$originName ($selected/$total)',
-            onChanged: (v) {
-              ref.read(selectAllProvider.notifier).update();
-              updateName(ref);
-              updateExtension(ref);
-            },
-            action: ClickIcon(
-              svg: ref.watch(fileSortTypeProvider).value,
-              size: AppNum.fileCardH,
-              iconSize: 22,
+    return Row(
+      children: [
+        CheckTile(
+          check: ref.watch(selectAllProvider),
+          label: '$originName ($selected/$total)',
+          onChanged: (v) {
+            ref.read(selectAllProvider.notifier).update();
+            updateName(ref);
+            updateExtension(ref);
+          },
+          action: ClickIcon(
+            svg: ref.watch(fileSortTypeProvider).value,
+            size: AppNum.fileCardH,
+            iconSize: 22,
+            color: AppColors.icon,
+            onTap: toggleSortType,
+          ),
+        ),
+        const NormalTile(label: renameName),
+        const SizedBox(
+          width: AppNum.extensionW,
+          child: Center(child: FilterFileButton()),
+        ),
+        SizedBox(
+          width: AppNum.deleteW,
+          child: Center(
+            child: IconButton(
+              onPressed: deleteAll,
               color: AppColors.icon,
-              onTap: toggleSortType,
+              icon: const Icon(Icons.delete_rounded),
             ),
           ),
-          const NormalTile(label: renameName),
-          const SizedBox(
-            width: AppNum.extensionW,
-            child: Center(child: FilterFileButton()),
-          ),
-          SizedBox(
-            width: AppNum.deleteW,
-            child: Center(
-              child: IconButton(
-                onPressed: deleteAll,
-                color: AppColors.icon,
-                icon: const Icon(Icons.delete_forever_rounded),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

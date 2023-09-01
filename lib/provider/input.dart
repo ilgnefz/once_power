@@ -146,3 +146,22 @@ class ExtensionClear extends _$ExtensionClear {
   bool build() => false;
   void update(bool value) => state = value;
 }
+
+@riverpod
+class TargetController extends _$TargetController {
+  @override
+  TextEditingController build() {
+    TextEditingController controller = TextEditingController();
+    controller.addListener(() {
+      ref.read(targetClearProvider.notifier).update(controller.text.isNotEmpty);
+    });
+    return controller;
+  }
+}
+
+@riverpod
+class TargetClear extends _$TargetClear {
+  @override
+  bool build() => false;
+  void update(bool value) => state = value;
+}

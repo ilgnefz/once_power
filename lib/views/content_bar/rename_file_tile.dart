@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/model/rename_file.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/utils/rename.dart';
@@ -9,10 +9,10 @@ import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class ContentFileTile extends ConsumerWidget {
-  const ContentFileTile({super.key, required this.file});
+class RenameFileTile extends ConsumerWidget {
+  const RenameFileTile(this.file, {super.key});
 
-  final RenameFile file;
+  final FileInfo file;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

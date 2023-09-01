@@ -6,7 +6,7 @@ part of 'select.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectAudioHash() => r'9fad9af3a8b835bfee6184778cf81c98b7cf844a';
+String _$selectAudioHash() => r'ffe034a78d452f5afc56750c3a3c55507bdb35ac';
 
 /// See also [selectAudio].
 @ProviderFor(selectAudio)
@@ -20,7 +20,7 @@ final selectAudioProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectAudioRef = AutoDisposeProviderRef<bool>;
-String _$selectFolderHash() => r'7134a3bc4ea37427338ece1aee3bebfd8b623236';
+String _$selectFolderHash() => r'30006b7b5cdb6c910f1cbc2d9eaf65a7dcff26b9';
 
 /// See also [selectFolder].
 @ProviderFor(selectFolder)
@@ -34,7 +34,7 @@ final selectFolderProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectFolderRef = AutoDisposeProviderRef<bool>;
-String _$selectImageHash() => r'1dad323d13bde566a3e5c0ac994f733a71db187a';
+String _$selectImageHash() => r'c8731e006ea31c7d1e1ba2191a783da91b573fab';
 
 /// See also [selectImage].
 @ProviderFor(selectImage)
@@ -48,7 +48,7 @@ final selectImageProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectImageRef = AutoDisposeProviderRef<bool>;
-String _$selectOtherHash() => r'bf2d3df17e360040e375e65d58525f0f83308f68';
+String _$selectOtherHash() => r'877bd31c72d09035c5d2d84c1b4ebedca35cd5e0';
 
 /// See also [selectOther].
 @ProviderFor(selectOther)
@@ -62,7 +62,7 @@ final selectOtherProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectOtherRef = AutoDisposeProviderRef<bool>;
-String _$selectTextHash() => r'9c1be49c7764fb98a48a23be31bdeab849914d64';
+String _$selectTextHash() => r'35e10308fb94e2be3a0dc343d139d5c6e6774c37';
 
 /// See also [selectText].
 @ProviderFor(selectText)
@@ -76,7 +76,7 @@ final selectTextProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectTextRef = AutoDisposeProviderRef<bool>;
-String _$selectVideoHash() => r'156029a63ed00d9830beb863c0987fb98209acf9';
+String _$selectVideoHash() => r'7cb3bc15998dc9cdfd92f325dd3c7a2b222d886e';
 
 /// See also [selectVideo].
 @ProviderFor(selectVideo)
@@ -90,7 +90,7 @@ final selectVideoProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
-String _$selectZipHash() => r'c02f3a3483cee2e56c7fcf9fe8edf82d5e8351d3';
+String _$selectZipHash() => r'd2e37dba7a6e21a146b6f5687889f3bde6021149';
 
 /// See also [selectZip].
 @ProviderFor(selectZip)
@@ -282,5 +282,49 @@ final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
 );
 
 typedef _$Cancel = AutoDisposeNotifier<bool>;
+String _$useOrganizeHash() => r'640825586e27891c9a0a8e78db3cd04ea86184ea';
+
+/// See also [UseOrganize].
+@ProviderFor(UseOrganize)
+final useOrganizeProvider =
+    AutoDisposeNotifierProvider<UseOrganize, bool>.internal(
+  UseOrganize.new,
+  name: r'useOrganizeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$useOrganizeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseOrganize = AutoDisposeNotifier<bool>;
+String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
+
+/// See also [SaveLog].
+@ProviderFor(SaveLog)
+final saveLogProvider = AutoDisposeNotifierProvider<SaveLog, bool>.internal(
+  SaveLog.new,
+  name: r'saveLogProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$saveLogHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SaveLog = AutoDisposeNotifier<bool>;
+String _$newVersionHash() => r'4ca1493d32268d4efd0debf948f26dec34e9eed4';
+
+/// See also [NewVersion].
+@ProviderFor(NewVersion)
+final newVersionProvider =
+    AutoDisposeNotifierProvider<NewVersion, bool>.internal(
+  NewVersion.new,
+  name: r'newVersionProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$newVersionHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$NewVersion = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

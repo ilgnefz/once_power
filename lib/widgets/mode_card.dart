@@ -19,6 +19,8 @@ class ModeCard extends ConsumerWidget {
       flex: 1,
       child: InkWell(
         onTap: () {
+          FunctionMode before = ref.watch(currentModeProvider);
+          if (before == mode) return;
           ref.read(currentModeProvider.notifier).update(mode);
           updateName(ref);
         },
