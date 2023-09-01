@@ -193,7 +193,7 @@ bool selectZip(SelectZipRef ref) {
 }
 
 @riverpod
-class UseOrganize extends _$UseOrganize {
+class EnableArrange extends _$EnableArrange {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
   Future<void> update() async {

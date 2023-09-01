@@ -2,24 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanoid/nanoid.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/notification_info.dart';
-import 'package:once_power/model/types.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/file.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/notification.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
-class OrganizeButton extends ConsumerWidget {
-  const OrganizeButton({super.key});
+class ArrangeButton extends ConsumerWidget {
+  const ArrangeButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String arrangeFolder = '整理文件夹';
     List<FileInfo> realFiles = [];
     List<NotificationInfo> errorList = [];
 
@@ -39,6 +32,10 @@ class OrganizeButton extends ConsumerWidget {
       TextEditingController controller = ref.watch(targetControllerProvider);
       bool saveLog = ref.watch(saveLogProvider);
       String newPath = path.join(controller.text, path.basename(file.filePath));
+      if (!File(file.filePath).existsSync()) {
+        return errorList
+            .add(NotificationInfo(file: file.filePath, message: '不存在'));
+      }
       if (newPath != file.filePath) {
         if (File(newPath).existsSync()) newPath = renameFile(newPath);
         if (saveLog) {
@@ -52,52 +49,36 @@ class OrganizeButton extends ConsumerWidget {
         } catch (e) {
           errorList.add(NotificationInfo(
             file: file.filePath,
-            message: '移动失败，$e',
+            message: '移动失败：$e',
           ));
         }
       }
     }
 
+    void showNotification() {
+      if (errorList.isEmpty) {
+        NotificationMessage.show('整理成功', '已成功移动所有文件', [], MessageType.success);
+      } else {
+        NotificationMessage.show(
+            '整理失败', '以下几个移动失败！', errorList, MessageType.failure);
+      }
+    }
+
     Future<void> realFile(WidgetRef ref, String filePath) async {
       bool isFile = FileSystemEntity.isFileSync(filePath);
-      String id = nanoid(10);
-      String name = path.basename(filePath);
-      String extension = 'dir';
-      DateTime? exifDate;
-      DateTime createDate = File(filePath).statSync().changed;
-      DateTime modifyDate = File(filePath).statSync().modified;
-      if (isFile) {
-        extension = path.extension(filePath);
-        if (extension != '') {
-          name = name.split(extension).first;
-          extension = extension.substring(1);
-        }
-        if (image.contains(extension)) {
-          exifDate = await getExifDate(filePath);
-        }
-      }
-      FileClassify type = ref.read(getFileClassifyProvider(extension));
-      FileInfo renameFile = FileInfo(
-        id: id,
-        name: name,
-        newName: name,
-        parent: path.dirname(filePath),
-        filePath: filePath,
-        extension: extension,
-        newExtension: extension,
-        createDate: createDate,
-        modifyDate: modifyDate,
-        exifDate: exifDate,
-        type: type,
-        checked: true,
-      );
-      realFiles.add(renameFile);
+      FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+      realFiles.add(fileInfo);
     }
 
     void organizeFolder() async {
       List<FileInfo> files = ref.watch(fileListProvider);
       for (var file in files) {
         if (file.type == FileClassify.folder) {
+          if (!Directory(file.filePath).existsSync()) {
+            errorList
+                .add(NotificationInfo(file: file.filePath, message: '不存在'));
+            continue;
+          }
           final list = getAllFile(file.filePath);
           for (var file in list) {
             await realFile(ref, file);
@@ -109,26 +90,12 @@ class OrganizeButton extends ConsumerWidget {
       for (var file in realFiles) {
         moveFile(file);
       }
-      if (errorList.isEmpty) {
-        NotificationMessage.show(
-          '整理成功',
-          '已成功移动所有文件',
-          [],
-          MessageType.success,
-        );
-      } else {
-        NotificationMessage.show(
-          '整理失败',
-          '以下几个文件移动失败！',
-          errorList,
-          MessageType.failure,
-        );
-      }
+      showNotification();
     }
 
     return ElevatedButton(
       onPressed: ref.watch(fileListProvider).isEmpty ? null : organizeFolder,
-      child: const Text('整理文件夹'),
+      child: const Text(arrangeFolder),
     );
   }
 }

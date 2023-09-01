@@ -3,17 +3,15 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/content_bar/empty.dart';
-import 'package:once_power/views/content_bar/organize_file_tile.dart';
-import 'package:once_power/views/content_bar/organize_title_bar.dart';
-import 'package:once_power/views/content_bar/rename_title_bar.dart';
+import 'package:once_power/views/content_bar/arrange/arrange_file_tile.dart';
 
-import 'rename_file_tile.dart';
+import 'arrange/arrange_title_bar.dart';
+import 'empty.dart';
+import 'rename/rename_file_tile.dart';
+import 'rename/rename_title_bar.dart';
 
 class ContentBar extends ConsumerWidget {
   const ContentBar({super.key});
@@ -44,7 +42,7 @@ class ContentBar extends ConsumerWidget {
             SizedBox(
               height: AppNum.fileCardH,
               child: mode == FunctionMode.organize
-                  ? const OrganizeTitleBar()
+                  ? const ArrangeTitleBar()
                   : const RenameTitleBar(),
             ),
             Expanded(
@@ -62,7 +60,7 @@ class ContentBar extends ConsumerWidget {
                             index: index,
                             key: ValueKey(files[index].id),
                             child: mode == FunctionMode.organize
-                                ? OrganizeFileTile(files[index])
+                                ? ArrangeFileTile(files[index])
                                 : RenameFileTile(files[index]),
                           );
                         },

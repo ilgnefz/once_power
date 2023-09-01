@@ -4,8 +4,8 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class OrganizeTitleBar extends ConsumerWidget {
-  const OrganizeTitleBar({super.key});
+class ArrangeTitleBar extends ConsumerWidget {
+  const ArrangeTitleBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

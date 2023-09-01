@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/num.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
 
@@ -36,7 +36,7 @@ class RenameMenu extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppNum.gapW),
+        const SizedBox(height: AppNum.gapH),
         const ApplyMenu(),
       ],
     );

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class ModifyTextInput extends ConsumerWidget {
   const ModifyTextInput({super.key});
@@ -23,6 +21,12 @@ class ModifyTextInput extends ConsumerWidget {
     bool reserveTypeEmpty = ref.watch(currentReserveTypeProvider).isNotEmpty;
     bool disable =
         dateRename || (reverseMode && (inputNotEmpty || reserveTypeEmpty));
+
+    void toggleCase() {
+      ref.read(matchCaseProvider.notifier).update();
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       disable: disable,
       controller: ref.watch(modifyControllerProvider),
@@ -32,10 +36,7 @@ class ModifyTextInput extends ConsumerWidget {
       message: matchCaseTip,
       icon: AppIcons.cases,
       selected: ref.watch(matchCaseProvider),
-      onTap: () {
-        ref.read(matchCaseProvider.notifier).update();
-        updateName(ref);
-      },
+      onTap: toggleCase,
     );
   }
 }

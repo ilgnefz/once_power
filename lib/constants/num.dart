@@ -14,4 +14,5 @@ class AppNum {
   static const double deleteW = 40;
   static const double fileCardH = 40;
   static const double fileCardP = 8;
+  static const double tileFontSize = 13;
 }

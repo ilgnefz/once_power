@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/icons.dart';
-import 'package:once_power/constants/keys.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/rename.dart';
-import 'package:once_power/utils/storage.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
-import 'package:once_power/widgets/digit_input.dart';
+import 'package:once_power/constants/constants.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class PrefixNumInput extends ConsumerWidget {
   const PrefixNumInput({super.key});
@@ -29,6 +25,33 @@ class PrefixNumInput extends ConsumerWidget {
     TextEditingController startController =
         ref.watch(prefixStartControllerProvider);
 
+    void getLengthNum() async {
+      updateName(ref);
+      int num = int.parse(lengthController.text.replaceAll(prefixNumLengthLabel, ''));
+      await StorageUtil.setInt(AppKeys.prefixLength, num);
+    }
+
+    void lengthNumInput(v) async{
+      updateName(ref);
+      await StorageUtil.setInt(AppKeys.prefixLength, int.parse(v));
+    }
+
+    void getStartNum() async {
+      updateName(ref);
+      int num = int.parse(startController.text.replaceAll(prefixNumStartLabel, ''));
+      await StorageUtil.setInt(AppKeys.prefixStart, num);
+    }
+
+    void startNumInput(v) async{
+      updateName(ref);
+      await StorageUtil.setInt(AppKeys.prefixStart, int.parse(v));
+    }
+
+    void toggleSwap() {
+      ref.read(swapPrefixProvider.notifier).update();
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       label: increaseLabel,
       slot: Row(
@@ -38,15 +61,8 @@ class PrefixNumInput extends ConsumerWidget {
               controller: lengthController,
               value: defaultPrefixNumLength,
               label: prefixNumLengthLabel,
-              callback: () async {
-                updateName(ref);
-                int num = int.parse(lengthController.text.replaceAll('位', ''));
-                await StorageUtil.setInt(AppKeys.prefixLength, num);
-              },
-              onChanged: (v) async {
-                updateName(ref);
-                await StorageUtil.setInt(AppKeys.prefixLength, int.parse(v));
-              },
+              callback: getLengthNum,
+              onChanged: lengthNumInput,
             ),
           ),
           const SizedBox(width: 8.0),
@@ -55,15 +71,8 @@ class PrefixNumInput extends ConsumerWidget {
               controller: startController,
               value: defaultPrefixNumStart,
               label: prefixNumStartLabel,
-              callback: () async {
-                updateName(ref);
-                int num = int.parse(startController.text.replaceAll('开始', ''));
-                await StorageUtil.setInt(AppKeys.prefixStart, num);
-              },
-              onChanged: (v) async {
-                updateName(ref);
-                await StorageUtil.setInt(AppKeys.prefixStart, int.parse(v));
-              },
+              callback: getStartNum,
+              onChanged: startNumInput,
             ),
           ),
         ],
@@ -72,10 +81,7 @@ class PrefixNumInput extends ConsumerWidget {
       message: prefixSwapTip,
       icon: AppIcons.swap,
       selected: ref.watch(swapPrefixProvider),
-      onTap: () {
-        ref.read(swapPrefixProvider.notifier).update();
-        updateName(ref);
-      },
+      onTap: toggleSwap,
     );
   }
 }

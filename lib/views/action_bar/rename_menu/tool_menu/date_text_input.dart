@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/icons.dart';
-import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/utils/rename.dart';
-import 'package:once_power/utils/storage.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
-import 'package:once_power/widgets/digit_input.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 import 'date_selected.dart';
 
@@ -26,6 +21,26 @@ class DateTextInput extends ConsumerWidget {
 
     TextEditingController controller = ref.watch(dateLengthControllerProvider);
 
+    void getLengthNum() async {
+      updateName(ref);
+      int num = int.parse(controller.text.replaceAll(dateLengthLabel, ''));
+      await StorageUtil.setInt(AppKeys.dateLength, num);
+    }
+
+    void lengthNumInput(v) async {
+      updateName(ref);
+      await StorageUtil.setInt(AppKeys.dateLength, int.parse(v));
+    }
+
+    void toggleDateRename() {
+      ref.read(dateRenameProvider.notifier).update();
+      ref.watch(modifyControllerProvider).clear();
+      if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
+        ref.watch(matchControllerProvider).clear();
+      }
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       label: dateLabel,
       slot: Row(
@@ -35,15 +50,8 @@ class DateTextInput extends ConsumerWidget {
               controller: controller,
               value: defaultDateLength,
               label: dateLengthLabel,
-              callback: () async {
-                updateName(ref);
-                int num = int.parse(controller.text.replaceAll('位', ''));
-                await StorageUtil.setInt(AppKeys.dateLength, num);
-              },
-              onChanged: (v) async {
-                updateName(ref);
-                await StorageUtil.setInt(AppKeys.dateLength, int.parse(v));
-              },
+              callback: getLengthNum,
+              onChanged: lengthNumInput,
             ),
           ),
           const SizedBox(width: 8),
@@ -53,14 +61,7 @@ class DateTextInput extends ConsumerWidget {
       message: dateTip,
       icon: AppIcons.date,
       selected: ref.watch(dateRenameProvider),
-      onTap: () {
-        ref.read(dateRenameProvider.notifier).update();
-        ref.watch(modifyControllerProvider).clear();
-        if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
-          ref.watch(matchControllerProvider).clear();
-        }
-        updateName(ref);
-      },
+      onTap: toggleDateRename,
     );
   }
 }

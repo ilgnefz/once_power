@@ -5,6 +5,8 @@ class EmptyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const String emptyText = '拖动文件（夹）到这里';
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -15,7 +17,7 @@ class EmptyView extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           Text(
-            '拖动文件（夹）到这里',
+            emptyText,
             style: TextStyle(
               fontSize: 18,
               color: Theme.of(context).primaryColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/widgets/action_bar/box_card.dart';
-import 'package:once_power/widgets/base_input.dart';
+import 'package:once_power/widgets/input/base_input.dart';
+import 'package:once_power/widgets/input/box_card.dart';
 
 class CommonInputMenu extends StatelessWidget {
   const CommonInputMenu({

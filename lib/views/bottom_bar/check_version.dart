@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/notification_info.dart';
-import 'package:once_power/model/version.dart';
+import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/notification.dart';
-import 'package:once_power/utils/package_desc.dart';
+import 'package:once_power/utils/utils.dart';
 
 class CheckVersion extends ConsumerStatefulWidget {
   const CheckVersion({super.key});
@@ -19,6 +15,8 @@ class CheckVersion extends ConsumerStatefulWidget {
 }
 
 class _CheckVersionState extends ConsumerState<CheckVersion> {
+  final String versionText =
+      'https://gitee.com/ilgnefz/once_power/raw/master/version.json';
   bool hover = false;
   bool check = false;
 
@@ -26,8 +24,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
     check = true;
     try {
       Dio dio = Dio();
-      final response = await dio
-          .get('https://gitee.com/ilgnefz/once_power/raw/master/version.json');
+      final response = await dio.get(versionText);
       VersionInfoResponse res =
           VersionInfoResponse.fromJson(jsonDecode(response.toString()));
       int version = getExtendedVersionNumber(res.info.first.version);

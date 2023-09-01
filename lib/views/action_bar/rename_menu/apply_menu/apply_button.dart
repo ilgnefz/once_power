@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/notification_info.dart';
+import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
@@ -15,7 +13,6 @@ class ApplyButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String applyChange = '应用更改';
-
     List<FileInfo> fileList = ref.watch(fileListProvider);
 
     applyRename() {
@@ -52,7 +49,7 @@ class ApplyButton extends ConsumerWidget {
           }
           try {
             if (file.type == FileClassify.folder) {
-              Directory(newPath).renameSync(newPath);
+              Directory(oldPath).renameSync(newPath);
             } else {
               File(oldPath).renameSync(newPath);
             }

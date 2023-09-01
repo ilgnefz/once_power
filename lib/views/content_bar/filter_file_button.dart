@@ -12,6 +12,8 @@ class FilterFileButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String delete = '删除未选择';
+
     bool isCheck(FileClassify classify) {
       if (classify == FileClassify.audio) return ref.watch(selectAudioProvider);
       if (classify == FileClassify.other) return ref.watch(selectOtherProvider);
@@ -22,7 +24,6 @@ class FilterFileButton extends ConsumerWidget {
       return ref.watch(selectFolderProvider);
     }
 
-    // TODO 当没有要删除的文件时，应该显示一个提示
     void remove() {
       ref.read(fileListProvider.notifier).removeUncheck();
       Navigator.of(context).pop();
@@ -35,11 +36,36 @@ class FilterFileButton extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
           child: InkWell(
             onTap: remove,
-            child: const Text('删除未选择', style: TextStyle(color: Colors.red)),
+            child: const Text(delete, style: TextStyle(color: Colors.red)),
           ),
         ),
       );
     }
+
+    List<DropdownMenuItem> items = ref.watch(classifyListProvider).map(
+      (e) {
+        return DropdownMenuItem(
+          value: e,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              void toggleCheck(v) {
+                ref.read(fileListProvider.notifier).checkPart(e, !isCheck(e));
+                updateName(ref);
+                updateExtension(ref);
+                setState(() {});
+              }
+
+              return Row(
+                children: [
+                  Checkbox(value: isCheck(e), onChanged: toggleCheck),
+                  Text(e.value),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    ).toList();
 
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
@@ -48,34 +74,7 @@ class FilterFileButton extends ConsumerWidget {
           size: 24,
           color: AppColors.icon,
         ),
-        items: [
-          deleteUncheck(),
-          ...ref.watch(classifyListProvider).map(
-            (e) {
-              return DropdownMenuItem(
-                value: e,
-                child: StatefulBuilder(
-                  builder: (context, setState) => Row(
-                    children: [
-                      Checkbox(
-                        value: isCheck(e),
-                        onChanged: (v) {
-                          ref
-                              .read(fileListProvider.notifier)
-                              .checkPart(e, !isCheck(e));
-                          updateName(ref);
-                          updateExtension(ref);
-                          setState(() {});
-                        },
-                      ),
-                      Text(e.value),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ).toList(),
-        ],
+        items: [deleteUncheck(), ...items],
         onChanged: (value) {},
         dropdownStyleData: DropdownStyleData(
           width: 120,

@@ -22,21 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         textTheme: const TextTheme(
-          // displayLarge: TextStyle(fontSize: 14, color: Colors.black),
-          // displayMedium: TextStyle(fontSize: 14, color: Colors.black),
-          // displaySmall: TextStyle(fontSize: 14, color: Colors.black),
-          // headlineLarge: TextStyle(fontSize: 14, color: Colors.black),
-          // headlineMedium: TextStyle(fontSize: 14, color: Colors.black),
-          // headlineSmall: TextStyle(fontSize: 14, color: Colors.black),
-          // titleLarge: TextStyle(fontSize: 14, color: Colors.black),
           titleMedium: TextStyle(fontSize: 14, color: Colors.black),
-          // titleSmall: TextStyle(fontSize: 12, color: Colors.black),
           bodyLarge: TextStyle(fontSize: 14, color: Colors.black),
           bodyMedium: TextStyle(fontSize: 14, color: Colors.black),
-          // bodySmall: TextStyle(fontSize: 12, color: Colors.black),
-          // labelLarge: TextStyle(fontSize: 14, color: Colors.black),
-          // labelMedium: TextStyle(fontSize: 14, color: Colors.black),
-          // labelSmall: TextStyle(fontSize: 14, color: Colors.black),
         ).useSystemChineseFont(),
       ),
       localizationsDelegates: const [
@@ -45,7 +33,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('zh', 'CN')],
-      builder: BotToastInit(), //1.调用BotToastInit
+      builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       home: const HomePage(),
     );

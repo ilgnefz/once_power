@@ -4,10 +4,10 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/base_input.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/input/base_input.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 

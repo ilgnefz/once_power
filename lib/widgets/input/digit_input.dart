@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:once_power/widgets/base_input.dart';
+import 'package:once_power/widgets/input/base_input.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
-
-import 'my_text.dart';
 
 class DigitInput extends StatefulWidget {
   const DigitInput({
@@ -139,7 +137,7 @@ class OperatorButton extends StatelessWidget {
             width: 20,
             // height: 32,
             alignment: Alignment.center,
-            child: MyText(operator, fontSize: 18),
+            child: Text(operator, style: const TextStyle(fontSize: 18)),
           ),
         ),
       ),

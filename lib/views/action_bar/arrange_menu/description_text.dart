@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/constants.dart';
 
 class DescriptionText extends StatelessWidget {
   const DescriptionText({super.key});
@@ -12,23 +13,23 @@ class DescriptionText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('功能使用说明', style: titleStyle),
-        SizedBox(height: 8),
-        BaseRichText(
+        const SizedBox(height: AppNum.gapH / 2),
+        const BaseRichText(
           title: '目标文件夹',
           content: '默认为第一个添加的文件的父文件夹或文件夹本身',
         ),
-        SizedBox(height: 4),
-        BaseRichText(
+        const SizedBox(height: AppNum.gapH / 2),
+        const BaseRichText(
           title: '日志',
           content: '保存的日志会在目标文件夹内',
         ),
-        SizedBox(height: 4),
-        BaseRichText(
+        const SizedBox(height: AppNum.gapH / 2),
+        const BaseRichText(
           title: '删除空文件夹',
           content: '删除添加的文件夹下的所有空文件夹',
         ),
-        SizedBox(height: 4),
-        BaseRichText(
+        const SizedBox(height: AppNum.gapH / 2),
+        const BaseRichText(
           title: '整理文件夹',
           content: '将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内',
         ),
@@ -45,15 +46,8 @@ class BaseRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle mainStyle = TextStyle(
-      color: Theme.of(context).primaryColor,
-      letterSpacing: 1.2,
-    );
-    TextStyle baseStyle = const TextStyle(
-      color: Color(0xFF666666),
-      height: 1.5,
-      letterSpacing: 1.2,
-    );
+    TextStyle mainStyle = TextStyle(color: Theme.of(context).primaryColor);
+    const baseStyle = TextStyle(color: Color(0xFF666666), height: 1.5);
 
     return RichText(
       text: TextSpan(

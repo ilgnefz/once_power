@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/types.dart';
+import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class OrganizeFileTile extends ConsumerWidget {
-  const OrganizeFileTile(this.file, {super.key});
+class ArrangeFileTile extends ConsumerWidget {
+  const ArrangeFileTile(this.file, {super.key});
 
   final FileInfo file;
 
@@ -22,7 +21,7 @@ class OrganizeFileTile extends ConsumerWidget {
           onTap: () {},
           child: Row(
             children: [
-              const SizedBox(width: 8),
+              const SizedBox(width: AppNum.gapW),
               Icon(
                 getFileIcon(file.extension),
                 color: Theme.of(context).primaryColor,
@@ -32,14 +31,14 @@ class OrganizeFileTile extends ConsumerWidget {
                 label: file.extension == '' || file.type == FileClassify.folder
                     ? file.name
                     : '${file.name}.${file.extension}',
-                fontSize: 12,
+                fontSize: AppNum.tileFontSize,
               ),
               SizedBox(
                 width: AppNum.deleteW,
                 child: Center(
                   child: Text(
                     file.type.value,
-                    style: const TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: AppNum.tileFontSize),
                   ),
                 ),
               ),
@@ -50,7 +49,7 @@ class OrganizeFileTile extends ConsumerWidget {
                     onPressed: () =>
                         ref.read(fileListProvider.notifier).remove(file.id),
                     color: Colors.black26,
-                    icon: const Icon(Icons.delete_forever_rounded),
+                    icon: const Icon(Icons.delete_rounded),
                   ),
                 ),
               ),
@@ -60,14 +59,4 @@ class OrganizeFileTile extends ConsumerWidget {
       ),
     );
   }
-}
-
-IconData getFileIcon(String extension) {
-  if (folder.contains(extension)) return Icons.folder_rounded;
-  if (image.contains(extension)) return Icons.image_rounded;
-  if (video.contains(extension)) return Icons.movie_creation_rounded;
-  if (text.contains(extension)) return Icons.text_snippet_rounded;
-  if (audio.contains(extension)) return Icons.audiotrack_rounded;
-  if (zip.contains(extension)) return Icons.backpack_rounded;
-  return Icons.question_mark_rounded;
 }

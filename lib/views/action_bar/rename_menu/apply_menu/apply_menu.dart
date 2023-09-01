@@ -1,8 +1,7 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
 import 'package:once_power/widgets/click_text.dart';
 

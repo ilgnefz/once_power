@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class FileExtensionInput extends ConsumerWidget {
   const FileExtensionInput({super.key});
@@ -16,6 +15,12 @@ class FileExtensionInput extends ConsumerWidget {
     final String fileExtensionHint = disable ? '输入已禁用' : '修改为的扩展名';
     const String fileExtensionTip = '启用修改扩展名';
 
+    void clearInput() {
+      ref.read(modifyExtensionProvider.notifier).update();
+      ref.read(extensionControllerProvider).clear();
+      updateExtension(ref);
+    }
+
     return CommonInputMenu(
       disable: disable,
       label: fileExtensionLabel,
@@ -26,11 +31,7 @@ class FileExtensionInput extends ConsumerWidget {
       icon: AppIcons.checkbox,
       selected: ref.watch(modifyExtensionProvider),
       onChanged: (v) => updateExtension(ref),
-      onTap: () {
-        ref.read(modifyExtensionProvider.notifier).update();
-        ref.read(extensionControllerProvider).clear();
-        updateExtension(ref);
-      },
+      onTap: clearInput,
     );
   }
 }

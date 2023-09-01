@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
@@ -23,7 +22,16 @@ class RenameFileTile extends ConsumerWidget {
     const String modifyDate = '修改日期';
     const String exifDate = '拍摄日期';
 
-    const double fontSize = 12;
+    void autoInput() {
+      ref.watch(matchControllerProvider).text = file.name;
+      updateName(ref);
+    }
+
+    void toggleCheck(v) {
+      ref.read(fileListProvider.notifier).check(file.id);
+      updateName(ref);
+      updateExtension(ref);
+    }
 
     void delete() {
       ref.read(fileListProvider.notifier).remove(file.id);
@@ -58,30 +66,23 @@ class RenameFileTile extends ConsumerWidget {
           color: Colors.white,
           child: InkWell(
             hoverColor: Theme.of(context).primaryColor.withOpacity(.1),
-            onDoubleTap: () {
-              ref.watch(matchControllerProvider).text = file.name;
-              updateName(ref);
-            },
+            onDoubleTap: autoInput,
             child: Row(
               children: [
                 CheckTile(
                   check: file.checked,
                   label: file.name,
-                  fontSize: fontSize,
-                  onChanged: (v) {
-                    ref.read(fileListProvider.notifier).check(file.id);
-                    updateName(ref);
-                    updateExtension(ref);
-                  },
+                  fontSize: AppNum.tileFontSize,
+                  onChanged: toggleCheck,
                   color: Colors.grey,
                 ),
-                NormalTile(label: file.newName, fontSize: fontSize),
+                NormalTile(label: file.newName, fontSize: AppNum.tileFontSize),
                 SizedBox(
                   width: AppNum.extensionW,
                   child: Center(
                     child: Text(
                       file.newExtension,
-                      style: const TextStyle(fontSize: fontSize),
+                      style: const TextStyle(fontSize: AppNum.tileFontSize),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -93,7 +94,7 @@ class RenameFileTile extends ConsumerWidget {
                     child: IconButton(
                       onPressed: delete,
                       color: Colors.black26,
-                      icon: const Icon(Icons.delete_forever_rounded),
+                      icon: const Icon(Icons.delete_rounded),
                     ),
                   ),
                 ),

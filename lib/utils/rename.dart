@@ -1,10 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/format.dart';
 
 import 'mode.dart';

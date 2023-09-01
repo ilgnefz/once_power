@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/check_tile.dart';
@@ -17,6 +16,12 @@ class RenameTitleBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const String originName = '原始名称';
     const String renameName = '重命名名称';
+
+    void selectAll(v) {
+      ref.read(selectAllProvider.notifier).update();
+      updateName(ref);
+      updateExtension(ref);
+    }
 
     void toggleSortType() {
       int index = SortType.values.indexOf(ref.read(fileSortTypeProvider));
@@ -40,11 +45,7 @@ class RenameTitleBar extends ConsumerWidget {
         CheckTile(
           check: ref.watch(selectAllProvider),
           label: '$originName ($selected/$total)',
-          onChanged: (v) {
-            ref.read(selectAllProvider.notifier).update();
-            updateName(ref);
-            updateExtension(ref);
-          },
+          onChanged: selectAll,
           action: ClickIcon(
             svg: ref.watch(fileSortTypeProvider).value,
             size: AppNum.fileCardH,

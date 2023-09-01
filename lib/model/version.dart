@@ -6,7 +6,7 @@ class VersionInfoResponse {
   factory VersionInfoResponse.fromJson(Map<String, dynamic> json) =>
       VersionInfoResponse(
         info: List<VersionInfo>.from(
-            json["info"].map((x) => VersionInfo.fromJson(x))).toList(),
+            json["info"].map((e) => VersionInfo.fromJson(e))).toList(),
       );
 
   @override

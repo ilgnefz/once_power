@@ -2,14 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/notification_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/notification.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
 class DeleteFolderButton extends ConsumerWidget {
@@ -17,6 +12,7 @@ class DeleteFolderButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String deleteEmpty = '删除空文件夹';
     List<NotificationInfo> errorList = [];
     bool saveLog = ref.watch(saveLogProvider);
     TextEditingController controller = ref.watch(targetControllerProvider);
@@ -33,7 +29,7 @@ class DeleteFolderButton extends ConsumerWidget {
       } catch (e) {
         errorList.add(NotificationInfo(
           file: directory.path,
-          message: '删除失败，$e',
+          message: '删除失败：$e',
         ));
       }
     }
@@ -52,32 +48,28 @@ class DeleteFolderButton extends ConsumerWidget {
       }
     }
 
+    void showNotification() {
+      if (errorList.isEmpty) {
+        NotificationMessage.show(
+            '删除成功', '已成功删除所有空文件夹', [], MessageType.success);
+      } else {
+        NotificationMessage.show(
+            '删除失败', '删除空文件夹失败！', errorList, MessageType.failure);
+      }
+    }
+
     void deleteEmptyFolder() {
       List<FileInfo> files = ref.read(fileListProvider);
       for (var file in files) {
         if (file.type != FileClassify.folder) return;
         deleteFolders(file.filePath);
       }
-      if (errorList.isEmpty) {
-        NotificationMessage.show(
-          '删除成功',
-          '已成功删除所有空文件夹',
-          [],
-          MessageType.success,
-        );
-      } else {
-        NotificationMessage.show(
-          '删除失败',
-          '删除空文件夹失败！',
-          errorList,
-          MessageType.failure,
-        );
-      }
+      showNotification();
     }
 
     return ElevatedButton(
       onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteEmptyFolder,
-      child: const Text('删除空文件夹'),
+      child: const Text(deleteEmpty),
     );
   }
 }

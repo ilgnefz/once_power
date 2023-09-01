@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/bottom_bar/check_version.dart';
-import 'package:once_power/views/bottom_bar/enable_organize.dart';
-import 'package:once_power/views/bottom_bar/repo_url.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../constants/constants.dart';
+import 'check_version.dart';
+import 'enable_organize.dart';
+import 'repo_url.dart';
 
 class BottomBar extends ConsumerWidget {
   const BottomBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String download = '下载';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
     bool save = ref.watch(saveConfigProvider);
+
+    void downloadWeb() async {
+      String url = 'https://gitee.com/ilgnefz/once_power/releases';
+      await launchUrl(Uri.parse(url));
+    }
 
     return Container(
       height: AppNum.bottomBarH,
@@ -52,12 +58,9 @@ class BottomBar extends ConsumerWidget {
           const CheckVersion(),
           if (ref.watch(newVersionProvider)) ...[
             InkWell(
-              onTap: () async {
-                String url = 'https://gitee.com/ilgnefz/once_power/releases';
-                await launchUrl(Uri.parse(url));
-              },
+              onTap: downloadWeb,
               child: const Text(
-                '下载',
+                download,
                 style: TextStyle(fontSize: 13, color: Colors.blue),
               ),
             ),

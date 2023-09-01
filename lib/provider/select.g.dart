@@ -282,21 +282,22 @@ final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
 );
 
 typedef _$Cancel = AutoDisposeNotifier<bool>;
-String _$useOrganizeHash() => r'640825586e27891c9a0a8e78db3cd04ea86184ea';
+String _$enableArrangeHash() => r'a0391bcf747b94ac0663f85d68d7a18233894055';
 
-/// See also [UseOrganize].
-@ProviderFor(UseOrganize)
-final useOrganizeProvider =
-    AutoDisposeNotifierProvider<UseOrganize, bool>.internal(
-  UseOrganize.new,
-  name: r'useOrganizeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$useOrganizeHash,
+/// See also [EnableArrange].
+@ProviderFor(EnableArrange)
+final enableArrangeProvider =
+    AutoDisposeNotifierProvider<EnableArrange, bool>.internal(
+  EnableArrange.new,
+  name: r'enableArrangeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$enableArrangeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UseOrganize = AutoDisposeNotifier<bool>;
+typedef _$EnableArrange = AutoDisposeNotifier<bool>;
 String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
 
 /// See also [SaveLog].

@@ -2,22 +2,28 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
-import 'package:once_power/views/action_bar/organize_menu/delete_folder_button.dart';
-import 'package:once_power/views/action_bar/organize_menu/description_text.dart';
-import 'package:once_power/views/action_bar/organize_menu/organize_button.dart';
-import 'package:once_power/widgets/base_input.dart';
 import 'package:once_power/widgets/click_text.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
+import 'package:once_power/widgets/input/base_input.dart';
 
-class OrganizeMenu extends ConsumerWidget {
-  const OrganizeMenu({super.key});
+import 'arrange_button.dart';
+import 'delete_folder_button.dart';
+import 'description_text.dart';
+
+class ArrangeMenu extends ConsumerWidget {
+  const ArrangeMenu({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const String targetFolder = '目标文件夹';
+    const String saveLog = '保存日志';
+    const String selectFolder = '选择目标文件夹';
+    const String appendMode = '追加模式';
+    const String addFileText = '添加文件';
+    const String addFolderText = '添加文件夹';
+
     bool append = ref.watch(appendModeProvider);
     TextEditingController controller = ref.watch(targetControllerProvider);
 
@@ -48,7 +54,7 @@ class OrganizeMenu extends ConsumerWidget {
         const Expanded(child: DescriptionText()),
         const SizedBox(height: AppNum.gapH),
         BaseInput(
-          hintText: '目标文件夹',
+          hintText: targetFolder,
           readOnly: true,
           controller: controller,
           show: ref.watch(targetClearProvider),
@@ -58,31 +64,31 @@ class OrganizeMenu extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             EasyCheckbox(
-              '保存日志',
+              saveLog,
               checked: ref.watch(saveLogProvider),
               onChanged: (v) => ref.read(saveLogProvider.notifier).update(),
             ),
-            ClickText('选择目标文件夹', onTap: selectTargetFolder),
+            ClickText(selectFolder, onTap: selectTargetFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),
         Row(
           children: [
             EasyCheckbox(
-              '追加模式',
+              appendMode,
               checked: ref.watch(appendModeProvider),
               onChanged: (v) => ref.read(appendModeProvider.notifier).update(),
             ),
             const Spacer(),
-            ClickText('添加文件', onTap: addFile),
+            ClickText(addFileText, onTap: addFile),
             const SizedBox(height: AppNum.gapW),
-            ClickText('添加文件夹', onTap: addFolder),
+            ClickText(addFolderText, onTap: addFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [DeleteFolderButton(), OrganizeButton()],
+          children: [DeleteFolderButton(), ArrangeButton()],
         ),
       ],
     );

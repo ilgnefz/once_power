@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class MatchTextInput extends ConsumerWidget {
   const MatchTextInput({super.key});
@@ -22,6 +20,11 @@ class MatchTextInput extends ConsumerWidget {
             ref.watch(dateRenameProvider) ||
             ref.watch(modifyClearProvider));
 
+    void toggleLengthInput() {
+      ref.read(inputLengthProvider.notifier).update();
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       disable: disable,
       controller: ref.watch(matchControllerProvider),
@@ -31,10 +34,7 @@ class MatchTextInput extends ConsumerWidget {
       message: lengthTip,
       icon: AppIcons.ruler,
       selected: ref.watch(inputLengthProvider),
-      onTap: () {
-        ref.read(inputLengthProvider.notifier).update();
-        updateName(ref);
-      },
+      onTap: toggleLengthInput,
     );
   }
 }

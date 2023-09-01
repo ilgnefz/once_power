@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
-import 'package:once_power/widgets/action_bar/upload_input.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class PrefixTextInput extends ConsumerWidget {
   const PrefixTextInput({super.key});
@@ -16,6 +14,11 @@ class PrefixTextInput extends ConsumerWidget {
     const String prefixLabel = '前缀';
     const String prefixTextHint = '添加前缀内容';
     const String prefixCycleTip = '循环前缀文件内容';
+
+    void toggleCycle() {
+      ref.read(cyclePrefixProvider.notifier).update();
+      updateName(ref);
+    }
 
     return CommonInputMenu(
       label: prefixLabel,
@@ -29,10 +32,7 @@ class PrefixTextInput extends ConsumerWidget {
       message: prefixCycleTip,
       icon: AppIcons.cycle,
       selected: ref.watch(cyclePrefixProvider),
-      onTap: () {
-        ref.read(cyclePrefixProvider.notifier).update();
-        updateName(ref);
-      },
+      onTap: toggleCycle,
     );
   }
 }

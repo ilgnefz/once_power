@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/icons.dart';
-import 'package:once_power/constants/keys.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/rename.dart';
-import 'package:once_power/utils/storage.dart';
-import 'package:once_power/widgets/action_bar/common_input_menu.dart';
-import 'package:once_power/widgets/digit_input.dart';
+import 'package:once_power/constants/constants.dart';
+import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/input/input.dart';
 
 class SuffixNumInput extends ConsumerWidget {
   const SuffixNumInput({super.key});
@@ -30,6 +26,35 @@ class SuffixNumInput extends ConsumerWidget {
     TextEditingController startController =
         ref.watch(suffixStartControllerProvider);
 
+    void getLengthNum() async {
+      updateName(ref);
+      int num =
+          int.parse(lengthController.text.replaceAll(suffixNumLengthLabel, ''));
+      await StorageUtil.setInt(AppKeys.suffixLength, num);
+    }
+
+    void lengthNumInput(v) async {
+      updateName(ref);
+      await StorageUtil.setInt(AppKeys.suffixLength, int.parse(v));
+    }
+
+    void getStartNum() async {
+      updateName(ref);
+      int num =
+          int.parse(startController.text.replaceAll(suffixNumStartLabel, ''));
+      await StorageUtil.setInt(AppKeys.suffixStart, num);
+    }
+
+    void startNumInput(v) async {
+      updateName(ref);
+      await StorageUtil.setInt(AppKeys.prefixStart, int.parse(v));
+    }
+
+    void toggleSwap() async {
+      ref.read(swapSuffixProvider.notifier).update();
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       label: increaseLabel,
       slot: Row(
@@ -39,15 +64,8 @@ class SuffixNumInput extends ConsumerWidget {
               controller: lengthController,
               value: defaultSuffixNumLength,
               label: suffixNumLengthLabel,
-              callback: () async {
-                updateName(ref);
-                int num = int.parse(lengthController.text.replaceAll('位', ''));
-                await StorageUtil.setInt(AppKeys.suffixLength, num);
-              },
-              onChanged: (v) async {
-                updateName(ref);
-                await StorageUtil.setInt(AppKeys.suffixLength, int.parse(v));
-              },
+              callback: getLengthNum,
+              onChanged: lengthNumInput,
             ),
           ),
           const SizedBox(width: 8.0),
@@ -56,15 +74,8 @@ class SuffixNumInput extends ConsumerWidget {
               controller: startController,
               value: defaultSuffixNumStart,
               label: suffixNumStartLabel,
-              callback: () async {
-                updateName(ref);
-                int num = int.parse(startController.text.replaceAll('开始', ''));
-                await StorageUtil.setInt(AppKeys.suffixStart, num);
-              },
-              onChanged: (v) async {
-                updateName(ref);
-                await StorageUtil.setInt(AppKeys.suffixStart, int.parse(v));
-              },
+              callback: getStartNum,
+              onChanged: startNumInput,
             ),
           ),
         ],
@@ -72,10 +83,7 @@ class SuffixNumInput extends ConsumerWidget {
       message: suffixSwapTip,
       icon: AppIcons.swap,
       selected: ref.watch(swapSuffixProvider),
-      onTap: () {
-        ref.read(swapSuffixProvider.notifier).update();
-        updateName(ref);
-      },
+      onTap: toggleSwap,
     );
   }
 }

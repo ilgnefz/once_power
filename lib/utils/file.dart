@@ -5,13 +5,8 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/types.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
@@ -32,6 +27,44 @@ void xFileFormat(WidgetRef ref, List<XFile> files) async {
   for (var file in files) {
     fileFormat(ref, file.path);
   }
+}
+
+Future<FileInfo> generateFileInfo(
+    WidgetRef ref, String filePath, bool isFile) async {
+  String id = nanoid(10);
+  String name = path.basename(filePath);
+  String extension = 'dir';
+  String parent = path.dirname(filePath);
+  DateTime? exifDate;
+  DateTime createDate = File(filePath).statSync().changed;
+  DateTime modifyDate = File(filePath).statSync().modified;
+  if (isFile) {
+    extension = path.extension(filePath);
+    // 有可能文件没有扩展名
+    if (extension != '') {
+      name = name.split(extension).first;
+      extension = extension.substring(1);
+    }
+    // 如果是图片就获取 exif 中的拍摄日期
+    if (image.contains(extension)) {
+      exifDate = await getExifDate(filePath);
+    }
+  }
+  FileClassify type = ref.read(getFileClassifyProvider(extension));
+  return FileInfo(
+    id: id,
+    name: name,
+    newName: name,
+    parent: parent,
+    filePath: filePath,
+    extension: extension,
+    newExtension: extension,
+    createDate: createDate,
+    modifyDate: modifyDate,
+    exifDate: exifDate,
+    type: type,
+    checked: true,
+  );
 }
 
 void fileFormat(WidgetRef ref, String filePath) async {
@@ -58,46 +91,13 @@ void fileFormat(WidgetRef ref, String filePath) async {
   // await Future.delayed(const Duration(microseconds: 1));
   // ref.read(countProvider.notifier).increment();
 
-  String id = nanoid(10);
-  String name = path.basename(filePath);
-  String extension = 'dir';
-  String parent = path.dirname(filePath);
-  DateTime? exifDate;
-  DateTime createDate = File(filePath).statSync().changed;
-  DateTime modifyDate = File(filePath).statSync().modified;
-  if (isFile) {
-    extension = path.extension(filePath);
-    // 有可能文件没有扩展名
-    if (extension != '') {
-      name = name.split(extension).first;
-      extension = extension.substring(1);
-    }
-    // 如果是图片就获取 exif 中的拍摄日期
-    if (image.contains(extension)) {
-      exifDate = await getExifDate(filePath);
-    }
-  }
-  FileClassify type = ref.read(getFileClassifyProvider(extension));
-  FileInfo renameFile = FileInfo(
-    id: id,
-    name: name,
-    newName: name,
-    parent: parent,
-    filePath: filePath,
-    extension: extension,
-    newExtension: extension,
-    createDate: createDate,
-    modifyDate: modifyDate,
-    exifDate: exifDate,
-    type: type,
-    checked: true,
-  );
-  ref.read(fileListProvider.notifier).add(renameFile);
+  FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+  ref.read(fileListProvider.notifier).add(fileInfo);
 
   if (mode == FunctionMode.organize) {
     TextEditingController controller = ref.watch(targetControllerProvider);
     if (controller.text.isEmpty) {
-      controller.text = isFile ? parent : filePath;
+      controller.text = isFile ? fileInfo.parent : filePath;
     }
   }
 
