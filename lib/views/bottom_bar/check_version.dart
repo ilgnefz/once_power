@@ -15,7 +15,7 @@ class CheckVersion extends ConsumerStatefulWidget {
 }
 
 class _CheckVersionState extends ConsumerState<CheckVersion> {
-  final String versionText =
+  final String versionUrl =
       'https://gitee.com/ilgnefz/once_power/raw/master/version.json';
   bool hover = false;
   bool check = false;
@@ -23,8 +23,8 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
   void checkVersion() async {
     check = true;
     try {
-      Dio dio = Dio();
-      final response = await dio.get(versionText);
+      Dio dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 5)));
+      final response = await dio.get(versionUrl);
       VersionInfoResponse res =
           VersionInfoResponse.fromJson(jsonDecode(response.toString()));
       int version = getExtendedVersionNumber(res.info.first.version);
