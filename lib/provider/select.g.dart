@@ -268,20 +268,6 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
-String _$cancelHash() => r'228db33fc50e652898879dd449bf8fb3b09eb881';
-
-/// See also [Cancel].
-@ProviderFor(Cancel)
-final cancelProvider = AutoDisposeNotifierProvider<Cancel, bool>.internal(
-  Cancel.new,
-  name: r'cancelProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$cancelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$Cancel = AutoDisposeNotifier<bool>;
 String _$enableArrangeHash() => r'a0391bcf747b94ac0663f85d68d7a18233894055';
 
 /// See also [EnableArrange].

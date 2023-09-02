@@ -59,7 +59,8 @@ String matchContent(dynamic ref, FileInfo file, int fileIndex, int prefixIndex,
   }
 
   if (mode == FunctionMode.reserve) {
-    name = reserveName(ref, matchText, name, isLength, matchCase, dateText);
+    name = reserveName(
+        ref, matchText, modifyText, name, isLength, matchCase, dateText);
   }
 
   name = prefixName(ref, fileIndex, prefixIndex) +

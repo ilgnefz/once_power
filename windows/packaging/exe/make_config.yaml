@@ -1,0 +1,8 @@
+app_id: 508C0EF6523A50EDD89AFDED9157F6B1
+publisher: ilgnefz
+publisher_url: https://github.com/ilgnefz/once_power
+display_name: OncePower
+create_desktop_icon: true
+install_dir_name: OncePower
+locales:
+  - zh

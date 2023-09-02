@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,6 +13,7 @@ class MatchController extends _$MatchController {
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       ref.read(matchClearProvider.notifier).update(controller.text.isNotEmpty);
+      ref.read(currentReserveTypeProvider.notifier).clear();
     });
     return controller;
   }

@@ -25,8 +25,6 @@ class ApplyMenu extends ConsumerWidget {
       if (folders.isNotEmpty) {
         bool append = ref.watch(appendModeProvider);
         if (!append) ref.read(fileListProvider.notifier).clear();
-        // bool addFolder = ref.watch(addFolderProvider);
-        // if (addFolder) ref.read(totalProvider.notifier).update(folders.length);
         for (var folder in folders) {
           fileFormat(ref, folder!);
         }

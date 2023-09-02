@@ -23,7 +23,6 @@ Future<DateTime?> getExifDate(String filePath) async {
 void xFileFormat(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
-  // ref.read(totalProvider.notifier).update(files.length);
   for (var file in files) {
     fileFormat(ref, file.path);
   }
@@ -70,7 +69,6 @@ Future<FileInfo> generateFileInfo(
 void fileFormat(WidgetRef ref, String filePath) async {
   bool append = ref.watch(appendModeProvider);
   bool addFolder = ref.watch(addFolderProvider);
-  // if (!append) ref.read(countProvider.notifier).clear();
   if (append) {
     final files = ref.watch(fileListProvider);
     if (files.any((e) => e.filePath == filePath)) return;
@@ -81,15 +79,11 @@ void fileFormat(WidgetRef ref, String filePath) async {
 
   if (!addFolder && !isFile && mode != FunctionMode.organize) {
     final list = getAllFile(filePath);
-    // ref.read(totalProvider.notifier).update(list.length);
     for (var file in list) {
       fileFormat(ref, file);
     }
     return;
   }
-
-  // await Future.delayed(const Duration(microseconds: 1));
-  // ref.read(countProvider.notifier).increment();
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
   ref.read(fileListProvider.notifier).add(fileInfo);

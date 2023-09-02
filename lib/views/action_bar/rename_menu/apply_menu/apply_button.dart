@@ -77,7 +77,7 @@ class ApplyButton extends ConsumerWidget {
           : type == MessageType.warning
               ? warningList
               : [];
-      showToast(type, list, total, count);
+      showNotification(type, list, total, count);
     }
 
     return ElevatedButton(
@@ -87,7 +87,7 @@ class ApplyButton extends ConsumerWidget {
   }
 }
 
-void showToast(
+void showNotification(
     MessageType type, List<NotificationInfo> list, int total, int count) {
   if (type == MessageType.success) {
     NotificationMessage.show('重命名成功', '选中的 $total 个已全部重命名成功', [], type);

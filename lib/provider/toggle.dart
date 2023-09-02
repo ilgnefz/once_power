@@ -40,6 +40,7 @@ class CurrentReserveType extends _$CurrentReserveType {
   void update(ReserveType type) => state.contains(type)
       ? state = state.where((e) => e != type).toList()
       : state = [...state, type];
+  void clear() => state = [];
 }
 
 @riverpod

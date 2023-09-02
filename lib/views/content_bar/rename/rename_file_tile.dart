@@ -7,6 +7,7 @@ import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
+import 'package:once_power/widgets/tip_text.dart';
 
 class RenameFileTile extends ConsumerWidget {
   const RenameFileTile(this.file, {super.key});
@@ -49,12 +50,19 @@ class RenameFileTile extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('$name：${file.name}$dot${file.extension}'),
-                Text('$newName：${file.newName}$newDot${file.newExtension}'),
-                Text('$folder：${file.parent}'),
-                Text('$createTime：${file.createDate}'),
-                Text('$modifyDate：${file.modifyDate}'),
-                if (file.exifDate != null) Text('$exifDate：${file.exifDate}'),
+                TipText(
+                  label: name,
+                  content: '${file.name}$dot${file.extension}',
+                ),
+                TipText(
+                  label: newName,
+                  content: '${file.newName}$newDot${file.newExtension}',
+                ),
+                TipText(label: folder, content: file.parent),
+                TipText(label: createTime, content: '${file.createDate}'),
+                TipText(label: modifyDate, content: '${file.modifyDate}'),
+                if (file.exifDate != null)
+                  TipText(label: exifDate, content: '${file.exifDate}'),
               ],
             ),
           ),

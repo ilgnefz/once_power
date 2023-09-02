@@ -10,12 +10,15 @@ class ArrangeTitleBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String name = '名称';
-    const String type = '类型';
+    const String type = '扩展';
+    const String folder = '文件夹';
     int total = ref.watch(fileListProvider).length;
 
     return Row(
       children: [
         NormalTile(label: '$name ($total)'),
+        const SizedBox(width: AppNum.gapW + 24),
+        const NormalTile(label: folder),
         const SizedBox(width: AppNum.deleteW, child: Center(child: Text(type))),
         SizedBox(
           width: AppNum.deleteW,

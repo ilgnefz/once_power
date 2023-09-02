@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.ilgnefz" "\0"
-            VALUE "FileDescription", "once_power" "\0"
+            VALUE "CompanyName", "ilgnefz" "\0"
+            VALUE "FileDescription", "OncePower" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "once_power" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.ilgnefz. All rights reserved." "\0"
-            VALUE "OriginalFilename", "once_power.exe" "\0"
-            VALUE "ProductName", "once_power" "\0"
+            VALUE "InternalName", "OncePower" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 ilgnefz All rights reserved." "\0"
+            VALUE "OriginalFilename", "OncePower.exe" "\0"
+            VALUE "ProductName", "OncePower" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

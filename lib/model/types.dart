@@ -49,6 +49,7 @@ final text = [
   'doc',
   'docx',
   'epub',
+  'log',
   'md',
   'mobi',
   'pdf',

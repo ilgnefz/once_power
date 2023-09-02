@@ -11,6 +11,10 @@ import 'package:once_power/provider/toggle.dart';
     start = start > name.length - 1 ? name.length - 1 : start;
     end = hasSpace ? int.parse(match.split(' ').last) : int.parse(match);
     end = end > name.length ? name.length : end;
+    if (end < start) {
+      start = 0;
+      end = 0;
+    }
   } else {
     end = match.length > name.length ? name.length : match.length;
   }
@@ -22,7 +26,9 @@ String replaceName(RemoveType type, String match, String modify, String name,
     bool isLength, bool matchCase, String? dateText) {
   int start = 0, end = 0;
   if (isLength) (start, end) = lengthMatchNum(match, name);
-  // 匹配的 TODO 匹配中间内容
+  modify = dateText ?? modify;
+
+  // 匹配的
   if (type == RemoveType.match) {
     if (isLength) {
       String front = name.substring(0, start);
@@ -91,10 +97,16 @@ String replaceName(RemoveType type, String match, String modify, String name,
 }
 
 /// 保留模式
-String reserveName(WidgetRef ref, String match, String name, bool isLength,
-    bool matchCase, String? dateText) {
+String reserveName(WidgetRef ref, String match, String modify, String name,
+    bool isLength, bool matchCase, String? dateText) {
   List<ReserveType> typeList = ref.watch(currentReserveTypeProvider);
-  if (typeList.isEmpty && dateText != null) return dateText;
+  int start = 0, end = 0;
+  if (isLength && match != '') {
+    (start, end) = lengthMatchNum(match, name);
+    return name.substring(start, end);
+  }
+  modify = dateText ?? modify;
+  if (typeList.isEmpty) return modify;
   if (typeList.isNotEmpty) {
     name = reserveTypeString(typeList, name);
   } else {

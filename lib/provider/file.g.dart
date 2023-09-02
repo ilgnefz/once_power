@@ -57,8 +57,6 @@ class _SystemHash {
   }
 }
 
-typedef GetFileClassifyRef = AutoDisposeProviderRef<FileClassify>;
-
 /// See also [getFileClassify].
 @ProviderFor(getFileClassify)
 const getFileClassifyProvider = GetFileClassifyFamily();
@@ -105,10 +103,10 @@ class GetFileClassifyFamily extends Family<FileClassify> {
 class GetFileClassifyProvider extends AutoDisposeProvider<FileClassify> {
   /// See also [getFileClassify].
   GetFileClassifyProvider(
-    this.extension,
-  ) : super.internal(
+    String extension,
+  ) : this._internal(
           (ref) => getFileClassify(
-            ref,
+            ref as GetFileClassifyRef,
             extension,
           ),
           from: getFileClassifyProvider,
@@ -120,9 +118,43 @@ class GetFileClassifyProvider extends AutoDisposeProvider<FileClassify> {
           dependencies: GetFileClassifyFamily._dependencies,
           allTransitiveDependencies:
               GetFileClassifyFamily._allTransitiveDependencies,
+          extension: extension,
         );
 
+  GetFileClassifyProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.extension,
+  }) : super.internal();
+
   final String extension;
+
+  @override
+  Override overrideWith(
+    FileClassify Function(GetFileClassifyRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetFileClassifyProvider._internal(
+        (ref) => create(ref as GetFileClassifyRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        extension: extension,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<FileClassify> createElement() {
+    return _GetFileClassifyProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -136,6 +168,19 @@ class GetFileClassifyProvider extends AutoDisposeProvider<FileClassify> {
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin GetFileClassifyRef on AutoDisposeProviderRef<FileClassify> {
+  /// The parameter `extension` of this provider.
+  String get extension;
+}
+
+class _GetFileClassifyProviderElement
+    extends AutoDisposeProviderElement<FileClassify> with GetFileClassifyRef {
+  _GetFileClassifyProviderElement(super.provider);
+
+  @override
+  String get extension => (origin as GetFileClassifyProvider).extension;
 }
 
 String _$classifyListHash() => r'10845e41cc26efebe4d86d275f66b480dd2877e3';

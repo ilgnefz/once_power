@@ -28,6 +28,14 @@ class ContentBar extends ConsumerWidget {
       if (newIndex > oldIndex) newIndex -= 1;
       FileInfo item = files.removeAt(oldIndex);
       files.insert(newIndex, item);
+      FunctionMode mode = ref.watch(currentModeProvider);
+      if (mode == FunctionMode.organize) {
+        TextEditingController controller = ref.watch(targetControllerProvider);
+        bool isFile = files.first.extension != 'dir';
+        if (controller.text.isEmpty) {
+          controller.text = isFile ? files.first.parent : files.first.filePath;
+        }
+      }
       updateName(ref);
       updateExtension(ref);
     }

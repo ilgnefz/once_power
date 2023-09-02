@@ -16,7 +16,7 @@ class DescriptionText extends StatelessWidget {
         const SizedBox(height: AppNum.gapH / 2),
         const BaseRichText(
           title: '目标文件夹',
-          content: '默认为第一个添加的文件的父文件夹或文件夹本身',
+          content: '默认为列表第一个添加的文件的父文件夹或文件夹本身',
         ),
         const SizedBox(height: AppNum.gapH / 2),
         const BaseRichText(

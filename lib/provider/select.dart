@@ -114,14 +114,6 @@ class SaveConfig extends _$SaveConfig {
   }
 }
 
-// TODO 底部取消按钮，似乎没用
-@riverpod
-class Cancel extends _$Cancel {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-}
-
 @riverpod
 bool selectAudio(SelectAudioRef ref) {
   List<FileInfo> audioList = ref
