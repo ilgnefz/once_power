@@ -27,13 +27,14 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
       final response = await dio.get(versionUrl);
       VersionInfoResponse res =
           VersionInfoResponse.fromJson(jsonDecode(response.toString()));
+      print(res.toString());
       int version = getExtendedVersionNumber(res.info.first.version);
       int currentVersion = getExtendedVersionNumber(PackageDesc.getVersion());
       List<String> desc = res.info.first.description;
       if (version > currentVersion) {
         NotificationMessage.show(
           '检测完成',
-          '新的版本v${res.info.first.version}需要更新',
+          '新的版本 v${res.info.first.version} 可以更新',
           desc.map((e) {
             int index = desc.indexOf(e);
             index = desc.length > 1 ? index + 1 : 0;
@@ -41,6 +42,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
                 file: index == 0 ? '' : '$index', message: e);
           }).toList(),
           MessageType.success,
+          30,
         );
         ref.read(newVersionProvider.notifier).update();
       } else {

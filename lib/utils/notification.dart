@@ -26,7 +26,8 @@ class NotificationMessage {
   }
 
   static show(String title, String message, List<NotificationInfo> info,
-      MessageType type) {
+      MessageType type,
+      [int time = 5]) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(
@@ -101,7 +102,7 @@ class NotificationMessage {
         );
       },
       wrapToastAnimation: notificationAnimation,
-      duration: type == MessageType.success ? const Duration(seconds: 3) : null,
+      duration: type == MessageType.success ? Duration(seconds: time) : null,
       align: Alignment.bottomRight,
     );
   }
