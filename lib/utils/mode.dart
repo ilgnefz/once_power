@@ -106,16 +106,15 @@ String reserveName(WidgetRef ref, String match, String modify, String name,
     return name.substring(start, end);
   }
   modify = dateText ?? modify;
-  if (typeList.isEmpty) return modify;
-  if (typeList.isNotEmpty) {
-    name = reserveTypeString(typeList, name);
-  } else {
+  if (match != '') {
     if (!isLength) name = getMatchedStrings(match, name, matchCase);
     if (isLength) {
       var (start, end) = lengthMatchNum(match, name);
       name = name.substring(start, end);
     }
   }
+  if (typeList.isNotEmpty) name = reserveTypeString(typeList, name);
+  if (typeList.isEmpty && match == '') name = modify;
   return name;
 }
 

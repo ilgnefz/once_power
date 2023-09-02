@@ -22,7 +22,7 @@ class DeleteFolderButton extends ConsumerWidget {
         directory.deleteSync();
         if (saveLog) {
           final fileName = formatDateTime(DateTime.now()).substring(0, 14);
-          final log = File(path.join(controller.text, '日志$fileName.log'));
+          final log = File(path.join(controller.text, '删除日志$fileName.log'));
           String contents = '【${directory.path}】 已被删除';
           log.writeAsStringSync('$contents\n', mode: FileMode.append);
         }
@@ -37,7 +37,7 @@ class DeleteFolderButton extends ConsumerWidget {
     void deleteFolders(String folderPath) {
       var directory = Directory(folderPath);
       if (directory.existsSync()) {
-        var isEmpty = directory.listSync().isEmpty;
+        bool isEmpty = directory.listSync().isEmpty;
         if (isEmpty) return delete(directory);
         directory.listSync().forEach((file) {
           if (FileSystemEntity.isDirectorySync(file.path)) {
