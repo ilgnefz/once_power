@@ -39,7 +39,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
             int index = desc.indexOf(e);
             index = desc.length > 1 ? index + 1 : 0;
             return NotificationInfo(
-                file: index == 0 ? '' : '$index', message: e);
+                file: index == 0 ? '' : '$index. ', message: e);
           }).toList(),
           MessageType.success,
           30,
