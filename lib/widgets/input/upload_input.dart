@@ -58,15 +58,6 @@ class UploadInput extends ConsumerWidget {
           onTap: uploadFile,
         ),
       ),
-      callback: () {
-        if (type == FileUploadType.prefix) {
-          ref.read(prefixControllerProvider).clear();
-        }
-        if (type == FileUploadType.suffix) {
-          ref.read(suffixControllerProvider).clear();
-        }
-        updateName(ref);
-      },
     );
   }
 }

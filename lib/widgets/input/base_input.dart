@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/model/enum.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/click_icon.dart';
 
 class BaseInput extends StatelessWidget {
@@ -22,7 +25,6 @@ class BaseInput extends StatelessWidget {
     this.onSubmitted,
     required this.show,
     this.action,
-    this.callback,
   });
 
   final bool disable;
@@ -39,7 +41,6 @@ class BaseInput extends StatelessWidget {
   final void Function(String)? onSubmitted;
   final bool show;
   final Widget? action;
-  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +84,12 @@ class BaseInput extends StatelessWidget {
               Consumer(
                 builder: (context, ref, child) => ClickIcon(
                   icon: Icons.close_rounded,
-                  onTap: () {
+                  onTap: () async {
                     controller!.clear();
-                    if (callback != null) callback;
+                    if (ref.watch(currentModeProvider) ==
+                        FunctionMode.organize) {
+                      await StorageUtil.remove(AppKeys.targetFolder);
+                    }
                     updateName(ref);
                     updateExtension(ref);
                   },

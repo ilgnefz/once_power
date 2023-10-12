@@ -165,6 +165,6 @@ class TargetController extends _$TargetController {
 @riverpod
 class TargetClear extends _$TargetClear {
   @override
-  bool build() => false;
+  bool build() => StorageUtil.getString(AppKeys.targetFolder) != null;
   void update(bool value) => state = value;
 }
