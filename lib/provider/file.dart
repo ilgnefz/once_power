@@ -39,6 +39,16 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
+  void updateFilePath(String id, String filePath) => state = state.map((e) {
+        if (e.id == id) e.filePath = filePath;
+        return e;
+      }).toList();
+
+  void updateFileParent(String id, String folder) => state = state.map((e) {
+        if (e.id == id) e.parent = folder;
+        return e;
+      }).toList();
+
   void updateName(String id, String name) => state = state.map((e) {
         if (e.id == id) e.newName = name;
         return e;

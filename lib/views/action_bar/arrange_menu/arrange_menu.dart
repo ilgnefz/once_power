@@ -1,9 +1,11 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/click_text.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
 import 'package:once_power/widgets/input/base_input.dart';
@@ -29,7 +31,12 @@ class ArrangeMenu extends ConsumerWidget {
 
     void selectTargetFolder() async {
       final String? folder = await getDirectoryPath();
-      if (folder != null) controller.text = folder;
+      if (folder != null) {
+        controller.text = folder;
+        if (ref.watch(saveConfigProvider)) {
+          StorageUtil.setString(AppKeys.targetFolder, folder);
+        }
+      }
     }
 
     void addFile() async {

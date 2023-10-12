@@ -153,7 +153,8 @@ class ExtensionClear extends _$ExtensionClear {
 class TargetController extends _$TargetController {
   @override
   TextEditingController build() {
-    TextEditingController controller = TextEditingController();
+    String? folder = StorageUtil.getString(AppKeys.targetFolder);
+    TextEditingController controller = TextEditingController(text: folder);
     controller.addListener(() {
       ref.read(targetClearProvider.notifier).update(controller.text.isNotEmpty);
     });

@@ -32,10 +32,12 @@ class ArrangeButton extends ConsumerWidget {
       TextEditingController controller = ref.watch(targetControllerProvider);
       bool saveLog = ref.watch(saveLogProvider);
       String newPath = path.join(controller.text, path.basename(file.filePath));
+
       if (!File(file.filePath).existsSync()) {
-        return errorList
-            .add(NotificationInfo(file: file.filePath, message: '不存在'));
+        errorList.add(NotificationInfo(file: file.filePath, message: '不存在'));
+        return;
       }
+
       if (newPath != file.filePath) {
         if (File(newPath).existsSync()) newPath = renameFile(newPath);
         if (saveLog) {
@@ -44,14 +46,36 @@ class ArrangeButton extends ConsumerWidget {
           String contents = '【${file.filePath}】 ---> 【$newPath】';
           log.writeAsStringSync('$contents\n', mode: FileMode.append);
         }
-        try {
-          File(file.filePath).renameSync(newPath);
-        } catch (e) {
-          errorList.add(NotificationInfo(
-            file: file.filePath,
-            message: '移动失败：$e',
-          ));
+
+        bool sameDisc = file.filePath[0] == newPath[0];
+        if (sameDisc) {
+          try {
+            File(file.filePath).renameSync(newPath);
+          } catch (e) {
+            errorList.add(NotificationInfo(
+              file: file.filePath,
+              message: '移动失败：$e',
+            ));
+            debugPrint(e.toString());
+          }
         }
+
+        if (!sameDisc) {
+          try {
+            File(file.filePath).copySync(newPath);
+            File(file.filePath).deleteSync();
+          } catch (e) {
+            errorList.add(NotificationInfo(
+              file: file.filePath,
+              message: '移动过程中出错了：$e',
+            ));
+            debugPrint(e.toString());
+          }
+        }
+
+        final fileInfo = ref.read(fileListProvider.notifier);
+        fileInfo.updateFilePath(file.id, newPath);
+        fileInfo.updateFileParent(file.id, controller.text);
       }
     }
 
@@ -94,7 +118,10 @@ class ArrangeButton extends ConsumerWidget {
     }
 
     return ElevatedButton(
-      onPressed: ref.watch(fileListProvider).isEmpty ? null : organizeFolder,
+      onPressed:
+          ref.watch(fileListProvider).isEmpty || !ref.watch(targetClearProvider)
+              ? null
+              : organizeFolder,
       child: const Text(arrangeFolder),
     );
   }

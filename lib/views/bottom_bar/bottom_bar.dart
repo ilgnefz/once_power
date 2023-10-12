@@ -17,6 +17,10 @@ class BottomBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String download = '下载';
+    const String openSave = '已开启保存配置';
+    const String closeSave = '未开启保存配置';
+    const String giteeUrl = 'https://gitee.com/ilgnefz/once_power';
+    const String githubUrl = 'https://github.com/ilgnefz/once_power';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
     bool save = ref.watch(saveConfigProvider);
 
@@ -35,7 +39,7 @@ class BottomBar extends ConsumerWidget {
       child: Row(
         children: [
           EasyTooltip(
-            message: save ? '已开启保存配置' : '未开启保存配置',
+            message: save ? openSave : closeSave,
             child: ClickIcon(
               size: 24,
               svg: AppIcons.save,
@@ -46,15 +50,9 @@ class BottomBar extends ConsumerWidget {
           const SizedBox(width: 4),
           const EnableOrganize(),
           const Spacer(),
-          const RepoUrl(
-            icon: AppIcons.gitee,
-            url: 'https://gitee.com/ilgnefz/once_power',
-          ),
+          const RepoUrl(icon: AppIcons.gitee, url: giteeUrl),
           const SizedBox(width: 12),
-          const RepoUrl(
-            icon: AppIcons.github,
-            url: 'https://github.com/ilgnefz/once_power',
-          ),
+          const RepoUrl(icon: AppIcons.github, url: githubUrl),
           const CheckVersion(),
           if (ref.watch(newVersionProvider)) ...[
             InkWell(

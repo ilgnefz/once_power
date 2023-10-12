@@ -55,6 +55,7 @@ class ApplyButton extends ConsumerWidget {
             }
             final fileInfo = ref.read(fileListProvider.notifier);
             fileInfo.updateOriginName(file.id, file.newName);
+            fileInfo.updateFilePath(file.id, newPath);
             fileInfo.updateOriginExtension(file.id, file.newExtension);
             count++;
           } catch (e) {

@@ -33,6 +33,11 @@ class DescriptionText extends StatelessWidget {
           title: '整理文件夹',
           content: '将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内',
         ),
+        const SizedBox(height: AppNum.gapH / 2),
+        const BaseRichText(
+          title: '打开文件夹',
+          content: '双击右边文件列表，可以快速打开文件所在文件夹',
+        ),
       ],
     );
   }

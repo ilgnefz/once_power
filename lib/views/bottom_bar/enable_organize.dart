@@ -32,7 +32,6 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
 
   void onChange() {
     ref.read(enableArrangeProvider.notifier).update();
-    ref.read(fileListProvider.notifier).clear();
     bool enable = ref.read(enableArrangeProvider);
     FunctionMode currentMode = ref.watch(currentModeProvider);
     FunctionMode mode = enable

@@ -29,6 +29,7 @@ class Global {
 void saveOrNo() {
   bool? save = StorageUtil.getBool(AppKeys.isSave) ?? false;
   if (!save) {
+    StorageUtil.remove(AppKeys.targetFolder);
     StorageUtil.remove(AppKeys.functionMode);
     StorageUtil.remove(AppKeys.dateType);
     StorageUtil.remove(AppKeys.isLength);

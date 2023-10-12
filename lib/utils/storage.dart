@@ -15,7 +15,7 @@ class StorageUtil {
     return _prefs.setString(key, value);
   }
 
-  static dynamic getString(String key) {
+  static String? getString(String key) {
     String? value = _prefs.getString(key);
     return value;
   }
