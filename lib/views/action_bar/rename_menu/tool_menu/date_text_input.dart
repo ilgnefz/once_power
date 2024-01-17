@@ -55,7 +55,7 @@ class DateTextInput extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 8),
-          const DateSelected(),
+          const Expanded(child: DateSelected()),
         ],
       ),
       message: dateTip,

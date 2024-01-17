@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           titleMedium: TextStyle(fontSize: 14, color: Colors.black),
           bodyLarge: TextStyle(fontSize: 14, color: Colors.black),
           bodyMedium: TextStyle(fontSize: 14, color: Colors.black),
-        ).useSystemChineseFont(),
+        ).useSystemChineseFont(Brightness.light),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

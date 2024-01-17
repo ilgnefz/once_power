@@ -20,6 +20,56 @@ void updateExtension(dynamic ref) {
   }
 }
 
+// int actualIndex(dynamic ref, List<Map<String, List<String>>> array,
+//     FileInfo file, int index) {
+//   String dateText = dateName(ref, file);
+//   List<String> keyList = array.map((e) => e.keys.first).toList();
+//   if (keyList.contains(dateText)) {
+//     //   如果已经存在，获取当前值
+//     Map<String, List<String>> map =
+//         array.firstWhere((e) => e.keys.first == dateText);
+//     List<String> fileList = map.values.first;
+//     print("before-index: $index");
+//     print("map: $map");
+//     print("fileList: $fileList");
+//     index += fileList.length;
+//     print("index: $index");
+//     map[dateText]?.add(file.name);
+//   } else {
+//     array.add({
+//       dateText: [file.name]
+//     });
+//   }
+//   // print("========== fileArray Start");
+//   // print(array);
+//   // print("========== fileArray END");
+//   return index;
+// }
+
+int actualIndex(
+    dynamic ref, List<Map<String, List<String>>> array, FileInfo file) {
+  int index = 0;
+  String dateText = dateName(ref, file);
+  List<String> keyList = array.map((e) => e.keys.first).toList();
+  if (keyList.contains(dateText)) {
+    //   如果已经存在，获取当前值
+    Map<String, List<String>> map =
+        array.firstWhere((e) => e.keys.first == dateText);
+    List<String> fileList = map.values.first;
+
+    index += fileList.length;
+    map[dateText]?.add(file.name);
+  } else {
+    array.add({
+      dateText: [file.name]
+    });
+  }
+  // print("========== fileArray Start");
+  // print(array);
+  // print("========== fileArray END");
+  return index;
+}
+
 void updateName(dynamic ref) {
   List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
@@ -27,14 +77,24 @@ void updateName(dynamic ref) {
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;
   int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
   int fileIndex = 0;
+  // List<Map<String, List<String>>> prefixArray = [], suffixArray = [];
+  List<Map<String, List<String>>> fileArray = [];
+  bool dateRename = ref.watch(dateRenameProvider);
   for (var file in files) {
     if (file.checked) {
-      String newName =
-          matchContent(ref, file, fileIndex, prefixIndex, suffixIndex);
+      // int actualPrefixIndex = actualIndex(ref, prefixArray, file, prefixIndex);
+      // int actualSuffixIndex = actualIndex(ref, suffixArray, file, suffixIndex);
+      int actualFileIndex = dateRename ? actualIndex(ref, fileArray, file) : 0;
+      int actualPrefixIndex = prefixIndex + actualFileIndex;
+      int actualSuffixIndex = suffixIndex + actualFileIndex;
+      String newName = matchContent(
+          ref, file, fileIndex, actualPrefixIndex, actualSuffixIndex);
       ref.read(fileListProvider.notifier).updateName(file.id, newName);
       fileIndex++;
-      prefixIndex++;
-      suffixIndex++;
+      if (!dateRename) {
+        prefixIndex++;
+        suffixIndex++;
+      }
     } else {
       ref.read(fileListProvider.notifier).updateName(file.id, file.name);
     }
