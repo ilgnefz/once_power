@@ -36,6 +36,7 @@ class RenameFileTile extends ConsumerWidget {
 
     void delete() {
       ref.read(fileListProvider.notifier).remove(file.id);
+      updateName(ref);
     }
 
     String dot = file.extension == '' ? '' : '.';
