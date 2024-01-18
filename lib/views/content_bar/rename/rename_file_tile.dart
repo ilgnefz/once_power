@@ -42,34 +42,28 @@ class RenameFileTile extends ConsumerWidget {
     String dot = file.extension == '' ? '' : '.';
     String newDot = file.newExtension == '' ? '' : '.';
     return EasyTooltip(
-      margin: const EdgeInsets.only(left: 240),
-      richMessage: WidgetSpan(
-        child: DefaultTextStyle(
-          style: const TextStyle(fontSize: 12, color: Color(0xFF666666)),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 280),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TipText(
-                  label: name,
-                  content: '${file.name}$dot${file.extension}',
-                ),
-                TipText(
-                  label: newName,
-                  content: '${file.newName}$newDot${file.newExtension}',
-                ),
-                TipText(label: folder, content: file.parent),
-                TipText(label: createTime, content: '${file.createDate}'),
-                TipText(label: modifyDate, content: '${file.modifyDate}'),
-                if (file.exifDate != null)
-                  TipText(label: exifDate, content: '${file.exifDate}'),
-              ],
+      // margin: const EdgeInsets.only(left: 240),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 280),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TipText(
+              label: name,
+              content: '${file.name}$dot${file.extension}',
             ),
-          ),
+            TipText(
+              label: newName,
+              content: '${file.newName}$newDot${file.newExtension}',
+            ),
+            TipText(label: folder, content: file.parent),
+            TipText(label: createTime, content: '${file.createDate}'),
+            TipText(label: modifyDate, content: '${file.modifyDate}'),
+            if (file.exifDate != null)
+              TipText(label: exifDate, content: '${file.exifDate}'),
+          ],
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Material(
         child: Ink(
           color: Colors.white,

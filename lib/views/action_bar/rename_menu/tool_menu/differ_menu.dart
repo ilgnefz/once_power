@@ -33,7 +33,7 @@ class DifferMenu extends ConsumerWidget {
                 },
               );
             },
-          ).toList(),
+          ),
         ],
       );
     }
@@ -53,7 +53,7 @@ class DifferMenu extends ConsumerWidget {
               },
             );
           },
-        ).toList(),
+        ),
       ],
     );
   }

@@ -44,20 +44,17 @@ class ArrangeFileTile extends ConsumerWidget {
     }
 
     return EasyTooltip(
-      margin: const EdgeInsets.only(left: 240),
-      richMessage: WidgetSpan(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 280),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TipText(label: name, content: fileName),
-              TipText(label: folder, content: fileFolder),
-            ],
-          ),
+      // margin: const EdgeInsets.only(left: 240),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 280),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TipText(label: name, content: fileName),
+            TipText(label: folder, content: fileFolder),
+          ],
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Material(
         child: Ink(
           color: Colors.white,

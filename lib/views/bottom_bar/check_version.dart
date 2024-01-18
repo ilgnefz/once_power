@@ -27,7 +27,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
       final response = await dio.get(versionUrl);
       VersionInfoResponse res =
           VersionInfoResponse.fromJson(jsonDecode(response.toString()));
-      print(res.toString());
+      Log.i(res.toString());
       int version = getVersionNumber(res.info.first.version);
       int currentVersion = getVersionNumber(PackageDesc.getVersion());
       List<String> desc = res.info.first.description;

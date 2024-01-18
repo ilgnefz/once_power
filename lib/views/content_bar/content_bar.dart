@@ -29,6 +29,10 @@ class ContentBar extends ConsumerWidget {
       FileInfo item = files.removeAt(oldIndex);
       files.insert(newIndex, item);
       FunctionMode mode = ref.watch(currentModeProvider);
+      // modify
+      ref.read(fileListProvider.notifier).addAll(files);
+      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
+      // ref.read(provider)
       if (mode == FunctionMode.organize) {
         TextEditingController controller = ref.watch(targetControllerProvider);
         bool isFile = files.first.extension != 'dir';

@@ -1,3 +1,4 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 
 class TipText extends StatelessWidget {
@@ -12,13 +13,14 @@ class TipText extends StatelessWidget {
       text: TextSpan(
         text: '$label：',
         style: TextStyle(
-          fontSize: 12,
+          fontSize: 13,
           color: Theme.of(context).primaryColor.withOpacity(.8),
-        ),
+        ).useSystemChineseFont(),
         children: [
           TextSpan(
             text: content,
-            style: const TextStyle(color: Color(0xFF666666)),
+            style: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+                .useSystemChineseFont(),
           )
         ],
       ),

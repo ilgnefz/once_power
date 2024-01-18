@@ -1,3 +1,4 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:once_power/widgets/svg_icon.dart';
@@ -19,7 +20,11 @@ class BoxCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasyTooltip(
-      message: message,
+      content: Text(
+        message,
+        style: const TextStyle(fontSize: 13, color: Color(0xFF454545))
+            .useSystemChineseFont(),
+      ),
       child: Ink(
         height: 32,
         width: 32,

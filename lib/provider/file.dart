@@ -14,6 +14,8 @@ class FileList extends _$FileList {
 
   void add(FileInfo file) => state = [...state, file];
 
+  void addAll(List<FileInfo> list) => state = list;
+
   void clear() => state = [];
 
   void remove(String id) => state = state.where((e) => e.id != id).toList();

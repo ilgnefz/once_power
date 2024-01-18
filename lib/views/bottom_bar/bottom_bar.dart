@@ -39,7 +39,7 @@ class BottomBar extends ConsumerWidget {
       child: Row(
         children: [
           EasyTooltip(
-            message: save ? openSave : closeSave,
+            content: Text(save ? openSave : closeSave),
             child: ClickIcon(
               size: 24,
               svg: AppIcons.save,

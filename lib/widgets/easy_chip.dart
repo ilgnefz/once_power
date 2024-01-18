@@ -4,12 +4,12 @@ const borderRadius = BorderRadius.all(Radius.circular(8));
 
 class EasyChip extends StatelessWidget {
   const EasyChip({
-    Key? key,
+    super.key,
     required this.label,
     required this.selected,
     required this.onTap,
     this.enable = true,
-  }) : super(key: key);
+  });
 
   final String label;
   final bool selected;

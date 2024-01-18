@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:window_manager/window_manager.dart';

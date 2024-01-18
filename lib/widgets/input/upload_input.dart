@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,7 +52,11 @@ class UploadInput extends ConsumerWidget {
       show: show,
       onChanged: onChanged,
       action: EasyTooltip(
-        message: '上传 .txt 文件',
+        content: Text(
+          '上传 .txt 文件',
+          style: const TextStyle(fontSize: 13, color: Color(0xFF454545))
+              .useSystemChineseFont(),
+        ),
         child: ClickIcon(
           icon: Icons.upload_file_rounded,
           color: AppColors.select,

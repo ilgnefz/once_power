@@ -82,7 +82,7 @@ class _DigitInputState extends State<DigitInput> {
   @override
   Widget build(BuildContext context) {
     return EasyTooltip(
-      message: tip,
+      content: Text(tip),
       child: BaseInput(
         padding: EdgeInsets.zero,
         controller: widget.controller,
