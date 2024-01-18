@@ -6,8 +6,8 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/content_bar/arrange/arrange_file_tile.dart';
 
+import 'arrange/arrange_file_tile.dart';
 import 'arrange/arrange_title_bar.dart';
 import 'empty.dart';
 import 'rename/rename_file_tile.dart';
@@ -20,7 +20,7 @@ class ContentBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void dropAdd(DropDoneDetails details) {
       List<XFile> files = details.files;
-      if (files.isNotEmpty) xFileFormat(ref, files);
+      if (files.isNotEmpty) formatXFile(ref, files);
     }
 
     List<FileInfo> files = ref.watch(sortListProvider);

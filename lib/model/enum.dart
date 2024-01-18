@@ -59,6 +59,8 @@ enum SortType {
   defaultSort,
   nameDescending,
   nameAscending,
+  dateDescending,
+  dateAscending,
   checkDescending,
   checkAscending
 }
@@ -72,6 +74,10 @@ extension SortTypeExtension on SortType {
         return AppIcons.nameDescending;
       case SortType.nameAscending:
         return AppIcons.nameAscending;
+      case SortType.dateDescending:
+        return AppIcons.dateDescending;
+      case SortType.dateAscending:
+        return AppIcons.dateAscending;
       case SortType.checkDescending:
         return AppIcons.checkDescending;
       case SortType.checkAscending:
@@ -105,4 +111,4 @@ extension FileClassifyExtension on FileClassify {
 
 enum FileUploadType { prefix, suffix }
 
-enum MessageType { failure, success, warning }
+enum NotificationType { failure, success }

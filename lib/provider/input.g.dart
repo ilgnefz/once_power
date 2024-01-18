@@ -6,7 +6,7 @@ part of 'input.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$matchControllerHash() => r'93895e6f7b9a9185b10d703c56f190db338c27cd';
+String _$matchControllerHash() => r'9587e269611aa4f957e896df7d0dfcd1fc7378d5';
 
 /// See also [MatchController].
 @ProviderFor(MatchController)
@@ -248,7 +248,7 @@ final extensionClearProvider =
 );
 
 typedef _$ExtensionClear = AutoDisposeNotifier<bool>;
-String _$targetControllerHash() => r'd4d6329b7456e37e9fa87657e45bae51342a2d38';
+String _$targetControllerHash() => r'5bc93507bce00fa04ef5f6b607b9b17fb7480825';
 
 /// See also [TargetController].
 @ProviderFor(TargetController)
@@ -264,7 +264,7 @@ final targetControllerProvider = AutoDisposeNotifierProvider<TargetController,
 );
 
 typedef _$TargetController = AutoDisposeNotifier<TextEditingController>;
-String _$targetClearHash() => r'f35b70c431e475e1ab1284dc977fb6290b7d7479';
+String _$targetClearHash() => r'277b4390b31353f816bbfacb6d296179582a04a7';
 
 /// See also [TargetClear].
 @ProviderFor(TargetClear)
@@ -280,4 +280,4 @@ final targetClearProvider =
 
 typedef _$TargetClear = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

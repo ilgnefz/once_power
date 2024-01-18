@@ -13,6 +13,8 @@ final List<String> dateTypeList = [
   DateType.latestDate.value
 ];
 
+final BorderRadius borderRadius = BorderRadius.circular(8);
+
 class DateSelected extends ConsumerWidget {
   const DateSelected({super.key});
 
@@ -35,11 +37,14 @@ class DateSelected extends ConsumerWidget {
           height: 32,
           width: 96,
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(borderRadius: borderRadius),
         ),
         dropdownStyleData: DropdownStyleData(
-          width: 96,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+          width: 104,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: borderRadius,
+          ),
           scrollbarTheme: ScrollbarThemeData(
             radius: const Radius.circular(40),
             thickness: MaterialStateProperty.all(2),

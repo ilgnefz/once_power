@@ -6,27 +6,27 @@ import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/svg_icon.dart';
 
 class NotificationMessage {
-  static Color showColor(MessageType type) {
+  static Color showColor(NotificationType type) {
     const Color failure = Colors.red;
     const Color success = Colors.green;
     const Color warning = Colors.orange;
-    return type == MessageType.failure
+    return type == NotificationType.failure
         ? failure
-        : type == MessageType.success
+        : type == NotificationType.success
             ? success
             : warning;
   }
 
-  static String showIcon(MessageType type) {
-    return type == MessageType.failure
+  static String showIcon(NotificationType type) {
+    return type == NotificationType.failure
         ? AppIcons.error
-        : type == MessageType.success
+        : type == NotificationType.success
             ? AppIcons.success
             : AppIcons.warning;
   }
 
   static show(String title, String message, List<NotificationInfo> info,
-      MessageType type,
+      NotificationType type,
       [int time = 5]) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
@@ -82,7 +82,7 @@ class NotificationMessage {
                             TextStyle fileStyle =
                                 const TextStyle(color: Colors.blue);
                             TextStyle infoStyle =
-                                const TextStyle(color: Color(0xFF666666));
+                                const TextStyle(color: Color(0xFF454545));
                             return RichText(
                               text: TextSpan(
                                   text: e.file,
@@ -91,7 +91,7 @@ class NotificationMessage {
                                     TextSpan(text: e.message, style: infoStyle)
                                   ]),
                             );
-                          }).toList(),
+                          }),
                         ],
                       ),
                     ),
@@ -102,7 +102,8 @@ class NotificationMessage {
         );
       },
       wrapToastAnimation: notificationAnimation,
-      duration: type == MessageType.success ? Duration(seconds: time) : null,
+      duration:
+          type == NotificationType.success ? Duration(seconds: time) : null,
       align: Alignment.bottomRight,
     );
   }
@@ -117,12 +118,12 @@ class NormalAnimation extends StatefulWidget {
   final bool reverse;
   final AnimationController controller;
 
-  const NormalAnimation(
-      {Key? key,
-      required this.child,
-      this.reverse = false,
-      required this.controller})
-      : super(key: key);
+  const NormalAnimation({
+    super.key,
+    required this.child,
+    this.reverse = false,
+    required this.controller,
+  });
 
   @override
   NormalAnimationState createState() => NormalAnimationState();

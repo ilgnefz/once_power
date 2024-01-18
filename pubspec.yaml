@@ -46,7 +46,6 @@ dependencies:
   shared_preferences: ^2.2.2
   package_info_plus: ^5.0.1
   url_launcher: ^6.2.3
-#  intl: ^0.18.1
   dio: ^5.4.0
   desktop_drop: ^0.4.4
   cross_file: ^0.3.3+8
@@ -56,6 +55,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
   flutter_riverpod: ^2.4.9
   dropdown_button2: ^2.3.9
+  logger: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:

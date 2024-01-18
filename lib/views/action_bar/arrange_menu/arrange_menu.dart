@@ -42,7 +42,7 @@ class ArrangeMenu extends ConsumerWidget {
     void addFile() async {
       final List<XFile> files = await openFiles();
       if (!append) ref.read(fileListProvider.notifier).clear();
-      if (files.isNotEmpty) xFileFormat(ref, files);
+      if (files.isNotEmpty) formatXFile(ref, files);
     }
 
     void addFolder() async {
@@ -50,7 +50,7 @@ class ArrangeMenu extends ConsumerWidget {
       if (folders.isNotEmpty) {
         if (!append) ref.read(fileListProvider.notifier).clear();
         for (var folder in folders) {
-          fileFormat(ref, folder!);
+          formatFile(ref, folder!);
         }
       }
     }

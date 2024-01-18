@@ -37,7 +37,7 @@ String replaceName(RemoveType type, String match, String modify, String name,
     }
     if (!isLength) {
       if (matchCase) name = name.replaceAll(match, modify);
-      // // 不区分大小写时情况很多
+      // 不区分大小写时情况很多
       if (!matchCase && match != '') {
         int index = name.toLowerCase().indexOf(match.toLowerCase());
         while (index != -1) {

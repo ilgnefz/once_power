@@ -17,7 +17,7 @@ class ApplyMenu extends ConsumerWidget {
 
     void addFile() async {
       final List<XFile> files = await openFiles();
-      if (files.isNotEmpty) xFileFormat(ref, files);
+      if (files.isNotEmpty) formatXFile(ref, files);
     }
 
     void addFolder() async {
@@ -26,7 +26,7 @@ class ApplyMenu extends ConsumerWidget {
         bool append = ref.watch(appendModeProvider);
         if (!append) ref.read(fileListProvider.notifier).clear();
         for (var folder in folders) {
-          fileFormat(ref, folder!);
+          formatFile(ref, folder!);
         }
       }
     }

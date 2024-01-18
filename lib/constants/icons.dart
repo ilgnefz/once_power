@@ -6,6 +6,8 @@ class AppIcons {
   static const String checkDescending = '${basePath}check-descending.svg';
   static const String cycle = '${basePath}cycle.svg';
   static const String date = '${basePath}date.svg';
+  static const String dateAscending = '${basePath}date-ascending.svg';
+  static const String dateDescending = '${basePath}date-descending.svg';
   static const String error = '${basePath}error.svg';
   static const String gitee = '${basePath}gitee.svg';
   static const String github = '${basePath}github.svg';

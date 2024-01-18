@@ -10,22 +10,59 @@ import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
-Future<DateTime?> getExifDate(String filePath) async {
-  final fileBytes = File(filePath).readAsBytesSync();
-  final data = await readExifFromBytes(fileBytes);
-  if (!data.containsKey('Image DateTime')) return null;
-  String? dateTime = data['Image DateTime'].toString();
-  if (dateTime == '') return null;
-  debugPrint('$filePath拍摄日期: ${exifDateFormat(dateTime)}');
-  return exifDateFormat(dateTime);
-}
-
-void xFileFormat(WidgetRef ref, List<XFile> files) async {
+void formatXFile(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
   for (var file in files) {
-    fileFormat(ref, file.path);
+    formatFile(ref, file.path);
   }
+}
+
+void formatFile(WidgetRef ref, String filePath) async {
+  bool append = ref.watch(appendModeProvider);
+  bool addFolder = ref.watch(addFolderProvider);
+  if (append) {
+    final files = ref.watch(fileListProvider);
+    if (files.any((e) => e.filePath == filePath)) return;
+  }
+
+  bool isFile = FileSystemEntity.isFileSync(filePath);
+  FunctionMode mode = ref.watch(currentModeProvider);
+
+  if (!addFolder && !isFile && mode != FunctionMode.organize) {
+    final list = getAllFile(filePath);
+    for (var file in list) {
+      formatFile(ref, file);
+    }
+    return;
+  }
+
+  FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+  ref.read(fileListProvider.notifier).add(fileInfo);
+
+  if (mode == FunctionMode.organize) {
+    TextEditingController controller = ref.watch(targetControllerProvider);
+    if (controller.text.isEmpty) {
+      controller.text = isFile ? fileInfo.parent : filePath;
+    }
+  }
+
+  updateName(ref);
+  updateExtension(ref);
+}
+
+List<String> getAllFile(String folder) {
+  Directory directory = Directory(folder);
+  List<String> children = [];
+  List<FileSystemEntity> files = directory.listSync(recursive: true);
+  for (var file in files) {
+    if (FileSystemEntity.isFileSync(file.path)) {
+      String extension = path.extension(file.path);
+      extension = extension == '' ? extension : extension.substring(1);
+      if (!filter.contains(extension)) children.add(file.path);
+    }
+  }
+  return children;
 }
 
 Future<FileInfo> generateFileInfo(
@@ -66,49 +103,12 @@ Future<FileInfo> generateFileInfo(
   );
 }
 
-void fileFormat(WidgetRef ref, String filePath) async {
-  bool append = ref.watch(appendModeProvider);
-  bool addFolder = ref.watch(addFolderProvider);
-  if (append) {
-    final files = ref.watch(fileListProvider);
-    if (files.any((e) => e.filePath == filePath)) return;
-  }
-
-  bool isFile = FileSystemEntity.isFileSync(filePath);
-  FunctionMode mode = ref.watch(currentModeProvider);
-
-  if (!addFolder && !isFile && mode != FunctionMode.organize) {
-    final list = getAllFile(filePath);
-    for (var file in list) {
-      fileFormat(ref, file);
-    }
-    return;
-  }
-
-  FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
-  ref.read(fileListProvider.notifier).add(fileInfo);
-
-  if (mode == FunctionMode.organize) {
-    TextEditingController controller = ref.watch(targetControllerProvider);
-    if (controller.text.isEmpty) {
-      controller.text = isFile ? fileInfo.parent : filePath;
-    }
-  }
-
-  updateName(ref);
-  updateExtension(ref);
-}
-
-List<String> getAllFile(String folder) {
-  Directory directory = Directory(folder);
-  List<String> children = [];
-  List<FileSystemEntity> files = directory.listSync(recursive: true);
-  for (var file in files) {
-    if (FileSystemEntity.isFileSync(file.path)) {
-      String extension = path.extension(file.path);
-      extension = extension == '' ? extension : extension.substring(1);
-      if (!filter.contains(extension)) children.add(file.path);
-    }
-  }
-  return children;
+Future<DateTime?> getExifDate(String filePath) async {
+  final fileBytes = File(filePath).readAsBytesSync();
+  final data = await readExifFromBytes(fileBytes);
+  if (!data.containsKey('Image DateTime')) return null;
+  String? dateTime = data['Image DateTime'].toString();
+  if (dateTime == '') return null;
+  Log.i('$filePath拍摄日期: ${formatExifDate(dateTime)}');
+  return formatExifDate(dateTime);
 }

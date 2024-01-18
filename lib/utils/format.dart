@@ -14,14 +14,14 @@ String formatNumber(int n, int width) {
   return n.toString().padLeft(width, '0');
 }
 
-DateTime exifDateFormat(String date) {
+DateTime formatExifDate(String date) {
   List<String> list = date.split(' ');
   String ymd = list.first.replaceAll(':', '-');
   list.replaceRange(0, 1, [ymd]);
   return DateTime.parse(list.join(' '));
 }
 
-int getExtendedVersionNumber(String version) {
+int getVersionNumber(String version) {
   List versionCells = version.split('.');
   versionCells = versionCells.map((i) => int.parse(i)).toList();
   return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];

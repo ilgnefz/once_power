@@ -2,6 +2,7 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/rename.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file.g.dart';
@@ -79,6 +80,18 @@ List<FileInfo> sortList(SortListRef ref) {
       break;
     case SortType.nameAscending:
       sortedList = [...list]..sort((a, b) => b.name.compareTo(a.name));
+      break;
+    case SortType.dateDescending:
+      sortedList = [...list]..sort((a, b) {
+          int result = sortDateTime(a).first.compareTo(sortDateTime(b).first);
+          return result == 0 ? a.name.compareTo(b.name) : result;
+        });
+      break;
+    case SortType.dateAscending:
+      sortedList = [...list]..sort((a, b) {
+          int result = sortDateTime(b).first.compareTo(sortDateTime(a).first);
+          return result == 0 ? b.name.compareTo(a.name) : result;
+        });
       break;
     case SortType.checkDescending:
       sortedList = [...list]..sort((a, b) {

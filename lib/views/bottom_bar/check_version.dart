@@ -28,8 +28,8 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
       VersionInfoResponse res =
           VersionInfoResponse.fromJson(jsonDecode(response.toString()));
       print(res.toString());
-      int version = getExtendedVersionNumber(res.info.first.version);
-      int currentVersion = getExtendedVersionNumber(PackageDesc.getVersion());
+      int version = getVersionNumber(res.info.first.version);
+      int currentVersion = getVersionNumber(PackageDesc.getVersion());
       List<String> desc = res.info.first.description;
       if (version > currentVersion) {
         NotificationMessage.show(
@@ -41,15 +41,16 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
             return NotificationInfo(
                 file: index == 0 ? '' : '$index. ', message: e);
           }).toList(),
-          MessageType.success,
+          NotificationType.success,
           30,
         );
         ref.read(newVersionProvider.notifier).update();
       } else {
-        NotificationMessage.show('检测完成', '当前已是最新版本', [], MessageType.success);
+        NotificationMessage.show(
+            '检测完成', '当前已是最新版本', [], NotificationType.success);
       }
     } catch (e) {
-      NotificationMessage.show('检测失败', '$e', [], MessageType.failure);
+      NotificationMessage.show('检测失败', '$e', [], NotificationType.failure);
     }
     check = false;
     setState(() {});

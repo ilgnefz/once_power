@@ -81,10 +81,11 @@ class ArrangeButton extends ConsumerWidget {
 
     void showNotification() {
       if (errorList.isEmpty) {
-        NotificationMessage.show('整理成功', '已成功移动所有文件', [], MessageType.success);
+        NotificationMessage.show(
+            '整理成功', '已成功移动所有文件', [], NotificationType.success);
       } else {
         NotificationMessage.show(
-            '整理失败', '以下几个移动失败！', errorList, MessageType.failure);
+            '整理失败', '以下几个移动失败！', errorList, NotificationType.failure);
       }
     }
 

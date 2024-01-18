@@ -51,10 +51,10 @@ class DeleteFolderButton extends ConsumerWidget {
     void showNotification() {
       if (errorList.isEmpty) {
         NotificationMessage.show(
-            '删除成功', '已成功删除所有空文件夹', [], MessageType.success);
+            '删除成功', '已成功删除所有空文件夹', [], NotificationType.success);
       } else {
         NotificationMessage.show(
-            '删除失败', '删除空文件夹失败！', errorList, MessageType.failure);
+            '删除失败', '删除空文件夹失败！', errorList, NotificationType.failure);
       }
     }
 
