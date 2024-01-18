@@ -6,7 +6,7 @@ part of 'input.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$matchControllerHash() => r'9587e269611aa4f957e896df7d0dfcd1fc7378d5';
+String _$matchControllerHash() => r'ab083887890691c536d5e703dc65c44447006039';
 
 /// See also [MatchController].
 @ProviderFor(MatchController)
@@ -37,7 +37,7 @@ final matchClearProvider =
 );
 
 typedef _$MatchClear = AutoDisposeNotifier<bool>;
-String _$modifyControllerHash() => r'ac0c5a426eaee772973cfe62f94a1afe91dec46c';
+String _$modifyControllerHash() => r'd28c6f606d13a11279a4b33c1a07530a2e515a49';
 
 /// See also [ModifyController].
 @ProviderFor(ModifyController)

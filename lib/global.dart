@@ -29,6 +29,8 @@ class Global {
 
 void saveOrNo() {
   bool? save = StorageUtil.getBool(AppKeys.isSave) ?? false;
+  StorageUtil.remove(AppKeys.matchCache);
+  StorageUtil.remove(AppKeys.modifyCache);
   if (!save) {
     List<String> appKeyList = [
       AppKeys.targetFolder,

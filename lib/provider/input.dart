@@ -17,6 +17,10 @@ class MatchController extends _$MatchController {
     });
     return controller;
   }
+
+  void updateText(String text) {
+    state.text = text;
+  }
 }
 
 @riverpod
@@ -35,6 +39,10 @@ class ModifyController extends _$ModifyController {
       ref.read(modifyClearProvider.notifier).update(controller.text.isNotEmpty);
     });
     return controller;
+  }
+
+  void updateText(String text) {
+    state.text = text;
   }
 }
 

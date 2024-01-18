@@ -35,4 +35,8 @@ class AppKeys {
   // static String reverseType = 'reverseType';
   static String dateType = 'dateType';
   static String sortType = 'sortType';
+
+  // temp cache
+  static String matchCache = 'matchCache';
+  static String modifyCache = 'modifyCache';
 }
