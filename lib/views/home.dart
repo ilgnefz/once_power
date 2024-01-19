@@ -3,6 +3,7 @@ import 'package:once_power/global.dart';
 import 'package:once_power/views/action_bar/action_bar.dart';
 import 'package:once_power/views/bottom_bar/bottom_bar.dart';
 import 'package:once_power/views/content_bar/content_bar.dart';
+import 'package:once_power/views/top_bar.dart';
 import 'package:window_manager/window_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,11 +42,14 @@ class _HomePageState extends State<HomePage> with WindowListener {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Expanded(child: Row(children: [ActionBar(), ContentBar()])),
-          BottomBar(),
-        ],
+      body: DragToResizeArea(
+        child: Column(
+          children: [
+            TopBar(),
+            Expanded(child: Row(children: [ActionBar(), ContentBar()])),
+            BottomBar(),
+          ],
+        ),
       ),
     );
   }

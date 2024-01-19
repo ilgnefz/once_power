@@ -15,14 +15,16 @@ class Global {
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(1000, 600),
-      minimumSize: Size(1000, 600),
+      size: Size(1016, 616),
+      minimumSize: Size(1016, 616),
       center: true,
       title: 'OncePower',
+      backgroundColor: Colors.transparent,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();
+      await windowManager.setAsFrameless();
     });
   }
 }

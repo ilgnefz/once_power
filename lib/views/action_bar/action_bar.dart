@@ -17,11 +17,13 @@ class ActionBar extends ConsumerWidget {
     const String reserve = '保留';
     const String organize = '整理';
     bool enableArrange = ref.watch(enableArrangeProvider);
+    bool max = ref.watch(maxWindowProvider);
+    double width = max ? AppNum.actionBarW + 8 : AppNum.actionBarW;
 
     return Column(
       children: [
         Container(
-          width: AppNum.actionBarW,
+          width: width,
           height: AppNum.topMenuH,
           color: Colors.white,
           child: Row(
@@ -35,8 +37,8 @@ class ActionBar extends ConsumerWidget {
         ),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.all(AppNum.actionBarP),
-            width: AppNum.actionBarW,
+            padding: EdgeInsets.all(max ? 16 : AppNum.actionBarP),
+            width: width,
             child: ref.watch(currentModeProvider) == FunctionMode.organize
                 ? const ArrangeMenu()
                 : const RenameMenu(),

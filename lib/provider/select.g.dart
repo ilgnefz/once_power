@@ -313,5 +313,19 @@ final newVersionProvider =
 );
 
 typedef _$NewVersion = AutoDisposeNotifier<bool>;
+String _$maxWindowHash() => r'9607a8ce8e2e3e0ee2096869f8268afca04aebbd';
+
+/// See also [MaxWindow].
+@ProviderFor(MaxWindow)
+final maxWindowProvider = AutoDisposeNotifierProvider<MaxWindow, bool>.internal(
+  MaxWindow.new,
+  name: r'maxWindowProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$maxWindowHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MaxWindow = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

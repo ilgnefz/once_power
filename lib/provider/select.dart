@@ -210,3 +210,10 @@ class NewVersion extends _$NewVersion {
   bool build() => false;
   void update() => state = !state;
 }
+
+@riverpod
+class MaxWindow extends _$MaxWindow {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}

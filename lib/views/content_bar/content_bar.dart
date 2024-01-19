@@ -47,7 +47,8 @@ class ContentBar extends ConsumerWidget {
     FunctionMode mode = ref.watch(currentModeProvider);
 
     return Expanded(
-      child: ColoredBox(
+      child: Container(
+        padding: const EdgeInsets.only(right: 4),
         color: Colors.white,
         child: Column(
           children: [
