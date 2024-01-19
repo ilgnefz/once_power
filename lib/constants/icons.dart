@@ -18,5 +18,4 @@ class AppIcons {
   static const String sort = '${basePath}sort.svg';
   static const String success = '${basePath}success.svg';
   static const String swap = '${basePath}swap.svg';
-  static const String warning = '${basePath}warning.svg';
 }

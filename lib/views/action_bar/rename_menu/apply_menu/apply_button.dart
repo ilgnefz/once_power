@@ -7,28 +7,58 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
+FileInfo errFile = FileInfo(
+  id: '',
+  name: '',
+  newName: '',
+  parent: '',
+  filePath: '',
+  extension: '',
+  newExtension: '',
+  createDate: DateTime.now(),
+  modifyDate: DateTime.now(),
+  type: FileClassify.other,
+  checked: false,
+);
+
 class ApplyButton extends ConsumerWidget {
   const ApplyButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String applyChange = '应用更改';
-    List<FileInfo> fileList = ref.watch(fileListProvider);
+    List<FileInfo> fileList = ref.watch(sortListProvider);
+    List<FileInfo> checkList = fileList.where((e) => e.checked).toList();
+    List<NotificationInfo> errorList = [];
+    int total = checkList.length;
 
     void applyRename() {
-      List<FileInfo> checkList = fileList.where((e) => e.checked).toList();
-      int total = checkList.length;
-      List<NotificationInfo> errorList = [];
-      List<FileInfo> tempFileList = [];
-      rename(ref, checkList, tempFileList, errorList);
-      if (tempFileList.isNotEmpty) rename(ref, tempFileList, null, errorList);
+      if (total > 1) {
+        FileInfo first = checkList.first;
+        String firstExtension =
+            first.newExtension == 'dir' ? '' : '.${first.newExtension}';
+        String firstPath =
+            path.join(first.parent, '${first.newName}$firstExtension');
+
+        FileInfo f = checkList.firstWhere((f) {
+          String fExtension = f.extension == 'dir' ? '' : '.${f.extension}';
+          String fPath = path.join(f.parent, '${f.name}$fExtension');
+          return fPath == firstPath;
+        }, orElse: () => errFile);
+
+        List<FileInfo> list =
+            f == errFile ? checkList : checkList.reversed.toList();
+        rename(ref, list, errorList);
+      } else {
+        rename(ref, checkList, errorList);
+      }
       updateName(ref);
       updateExtension(ref);
       NotificationType type = errorList.isNotEmpty
           ? NotificationType.failure
           : NotificationType.success;
-      List<NotificationInfo> list = errorList.isNotEmpty ? errorList : [];
-      showNotification(type, list, total);
+      List<NotificationInfo> infoList = errorList.isNotEmpty ? errorList : [];
+      showNotification(type, infoList, total);
     }
 
     return ElevatedButton(
@@ -38,51 +68,45 @@ class ApplyButton extends ConsumerWidget {
   }
 }
 
-void rename(WidgetRef ref, List<FileInfo> fileList,
-    List<FileInfo>? tempFileList, List<NotificationInfo> errorList) {
-  for (FileInfo file in fileList) {
-    bool sameName = file.name == file.newName;
-    bool sameExtension = file.extension == file.newExtension;
-    String extension = file.extension == 'dir' ? '' : '.${file.extension}';
-    String newExtension =
-        file.newExtension == 'dir' ? '' : '.${file.newExtension}';
-    String oldPath = path.join(file.parent, '${file.name}$extension');
-    String newPath = path.join(file.parent, '${file.newName}$newExtension');
+void rename(
+    WidgetRef ref, List<FileInfo> list, List<NotificationInfo> errorList) {
+  for (FileInfo f in list) {
+    bool sameName = f.name == f.newName;
+    bool sameExtension = f.extension == f.newExtension;
     if (sameName && sameExtension) continue;
+    String extension = f.extension == 'dir' ? '' : '.${f.extension}';
+    String newExtension = f.newExtension == 'dir' ? '' : '.${f.newExtension}';
+    String oldPath = path.join(f.parent, '${f.name}$extension');
+    String newPath = path.join(f.parent, '${f.newName}$newExtension');
     if (File(newPath).existsSync()) {
-      if (tempFileList != null) {
-        tempFileList.add(file);
-      } else {
-        final oldFile = '${file.name}$extension';
-        final newFile = '${file.newName}$newExtension';
-        errorList.add(NotificationInfo(
-          file: oldFile,
-          message: ' 重命名为 $newFile 的文件已存在',
-        ));
-      }
+      final oldFile = '${f.name}$extension';
+      final newFile = '${f.newName}$newExtension';
+      errorList.add(NotificationInfo(
+        file: oldFile,
+        message: ' 重命名为 $newFile 的文件已存在',
+      ));
       continue;
     }
     try {
-      if (file.type == FileClassify.folder) {
+      if (f.type == FileClassify.folder) {
         Directory(oldPath).renameSync(newPath);
       } else {
         File(oldPath).renameSync(newPath);
       }
       final fileInfo = ref.read(fileListProvider.notifier);
-      fileInfo.updateOriginName(file.id, file.newName);
-      fileInfo.updateFilePath(file.id, newPath);
-      fileInfo.updateOriginExtension(file.id, file.newExtension);
-      // count++;
+      fileInfo.updateOriginName(f.id, f.newName);
+      fileInfo.updateFilePath(f.id, newPath);
+      fileInfo.updateOriginExtension(f.id, f.newExtension);
     } catch (e) {
       Log.e(e.runtimeType.toString());
       String message = '';
       if (e.runtimeType == PathNotFoundException) {
-        message = ' 在 ${file.parent} 中已不存在';
+        message = ' 在 ${f.parent} 中已不存在';
       } else {
         message = ' 因为 $e 重命名失败';
       }
       errorList.add(NotificationInfo(
-        file: '${file.name}$extension',
+        file: '${f.name}$extension',
         message: message,
       ));
     }

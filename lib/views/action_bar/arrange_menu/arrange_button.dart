@@ -43,7 +43,8 @@ class ArrangeButton extends ConsumerWidget {
         if (saveLog) {
           final fileName = formatDateTime(DateTime.now()).substring(0, 14);
           final log = File(path.join(controller.text, '整理日志$fileName.log'));
-          String contents = '【${file.filePath}】 ---> 【$newPath】';
+          String contents =
+              '${DateTime.now()}:【${file.filePath}】 ————→ 【$newPath】';
           log.writeAsStringSync('$contents\n', mode: FileMode.append);
         }
 

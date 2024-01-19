@@ -9,20 +9,11 @@ class NotificationMessage {
   static Color showColor(NotificationType type) {
     const Color failure = Colors.red;
     const Color success = Colors.green;
-    const Color warning = Colors.orange;
-    return type == NotificationType.failure
-        ? failure
-        : type == NotificationType.success
-            ? success
-            : warning;
+    return type == NotificationType.failure ? failure : success;
   }
 
   static String showIcon(NotificationType type) {
-    return type == NotificationType.failure
-        ? AppIcons.error
-        : type == NotificationType.success
-            ? AppIcons.success
-            : AppIcons.warning;
+    return type == NotificationType.failure ? AppIcons.error : AppIcons.success;
   }
 
   static show(String title, String message, List<NotificationInfo> info,
