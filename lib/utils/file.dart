@@ -99,7 +99,7 @@ Future<FileInfo> generateFileInfo(
     extension = path.extension(filePath);
     // 有可能文件没有扩展名
     if (extension != '') {
-      name = name.split(extension).first;
+      name = name.substring(0, name.length - extension.length);
       extension = extension.substring(1);
     }
     // 如果是图片就获取 exif 中的拍摄日期
@@ -108,7 +108,7 @@ Future<FileInfo> generateFileInfo(
     }
   }
   FileClassify type = ref.read(getFileClassifyProvider(extension));
-  return FileInfo(
+  FileInfo fileInfo = FileInfo(
     id: id,
     name: name,
     newName: name,
@@ -122,6 +122,7 @@ Future<FileInfo> generateFileInfo(
     type: type,
     checked: true,
   );
+  return fileInfo;
 }
 
 Future<DateTime?> getExifDate(String filePath) async {
