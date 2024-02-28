@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
@@ -73,7 +74,7 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
     List<NotificationInfo> errorList) async {
   ref.read(totalProvider.notifier).update(list.length);
   int count = 0;
-  bool delay = list.length > 150;
+  bool delay = list.length > AppNum.maxFileNum;
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (FileInfo f in list) {
     bool sameName = f.name == f.newName;

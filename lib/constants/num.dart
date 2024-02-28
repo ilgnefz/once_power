@@ -15,4 +15,5 @@ class AppNum {
   static const double fileCardH = 40;
   static const double fileCardP = 8;
   static const double tileFontSize = 13;
+  static const int maxFileNum = 150;
 }

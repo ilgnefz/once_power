@@ -8,7 +8,6 @@ class Count extends _$Count {
   int build() => 0;
   void update(int value) => state = value;
   void clear() => state = 0;
-  // void reduce() => state = state - 1;
 }
 
 @riverpod

@@ -5,6 +5,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
@@ -16,7 +17,7 @@ void formatXFile(WidgetRef ref, List<XFile> files) async {
   if (!append) ref.read(fileListProvider.notifier).clear();
   int count = 0;
   ref.read(totalProvider.notifier).update(files.length);
-  bool delay = files.length > 150;
+  bool delay = files.length > AppNum.maxFileNum;
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (var file in files) {
     count++;
@@ -43,7 +44,7 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
     final list = getAllFile(filePath);
     int count = 0;
     ref.read(totalProvider.notifier).update(list.length);
-    bool delay = list.length > 150;
+    bool delay = list.length > AppNum.maxFileNum;
     int startTime = DateTime.now().microsecondsSinceEpoch;
     for (var file in list) {
       count++;
