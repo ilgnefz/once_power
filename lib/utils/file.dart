@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
@@ -13,12 +14,21 @@ import 'package:path/path.dart' as path;
 void formatXFile(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
+  int count = 0;
+  ref.read(totalProvider.notifier).update(files.length);
+  bool delay = files.length > 150;
+  int startTime = DateTime.now().microsecondsSinceEpoch;
   for (var file in files) {
-    formatFile(ref, file.path);
+    count++;
+    formatFile(ref, file.path, count);
+    if (delay) await Future.delayed(const Duration(microseconds: 1));
   }
+  int endTime = DateTime.now().microsecondsSinceEpoch;
+  double cost = (endTime - startTime) / 1000000;
+  ref.read(costProvider.notifier).update(cost);
 }
 
-void formatFile(WidgetRef ref, String filePath) async {
+void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   bool append = ref.watch(appendModeProvider);
   bool addFolder = ref.watch(addFolderProvider);
   if (append) {
@@ -31,11 +41,22 @@ void formatFile(WidgetRef ref, String filePath) async {
 
   if (!addFolder && !isFile && mode != FunctionMode.organize) {
     final list = getAllFile(filePath);
+    int count = 0;
+    ref.read(totalProvider.notifier).update(list.length);
+    bool delay = list.length > 150;
+    int startTime = DateTime.now().microsecondsSinceEpoch;
     for (var file in list) {
-      formatFile(ref, file);
+      count++;
+      formatFile(ref, file, count);
+      if (delay) await await Future.delayed(const Duration(microseconds: 1));
     }
+    int endTime = DateTime.now().microsecondsSinceEpoch;
+    double cost = (endTime - startTime) / 1000000;
+    ref.read(costProvider.notifier).update(cost);
     return;
   }
+
+  ref.read(countProvider.notifier).update(count);
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
   ref.read(fileListProvider.notifier).add(fileInfo);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
@@ -35,6 +36,9 @@ class RenameTitleBar extends ConsumerWidget {
 
     void deleteAll() {
       ref.read(fileListProvider.notifier).clear();
+      ref.read(countProvider.notifier).clear();
+      ref.read(totalProvider.notifier).clear();
+      ref.read(costProvider.notifier).clear();
     }
 
     int selected = ref.watch(selectFileProvider);

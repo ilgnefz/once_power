@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 
@@ -20,7 +21,10 @@ class ContentBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void dropAdd(DropDoneDetails details) {
       List<XFile> files = details.files;
-      if (files.isNotEmpty) formatXFile(ref, files);
+      if (files.isNotEmpty) {
+        ref.read(totalProvider.notifier).update(files.length);
+        formatXFile(ref, files);
+      }
     }
 
     List<FileInfo> files = ref.watch(sortListProvider);

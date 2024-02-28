@@ -2,6 +2,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
 import 'package:once_power/utils/storage.dart';
@@ -41,13 +42,16 @@ class ArrangeMenu extends ConsumerWidget {
     void addFile() async {
       final List<XFile> files = await openFiles();
       if (!append) ref.read(fileListProvider.notifier).clear();
-      if (files.isNotEmpty) formatXFile(ref, files);
+      if (files.isNotEmpty) {
+        formatXFile(ref, files);
+      }
     }
 
     void addFolder() async {
       final List<String?> folders = await getDirectoryPaths();
       if (folders.isNotEmpty) {
         if (!append) ref.read(fileListProvider.notifier).clear();
+        ref.read(totalProvider.notifier).update(folders.length);
         for (var folder in folders) {
           formatFile(ref, folder!);
         }

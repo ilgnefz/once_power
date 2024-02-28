@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/click_icon.dart';
@@ -23,6 +24,10 @@ class BottomBar extends ConsumerWidget {
     const String githubUrl = 'https://github.com/ilgnefz/once_power';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
     bool save = ref.watch(saveConfigProvider);
+
+    int count = ref.watch(countProvider);
+    int total = ref.watch(totalProvider);
+    String cost = ref.watch(costProvider).toStringAsFixed(2);
 
     void downloadWeb() async {
       String url = 'https://gitee.com/ilgnefz/once_power/releases';
@@ -50,6 +55,8 @@ class BottomBar extends ConsumerWidget {
           const SizedBox(width: 4),
           const EnableOrganize(),
           const Spacer(),
+          Text('当前任务: $count/$total 用时: ${cost}s', style: style),
+          const SizedBox(width: 12),
           const RepoUrl(icon: AppIcons.gitee, url: giteeUrl),
           const SizedBox(width: 12),
           const RepoUrl(icon: AppIcons.github, url: githubUrl),

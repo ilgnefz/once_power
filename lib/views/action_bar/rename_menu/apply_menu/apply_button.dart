@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
@@ -32,7 +33,7 @@ class ApplyButton extends ConsumerWidget {
     List<NotificationInfo> errorList = [];
     int total = checkList.length;
 
-    void applyRename() {
+    void applyRename() async {
       if (total > 1) {
         FileInfo first = checkList.first;
         String firstExtension =
@@ -48,9 +49,9 @@ class ApplyButton extends ConsumerWidget {
 
         List<FileInfo> list =
             f == errFile ? checkList : checkList.reversed.toList();
-        rename(ref, list, errorList);
+        await rename(ref, list, errorList);
       } else {
-        rename(ref, checkList, errorList);
+        await rename(ref, checkList, errorList);
       }
       updateName(ref);
       updateExtension(ref);
@@ -68,8 +69,12 @@ class ApplyButton extends ConsumerWidget {
   }
 }
 
-void rename(
-    WidgetRef ref, List<FileInfo> list, List<NotificationInfo> errorList) {
+Future<void> rename(WidgetRef ref, List<FileInfo> list,
+    List<NotificationInfo> errorList) async {
+  ref.read(totalProvider.notifier).update(list.length);
+  int count = 0;
+  bool delay = list.length > 150;
+  int startTime = DateTime.now().microsecondsSinceEpoch;
   for (FileInfo f in list) {
     bool sameName = f.name == f.newName;
     bool sameExtension = f.extension == f.newExtension;
@@ -110,7 +115,13 @@ void rename(
         message: message,
       ));
     }
+    count++;
+    ref.read(countProvider.notifier).update(count);
+    if (delay) await Future.delayed(const Duration(microseconds: 1));
   }
+  int endTime = DateTime.now().microsecondsSinceEpoch;
+  double cost = (endTime - startTime) / 1000000;
+  ref.read(costProvider.notifier).update(cost);
 }
 
 void showNotification(
