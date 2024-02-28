@@ -24,6 +24,8 @@ class RenameFileTile extends ConsumerWidget {
     const String exifDate = '拍摄日期';
 
     void autoInput() {
+      bool dateRename = ref.watch(dateRenameProvider);
+      if (dateRename) return;
       ref.watch(matchControllerProvider).text = file.name;
       updateName(ref);
     }
