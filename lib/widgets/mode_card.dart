@@ -20,7 +20,8 @@ class ModeCard extends ConsumerWidget {
       if (before == mode) return;
       if (mode == FunctionMode.reserve) {
         bool matchNotEmpty = ref.watch(matchClearProvider);
-        if (matchNotEmpty && ref.watch(modifyClearProvider)) {
+        bool modifyNotEmpty = ref.watch(modifyClearProvider);
+        if (matchNotEmpty && modifyNotEmpty) {
           ref.watch(modifyControllerProvider).text = '';
         }
         if (matchNotEmpty && ref.watch(dateRenameProvider)) {
