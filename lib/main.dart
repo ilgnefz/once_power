@@ -17,23 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        bool max = ref.watch(maxWindowProvider);
-        return Container(
-          margin: max ? EdgeInsets.zero : const EdgeInsets.all(8),
-          clipBehavior: max ? Clip.none : Clip.antiAliasWithSaveLayer,
-          decoration: max
-              ? null
-              : const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  boxShadow: [
-                    BoxShadow(color: Color(0x33000000), blurRadius: 8),
-                  ],
-                ),
-          child: child,
-        );
-      },
+    return BorderRadiusFrames(
       child: MaterialApp(
         title: 'OncePower',
         debugShowCheckedModeBanner: false,
@@ -50,11 +34,38 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [Locale('zh', 'CN')],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('zh', 'CN'),
+        ],
         builder: BotToastInit(),
         navigatorObservers: [BotToastNavigatorObserver()],
         home: const HomePage(),
       ),
+    );
+  }
+}
+
+class BorderRadiusFrames extends ConsumerWidget {
+  const BorderRadiusFrames({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool max = ref.watch(maxWindowProvider);
+    return Container(
+      margin: max ? EdgeInsets.zero : const EdgeInsets.all(8),
+      clipBehavior: max ? Clip.none : Clip.antiAliasWithSaveLayer,
+      decoration: max
+          ? null
+          : const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              boxShadow: [
+                BoxShadow(color: Color(0x33000000), blurRadius: 8),
+              ],
+            ),
+      child: child,
     );
   }
 }

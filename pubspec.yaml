@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,14 +49,14 @@ dependencies:
   url_launcher: ^6.2.5
   dio: ^5.4.1
   desktop_drop: ^0.4.4
-  cross_file: ^0.3.3+8
+  cross_file: any
   flutter_launcher_icons: ^0.13.1
   exif: ^3.3.0
   flutter_svg: ^2.0.10+1
-  riverpod_annotation: ^2.3.4
-  flutter_riverpod: ^2.4.10
+  riverpod_annotation: ^2.3.5
+  flutter_riverpod: ^2.5.1
   dropdown_button2: ^2.3.9
-  logger: ^2.0.2+1
+  logger: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,9 +69,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
   custom_lint: ^0.6.2
-  riverpod_lint: ^2.3.9
+  riverpod_lint: ^2.3.10
   build_runner: ^2.4.8
-  riverpod_generator: ^2.3.11
+  riverpod_generator: ^2.4.0
 
 flutter_icons:
   #  web:
@@ -89,7 +90,6 @@ flutter_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -125,3 +125,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
