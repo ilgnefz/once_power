@@ -1,5 +1,10 @@
 {
   "info": [{
+    "version": "2.3.0",
+    "description": [
+      "添加了英语"
+    ]
+  },{
     "version": "2.2.0",
     "description": [
       "添加了运行时的进度显示",
