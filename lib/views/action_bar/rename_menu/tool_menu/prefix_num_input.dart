@@ -28,8 +28,7 @@ class PrefixNumInput extends ConsumerWidget {
 
     void getLengthNum() async {
       updateName(ref);
-      int num =
-          int.parse(lengthController.text.replaceAll(prefixNumLengthLabel, ''));
+      int num = getNum(lengthController.text);
       await StorageUtil.setInt(AppKeys.prefixLength, num);
     }
 
@@ -40,8 +39,7 @@ class PrefixNumInput extends ConsumerWidget {
 
     void getStartNum() async {
       updateName(ref);
-      int num =
-          int.parse(startController.text.replaceAll(prefixNumStartLabel, ''));
+      int num = getNum(startController.text);
       await StorageUtil.setInt(AppKeys.prefixStart, num);
     }
 

@@ -24,7 +24,7 @@ class DateTextInput extends ConsumerWidget {
 
     void getLengthNum() async {
       updateName(ref);
-      int num = int.parse(controller.text.replaceAll(dateLengthLabel, ''));
+      int num = getNum(controller.text);
       await StorageUtil.setInt(AppKeys.dateLength, num);
     }
 

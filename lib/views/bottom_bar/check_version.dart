@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/provider/select.dart';

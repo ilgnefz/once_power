@@ -29,8 +29,7 @@ class SuffixNumInput extends ConsumerWidget {
 
     void getLengthNum() async {
       updateName(ref);
-      int num =
-          int.parse(lengthController.text.replaceAll(suffixNumLengthLabel, ''));
+      int num = getNum(lengthController.text);
       await StorageUtil.setInt(AppKeys.suffixLength, num);
     }
 
@@ -41,8 +40,7 @@ class SuffixNumInput extends ConsumerWidget {
 
     void getStartNum() async {
       updateName(ref);
-      int num =
-          int.parse(startController.text.replaceAll(suffixNumStartLabel, ''));
+      int num = getNum(startController.text);
       await StorageUtil.setInt(AppKeys.suffixStart, num);
     }
 

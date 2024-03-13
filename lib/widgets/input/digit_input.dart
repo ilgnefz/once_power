@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/widgets/input/base_input.dart';
-import 'package:once_power/widgets/custom_tooltip.dart';
 
 class DigitInput extends StatefulWidget {
   const DigitInput({

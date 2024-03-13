@@ -5,7 +5,6 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/widgets/click_icon.dart';
