@@ -6,6 +6,8 @@ import 'package:once_power/views/content_bar/content_bar.dart';
 import 'package:once_power/views/top_bar.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../utils/log.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 

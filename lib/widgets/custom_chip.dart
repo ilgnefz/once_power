@@ -22,7 +22,8 @@ class CustomChip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(currentModeProvider);
-    LanguageType type = ref.watch(currentLanguageProvider);
+    final locale = Localizations.localeOf(context);
+    bool isEnglish = locale == const Locale('en', 'US');
     Color background = enable
         ? (selected
             ? Theme.of(context).primaryColor
@@ -31,8 +32,7 @@ class CustomChip extends ConsumerWidget {
     Color text = enable
         ? (selected ? Colors.white : Theme.of(context).primaryColor)
         : Colors.grey;
-    double fontSize =
-        mode == FunctionMode.replace && type == LanguageType.english ? 13 : 14;
+    double fontSize = mode == FunctionMode.replace && isEnglish ? 13 : 14;
 
     return Ink(
       decoration: BoxDecoration(
