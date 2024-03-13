@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/config.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/log.dart';
 import 'package:once_power/views/home.dart';
 
 void main() async {
