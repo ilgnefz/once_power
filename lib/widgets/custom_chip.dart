@@ -22,8 +22,8 @@ class CustomChip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(currentModeProvider);
-    final locale = Localizations.localeOf(context);
-    bool isEnglish = locale == const Locale('en', 'US');
+    LanguageType type = ref.watch(currentLanguageProvider);
+    bool isEnglish = type == LanguageType.english;
     Color background = enable
         ? (selected
             ? Theme.of(context).primaryColor

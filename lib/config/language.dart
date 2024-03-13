@@ -22,8 +22,10 @@ class LanguageConfig {
     Locale? cacheLocale = StorageUtil.getLocale(AppKeys.locale);
     if (cacheLocale != null) return cacheLocale;
     if (locale.languageCode == 'zh') {
+      StorageUtil.setLocale(AppKeys.locale, const Locale('zh', 'CN'));
       return const Locale('zh', 'CN');
     }
+    StorageUtil.setLocale(AppKeys.locale, const Locale('en', 'US'));
     return const Locale('en', 'US');
   }
 }

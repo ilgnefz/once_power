@@ -74,7 +74,7 @@ class Language extends _$Language {
   Locale? build() => StorageUtil.getLocale(AppKeys.locale);
 
   void update(Locale? locale) {
-    if (locale != null) StorageUtil.setLocal(AppKeys.locale, locale);
+    if (locale != null) StorageUtil.setLocale(AppKeys.locale, locale);
     if (locale == null) StorageUtil.remove(AppKeys.locale);
     state = locale;
     S.load(state ?? Locale(Platform.localeName));

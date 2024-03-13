@@ -45,7 +45,7 @@ class StorageUtil {
   }
 
   // 存储Locale
-  static Future<void> setLocal(String key, Locale value) async {
+  static Future<void> setLocale(String key, Locale value) async {
     String localString = '${value.languageCode}_${value.countryCode}';
     await _prefs.setString(key, localString);
   }
