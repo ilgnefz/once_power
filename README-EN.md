@@ -10,19 +10,23 @@ This software is developed using Flutter and can easily cross multiple platforms
 >
 > Due to the difficulty of recording GIFs, only dynamic diagrams in Chinese are available. If you do not understand, you can open the software and refer to the pictures to learn and use them
 
-# Platform support
+# Language Support
+- **中文**
+- **English**
+
+# Platform Support
 
 - **Windows**
 - **macOS**(You need to pack it yourself. For details, please refer to **Packaging**)
 - **Linux**(You need to pack it yourself. For details, please refer to **Packaging**)
 
-# Quick start
+# Quick Start
 
 For unfamiliar icon functions, a prompt can be displayed after hovering over the mouse for the first time. You can also view the following image introduction
 
 ![01](doc/01.png)
 
-# Function introduction
+# Function Introduction
 
 Add files or folders to the software, and you can choose multiple options to drag them directly or select them through the menu in the bottom left corner.
 
