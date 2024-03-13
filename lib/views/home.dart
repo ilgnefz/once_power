@@ -46,14 +46,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
         child: Column(
           children: [
             TopBar(),
-            Expanded(
-              child: Row(
-                children: [
-                  ActionBar(),
-                  ContentBar(),
-                ],
-              ),
-            ),
+            Expanded(child: Row(children: [ActionBar(), ContentBar()])),
             BottomBar(),
           ],
         ),

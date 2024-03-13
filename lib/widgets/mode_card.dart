@@ -39,7 +39,8 @@ class ModeCard extends ConsumerWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           // width: AppNum.modeCardW,
-          margin: const EdgeInsets.symmetric(horizontal: AppNum.modeCardP * 2),
+          margin:
+              const EdgeInsets.symmetric(horizontal: AppNum.modeCardP * 1.5),
           decoration: BoxDecoration(
             border: selected
                 ? const Border(

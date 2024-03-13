@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
@@ -12,7 +13,7 @@ class FilterFileButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String delete = '删除未选择';
+    final String delete = S.of(context).deleted;
 
     bool isCheck(FileClassify classify) {
       if (classify == FileClassify.audio) return ref.watch(selectAudioProvider);
@@ -36,7 +37,7 @@ class FilterFileButton extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
           child: InkWell(
             onTap: remove,
-            child: const Text(delete, style: TextStyle(color: Colors.red)),
+            child: Text(delete, style: const TextStyle(color: Colors.red)),
           ),
         ),
       );
@@ -77,7 +78,7 @@ class FilterFileButton extends ConsumerWidget {
         items: [deleteUncheck(), ...items],
         onChanged: (value) {},
         dropdownStyleData: DropdownStyleData(
-          width: 120,
+          width: 152,
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

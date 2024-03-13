@@ -1,16 +1,25 @@
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 
 enum FunctionMode { replace, reserve, organize }
 
-enum DateType {
-  createDate('创建日期'),
-  modifyDate('修改日期'),
-  exifDate('拍摄日期'),
-  earliestDate('最早日期'),
-  latestDate('最晚日期');
+enum DateType { createdDate, modifiedDate, exifDate, earliestDate, latestDate }
 
-  final String value;
-  const DateType(this.value);
+extension DateTypeExtension on DateType {
+  String get value {
+    switch (this) {
+      case DateType.createdDate:
+        return S.current.createdDate;
+      case DateType.modifiedDate:
+        return S.current.modifiedDate;
+      case DateType.exifDate:
+        return S.current.exifDate;
+      case DateType.earliestDate:
+        return S.current.earliestDate;
+      case DateType.latestDate:
+        return S.current.latestDate;
+    }
+  }
 }
 
 enum ReserveType {
@@ -55,6 +64,21 @@ extension RemoveTypeExtension on RemoveType {
   }
 }
 
+// extension RemoveTypeExtension on RemoveType {
+//   String get value {
+//     switch (this) {
+//       case RemoveType.match:
+//         return S.current.match;
+//       case RemoveType.before:
+//         return S.current.before;
+//       case RemoveType.middle:
+//         return S.current.between;
+//       case RemoveType.after:
+//         return S.current.after;
+//     }
+//   }
+// }
+
 enum SortType {
   defaultSort,
   nameDescending,
@@ -92,19 +116,19 @@ extension FileClassifyExtension on FileClassify {
   String get value {
     switch (this) {
       case FileClassify.image:
-        return '图片';
+        return S.current.image;
       case FileClassify.video:
-        return '视频';
+        return S.current.video;
       case FileClassify.text:
-        return '文本';
+        return S.current.text;
       case FileClassify.audio:
-        return '音频';
+        return S.current.audio;
       case FileClassify.folder:
-        return '文件夹';
+        return S.current.folder;
       case FileClassify.zip:
-        return '压缩包';
+        return S.current.zip;
       case FileClassify.other:
-        return '其他';
+        return S.current.other;
     }
   }
 }
@@ -112,3 +136,11 @@ extension FileClassifyExtension on FileClassify {
 enum FileUploadType { prefix, suffix }
 
 enum NotificationType { failure, success }
+
+enum Language {
+  english('English'),
+  chinese('中文');
+
+  final String value;
+  const Language(this.value);
+}

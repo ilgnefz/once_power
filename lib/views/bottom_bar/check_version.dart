@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
@@ -58,6 +59,10 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
 
   @override
   Widget build(BuildContext context) {
+    final String checkUpdates = S.of(context).checkUpdate;
+    final String checking = S.of(context).checking;
+    final String checkComplete = S.of(context).checkCompleted;
+
     return Container(
       // width: 80,
       margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -72,7 +77,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              check ? '检测中' : '检测更新',
+              check ? checking : checkUpdates,
               style: TextStyle(
                 fontSize: 13,
                 color: hover ? Theme.of(context).primaryColor : Colors.grey,

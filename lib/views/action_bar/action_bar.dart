@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/widgets/mode_card.dart';
 
-import 'arrange_menu/arrange_menu.dart';
+import 'organize_menu/organize_menu.dart';
 import 'rename_menu/rename_menu.dart';
 
 class ActionBar extends ConsumerWidget {
@@ -13,9 +14,9 @@ class ActionBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String replace = '替换';
-    const String reserve = '保留';
-    const String organize = '整理';
+    String replace = S.of(context).replace;
+    String reserve = S.of(context).reserve;
+    String organize = S.of(context).organize;
     bool enableArrange = ref.watch(enableArrangeProvider);
     bool max = ref.watch(maxWindowProvider);
     double width = max ? AppNum.actionBarW + 8 : AppNum.actionBarW;
@@ -28,10 +29,10 @@ class ActionBar extends ConsumerWidget {
           color: Colors.white,
           child: Row(
             children: [
-              const ModeCard(label: replace, mode: FunctionMode.replace),
-              const ModeCard(label: reserve, mode: FunctionMode.reserve),
+              ModeCard(label: replace, mode: FunctionMode.replace),
+              ModeCard(label: reserve, mode: FunctionMode.reserve),
               if (enableArrange)
-                const ModeCard(label: organize, mode: FunctionMode.organize),
+                ModeCard(label: organize, mode: FunctionMode.organize),
             ],
           ),
         ),
@@ -40,7 +41,7 @@ class ActionBar extends ConsumerWidget {
             padding: EdgeInsets.all(max ? 16 : AppNum.actionBarP),
             width: width,
             child: ref.watch(currentModeProvider) == FunctionMode.organize
-                ? const ArrangeMenu()
+                ? const OrganizeMenu()
                 : const RenameMenu(),
           ),
         ),

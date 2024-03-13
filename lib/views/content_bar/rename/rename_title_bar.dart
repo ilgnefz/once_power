@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
@@ -15,8 +16,8 @@ class RenameTitleBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String originName = '原始名称';
-    const String renameName = '重命名名称';
+    final String originName = S.of(context).originalName;
+    final String renameName = S.of(context).renamedName;
 
     void selectAll(v) {
       ref.read(selectAllProvider.notifier).update();
@@ -58,7 +59,7 @@ class RenameTitleBar extends ConsumerWidget {
             onTap: toggleSortType,
           ),
         ),
-        const NormalTile(label: renameName),
+        NormalTile(label: renameName),
         const SizedBox(
           width: AppNum.extensionW,
           child: Center(child: FilterFileButton()),

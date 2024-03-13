@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
@@ -11,9 +12,9 @@ class PrefixTextInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String prefixLabel = '前缀';
-    const String prefixTextHint = '添加前缀内容';
-    const String prefixCycleTip = '循环前缀文件内容';
+    final String prefixLabel = S.of(context).prefix;
+    final String prefixTextHint = S.of(context).prefixContent;
+    final String prefixCycleTip = S.of(context).circularPrefixDesc;
 
     void toggleCycle() {
       ref.read(cyclePrefixProvider.notifier).update();

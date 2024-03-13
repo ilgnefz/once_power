@@ -81,10 +81,10 @@ class S {
   }
 
   /// `Matching content`
-  String get inputHint {
+  String get matchHint {
     return Intl.message(
       'Matching content',
-      name: 'inputHint',
+      name: 'matchHint',
       desc: '',
       args: [],
     );
@@ -101,10 +101,10 @@ class S {
   }
 
   /// `Number or length string`
-  String get inputLength {
+  String get matchLength {
     return Intl.message(
       'Number or length string',
-      name: 'inputLength',
+      name: 'matchLength',
       desc: '',
       args: [],
     );
@@ -141,20 +141,20 @@ class S {
   }
 
   /// `Between`
-  String get middle {
+  String get between {
     return Intl.message(
       'Between',
-      name: 'middle',
+      name: 'between',
       desc: '',
       args: [],
     );
   }
 
   /// `Modify to`
-  String get modify {
+  String get modifyTo {
     return Intl.message(
       'Modify to',
-      name: 'modify',
+      name: 'modifyTo',
       desc: '',
       args: [],
     );
@@ -170,50 +170,50 @@ class S {
     );
   }
 
-  /// `Create Date`
-  String get createDate {
+  /// `Created`
+  String get createdDate {
     return Intl.message(
-      'Create Date',
-      name: 'createDate',
+      'Created',
+      name: 'createdDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Modify Date`
-  String get modifyDate {
+  /// `Modified`
+  String get modifiedDate {
     return Intl.message(
-      'Modify Date',
-      name: 'modifyDate',
+      'Modified',
+      name: 'modifiedDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Exif Date`
+  /// `ExifDate`
   String get exifDate {
     return Intl.message(
-      'Exif Date',
+      'ExifDate',
       name: 'exifDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Earliest date`
+  /// `Earliest`
   String get earliestDate {
     return Intl.message(
-      'Earliest date',
+      'Earliest',
       name: 'earliestDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Latest date`
+  /// `Latest`
   String get latestDate {
     return Intl.message(
-      'Latest date',
+      'Latest',
       name: 'latestDate',
       desc: '',
       args: [],
@@ -260,11 +260,11 @@ class S {
     );
   }
 
-  /// `Increment`
-  String get increment {
+  /// `SerialNo.`
+  String get serial {
     return Intl.message(
-      'Increment',
-      name: 'increment',
+      'SerialNo.',
+      name: 'serial',
       desc: '',
       args: [],
     );
@@ -290,60 +290,70 @@ class S {
     );
   }
 
-  /// `File extension`
+  /// `FileExtension`
   String get fileExtension {
     return Intl.message(
-      'File extension',
+      'FileExtension',
       name: 'fileExtension',
       desc: '',
       args: [],
     );
   }
 
-  /// `Append mode`
+  /// `New file extension`
+  String get fileExtensionDesc {
+    return Intl.message(
+      'New file extension',
+      name: 'fileExtensionDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Append`
   String get appendMode {
     return Intl.message(
-      'Append mode',
+      'Append',
       name: 'appendMode',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add folders`
-  String get addFolders {
+  /// `Add file`
+  String get addFile {
     return Intl.message(
-      'Add folders',
-      name: 'addFolders',
+      'Add file',
+      name: 'addFile',
       desc: '',
       args: [],
     );
   }
 
-  /// `Select File`
-  String get selectFile {
+  /// `Add folder`
+  String get addFolder {
     return Intl.message(
-      'Select File',
-      name: 'selectFile',
+      'Add folder',
+      name: 'addFolder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Select Folder`
+  /// `Select folder`
   String get selectFolder {
     return Intl.message(
-      'Select Folder',
+      'Select folder',
       name: 'selectFolder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Apply Change`
+  /// `Apply`
   String get applyChange {
     return Intl.message(
-      'Apply Change',
+      'Apply',
       name: 'applyChange',
       desc: '',
       args: [],
@@ -420,10 +430,10 @@ class S {
     );
   }
 
-  /// `Modifying file extensions`
+  /// `Modify file extensions`
   String get extensionDesc {
     return Intl.message(
-      'Modifying file extensions',
+      'Modify file extensions',
       name: 'extensionDesc',
       desc: '',
       args: [],
@@ -450,10 +460,30 @@ class S {
     );
   }
 
-  /// `Delete unselected`
+  /// `Created date`
+  String get createdTime {
+    return Intl.message(
+      'Created date',
+      name: 'createdTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modified date`
+  String get modifiedTime {
+    return Intl.message(
+      'Modified date',
+      name: 'modifiedTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DeleteUnselected`
   String get deleted {
     return Intl.message(
-      'Delete unselected',
+      'DeleteUnselected',
       name: 'deleted',
       desc: '',
       args: [],
@@ -540,10 +570,10 @@ class S {
     );
   }
 
-  /// `Extension`
+  /// `Type`
   String get extension {
     return Intl.message(
-      'Extension',
+      'Type',
       name: 'extension',
       desc: '',
       args: [],
@@ -580,20 +610,20 @@ class S {
     );
   }
 
-  /// `Delete empty folder`
+  /// `Delete folder`
   String get deleteEmptyFolder {
     return Intl.message(
-      'Delete empty folder',
+      'Delete folder',
       name: 'deleteEmptyFolder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Organize Folder`
+  /// `Organize folder`
   String get organizeFolder {
     return Intl.message(
-      'Organize Folder',
+      'Organize folder',
       name: 'organizeFolder',
       desc: '',
       args: [],
@@ -630,10 +660,10 @@ class S {
     );
   }
 
-  /// `Current task`
+  /// `CurrentTask`
   String get currentTask {
     return Intl.message(
-      'Current task',
+      'CurrentTask',
       name: 'currentTask',
       desc: '',
       args: [],
@@ -650,11 +680,31 @@ class S {
     );
   }
 
-  /// `Checking for updates`
-  String get checkingUpdates {
+  /// `Check for Updates`
+  String get checkUpdate {
     return Intl.message(
-      'Checking for updates',
-      name: 'checkingUpdates',
+      'Check for Updates',
+      name: 'checkUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checking`
+  String get checking {
+    return Intl.message(
+      'Checking',
+      name: 'checking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check completed`
+  String get checkCompleted {
+    return Intl.message(
+      'Check completed',
+      name: 'checkCompleted',
       desc: '',
       args: [],
     );
@@ -735,6 +785,46 @@ class S {
     return Intl.message(
       'Double-click on the list of files on the right to quickly open the folder where the file is located',
       name: 'openFolderDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drag the file (folder) here`
+  String get tip {
+    return Intl.message(
+      'Drag the file (folder) here',
+      name: 'tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload .txt file`
+  String get uploadDesc {
+    return Intl.message(
+      'Upload .txt file',
+      name: 'uploadDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download`
+  String get download {
+    return Intl.message(
+      'Download',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
       desc: '',
       args: [],
     );

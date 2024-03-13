@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
@@ -16,12 +17,12 @@ class RenameFileTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String name = '原名称';
-    const String newName = '重命名';
-    const String folder = '文件夹';
-    const String createTime = '创建日期';
-    const String modifyDate = '修改日期';
-    const String exifDate = '拍摄日期';
+    final String name = S.of(context).originalName;
+    final String newName = S.of(context).renamedName;
+    final String folder = S.of(context).folder;
+    final String createTime = S.of(context).createdTime;
+    final String modifyDate = S.of(context).modifiedTime;
+    final String exifDate = S.of(context).exifDate;
 
     void autoInput() {
       bool dateRename = ref.watch(dateRenameProvider);
@@ -59,8 +60,8 @@ class RenameFileTile extends ConsumerWidget {
               content: '${file.newName}$newDot${file.newExtension}',
             ),
             TipText(label: folder, content: file.parent),
-            TipText(label: createTime, content: '${file.createDate}'),
-            TipText(label: modifyDate, content: '${file.modifyDate}'),
+            TipText(label: createTime, content: '${file.createdDate}'),
+            TipText(label: modifyDate, content: '${file.modifiedDate}'),
             if (file.exifDate != null)
               TipText(label: exifDate, content: '${file.exifDate}'),
           ],

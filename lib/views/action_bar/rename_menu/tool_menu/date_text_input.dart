@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
@@ -13,11 +14,11 @@ class DateTextInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String dateLabel = '日期';
-    const String dateTip = '以日期命名';
+    final String dateLabel = S.of(context).date;
+    final String dateTip = S.of(context).dateDesc;
 
     const int defaultDateLength = 8;
-    const String dateLengthLabel = '位';
+    final String dateLengthLabel = S.of(context).digits;
 
     TextEditingController controller = ref.watch(dateLengthControllerProvider);
 

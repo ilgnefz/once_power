@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/input/input.dart';
@@ -11,9 +12,10 @@ class FileExtensionInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool disable = !ref.read(modifyExtensionProvider);
-    const String fileExtensionLabel = '文件扩展名';
-    final String fileExtensionHint = disable ? '输入已禁用' : '修改为的扩展名';
-    const String fileExtensionTip = '启用修改扩展名';
+    final String fileExtensionLabel = S.of(context).fileExtension;
+    final String fileExtensionHint =
+        disable ? S.of(context).inputDisable : S.of(context).fileExtensionDesc;
+    final String fileExtensionTip = S.of(context).extensionDesc;
 
     void clearInput() {
       ref.read(modifyExtensionProvider.notifier).update();

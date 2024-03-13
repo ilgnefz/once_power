@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
@@ -11,9 +12,9 @@ class SuffixTextInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String suffixLabel = '后缀';
-    const String suffixTextHint = '添加后缀内容';
-    const String suffixCycleTip = '循环后缀文件内容';
+    final String suffixLabel = S.of(context).suffix;
+    final String suffixTextHint = S.of(context).suffixContent;
+    final String suffixCycleTip = S.of(context).circularSuffixDesc;
 
     void toggleCycle() {
       ref.read(cycleSuffixProvider.notifier).update();

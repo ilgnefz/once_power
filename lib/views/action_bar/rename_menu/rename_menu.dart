@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
 
@@ -12,9 +13,6 @@ class RenameMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appendMode = '追加模式';
-    const String addFolder = '添加文件夹';
-
     return Column(
       children: [
         const Expanded(child: SingleChildScrollView(child: ToolMenu())),
@@ -23,13 +21,13 @@ class RenameMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               EasyCheckbox(
-                appendMode,
+                S.of(context).appendMode,
                 checked: ref.watch(appendModeProvider),
                 onChanged: (v) =>
                     ref.read(appendModeProvider.notifier).update(),
               ),
               EasyCheckbox(
-                addFolder,
+                S.of(context).addFolder,
                 checked: ref.watch(addFolderProvider),
                 onChanged: (v) => ref.read(addFolderProvider.notifier).update(),
               ),

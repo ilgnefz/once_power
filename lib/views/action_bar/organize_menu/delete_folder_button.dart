@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
@@ -12,7 +13,6 @@ class DeleteFolderButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String deleteEmpty = '删除空文件夹';
     List<NotificationInfo> errorList = [];
     bool saveLog = ref.watch(saveLogProvider);
     TextEditingController controller = ref.watch(targetControllerProvider);
@@ -69,7 +69,7 @@ class DeleteFolderButton extends ConsumerWidget {
 
     return ElevatedButton(
       onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteEmptyFolder,
-      child: const Text(deleteEmpty),
+      child: Text(S.of(context).deleteEmptyFolder),
     );
   }
 }

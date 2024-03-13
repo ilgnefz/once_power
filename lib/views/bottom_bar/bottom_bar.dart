@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/easy_tooltip.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,9 +19,11 @@ class BottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String download = '下载';
-    const String openSave = '已开启保存配置';
-    const String closeSave = '未开启保存配置';
+    final String download = S.of(context).download;
+    final String openSave = S.of(context).enableSaveConfig;
+    final String closeSave = S.of(context).closeSaveConfig;
+    final String currentTask = S.of(context).currentTask;
+    final String takeTime = S.of(context).takeTime;
     const String giteeUrl = 'https://gitee.com/ilgnefz/once_power';
     const String githubUrl = 'https://github.com/ilgnefz/once_power';
     const TextStyle style = TextStyle(fontSize: 13, color: Colors.grey);
@@ -54,8 +58,11 @@ class BottomBar extends ConsumerWidget {
           ),
           const SizedBox(width: 4),
           const EnableOrganize(),
+          const SizedBox(width: 4),
+          const LanguageToggle(style: style),
           const Spacer(),
-          Text('当前任务: $count/$total 用时: ${cost}s', style: style),
+          Text('$currentTask: $count/$total  $takeTime: ${cost}s',
+              style: style),
           const SizedBox(width: 12),
           const RepoUrl(icon: AppIcons.gitee, url: giteeUrl),
           const SizedBox(width: 12),
@@ -64,9 +71,9 @@ class BottomBar extends ConsumerWidget {
           if (ref.watch(newVersionProvider)) ...[
             InkWell(
               onTap: downloadWeb,
-              child: const Text(
+              child: Text(
                 download,
-                style: TextStyle(fontSize: 13, color: Colors.blue),
+                style: const TextStyle(fontSize: 13, color: Colors.blue),
               ),
             ),
             const SizedBox(width: 12),

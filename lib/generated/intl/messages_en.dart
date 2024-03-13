@@ -22,57 +22,66 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "addFolders": MessageLookupByLibrary.simpleMessage("Add folders"),
+        "addFile": MessageLookupByLibrary.simpleMessage("Add file"),
+        "addFolder": MessageLookupByLibrary.simpleMessage("Add folder"),
         "after": MessageLookupByLibrary.simpleMessage("After"),
-        "appendMode": MessageLookupByLibrary.simpleMessage("Append mode"),
-        "applyChange": MessageLookupByLibrary.simpleMessage("Apply Change"),
+        "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
+        "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
+        "between": MessageLookupByLibrary.simpleMessage("Between"),
         "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
-        "checkingUpdates":
-            MessageLookupByLibrary.simpleMessage("Checking for updates"),
+        "checkCompleted":
+            MessageLookupByLibrary.simpleMessage("Check completed"),
+        "checkUpdate":
+            MessageLookupByLibrary.simpleMessage("Check for Updates"),
+        "checking": MessageLookupByLibrary.simpleMessage("Checking"),
         "circularPrefixDesc":
             MessageLookupByLibrary.simpleMessage("Circular prefix content"),
         "circularSuffixDesc":
             MessageLookupByLibrary.simpleMessage("Circular suffix content"),
         "closeSaveConfig": MessageLookupByLibrary.simpleMessage(
             "Saved configurations not enabled"),
-        "createDate": MessageLookupByLibrary.simpleMessage("Create Date"),
-        "currentTask": MessageLookupByLibrary.simpleMessage("Current task"),
+        "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
+        "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
+        "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
         "deleteEmptyFolder":
-            MessageLookupByLibrary.simpleMessage("Delete empty folder"),
+            MessageLookupByLibrary.simpleMessage("Delete folder"),
         "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Delete all empty folders under the added folder"),
-        "deleted": MessageLookupByLibrary.simpleMessage("Delete unselected"),
+        "deleted": MessageLookupByLibrary.simpleMessage("DeleteUnselected"),
         "digits": MessageLookupByLibrary.simpleMessage("Digits"),
-        "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest date"),
+        "download": MessageLookupByLibrary.simpleMessage("Download"),
+        "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
         "enableSaveConfig": MessageLookupByLibrary.simpleMessage(
             "Saved Configurations Enabled"),
-        "exifDate": MessageLookupByLibrary.simpleMessage("Exif Date"),
-        "extension": MessageLookupByLibrary.simpleMessage("Extension"),
+        "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
+        "extension": MessageLookupByLibrary.simpleMessage("Type"),
         "extensionDesc":
-            MessageLookupByLibrary.simpleMessage("Modifying file extensions"),
-        "fileExtension": MessageLookupByLibrary.simpleMessage("File extension"),
+            MessageLookupByLibrary.simpleMessage("Modify file extensions"),
+        "fileExtension": MessageLookupByLibrary.simpleMessage("FileExtension"),
+        "fileExtensionDesc":
+            MessageLookupByLibrary.simpleMessage("New file extension"),
         "fileName": MessageLookupByLibrary.simpleMessage("File name"),
         "folder": MessageLookupByLibrary.simpleMessage("Folder"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
-        "increment": MessageLookupByLibrary.simpleMessage("Increment"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
-        "inputHint": MessageLookupByLibrary.simpleMessage("Matching content"),
-        "inputLength":
-            MessageLookupByLibrary.simpleMessage("Number or length string"),
-        "latestDate": MessageLookupByLibrary.simpleMessage("Latest date"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
         "lengthDesc": MessageLookupByLibrary.simpleMessage(
             "Input length truncation (adding a space between two numbers to truncate the middle part)"),
         "log": MessageLookupByLibrary.simpleMessage("Log"),
         "logDesc": MessageLookupByLibrary.simpleMessage(
             "Saved logs will be in the target folder"),
         "match": MessageLookupByLibrary.simpleMessage("Matching"),
-        "middle": MessageLookupByLibrary.simpleMessage("Between"),
-        "modify": MessageLookupByLibrary.simpleMessage("Modify to"),
-        "modifyDate": MessageLookupByLibrary.simpleMessage("Modify Date"),
+        "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
+        "matchLength":
+            MessageLookupByLibrary.simpleMessage("Number or length string"),
+        "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
+        "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
+        "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
         "openFolder": MessageLookupByLibrary.simpleMessage("Open Folder"),
         "openFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Double-click on the list of files on the right to quickly open the folder where the file is located"),
@@ -80,7 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizeDesc":
             MessageLookupByLibrary.simpleMessage("Enable file organization"),
         "organizeFolder":
-            MessageLookupByLibrary.simpleMessage("Organize Folder"),
+            MessageLookupByLibrary.simpleMessage("Organize folder"),
         "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Move all added files or all sub-files under a folder into the destination folder"),
         "originalName": MessageLookupByLibrary.simpleMessage("Original name"),
@@ -92,10 +101,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "replace": MessageLookupByLibrary.simpleMessage("Replace"),
         "reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
         "saveLog": MessageLookupByLibrary.simpleMessage("Save log"),
-        "selectFile": MessageLookupByLibrary.simpleMessage("Select File"),
-        "selectFolder": MessageLookupByLibrary.simpleMessage("Select Folder"),
+        "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Select target folder"),
+        "serial": MessageLookupByLibrary.simpleMessage("SerialNo."),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
         "suffixContent":
@@ -109,6 +118,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "targetFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Defaults to the parent folder of the first file added to the list or the folder itself"),
         "text": MessageLookupByLibrary.simpleMessage("Text"),
+        "tip":
+            MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
+        "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "zip": MessageLookupByLibrary.simpleMessage("Zip")

@@ -5,12 +5,12 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/rename.dart';
 
-final List<String> dateTypeList = [
-  DateType.createDate.value,
-  DateType.modifyDate.value,
-  DateType.exifDate.value,
-  DateType.earliestDate.value,
-  DateType.latestDate.value
+final List<DateType> dateTypeList = [
+  DateType.createdDate,
+  DateType.modifiedDate,
+  DateType.exifDate,
+  DateType.earliestDate,
+  DateType.latestDate
 ];
 
 final BorderRadius borderRadius = BorderRadius.circular(8);
@@ -21,15 +21,15 @@ class DateSelected extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2<String>(
+      child: DropdownButton2<DateType>(
         isExpanded: true,
         items: dateTypeList
-            .map((String item) =>
-                DropdownMenuItem<String>(value: item, child: Text(item)))
+            .map((DateType item) => DropdownMenuItem<DateType>(
+                value: item, child: Text(item.value)))
             .toList(),
-        value: ref.watch(currentDateTypeProvider).value,
+        value: ref.watch(currentDateTypeProvider),
         onChanged: (v) {
-          DateType type = DateType.values.firstWhere((e) => e.value == v);
+          DateType type = DateType.values.firstWhere((e) => e == v);
           ref.read(currentDateTypeProvider.notifier).update(type);
           updateName(ref);
         },

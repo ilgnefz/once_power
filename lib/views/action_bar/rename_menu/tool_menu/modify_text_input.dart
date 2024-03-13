@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
@@ -11,9 +12,9 @@ class ModifyTextInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String matchCaseTip = '区分大小写';
-    const String modifyTextHint = '修改为';
-    const String disableHint = '输入已禁用';
+    final String caseDesc = S.of(context).caseDesc;
+    final String modifyTo = S.of(context).modifyTo;
+    final String inputDisable = S.of(context).inputDisable;
 
     bool dateRename = ref.watch(dateRenameProvider);
     bool reverseMode = ref.watch(currentModeProvider) == FunctionMode.reserve;
@@ -30,10 +31,10 @@ class ModifyTextInput extends ConsumerWidget {
     return CommonInputMenu(
       disable: disable,
       controller: ref.watch(modifyControllerProvider),
-      hintText: disable ? disableHint : modifyTextHint,
+      hintText: disable ? inputDisable : modifyTo,
       show: ref.watch(modifyClearProvider),
       onChanged: (v) => updateName(ref),
-      message: matchCaseTip,
+      message: caseDesc,
       icon: AppIcons.cases,
       selected: ref.watch(matchCaseProvider),
       onTap: toggleCase,

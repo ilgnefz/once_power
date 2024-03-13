@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
@@ -17,8 +18,8 @@ FileInfo errFile = FileInfo(
   filePath: '',
   extension: '',
   newExtension: '',
-  createDate: DateTime.now(),
-  modifyDate: DateTime.now(),
+  createdDate: DateTime.now(),
+  modifiedDate: DateTime.now(),
   type: FileClassify.other,
   checked: false,
 );
@@ -28,7 +29,6 @@ class ApplyButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String applyChange = '应用更改';
     List<FileInfo> fileList = ref.watch(sortListProvider);
     List<FileInfo> checkList = fileList.where((e) => e.checked).toList();
     List<NotificationInfo> errorList = [];
@@ -65,7 +65,7 @@ class ApplyButton extends ConsumerWidget {
 
     return ElevatedButton(
       onPressed: fileList.isEmpty ? null : applyRename,
-      child: const Text(applyChange),
+      child: Text(S.of(context).applyChange),
     );
   }
 }

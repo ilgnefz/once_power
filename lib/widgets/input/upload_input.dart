@@ -5,6 +5,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
@@ -53,7 +54,7 @@ class UploadInput extends ConsumerWidget {
       onChanged: onChanged,
       action: EasyTooltip(
         content: Text(
-          '上传 .txt 文件',
+          S.of(context).uploadDesc,
           style: const TextStyle(fontSize: 13, color: Color(0xFF454545))
               .useSystemChineseFont(),
         ),

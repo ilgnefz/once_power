@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
@@ -18,8 +19,8 @@ class ArrangeFileTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String name = '名称';
-    const String folder = '文件夹';
+    final String name = S.of(context).fileName;
+    final String folder = S.of(context).folder;
 
     String fileName = file.extension == '' || file.type == FileClassify.folder
         ? file.name

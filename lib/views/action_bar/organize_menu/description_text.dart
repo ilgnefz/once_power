@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 
 class DescriptionText extends StatelessWidget {
   const DescriptionText({super.key});
@@ -12,31 +13,31 @@ class DescriptionText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('功能使用说明', style: titleStyle),
+        Text(S.of(context).useDesc, style: titleStyle),
         const SizedBox(height: AppNum.gapH / 2),
-        const BaseRichText(
-          title: '目标文件夹',
-          content: '默认为列表第一个添加的文件的父文件夹或文件夹本身',
+        BaseRichText(
+          title: S.of(context).targetFolder,
+          content: S.of(context).targetFolderDesc,
         ),
         const SizedBox(height: AppNum.gapH / 2),
-        const BaseRichText(
-          title: '日志',
-          content: '保存的日志会在目标文件夹内',
+        BaseRichText(
+          title: S.of(context).log,
+          content: S.of(context).logDesc,
         ),
         const SizedBox(height: AppNum.gapH / 2),
-        const BaseRichText(
-          title: '删除空文件夹',
-          content: '删除添加的文件夹下的所有空文件夹',
+        BaseRichText(
+          title: S.of(context).deleteEmptyFolder,
+          content: S.of(context).deleteEmptyFolderDesc,
         ),
         const SizedBox(height: AppNum.gapH / 2),
-        const BaseRichText(
-          title: '整理文件夹',
-          content: '将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内',
+        BaseRichText(
+          title: S.of(context).organizeFolder,
+          content: S.of(context).organizeFolderDesc,
         ),
         const SizedBox(height: AppNum.gapH / 2),
-        const BaseRichText(
-          title: '打开文件夹',
-          content: '双击右边文件列表，可以快速打开文件所在文件夹',
+        BaseRichText(
+          title: S.of(context).openFolder,
+          content: S.of(context).openFolderDesc,
         ),
       ],
     );

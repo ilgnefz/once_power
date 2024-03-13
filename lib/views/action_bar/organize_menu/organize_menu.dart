@@ -2,6 +2,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
@@ -10,21 +11,21 @@ import 'package:once_power/widgets/click_text.dart';
 import 'package:once_power/widgets/easy_checkbox.dart';
 import 'package:once_power/widgets/input/base_input.dart';
 
-import 'arrange_button.dart';
+import 'organize_button.dart';
 import 'delete_folder_button.dart';
 import 'description_text.dart';
 
-class ArrangeMenu extends ConsumerWidget {
-  const ArrangeMenu({super.key});
+class OrganizeMenu extends ConsumerWidget {
+  const OrganizeMenu({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String targetFolder = '目标文件夹';
-    const String saveLog = '保存日志';
-    const String selectFolder = '选择目标文件夹';
-    const String appendMode = '追加模式';
-    const String addFileText = '添加文件';
-    const String addFolderText = '添加文件夹';
+    final String targetFolder = S.of(context).targetFolder;
+    final String saveLog = S.of(context).saveLog;
+    final String selectFolder = S.of(context).selectFolder;
+    final String appendMode = S.of(context).appendMode;
+    final String addFileText = S.of(context).addFile;
+    final String addFolderText = S.of(context).addFolder;
 
     bool append = ref.watch(appendModeProvider);
     TextEditingController controller = ref.watch(targetControllerProvider);
@@ -98,7 +99,7 @@ class ArrangeMenu extends ConsumerWidget {
         const SizedBox(height: AppNum.gapH),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [DeleteFolderButton(), ArrangeButton()],
+          children: [DeleteFolderButton(), OrganizeButton()],
         ),
       ],
     );

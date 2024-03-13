@@ -6,6 +6,7 @@ class AppKeys {
   // static String suffixText = 'suffixText';
   // static String extensionText = 'extensionText';
   static String targetFolder = 'targetFolder';
+  static String language = 'language';
 
   // int
   static String dateLength = 'dateLength';

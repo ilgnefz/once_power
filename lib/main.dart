@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/global.dart';
 import 'package:once_power/provider/provider.dart';
+import 'package:once_power/utils/language.dart';
 import 'package:once_power/views/home.dart';
 
 void main() async {
@@ -29,15 +30,11 @@ class MyApp extends StatelessWidget {
             bodyMedium: TextStyle(fontSize: 14, color: Colors.black),
           ).useSystemChineseFont(Brightness.light),
         ),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en'),
-          Locale('zh', 'CN'),
-        ],
+        localizationsDelegates: LanguageManager.localizationsDelegates,
+        supportedLocales: LanguageManager.supportedLocales,
+        localeResolutionCallback: (locale, supportedLocales) =>
+            LanguageManager.localeResolutionCallback(
+                context, locale, supportedLocales),
         builder: BotToastInit(),
         navigatorObservers: [BotToastNavigatorObserver()],
         home: const HomePage(),

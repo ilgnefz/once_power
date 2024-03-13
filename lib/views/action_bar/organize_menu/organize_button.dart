@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
-class ArrangeButton extends ConsumerWidget {
-  const ArrangeButton({super.key});
+class OrganizeButton extends ConsumerWidget {
+  const OrganizeButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String arrangeFolder = '整理文件夹';
     List<FileInfo> realFiles = [];
     List<NotificationInfo> errorList = [];
 
@@ -124,7 +124,7 @@ class ArrangeButton extends ConsumerWidget {
           ref.watch(fileListProvider).isEmpty || !ref.watch(targetClearProvider)
               ? null
               : organizeFolder,
-      child: const Text(arrangeFolder),
+      child: Text(S.of(context).organizeFolder),
     );
   }
 }

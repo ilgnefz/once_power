@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
@@ -12,9 +13,10 @@ class MatchTextInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool useLength = ref.watch(inputLengthProvider);
-    final String matchTextHint = useLength ? '输入数字或指定长度字符串' : '请输入内容';
-    const String disableHint = '输入已禁用';
-    const String lengthTip = '输入长度截取（两个数字之间加空格截取中间部分）';
+    final String matchLength =
+        useLength ? S.of(context).matchLength : S.of(context).matchLength;
+    final String inputDisable = S.of(context).inputDisable;
+    final String lengthDesc = S.of(context).lengthDesc;
     bool disable = ref.watch(currentModeProvider) == FunctionMode.reserve &&
         (ref.watch(currentReserveTypeProvider).isNotEmpty ||
             ref.watch(dateRenameProvider) ||
@@ -28,10 +30,10 @@ class MatchTextInput extends ConsumerWidget {
     return CommonInputMenu(
       disable: disable,
       controller: ref.watch(matchControllerProvider),
-      hintText: disable ? disableHint : matchTextHint,
+      hintText: disable ? inputDisable : matchLength,
       show: ref.watch(matchClearProvider),
       onChanged: (v) => updateName(ref),
-      message: lengthTip,
+      message: lengthDesc,
       icon: AppIcons.ruler,
       selected: ref.watch(inputLengthProvider),
       onTap: toggleLengthInput,

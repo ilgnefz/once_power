@@ -8,8 +8,8 @@ class FileInfo {
   String filePath;
   String extension;
   String newExtension;
-  DateTime createDate;
-  DateTime modifyDate;
+  DateTime createdDate;
+  DateTime modifiedDate;
   DateTime? exifDate;
   FileClassify type;
   bool checked;
@@ -22,8 +22,8 @@ class FileInfo {
     required this.filePath,
     required this.extension,
     required this.newExtension,
-    required this.createDate,
-    required this.modifyDate,
+    required this.createdDate,
+    required this.modifiedDate,
     this.exifDate,
     required this.type,
     required this.checked,
@@ -31,6 +31,6 @@ class FileInfo {
 
   @override
   String toString() {
-    return 'FileInfo(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, createDate: $createDate, modifyDate: $modifyDate, exifDate: $exifDate, type: $type, checked: $checked)';
+    return 'FileInfo(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, createdDate: $createdDate, modifiedDate: $modifiedDate, exifDate: $exifDate, type: $type, checked: $checked)';
   }
 }

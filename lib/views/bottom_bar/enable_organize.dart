@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 
@@ -12,7 +13,6 @@ class EnableOrganize extends ConsumerStatefulWidget {
 }
 
 class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
-  final String arrangeFile = '整理文件';
   Color color = Colors.grey;
 
   Color getColor(Set<MaterialState> states) {
@@ -44,6 +44,8 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
 
   @override
   Widget build(BuildContext context) {
+    final String arrangeFile = S.of(context).organizeFolder;
+
     return InkWell(
       onTap: onChange,
       onHover: toggleColor,

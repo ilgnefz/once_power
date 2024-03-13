@@ -1,6 +1,7 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
 import 'package:once_power/widgets/click_text.dart';
@@ -12,9 +13,6 @@ class ApplyMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String selectFile = '选择文件';
-    const String selectFolder = '选择文件夹';
-
     void addFile() async {
       final List<XFile> files = await openFiles();
       if (files.isNotEmpty) formatXFile(ref, files);
@@ -33,8 +31,9 @@ class ApplyMenu extends ConsumerWidget {
 
     return Row(
       children: [
-        ClickText(selectFile, onTap: addFile),
-        ClickText(selectFolder, onTap: addFolder),
+        ClickText(S.of(context).addFile, onTap: addFile),
+        const SizedBox(width: 4),
+        ClickText(S.of(context).selectFolder, onTap: addFolder),
         const Spacer(),
         const ApplyButton(),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/input/input.dart';
@@ -10,15 +11,15 @@ class PrefixNumInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String prefixSwapTip = '交换前缀和递增数字位置';
-    const String increaseLabel = '增数';
+    final String swapPrefixTip = S.of(context).swapPrefixDesc;
+    final String increaseLabel = S.of(context).serial;
 
     // 位数
     const int defaultPrefixNumLength = 0;
-    const String prefixNumLengthLabel = '位';
+    final String prefixNumLengthLabel = S.of(context).digits;
     // 开始数
     const int defaultPrefixNumStart = 0;
-    const String prefixNumStartLabel = '开始';
+    final String prefixNumStartLabel = S.of(context).start;
 
     TextEditingController lengthController =
         ref.watch(prefixLengthControllerProvider);
@@ -27,22 +28,24 @@ class PrefixNumInput extends ConsumerWidget {
 
     void getLengthNum() async {
       updateName(ref);
-      int num = int.parse(lengthController.text.replaceAll(prefixNumLengthLabel, ''));
+      int num =
+          int.parse(lengthController.text.replaceAll(prefixNumLengthLabel, ''));
       await StorageUtil.setInt(AppKeys.prefixLength, num);
     }
 
-    void lengthNumInput(v) async{
+    void lengthNumInput(v) async {
       updateName(ref);
       await StorageUtil.setInt(AppKeys.prefixLength, int.parse(v));
     }
 
     void getStartNum() async {
       updateName(ref);
-      int num = int.parse(startController.text.replaceAll(prefixNumStartLabel, ''));
+      int num =
+          int.parse(startController.text.replaceAll(prefixNumStartLabel, ''));
       await StorageUtil.setInt(AppKeys.prefixStart, num);
     }
 
-    void startNumInput(v) async{
+    void startNumInput(v) async {
       updateName(ref);
       await StorageUtil.setInt(AppKeys.prefixStart, int.parse(v));
     }
@@ -78,7 +81,7 @@ class PrefixNumInput extends ConsumerWidget {
         ],
       ),
       onChanged: (v) => updateName(ref),
-      message: prefixSwapTip,
+      message: swapPrefixTip,
       icon: AppIcons.swap,
       selected: ref.watch(swapPrefixProvider),
       onTap: toggleSwap,

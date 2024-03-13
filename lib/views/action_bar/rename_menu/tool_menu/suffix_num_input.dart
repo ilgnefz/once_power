@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/input/input.dart';
@@ -10,16 +11,16 @@ class SuffixNumInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const String suffixSwapTip = '交换后缀和递增数字位置';
-    const String increaseLabel = '增数';
+    final String swapSuffixDesc = S.of(context).swapSuffixDesc;
+    final String increaseLabel = S.of(context).serial;
 
     // 数字位数
     const int defaultSuffixNumLength = 0;
-    const String suffixNumLengthLabel = '位';
+    final String suffixNumLengthLabel = S.of(context).digits;
 
     // 数字开始数
     const int defaultSuffixNumStart = 0;
-    const String suffixNumStartLabel = '开始';
+    final String suffixNumStartLabel = S.of(context).start;
 
     TextEditingController lengthController =
         ref.watch(suffixLengthControllerProvider);
@@ -80,7 +81,7 @@ class SuffixNumInput extends ConsumerWidget {
           ),
         ],
       ),
-      message: suffixSwapTip,
+      message: swapSuffixDesc,
       icon: AppIcons.swap,
       selected: ref.watch(swapSuffixProvider),
       onTap: toggleSwap,

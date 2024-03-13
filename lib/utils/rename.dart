@@ -101,14 +101,14 @@ String dateName(WidgetRef ref, FileInfo file) {
   String dateDigitText = ref.watch(dateLengthControllerProvider).text;
   int dateDigit = int.parse(dateDigitText.replaceAll('位', ''));
   DateType type = ref.watch(currentDateTypeProvider);
-  if (type == DateType.modifyDate) date = formatDateTime(file.modifyDate);
+  if (type == DateType.modifiedDate) date = formatDateTime(file.modifiedDate);
   if (type == DateType.earliestDate) {
     date = formatDateTime(sortDateTime(file).first);
   }
   if (type == DateType.latestDate) {
     date = formatDateTime(sortDateTime(file).last);
   }
-  if (type == DateType.createDate) date = formatDateTime(file.createDate);
+  if (type == DateType.createdDate) date = formatDateTime(file.createdDate);
   if (type == DateType.exifDate) {
     DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
     date = formatDateTime(dateTime);
@@ -117,7 +117,7 @@ String dateName(WidgetRef ref, FileInfo file) {
 }
 
 List<DateTime> sortDateTime(FileInfo file) {
-  List<DateTime> list = [file.createDate, file.modifyDate];
+  List<DateTime> list = [file.createdDate, file.modifiedDate];
   if (file.exifDate != null) list.add(file.exifDate!);
   list.sort();
   return list;
