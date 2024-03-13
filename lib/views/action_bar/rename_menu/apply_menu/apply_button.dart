@@ -89,7 +89,7 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
       final newFile = '${f.newName}$newExtension';
       errorList.add(NotificationInfo(
         file: oldFile,
-        message: ' 重命名为 $newFile 的文件已存在',
+        message: ': ${S.current.existsError(newFile)}',
       ));
       continue;
     }
@@ -107,9 +107,9 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
       Log.e(e.runtimeType.toString());
       String message = '';
       if (e.runtimeType == PathNotFoundException) {
-        message = ' 在 ${f.parent} 中已不存在';
+        message = ': ${S.current.notExistsError(f.parent)}';
       } else {
-        message = ' 因为 $e 重命名失败';
+        message = S.current.failedError(e);
       }
       errorList.add(NotificationInfo(
         file: '${f.name}$extension',
@@ -128,9 +128,14 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
 void showNotification(
     NotificationType type, List<NotificationInfo> list, int total) {
   if (type == NotificationType.success) {
-    NotificationMessage.show('重命名成功', '选中的 $total 个已全部重命名成功', [], type);
+    NotificationMessage.show(
+      S.current.successful,
+      S.current.successfulNum(total),
+      [],
+      type,
+    );
   } else {
-    String message = '选中 $total 个中 ${list.length} 个重命名失败';
-    NotificationMessage.show('重命名失败', message, list, type);
+    String message = S.current.failedNum(list.length, total);
+    NotificationMessage.show(S.current.failed, message, list, type);
   }
 }

@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/small_text_button.dart';
@@ -17,8 +19,10 @@ class CheckVersion extends ConsumerStatefulWidget {
 }
 
 class _CheckVersionState extends ConsumerState<CheckVersion> {
-  final String versionUrl =
+  // final String githubUrl = 'https://raw.githubusercontent.com/ilgnefz/once_power/master/version.json';
+  String versionUrl =
       'https://gitee.com/ilgnefz/once_power/raw/master/version.json';
+
   bool hover = false;
   bool check = false;
 
@@ -36,8 +40,8 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
       List<String> desc = res.info.first.description;
       if (version > currentVersion) {
         NotificationMessage.show(
-          '检测完成',
-          '新的版本 v${res.info.first.version} 可以更新',
+          S.current.checkCompleted,
+          S.current.newVersionInfo(res.info.first.version),
           desc.map((e) {
             int index = desc.indexOf(e);
             index = desc.length > 1 ? index + 1 : 0;
@@ -50,14 +54,19 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
         ref.read(newVersionProvider.notifier).update();
       } else {
         NotificationMessage.show(
-          '检测完成',
-          '当前已是最新版本',
+          S.current.checkCompleted,
+          S.current.noNewVersionInfo,
           [],
           NotificationType.success,
         );
       }
     } catch (e) {
-      NotificationMessage.show('检测失败', '$e', [], NotificationType.failure);
+      NotificationMessage.show(
+        S.current.checkFailed,
+        '$e',
+        [],
+        NotificationType.failure,
+      );
     }
     check = false;
     setState(() {});

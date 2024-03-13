@@ -27,10 +27,7 @@ class DateSelected extends ConsumerWidget {
             .map(
               (DateType item) => DropdownMenuItem<DateType>(
                 value: item,
-                child: Text(
-                  item.value,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
+                child: Text(item.value),
               ),
             )
             .toList(),

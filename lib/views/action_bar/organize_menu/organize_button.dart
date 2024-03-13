@@ -34,7 +34,12 @@ class OrganizeButton extends ConsumerWidget {
       String newPath = path.join(controller.text, path.basename(file.filePath));
 
       if (!File(file.filePath).existsSync()) {
-        errorList.add(NotificationInfo(file: file.filePath, message: '不存在'));
+        errorList.add(
+          NotificationInfo(
+            file: file.filePath,
+            message: S.of(context).notExist,
+          ),
+        );
         return;
       }
 
@@ -42,7 +47,8 @@ class OrganizeButton extends ConsumerWidget {
         if (File(newPath).existsSync()) newPath = renameFile(newPath);
         if (saveLog) {
           final fileName = formatDateTime(DateTime.now()).substring(0, 14);
-          final log = File(path.join(controller.text, '整理日志$fileName.log'));
+          final log = File(path.join(
+              controller.text, '${S.of(context).organizeLogs}-$fileName.log'));
           String contents =
               '${DateTime.now()}:【${file.filePath}】 ————→ 【$newPath】';
           log.writeAsStringSync('$contents\n', mode: FileMode.append);
@@ -55,7 +61,7 @@ class OrganizeButton extends ConsumerWidget {
           } catch (e) {
             errorList.add(NotificationInfo(
               file: file.filePath,
-              message: '移动失败：$e',
+              message: '${S.of(context).moveFailed}: $e',
             ));
             debugPrint(e.toString());
           }
@@ -68,7 +74,7 @@ class OrganizeButton extends ConsumerWidget {
           } catch (e) {
             errorList.add(NotificationInfo(
               file: file.filePath,
-              message: '移动过程中出错了：$e',
+              message: '${S.of(context).moveError}: $e',
             ));
             debugPrint(e.toString());
           }
@@ -83,10 +89,17 @@ class OrganizeButton extends ConsumerWidget {
     void showNotification() {
       if (errorList.isEmpty) {
         NotificationMessage.show(
-            '整理成功', '已成功移动所有文件', [], NotificationType.success);
+            S.of(context).organizedSuccessfully,
+            S.of(context).organizedSuccessfullyInfo,
+            [],
+            NotificationType.success);
       } else {
         NotificationMessage.show(
-            '整理失败', '以下几个移动失败！', errorList, NotificationType.failure);
+          S.of(context).organizingFailed,
+          S.of(context).organizingFailedInfo,
+          errorList,
+          NotificationType.failure,
+        );
       }
     }
 
@@ -101,8 +114,12 @@ class OrganizeButton extends ConsumerWidget {
       for (var file in files) {
         if (file.type == FileClassify.folder) {
           if (!Directory(file.filePath).existsSync()) {
-            errorList
-                .add(NotificationInfo(file: file.filePath, message: '不存在'));
+            errorList.add(
+              NotificationInfo(
+                file: file.filePath,
+                message: S.of(context).notExist,
+              ),
+            );
             continue;
           }
           final list = getAllFile(file.filePath);

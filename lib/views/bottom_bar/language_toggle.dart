@@ -13,6 +13,8 @@ class LanguageToggle extends ConsumerStatefulWidget {
 }
 
 class _LanguageToggleState extends ConsumerState<LanguageToggle> {
+  bool show = false;
+
   void toggleLanguage() {
     LanguageType languageType = ref.watch(currentLanguageProvider);
     if (languageType == LanguageType.chinese) {
@@ -20,14 +22,18 @@ class _LanguageToggleState extends ConsumerState<LanguageToggle> {
     } else {
       ref.read(languageProvider.notifier).update(const Locale('zh', 'CN'));
     }
+    show = true;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final String language = S.of(context).language;
     LanguageType currentLanguage = ref.watch(currentLanguageProvider);
+    String text = '$language: ${currentLanguage.value}';
+    String tip = '(${S.of(context).restartTip})';
     return SmallTextButton(
-      text: '$language: ${currentLanguage.value}',
+      text: show ? "$text$tip" : text,
       onTap: toggleLanguage,
     );
   }

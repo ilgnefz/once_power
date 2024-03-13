@@ -19,11 +19,15 @@ class LanguageConfig {
 
   static localeResolutionCallback(
       BuildContext context, locale, supportedLocales) {
-    Locale? locale = StorageUtil.getLocale(AppKeys.locale);
-    if (locale != null) return locale;
-    if (locale?.languageCode == 'zh') {
-      return const Locale('zh', 'CN');
+    Locale? cacheLocale = StorageUtil.getLocale(AppKeys.locale);
+    if (cacheLocale != null) return cacheLocale;
+    if (locale.languageCode == 'zh') {
+      Locale value = const Locale('zh', 'CN');
+      StorageUtil.setLocal(AppKeys.locale, value);
+      return value;
     }
-    return const Locale('en', 'US');
+    Locale value = const Locale('en', 'US');
+    StorageUtil.setLocal(AppKeys.locale, value);
+    return value;
   }
 }

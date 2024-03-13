@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
@@ -34,7 +36,13 @@ class BottomBar extends ConsumerWidget {
     String cost = ref.watch(costProvider).toStringAsFixed(2);
 
     void downloadWeb() async {
-      String url = 'https://gitee.com/ilgnefz/once_power/releases';
+      LanguageType type = ref.watch(currentLanguageProvider);
+      String url = '';
+      if (type == LanguageType.english) {
+        url = 'https://github.com/ilgnefz/once_power/releases';
+      } else {
+        url = 'https://gitee.com/ilgnefz/once_power/releases';
+      }
       await launchUrl(Uri.parse(url));
     }
 

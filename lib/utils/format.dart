@@ -26,3 +26,10 @@ int getVersionNumber(String version) {
   versionCells = versionCells.map((i) => int.parse(i)).toList();
   return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
 }
+
+int getNum(String value) {
+  RegExp exp = RegExp(r'\d+');
+  RegExpMatch? match = exp.firstMatch(value);
+  if (match != null) return int.parse(match.group(0)!);
+  return 0;
+}

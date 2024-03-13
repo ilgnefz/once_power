@@ -260,30 +260,30 @@ class S {
     );
   }
 
-  /// `SerialNo.`
+  /// `Serial`
   String get serial {
     return Intl.message(
-      'SerialNo.',
+      'Serial',
       name: 'serial',
       desc: '',
       args: [],
     );
   }
 
-  /// `Digits`
+  /// `digits`
   String get digits {
     return Intl.message(
-      'Digits',
+      'digits',
       name: 'digits',
       desc: '',
       args: [],
     );
   }
 
-  /// `Start`
+  /// `start`
   String get start {
     return Intl.message(
-      'Start',
+      'start',
       name: 'start',
       desc: '',
       args: [],
@@ -710,6 +710,36 @@ class S {
     );
   }
 
+  /// `Check failed`
+  String get checkFailed {
+    return Intl.message(
+      'Check failed',
+      name: 'checkFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New version {version} can be updated`
+  String newVersionInfo(Object version) {
+    return Intl.message(
+      'New version $version can be updated',
+      name: 'newVersionInfo',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `Currently in the latest version`
+  String get noNewVersionInfo {
+    return Intl.message(
+      'Currently in the latest version',
+      name: 'noNewVersionInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Instructions for use`
   String get useDesc {
     return Intl.message(
@@ -825,6 +855,226 @@ class S {
     return Intl.message(
       'Language',
       name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` The file renamed to {name} already exists`
+  String existsError(Object name) {
+    return Intl.message(
+      ' The file renamed to $name already exists',
+      name: 'existsError',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `No longer exists in {name}`
+  String notExistsError(Object name) {
+    return Intl.message(
+      'No longer exists in $name',
+      name: 'notExistsError',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// ` renaming failed, Because {name}`
+  String failedError(Object name) {
+    return Intl.message(
+      ' renaming failed, Because $name',
+      name: 'failedError',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Renaming successful`
+  String get successful {
+    return Intl.message(
+      'Renaming successful',
+      name: 'successful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Renaming failed`
+  String get failed {
+    return Intl.message(
+      'Renaming failed',
+      name: 'failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All {total} selected items have been successfully renamed`
+  String successfulNum(Object total) {
+    return Intl.message(
+      'All $total selected items have been successfully renamed',
+      name: 'successfulNum',
+      desc: '',
+      args: [total],
+    );
+  }
+
+  /// `{count} out of {total} selected renames failed`
+  String failedNum(Object count, Object total) {
+    return Intl.message(
+      '$count out of $total selected renames failed',
+      name: 'failedNum',
+      desc: '',
+      args: [count, total],
+    );
+  }
+
+  /// `delete logs`
+  String get deleteLog {
+    return Intl.message(
+      'delete logs',
+      name: 'deleteLog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `【{file}】 has been deleted`
+  String deleteInfo(Object file) {
+    return Intl.message(
+      '【$file】 has been deleted',
+      name: 'deleteInfo',
+      desc: '',
+      args: [file],
+    );
+  }
+
+  /// `Delete failed`
+  String get deleteFailed {
+    return Intl.message(
+      'Delete failed',
+      name: 'deleteFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete successful`
+  String get deleteSuccessful {
+    return Intl.message(
+      'Delete successful',
+      name: 'deleteSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully deleted all empty folders`
+  String get successInfo {
+    return Intl.message(
+      'Successfully deleted all empty folders',
+      name: 'successInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to delete empty folder`
+  String get failureInfo {
+    return Intl.message(
+      'Failed to delete empty folder',
+      name: 'failureInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `not exist`
+  String get notExist {
+    return Intl.message(
+      'not exist',
+      name: 'notExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `organize logs`
+  String get organizeLogs {
+    return Intl.message(
+      'organize logs',
+      name: 'organizeLogs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move failed`
+  String get moveFailed {
+    return Intl.message(
+      'Move failed',
+      name: 'moveFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moving error`
+  String get moveError {
+    return Intl.message(
+      'Moving error',
+      name: 'moveError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organized successfully`
+  String get organizedSuccessfully {
+    return Intl.message(
+      'Organized successfully',
+      name: 'organizedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organizing failed`
+  String get organizingFailed {
+    return Intl.message(
+      'Organizing failed',
+      name: 'organizingFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully moved all files`
+  String get organizedSuccessfullyInfo {
+    return Intl.message(
+      'Successfully moved all files',
+      name: 'organizedSuccessfullyInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The following moves failed`
+  String get organizingFailedInfo {
+    return Intl.message(
+      'The following moves failed',
+      name: 'organizingFailedInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restart takes effect`
+  String get restartTip {
+    return Intl.message(
+      'Restart takes effect',
+      name: 'restartTip',
       desc: '',
       args: [],
     );

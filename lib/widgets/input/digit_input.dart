@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:once_power/utils/format.dart';
 import 'package:once_power/widgets/input/base_input.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
 
@@ -9,6 +10,7 @@ class DigitInput extends StatefulWidget {
     required this.controller,
     required this.value,
     required this.label,
+    this.textStyle,
     this.length,
     this.callback,
     this.onChanged,
@@ -17,6 +19,7 @@ class DigitInput extends StatefulWidget {
   final TextEditingController controller;
   final int value;
   final String label;
+  final TextStyle? textStyle;
   final int? length;
   final VoidCallback? callback;
   final void Function(String)? onChanged;
@@ -29,12 +32,9 @@ class _DigitInputState extends State<DigitInput> {
   // late TextEditingController controller;
   final FocusNode focusNode = FocusNode();
 
-  late String tip;
-
   @override
   void initState() {
     super.initState();
-    tip = "${widget.value}${widget.label}";
     // controller = TextEditingController(text: '${widget.value}${widget.label}');
     focusNode.addListener(() {
       final text = widget.controller.text;
@@ -46,7 +46,6 @@ class _DigitInputState extends State<DigitInput> {
         widget.controller.text = widget.controller.text.isEmpty
             ? '${widget.value}${widget.label}'
             : "${int.parse(text)}${widget.label}";
-        tip = widget.controller.text;
       }
       setState(() {});
     });
@@ -65,40 +64,40 @@ class _DigitInputState extends State<DigitInput> {
   }
 
   increment() {
-    final num = widget.controller.text.replaceAll(widget.label, '');
-    widget.controller.text = "${int.parse(num) + 1}${widget.label}";
+    // final num = widget.controller.text.replaceAll(widget.label, '');
+    final num = getNum(widget.controller.text);
+    widget.controller.text = "${num + 1}${widget.label}";
     widget.callback!();
     setState(() {});
   }
 
   reduce() {
-    final num = widget.controller.text.replaceAll(widget.label, '');
-    if (num == "0") return;
-    widget.controller.text = "${int.parse(num) - 1}${widget.label}";
+    // final num = widget.controller.text.replaceAll(widget.label, '');
+    final num = getNum(widget.controller.text);
+    if (num == 0) return;
+    widget.controller.text = "${num - 1}${widget.label}";
     widget.callback!();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomTooltip(
-      content: Text(tip),
-      child: BaseInput(
-        padding: EdgeInsets.zero,
-        controller: widget.controller,
-        show: false,
-        textAlign: TextAlign.center,
-        inputFormatters: [
-          if (widget.length != null)
-            LengthLimitingTextInputFormatter(widget.length),
-          FilteringTextInputFormatter.digitsOnly
-        ],
-        onChanged: widget.onChanged,
-        onSubmitted: onSubmitted,
-        focusNode: focusNode,
-        leading: OperatorButton('-', onTap: reduce),
-        action: OperatorButton('+', start: false, onTap: increment),
-      ),
+    return BaseInput(
+      padding: EdgeInsets.zero,
+      controller: widget.controller,
+      show: false,
+      textStyle: widget.textStyle,
+      textAlign: TextAlign.center,
+      inputFormatters: [
+        if (widget.length != null)
+          LengthLimitingTextInputFormatter(widget.length),
+        FilteringTextInputFormatter.digitsOnly
+      ],
+      onChanged: widget.onChanged,
+      onSubmitted: onSubmitted,
+      focusNode: focusNode,
+      leading: OperatorButton('-', onTap: reduce),
+      action: OperatorButton('+', start: false, onTap: increment),
     );
   }
 }

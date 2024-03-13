@@ -14,6 +14,7 @@ class BaseInput extends StatelessWidget {
     this.disable = false,
     this.readOnly = false,
     this.padding,
+    this.textStyle,
     this.leading,
     this.controller,
     this.hintText,
@@ -30,6 +31,7 @@ class BaseInput extends StatelessWidget {
   final bool disable;
   final bool readOnly;
   final EdgeInsets? padding;
+  final TextStyle? textStyle;
   final Widget? leading;
   final TextEditingController? controller;
   final String? hintText;
@@ -65,6 +67,7 @@ class BaseInput extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 readOnly: readOnly,
+                style: textStyle,
                 decoration: InputDecoration(
                   hintText: hintText,
                   isDense: true,

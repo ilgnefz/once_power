@@ -43,9 +43,11 @@ int actualIndex(
 void updateName(dynamic ref) {
   List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
-  int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
+  // int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
+  int prefixIndex = getNum(prefixIndexText);
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;
-  int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
+  // int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
+  int suffixIndex = getNum(suffixIndexText);
   int fileIndex = 0;
   List<Map<String, List<String>>> fileArray = [];
   bool dateRename = ref.watch(dateRenameProvider);
@@ -99,7 +101,8 @@ String matchContent(dynamic ref, FileInfo file, int fileIndex, int prefixIndex,
 String dateName(WidgetRef ref, FileInfo file) {
   String date = '';
   String dateDigitText = ref.watch(dateLengthControllerProvider).text;
-  int dateDigit = int.parse(dateDigitText.replaceAll('位', ''));
+  // int dateDigit = int.parse(dateDigitText.replaceAll('位', ''));
+  int dateDigit = getNum(dateDigitText);
   DateType type = ref.watch(currentDateTypeProvider);
   if (type == DateType.modifiedDate) date = formatDateTime(file.modifiedDate);
   if (type == DateType.earliestDate) {
@@ -127,7 +130,8 @@ List<DateTime> sortDateTime(FileInfo file) {
 String prefixName(WidgetRef ref, int fileIndex, int prefixIndex) {
   bool swap = ref.watch(swapPrefixProvider);
   String widthStr = ref.watch(prefixLengthControllerProvider).text;
-  int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
+  // int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
+  int width = widthStr == '' ? 0 : getNum(widthStr);
   String num = formatNumber(prefixIndex, width);
   String prefixText = ref.watch(prefixControllerProvider).text;
   if (prefixText != '') {
@@ -151,7 +155,8 @@ String prefixName(WidgetRef ref, int fileIndex, int prefixIndex) {
 String suffixName(WidgetRef ref, int fileIndex, int suffixIndex) {
   bool swap = ref.watch(swapSuffixProvider);
   String widthStr = ref.watch(suffixLengthControllerProvider).text;
-  int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
+  // int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
+  int width = widthStr == '' ? 0 : getNum(widthStr);
   String num = formatNumber(suffixIndex, width);
   String suffixText = ref.watch(suffixControllerProvider).text;
   if (suffixText != '') {

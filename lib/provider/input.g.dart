@@ -69,7 +69,7 @@ final modifyClearProvider =
 
 typedef _$ModifyClear = AutoDisposeNotifier<bool>;
 String _$dateLengthControllerHash() =>
-    r'9a46f13377faa2038d664c151cfaf7ff7b2a367d';
+    r'c28efaa4e94025669f187cfef20f79cc1efbe5d2';
 
 /// See also [DateLengthController].
 @ProviderFor(DateLengthController)
@@ -117,7 +117,7 @@ final prefixClearProvider =
 
 typedef _$PrefixClear = AutoDisposeNotifier<bool>;
 String _$prefixLengthControllerHash() =>
-    r'c1887cfcdce00a05d986d228422d0496209e316e';
+    r'18d0c6150412a4ce309f6dd91558d38a3f4174c7';
 
 /// See also [PrefixLengthController].
 @ProviderFor(PrefixLengthController)
@@ -134,7 +134,7 @@ final prefixLengthControllerProvider = AutoDisposeNotifierProvider<
 
 typedef _$PrefixLengthController = AutoDisposeNotifier<TextEditingController>;
 String _$prefixStartControllerHash() =>
-    r'f35319bf2d16bbb691c683c451cab4f3fe7ec91c';
+    r'5b114504adc968f4a711b3eab9194610bd8a451d';
 
 /// See also [PrefixStartController].
 @ProviderFor(PrefixStartController)
@@ -182,7 +182,7 @@ final suffixClearProvider =
 
 typedef _$SuffixClear = AutoDisposeNotifier<bool>;
 String _$suffixLengthControllerHash() =>
-    r'c03676acc17910a7cf9a1e4375e25510a56e9b1d';
+    r'b3a92bd8a7f4835db71be031b1098e1860b7049a';
 
 /// See also [SuffixLengthController].
 @ProviderFor(SuffixLengthController)
@@ -199,7 +199,7 @@ final suffixLengthControllerProvider = AutoDisposeNotifierProvider<
 
 typedef _$SuffixLengthController = AutoDisposeNotifier<TextEditingController>;
 String _$suffixStartControllerHash() =>
-    r'11bf699cf0dde24aa646c866b4aa4e018a2c5764';
+    r'700568d9b1c545285f2687d2b743921b1d14af22';
 
 /// See also [SuffixStartController].
 @ProviderFor(SuffixStartController)

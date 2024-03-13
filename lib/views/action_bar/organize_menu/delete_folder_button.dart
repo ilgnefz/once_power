@@ -22,14 +22,15 @@ class DeleteFolderButton extends ConsumerWidget {
         directory.deleteSync();
         if (saveLog) {
           final fileName = formatDateTime(DateTime.now()).substring(0, 14);
-          final log = File(path.join(controller.text, '删除日志$fileName.log'));
-          String contents = '【${directory.path}】 已被删除';
+          final log = File(path.join(
+              controller.text, '${S.of(context).deleteLog}-$fileName.log'));
+          String contents = S.of(context).deleteInfo(directory.path);
           log.writeAsStringSync('$contents\n', mode: FileMode.append);
         }
       } catch (e) {
         errorList.add(NotificationInfo(
           file: directory.path,
-          message: '删除失败：$e',
+          message: '${S.of(context).deleteFailed}: $e',
         ));
       }
     }
@@ -51,10 +52,18 @@ class DeleteFolderButton extends ConsumerWidget {
     void showNotification() {
       if (errorList.isEmpty) {
         NotificationMessage.show(
-            '删除成功', '已成功删除所有空文件夹', [], NotificationType.success);
+          S.of(context).deleteSuccessful,
+          S.of(context).successInfo,
+          [],
+          NotificationType.success,
+        );
       } else {
         NotificationMessage.show(
-            '删除失败', '删除空文件夹失败！', errorList, NotificationType.failure);
+          S.of(context).deleteFailed,
+          S.of(context).failureInfo,
+          errorList,
+          NotificationType.failure,
+        );
       }
     }
 

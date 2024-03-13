@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -58,7 +59,8 @@ class DateLengthController extends _$DateLengthController {
   @override
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.dateLength) ?? 8;
-    return TextEditingController(text: '$text位');
+    String unit = S.current.digits;
+    return TextEditingController(text: '$text$unit');
   }
 }
 
@@ -86,7 +88,8 @@ class PrefixLengthController extends _$PrefixLengthController {
   @override
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.prefixLength) ?? 0;
-    return TextEditingController(text: '$text位');
+    String unit = S.current.digits;
+    return TextEditingController(text: '$text$unit');
   }
 }
 
@@ -95,7 +98,8 @@ class PrefixStartController extends _$PrefixStartController {
   @override
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.prefixStart) ?? 0;
-    return TextEditingController(text: '$text开始');
+    String unit = S.current.start;
+    return TextEditingController(text: '$text$unit');
   }
 }
 
@@ -123,7 +127,8 @@ class SuffixLengthController extends _$SuffixLengthController {
   @override
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.suffixLength) ?? 0;
-    return TextEditingController(text: '$text位');
+    String unit = S.current.digits;
+    return TextEditingController(text: '$text$unit');
   }
 }
 
@@ -132,7 +137,8 @@ class SuffixStartController extends _$SuffixStartController {
   @override
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.suffixStart) ?? 0;
-    return TextEditingController(text: '$text开始');
+    String unit = S.current.start;
+    return TextEditingController(text: '$text$unit');
   }
 }
 
