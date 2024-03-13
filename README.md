@@ -1,4 +1,6 @@
-<div align=center><img alt="OncePower" src="doc/logo.png"></div>
+<div align="center"><img alt="OncePower" src="doc/logo.png"></div>
+
+简体中文 | [English](README-EN.md)
 
 OncePower 是一个文件管理工具，目前只有三个功能：批量重命名文件和文件夹（可对文件的扩展名进行批量修改）、批量移动文件和批量删除空文件夹。
 
@@ -96,9 +98,9 @@ OncePower 是一个文件管理工具，目前只有三个功能：批量重命�
 
 # 打包
 
-该项目只在 Win10 测试过，macOS 和 Ubuntu 需要自行测试，不出意外应该不用特别配置某个第三方库。
+该项目只在 Win10 和 win11 测试过，macOS 和 Ubuntu 需要自行测试，不出意外应该不用特别配置某个第三方库。
 
-因为使用了 [flutter_distributor](https://distributor.leanflutter.org/zh/docs/getting-started)，打包的配置文件已经配置好了。想打包的要依次执行一下命令：
+因为使用了 [flutter_distributor](https://distributor.leanflutter.dev/zh-hans/getting-started/)，打包的配置文件已经配置好了。想打包的要依次执行一下命令：
 
 **全局安装 flutter_distributor**
 
