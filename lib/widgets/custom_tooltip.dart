@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EasyTooltip extends StatelessWidget {
-  const EasyTooltip({
+class CustomTooltip extends StatelessWidget {
+  const CustomTooltip({
     super.key,
     required this.child,
     required this.content,

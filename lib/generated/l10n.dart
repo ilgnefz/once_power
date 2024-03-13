@@ -680,10 +680,10 @@ class S {
     );
   }
 
-  /// `Check for Updates`
+  /// `Check Version`
   String get checkUpdate {
     return Intl.message(
-      'Check for Updates',
+      'Check Version',
       name: 'checkUpdate',
       desc: '',
       args: [],

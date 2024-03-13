@@ -1,6 +1,6 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/svg_icon.dart';
 
 class BoxCard extends StatelessWidget {
@@ -19,7 +19,7 @@ class BoxCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EasyTooltip(
+    return CustomTooltip(
       content: Text(
         message,
         style: const TextStyle(fontSize: 13, color: Color(0xFF454545))

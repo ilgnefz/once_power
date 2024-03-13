@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/widgets/easy_checkbox.dart';
+import 'package:once_power/widgets/custom_checkbox.dart';
 
 import 'apply_menu/apply_menu.dart';
 import 'tool_menu/tool_menu.dart';
@@ -20,13 +20,13 @@ class RenameMenu extends StatelessWidget {
           builder: (context, ref, child) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              EasyCheckbox(
+              CustomCheckbox(
                 S.of(context).appendMode,
                 checked: ref.watch(appendModeProvider),
                 onChanged: (v) =>
                     ref.read(appendModeProvider.notifier).update(),
               ),
-              EasyCheckbox(
+              CustomCheckbox(
                 S.of(context).addFolder,
                 checked: ref.watch(addFolderProvider),
                 onChanged: (v) => ref.read(addFolderProvider.notifier).update(),

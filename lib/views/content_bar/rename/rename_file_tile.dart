@@ -6,7 +6,7 @@ import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
 import 'package:once_power/widgets/check_tile.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 import 'package:once_power/widgets/tip_text.dart';
 
@@ -44,7 +44,7 @@ class RenameFileTile extends ConsumerWidget {
 
     String dot = file.extension == '' ? '' : '.';
     String newDot = file.newExtension == '' ? '' : '.';
-    return EasyTooltip(
+    return CustomTooltip(
       // margin: const EdgeInsets.only(left: 240),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 280),

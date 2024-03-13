@@ -53,31 +53,16 @@ extension RemoveTypeExtension on RemoveType {
   String get value {
     switch (this) {
       case RemoveType.match:
-        return '匹配的';
+        return S.current.match;
       case RemoveType.before:
-        return '之前的';
+        return S.current.before;
       case RemoveType.middle:
-        return '中间的';
+        return S.current.between;
       case RemoveType.after:
-        return '之后的';
+        return S.current.after;
     }
   }
 }
-
-// extension RemoveTypeExtension on RemoveType {
-//   String get value {
-//     switch (this) {
-//       case RemoveType.match:
-//         return S.current.match;
-//       case RemoveType.before:
-//         return S.current.before;
-//       case RemoveType.middle:
-//         return S.current.between;
-//       case RemoveType.after:
-//         return S.current.after;
-//     }
-//   }
-// }
 
 enum SortType {
   defaultSort,
@@ -137,10 +122,10 @@ enum FileUploadType { prefix, suffix }
 
 enum NotificationType { failure, success }
 
-enum Language {
+enum LanguageType {
   english('English'),
   chinese('中文');
 
   final String value;
-  const Language(this.value);
+  const LanguageType(this.value);
 }

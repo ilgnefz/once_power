@@ -11,7 +11,7 @@ import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/input/base_input.dart';
 import 'package:once_power/widgets/click_icon.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 
 class UploadInput extends ConsumerWidget {
   const UploadInput({
@@ -52,7 +52,7 @@ class UploadInput extends ConsumerWidget {
       hintText: hintText,
       show: show,
       onChanged: onChanged,
-      action: EasyTooltip(
+      action: CustomTooltip(
         content: Text(
           S.of(context).uploadDesc,
           style: const TextStyle(fontSize: 13, color: Color(0xFF454545))

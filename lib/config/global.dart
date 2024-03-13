@@ -52,7 +52,8 @@ void saveOrNo() {
       AppKeys.prefixStart,
       AppKeys.suffixLength,
       AppKeys.suffixStart,
-      AppKeys.sortType
+      AppKeys.sortType,
+      AppKeys.locale
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);

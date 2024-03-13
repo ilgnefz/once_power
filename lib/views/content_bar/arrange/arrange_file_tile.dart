@@ -7,7 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 import 'package:once_power/widgets/tip_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,7 +44,7 @@ class ArrangeFileTile extends ConsumerWidget {
       }
     }
 
-    return EasyTooltip(
+    return CustomTooltip(
       // margin: const EdgeInsets.only(left: 240),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 280),

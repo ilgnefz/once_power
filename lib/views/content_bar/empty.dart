@@ -19,7 +19,7 @@ class EmptyView extends StatelessWidget {
             S.of(context).tip,
             style: TextStyle(
               fontSize: 18,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],

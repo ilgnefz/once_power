@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/rename.dart';
-import 'package:once_power/widgets/easy_chip.dart';
+import 'package:once_power/widgets/custom_chip.dart';
 
 class DifferMenu extends ConsumerWidget {
   const DifferMenu({super.key});
@@ -22,7 +22,7 @@ class DifferMenu extends ConsumerWidget {
         children: [
           ...ReserveType.values.map(
             (e) {
-              return EasyChip(
+              return CustomChip(
                 label: e.value,
                 selected: currentReserveType.contains(e),
                 enable: enable,
@@ -43,7 +43,7 @@ class DifferMenu extends ConsumerWidget {
       children: [
         ...RemoveType.values.map(
           (e) {
-            return EasyChip(
+            return CustomChip(
               label: e.value,
               selected: ref.watch(currentRemoveTypeProvider) == e,
               // enable: false,

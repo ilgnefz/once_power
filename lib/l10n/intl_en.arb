@@ -62,7 +62,7 @@
   "closeSaveConfig": "Saved configurations not enabled",
   "currentTask": "CurrentTask",
   "takeTime": "Time",
-  "checkUpdate": "Check for Updates",
+  "checkUpdate": "Check Version",
   "checking": "Checking",
   "checkCompleted": "Check completed",
   "useDesc": "Instructions for use",

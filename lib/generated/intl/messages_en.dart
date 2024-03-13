@@ -33,8 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
         "checkCompleted":
             MessageLookupByLibrary.simpleMessage("Check completed"),
-        "checkUpdate":
-            MessageLookupByLibrary.simpleMessage("Check for Updates"),
+        "checkUpdate": MessageLookupByLibrary.simpleMessage("Check Version"),
         "checking": MessageLookupByLibrary.simpleMessage("Checking"),
         "circularPrefixDesc":
             MessageLookupByLibrary.simpleMessage("Circular prefix content"),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:once_power/widgets/input/base_input.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 
 class DigitInput extends StatefulWidget {
   const DigitInput({
@@ -81,7 +81,7 @@ class _DigitInputState extends State<DigitInput> {
 
   @override
   Widget build(BuildContext context) {
-    return EasyTooltip(
+    return CustomTooltip(
       content: Text(tip),
       child: BaseInput(
         padding: EdgeInsets.zero,

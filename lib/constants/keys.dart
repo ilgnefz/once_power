@@ -6,7 +6,6 @@ class AppKeys {
   // static String suffixText = 'suffixText';
   // static String extensionText = 'extensionText';
   static String targetFolder = 'targetFolder';
-  static String language = 'language';
 
   // int
   static String dateLength = 'dateLength';
@@ -36,6 +35,9 @@ class AppKeys {
   // static String reverseType = 'reverseType';
   static String dateType = 'dateType';
   static String sortType = 'sortType';
+
+  // Locale
+  static String locale = 'locale';
 
   // temp cache
   static String matchCache = 'matchCache';

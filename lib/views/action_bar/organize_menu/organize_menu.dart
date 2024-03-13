@@ -7,8 +7,8 @@ import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
 import 'package:once_power/utils/storage.dart';
-import 'package:once_power/widgets/click_text.dart';
-import 'package:once_power/widgets/easy_checkbox.dart';
+import 'package:once_power/widgets/custom_text_button.dart';
+import 'package:once_power/widgets/custom_checkbox.dart';
 import 'package:once_power/widgets/input/base_input.dart';
 
 import 'organize_button.dart';
@@ -74,26 +74,26 @@ class OrganizeMenu extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            EasyCheckbox(
+            CustomCheckbox(
               saveLog,
               checked: ref.watch(saveLogProvider),
               onChanged: (v) => ref.read(saveLogProvider.notifier).update(),
             ),
-            ClickText(selectFolder, onTap: selectTargetFolder),
+            CustomTextButton(selectFolder, onTap: selectTargetFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),
         Row(
           children: [
-            EasyCheckbox(
+            CustomCheckbox(
               appendMode,
               checked: ref.watch(appendModeProvider),
               onChanged: (v) => ref.read(appendModeProvider.notifier).update(),
             ),
             const Spacer(),
-            ClickText(addFileText, onTap: addFile),
+            CustomTextButton(addFileText, onTap: addFile),
             const SizedBox(height: AppNum.gapW),
-            ClickText(addFolderText, onTap: addFolder),
+            CustomTextButton(addFolderText, onTap: addFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),

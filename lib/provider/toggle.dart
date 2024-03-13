@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -62,4 +66,24 @@ class FileSortType extends _$FileSortType {
     state = type;
     await StorageUtil.setInt(AppKeys.sortType, type.index);
   }
+}
+
+@riverpod
+class Language extends _$Language {
+  @override
+  Locale? build() => StorageUtil.getLocale(AppKeys.locale);
+
+  void update(Locale? locale) {
+    if (locale != null) StorageUtil.setLocal(AppKeys.locale, locale);
+    if (locale == null) StorageUtil.remove(AppKeys.locale);
+    state = locale;
+    S.load(state ?? Locale(Platform.localeName));
+  }
+}
+
+@riverpod
+LanguageType currentLanguage(CurrentLanguageRef ref) {
+  Locale? locale = ref.watch(languageProvider);
+  if (locale == const Locale('en', 'US')) return LanguageType.english;
+  return LanguageType.chinese;
 }

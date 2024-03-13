@@ -44,8 +44,7 @@ class ModeCard extends ConsumerWidget {
           decoration: BoxDecoration(
             border: selected
                 ? const Border(
-                    bottom: BorderSide(color: AppColors.select, width: 4),
-                  )
+                    bottom: BorderSide(color: AppColors.select, width: 4))
                 : const Border(),
           ),
           alignment: Alignment.center,

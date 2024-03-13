@@ -7,6 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/small_text_button.dart';
 
 class CheckVersion extends ConsumerStatefulWidget {
   const CheckVersion({super.key});
@@ -23,6 +24,7 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
 
   void checkVersion() async {
     check = true;
+    setState(() {});
     try {
       Dio dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 5)));
       final response = await dio.get(versionUrl);
@@ -48,7 +50,11 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
         ref.read(newVersionProvider.notifier).update();
       } else {
         NotificationMessage.show(
-            '检测完成', '当前已是最新版本', [], NotificationType.success);
+          '检测完成',
+          '当前已是最新版本',
+          [],
+          NotificationType.success,
+        );
       }
     } catch (e) {
       NotificationMessage.show('检测失败', '$e', [], NotificationType.failure);
@@ -61,39 +67,18 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
   Widget build(BuildContext context) {
     final String checkUpdates = S.of(context).checkUpdate;
     final String checking = S.of(context).checking;
-    final String checkComplete = S.of(context).checkCompleted;
+    // final String checkComplete = S.of(context).checkCompleted;
 
-    return Container(
-      // width: 80,
-      margin: const EdgeInsets.symmetric(horizontal: 12),
-      alignment: Alignment.center,
-      child: InkWell(
-        onHover: (v) {
-          hover = v;
-          setState(() {});
-        },
-        onTap: check ? null : checkVersion,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              check ? checking : checkUpdates,
-              style: TextStyle(
-                fontSize: 13,
-                color: hover ? Theme.of(context).primaryColor : Colors.grey,
-              ),
-            ),
-            if (check)
-              Container(
-                margin: const EdgeInsets.only(left: 4),
-                width: 12,
-                height: 12,
-                child: const FittedBox(
-                  fit: BoxFit.fill,
-                  child: CircularProgressIndicator(strokeWidth: 6),
-                ),
-              ),
-          ],
+    return SmallTextButton(
+      text: check ? checking : checkUpdates,
+      onTap: check ? null : checkVersion,
+      action: Container(
+        margin: const EdgeInsets.only(left: 4),
+        width: check ? 12 : 0,
+        height: 12,
+        child: const FittedBox(
+          fit: BoxFit.fill,
+          child: CircularProgressIndicator(strokeWidth: 6),
         ),
       ),
     );

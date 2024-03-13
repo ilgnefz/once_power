@@ -7,7 +7,7 @@ import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/widgets/click_icon.dart';
-import 'package:once_power/widgets/easy_tooltip.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'check_version.dart';
@@ -47,8 +47,11 @@ class BottomBar extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          EasyTooltip(
-            content: Text(save ? openSave : closeSave),
+          CustomTooltip(
+            content: Text(
+              save ? openSave : closeSave,
+              style: const TextStyle(fontSize: 13),
+            ),
             child: ClickIcon(
               size: 24,
               svg: AppIcons.save,
@@ -59,10 +62,12 @@ class BottomBar extends ConsumerWidget {
           const SizedBox(width: 4),
           const EnableOrganize(),
           const SizedBox(width: 4),
-          const LanguageToggle(style: style),
+          const LanguageToggle(),
           const Spacer(),
-          Text('$currentTask: $count/$total  $takeTime: ${cost}s',
-              style: style),
+          Text(
+            '$currentTask: $count/$total  $takeTime: ${cost}s',
+            style: style,
+          ),
           const SizedBox(width: 12),
           const RepoUrl(icon: AppIcons.gitee, url: giteeUrl),
           const SizedBox(width: 12),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EasyCheckbox extends StatelessWidget {
-  const EasyCheckbox(
+class CustomCheckbox extends StatelessWidget {
+  const CustomCheckbox(
     this.label, {
     super.key,
     required this.checked,

@@ -63,7 +63,11 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
               ),
             ),
           ),
-          Text(arrangeFile, style: TextStyle(fontSize: 13, color: color)),
+          // Text(arrangeFile, style: TextStyle(fontSize: 13, color: color)),
+          Text(
+            arrangeFile,
+            style: TextStyle(fontSize: 13, color: color),
+          ),
         ],
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/colors.dart';
 
-class ClickText extends StatelessWidget {
-  const ClickText(
+class CustomTextButton extends StatelessWidget {
+  const CustomTextButton(
     this.label, {
     super.key,
     this.style,

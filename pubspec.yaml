@@ -57,6 +57,7 @@ dependencies:
   flutter_riverpod: ^2.5.1
   dropdown_button2: ^2.3.9
   logger: ^2.1.0
+  nil: ^1.1.1
 
 dev_dependencies:
   flutter_test:

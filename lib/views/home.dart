@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/global.dart';
+import 'package:once_power/config/global.dart';
 import 'package:once_power/views/action_bar/action_bar.dart';
 import 'package:once_power/views/bottom_bar/bottom_bar.dart';
 import 'package:once_power/views/content_bar/content_bar.dart';

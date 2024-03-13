@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/file.dart';
-import 'package:once_power/widgets/click_text.dart';
+import 'package:once_power/widgets/custom_text_button.dart';
 
 import 'apply_button.dart';
 
@@ -31,9 +31,9 @@ class ApplyMenu extends ConsumerWidget {
 
     return Row(
       children: [
-        ClickText(S.of(context).addFile, onTap: addFile),
+        CustomTextButton(S.of(context).addFile, onTap: addFile),
         const SizedBox(width: 4),
-        ClickText(S.of(context).selectFolder, onTap: addFolder),
+        CustomTextButton(S.of(context).selectFolder, onTap: addFolder),
         const Spacer(),
         const ApplyButton(),
       ],

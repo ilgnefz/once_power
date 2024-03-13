@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUtil {
@@ -40,5 +42,22 @@ class StorageUtil {
 
   static Future<bool> remove(String key) {
     return _prefs.remove(key);
+  }
+
+  // 存储Locale
+  static Future<void> setLocal(String key, Locale value) async {
+    String localString = '${value.languageCode}_${value.countryCode}';
+    await _prefs.setString(key, localString);
+  }
+
+  // 获取Locale
+  static Locale? getLocale(String key) {
+    Locale? locale;
+    String? value = _prefs.getString(key);
+    if (value != null) {
+      List<String> localeList = value.split('_');
+      locale = Locale(localeList[0], localeList[1]);
+    }
+    return locale;
   }
 }
