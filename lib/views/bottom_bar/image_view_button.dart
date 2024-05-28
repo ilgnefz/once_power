@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/model/enum.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
@@ -17,6 +18,15 @@ class ImageViewButton extends ConsumerWidget {
 
     bool imageView = ref.watch(imageViewProvider);
 
+    void toggleView() {
+      if (!imageView) {
+        ref
+            .read(fileListProvider.notifier)
+            .removeOtherClassify(FileClassify.image);
+      }
+      ref.read(imageViewProvider.notifier).update();
+    }
+
     return CustomTooltip(
       message: imageViewMode,
       textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
@@ -26,7 +36,7 @@ class ImageViewButton extends ConsumerWidget {
         size: 24,
         svg: AppIcons.image,
         color: imageView ? Theme.of(context).primaryColor : Colors.grey,
-        onTap: ref.read(imageViewProvider.notifier).update,
+        onTap: toggleView,
       ),
     );
   }

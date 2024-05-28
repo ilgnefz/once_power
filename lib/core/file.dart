@@ -40,8 +40,11 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
 
   bool isFile = FileSystemEntity.isFileSync(filePath);
   FunctionMode mode = ref.watch(currentModeProvider);
+  bool isImageView = ref.watch(imageViewProvider);
 
-  if (!addFolder && !isFile && mode != FunctionMode.organize) {
+  if ((!addFolder || addFolder && isImageView) &&
+      !isFile &&
+      mode != FunctionMode.organize) {
     final list = getAllFile(filePath);
     int count = 0;
     ref.read(totalProvider.notifier).update(list.length);
@@ -50,7 +53,7 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
     for (var file in list) {
       count++;
       formatFile(ref, file, count);
-      if (delay) await await Future.delayed(const Duration(microseconds: 1));
+      if (delay) await Future.delayed(const Duration(microseconds: 1));
     }
     int endTime = DateTime.now().microsecondsSinceEpoch;
     double cost = (endTime - startTime) / 1000000;
@@ -61,6 +64,7 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   ref.read(countProvider.notifier).update(count);
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+  if (isImageView && fileInfo.type != FileClassify.image) return;
   ref.read(fileListProvider.notifier).add(fileInfo);
 
   if (mode == FunctionMode.organize) {
@@ -133,7 +137,7 @@ Future<DateTime?> getExifDate(String filePath) async {
   if (!data.containsKey('Image DateTime')) return null;
   String? dateTime = data['Image DateTime'].toString();
   if (dateTime == '') return null;
-  Log.i('$filePath拍摄日期: ${formatExifDate(dateTime)}');
+  Log.i('$filePath 拍摄日期: ${formatExifDate(dateTime)}');
   return formatExifDate(dateTime);
 }
 
@@ -163,6 +167,11 @@ void deleteAll(WidgetRef ref) {
 void autoInput(WidgetRef ref, String fileName) {
   bool dateRename = ref.watch(dateRenameProvider);
   if (dateRename) return;
+  bool modifyNotEmpty = ref.watch(modifyClearProvider);
+  FunctionMode mode = ref.watch(currentModeProvider);
+  if (modifyNotEmpty && mode == FunctionMode.reserve) {
+    ref.watch(modifyControllerProvider).text = '';
+  }
   ref.watch(matchControllerProvider).text = fileName;
   updateName(ref);
 }

@@ -25,7 +25,6 @@ class FunctionModeTab extends ConsumerWidget {
       FunctionMode before = ref.watch(currentModeProvider);
       if (before == mode) return;
       if (mode == FunctionMode.reserve) {
-        //TODO 如果切换到保留模式，则清空修改和匹配的输入框
         bool matchNotEmpty = ref.watch(matchClearProvider);
         bool modifyNotEmpty = ref.watch(modifyClearProvider);
         if (matchNotEmpty && modifyNotEmpty) {

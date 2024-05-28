@@ -81,7 +81,6 @@
   "tip": "拖动文件（夹）到这里",
   "uploadDesc": "上传 .txt 文件",
   "download": "下载",
-  "language": "语言",
   "existsError": "重命名为 {name} 的文件已存在",
   "notExistsError": "在 {name} 中已不存在",
   "failedError": "重命名失败,因为 {name}",

@@ -27,6 +27,9 @@ class FileList extends _$FileList {
 
   void removeUncheck() => state = state.where((e) => e.checked).toList();
 
+  void removeOtherClassify(FileClassify classify) =>
+      state = state = state.where((e) => e.type == classify).toList();
+
   void checkAll(bool check) => state = state.map((e) {
         if (e.checked != check) e.checked = check;
         return e;
@@ -36,6 +39,11 @@ class FileList extends _$FileList {
         if (e.type == classify) e.checked = check;
         return e;
       }).toList();
+
+  // void uncheckClassify(FileClassify classify) => state = state.map((e) {
+  //       if (e.type != classify) e.checked = false;
+  //       return e;
+  //     }).toList();
 
   void updateOriginName(String id, String name) => state = state.map((e) {
         if (e.id == id) e.name = name;

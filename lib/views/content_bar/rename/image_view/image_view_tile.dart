@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/content_bar/rename/image_view/err_image.dart';
 
 import 'image_preview.dart';
 
@@ -14,17 +15,17 @@ class ImageViewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showImage() {
+      showDialog(
+        context: context,
+        builder: (context) => ImagePreview(file.filePath),
+      );
+    }
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        // TODO ???
-        onTap: () {},
-        onDoubleTap: () {
-          showDialog(
-            context: context,
-            builder: (context) => ImagePreview(file.filePath),
-          );
-        },
+        onDoubleTap: showImage,
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,6 +36,9 @@ class ImageViewTile extends StatelessWidget {
                   fit: BoxFit.contain,
                   color: file.checked ? null : Colors.grey,
                   colorBlendMode: BlendMode.saturation,
+                  cacheWidth: AppNum.imageW,
+                  errorBuilder: (context, exception, stackTrace) =>
+                      const ErrorImage(),
                 ),
               ),
               const SizedBox(height: 4),

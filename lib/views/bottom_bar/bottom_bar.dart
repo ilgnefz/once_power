@@ -8,7 +8,6 @@ import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/image_view_button.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/views/bottom_bar/save_button.dart';
-import 'package:once_power/views/setting/setting.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'check_version.dart';
@@ -53,9 +52,9 @@ class BottomBar extends ConsumerWidget {
       child: Row(
         children: [
           const SaveButton(),
-          const SizedBox(width: AppNum.bottomBarInterval),
+          const SizedBox(width: AppNum.bottomBarInterval - 4),
           const ImageViewButton(),
-          const SizedBox(width: AppNum.bottomBarInterval),
+          const SizedBox(width: AppNum.bottomBarInterval - 4),
           const EnableOrganizeCheckbox(),
           const SizedBox(width: AppNum.bottomBarInterval / 3),
           const LanguageToggle(),
@@ -63,11 +62,6 @@ class BottomBar extends ConsumerWidget {
           Text(
             '$currentTask: $count/$total  $takeTime: ${cost}s',
             style: style,
-          ),
-          const SizedBox(width: AppNum.bottomBarInterval),
-          IconButton(
-            onPressed: () => _showDialog(context),
-            icon: const Icon(Icons.settings),
           ),
           const SizedBox(width: AppNum.bottomBarInterval),
           const RepoUrl(icon: AppIcons.gitee, url: giteeUrl),
@@ -91,9 +85,5 @@ class BottomBar extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  _showDialog(BuildContext context) {
-    showDialog(context: context, builder: (context) => const Setting());
   }
 }

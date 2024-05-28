@@ -1,12 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:once_power/views/content_bar/rename/image_view/err_image.dart';
 
-class ImagePreview extends StatelessWidget {
+class ImagePreview extends StatefulWidget {
   const ImagePreview(this.file, {super.key});
 
   final String file;
 
+  @override
+  State<ImagePreview> createState() => _ImagePreviewState();
+}
+
+class _ImagePreviewState extends State<ImagePreview> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -17,25 +23,14 @@ class ImagePreview extends StatelessWidget {
           InteractiveViewer(
             child: InkWell(
               onTap: () => Navigator.pop(context),
-              child: Image.file(File(file), fit: BoxFit.scaleDown),
+              child: Image.file(
+                File(widget.file),
+                fit: BoxFit.scaleDown,
+                errorBuilder: (context, exception, stackTrace) =>
+                    const ErrorImage(),
+              ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.centerLeft,
-          //   child: IconButton(
-          //     icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          //     onPressed: () => provider.previousImage(file),
-          //     color: Colors.white,
-          //   ),
-          // ),
-          // Align(
-          //   alignment: Alignment.centerRight,
-          //   child: IconButton(
-          //     icon: const Icon(Icons.arrow_forward_ios_rounded),
-          //     onPressed: () => provider.nextImage(file),
-          //     color: Colors.white,
-          //   ),
-          // ),
         ],
       ),
     );

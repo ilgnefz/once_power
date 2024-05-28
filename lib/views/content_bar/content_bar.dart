@@ -40,10 +40,8 @@ class ContentBar extends ConsumerWidget {
       FileInfo item = files.removeAt(oldIndex);
       files.insert(newIndex, item);
       FunctionMode mode = ref.watch(currentModeProvider);
-      // modify
       ref.read(fileListProvider.notifier).addAll(files);
       ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
-      // ref.read(provider)
       if (mode == FunctionMode.organize) {
         TextEditingController controller = ref.watch(targetControllerProvider);
         bool isFile = files.first.extension != 'dir';
@@ -132,41 +130,7 @@ class BuildListView extends ConsumerWidget {
         insertDuration: const Duration(milliseconds: 300),
         removeDuration: const Duration(milliseconds: 300),
         onReorder: onReorder,
-        // onReorderStart: (v) {
-        //   print('开始了：$v');
-        // },
-        // onReorderEnd: (v) {
-        //   print('结束了：$v');
-        // },
       ),
     );
   }
 }
-
-// TODO 删除
-// class NewWidget extends StatelessWidget {
-//   const NewWidget({
-//     super.key,
-//     required this.files,
-//     required this.mode,
-//   });
-//
-//   final List<FileInfo> files;
-//   final FunctionMode mode;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ReorderableListView.builder(
-//         buildDefaultDragHandles: false,
-//         itemCount: files.length,
-//         onReorder: (oldIndex, newIndex) => reorderList(oldIndex, newIndex),
-//         itemBuilder: (context, index) {
-//           return ReorderableDragStartListener(
-//             index: index,
-//             key: ValueKey(files[index].id),
-//             child: mode == FunctionMode.organize ? ArrangeFileTile(files[index]) : RenameFileTile(files[index]),
-//           );
-//         },
-//       );
-//   }
-// }

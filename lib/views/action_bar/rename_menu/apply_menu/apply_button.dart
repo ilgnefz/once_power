@@ -6,8 +6,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
@@ -81,16 +80,14 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
     bool sameName = f.name == f.newName;
     bool sameExtension = f.extension == f.newExtension;
     if (sameName && sameExtension) continue;
-    String extension = f.extension == 'dir' ? '' : '.${f.extension}';
-    String newExtension = f.newExtension == 'dir' ? '' : '.${f.newExtension}';
-    String oldPath = path.join(f.parent, '${f.name}$extension');
-    String newPath = path.join(f.parent, '${f.newName}$newExtension');
+    String oldName = fileName(f.name, f.extension);
+    String newName = fileName(f.newName, f.newExtension);
+    String oldPath = path.join(f.parent, oldName);
+    String newPath = path.join(f.parent, newName);
     if (File(newPath).existsSync()) {
-      final oldFile = '${f.name}$extension';
-      final newFile = '${f.newName}$newExtension';
       errorList.add(NotificationInfo(
-        file: oldFile,
-        message: ': ${S.current.existsError(newFile)}',
+        file: oldName,
+        message: ': ${S.current.existsError(newName)}',
       ));
       continue;
     }
@@ -112,10 +109,7 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
       } else {
         message = S.current.failedError(e);
       }
-      errorList.add(NotificationInfo(
-        file: '${f.name}$extension',
-        message: message,
-      ));
+      errorList.add(NotificationInfo(file: oldName, message: message));
     }
     count++;
     ref.read(countProvider.notifier).update(count);

@@ -2,6 +2,7 @@ final filter = ['ini', 'lnk'];
 
 final image = [
   'ai',
+  'apng',
   'bmp',
   'cdr',
   'dib',
@@ -11,6 +12,7 @@ final image = [
   'fpx',
   'gif',
   'heic',
+  'ico',
   'jfif',
   'jpe',
   'jpeg',
@@ -19,6 +21,7 @@ final image = [
   'pcx',
   'png',
   'psd',
+  'pvr',
   'svg',
   'tga',
   'tif',

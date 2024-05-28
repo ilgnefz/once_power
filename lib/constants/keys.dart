@@ -28,6 +28,7 @@ class AppKeys {
   static String isSave = 'isSave';
   static String isUseOrganize = 'isUseOrganize';
   static String isSaveLog = 'isSaveLog';
+  static String isImageView = 'isImageView';
 
   // enum
   static String functionMode = 'functionMode';

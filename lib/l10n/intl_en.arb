@@ -81,7 +81,6 @@
   "tip": "Drag the file (folder) here",
   "uploadDesc": "Upload .txt file",
   "download": "Download",
-  "language": "Language",
   "existsError": " The file renamed to {name} already exists",
   "notExistsError": "No longer exists in {name}",
   "failedError": " renaming failed, Because {name}",

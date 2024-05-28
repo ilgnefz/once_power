@@ -9,7 +9,7 @@ class AppNum {
   static const double actionBarMaxW = 328;
   static const double actionBarP = 12;
   static const double actionBarMaxP = 16;
-  static const double gapW = 8;
+  static const double gapW = 4;
   static const double gapH = 8;
   static const double bottomBarH = 32;
   static const double bottomBarP = 12;
@@ -26,4 +26,5 @@ class AppNum {
   static const double tileFontSize = 13;
   static const int maxFileNum = 150;
   static const double contentRP = 12;
+  static const int imageW = 144;
 }

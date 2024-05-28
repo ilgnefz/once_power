@@ -342,7 +342,7 @@ final showTextTipProvider =
 );
 
 typedef _$ShowTextTip = AutoDisposeNotifier<bool>;
-String _$imageViewHash() => r'65c82c9800bfc82bcff194216c79b3a5536dd46a';
+String _$imageViewHash() => r'c3924319eaee9112110b6f5195f456b990ca66ee';
 
 /// See also [ImageView].
 @ProviderFor(ImageView)

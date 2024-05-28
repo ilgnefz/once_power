@@ -88,7 +88,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "image": MessageLookupByLibrary.simpleMessage("图片"),
         "imageViewMode": MessageLookupByLibrary.simpleMessage("图像查看模式"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("输入已禁用"),
-        "language": MessageLookupByLibrary.simpleMessage("语言"),
         "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
         "lengthDesc":
             MessageLookupByLibrary.simpleMessage("输入长度截取（两个数字之间加空格截取中间部分）"),

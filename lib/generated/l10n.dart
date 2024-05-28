@@ -870,16 +870,6 @@ class S {
     );
   }
 
-  /// `Language`
-  String get language {
-    return Intl.message(
-      'Language',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// ` The file renamed to {name} already exists`
   String existsError(Object name) {
     return Intl.message(

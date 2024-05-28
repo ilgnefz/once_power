@@ -69,7 +69,7 @@ class ImageGridView extends ConsumerWidget {
             );
           },
           sliverGridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: (constraints.maxWidth / 120).floor(),
+            crossAxisCount: (constraints.maxWidth / AppNum.imageW).floor(),
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             childAspectRatio: 5 / 6,

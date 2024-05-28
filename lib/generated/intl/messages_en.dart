@@ -101,7 +101,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "imageViewMode":
             MessageLookupByLibrary.simpleMessage("Image view mode"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
         "lengthDesc": MessageLookupByLibrary.simpleMessage(
             "Input length truncation (adding a space between two numbers to truncate the middle part)"),

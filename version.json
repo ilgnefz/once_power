@@ -1,5 +1,10 @@
 {
   "info": [{
+    "version": "2.4.0",
+    "description": [
+      "添加了图片预览模式"
+    ]
+  },{
     "version": "2.3.0",
     "description": [
       "添加了英语"

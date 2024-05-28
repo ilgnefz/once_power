@@ -10,9 +10,6 @@ class LanguageToggle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO 删除这条翻译
-    final String language = S.of(context).language;
-
     LanguageType currentLanguage = ref.watch(currentLanguageProvider);
     bool showTextTip = ref.watch(showTextTipProvider);
 

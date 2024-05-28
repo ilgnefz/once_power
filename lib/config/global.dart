@@ -35,25 +35,26 @@ void saveOrNo() {
   StorageUtil.remove(AppKeys.modifyCache);
   if (!save) {
     List<String> appKeyList = [
-      AppKeys.targetFolder,
-      AppKeys.functionMode,
+      AppKeys.dateLength,
       AppKeys.dateType,
-      AppKeys.isLength,
+      AppKeys.functionMode,
+      AppKeys.isAppend,
       AppKeys.isCase,
       AppKeys.isDate,
-      AppKeys.isPrefixCycle,
-      AppKeys.isSuffixCycle,
-      AppKeys.isPrefixSwap,
-      AppKeys.isSuffixSwap,
-      AppKeys.isAppend,
       AppKeys.isFolder,
-      AppKeys.dateLength,
+      AppKeys.isImageView,
+      AppKeys.isLength,
+      AppKeys.isPrefixCycle,
+      AppKeys.isPrefixSwap,
+      AppKeys.isSuffixCycle,
+      AppKeys.isSuffixSwap,
+      AppKeys.locale,
       AppKeys.prefixLength,
       AppKeys.prefixStart,
       AppKeys.suffixLength,
       AppKeys.suffixStart,
       AppKeys.sortType,
-      AppKeys.locale
+      AppKeys.targetFolder
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);
