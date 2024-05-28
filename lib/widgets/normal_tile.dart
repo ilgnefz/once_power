@@ -17,8 +17,10 @@ class NormalTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding:
-            padding ?? const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
+        padding: padding ??
+            const EdgeInsets.symmetric(
+              horizontal: AppNum.fileCardP,
+            ),
         child: Text(
           label,
           style: TextStyle(fontSize: fontSize),

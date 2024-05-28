@@ -53,11 +53,9 @@ class UploadInput extends ConsumerWidget {
       show: show,
       onChanged: onChanged,
       action: CustomTooltip(
-        content: Text(
-          S.of(context).uploadDesc,
-          style: const TextStyle(fontSize: 13, color: Color(0xFF454545))
-              .useSystemChineseFont(),
-        ),
+        message: S.of(context).uploadDesc,
+        textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+            .useSystemChineseFont(),
         child: ClickIcon(
           icon: Icons.upload_file_rounded,
           color: AppColors.primary,

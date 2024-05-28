@@ -9,7 +9,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/normal_tile.dart';
-import 'package:once_power/widgets/tip_text.dart';
+import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArrangeFileTile extends ConsumerWidget {
@@ -45,16 +45,13 @@ class ArrangeFileTile extends ConsumerWidget {
     }
 
     return CustomTooltip(
-      // margin: const EdgeInsets.only(left: 240),
-      content: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 280),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TipText(label: name, content: fileName),
-            TipText(label: folder, content: fileFolder),
-          ],
-        ),
+      placement: Placement.bottom,
+      waitDuration: const Duration(seconds: 1),
+      richMessage: TextSpan(
+        children: [
+          richTextTooltip(context, name, fileName),
+          richTextTooltip(context, folder, fileFolder, true),
+        ],
       ),
       child: Material(
         child: Ink(

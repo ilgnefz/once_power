@@ -5,7 +5,6 @@ import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/core/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/click_icon.dart';

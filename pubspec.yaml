@@ -64,6 +64,7 @@ dependencies:
   contextmenu: ^3.0.0
   tolyui_feedback: ^0.3.4
   vs_scrollbar: ^1.0.0
+  extended_text: ^13.0.0
 
 dev_dependencies:
   flutter_test:

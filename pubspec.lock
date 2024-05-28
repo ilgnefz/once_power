@@ -321,6 +321,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.3.0"
+  extended_text:
+    dependency: "direct main"
+    description:
+      name: extended_text
+      sha256: "7f382de3af12992e34bd72ddd36becf90c4720900af126cb9859f0189af71ffe"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "13.0.0"
+  extended_text_library:
+    dependency: transitive
+    description:
+      name: extended_text_library
+      sha256: "55d09098ec56fab0d9a8a68950ca0bbf2efa1327937f7cec6af6dfa066234829"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "12.0.0"
   fake_async:
     dependency: transitive
     description:

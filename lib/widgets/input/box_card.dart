@@ -20,11 +20,9 @@ class BoxCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTooltip(
-      content: Text(
-        message,
-        style: const TextStyle(fontSize: 13, color: Color(0xFF454545))
-            .useSystemChineseFont(),
-      ),
+      message: message,
+      textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+          .useSystemChineseFont(),
       child: Ink(
         height: 32,
         width: 32,

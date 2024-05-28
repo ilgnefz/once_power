@@ -11,6 +11,7 @@ import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/content_bar/rename/image_view/image_view_tile.dart';
+import 'package:once_power/views/content_bar/rename/rename_tile_tooltip.dart';
 import 'package:once_power/widgets/context_menu.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
 
@@ -46,22 +47,30 @@ class ImageGridView extends ConsumerWidget {
           items: files,
           padding: const EdgeInsets.only(right: AppNum.contentRP),
           itemBuilder: (BuildContext context, int index) {
-            return CustomContextMenu(
-              key: ValueKey(files[index].id),
-              menu: Column(
-                children: [
-                  MenuContextItem(
-                    label: files[index].checked ? unselectLabel : selectLabel,
-                    callback: () => toggleCheck(ref, files[index].id),
-                  ),
-                  MenuContextItem(
-                    label: deleteLabel,
-                    color: Colors.red,
-                    callback: () => deleteOne(ref, files[index].id),
-                  ),
-                ],
+            String id = files[index].id;
+            bool checked = files[index].checked;
+
+            return RenameTileTooltip(
+              key: ValueKey(id),
+              file: files[index],
+              waitDuration: const Duration(seconds: 1),
+              child: CustomContextMenu(
+                menu: Column(
+                  children: [
+                    MenuContextItem(
+                      label: checked ? unselectLabel : selectLabel,
+                      color: checked ? Colors.grey : Colors.black,
+                      callback: () => toggleCheck(ref, id),
+                    ),
+                    MenuContextItem(
+                      label: deleteLabel,
+                      color: Colors.red,
+                      callback: () => deleteOne(ref, id),
+                    ),
+                  ],
+                ),
+                child: ImageViewTile(files[index]),
               ),
-              child: ImageViewTile(files[index]),
             );
           },
           sliverGridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
