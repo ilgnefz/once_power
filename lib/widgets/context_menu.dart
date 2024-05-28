@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:once_power/utils/log.dart';
 import 'package:window_manager/window_manager.dart';
 
-class MyContextMenu extends StatelessWidget {
-  const MyContextMenu({super.key, required this.child});
+class CustomContextMenu extends StatelessWidget {
+  const CustomContextMenu({super.key, required this.menu, required this.child});
 
+  final Widget menu;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    const double safeW = 12;
+    const double safeH = 32;
     const double width = 80;
-    const double height = 32;
+    const double height = 64;
 
     return GestureDetector(
       onSecondaryTapDown: (detail) async {
         Size size = await windowManager.getSize();
-        print('窗口尺寸：$size');
-        print('detail: ${detail.globalPosition}');
+        Log.i('窗口尺寸：$size，鼠标坐标：${detail.globalPosition}');
         if (!context.mounted) return;
         showModal(
           context: context,
@@ -26,10 +29,8 @@ class MyContextMenu extends StatelessWidget {
           builder: (BuildContext context) {
             double x = detail.globalPosition.dx;
             double y = detail.globalPosition.dy;
-            // 如果x坐标+80大于屏幕宽度，则x坐标减去80
-            // 如果y坐标+32大于屏幕高度，则y坐标减去32
-            if (x + width > size.width) x -= width;
-            if (y + height > size.height) y -= height;
+            if (x + width > size.width - safeW) x -= width;
+            if (y + height > size.height - safeH) y -= height;
             return UnconstrainedBox(
               alignment: Alignment.topLeft,
               child: Container(
@@ -49,20 +50,7 @@ class MyContextMenu extends StatelessWidget {
                 child: Material(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('删除失败')),
-                      );
-                    },
-                    child: const Center(
-                      child: Text(
-                        '删除',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
-                  ),
+                  child: menu,
                 ),
               ),
             );

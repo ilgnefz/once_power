@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "1.0.5"
   animations:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: animations
       sha256: d3d6dcfb218225bbe68e87ccf6378bbb2e32a94900722c5f81611dad089911cb

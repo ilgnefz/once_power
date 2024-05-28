@@ -159,3 +159,21 @@ void deleteAll(WidgetRef ref) {
   ref.read(totalProvider.notifier).clear();
   ref.read(costProvider.notifier).clear();
 }
+
+void autoInput(WidgetRef ref, String fileName) {
+  bool dateRename = ref.watch(dateRenameProvider);
+  if (dateRename) return;
+  ref.watch(matchControllerProvider).text = fileName;
+  updateName(ref);
+}
+
+void toggleCheck(WidgetRef ref, String id) {
+  ref.read(fileListProvider.notifier).check(id);
+  updateName(ref);
+  updateExtension(ref);
+}
+
+void deleteOne(WidgetRef ref, String id) {
+  ref.read(fileListProvider.notifier).remove(id);
+  updateName(ref);
+}

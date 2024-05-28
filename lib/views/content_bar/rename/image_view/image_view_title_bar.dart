@@ -6,6 +6,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
@@ -15,7 +16,8 @@ class ImageViewTitleBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int total = ref.watch(fileListProvider).length;
-    final String title = S.of(context).fileCount(total);
+    int selected = ref.watch(selectFileProvider);
+    final String title = S.of(context).fileCount(total, selected);
 
     return Row(
       children: [
@@ -27,6 +29,10 @@ class ImageViewTitleBar extends ConsumerWidget {
           iconSize: 22,
           color: AppColors.icon,
           onTap: () => toggleSortType(ref),
+        ),
+        const SizedBox(
+          width: AppNum.extensionW,
+          child: Center(child: FilterFileButton()),
         ),
         SizedBox(
           width: AppNum.deleteW,

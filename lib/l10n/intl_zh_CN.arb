@@ -103,5 +103,8 @@
   "organizingFailedInfo": "以下几个移动失败",
   "restartTip": "重启生效",
   "imageViewMode": "图像查看模式",
-  "fileCount": "{count} 个文件"
+  "fileCount": "{total} 个文件已选择 {count} 个",
+  "select": "选择",
+  "unselect": "取消选择",
+  "delete": "删除"
 }

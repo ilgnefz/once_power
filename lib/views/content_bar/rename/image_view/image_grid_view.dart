@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/core.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/content_bar/rename/image_view/image_view_tile.dart';
 import 'package:once_power/widgets/context_menu.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
 
@@ -20,6 +22,9 @@ class ImageGridView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<FileInfo> files = ref.watch(sortListProvider);
+    final String selectLabel = S.of(context).select;
+    final String unselectLabel = S.of(context).unselect;
+    final String deleteLabel = S.of(context).delete;
 
     void reorderList(int oldIndex, int newIndex) {
       // if (newIndex > oldIndex) newIndex -= 1;
@@ -41,43 +46,22 @@ class ImageGridView extends ConsumerWidget {
           items: files,
           padding: const EdgeInsets.only(right: AppNum.contentRP),
           itemBuilder: (BuildContext context, int index) {
-            return MyContextMenu(
+            return CustomContextMenu(
               key: ValueKey(files[index].id),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  // TODO ???
-                  onTap: () {},
-                  onDoubleTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => ImagePreview(files[index].filePath),
-                    );
-                  },
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.file(
-                            File(files[index].filePath),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          fileName(
-                            files[index].newName,
-                            files[index].newExtension,
-                          ),
-                          style: const TextStyle(fontSize: AppNum.tileFontSize),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+              menu: Column(
+                children: [
+                  MenuContextItem(
+                    label: files[index].checked ? unselectLabel : selectLabel,
+                    callback: () => toggleCheck(ref, files[index].id),
                   ),
-                ),
+                  MenuContextItem(
+                    label: deleteLabel,
+                    color: Colors.red,
+                    callback: () => deleteOne(ref, files[index].id),
+                  ),
+                ],
               ),
+              child: ImageViewTile(files[index]),
             );
           },
           sliverGridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -88,10 +72,38 @@ class ImageGridView extends ConsumerWidget {
           ),
           enterTransition: [FadeIn(), ScaleIn()],
           // exitTransition:  [SlideIn()],
-          insertDuration: const Duration(milliseconds: 300),
-          removeDuration: const Duration(milliseconds: 300),
+          insertDuration: const Duration(milliseconds: 150),
+          removeDuration: const Duration(milliseconds: 150),
           onReorder: (oldIndex, newIndex) => reorderList(oldIndex, newIndex),
         ),
+      ),
+    );
+  }
+}
+
+class MenuContextItem extends StatelessWidget {
+  const MenuContextItem({
+    super.key,
+    required this.label,
+    this.color = Colors.black,
+    required this.callback,
+  });
+
+  final String label;
+  final Color color;
+  final VoidCallback callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pop();
+        callback();
+      },
+      child: Container(
+        height: 32,
+        alignment: Alignment.center,
+        child: Text(label, style: TextStyle(color: color)),
       ),
     );
   }

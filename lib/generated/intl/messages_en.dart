@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(count, total) =>
       "${count} out of ${total} selected renames failed";
 
-  static String m4(count) => "${count} files";
+  static String m4(total, count) => "${total} files ${count} selected";
 
   static String m5(version) => "New version ${version} can be updated";
 
@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete folder"),
         "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
@@ -151,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "restartTip":
             MessageLookupByLibrary.simpleMessage("Restart takes effect"),
         "saveLog": MessageLookupByLibrary.simpleMessage("Save log"),
+        "select": MessageLookupByLibrary.simpleMessage("Select"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Select target folder"),
@@ -175,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text": MessageLookupByLibrary.simpleMessage("Text"),
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
+        "unselect": MessageLookupByLibrary.simpleMessage("Unselect"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),

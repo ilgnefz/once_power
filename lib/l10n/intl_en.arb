@@ -103,5 +103,8 @@
   "organizingFailedInfo": "The following moves failed",
   "restartTip": "Restart takes effect",
   "imageViewMode": "Image view mode",
-  "fileCount": "{count} files"
+  "fileCount": "{total} files {count} selected",
+  "select": "Select",
+  "unselect": "Unselect",
+  "delete": "Delete"
 }

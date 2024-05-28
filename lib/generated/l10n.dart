@@ -1090,13 +1090,43 @@ class S {
     );
   }
 
-  /// `{count} files`
-  String fileCount(Object count) {
+  /// `{total} files {count} selected`
+  String fileCount(Object total, Object count) {
     return Intl.message(
-      '$count files',
+      '$total files $count selected',
       name: 'fileCount',
       desc: '',
-      args: [count],
+      args: [total, count],
+    );
+  }
+
+  /// `Select`
+  String get select {
+    return Intl.message(
+      'Select',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unselect`
+  String get unselect {
+    return Intl.message(
+      'Unselect',
+      name: 'unselect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
     );
   }
 }

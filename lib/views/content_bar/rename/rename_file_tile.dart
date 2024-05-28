@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/provider.dart';
@@ -23,24 +24,6 @@ class RenameFileTile extends ConsumerWidget {
     final String createTime = S.of(context).createdTime;
     final String modifyDate = S.of(context).modifiedTime;
     final String exifDate = S.of(context).exifDate;
-
-    void autoInput() {
-      bool dateRename = ref.watch(dateRenameProvider);
-      if (dateRename) return;
-      ref.watch(matchControllerProvider).text = file.name;
-      updateName(ref);
-    }
-
-    void toggleCheck(v) {
-      ref.read(fileListProvider.notifier).check(file.id);
-      updateName(ref);
-      updateExtension(ref);
-    }
-
-    void delete() {
-      ref.read(fileListProvider.notifier).remove(file.id);
-      updateName(ref);
-    }
 
     String dot = file.extension == '' ? '' : '.';
     String newDot = file.newExtension == '' ? '' : '.';
@@ -72,14 +55,14 @@ class RenameFileTile extends ConsumerWidget {
           color: Colors.white,
           child: InkWell(
             hoverColor: Theme.of(context).primaryColor.withOpacity(.1),
-            onDoubleTap: autoInput,
+            onDoubleTap: () => autoInput(ref, file.name),
             child: Row(
               children: [
                 CheckTile(
                   check: file.checked,
                   label: file.name,
                   fontSize: AppNum.tileFontSize,
-                  onChanged: toggleCheck,
+                  onChanged: (v) => toggleCheck(ref, file.id),
                   color: Colors.grey,
                 ),
                 NormalTile(label: file.newName, fontSize: AppNum.tileFontSize),
@@ -98,7 +81,7 @@ class RenameFileTile extends ConsumerWidget {
                   width: AppNum.deleteW,
                   child: Center(
                     child: IconButton(
-                      onPressed: delete,
+                      onPressed: () => deleteOne(ref, file.id),
                       color: Colors.black26,
                       icon: const Icon(Icons.delete_rounded),
                     ),

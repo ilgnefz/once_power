@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count, total) => "选中 ${total} 个中 ${count} 个重命名失败";
 
-  static String m4(count) => "${count} 个文件";
+  static String m4(total, count) => "${total} 个文件已选择 ${count} 个";
 
   static String m5(version) => "新的版本 ${version} 可以更新";
 
@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentTask": MessageLookupByLibrary.simpleMessage("当前任务"),
         "date": MessageLookupByLibrary.simpleMessage("日期"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("以日期命名"),
+        "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "deleteEmptyFolder": MessageLookupByLibrary.simpleMessage("删除空文件夹"),
         "deleteEmptyFolderDesc":
             MessageLookupByLibrary.simpleMessage("删除添加的文件夹下的所有空文件夹"),
@@ -129,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reserve": MessageLookupByLibrary.simpleMessage("保留"),
         "restartTip": MessageLookupByLibrary.simpleMessage("重启生效"),
         "saveLog": MessageLookupByLibrary.simpleMessage("保存日志"),
+        "select": MessageLookupByLibrary.simpleMessage("选择"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
         "selectTargetFolder": MessageLookupByLibrary.simpleMessage("选择目标文件夹"),
         "serial": MessageLookupByLibrary.simpleMessage("增数"),
@@ -146,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("默认为列表第一个添加的文件的父文件夹或文件夹本身"),
         "text": MessageLookupByLibrary.simpleMessage("文本"),
         "tip": MessageLookupByLibrary.simpleMessage("拖动文件（夹）到这里"),
+        "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("上传 .txt 文件"),
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),
         "video": MessageLookupByLibrary.simpleMessage("视频"),
