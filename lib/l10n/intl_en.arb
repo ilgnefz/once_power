@@ -16,6 +16,8 @@
   "exifDate": "ExifDate",
   "earliestDate": "Earliest",
   "latestDate": "Latest",
+  "today": "Today",
+  "yesterday": "Yesterday",
   "prefix": "Prefix",
   "prefixContent": "Add prefix content",
   "suffix": "Suffix",

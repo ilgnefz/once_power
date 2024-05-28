@@ -26,8 +26,9 @@ int actualIndex(
   String dateText = dateName(ref, file);
   List<String> keyList = array.map((e) => e.keys.first).toList();
   if (keyList.contains(dateText)) {
-    Map<String, List<String>> map =
-        array.firstWhere((e) => e.keys.first == dateText);
+    Map<String, List<String>> map = array.firstWhere(
+      (e) => e.keys.first == dateText,
+    );
     List<String> fileList = map.values.first;
 
     index += fileList.length;
@@ -115,6 +116,10 @@ String dateName(WidgetRef ref, FileInfo file) {
   if (type == DateType.exifDate) {
     DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
     date = formatDateTime(dateTime);
+  }
+  if (type == DateType.today) date = formatDateTime(DateTime.now());
+  if (type == DateType.yesterday) {
+    date = formatDateTime(DateTime.now().subtract(const Duration(days: 1)));
   }
   return date.substring(0, dateDigit > date.length ? date.length : dateDigit);
 }

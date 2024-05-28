@@ -9,7 +9,6 @@ import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/views/content_bar/rename/image_view/image_grid_view.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
-import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 import 'empty.dart';
 import 'arrange/arrange_file_tile.dart';

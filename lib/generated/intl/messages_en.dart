@@ -177,10 +177,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "text": MessageLookupByLibrary.simpleMessage("Text"),
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
         "unselect": MessageLookupByLibrary.simpleMessage("Unselect"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
+        "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "zip": MessageLookupByLibrary.simpleMessage("Zip")
       };
 }

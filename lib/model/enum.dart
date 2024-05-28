@@ -3,7 +3,15 @@ import 'package:once_power/generated/l10n.dart';
 
 enum FunctionMode { replace, reserve, organize }
 
-enum DateType { createdDate, modifiedDate, exifDate, earliestDate, latestDate }
+enum DateType {
+  createdDate,
+  modifiedDate,
+  exifDate,
+  earliestDate,
+  latestDate,
+  today,
+  yesterday,
+}
 
 extension DateTypeExtension on DateType {
   String get value {
@@ -18,6 +26,10 @@ extension DateTypeExtension on DateType {
         return S.current.earliestDate;
       case DateType.latestDate:
         return S.current.latestDate;
+      case DateType.today:
+        return S.current.today;
+      case DateType.yesterday:
+        return S.current.yesterday;
     }
   }
 }

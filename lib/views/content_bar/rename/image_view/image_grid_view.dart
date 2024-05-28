@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:animated_reorderable_list/animated_reorderable_list.dart';
-import 'package:contextmenu/contextmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
@@ -9,13 +6,11 @@ import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/content_bar/rename/image_view/image_view_tile.dart';
-import 'package:once_power/views/content_bar/rename/rename_tile_tooltip.dart';
 import 'package:once_power/widgets/context_menu.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
 
-import 'image_preview.dart';
+import '../rename_tile_tooltip.dart';
+import 'image_view_tile.dart';
 
 class ImageGridView extends ConsumerWidget {
   const ImageGridView({super.key});

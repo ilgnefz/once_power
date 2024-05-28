@@ -148,10 +148,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("默认为列表第一个添加的文件的父文件夹或文件夹本身"),
         "text": MessageLookupByLibrary.simpleMessage("文本"),
         "tip": MessageLookupByLibrary.simpleMessage("拖动文件（夹）到这里"),
+        "today": MessageLookupByLibrary.simpleMessage("今天日期"),
         "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("上传 .txt 文件"),
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),
         "video": MessageLookupByLibrary.simpleMessage("视频"),
+        "yesterday": MessageLookupByLibrary.simpleMessage("昨天日期"),
         "zip": MessageLookupByLibrary.simpleMessage("压缩包")
       };
 }
