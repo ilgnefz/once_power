@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/click_icon.dart';
 

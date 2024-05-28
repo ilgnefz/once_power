@@ -28,11 +28,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count, total) => "选中 ${total} 个中 ${count} 个重命名失败";
 
-  static String m4(version) => "新的版本 ${version} 可以更新";
+  static String m4(count) => "${count} 个文件";
 
-  static String m5(name) => "在 ${name} 中已不存在";
+  static String m5(version) => "新的版本 ${version} 可以更新";
 
-  static String m6(total) => "选中的 ${total} 个已全部重命名成功";
+  static String m6(name) => "在 ${name} 中已不存在";
+
+  static String m7(total) => "选中的 ${total} 个已全部重命名成功";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -77,11 +79,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedError": m2,
         "failedNum": m3,
         "failureInfo": MessageLookupByLibrary.simpleMessage("删除空文件夹失败"),
+        "fileCount": m4,
         "fileExtension": MessageLookupByLibrary.simpleMessage("文件扩展名"),
         "fileExtensionDesc": MessageLookupByLibrary.simpleMessage("新扩展名"),
         "fileName": MessageLookupByLibrary.simpleMessage("文件名"),
         "folder": MessageLookupByLibrary.simpleMessage("文件夹"),
         "image": MessageLookupByLibrary.simpleMessage("图片"),
+        "imageViewMode": MessageLookupByLibrary.simpleMessage("图像查看模式"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("输入已禁用"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
@@ -97,16 +101,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "modifyTo": MessageLookupByLibrary.simpleMessage("修改为"),
         "moveError": MessageLookupByLibrary.simpleMessage("移动出错了"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("移动失败"),
-        "newVersionInfo": m4,
+        "newVersionInfo": m5,
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
         "notExist": MessageLookupByLibrary.simpleMessage("不存在"),
-        "notExistsError": m5,
+        "notExistsError": m6,
         "openFolder": MessageLookupByLibrary.simpleMessage("打开文件夹"),
         "openFolderDesc":
             MessageLookupByLibrary.simpleMessage("双击右边文件列表，可以快速打开文件所在文件夹"),
         "organize": MessageLookupByLibrary.simpleMessage("整理"),
         "organizeDesc": MessageLookupByLibrary.simpleMessage("整理文件"),
-        "organizeFolder": MessageLookupByLibrary.simpleMessage("整理文件夹"),
+        "organizeFolder": MessageLookupByLibrary.simpleMessage("整理功能"),
         "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
             "将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内"),
         "organizeLogs": MessageLookupByLibrary.simpleMessage("整理日志"),
@@ -131,7 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("开始"),
         "successInfo": MessageLookupByLibrary.simpleMessage("已成功删除所有空文件夹"),
         "successful": MessageLookupByLibrary.simpleMessage("重命名成功"),
-        "successfulNum": m6,
+        "successfulNum": m7,
         "suffix": MessageLookupByLibrary.simpleMessage("后缀"),
         "suffixContent": MessageLookupByLibrary.simpleMessage("添加后缀内容"),
         "swapPrefixDesc": MessageLookupByLibrary.simpleMessage("交换前缀和递增数字位置"),

@@ -100,7 +100,7 @@ final fileSortTypeProvider =
 );
 
 typedef _$FileSortType = AutoDisposeNotifier<SortType>;
-String _$languageHash() => r'f8f1974cc9fc1ca994035e0c7bf08ab1f93a64b0';
+String _$languageHash() => r'45f175e269e3bc0f669d2d64e86b66b14c0364f7';
 
 /// See also [Language].
 @ProviderFor(Language)

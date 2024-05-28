@@ -6,7 +6,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 
 class FilterFileButton extends ConsumerWidget {
   const FilterFileButton({super.key});

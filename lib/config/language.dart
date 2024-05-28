@@ -18,7 +18,7 @@ class LanguageConfig {
   ];
 
   static localeResolutionCallback(
-      BuildContext context, locale, supportedLocales) {
+      BuildContext context, Locale locale, Iterable<Locale> supportedLocales) {
     Locale? cacheLocale = StorageUtil.getLocale(AppKeys.locale);
     if (cacheLocale != null) return cacheLocale;
     if (locale.languageCode == 'zh') {

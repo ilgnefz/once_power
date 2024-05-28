@@ -4,7 +4,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/widgets/mode_card.dart';
+import 'package:once_power/widgets/function_mode_card.dart';
 
 import 'organize_menu/organize_menu.dart';
 import 'rename_menu/rename_menu.dart';
@@ -17,9 +17,11 @@ class ActionBar extends ConsumerWidget {
     String replace = S.of(context).replace;
     String reserve = S.of(context).reserve;
     String organize = S.of(context).organize;
-    bool enableArrange = ref.watch(enableArrangeProvider);
-    bool max = ref.watch(maxWindowProvider);
-    double width = max ? AppNum.actionBarW + 8 : AppNum.actionBarW;
+
+    bool enableOrganize = ref.watch(enableOrganizeProvider);
+    bool isMax = ref.watch(maxWindowProvider);
+    double width = isMax ? AppNum.actionBarMaxW : AppNum.actionBarW;
+    double padding = isMax ? AppNum.actionBarMaxP : AppNum.actionBarP;
 
     return Column(
       children: [
@@ -29,16 +31,16 @@ class ActionBar extends ConsumerWidget {
           color: Colors.white,
           child: Row(
             children: [
-              ModeCard(label: replace, mode: FunctionMode.replace),
-              ModeCard(label: reserve, mode: FunctionMode.reserve),
-              if (enableArrange)
-                ModeCard(label: organize, mode: FunctionMode.organize),
+              FunctionModeTab(label: replace, mode: FunctionMode.replace),
+              FunctionModeTab(label: reserve, mode: FunctionMode.reserve),
+              if (enableOrganize)
+                FunctionModeTab(label: organize, mode: FunctionMode.organize),
             ],
           ),
         ),
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(max ? 16 : AppNum.actionBarP),
+            padding: EdgeInsets.all(padding),
             width: width,
             child: ref.watch(currentModeProvider) == FunctionMode.organize
                 ? const OrganizeMenu()

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/check_tile.dart';
 import 'package:once_power/widgets/click_icon.dart';
@@ -19,29 +19,6 @@ class RenameTitleBar extends ConsumerWidget {
     final String originName = S.of(context).originalName;
     final String renameName = S.of(context).renamedName;
 
-    void selectAll(v) {
-      ref.read(selectAllProvider.notifier).update();
-      updateName(ref);
-      updateExtension(ref);
-    }
-
-    void toggleSortType() {
-      int index = SortType.values.indexOf(ref.read(fileSortTypeProvider));
-      ++index;
-      if (index > SortType.values.length - 1) index = 0;
-      SortType type = SortType.values[index];
-      ref.read(fileSortTypeProvider.notifier).update(type);
-      updateName(ref);
-      updateExtension(ref);
-    }
-
-    void deleteAll() {
-      ref.read(fileListProvider.notifier).clear();
-      ref.read(countProvider.notifier).clear();
-      ref.read(totalProvider.notifier).clear();
-      ref.read(costProvider.notifier).clear();
-    }
-
     int selected = ref.watch(selectFileProvider);
     int total = ref.watch(fileListProvider).length;
 
@@ -50,13 +27,13 @@ class RenameTitleBar extends ConsumerWidget {
         CheckTile(
           check: ref.watch(selectAllProvider),
           label: '$originName ($selected/$total)',
-          onChanged: selectAll,
+          onChanged: (v) => selectAll(ref),
           action: ClickIcon(
             svg: ref.watch(fileSortTypeProvider).value,
             size: AppNum.fileCardH,
             iconSize: 22,
             color: AppColors.icon,
-            onTap: toggleSortType,
+            onTap: () => toggleSortType(ref),
           ),
         ),
         NormalTile(label: renameName),
@@ -68,12 +45,13 @@ class RenameTitleBar extends ConsumerWidget {
           width: AppNum.deleteW,
           child: Center(
             child: IconButton(
-              onPressed: deleteAll,
+              onPressed: () => deleteAll(ref),
               color: AppColors.icon,
               icon: const Icon(Icons.delete_rounded),
             ),
           ),
         ),
+        const SizedBox(width: AppNum.contentRP),
       ],
     );
   }

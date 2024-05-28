@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/input/input.dart';
 
 class MatchTextInput extends ConsumerWidget {
@@ -14,7 +14,7 @@ class MatchTextInput extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool useLength = ref.watch(inputLengthProvider);
     final String matchLength =
-        useLength ? S.of(context).matchLength : S.of(context).matchLength;
+        useLength ? S.of(context).matchLength : S.of(context).matchHint;
     final String inputDisable = S.of(context).inputDisable;
     final String lengthDesc = S.of(context).lengthDesc;
     bool disable = ref.watch(currentModeProvider) == FunctionMode.reserve &&

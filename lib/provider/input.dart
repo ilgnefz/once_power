@@ -16,6 +16,9 @@ class MatchController extends _$MatchController {
       ref.read(matchClearProvider.notifier).update(controller.text.isNotEmpty);
       ref.read(currentReserveTypeProvider.notifier).clear();
     });
+    ref.onDispose(() {
+      controller.dispose();
+    });
     return controller;
   }
 
@@ -39,6 +42,9 @@ class ModifyController extends _$ModifyController {
     controller.addListener(() {
       ref.read(modifyClearProvider.notifier).update(controller.text.isNotEmpty);
     });
+    ref.onDispose(() {
+      controller.dispose();
+    });
     return controller;
   }
 
@@ -60,7 +66,12 @@ class DateLengthController extends _$DateLengthController {
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.dateLength) ?? 8;
     String unit = S.current.digits;
-    return TextEditingController(text: '$text$unit');
+    TextEditingController controller =
+        TextEditingController(text: '$text$unit');
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   }
 }
 
@@ -71,6 +82,9 @@ class PrefixController extends _$PrefixController {
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       ref.read(prefixClearProvider.notifier).update(controller.text.isNotEmpty);
+    });
+    ref.onDispose(() {
+      controller.dispose();
     });
     return controller;
   }
@@ -89,7 +103,12 @@ class PrefixLengthController extends _$PrefixLengthController {
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.prefixLength) ?? 0;
     String unit = S.current.digits;
-    return TextEditingController(text: '$text$unit');
+    TextEditingController controller =
+        TextEditingController(text: '$text$unit');
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   }
 }
 
@@ -99,7 +118,12 @@ class PrefixStartController extends _$PrefixStartController {
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.prefixStart) ?? 0;
     String unit = S.current.start;
-    return TextEditingController(text: '$text$unit');
+    TextEditingController controller =
+        TextEditingController(text: '$text$unit');
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   }
 }
 
@@ -110,6 +134,9 @@ class SuffixController extends _$SuffixController {
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       ref.read(suffixClearProvider.notifier).update(controller.text.isNotEmpty);
+    });
+    ref.onDispose(() {
+      controller.dispose();
     });
     return controller;
   }
@@ -128,7 +155,12 @@ class SuffixLengthController extends _$SuffixLengthController {
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.suffixLength) ?? 0;
     String unit = S.current.digits;
-    return TextEditingController(text: '$text$unit');
+    TextEditingController controller =
+        TextEditingController(text: '$text$unit');
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   }
 }
 
@@ -138,7 +170,12 @@ class SuffixStartController extends _$SuffixStartController {
   TextEditingController build() {
     int text = StorageUtil.getInt(AppKeys.suffixStart) ?? 0;
     String unit = S.current.start;
-    return TextEditingController(text: '$text$unit');
+    TextEditingController controller =
+        TextEditingController(text: '$text$unit');
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   }
 }
 
@@ -151,6 +188,9 @@ class ExtensionController extends _$ExtensionController {
       ref
           .read(extensionClearProvider.notifier)
           .update(controller.text.isNotEmpty);
+    });
+    ref.onDispose(() {
+      controller.dispose();
     });
     return controller;
   }
@@ -172,6 +212,9 @@ class TargetController extends _$TargetController {
     controller.addListener(() {
       ref.read(targetClearProvider.notifier).update(controller.text.isNotEmpty);
     });
+    ref.onDispose(() {
+      controller.dispose();
+    });
     return controller;
   }
 }
@@ -181,4 +224,16 @@ class TargetClear extends _$TargetClear {
   @override
   bool build() => StorageUtil.getString(AppKeys.targetFolder) != null;
   void update(bool value) => state = value;
+}
+
+@riverpod
+class ScrollBarController extends _$ScrollBarController {
+  @override
+  ScrollController build() {
+    ScrollController controller = ScrollController();
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
+  }
 }

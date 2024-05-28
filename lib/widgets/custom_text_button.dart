@@ -31,7 +31,7 @@ class CustomTextButton extends StatelessWidget {
             child: Center(
               child: Text(
                 label,
-                style: style ?? const TextStyle(color: AppColors.select),
+                style: style ?? const TextStyle(color: AppColors.primary),
               ),
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/widgets/custom_chip.dart';
 
 class DifferMenu extends ConsumerWidget {

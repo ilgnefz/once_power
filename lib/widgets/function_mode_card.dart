@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 
-class ModeCard extends ConsumerWidget {
-  const ModeCard({super.key, required this.label, required this.mode});
+class FunctionModeTab extends ConsumerWidget {
+  const FunctionModeTab({super.key, required this.label, required this.mode});
 
   final String label;
   final FunctionMode mode;
@@ -14,11 +14,18 @@ class ModeCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selected = ref.watch(currentModeProvider) == mode;
+    Border? border = selected
+        ? const Border(bottom: BorderSide(color: AppColors.primary, width: 4))
+        : null;
+    TextStyle style = selected
+        ? const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)
+        : const TextStyle(color: AppColors.unselectText);
 
     void toggleMode() {
       FunctionMode before = ref.watch(currentModeProvider);
       if (before == mode) return;
       if (mode == FunctionMode.reserve) {
+        //TODO 如果切换到保留模式，则清空修改和匹配的输入框
         bool matchNotEmpty = ref.watch(matchClearProvider);
         bool modifyNotEmpty = ref.watch(modifyClearProvider);
         if (matchNotEmpty && modifyNotEmpty) {
@@ -39,24 +46,10 @@ class ModeCard extends ConsumerWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           // width: AppNum.modeCardW,
-          margin:
-              const EdgeInsets.symmetric(horizontal: AppNum.modeCardP * 1.5),
-          decoration: BoxDecoration(
-            border: selected
-                ? const Border(
-                    bottom: BorderSide(color: AppColors.select, width: 4))
-                : const Border(),
-          ),
+          margin: const EdgeInsets.symmetric(horizontal: AppNum.modeCardM),
+          decoration: BoxDecoration(border: border),
           alignment: Alignment.center,
-          child: Text(
-            label,
-            style: selected
-                ? const TextStyle(
-                    color: AppColors.select,
-                    fontWeight: FontWeight.bold,
-                  )
-                : const TextStyle(color: AppColors.unselectText),
-          ),
+          child: Text(label, style: style),
         ),
       ),
     );

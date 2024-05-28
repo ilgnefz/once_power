@@ -56,7 +56,7 @@
   "saveLog": "保存日志",
   "selectTargetFolder": "选择目标文件夹",
   "deleteEmptyFolder": "删除空文件夹",
-  "organizeFolder": "整理文件夹",
+  "organizeFolder": "整理功能",
   "organizeDesc": "整理文件",
   "enableSaveConfig": "已开启保存配置",
   "closeSaveConfig": "未开启保存配置",
@@ -101,5 +101,7 @@
   "organizingFailed": "整理失败",
   "organizedSuccessfullyInfo":"已成功移动所有文件",
   "organizingFailedInfo": "以下几个移动失败",
-  "restartTip": "重启生效"
+  "restartTip": "重启生效",
+  "imageViewMode": "图像查看模式",
+  "fileCount": "{count} 个文件"
 }

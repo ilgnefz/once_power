@@ -5,10 +5,10 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/input/base_input.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
@@ -60,7 +60,7 @@ class UploadInput extends ConsumerWidget {
         ),
         child: ClickIcon(
           icon: Icons.upload_file_rounded,
-          color: AppColors.select,
+          color: AppColors.primary,
           onTap: uploadFile,
         ),
       ),

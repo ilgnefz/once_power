@@ -5,21 +5,21 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 
-class EnableOrganize extends ConsumerStatefulWidget {
-  const EnableOrganize({super.key});
+class EnableOrganizeCheckbox extends ConsumerStatefulWidget {
+  const EnableOrganizeCheckbox({super.key});
 
   @override
-  ConsumerState<EnableOrganize> createState() => _EnableOrganizeState();
+  ConsumerState<EnableOrganizeCheckbox> createState() => _EnableOrganizeState();
 }
 
-class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
+class _EnableOrganizeState extends ConsumerState<EnableOrganizeCheckbox> {
   Color color = Colors.grey;
 
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.selected,
-      MaterialState.focused,
-      MaterialState.pressed,
+  Color getColor(Set<WidgetState> states) {
+    const Set<WidgetState> interactiveStates = <WidgetState>{
+      WidgetState.selected,
+      WidgetState.focused,
+      WidgetState.pressed,
     };
     if (states.any(interactiveStates.contains)) return color;
     return Colors.transparent;
@@ -31,8 +31,8 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
   }
 
   void onChange() {
-    ref.read(enableArrangeProvider.notifier).update();
-    bool enable = ref.read(enableArrangeProvider);
+    ref.read(enableOrganizeProvider.notifier).update();
+    bool enable = ref.read(enableOrganizeProvider);
     FunctionMode currentMode = ref.watch(currentModeProvider);
     FunctionMode mode = enable
         ? FunctionMode.organize
@@ -56,9 +56,12 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganize> {
             child: FittedBox(
               fit: BoxFit.fill,
               child: Checkbox(
-                value: ref.watch(enableArrangeProvider),
-                fillColor: MaterialStateProperty.resolveWith(getColor),
-                side: BorderSide(color: color, width: 2),
+                value: ref.watch(enableOrganizeProvider),
+                fillColor: WidgetStateProperty.resolveWith(getColor),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                side: BorderSide(color: color, width: 1),
                 onChanged: (v) => onChange(),
               ),
             ),

@@ -1079,6 +1079,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Image view mode`
+  String get imageViewMode {
+    return Intl.message(
+      'Image view mode',
+      name: 'imageViewMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} files`
+  String fileCount(Object count) {
+    return Intl.message(
+      '$count files',
+      name: 'fileCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

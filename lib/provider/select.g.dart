@@ -268,22 +268,22 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
-String _$enableArrangeHash() => r'a0391bcf747b94ac0663f85d68d7a18233894055';
+String _$enableOrganizeHash() => r'9250ecf0fb8247ac48ca1c7b3796da1ba25ffe42';
 
-/// See also [EnableArrange].
-@ProviderFor(EnableArrange)
-final enableArrangeProvider =
-    AutoDisposeNotifierProvider<EnableArrange, bool>.internal(
-  EnableArrange.new,
-  name: r'enableArrangeProvider',
+/// See also [EnableOrganize].
+@ProviderFor(EnableOrganize)
+final enableOrganizeProvider =
+    AutoDisposeNotifierProvider<EnableOrganize, bool>.internal(
+  EnableOrganize.new,
+  name: r'enableOrganizeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$enableArrangeHash,
+      : _$enableOrganizeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EnableArrange = AutoDisposeNotifier<bool>;
+typedef _$EnableOrganize = AutoDisposeNotifier<bool>;
 String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
 
 /// See also [SaveLog].
@@ -327,5 +327,34 @@ final maxWindowProvider = AutoDisposeNotifierProvider<MaxWindow, bool>.internal(
 );
 
 typedef _$MaxWindow = AutoDisposeNotifier<bool>;
+String _$showTextTipHash() => r'edadcbe0374b099638b25a35258238483ebe1fa6';
+
+/// See also [ShowTextTip].
+@ProviderFor(ShowTextTip)
+final showTextTipProvider =
+    AutoDisposeNotifierProvider<ShowTextTip, bool>.internal(
+  ShowTextTip.new,
+  name: r'showTextTipProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$showTextTipHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ShowTextTip = AutoDisposeNotifier<bool>;
+String _$imageViewHash() => r'65c82c9800bfc82bcff194216c79b3a5536dd46a';
+
+/// See also [ImageView].
+@ProviderFor(ImageView)
+final imageViewProvider = AutoDisposeNotifierProvider<ImageView, bool>.internal(
+  ImageView.new,
+  name: r'imageViewProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$imageViewHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ImageView = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

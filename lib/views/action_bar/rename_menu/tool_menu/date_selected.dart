@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 
 final List<DateType> dateTypeList = [
   DateType.createdDate,
@@ -51,8 +51,8 @@ class DateSelected extends ConsumerWidget {
           ),
           scrollbarTheme: ScrollbarThemeData(
             radius: const Radius.circular(40),
-            thickness: MaterialStateProperty.all(2),
-            thumbVisibility: MaterialStateProperty.all(true),
+            thickness: WidgetStateProperty.all(2),
+            thumbVisibility: WidgetStateProperty.all(true),
           ),
         ),
         menuItemStyleData: const MenuItemStyleData(

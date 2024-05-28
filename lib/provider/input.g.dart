@@ -6,7 +6,7 @@ part of 'input.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$matchControllerHash() => r'ab083887890691c536d5e703dc65c44447006039';
+String _$matchControllerHash() => r'8a1f56ffac12cacc03fb780b1eb2dd32184661e5';
 
 /// See also [MatchController].
 @ProviderFor(MatchController)
@@ -37,7 +37,7 @@ final matchClearProvider =
 );
 
 typedef _$MatchClear = AutoDisposeNotifier<bool>;
-String _$modifyControllerHash() => r'd28c6f606d13a11279a4b33c1a07530a2e515a49';
+String _$modifyControllerHash() => r'0e262b876d041b2976e3204c9a02e89c40826255';
 
 /// See also [ModifyController].
 @ProviderFor(ModifyController)
@@ -69,7 +69,7 @@ final modifyClearProvider =
 
 typedef _$ModifyClear = AutoDisposeNotifier<bool>;
 String _$dateLengthControllerHash() =>
-    r'c28efaa4e94025669f187cfef20f79cc1efbe5d2';
+    r'595e429f00f9c1c9ff88115a9f8a29cba5391a27';
 
 /// See also [DateLengthController].
 @ProviderFor(DateLengthController)
@@ -85,7 +85,7 @@ final dateLengthControllerProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$DateLengthController = AutoDisposeNotifier<TextEditingController>;
-String _$prefixControllerHash() => r'9f6ff9c6e7d31616eff882f566327abeb66152c9';
+String _$prefixControllerHash() => r'f5c1a21c6c95f91f9e186c57c8c126b7469b8fb8';
 
 /// See also [PrefixController].
 @ProviderFor(PrefixController)
@@ -117,7 +117,7 @@ final prefixClearProvider =
 
 typedef _$PrefixClear = AutoDisposeNotifier<bool>;
 String _$prefixLengthControllerHash() =>
-    r'18d0c6150412a4ce309f6dd91558d38a3f4174c7';
+    r'd80ab9d5883ac69f8f8360ff2bb86ccab4ff829c';
 
 /// See also [PrefixLengthController].
 @ProviderFor(PrefixLengthController)
@@ -134,7 +134,7 @@ final prefixLengthControllerProvider = AutoDisposeNotifierProvider<
 
 typedef _$PrefixLengthController = AutoDisposeNotifier<TextEditingController>;
 String _$prefixStartControllerHash() =>
-    r'5b114504adc968f4a711b3eab9194610bd8a451d';
+    r'90d4e2d12992758aeb877e04b76106280ff49972';
 
 /// See also [PrefixStartController].
 @ProviderFor(PrefixStartController)
@@ -150,7 +150,7 @@ final prefixStartControllerProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$PrefixStartController = AutoDisposeNotifier<TextEditingController>;
-String _$suffixControllerHash() => r'9ca7f47f584a0da01a8cc304c0ca1a81a2c04d59';
+String _$suffixControllerHash() => r'609c9978969722a8dd07d0cbc53ce08fbd6e34b9';
 
 /// See also [SuffixController].
 @ProviderFor(SuffixController)
@@ -182,7 +182,7 @@ final suffixClearProvider =
 
 typedef _$SuffixClear = AutoDisposeNotifier<bool>;
 String _$suffixLengthControllerHash() =>
-    r'b3a92bd8a7f4835db71be031b1098e1860b7049a';
+    r'c0d60727c7d58b008adb330c87b339ea95b7eb11';
 
 /// See also [SuffixLengthController].
 @ProviderFor(SuffixLengthController)
@@ -199,7 +199,7 @@ final suffixLengthControllerProvider = AutoDisposeNotifierProvider<
 
 typedef _$SuffixLengthController = AutoDisposeNotifier<TextEditingController>;
 String _$suffixStartControllerHash() =>
-    r'700568d9b1c545285f2687d2b743921b1d14af22';
+    r'4b3514415ae881183ec3249cb4ec2189fb6f4414';
 
 /// See also [SuffixStartController].
 @ProviderFor(SuffixStartController)
@@ -216,7 +216,7 @@ final suffixStartControllerProvider = AutoDisposeNotifierProvider<
 
 typedef _$SuffixStartController = AutoDisposeNotifier<TextEditingController>;
 String _$extensionControllerHash() =>
-    r'3953cda088e2adf41661075d59204a7eef545bbc';
+    r'51358c5b263a331540c63f9bfca7fc91ff4585ae';
 
 /// See also [ExtensionController].
 @ProviderFor(ExtensionController)
@@ -248,7 +248,7 @@ final extensionClearProvider =
 );
 
 typedef _$ExtensionClear = AutoDisposeNotifier<bool>;
-String _$targetControllerHash() => r'5bc93507bce00fa04ef5f6b607b9b17fb7480825';
+String _$targetControllerHash() => r'fe7efb71d20437915a6c5e30cbdd856be31545db';
 
 /// See also [TargetController].
 @ProviderFor(TargetController)
@@ -279,5 +279,22 @@ final targetClearProvider =
 );
 
 typedef _$TargetClear = AutoDisposeNotifier<bool>;
+String _$scrollBarControllerHash() =>
+    r'afb7096a8881ba1089a0e1677ad6e8e3ab2ddb05';
+
+/// See also [ScrollBarController].
+@ProviderFor(ScrollBarController)
+final scrollBarControllerProvider =
+    AutoDisposeNotifierProvider<ScrollBarController, ScrollController>.internal(
+  ScrollBarController.new,
+  name: r'scrollBarControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$scrollBarControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ScrollBarController = AutoDisposeNotifier<ScrollController>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

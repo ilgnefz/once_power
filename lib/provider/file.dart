@@ -2,7 +2,7 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/types.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file.g.dart';

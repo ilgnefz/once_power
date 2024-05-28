@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/rename.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/widgets/input/input.dart';
 
 class FileExtensionInput extends ConsumerWidget {

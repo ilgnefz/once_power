@@ -29,11 +29,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(count, total) =>
       "${count} out of ${total} selected renames failed";
 
-  static String m4(version) => "New version ${version} can be updated";
+  static String m4(count) => "${count} files";
 
-  static String m5(name) => "No longer exists in ${name}";
+  static String m5(version) => "New version ${version} can be updated";
 
-  static String m6(total) =>
+  static String m6(name) => "No longer exists in ${name}";
+
+  static String m7(total) =>
       "All ${total} selected items have been successfully renamed";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -88,12 +90,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedNum": m3,
         "failureInfo": MessageLookupByLibrary.simpleMessage(
             "Failed to delete empty folder"),
+        "fileCount": m4,
         "fileExtension": MessageLookupByLibrary.simpleMessage("FileExtension"),
         "fileExtensionDesc":
             MessageLookupByLibrary.simpleMessage("New file extension"),
         "fileName": MessageLookupByLibrary.simpleMessage("File name"),
         "folder": MessageLookupByLibrary.simpleMessage("Folder"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
+        "imageViewMode":
+            MessageLookupByLibrary.simpleMessage("Image view mode"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
@@ -111,11 +116,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
         "moveError": MessageLookupByLibrary.simpleMessage("Moving error"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("Move failed"),
-        "newVersionInfo": m4,
+        "newVersionInfo": m5,
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(
             "Currently in the latest version"),
         "notExist": MessageLookupByLibrary.simpleMessage("not exist"),
-        "notExistsError": m5,
+        "notExistsError": m6,
         "openFolder": MessageLookupByLibrary.simpleMessage("Open Folder"),
         "openFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Double-click on the list of files on the right to quickly open the folder where the file is located"),
@@ -155,7 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Successfully deleted all empty folders"),
         "successful":
             MessageLookupByLibrary.simpleMessage("Renaming successful"),
-        "successfulNum": m6,
+        "successfulNum": m7,
         "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
         "suffixContent":
             MessageLookupByLibrary.simpleMessage("Add suffix content"),

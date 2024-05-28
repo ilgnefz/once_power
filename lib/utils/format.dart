@@ -33,3 +33,8 @@ int getNum(String value) {
   if (match != null) return int.parse(match.group(0)!);
   return 0;
 }
+
+String fileName(String name, String extension) {
+  if (extension == '' || extension == 'dir') return name;
+  return '$name.$extension';
+}

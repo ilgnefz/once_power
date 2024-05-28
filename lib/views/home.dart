@@ -3,7 +3,7 @@ import 'package:once_power/config/global.dart';
 import 'package:once_power/views/action_bar/action_bar.dart';
 import 'package:once_power/views/bottom_bar/bottom_bar.dart';
 import 'package:once_power/views/content_bar/content_bar.dart';
-import 'package:once_power/views/top_bar.dart';
+import 'package:once_power/views/top_title_bar.dart';
 import 'package:window_manager/window_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WindowListener {
+  void _init() async {
+    await windowManager.setPreventClose(true);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -25,11 +30,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
   void dispose() {
     windowManager.removeListener(this);
     super.dispose();
-  }
-
-  void _init() async {
-    await windowManager.setPreventClose(true);
-    setState(() {});
   }
 
   @override
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
       body: DragToResizeArea(
         child: Column(
           children: [
-            TopBar(),
+            TopTitleBar(),
             Expanded(child: Row(children: [ActionBar(), ContentBar()])),
             BottomBar(),
           ],

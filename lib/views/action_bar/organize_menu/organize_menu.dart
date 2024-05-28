@@ -2,11 +2,10 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/file.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/custom_text_button.dart';
 import 'package:once_power/widgets/custom_checkbox.dart';
 import 'package:once_power/widgets/input/base_input.dart';
@@ -43,9 +42,7 @@ class OrganizeMenu extends ConsumerWidget {
     void addFile() async {
       final List<XFile> files = await openFiles();
       if (!append) ref.read(fileListProvider.notifier).clear();
-      if (files.isNotEmpty) {
-        formatXFile(ref, files);
-      }
+      if (files.isNotEmpty) formatXFile(ref, files);
     }
 
     void addFolder() async {
@@ -92,7 +89,7 @@ class OrganizeMenu extends ConsumerWidget {
             ),
             const Spacer(),
             CustomTextButton(addFileText, onTap: addFile),
-            const SizedBox(height: AppNum.gapW),
+            const SizedBox(width: AppNum.gapW),
             CustomTextButton(addFolderText, onTap: addFolder),
           ],
         ),

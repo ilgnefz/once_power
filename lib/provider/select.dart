@@ -185,7 +185,7 @@ bool selectZip(SelectZipRef ref) {
 }
 
 @riverpod
-class EnableArrange extends _$EnableArrange {
+class EnableOrganize extends _$EnableOrganize {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
   Future<void> update() async {
@@ -213,6 +213,20 @@ class NewVersion extends _$NewVersion {
 
 @riverpod
 class MaxWindow extends _$MaxWindow {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class ShowTextTip extends _$ShowTextTip {
+  @override
+  bool build() => false;
+  void update() => state = true;
+}
+
+@riverpod
+class ImageView extends _$ImageView {
   @override
   bool build() => false;
   void update() => state = !state;

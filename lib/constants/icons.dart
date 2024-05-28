@@ -12,6 +12,8 @@ class AppIcons {
   static const String error = '${basePath}error.svg';
   static const String gitee = '${basePath}gitee.svg';
   static const String github = '${basePath}github.svg';
+  static const String image = '${basePath}image.svg';
+  static const String log = '${basePath}log.svg';
   static const String maximize = '${basePath}maximize.svg';
   static const String minimize = '${basePath}minimize.svg';
   static const String nameAscending = '${basePath}name-ascending.svg';

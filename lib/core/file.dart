@@ -7,10 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
+
+import 'core.dart';
 
 void formatXFile(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
@@ -134,4 +135,27 @@ Future<DateTime?> getExifDate(String filePath) async {
   if (dateTime == '') return null;
   Log.i('$filePath拍摄日期: ${formatExifDate(dateTime)}');
   return formatExifDate(dateTime);
+}
+
+void selectAll(WidgetRef ref) {
+  ref.read(selectAllProvider.notifier).update();
+  updateName(ref);
+  updateExtension(ref);
+}
+
+void toggleSortType(WidgetRef ref) {
+  int index = SortType.values.indexOf(ref.read(fileSortTypeProvider));
+  ++index;
+  if (index > SortType.values.length - 1) index = 0;
+  SortType type = SortType.values[index];
+  ref.read(fileSortTypeProvider.notifier).update(type);
+  updateName(ref);
+  updateExtension(ref);
+}
+
+void deleteAll(WidgetRef ref) {
+  ref.read(fileListProvider.notifier).clear();
+  ref.read(countProvider.notifier).clear();
+  ref.read(totalProvider.notifier).clear();
+  ref.read(costProvider.notifier).clear();
 }

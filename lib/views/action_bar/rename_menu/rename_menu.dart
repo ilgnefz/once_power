@@ -17,7 +17,7 @@ class RenameMenu extends StatelessWidget {
       children: [
         const Expanded(child: SingleChildScrollView(child: ToolMenu())),
         Consumer(
-          builder: (context, ref, child) => Row(
+          builder: (context, ref, _) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomCheckbox(

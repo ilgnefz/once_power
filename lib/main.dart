@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         localeResolutionCallback: (locale, supportedLocales) {
           return LanguageConfig.localeResolutionCallback(
             context,
-            locale,
+            locale!,
             supportedLocales,
           );
         },

@@ -101,5 +101,7 @@
   "organizingFailed": "Organizing failed",
   "organizedSuccessfullyInfo":"Successfully moved all files",
   "organizingFailedInfo": "The following moves failed",
-  "restartTip": "Restart takes effect"
+  "restartTip": "Restart takes effect",
+  "imageViewMode": "Image view mode",
+  "fileCount": "{count} files"
 }
