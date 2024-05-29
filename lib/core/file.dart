@@ -64,9 +64,7 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   ref.read(countProvider.notifier).update(count);
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
-  if (isViewMode &&
-      fileInfo.type != FileClassify.video &&
-      fileInfo.type != FileClassify.image) return;
+  if (isViewMode && fileInfo.type != FileClassify.image) return;
   ref.read(fileListProvider.notifier).add(fileInfo);
 
   if (mode == FunctionMode.organize) {

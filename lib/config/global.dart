@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:video_player_media_kit/video_player_media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Global {
@@ -14,12 +13,6 @@ class Global {
     saveOrNo();
 
     await windowManager.ensureInitialized();
-
-    VideoPlayerMediaKit.ensureInitialized(
-      macOS: true,
-      windows: true,
-      linux: true,
-    );
 
     WindowOptions windowOptions = const WindowOptions(
       size: Size(1016, 616),

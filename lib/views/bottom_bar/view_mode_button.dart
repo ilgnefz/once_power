@@ -22,7 +22,7 @@ class ViewModeButton extends ConsumerWidget {
       if (!isViewMode) {
         ref
             .read(fileListProvider.notifier)
-            .removeOtherClassify([FileClassify.image, FileClassify.video]);
+            .removeOtherClassify(FileClassify.image);
       }
       ref.read(viewModeProvider.notifier).update();
     }

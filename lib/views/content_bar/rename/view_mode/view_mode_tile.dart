@@ -4,7 +4,6 @@ import 'package:once_power/model/model.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/content_bar/rename/view_mode/image_view.dart';
 
-import 'video_view.dart';
 import 'preview_view.dart';
 
 class ViewModeTile extends StatelessWidget {
@@ -14,17 +13,10 @@ class ViewModeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FileClassify classify = file.type;
-
     void previewView() {
       showDialog(
         context: context,
-        builder: (context) {
-          if (classify == FileClassify.image) {
-            return PreviewImageView(file.filePath);
-          }
-          return PreviewVideoView(file.filePath);
-        },
+        builder: (context) => PreviewImageView(file.filePath),
       );
     }
 
@@ -36,11 +28,7 @@ class ViewModeTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: classify == FileClassify.image
-                    ? ImageView(file: file, key: ValueKey(file.id))
-                    : VideoView(file: file, key: ValueKey(file.id)),
-              ),
+              Expanded(child: ImageView(file: file, key: ValueKey(file.id))),
               const SizedBox(height: 4),
               Text(
                 fileName(file.newName, file.newExtension),
