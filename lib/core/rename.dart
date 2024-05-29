@@ -2,8 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/format.dart';
+import 'package:once_power/utils/log.dart';
+import 'package:once_power/utils/type.dart';
 
 import 'mode.dart';
+
+// Map<String, Map<String, List<String>>> map = {
+//     "today": {"jpg": [], "mp4": []},
+//     "yesterday": {"jpg": [], "mp4": []},
+//   };
+typedef DateFormatMap = Map<String, Map<String, List<String>>>;
 
 void updateExtension(dynamic ref) {
   List<FileInfo> files = ref.read(fileListProvider);
@@ -20,22 +28,37 @@ void updateExtension(dynamic ref) {
   }
 }
 
-int actualIndex(
-    dynamic ref, List<Map<String, List<String>>> array, FileInfo file) {
+int actualIndex(dynamic ref, DateFormatMap dfMap, FileInfo file) {
+  Log.i(dfMap.toString());
+  // 默认 index 为 0
   int index = 0;
+  // 获取日期名称
   String dateText = dateName(ref, file);
-  List<String> keyList = array.map((e) => e.keys.first).toList();
-  if (keyList.contains(dateText)) {
-    Map<String, List<String>> map = array.firstWhere(
-      (e) => e.keys.first == dateText,
-    );
-    List<String> fileList = map.values.first;
-
-    index += fileList.length;
-    map[dateText]?.add(file.name);
+  // 获取列表中的所有以日期为名的 key
+  List<String> dateKeyList = dfMap.keys.toList();
+  // 获取当前文件的格式分类名称
+  String extensionName = getFileClassifyName(file.extension);
+  // 如果获取的日期列表中包含了当前的日期
+  if (dateKeyList.contains(dateText)) {
+    // 获取当前日期下的多有格式分类
+    List<String> extensionList = dfMap[dateText]!.keys.toList();
+    // 查看日期下是否有当前分类
+    if (extensionList.contains(extensionName)) {
+      // 如果有当前分类就获取文件的长度并将该文件添加到数组中
+      List<String>? fileNameList = dfMap[dateText]![extensionName];
+      index += fileNameList!.length;
+      fileNameList.add(file.name);
+    } else {
+      // 如果没有当前分类就添加当前分类并添加文件到数组中
+      dfMap[dateText]?.addAll({
+        extensionName: [file.name]
+      });
+    }
   } else {
-    array.add({
-      dateText: [file.name]
+    dfMap.addAll({
+      dateText: {
+        extensionName: [file.name]
+      }
     });
   }
   return index;
@@ -50,11 +73,13 @@ void updateName(dynamic ref) {
   // int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
   int suffixIndex = getNum(suffixIndexText);
   int fileIndex = 0;
-  List<Map<String, List<String>>> fileArray = [];
+  // 文件列表，用来存储日期和文件名
+  DateFormatMap dfMap = {};
   bool dateRename = ref.watch(dateRenameProvider);
   for (var file in files) {
     if (file.checked) {
-      int actualFileIndex = dateRename ? actualIndex(ref, fileArray, file) : 0;
+      // 实际索引 = 以日期命名 ?  : 0;
+      int actualFileIndex = dateRename ? actualIndex(ref, dfMap, file) : 0;
       int actualPrefixIndex = prefixIndex + actualFileIndex;
       int actualSuffixIndex = suffixIndex + actualFileIndex;
       String newName = matchContent(
