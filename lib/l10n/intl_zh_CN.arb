@@ -58,7 +58,7 @@
   "saveLog": "保存日志",
   "selectTargetFolder": "选择目标文件夹",
   "deleteEmptyFolder": "删除空文件夹",
-  "organizeFolder": "整理功能",
+  "organizeFolder": "整理文件夹",
   "organizeDesc": "整理文件",
   "enableSaveConfig": "已开启保存配置",
   "closeSaveConfig": "未开启保存配置",

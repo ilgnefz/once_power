@@ -109,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("双击右边文件列表，可以快速打开文件所在文件夹"),
         "organize": MessageLookupByLibrary.simpleMessage("整理"),
         "organizeDesc": MessageLookupByLibrary.simpleMessage("整理文件"),
-        "organizeFolder": MessageLookupByLibrary.simpleMessage("整理功能"),
+        "organizeFolder": MessageLookupByLibrary.simpleMessage("整理文件夹"),
         "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
             "将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内"),
         "organizeLogs": MessageLookupByLibrary.simpleMessage("整理日志"),
