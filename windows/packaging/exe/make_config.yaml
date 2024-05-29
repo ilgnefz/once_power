@@ -5,4 +5,5 @@ display_name: OncePower
 create_desktop_icon: true
 install_dir_name: OncePower
 locales:
+  - en
   - zh

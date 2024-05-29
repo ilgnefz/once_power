@@ -2,10 +2,9 @@
 
 [简体中文](README.md) | English
 
-OncePower is a file management tool that currently only has three functions: batch renaming files and folders (batch modification of file extensions), batch moving files, and batch deleting empty folders.
+OncePower is a file batch renaming tool that adds the ability to batch delete empty folders and move files.
 
-This software is developed using Flutter and can easily cross multiple platforms. At present, version 2.0 has been migrated from Provider to Riverpod, with overall refactoring and redesigned UI, resulting in a more concise UI.
-
+The original intention of software development was to batch rename images, so the new version has updated a new feature specifically for image renaming —— **View Mode**.
 > [!Tip]
 >
 > Due to the difficulty of recording GIFs, only dynamic diagrams in Chinese are available. If you do not understand, you can open the software and refer to the pictures to learn and use them
@@ -19,6 +18,22 @@ This software is developed using Flutter and can easily cross multiple platforms
 - **Windows**
 - **macOS**(You need to pack it yourself. For details, please refer to **Packaging**)
 - **Linux**(You need to pack it yourself. For details, please refer to **Packaging**)
+
+# New Feature
+
+## View Mode
+
+In view mode, you can directly view images for sorting. To enable view mode, simply switch to the bottom left corner.
+
+![11](doc/11.gif)
+
+In view mode, long press the image to drag and sort it.
+
+![12](doc/12.gif)
+
+Right click on the image to switch between selected and deleted states.
+
+![13](doc/13.gif)
 
 # Quick Start
 
