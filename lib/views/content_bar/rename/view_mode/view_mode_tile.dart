@@ -48,6 +48,8 @@ class ViewModeTile extends StatelessWidget {
                   fontSize: AppNum.tileFontSize,
                   color: file.checked ? Colors.black : Colors.grey,
                 ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
               ),
             ],

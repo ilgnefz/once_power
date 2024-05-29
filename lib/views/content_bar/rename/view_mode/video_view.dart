@@ -49,7 +49,7 @@ class _VideoViewState extends State<VideoView> {
             alignment: Alignment.center,
             child: Icon(
               Icons.play_circle_outline_rounded,
-              size: 32,
+              size: 28,
               color: Colors.white,
               shadows: [
                 BoxShadow(
