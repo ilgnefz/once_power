@@ -15,7 +15,7 @@ The original intention of software development was to batch rename images, so th
 
 # Platform Support
 
-- **Windows**
+- **Windows**(Support system versions of Win10 and above)
 - **macOS**(You need to pack it yourself. For details, please refer to **Packaging**)
 - **Linux**(You need to pack it yourself. For details, please refer to **Packaging**)
 
@@ -23,7 +23,7 @@ The original intention of software development was to batch rename images, so th
 
 ## View Mode
 
-In view mode, you can directly view images for sorting. To enable view mode, simply switch to the bottom left corner.
+In view mode, you can directly view images for sorting. To enable view mode, simply switch to the bottom left corner (Switching to View Mode will automatically delete files other than images).
 
 ![11](doc/11.gif)
 
