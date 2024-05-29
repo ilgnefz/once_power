@@ -23,5 +23,7 @@ class AppIcons {
   static const String sort = '${basePath}sort.svg';
   static const String success = '${basePath}success.svg';
   static const String swap = '${basePath}swap.svg';
+  static const String typeAscending = '${basePath}type-ascending.svg';
+  static const String typeDescending = '${basePath}type-descending.svg';
   static const String unmaximize = '${basePath}unmaximize.svg';
 }

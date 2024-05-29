@@ -106,6 +106,14 @@ List<FileInfo> sortList(SortListRef ref) {
           return result == 0 ? b.name.compareTo(a.name) : result;
         });
       break;
+    case SortType.typeDescending:
+      sortedList = [...list]
+        ..sort((a, b) => a.extension.compareTo(b.extension));
+      break;
+    case SortType.typeAscending:
+      sortedList = [...list]
+        ..sort((a, b) => b.extension.compareTo(a.extension));
+      break;
     case SortType.checkDescending:
       sortedList = [...list]..sort((a, b) {
           if (a.checked == b.checked) return 0;

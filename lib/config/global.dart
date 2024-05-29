@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:video_player_media_kit/video_player_media_kit.dart';

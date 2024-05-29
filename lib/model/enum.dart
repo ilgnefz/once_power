@@ -82,6 +82,8 @@ enum SortType {
   nameAscending,
   dateDescending,
   dateAscending,
+  typeDescending,
+  typeAscending,
   checkDescending,
   checkAscending
 }
@@ -99,6 +101,10 @@ extension SortTypeExtension on SortType {
         return AppIcons.dateDescending;
       case SortType.dateAscending:
         return AppIcons.dateAscending;
+      case SortType.typeDescending:
+        return AppIcons.typeDescending;
+      case SortType.typeAscending:
+        return AppIcons.typeAscending;
       case SortType.checkDescending:
         return AppIcons.checkDescending;
       case SortType.checkAscending:
