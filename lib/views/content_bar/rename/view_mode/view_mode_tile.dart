@@ -1,45 +1,45 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/model/file_info.dart';
+import 'package:once_power/model/model.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/content_bar/rename/image_view/err_image.dart';
+import 'package:once_power/views/content_bar/rename/view_mode/image_view.dart';
 
-import 'image_preview.dart';
+import 'video_view.dart';
+import 'preview_view.dart';
 
-class ImageViewTile extends StatelessWidget {
-  const ImageViewTile(this.file, {super.key});
+class ViewModeTile extends StatelessWidget {
+  const ViewModeTile(this.file, {super.key});
 
   final FileInfo file;
 
   @override
   Widget build(BuildContext context) {
-    void showImage() {
+    FileClassify classify = file.type;
+
+    void previewView() {
       showDialog(
         context: context,
-        builder: (context) => ImagePreview(file.filePath),
+        builder: (context) {
+          if (classify == FileClassify.image) {
+            return PreviewImageView(file.filePath);
+          }
+          return PreviewVideoView(file.filePath);
+        },
       );
     }
 
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onDoubleTap: showImage,
+        onDoubleTap: previewView,
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Image.file(
-                  File(file.filePath),
-                  fit: BoxFit.contain,
-                  color: file.checked ? null : Colors.grey,
-                  colorBlendMode: BlendMode.saturation,
-                  cacheWidth: AppNum.imageW,
-                  errorBuilder: (context, exception, stackTrace) =>
-                      const ErrorImage(),
-                ),
+                child: classify == FileClassify.image
+                    ? ImageView(file: file, key: ValueKey(file.id))
+                    : VideoView(file: file, key: ValueKey(file.id)),
               ),
               const SizedBox(height: 4),
               Text(

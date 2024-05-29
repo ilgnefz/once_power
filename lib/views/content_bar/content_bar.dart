@@ -7,15 +7,15 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/views/content_bar/rename/image_view/image_grid_view.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
 
 import 'empty.dart';
 import 'arrange/arrange_file_tile.dart';
 import 'arrange/arrange_title_bar.dart';
-import 'rename/image_view/image_view_title_bar.dart';
 import 'rename/rename_file_tile.dart';
 import 'rename/rename_title_bar.dart';
+import 'rename/view_mode/view_grid_view.dart';
+import 'rename/view_mode/view_mode_title_bar.dart';
 
 class ContentBar extends ConsumerWidget {
   const ContentBar({super.key});
@@ -25,7 +25,7 @@ class ContentBar extends ConsumerWidget {
     List<FileInfo> files = ref.watch(sortListProvider);
     FunctionMode mode = ref.watch(currentModeProvider);
     bool isOrganize = mode == FunctionMode.organize;
-    bool isImageView = ref.watch(imageViewProvider);
+    bool isViewMode = ref.watch(viewModeProvider);
 
     void dropAdd(DropDoneDetails details) {
       List<XFile> files = details.files;
@@ -63,8 +63,8 @@ class ContentBar extends ConsumerWidget {
               height: AppNum.fileCardH,
               child: isOrganize
                   ? const ArrangeTitleBar()
-                  : isImageView
-                      ? const ImageViewTitleBar()
+                  : isViewMode
+                      ? const ViewModeTitleBar()
                       : const RenameTitleBar(),
             ),
             Expanded(
@@ -72,7 +72,7 @@ class ContentBar extends ConsumerWidget {
                 onDragDone: dropAdd,
                 child: BuildListView(
                   files: files,
-                  isImageView: isImageView,
+                  isViewMode: isViewMode,
                   isOrganize: isOrganize,
                   onReorder: reorderList,
                 ),
@@ -89,20 +89,20 @@ class BuildListView extends ConsumerWidget {
   const BuildListView({
     super.key,
     required this.files,
-    required this.isImageView,
+    required this.isViewMode,
     required this.isOrganize,
     required this.onReorder,
   });
 
   final List<FileInfo> files;
-  final bool isImageView;
+  final bool isViewMode;
   final bool isOrganize;
   final void Function(int, int) onReorder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (files.isEmpty) return const EmptyView();
-    if (isImageView && !isOrganize) return const ImageGridView();
+    if (isViewMode && !isOrganize) return const ViewGridView();
 
     ScrollController controller = ref.watch(scrollBarControllerProvider);
 

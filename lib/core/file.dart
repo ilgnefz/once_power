@@ -40,9 +40,9 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
 
   bool isFile = FileSystemEntity.isFileSync(filePath);
   FunctionMode mode = ref.watch(currentModeProvider);
-  bool isImageView = ref.watch(imageViewProvider);
+  bool isViewMode = ref.watch(viewModeProvider);
 
-  if ((!addFolder || addFolder && isImageView) &&
+  if ((!addFolder || addFolder && isViewMode) &&
       !isFile &&
       mode != FunctionMode.organize) {
     final list = getAllFile(filePath);
@@ -64,7 +64,9 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   ref.read(countProvider.notifier).update(count);
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
-  if (isImageView && fileInfo.type != FileClassify.image) return;
+  if (isViewMode &&
+      fileInfo.type != FileClassify.video &&
+      fileInfo.type != FileClassify.image) return;
   ref.read(fileListProvider.notifier).add(fileInfo);
 
   if (mode == FunctionMode.organize) {

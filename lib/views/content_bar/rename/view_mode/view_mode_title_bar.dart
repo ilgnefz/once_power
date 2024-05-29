@@ -9,8 +9,8 @@ import 'package:once_power/views/content_bar/filter_file_button.dart';
 import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/normal_tile.dart';
 
-class ImageViewTitleBar extends ConsumerWidget {
-  const ImageViewTitleBar({super.key});
+class ViewModeTitleBar extends ConsumerWidget {
+  const ViewModeTitleBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

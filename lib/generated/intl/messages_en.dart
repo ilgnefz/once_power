@@ -98,8 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileName": MessageLookupByLibrary.simpleMessage("File name"),
         "folder": MessageLookupByLibrary.simpleMessage("Folder"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
-        "imageViewMode":
-            MessageLookupByLibrary.simpleMessage("Image view mode"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
         "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
         "lengthDesc": MessageLookupByLibrary.simpleMessage(
@@ -181,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
+        "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "zip": MessageLookupByLibrary.simpleMessage("Zip")
       };

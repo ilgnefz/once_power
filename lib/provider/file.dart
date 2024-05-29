@@ -27,8 +27,11 @@ class FileList extends _$FileList {
 
   void removeUncheck() => state = state.where((e) => e.checked).toList();
 
-  void removeOtherClassify(FileClassify classify) =>
-      state = state = state.where((e) => e.type == classify).toList();
+  void removeOtherClassify(List<FileClassify> list) {
+    state = state = state.where((e) {
+      return e.type == list.first || e.type == list.last;
+    }).toList();
+  }
 
   void checkAll(bool check) => state = state.map((e) {
         if (e.checked != check) e.checked = check;

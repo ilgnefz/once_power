@@ -65,6 +65,14 @@ dependencies:
   tolyui_feedback: ^0.3.4
   vs_scrollbar: ^1.0.0
   extended_text: ^13.0.0
+#  media_kit: ^1.1.10+1
+#  media_kit_video: ^1.2.4
+#  media_kit_libs_video: ^1.0.4
+  video_player_media_kit: ^1.0.5
+  media_kit_libs_macos_video: any
+  media_kit_libs_windows_video: any
+  media_kit_libs_linux: any
+  video_player: ^2.8.6
 
 dev_dependencies:
   flutter_test:

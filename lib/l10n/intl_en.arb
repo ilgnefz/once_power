@@ -103,7 +103,7 @@
   "organizedSuccessfullyInfo":"Successfully moved all files",
   "organizingFailedInfo": "The following moves failed",
   "restartTip": "Restart takes effect",
-  "imageViewMode": "Image view mode",
+  "viewMode": "View mode",
   "fileCount": "{total} files {count} selected",
   "select": "Select",
   "unselect": "Unselect",

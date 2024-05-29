@@ -226,11 +226,11 @@ class ShowTextTip extends _$ShowTextTip {
 }
 
 @riverpod
-class ImageView extends _$ImageView {
+class ViewMode extends _$ViewMode {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isImageView) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isViewMode) ?? false;
   void update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isImageView, state);
+    await StorageUtil.setBool(AppKeys.isViewMode, state);
   }
 }

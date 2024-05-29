@@ -342,19 +342,19 @@ final showTextTipProvider =
 );
 
 typedef _$ShowTextTip = AutoDisposeNotifier<bool>;
-String _$imageViewHash() => r'c3924319eaee9112110b6f5195f456b990ca66ee';
+String _$viewModeHash() => r'5d0f3e933e954d2400aa8dbd84d379d8dd97ca4e';
 
-/// See also [ImageView].
-@ProviderFor(ImageView)
-final imageViewProvider = AutoDisposeNotifierProvider<ImageView, bool>.internal(
-  ImageView.new,
-  name: r'imageViewProvider',
+/// See also [ViewMode].
+@ProviderFor(ViewMode)
+final viewModeProvider = AutoDisposeNotifierProvider<ViewMode, bool>.internal(
+  ViewMode.new,
+  name: r'viewModeProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$imageViewHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$viewModeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ImageView = AutoDisposeNotifier<bool>;
+typedef _$ViewMode = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

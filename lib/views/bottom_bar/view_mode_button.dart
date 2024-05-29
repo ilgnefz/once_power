@@ -9,33 +9,33 @@ import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
-class ImageViewButton extends ConsumerWidget {
-  const ImageViewButton({super.key});
+class ViewModeButton extends ConsumerWidget {
+  const ViewModeButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String imageViewMode = S.of(context).imageViewMode;
+    final String viewMode = S.of(context).viewMode;
 
-    bool imageView = ref.watch(imageViewProvider);
+    bool isViewMode = ref.watch(viewModeProvider);
 
     void toggleView() {
-      if (!imageView) {
+      if (!isViewMode) {
         ref
             .read(fileListProvider.notifier)
-            .removeOtherClassify(FileClassify.image);
+            .removeOtherClassify([FileClassify.image, FileClassify.video]);
       }
-      ref.read(imageViewProvider.notifier).update();
+      ref.read(viewModeProvider.notifier).update();
     }
 
     return CustomTooltip(
-      message: imageViewMode,
+      message: viewMode,
       textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
           .useSystemChineseFont(),
       placement: Placement.top,
       child: ClickIcon(
         size: 24,
         svg: AppIcons.image,
-        color: imageView ? Theme.of(context).primaryColor : Colors.grey,
+        color: isViewMode ? Theme.of(context).primaryColor : Colors.grey,
         onTap: toggleView,
       ),
     );

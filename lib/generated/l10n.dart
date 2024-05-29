@@ -1090,11 +1090,11 @@ class S {
     );
   }
 
-  /// `Image view mode`
-  String get imageViewMode {
+  /// `View mode`
+  String get viewMode {
     return Intl.message(
-      'Image view mode',
-      name: 'imageViewMode',
+      'View mode',
+      name: 'viewMode',
       desc: '',
       args: [],
     );

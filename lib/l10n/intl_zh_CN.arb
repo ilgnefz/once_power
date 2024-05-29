@@ -103,7 +103,7 @@
   "organizedSuccessfullyInfo":"已成功移动所有文件",
   "organizingFailedInfo": "以下几个移动失败",
   "restartTip": "重启生效",
-  "imageViewMode": "图像查看模式",
+  "viewMode": "视图模式",
   "fileCount": "{total} 个文件已选择 {count} 个",
   "select": "选择",
   "unselect": "取消选择",

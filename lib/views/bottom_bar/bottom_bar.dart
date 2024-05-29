@@ -5,7 +5,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/bottom_bar/image_view_button.dart';
+import 'package:once_power/views/bottom_bar/view_mode_button.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/views/bottom_bar/save_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,7 +53,7 @@ class BottomBar extends ConsumerWidget {
         children: [
           const SaveButton(),
           const SizedBox(width: AppNum.bottomBarInterval - 4),
-          const ImageViewButton(),
+          const ViewModeButton(),
           const SizedBox(width: AppNum.bottomBarInterval - 4),
           const EnableOrganizeCheckbox(),
           const SizedBox(width: AppNum.bottomBarInterval / 3),

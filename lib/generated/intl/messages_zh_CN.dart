@@ -86,7 +86,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileName": MessageLookupByLibrary.simpleMessage("文件名"),
         "folder": MessageLookupByLibrary.simpleMessage("文件夹"),
         "image": MessageLookupByLibrary.simpleMessage("图片"),
-        "imageViewMode": MessageLookupByLibrary.simpleMessage("图像查看模式"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("输入已禁用"),
         "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
         "lengthDesc":
@@ -152,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadDesc": MessageLookupByLibrary.simpleMessage("上传 .txt 文件"),
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),
         "video": MessageLookupByLibrary.simpleMessage("视频"),
+        "viewMode": MessageLookupByLibrary.simpleMessage("视图模式"),
         "yesterday": MessageLookupByLibrary.simpleMessage("昨天日期"),
         "zip": MessageLookupByLibrary.simpleMessage("压缩包")
       };

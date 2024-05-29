@@ -10,10 +10,10 @@ import 'package:once_power/widgets/context_menu.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
 
 import '../rename_tile_tooltip.dart';
-import 'image_view_tile.dart';
+import 'view_mode_tile.dart';
 
-class ImageGridView extends ConsumerWidget {
-  const ImageGridView({super.key});
+class ViewGridView extends ConsumerWidget {
+  const ViewGridView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,7 +64,7 @@ class ImageGridView extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: ImageViewTile(files[index]),
+                child: ViewModeTile(files[index]),
               ),
             );
           },
