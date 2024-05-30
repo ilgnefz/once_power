@@ -87,23 +87,6 @@ class OrganizeButton extends ConsumerWidget {
       }
     }
 
-    void showNotification() {
-      if (errorList.isEmpty) {
-        NotificationMessage.show(
-            S.of(context).organizedSuccessfully,
-            S.of(context).organizedSuccessfullyInfo,
-            [],
-            NotificationType.success);
-      } else {
-        NotificationMessage.show(
-          S.of(context).organizingFailed,
-          S.of(context).organizingFailedInfo,
-          errorList,
-          NotificationType.failure,
-        );
-      }
-    }
-
     Future<void> realFile(WidgetRef ref, String filePath) async {
       bool isFile = FileSystemEntity.isFileSync(filePath);
       FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
@@ -134,7 +117,12 @@ class OrganizeButton extends ConsumerWidget {
       for (var file in realFiles) {
         moveFile(file);
       }
-      showNotification();
+      NotificationType type = errorList.isEmpty
+          ? SuccessNotification(S.of(context).organizedSuccessfully,
+              S.of(context).organizedSuccessfullyInfo)
+          : ErrorNotification(S.of(context).organizingFailed,
+              S.of(context).organizingFailedInfo, errorList);
+      NotificationMessage.show(type);
     }
 
     return ElevatedButton(

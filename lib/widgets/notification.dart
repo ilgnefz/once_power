@@ -6,19 +6,21 @@ import 'package:once_power/widgets/click_icon.dart';
 import 'package:once_power/widgets/svg_icon.dart';
 
 class NotificationMessage {
-  static Color showColor(NotificationType type) {
-    const Color failure = Colors.red;
-    const Color success = Colors.green;
-    return type == NotificationType.failure ? failure : success;
+  static (Color, String) showMark(NotificationType type) {
+    switch (type) {
+      case SuccessNotification():
+        return (Colors.green, AppIcons.success);
+      case ErrorNotification():
+        return (Colors.red, AppIcons.error);
+    }
   }
 
-  static String showIcon(NotificationType type) {
-    return type == NotificationType.failure ? AppIcons.error : AppIcons.success;
-  }
+  static show(NotificationType type, [int time = 5]) {
+    final (color, icon) = showMark(type);
+    if (type is SuccessNotification && type.infoList.isNotEmpty) {
+      time = 30;
+    }
 
-  static show(String title, String message, List<NotificationInfo> info,
-      NotificationType type,
-      [int time = 5]) {
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(
@@ -41,9 +43,9 @@ class NotificationMessage {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   children: [
-                    SvgIcon(showIcon(type), color: showColor(type), size: 18),
+                    SvgIcon(icon, color: color, size: 18),
                     const SizedBox(width: 4),
-                    Text(title, style: TextStyle(color: showColor(type))),
+                    Text(type.title, style: TextStyle(color: color)),
                     const Spacer(),
                     ClickIcon(
                       icon: Icons.close,
@@ -56,9 +58,9 @@ class NotificationMessage {
               const SizedBox(height: 4),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text(message),
+                child: Text(type.message),
               ),
-              if (info.isNotEmpty)
+              if (type.infoList.isNotEmpty)
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxHeight: 360),
                   child: SingleChildScrollView(
@@ -69,7 +71,7 @@ class NotificationMessage {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 4),
-                          ...info.map((e) {
+                          ...type.infoList.map((e) {
                             TextStyle fileStyle =
                                 const TextStyle(color: Colors.blue);
                             TextStyle infoStyle =
@@ -93,8 +95,7 @@ class NotificationMessage {
         );
       },
       wrapToastAnimation: notificationAnimation,
-      duration:
-          type == NotificationType.success ? Duration(seconds: time) : null,
+      duration: type is SuccessNotification ? Duration(seconds: time) : null,
       align: Alignment.bottomRight,
     );
   }
@@ -152,15 +153,10 @@ class NormalAnimationState extends State<NormalAnimation>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.controller,
-      builder: (_, child) {
-        return Transform.translate(
-          offset: animationOffset.value,
-          child: Opacity(
-            opacity: animationOpacity.value,
-            child: child,
-          ),
-        );
-      },
+      builder: (_, child) => Transform.translate(
+        offset: animationOffset.value,
+        child: Opacity(opacity: animationOpacity.value, child: child),
+      ),
       child: widget.child,
     );
   }

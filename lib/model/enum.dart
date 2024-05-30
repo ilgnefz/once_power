@@ -132,8 +132,6 @@ extension FileClassifyExtension on FileClassify {
 
 enum FileUploadType { prefix, suffix }
 
-enum NotificationType { failure, success }
-
 enum LanguageType {
   english('English'),
   chinese('中文');

@@ -49,31 +49,18 @@ class DeleteFolderButton extends ConsumerWidget {
       }
     }
 
-    void showNotification() {
-      if (errorList.isEmpty) {
-        NotificationMessage.show(
-          S.of(context).deleteSuccessful,
-          S.of(context).successInfo,
-          [],
-          NotificationType.success,
-        );
-      } else {
-        NotificationMessage.show(
-          S.of(context).deleteFailed,
-          S.of(context).failureInfo,
-          errorList,
-          NotificationType.failure,
-        );
-      }
-    }
-
     void deleteEmptyFolder() {
       List<FileInfo> files = ref.read(fileListProvider);
       for (var file in files) {
         if (file.type != FileClassify.folder) return;
         deleteFolders(file.filePath);
       }
-      showNotification();
+      NotificationType type = errorList.isEmpty
+          ? SuccessNotification(
+              S.of(context).deleteSuccessful, S.of(context).successInfo)
+          : ErrorNotification(
+              S.of(context).deleteFailed, S.of(context).failureInfo, errorList);
+      NotificationMessage.show(type);
     }
 
     return ElevatedButton(

@@ -10,6 +10,10 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+// TODO 修改重命名时遇到相同文件名的文件时的逻辑
+// TODO 整理文件夹的输入框可以直接输入
+// TODO 右键菜单添加将原名称填入输入框的功能
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

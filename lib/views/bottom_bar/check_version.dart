@@ -38,34 +38,23 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
       int currentVersion = getVersionNumber(PackageDesc.getVersion());
       List<String> desc = res.info.first.description;
       if (version > currentVersion) {
-        NotificationMessage.show(
-          S.current.checkCompleted,
-          S.current.newVersionInfo(res.info.first.version),
-          desc.map((e) {
-            int index = desc.indexOf(e);
-            index = desc.length > 1 ? index + 1 : 0;
-            return NotificationInfo(
-                file: index == 0 ? '' : '$index. ', message: e);
-          }).toList(),
-          NotificationType.success,
-          30,
-        );
+        NotificationMessage.show(SuccessNotification(
+            S.current.checkCompleted,
+            S.current.newVersionInfo(res.info.first.version),
+            desc.map((e) {
+              int index = desc.indexOf(e);
+              index = desc.length > 1 ? index + 1 : 0;
+              return NotificationInfo(
+                  file: index == 0 ? '' : '$index. ', message: e);
+            }).toList()));
         ref.read(newVersionProvider.notifier).update();
       } else {
-        NotificationMessage.show(
-          S.current.checkCompleted,
-          S.current.noNewVersionInfo,
-          [],
-          NotificationType.success,
-        );
+        NotificationMessage.show(SuccessNotification(
+            S.current.checkCompleted, S.current.noNewVersionInfo));
       }
     } catch (e) {
       NotificationMessage.show(
-        S.current.checkFailed,
-        '$e',
-        [],
-        NotificationType.failure,
-      );
+          ErrorNotification(S.current.checkFailed, '$e', []));
     }
     check = false;
     setState(() {});

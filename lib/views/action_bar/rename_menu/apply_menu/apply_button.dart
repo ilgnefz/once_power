@@ -56,11 +56,13 @@ class ApplyButton extends ConsumerWidget {
       }
       updateName(ref);
       updateExtension(ref);
+      List<NotificationInfo> list = errorList.isNotEmpty ? errorList : [];
       NotificationType type = errorList.isNotEmpty
-          ? NotificationType.failure
-          : NotificationType.success;
-      List<NotificationInfo> infoList = errorList.isNotEmpty ? errorList : [];
-      showNotification(type, infoList, total);
+          ? ErrorNotification(
+              S.current.failed, S.current.failedNum(list.length, total), list)
+          : SuccessNotification(
+              S.current.successful, S.current.successfulNum(total));
+      NotificationMessage.show(type);
     }
 
     return ElevatedButton(
@@ -118,19 +120,4 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
   int endTime = DateTime.now().microsecondsSinceEpoch;
   double cost = (endTime - startTime) / 1000000;
   ref.read(costProvider.notifier).update(cost);
-}
-
-void showNotification(
-    NotificationType type, List<NotificationInfo> list, int total) {
-  if (type == NotificationType.success) {
-    NotificationMessage.show(
-      S.current.successful,
-      S.current.successfulNum(total),
-      [],
-      type,
-    );
-  } else {
-    String message = S.current.failedNum(list.length, total);
-    NotificationMessage.show(S.current.failed, message, list, type);
-  }
 }
