@@ -106,5 +106,7 @@
   "fileCount": "{total} files {count} selected",
   "select": "Select",
   "unselect": "Unselect",
-  "delete": "Delete"
+  "delete": "Delete",
+  "matchName": "Match name",
+  "modifyName": "Modify name"
 }

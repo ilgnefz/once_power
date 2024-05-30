@@ -1129,6 +1129,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Match name`
+  String get matchName {
+    return Intl.message(
+      'Match name',
+      name: 'matchName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify name`
+  String get modifyName {
+    return Intl.message(
+      'Modify name',
+      name: 'modifyName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

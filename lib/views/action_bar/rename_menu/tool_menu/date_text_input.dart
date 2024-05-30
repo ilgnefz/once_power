@@ -42,12 +42,12 @@ class DateTextInput extends ConsumerWidget {
       if (dateRename) {
         String modifyText = ref.watch(modifyControllerProvider).text;
         await StorageUtil.setString(AppKeys.modifyCache, modifyText);
-        ref.watch(modifyControllerProvider).clear();
+        ref.read(modifyControllerProvider).clear();
         Log.i('before-modifyText: $modifyText');
         if (isReserve) {
           String matchText = ref.watch(matchControllerProvider).text;
           await StorageUtil.setString(AppKeys.matchCache, matchText);
-          ref.watch(matchControllerProvider).clear();
+          ref.read(matchControllerProvider).clear();
           Log.i('before-matchText: $matchText');
         }
       }

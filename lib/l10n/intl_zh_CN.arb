@@ -106,5 +106,7 @@
   "fileCount": "{total} 个文件已选择 {count} 个",
   "select": "选择",
   "unselect": "取消选择",
-  "delete": "删除"
+  "delete": "删除",
+  "matchName": "匹配名称",
+  "modifyName": "修改名称"
 }

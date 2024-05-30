@@ -109,8 +109,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
         "matchLength":
             MessageLookupByLibrary.simpleMessage("Number or length string"),
+        "matchName": MessageLookupByLibrary.simpleMessage("Match name"),
         "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
         "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
+        "modifyName": MessageLookupByLibrary.simpleMessage("Modify name"),
         "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
         "moveError": MessageLookupByLibrary.simpleMessage("Moving error"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("Move failed"),

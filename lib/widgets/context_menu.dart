@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
-import 'package:once_power/utils/log.dart';
+import 'package:once_power/constants/keys.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:window_manager/window_manager.dart';
 
 class CustomContextMenu extends StatelessWidget {
@@ -13,8 +14,10 @@ class CustomContextMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     const double safeW = 12;
     const double safeH = 32;
-    const double width = 80;
-    const double height = 64;
+    double width = 80;
+    Locale? cacheLocale = StorageUtil.getLocale(AppKeys.locale);
+    if (cacheLocale?.languageCode != 'zh') width = 120;
+    const double height = safeH * 4;
 
     return GestureDetector(
       onSecondaryTapDown: (detail) async {

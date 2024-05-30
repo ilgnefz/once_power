@@ -17,10 +17,13 @@ class ViewGridView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ScrollController controller = ref.watch(scrollBarControllerProvider);
     List<FileInfo> files = ref.watch(sortListProvider);
     final String selectLabel = S.of(context).select;
     final String unselectLabel = S.of(context).unselect;
     final String deleteLabel = S.of(context).delete;
+    final String matchName = S.of(context).matchName;
+    final String modifyName = S.of(context).modifyName;
 
     void reorderList(int oldIndex, int newIndex) {
       // if (newIndex > oldIndex) newIndex -= 1;
@@ -32,7 +35,21 @@ class ViewGridView extends ConsumerWidget {
       updateExtension(ref);
     }
 
-    ScrollController controller = ref.watch(scrollBarControllerProvider);
+    void autoMatchInput(String name) {
+      if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
+        ref.read(modifyControllerProvider).clear();
+      }
+      ref.read(matchControllerProvider.notifier).updateText(name);
+      updateName(ref);
+    }
+
+    void autoModifyInput(String name) {
+      if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
+        ref.read(matchControllerProvider).clear();
+      }
+      ref.read(modifyControllerProvider.notifier).updateText(name);
+      updateName(ref);
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) => CustomScrollbar(
@@ -59,6 +76,16 @@ class ViewGridView extends ConsumerWidget {
               child: CustomContextMenu(
                 menu: Column(
                   children: [
+                    MenuContextItem(
+                      label: matchName,
+                      color: Colors.black,
+                      callback: () => autoMatchInput(e.name),
+                    ),
+                    MenuContextItem(
+                      label: modifyName,
+                      color: Colors.black,
+                      callback: () => autoModifyInput(e.name),
+                    ),
                     MenuContextItem(
                       label: checked ? unselectLabel : selectLabel,
                       color: checked ? Colors.grey : Colors.black,
