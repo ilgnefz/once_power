@@ -1,10 +1,14 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/icons.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/core/rename.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/click_icon.dart';
+import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/input/input.dart';
 
 class ModifyTextInput extends ConsumerWidget {
@@ -13,6 +17,7 @@ class ModifyTextInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String caseDesc = S.of(context).caseDesc;
+    final String today = S.of(context).today;
     final String modifyTo = S.of(context).modifyTo;
     final String inputDisable = S.of(context).inputDisable;
 
@@ -28,12 +33,34 @@ class ModifyTextInput extends ConsumerWidget {
       updateName(ref);
     }
 
+    void todayDate() {
+      if (reverseMode) ref.watch(matchControllerProvider).clear();
+      String dateDigitText = ref.watch(dateLengthControllerProvider).text;
+      int dateDigit = getNum(dateDigitText);
+      String date = formatDateTime(DateTime.now());
+      ref.read(modifyControllerProvider.notifier).updateText(
+          date.substring(0, dateDigit > date.length ? date.length : dateDigit));
+      updateName(ref);
+    }
+
     return CommonInputMenu(
       disable: disable,
-      controller: ref.watch(modifyControllerProvider),
-      hintText: disable ? inputDisable : modifyTo,
-      show: ref.watch(modifyClearProvider),
-      onChanged: (v) => updateName(ref),
+      slot: BaseInput(
+        controller: ref.watch(modifyControllerProvider),
+        hintText: disable ? inputDisable : modifyTo,
+        show: ref.watch(modifyClearProvider),
+        onChanged: (v) => updateName(ref),
+        action: CustomTooltip(
+          message: today,
+          textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+              .useSystemChineseFont(),
+          child: ClickIcon(
+            svg: AppIcons.date,
+            color: AppColors.unselectIcon,
+            onTap: todayDate,
+          ),
+        ),
+      ),
       message: caseDesc,
       icon: AppIcons.cases,
       selected: ref.watch(matchCaseProvider),

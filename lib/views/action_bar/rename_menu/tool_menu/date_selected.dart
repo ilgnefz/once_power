@@ -10,9 +10,7 @@ final List<DateType> dateTypeList = [
   DateType.modifiedDate,
   DateType.exifDate,
   DateType.earliestDate,
-  DateType.latestDate,
-  DateType.today,
-  DateType.yesterday
+  DateType.latestDate
 ];
 
 final BorderRadius borderRadius = BorderRadius.circular(8);

@@ -9,8 +9,6 @@ enum DateType {
   exifDate,
   earliestDate,
   latestDate,
-  today,
-  yesterday,
 }
 
 extension DateTypeExtension on DateType {
@@ -26,10 +24,6 @@ extension DateTypeExtension on DateType {
         return S.current.earliestDate;
       case DateType.latestDate:
         return S.current.latestDate;
-      case DateType.today:
-        return S.current.today;
-      case DateType.yesterday:
-        return S.current.yesterday;
     }
   }
 }

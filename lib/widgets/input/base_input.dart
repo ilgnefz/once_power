@@ -87,6 +87,7 @@ class BaseInput extends StatelessWidget {
               Consumer(
                 builder: (context, ref, child) => ClickIcon(
                   icon: Icons.close_rounded,
+                  color: Colors.black54,
                   onTap: () async {
                     controller!.clear();
                     if (ref.watch(currentModeProvider) ==

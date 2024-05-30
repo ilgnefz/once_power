@@ -152,7 +152,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),
         "video": MessageLookupByLibrary.simpleMessage("视频"),
         "viewMode": MessageLookupByLibrary.simpleMessage("视图模式"),
-        "yesterday": MessageLookupByLibrary.simpleMessage("昨天日期"),
         "zip": MessageLookupByLibrary.simpleMessage("压缩包")
       };
 }

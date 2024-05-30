@@ -1,5 +1,6 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/colors.dart';
 import 'package:once_power/widgets/custom_tooltip.dart';
 import 'package:once_power/widgets/svg_icon.dart';
 
@@ -29,7 +30,7 @@ class BoxCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected
               ? Theme.of(context).primaryColor
-              : const Color(0xFFF5F5F5),
+              : AppColors.unselectBoxIcon,
           borderRadius: BorderRadius.circular(8),
         ),
         child: InkWell(

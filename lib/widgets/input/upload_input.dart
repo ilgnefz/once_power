@@ -58,7 +58,7 @@ class UploadInput extends ConsumerWidget {
             .useSystemChineseFont(),
         child: ClickIcon(
           icon: Icons.upload_file_rounded,
-          color: AppColors.primary,
+          color: AppColors.unselectIcon,
           onTap: uploadFile,
         ),
       ),

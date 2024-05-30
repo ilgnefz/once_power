@@ -180,7 +180,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),
-        "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "zip": MessageLookupByLibrary.simpleMessage("Zip")
       };
 }
