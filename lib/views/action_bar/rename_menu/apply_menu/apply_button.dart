@@ -37,29 +37,22 @@ class ApplyButton extends ConsumerWidget {
     void applyRename() async {
       if (total > 1) {
         FileInfo first = checkList.first;
-        String firstExtension =
-            first.newExtension == 'dir' ? '' : '.${first.newExtension}';
-        String firstPath =
-            path.join(first.parent, '${first.newName}$firstExtension');
-
+        String firstPath = path.join(
+            first.parent, getFileName(first.newName, first.newExtension));
         FileInfo f = checkList.firstWhere((f) {
-          String fExtension = f.extension == 'dir' ? '' : '.${f.extension}';
-          String fPath = path.join(f.parent, '${f.name}$fExtension');
+          String fPath = path.join(f.parent, getFileName(f.name, f.extension));
           return fPath == firstPath;
         }, orElse: () => errFile);
-
-        List<FileInfo> list =
-            f == errFile ? checkList : checkList.reversed.toList();
-        await rename(ref, list, errorList);
+        if (f == errFile) checkList = checkList.reversed.toList();
+        await rename(ref, checkList, errorList);
       } else {
         await rename(ref, checkList, errorList);
       }
       updateName(ref);
       updateExtension(ref);
-      List<NotificationInfo> list = errorList.isNotEmpty ? errorList : [];
       NotificationType type = errorList.isNotEmpty
-          ? ErrorNotification(
-              S.current.failed, S.current.failedNum(list.length, total), list)
+          ? ErrorNotification(S.current.failed,
+              S.current.failedNum(errorList.length, total), errorList)
           : SuccessNotification(
               S.current.successful, S.current.successfulNum(total));
       NotificationMessage.show(type);
@@ -82,8 +75,8 @@ Future<void> rename(WidgetRef ref, List<FileInfo> list,
     bool sameName = f.name == f.newName;
     bool sameExtension = f.extension == f.newExtension;
     if (sameName && sameExtension) continue;
-    String oldName = fileName(f.name, f.extension);
-    String newName = fileName(f.newName, f.newExtension);
+    String oldName = getFileName(f.name, f.extension);
+    String newName = getFileName(f.newName, f.newExtension);
     String oldPath = path.join(f.parent, oldName);
     String newPath = path.join(f.parent, newName);
     if (File(newPath).existsSync()) {

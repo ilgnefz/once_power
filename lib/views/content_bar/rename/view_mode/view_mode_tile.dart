@@ -31,7 +31,7 @@ class ViewModeTile extends StatelessWidget {
               Expanded(child: ImageView(file: file, key: ValueKey(file.id))),
               const SizedBox(height: 4),
               Text(
-                fileName(file.newName, file.newExtension),
+                getFileName(file.newName, file.newExtension),
                 style: TextStyle(
                   fontSize: AppNum.tileFontSize,
                   color: file.checked ? Colors.black : Colors.grey,

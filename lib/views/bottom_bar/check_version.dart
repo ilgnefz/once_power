@@ -45,9 +45,9 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
               int index = desc.indexOf(e);
               index = desc.length > 1 ? index + 1 : 0;
               return NotificationInfo(
-                  file: index == 0 ? '' : '$index. ', message: e);
+                  file: '', message: index == 0 ? e : '$index. $e');
             }).toList()));
-        ref.read(newVersionProvider.notifier).update();
+        ref.read(newVersionProvider.notifier).update(true);
       } else {
         NotificationMessage.show(SuccessNotification(
             S.current.checkCompleted, S.current.noNewVersionInfo));

@@ -64,7 +64,7 @@ class OrganizeButton extends ConsumerWidget {
               file: file.filePath,
               message: '${S.of(context).moveFailed}: $e',
             ));
-            debugPrint(e.toString());
+            Log.e(e.toString());
           }
         }
 
@@ -77,7 +77,7 @@ class OrganizeButton extends ConsumerWidget {
               file: file.filePath,
               message: '${S.of(context).moveError}: $e',
             ));
-            debugPrint(e.toString());
+            Log.e(e.toString());
           }
         }
 

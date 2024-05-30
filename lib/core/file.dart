@@ -42,9 +42,9 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool isViewMode = ref.watch(viewModeProvider);
 
+  // 如果不是添加文件夹或者是推添加文件夹但是是是视图模式，并且添加的不是文件且不是整理模式
   if ((!addFolder || addFolder && isViewMode) &&
-      !isFile &&
-      mode != FunctionMode.organize) {
+      (!isFile && mode != FunctionMode.organize)) {
     final list = getAllFile(filePath);
     int count = 0;
     ref.read(totalProvider.notifier).update(list.length);

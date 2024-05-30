@@ -63,7 +63,7 @@ class OrganizeMenu extends ConsumerWidget {
         const SizedBox(height: AppNum.gapH),
         BaseInput(
           hintText: targetFolder,
-          readOnly: true,
+          // readOnly: true,
           controller: controller,
           show: ref.watch(targetClearProvider),
         ),

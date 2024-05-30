@@ -34,7 +34,7 @@ int getNum(String value) {
   return 0;
 }
 
-String fileName(String name, String extension) {
+String getFileName(String name, String extension) {
   if (extension == '' || extension == 'dir') return name;
   return '$name.$extension';
 }

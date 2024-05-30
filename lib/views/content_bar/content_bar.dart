@@ -22,7 +22,6 @@ class ContentBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<FileInfo> files = ref.watch(sortListProvider);
     FunctionMode mode = ref.watch(currentModeProvider);
     bool isOrganize = mode == FunctionMode.organize;
     bool isViewMode = ref.watch(viewModeProvider);
@@ -33,24 +32,6 @@ class ContentBar extends ConsumerWidget {
         ref.read(totalProvider.notifier).update(files.length);
         formatXFile(ref, files);
       }
-    }
-
-    void reorderList(int oldIndex, int newIndex) {
-      // if (newIndex > oldIndex) newIndex -= 1;
-      FileInfo item = files.removeAt(oldIndex);
-      files.insert(newIndex, item);
-      FunctionMode mode = ref.watch(currentModeProvider);
-      ref.read(fileListProvider.notifier).addAll(files);
-      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
-      if (mode == FunctionMode.organize) {
-        TextEditingController controller = ref.watch(targetControllerProvider);
-        bool isFile = files.first.extension != 'dir';
-        if (controller.text.isEmpty) {
-          controller.text = isFile ? files.first.parent : files.first.filePath;
-        }
-      }
-      updateName(ref);
-      updateExtension(ref);
     }
 
     return Expanded(
@@ -71,10 +52,8 @@ class ContentBar extends ConsumerWidget {
               child: DropTarget(
                 onDragDone: dropAdd,
                 child: BuildListView(
-                  files: files,
                   isViewMode: isViewMode,
                   isOrganize: isOrganize,
-                  onReorder: reorderList,
                 ),
               ),
             ),
@@ -88,23 +67,38 @@ class ContentBar extends ConsumerWidget {
 class BuildListView extends ConsumerWidget {
   const BuildListView({
     super.key,
-    required this.files,
     required this.isViewMode,
     required this.isOrganize,
-    required this.onReorder,
   });
 
-  final List<FileInfo> files;
   final bool isViewMode;
   final bool isOrganize;
-  final void Function(int, int) onReorder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<FileInfo> files = ref.watch(sortListProvider);
     if (files.isEmpty) return const EmptyView();
     if (isViewMode && !isOrganize) return const ViewGridView();
 
     ScrollController controller = ref.watch(scrollBarControllerProvider);
+
+    void reorderList(int oldIndex, int newIndex) {
+      // if (newIndex > oldIndex) newIndex -= 1;
+      FileInfo item = files.removeAt(oldIndex);
+      files.insert(newIndex, item);
+      FunctionMode mode = ref.watch(currentModeProvider);
+      ref.read(fileListProvider.notifier).addAll(files);
+      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
+      if (mode == FunctionMode.organize) {
+        TextEditingController controller = ref.watch(targetControllerProvider);
+        bool isFile = files.first.extension != 'dir';
+        if (controller.text.isEmpty) {
+          controller.text = isFile ? files.first.parent : files.first.filePath;
+        }
+      }
+      updateName(ref);
+      updateExtension(ref);
+    }
 
     return CustomScrollbar(
       controller: controller,
@@ -129,7 +123,7 @@ class BuildListView extends ConsumerWidget {
         exitTransition: [SlideInLeft()],
         insertDuration: const Duration(milliseconds: 300),
         removeDuration: const Duration(milliseconds: 300),
-        onReorder: onReorder,
+        onReorder: reorderList,
       ),
     );
   }

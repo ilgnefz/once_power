@@ -208,7 +208,7 @@ class SaveLog extends _$SaveLog {
 class NewVersion extends _$NewVersion {
   @override
   bool build() => false;
-  void update() => state = !state;
+  void update(bool value) => state = value;
 }
 
 @riverpod
