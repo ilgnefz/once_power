@@ -6,7 +6,7 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sortListHash() => r'c2dcb91143ce44087500bb4f70d61f01fa942c14';
+String _$sortListHash() => r'db5fd6a5f5fd5298cf0d6e8c8467ef30e48363d9';
 
 /// See also [sortList].
 @ProviderFor(sortList)
@@ -197,7 +197,7 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
 );
 
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
-String _$fileListHash() => r'728503a6f1413a1d2d5a441dc4be00e59ca21c76';
+String _$fileListHash() => r'18c16e18ee9093f8b32e5b4cab6c7c73efd5bd9a';
 
 /// See also [FileList].
 @ProviderFor(FileList)

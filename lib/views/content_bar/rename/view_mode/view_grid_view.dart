@@ -35,9 +35,16 @@ class ViewGridView extends ConsumerWidget {
       updateExtension(ref);
     }
 
+    void unselectDateName() {
+      if (ref.watch(dateRenameProvider)) {
+        ref.read(dateRenameProvider.notifier).update();
+      }
+    }
+
     void autoMatchInput(String name) {
       if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
         ref.read(modifyControllerProvider).clear();
+        unselectDateName();
       }
       ref.read(matchControllerProvider.notifier).updateText(name);
       updateName(ref);
@@ -47,6 +54,7 @@ class ViewGridView extends ConsumerWidget {
       if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
         ref.read(matchControllerProvider).clear();
       }
+      unselectDateName();
       ref.read(modifyControllerProvider.notifier).updateText(name);
       updateName(ref);
     }

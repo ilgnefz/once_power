@@ -298,7 +298,7 @@ final saveLogProvider = AutoDisposeNotifierProvider<SaveLog, bool>.internal(
 );
 
 typedef _$SaveLog = AutoDisposeNotifier<bool>;
-String _$newVersionHash() => r'4ca1493d32268d4efd0debf948f26dec34e9eed4';
+String _$newVersionHash() => r'1536df237495a7345199a54e87352c0fb56865a8';
 
 /// See also [NewVersion].
 @ProviderFor(NewVersion)

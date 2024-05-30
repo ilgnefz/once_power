@@ -46,6 +46,7 @@ class ModifyTextInput extends ConsumerWidget {
     return CommonInputMenu(
       disable: disable,
       slot: BaseInput(
+        disable: disable,
         controller: ref.watch(modifyControllerProvider),
         hintText: disable ? inputDisable : modifyTo,
         show: ref.watch(modifyClearProvider),
