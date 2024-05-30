@@ -1,4 +1,3 @@
-import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
@@ -8,6 +7,7 @@ import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/widgets/context_menu.dart';
 import 'package:once_power/widgets/custom_scrollbar.dart';
+import 'package:reorderable_grid/reorderable_grid.dart';
 
 import '../rename_tile_tooltip.dart';
 import 'view_mode_tile.dart';
@@ -37,17 +37,24 @@ class ViewGridView extends ConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) => CustomScrollbar(
         controller: controller,
-        child: AnimatedReorderableGridView(
+        child: ReorderableGridView.extent(
           controller: controller,
-          items: files,
           padding: const EdgeInsets.only(right: AppNum.contentRP),
-          itemBuilder: (BuildContext context, int index) {
-            String id = files[index].id;
-            bool checked = files[index].checked;
-
+          onReorder: reorderList,
+          maxCrossAxisExtent: AppNum.imageW,
+          childAspectRatio: 5 / 6,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          proxyDecorator: (child, index, animation) => Container(
+            color: Colors.transparent,
+            child: child,
+          ),
+          children: files.map((e) {
+            String id = e.id;
+            bool checked = e.checked;
             return RenameTileTooltip(
               key: ValueKey(id),
-              file: files[index],
+              file: e,
               waitDuration: const Duration(seconds: 1),
               child: CustomContextMenu(
                 menu: Column(
@@ -64,21 +71,10 @@ class ViewGridView extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: ViewModeTile(files[index]),
+                child: ViewModeTile(e),
               ),
             );
-          },
-          sliverGridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: (constraints.maxWidth / AppNum.imageW).floor(),
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: 5 / 6,
-          ),
-          enterTransition: [FadeIn(), ScaleIn()],
-          // exitTransition:  [SlideIn()],
-          insertDuration: const Duration(milliseconds: 150),
-          removeDuration: const Duration(milliseconds: 150),
-          onReorder: (oldIndex, newIndex) => reorderList(oldIndex, newIndex),
+          }).toList(),
         ),
       ),
     );

@@ -26,5 +26,5 @@ class AppNum {
   static const double tileFontSize = 13;
   static const int maxFileNum = 150;
   static const double contentRP = 12;
-  static const int imageW = 136;
+  static const double imageW = 136;
 }

@@ -1,4 +1,3 @@
-import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +82,7 @@ class BuildListView extends ConsumerWidget {
     ScrollController controller = ref.watch(scrollBarControllerProvider);
 
     void reorderList(int oldIndex, int newIndex) {
-      // if (newIndex > oldIndex) newIndex -= 1;
+      if (newIndex > oldIndex) newIndex -= 1;
       FileInfo item = files.removeAt(oldIndex);
       files.insert(newIndex, item);
       FunctionMode mode = ref.watch(currentModeProvider);
@@ -102,28 +101,20 @@ class BuildListView extends ConsumerWidget {
 
     return CustomScrollbar(
       controller: controller,
-      child: AnimatedReorderableListView(
-        controller: controller,
-        items: files,
+      child: ReorderableListView.builder(
+        itemCount: files.length,
         padding: const EdgeInsets.only(right: AppNum.contentRP),
         buildDefaultDragHandles: false,
-        itemBuilder: (context, index) {
-          if (isOrganize) {
-            return ArrangeFileTile(
-              files[index],
-              key: ValueKey(files[index].id),
-            );
-          }
-          return RenameFileTile(
-            files[index],
+        onReorder: reorderList,
+        itemBuilder: (BuildContext context, int index) {
+          return ReorderableDragStartListener(
+            index: index,
             key: ValueKey(files[index].id),
+            child: isOrganize
+                ? ArrangeFileTile(files[index])
+                : RenameFileTile(files[index]),
           );
         },
-        enterTransition: [FlipInX(), ScaleIn()],
-        exitTransition: [SlideInLeft()],
-        insertDuration: const Duration(milliseconds: 300),
-        removeDuration: const Duration(milliseconds: 300),
-        onReorder: reorderList,
       ),
     );
   }

@@ -33,14 +33,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.11.3"
-  animated_reorderable_list:
-    dependency: "direct main"
-    description:
-      name: animated_reorderable_list
-      sha256: b8f7013144870e679bdcf8db70cb222ddc2f49d164866e8ecf81cb2a83d3bd3d
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.5"
   animations:
     dependency: "direct main"
     description:
@@ -821,6 +813,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.3"
+  reorderable_grid:
+    dependency: "direct main"
+    description:
+      name: reorderable_grid
+      sha256: "0b9cd95ef0f070ef99f92affe9cf85a4aa127099cd1334e5940950ce58cd981d"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.10"
   riverpod:
     dependency: transitive
     description:

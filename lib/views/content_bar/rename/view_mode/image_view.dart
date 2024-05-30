@@ -18,7 +18,7 @@ class ImageView extends StatelessWidget {
       fit: BoxFit.contain,
       color: file.checked ? null : Colors.grey,
       colorBlendMode: BlendMode.saturation,
-      cacheWidth: AppNum.imageW,
+      cacheWidth: AppNum.imageW.toInt(),
       errorBuilder: (context, exception, stackTrace) => const ErrorImage(),
     );
   }
