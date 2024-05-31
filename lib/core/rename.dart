@@ -1,11 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/num.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/model.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/log.dart';
 import 'package:once_power/utils/type.dart';
+import 'package:once_power/widgets/notification.dart';
+import 'package:path/path.dart' as path;
 
 import 'mode.dart';
+
+FileInfo nullFile = FileInfo(
+  id: '',
+  name: '',
+  newName: '',
+  parent: '',
+  filePath: '',
+  extension: '',
+  newExtension: '',
+  beforePath: '',
+  createdDate: DateTime.now(),
+  modifiedDate: DateTime.now(),
+  type: FileClassify.other,
+  checked: false,
+);
 
 // Map<String, Map<String, List<String>>> map = {
 //     "today": {"jpg": [], "mp4": []},
@@ -29,7 +50,7 @@ void updateExtension(dynamic ref) {
 }
 
 int actualIndex(dynamic ref, DateFormatMap dfMap, FileInfo file) {
-  Log.i(dfMap.toString());
+  // Log.i(dfMap.toString());
   // 默认 index 为 0
   int index = 0;
   // 获取日期名称
@@ -200,4 +221,106 @@ String suffixName(WidgetRef ref, int fileIndex, int suffixIndex) {
     suffixText = list.length < 2 ? suffixText : indexStr;
   }
   return swap ? num + suffixText : suffixText + num;
+}
+
+void undo(WidgetRef ref) async {
+  List<FileInfo> list = ref.watch(fileListProvider);
+  List<FileInfo> checkList = list.where((e) => e.checked).toList();
+  int total = checkList.length;
+  if (checkList.isEmpty) return;
+  List<NotificationInfo> errorList = [];
+
+  ref.read(totalProvider.notifier).update(total);
+  int count = 0;
+  bool delay = list.length > AppNum.maxFileNum;
+  int startTime = DateTime.now().microsecondsSinceEpoch;
+
+  for (final file in checkList) {
+    count++;
+    String oldPath = file.filePath;
+    String newPath = file.beforePath;
+    if (oldPath == newPath) continue;
+    NotificationInfo? info = renameFile(ref, (file.id, oldPath, newPath));
+    if (info != null) errorList.add(info);
+    if (delay) await Future.delayed(const Duration(microseconds: 1));
+  }
+  ref.read(countProvider.notifier).update(count);
+  renameTemp(ref);
+  int endTime = DateTime.now().microsecondsSinceEpoch;
+  double cost = (endTime - startTime) / 1000000;
+  ref.read(costProvider.notifier).update(cost);
+  updateName(ref);
+  updateExtension(ref);
+  NotificationType type = errorList.isNotEmpty
+      ? ErrorNotification(S.current.undoFailed,
+          S.current.undoFailedNum(errorList.length, total), errorList)
+      : SuccessNotification(
+          S.current.undoSuccessful, S.current.undoSuccessfulNum(total));
+  NotificationMessage.show(type);
+}
+
+typedef RenameInfo = (String id, String oldPath, String newPath);
+
+void renameTemp(WidgetRef ref) {
+  List<RenameInfo> temp = ref.watch(tempListProvider);
+  if (temp.isNotEmpty) {
+    for (final info in temp) {
+      renameFile(ref, info);
+      ref.read(tempListProvider.notifier).remove(info);
+    }
+    List<RenameInfo> newTemp = ref.watch(tempListProvider);
+    if (newTemp.isNotEmpty) {}
+  }
+}
+
+NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
+  final (id, oldPath, newPath) = renameInfo;
+  String extension = getFileExtension(oldPath);
+  bool isFolder = extension == folder;
+
+  if (File(newPath).existsSync()) {
+    List<FileInfo> list =
+        ref.watch(fileListProvider).where((e) => e.checked).toList();
+    FileInfo result =
+        list.firstWhere((e) => e.filePath == newPath, orElse: () => nullFile);
+    List<String> badList = ref.watch(badListProvider);
+    if (result == nullFile || badList.contains(newPath)) {
+      ref.read(badListProvider.notifier).add(oldPath);
+    }
+    if (result != nullFile && !badList.contains(newPath)) {
+      renameFile(ref, (id, oldPath, newPath + id));
+      ref.read(tempListProvider.notifier).add((id, newPath + id, newPath));
+      return null;
+    }
+    String oldName = path.basename(oldPath);
+    String newName = path.basename(newPath);
+    return NotificationInfo(
+        file: oldName, message: ' ${S.current.existsError(newName)}');
+  }
+
+  try {
+    if (isFolder) {
+      Directory(oldPath).renameSync(newPath);
+    } else {
+      File(oldPath).renameSync(newPath);
+    }
+    final fileInfo = ref.read(fileListProvider.notifier);
+    String name = path.basenameWithoutExtension(newPath);
+    fileInfo.updateOriginName(id, name);
+    fileInfo.updateFilePath(id, newPath);
+    String newExtension = getFileExtension(newPath);
+    fileInfo.updateOriginExtension(id, newExtension);
+    return null;
+  } catch (e) {
+    Log.e(e.runtimeType.toString());
+    String message = '';
+    if (e.runtimeType == PathNotFoundException) {
+      String parent = path.dirname(newPath);
+      message = ': ${S.current.notExistsError(parent)}';
+    } else {
+      message = S.current.failedError(e);
+    }
+    String fileName = path.basename(oldPath);
+    return NotificationInfo(file: fileName, message: message);
+  }
 }

@@ -36,6 +36,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(total) => "选中的 ${total} 个已全部重命名成功";
 
+  static String m8(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+
+  static String m9(total) => "选中的 ${total} 个已全部撤销重命名";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addFile": MessageLookupByLibrary.simpleMessage("添加文件"),
@@ -149,6 +153,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "text": MessageLookupByLibrary.simpleMessage("文本"),
         "tip": MessageLookupByLibrary.simpleMessage("拖动文件（夹）到这里"),
         "today": MessageLookupByLibrary.simpleMessage("今天日期"),
+        "undo": MessageLookupByLibrary.simpleMessage("撤销"),
+        "undoFailed": MessageLookupByLibrary.simpleMessage("撤销重命名失败"),
+        "undoFailedNum": m8,
+        "undoSuccessful": MessageLookupByLibrary.simpleMessage("已成功撤销"),
+        "undoSuccessfulNum": m9,
         "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("上传 .txt 文件"),
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),

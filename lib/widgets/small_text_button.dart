@@ -6,11 +6,13 @@ class SmallTextButton extends StatefulWidget {
     super.key,
     this.onTap,
     required this.text,
+    this.margin = 12,
     this.action,
   });
 
   final Function()? onTap;
   final String text;
+  final double margin;
   final Widget? action;
 
   @override
@@ -35,7 +37,7 @@ class _SmallTextButtonState extends State<SmallTextButton> {
 
     return Container(
       height: AppNum.bottomBarH,
-      margin: const EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(horizontal: widget.margin),
       alignment: Alignment.center,
       child: InkWell(
         onHover: onHover,

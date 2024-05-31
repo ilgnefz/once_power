@@ -61,5 +61,5 @@ final text = [
   'xlsx'
 ];
 final audio = ['aac', 'ape', 'flac', 'mp3', 'ogg', 'wav', 'wma'];
-final folder = ['dir'];
 final zip = ['zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'iso', 'dmg'];
+const String folder = 'dir';

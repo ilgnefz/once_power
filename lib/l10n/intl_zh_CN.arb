@@ -108,5 +108,10 @@
   "unselect": "取消选择",
   "delete": "删除",
   "matchName": "匹配名称",
-  "modifyName": "修改名称"
+  "modifyName": "修改名称",
+  "undo": "撤销",
+  "undoSuccessful": "已成功撤销",
+  "undoSuccessfulNum": "选中的 {total} 个已全部撤销重命名",
+  "undoFailed": "撤销重命名失败",
+  "undoFailedNum": "选中 {total} 个中 {count} 个取消重命名失败"
 }

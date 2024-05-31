@@ -34,7 +34,7 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$getFileClassifyHash() => r'06e7975cee32e4b3b3eec8979ead427d56e0e5ec';
+String _$getFileClassifyHash() => r'c9426f45552036b498e9b59109dd93cc1cfb392f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -226,5 +226,35 @@ final selectAllProvider = AutoDisposeNotifierProvider<SelectAll, bool>.internal(
 );
 
 typedef _$SelectAll = AutoDisposeNotifier<bool>;
+String _$tempListHash() => r'1bc790f0c4444f4c209fe419872e58349a5bd063';
+
+/// See also [TempList].
+@ProviderFor(TempList)
+final tempListProvider =
+    AutoDisposeNotifierProvider<TempList, List<RenameInfo>>.internal(
+  TempList.new,
+  name: r'tempListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$tempListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TempList = AutoDisposeNotifier<List<RenameInfo>>;
+String _$badListHash() => r'dc2a31e03c6cbeb2289cc45fd01002d99d310604';
+
+/// See also [BadList].
+@ProviderFor(BadList)
+final badListProvider =
+    AutoDisposeNotifierProvider<BadList, List<String>>.internal(
+  BadList.new,
+  name: r'badListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$badListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$BadList = AutoDisposeNotifier<List<String>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

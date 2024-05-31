@@ -1,6 +1,7 @@
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/types.dart';
+import 'package:once_power/provider/provider.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/core/rename.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -159,7 +160,7 @@ class SelectAll extends _$SelectAll {
 FileClassify getFileClassify(GetFileClassifyRef ref, String extension) {
   FileClassify classify = FileClassify.other;
   if (audio.contains(extension)) classify = FileClassify.audio;
-  if (folder.contains(extension)) classify = FileClassify.folder;
+  if (folder == extension) classify = FileClassify.folder;
   if (image.contains(extension)) classify = FileClassify.image;
   if (text.contains(extension)) classify = FileClassify.text;
   if (video.contains(extension)) classify = FileClassify.video;
@@ -174,4 +175,22 @@ List<FileClassify> classifyList(ClassifyListRef ref) {
     if (!classifyList.contains(e.type)) classifyList.add(e.type);
   }
   return classifyList;
+}
+
+@riverpod
+class TempList extends _$TempList {
+  @override
+  List<RenameInfo> build() => [];
+
+  void add(RenameInfo value) => state = [...state, value];
+  void remove(RenameInfo value) =>
+      state = state.where((e) => e != value).toList();
+}
+
+@riverpod
+class BadList extends _$BadList {
+  @override
+  List<String> build() => [];
+
+  void add(String value) => state = [...state, value];
 }

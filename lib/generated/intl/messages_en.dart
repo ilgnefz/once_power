@@ -38,6 +38,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m7(total) =>
       "All ${total} selected items have been successfully renamed";
 
+  static String m8(count, total) =>
+      "${count} out of ${total} selected undo renames failed";
+
+  static String m9(total) =>
+      "All ${total} selected items have been successfully undone";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addFile": MessageLookupByLibrary.simpleMessage("Add file"),
@@ -177,6 +183,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "undo": MessageLookupByLibrary.simpleMessage("Undo"),
+        "undoFailed":
+            MessageLookupByLibrary.simpleMessage("Undo rename failed"),
+        "undoFailedNum": m8,
+        "undoSuccessful":
+            MessageLookupByLibrary.simpleMessage("Undo Successful"),
+        "undoSuccessfulNum": m9,
         "unselect": MessageLookupByLibrary.simpleMessage("Unselect"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),

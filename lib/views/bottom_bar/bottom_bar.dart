@@ -5,6 +5,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/download_button.dart';
+import 'package:once_power/views/bottom_bar/undo_button.dart';
 import 'package:once_power/views/bottom_bar/view_mode_button.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/views/bottom_bar/save_button.dart';
@@ -45,6 +46,8 @@ class BottomBar extends ConsumerWidget {
           const EnableOrganizeCheckbox(),
           const SizedBox(width: AppNum.bottomBarInterval / 3),
           const LanguageToggle(),
+          const SizedBox(width: AppNum.bottomBarInterval / 3),
+          const UndoButton(),
           const Spacer(),
           Text(
             '$currentTask: $count/$total  $takeTime: ${cost}s',

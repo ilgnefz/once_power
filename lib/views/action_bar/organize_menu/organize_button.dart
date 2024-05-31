@@ -88,8 +88,7 @@ class OrganizeButton extends ConsumerWidget {
     }
 
     Future<void> realFile(WidgetRef ref, String filePath) async {
-      bool isFile = FileSystemEntity.isFileSync(filePath);
-      FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+      FileInfo fileInfo = await generateFileInfo(ref, filePath);
       realFiles.add(fileInfo);
     }
 

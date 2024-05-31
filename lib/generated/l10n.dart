@@ -1149,6 +1149,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Undo`
+  String get undo {
+    return Intl.message(
+      'Undo',
+      name: 'undo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Undo Successful`
+  String get undoSuccessful {
+    return Intl.message(
+      'Undo Successful',
+      name: 'undoSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All {total} selected items have been successfully undone`
+  String undoSuccessfulNum(Object total) {
+    return Intl.message(
+      'All $total selected items have been successfully undone',
+      name: 'undoSuccessfulNum',
+      desc: '',
+      args: [total],
+    );
+  }
+
+  /// `Undo rename failed`
+  String get undoFailed {
+    return Intl.message(
+      'Undo rename failed',
+      name: 'undoFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} out of {total} selected undo renames failed`
+  String undoFailedNum(Object count, Object total) {
+    return Intl.message(
+      '$count out of $total selected undo renames failed',
+      name: 'undoFailedNum',
+      desc: '',
+      args: [count, total],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

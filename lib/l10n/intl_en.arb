@@ -108,5 +108,10 @@
   "unselect": "Unselect",
   "delete": "Delete",
   "matchName": "Match name",
-  "modifyName": "Modify name"
+  "modifyName": "Modify name",
+  "undo": "Undo",
+  "undoSuccessful": "Undo Successful",
+  "undoSuccessfulNum": "All {total} selected items have been successfully undone",
+  "undoFailed": "Undo rename failed",
+  "undoFailedNum": "{count} out of {total} selected undo renames failed"
 }

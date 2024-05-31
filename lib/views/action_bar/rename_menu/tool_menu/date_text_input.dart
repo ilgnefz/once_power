@@ -43,22 +43,18 @@ class DateTextInput extends ConsumerWidget {
         String modifyText = ref.watch(modifyControllerProvider).text;
         await StorageUtil.setString(AppKeys.modifyCache, modifyText);
         ref.read(modifyControllerProvider).clear();
-        Log.i('before-modifyText: $modifyText');
         if (isReserve) {
           String matchText = ref.watch(matchControllerProvider).text;
           await StorageUtil.setString(AppKeys.matchCache, matchText);
           ref.read(matchControllerProvider).clear();
-          Log.i('before-matchText: $matchText');
         }
       }
 
       if (!dateRename) {
         String modifyCache = StorageUtil.getString(AppKeys.modifyCache) ?? '';
         ref.read(modifyControllerProvider.notifier).updateText(modifyCache);
-        Log.i('after-modifyCache: $modifyCache');
         if (isReserve) {
           String matchCache = StorageUtil.getString(AppKeys.matchCache) ?? '';
-          Log.i('after-matchCache: $matchCache');
           ref.read(matchControllerProvider.notifier).updateText(matchCache);
         }
       }

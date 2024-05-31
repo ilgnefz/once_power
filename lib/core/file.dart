@@ -63,7 +63,7 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
 
   ref.read(countProvider.notifier).update(count);
 
-  FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
+  FileInfo fileInfo = await generateFileInfo(ref, filePath);
   if (isViewMode && fileInfo.type != FileClassify.image) return;
   ref.read(fileListProvider.notifier).add(fileInfo);
 
@@ -92,27 +92,16 @@ List<String> getAllFile(String folder) {
   return children;
 }
 
-Future<FileInfo> generateFileInfo(
-    WidgetRef ref, String filePath, bool isFile) async {
+Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   String id = nanoid(10);
-  String name = path.basename(filePath);
+  String name = path.basenameWithoutExtension(filePath);
   String extension = 'dir';
   String parent = path.dirname(filePath);
   DateTime? exifDate;
   DateTime createDate = File(filePath).statSync().changed;
   DateTime modifyDate = File(filePath).statSync().modified;
-  if (isFile) {
-    extension = path.extension(filePath);
-    // 有可能文件没有扩展名
-    if (extension != '') {
-      name = name.substring(0, name.length - extension.length);
-      extension = extension.substring(1);
-    }
-    // 如果是图片就获取 exif 中的拍摄日期
-    if (image.contains(extension)) {
-      exifDate = await getExifDate(filePath);
-    }
-  }
+  extension = getFileExtension(filePath);
+  if (image.contains(extension)) exifDate = await getExifDate(filePath);
   FileClassify type = ref.read(getFileClassifyProvider(extension));
   FileInfo fileInfo = FileInfo(
     id: id,
@@ -122,6 +111,7 @@ Future<FileInfo> generateFileInfo(
     filePath: filePath,
     extension: extension,
     newExtension: extension,
+    beforePath: filePath,
     createdDate: createDate,
     modifiedDate: modifyDate,
     exifDate: exifDate,
