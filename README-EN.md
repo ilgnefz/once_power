@@ -21,6 +21,8 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Added undo function
+
 ## View Mode
 
 In view mode, you can directly view images for sorting. To enable view mode, simply switch to the bottom left corner (Switching to View Mode will automatically delete files other than images).
