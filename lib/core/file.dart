@@ -156,7 +156,7 @@ void deleteAll(WidgetRef ref) {
 
 void autoInput(WidgetRef ref, String fileName) {
   bool dateRename = ref.watch(dateRenameProvider);
-  if (dateRename) return;
+  if (dateRename) ref.read(dateRenameProvider.notifier).update();
   bool modifyNotEmpty = ref.watch(modifyClearProvider);
   FunctionMode mode = ref.watch(currentModeProvider);
   if (modifyNotEmpty && mode == FunctionMode.reserve) {
