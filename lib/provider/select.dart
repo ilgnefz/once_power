@@ -234,3 +234,10 @@ class ViewMode extends _$ViewMode {
     await StorageUtil.setBool(AppKeys.isViewMode, state);
   }
 }
+
+@riverpod
+class RefreshImage extends _$RefreshImage {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}

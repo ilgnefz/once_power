@@ -249,6 +249,8 @@ void undo(WidgetRef ref) async {
   int endTime = DateTime.now().microsecondsSinceEpoch;
   double cost = (endTime - startTime) / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  bool isViewMode = ref.watch(viewModeProvider);
+  if (isViewMode) ref.read(refreshImageProvider.notifier).update();
   updateName(ref);
   updateExtension(ref);
   NotificationType type = errorList.isNotEmpty

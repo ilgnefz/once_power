@@ -29,6 +29,8 @@ class ApplyButton extends ConsumerWidget {
       } else {
         await rename(ref, checkList, errorList);
       }
+      bool isViewMode = ref.watch(viewModeProvider);
+      if (isViewMode) ref.read(refreshImageProvider.notifier).update();
       updateName(ref);
       updateExtension(ref);
       NotificationType type = errorList.isNotEmpty

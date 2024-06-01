@@ -356,5 +356,20 @@ final viewModeProvider = AutoDisposeNotifierProvider<ViewMode, bool>.internal(
 );
 
 typedef _$ViewMode = AutoDisposeNotifier<bool>;
+String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
+
+/// See also [RefreshImage].
+@ProviderFor(RefreshImage)
+final refreshImageProvider =
+    AutoDisposeNotifierProvider<RefreshImage, bool>.internal(
+  RefreshImage.new,
+  name: r'refreshImageProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$refreshImageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RefreshImage = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
