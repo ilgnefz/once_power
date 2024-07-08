@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,9 +6,9 @@ import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/action_bar/organize_menu/target_folder_input.dart';
 import 'package:once_power/widgets/custom_text_button.dart';
 import 'package:once_power/widgets/custom_checkbox.dart';
-import 'package:once_power/widgets/input/base_input.dart';
 
 import 'organize_button.dart';
 import 'delete_folder_button.dart';
@@ -21,7 +19,6 @@ class OrganizeMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String targetFolder = S.of(context).targetFolder;
     final String saveLog = S.of(context).saveLog;
     final String selectFolder = S.of(context).selectFolder;
     final String appendMode = S.of(context).appendMode;
@@ -38,13 +35,6 @@ class OrganizeMenu extends ConsumerWidget {
         if (ref.watch(saveConfigProvider)) {
           StorageUtil.setString(AppKeys.targetFolder, folder);
         }
-      }
-    }
-
-    void onChanged(String folder) async {
-      controller.text = folder;
-      if (ref.watch(saveConfigProvider)) {
-        StorageUtil.setString(AppKeys.targetFolder, folder);
       }
     }
 
@@ -70,13 +60,7 @@ class OrganizeMenu extends ConsumerWidget {
       children: [
         const Expanded(child: DescriptionText()),
         const SizedBox(height: AppNum.gapH),
-        BaseInput(
-          hintText: targetFolder,
-          // readOnly: true,
-          controller: controller,
-          onChanged: onChanged,
-          show: ref.watch(targetClearProvider),
-        ),
+        const TargetFolderInput(),
         const SizedBox(height: AppNum.gapH),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

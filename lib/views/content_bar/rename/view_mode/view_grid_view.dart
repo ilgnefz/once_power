@@ -106,7 +106,7 @@ class ViewGridView extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: ViewModeTile(e),
+                child: ViewModeTile(files, e),
               ),
             );
           }).toList(),

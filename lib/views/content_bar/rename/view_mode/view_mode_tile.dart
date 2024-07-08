@@ -7,8 +7,9 @@ import 'package:once_power/views/content_bar/rename/view_mode/image_view.dart';
 import 'preview_view.dart';
 
 class ViewModeTile extends StatelessWidget {
-  const ViewModeTile(this.file, {super.key});
+  const ViewModeTile(this.files, this.file, {super.key});
 
+  final List<FileInfo> files;
   final FileInfo file;
 
   @override
@@ -16,7 +17,7 @@ class ViewModeTile extends StatelessWidget {
     void previewView() {
       showDialog(
         context: context,
-        builder: (context) => PreviewImageView(file.filePath),
+        builder: (context) => PreviewImageView(files, file),
       );
     }
 
