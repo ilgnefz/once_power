@@ -78,6 +78,7 @@ class OrganizeButton extends ConsumerWidget {
               message: '${S.of(context).moveError}: $e',
             ));
             Log.e(e.toString());
+            return;
           }
         }
 

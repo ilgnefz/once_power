@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,6 +41,13 @@ class OrganizeMenu extends ConsumerWidget {
       }
     }
 
+    void onChanged(String folder) async {
+      controller.text = folder;
+      if (ref.watch(saveConfigProvider)) {
+        StorageUtil.setString(AppKeys.targetFolder, folder);
+      }
+    }
+
     void addFile() async {
       final List<XFile> files = await openFiles();
       if (!append) ref.read(fileListProvider.notifier).clear();
@@ -65,6 +74,7 @@ class OrganizeMenu extends ConsumerWidget {
           hintText: targetFolder,
           // readOnly: true,
           controller: controller,
+          onChanged: onChanged,
           show: ref.watch(targetClearProvider),
         ),
         const SizedBox(height: AppNum.gapH),
