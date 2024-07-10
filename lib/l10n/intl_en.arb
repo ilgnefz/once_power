@@ -113,5 +113,9 @@
   "undoSuccessful": "Undo Successful",
   "undoSuccessfulNum": "All {total} selected items have been successfully undone",
   "undoFailed": "Undo rename failed",
-  "undoFailedNum": "{count} out of {total} selected undo renames failed"
+  "undoFailedNum": "{count} out of {total} selected undo renames failed",
+  "uploadCSV": "Upload CSV",
+  "tvSeriesInfo": "Get episode info",
+  "tableInfo": "Selected original name column: ",
+  "exit": "Exit"
 }

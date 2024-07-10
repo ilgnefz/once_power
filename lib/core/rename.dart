@@ -86,6 +86,8 @@ int actualIndex(dynamic ref, DateFormatMap dfMap, FileInfo file) {
 }
 
 void updateName(dynamic ref) {
+  // bool isCSV = ref.watch(cSVDataProvider).isNotEmpty;
+  // if (isCSV) return newFeatureRename(ref);
   List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
   // int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
@@ -324,5 +326,35 @@ NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
     }
     String fileName = path.basename(oldPath);
     return NotificationInfo(file: fileName, message: message);
+  }
+}
+
+void newFeatureRename(WidgetRef ref) {
+  List<FileInfo> list = ref.watch(fileListProvider);
+  List<EasyRenameInfo> easyList = ref.watch(easyRenameInfoListProvider);
+  bool isA = ref.watch(originNameColumnProvider) == 0;
+  EasyRenameInfo badInfo = EasyRenameInfo(nameA: '', nameB: '');
+  // print(easyList.toString());
+  for (FileInfo file in list) {
+    if (!file.checked) continue;
+    if (isA) {
+      EasyRenameInfo matching = easyList.firstWhere(
+        (e) => e.nameA == file.name,
+        orElse: () => badInfo,
+      );
+      if (matching != badInfo) {
+        ref.read(fileListProvider.notifier).updateName(file.id, matching.nameB);
+      } else {
+        ref.read(fileListProvider.notifier).updateName(file.id, file.name);
+      }
+    } else {
+      EasyRenameInfo matching = easyList.firstWhere((e) => e.nameB == file.name,
+          orElse: () => badInfo);
+      if (matching != badInfo) {
+        ref.read(fileListProvider.notifier).updateName(file.id, matching.nameA);
+      } else {
+        ref.read(fileListProvider.notifier).updateName(file.id, file.name);
+      }
+    }
   }
 }

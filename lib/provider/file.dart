@@ -191,6 +191,28 @@ class TempList extends _$TempList {
 class BadList extends _$BadList {
   @override
   List<String> build() => [];
-
   void add(String value) => state = [...state, value];
 }
+
+@riverpod
+class CSVData extends _$CSVData {
+  @override
+  List<List<String>> build() => [];
+  void update(List<List<String>> value) => state = value;
+}
+
+@riverpod
+List<EasyRenameInfo> easyRenameInfoList(EasyRenameInfoListRef ref) {
+  List<EasyRenameInfo> list = [];
+  for (var e in ref.watch(cSVDataProvider)) {
+    list.add(EasyRenameInfo(nameA: e.firstOrNull!, nameB: e.lastOrNull!));
+  }
+  return list;
+}
+
+// @riverpod
+// class EasyRenameList extends _$EasyRenameList {
+//   @override
+//   List<EasyRenameInfo> build() => ref.cSVDataProvider.map((e) => ).toList();
+//   void update(List<EasyRenameInfo> value) => state = value;
+// }

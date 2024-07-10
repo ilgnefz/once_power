@@ -197,6 +197,23 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
 );
 
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
+String _$easyRenameInfoListHash() =>
+    r'f50cd9df7222f93c32226f777b70c55706ae76dd';
+
+/// See also [easyRenameInfoList].
+@ProviderFor(easyRenameInfoList)
+final easyRenameInfoListProvider =
+    AutoDisposeProvider<List<EasyRenameInfo>>.internal(
+  easyRenameInfoList,
+  name: r'easyRenameInfoListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$easyRenameInfoListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
 String _$fileListHash() => r'18c16e18ee9093f8b32e5b4cab6c7c73efd5bd9a';
 
 /// See also [FileList].
@@ -256,5 +273,20 @@ final badListProvider =
 );
 
 typedef _$BadList = AutoDisposeNotifier<List<String>>;
+String _$cSVDataHash() => r'f191af1b6fec9422f6cdb24734d70af8f9b8db11';
+
+/// See also [CSVData].
+@ProviderFor(CSVData)
+final cSVDataProvider =
+    AutoDisposeNotifierProvider<CSVData, List<List<String>>>.internal(
+  CSVData.new,
+  name: r'cSVDataProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cSVDataHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CSVData = AutoDisposeNotifier<List<List<String>>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

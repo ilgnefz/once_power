@@ -87,3 +87,10 @@ LanguageType currentLanguage(CurrentLanguageRef ref) {
   if (locale == const Locale('en', 'US')) return LanguageType.english;
   return LanguageType.chinese;
 }
+
+@riverpod
+class OriginNameColumn extends _$OriginNameColumn {
+  @override
+  int build() => 0;
+  void update(int value) => state = value;
+}

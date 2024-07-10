@@ -1199,6 +1199,46 @@ class S {
       args: [count, total],
     );
   }
+
+  /// `Upload CSV`
+  String get uploadCSV {
+    return Intl.message(
+      'Upload CSV',
+      name: 'uploadCSV',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get episode info`
+  String get tvSeriesInfo {
+    return Intl.message(
+      'Get episode info',
+      name: 'tvSeriesInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected original name column: `
+  String get tableInfo {
+    return Intl.message(
+      'Selected original name column: ',
+      name: 'tableInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message(
+      'Exit',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

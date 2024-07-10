@@ -115,5 +115,21 @@ final languageProvider =
 );
 
 typedef _$Language = AutoDisposeNotifier<Locale?>;
+String _$originNameColumnHash() => r'66dba04013493f1d06a1803e56120197cef63203';
+
+/// See also [OriginNameColumn].
+@ProviderFor(OriginNameColumn)
+final originNameColumnProvider =
+    AutoDisposeNotifierProvider<OriginNameColumn, int>.internal(
+  OriginNameColumn.new,
+  name: r'originNameColumnProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$originNameColumnHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$OriginNameColumn = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

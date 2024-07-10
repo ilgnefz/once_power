@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Saved Configurations Enabled"),
         "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
         "existsError": m1,
+        "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "extension": MessageLookupByLibrary.simpleMessage("Type"),
         "extensionDesc":
             MessageLookupByLibrary.simpleMessage("Modify file extensions"),
@@ -175,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Swap prefixes and incremental number positions"),
         "swapSuffixDesc": MessageLookupByLibrary.simpleMessage(
             "Swap suffixes and incremental number positions"),
+        "tableInfo": MessageLookupByLibrary.simpleMessage(
+            "Selected original name column: "),
         "takeTime": MessageLookupByLibrary.simpleMessage("Time"),
         "targetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
         "targetFolderDesc": MessageLookupByLibrary.simpleMessage(
@@ -183,6 +186,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "tvSeriesInfo":
+            MessageLookupByLibrary.simpleMessage("Get episode info"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "undoFailed":
             MessageLookupByLibrary.simpleMessage("Undo rename failed"),
@@ -191,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Undo Successful"),
         "undoSuccessfulNum": m9,
         "unselect": MessageLookupByLibrary.simpleMessage("Unselect"),
+        "uploadCSV": MessageLookupByLibrary.simpleMessage("Upload CSV"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),

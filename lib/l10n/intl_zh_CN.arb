@@ -113,5 +113,9 @@
   "undoSuccessful": "已成功撤销",
   "undoSuccessfulNum": "选中的 {total} 个已全部撤销重命名",
   "undoFailed": "撤销重命名失败",
-  "undoFailedNum": "选中 {total} 个中 {count} 个取消重命名失败"
+  "undoFailedNum": "选中 {total} 个中 {count} 个取消重命名失败",
+  "uploadCSV": "上传CSV文件",
+  "tvSeriesInfo": "获取剧集信息",
+  "tableInfo": "已选择原名称列为：",
+  "exit": "退出"
 }

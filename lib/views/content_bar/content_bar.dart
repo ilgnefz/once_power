@@ -102,6 +102,7 @@ class BuildListView extends ConsumerWidget {
     return CustomScrollbar(
       controller: controller,
       child: ReorderableListView.builder(
+        scrollController: controller,
         itemCount: files.length,
         padding: const EdgeInsets.only(right: AppNum.contentRP),
         buildDefaultDragHandles: false,

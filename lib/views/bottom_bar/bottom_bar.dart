@@ -5,7 +5,9 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/download_button.dart';
+import 'package:once_power/views/bottom_bar/get_tv_info.dart';
 import 'package:once_power/views/bottom_bar/undo_button.dart';
+import 'package:once_power/views/bottom_bar/upload_csv.dart';
 import 'package:once_power/views/bottom_bar/view_mode_button.dart';
 import 'package:once_power/views/bottom_bar/language_toggle.dart';
 import 'package:once_power/views/bottom_bar/save_button.dart';
@@ -42,6 +44,10 @@ class BottomBar extends ConsumerWidget {
           const SaveButton(),
           const SizedBox(width: AppNum.bottomBarInterval - 4),
           const ViewModeButton(),
+          const SizedBox(width: AppNum.bottomBarInterval - 4),
+          const GetTvInfo(),
+          const SizedBox(width: AppNum.bottomBarInterval - 4),
+          const UploadCSV(),
           const SizedBox(width: AppNum.bottomBarInterval - 4),
           const EnableOrganizeCheckbox(),
           const SizedBox(width: AppNum.bottomBarInterval / 3),

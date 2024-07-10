@@ -36,3 +36,18 @@ class FileInfo {
     return 'FileInfo(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, exifDate: $exifDate, type: $type, checked: $checked)';
   }
 }
+
+class EasyRenameInfo {
+  String nameA;
+  String nameB;
+
+  EasyRenameInfo({
+    required this.nameA,
+    required this.nameB,
+  });
+
+  @override
+  String toString() {
+    return 'EasyRenameInfo(nameA: $nameA, nameB: $nameB)';
+  }
+}
