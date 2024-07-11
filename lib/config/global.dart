@@ -9,6 +9,7 @@ class Global {
     await PackageDesc.init();
 
     await StorageUtil.init();
+    StorageUtil.remove(AppKeys.apiKey);
     Log.init();
     saveOrNo();
 

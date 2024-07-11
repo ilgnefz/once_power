@@ -5,6 +5,7 @@ class AppKeys {
   // static String prefixText = 'prefixText';
   // static String suffixText = 'suffixText';
   // static String extensionText = 'extensionText';
+  static String apiKey = 'apiKey';
   static String targetFolder = 'targetFolder';
 
   // int

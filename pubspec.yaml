@@ -65,6 +65,10 @@ dependencies:
   vs_scrollbar: ^1.0.0
   extended_text: ^13.0.2
   reorderable_grid: ^1.0.10
+  pretty_dio_logger: ^1.3.1
+  dio_cookie_manager: ^3.1.1
+  dio_cache_interceptor: ^3.5.0
+  cookie_jar: ^4.0.8
 
 dev_dependencies:
   flutter_test:
@@ -107,6 +111,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - .tmdb_secret
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -4,7 +4,6 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/provider.dart';
-import 'package:once_power/views/action_bar/csv_data/csv_data.dart';
 import 'package:once_power/widgets/function_mode_card.dart';
 
 import 'csv_data/csv_data_title.dart';
