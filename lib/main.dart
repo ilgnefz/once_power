@@ -5,9 +5,6 @@ import 'package:once_power/config/config.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/views/home.dart';
 
-// TODO 添加上传 excel 或 csv 文件重命名的功能
-// TODO 添加自动重命名视频文件名的功能
-
 void main() async {
   await Global.init();
   runApp(const ProviderScope(child: MyApp()));
