@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | English
 
-OncePower is a file batch renaming tool that adds the ability to batch delete empty folders and move files.
+OncePower is a file and folder batch renaming utility with additional features of batch deleting empty folders and batch moving files, allowing users to do advanced matching without learning regular expressions.
 
 The original intention of software development was to batch rename images, so the new version has updated a new feature specifically for image renaming —— **View Mode**.
 > [!Tip]
