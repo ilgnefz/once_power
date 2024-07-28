@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/model.dart';
+import 'package:once_power/provider/file.dart';
 
 import 'err_image.dart';
 
@@ -51,8 +52,12 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
   void delete() {
     String id = widget.files[index].id;
     deleteOne(ref, id);
-    next();
-    setState(() {});
+    if (ref.watch(fileListProvider).isNotEmpty) {
+      next();
+      setState(() {});
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   void onKeyEvent(KeyEvent e) {
