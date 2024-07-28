@@ -74,8 +74,12 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
     }
   }
 
-  updateName(ref);
-  updateExtension(ref);
+  if (ref.watch(cSVDataProvider).isNotEmpty) {
+    newFeatureRename(ref);
+  } else {
+    updateName(ref);
+    updateExtension(ref);
+  }
 }
 
 List<String> getAllFile(String folder) {

@@ -153,6 +153,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.0"
+  charset:
+    dependency: "direct main"
+    description:
+      name: charset
+      sha256: "27802032a581e01ac565904ece8c8962564b1070690794f0072f6865958ce8b9"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   checked_yaml:
     dependency: transitive
     description:
@@ -1054,10 +1062,10 @@ packages:
     dependency: "direct main"
     description:
       name: tolyui_feedback
-      sha256: "0efc505b83fbb3546344a9c94988938954c11f8680a9ed9e226ff82fe924053d"
+      sha256: fe1ec59e888f81298cb157d8006abed74be1fe53a14291d925ac8900ee7fa83b
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.4+4"
+    version: "0.3.4+5"
   tolyui_message:
     dependency: transitive
     description:
