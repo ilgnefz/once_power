@@ -2,21 +2,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/model/model.dart';
 
 import 'err_image.dart';
 
-class PreviewImageView extends StatefulWidget {
+class PreviewImageView extends ConsumerStatefulWidget {
   const PreviewImageView(this.files, this.file, {super.key});
 
   final List<FileInfo> files;
   final FileInfo file;
 
   @override
-  State<PreviewImageView> createState() => _PreviewImageViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PreviewImageViewState();
 }
 
-class _PreviewImageViewState extends State<PreviewImageView> {
+class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
   List<Shadow> shadow = [
     Shadow(
       color: Colors.black.withOpacity(.4),
@@ -45,6 +48,13 @@ class _PreviewImageViewState extends State<PreviewImageView> {
     setState(() {});
   }
 
+  void delete() {
+    String id = widget.files[index].id;
+    deleteOne(ref, id);
+    next();
+    setState(() {});
+  }
+
   void onKeyEvent(KeyEvent e) {
     if (e is KeyUpEvent) {
       if (e.physicalKey == PhysicalKeyboardKey.arrowLeft ||
@@ -53,6 +63,8 @@ class _PreviewImageViewState extends State<PreviewImageView> {
       } else if (e.physicalKey == PhysicalKeyboardKey.arrowRight ||
           e.physicalKey == PhysicalKeyboardKey.arrowDown) {
         next();
+      } else if (e.physicalKey == PhysicalKeyboardKey.delete) {
+        delete();
       }
     }
   }

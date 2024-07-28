@@ -23,6 +23,8 @@ The original intention of software development was to batch rename images, so th
 
 ## Upload CSV file renaming
 
+*Note: Currently unable to recognize Korean, Tibetan, or other text in CSV files (can recognize Japanese)*
+
 Click the button in the bottom right corner to upload a CSV file, only the values in the first two columns of the CSV file will be read
 
 ![14](doc/14.gif)
