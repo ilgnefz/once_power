@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
         "enableSaveConfig": MessageLookupByLibrary.simpleMessage(
             "Saved Configurations Enabled"),
+        "errorImage": MessageLookupByLibrary.simpleMessage("Load Fail "),
         "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
         "existsError": m1,
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
@@ -109,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
         "lengthDesc": MessageLookupByLibrary.simpleMessage(
             "Input length truncation (adding a space between two numbers to truncate the middle part)"),
+        "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
         "log": MessageLookupByLibrary.simpleMessage("Log"),
         "logDesc": MessageLookupByLibrary.simpleMessage(
             "Saved logs will be in the target folder"),
@@ -184,7 +186,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Defaults to the parent folder of the first file added to the list or the folder itself"),
         "text": MessageLookupByLibrary.simpleMessage("Text"),
         "tip":
-            MessageLookupByLibrary.simpleMessage("Drag the file (folder) here"),
+            MessageLookupByLibrary.simpleMessage("Drag the File/Folder here"),
+        "tipImage": MessageLookupByLibrary.simpleMessage(
+            "Drag the Picture File/Folder here"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "tvSeriesInfo":
             MessageLookupByLibrary.simpleMessage("Get episode info"),

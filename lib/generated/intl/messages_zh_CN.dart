@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "earliestDate": MessageLookupByLibrary.simpleMessage("最早日期"),
         "enableSaveConfig": MessageLookupByLibrary.simpleMessage("已开启保存配置"),
+        "errorImage": MessageLookupByLibrary.simpleMessage("加载失败 "),
         "exifDate": MessageLookupByLibrary.simpleMessage("拍摄日期"),
         "existsError": m1,
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
@@ -95,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
         "lengthDesc":
             MessageLookupByLibrary.simpleMessage("输入长度截取（两个数字之间加空格截取中间部分）"),
+        "loadingImage": MessageLookupByLibrary.simpleMessage("加载中..."),
         "log": MessageLookupByLibrary.simpleMessage("日志"),
         "logDesc": MessageLookupByLibrary.simpleMessage("保存的日志会在目标文件夹内"),
         "match": MessageLookupByLibrary.simpleMessage("匹配的"),
@@ -154,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("默认为列表第一个添加的文件的父文件夹或文件夹本身"),
         "text": MessageLookupByLibrary.simpleMessage("文本"),
         "tip": MessageLookupByLibrary.simpleMessage("拖动文件（夹）到这里"),
+        "tipImage": MessageLookupByLibrary.simpleMessage("拖动图片文件（夹）到这里"),
         "today": MessageLookupByLibrary.simpleMessage("今天日期"),
         "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("获取剧集信息"),
         "undo": MessageLookupByLibrary.simpleMessage("撤销"),

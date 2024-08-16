@@ -20,10 +20,10 @@ class OrganizeMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String saveLog = S.of(context).saveLog;
-    final String selectFolder = S.of(context).selectFolder;
+    final String selectFolderLabel = S.of(context).selectTargetFolder;
     final String appendMode = S.of(context).appendMode;
-    final String addFileText = S.of(context).addFile;
-    final String addFolderText = S.of(context).addFolder;
+    final String addFileLabel = S.of(context).addFile;
+    final String addFolderLabel = S.of(context).addFolder;
 
     bool append = ref.watch(appendModeProvider);
     TextEditingController controller = ref.watch(targetControllerProvider);
@@ -70,7 +70,7 @@ class OrganizeMenu extends ConsumerWidget {
               checked: ref.watch(saveLogProvider),
               onChanged: (v) => ref.read(saveLogProvider.notifier).update(),
             ),
-            CustomTextButton(selectFolder, onTap: selectTargetFolder),
+            CustomTextButton(selectFolderLabel, onTap: selectTargetFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),
@@ -82,9 +82,9 @@ class OrganizeMenu extends ConsumerWidget {
               onChanged: (v) => ref.read(appendModeProvider.notifier).update(),
             ),
             const Spacer(),
-            CustomTextButton(addFileText, onTap: addFile),
+            CustomTextButton(addFileLabel, onTap: addFile),
             const SizedBox(width: AppNum.gapW),
-            CustomTextButton(addFolderText, onTap: addFolder),
+            CustomTextButton(addFolderLabel, onTap: addFolder),
           ],
         ),
         const SizedBox(height: AppNum.gapH),

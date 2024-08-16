@@ -360,6 +360,16 @@ class S {
     );
   }
 
+  /// `Select target folder`
+  String get selectTargetFolder {
+    return Intl.message(
+      'Select target folder',
+      name: 'selectTargetFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Apply`
   String get applyChange {
     return Intl.message(
@@ -610,16 +620,6 @@ class S {
     );
   }
 
-  /// `Select target folder`
-  String get selectTargetFolder {
-    return Intl.message(
-      'Select target folder',
-      name: 'selectTargetFolder',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Delete folder`
   String get deleteEmptyFolder {
     return Intl.message(
@@ -830,11 +830,21 @@ class S {
     );
   }
 
-  /// `Drag the file (folder) here`
+  /// `Drag the File/Folder here`
   String get tip {
     return Intl.message(
-      'Drag the file (folder) here',
+      'Drag the File/Folder here',
       name: 'tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drag the Picture File/Folder here`
+  String get tipImage {
+    return Intl.message(
+      'Drag the Picture File/Folder here',
+      name: 'tipImage',
       desc: '',
       args: [],
     );
@@ -1235,6 +1245,26 @@ class S {
     return Intl.message(
       'Exit',
       name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loadingImage {
+    return Intl.message(
+      'Loading...',
+      name: 'loadingImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load Fail `
+  String get errorImage {
+    return Intl.message(
+      'Load Fail ',
+      name: 'errorImage',
       desc: '',
       args: [],
     );

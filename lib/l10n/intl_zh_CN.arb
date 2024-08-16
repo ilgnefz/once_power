@@ -30,6 +30,7 @@
   "addFile": "添加文件",
   "addFolder": "添加文件夹",
   "selectFolder": "选择文件夹",
+  "selectTargetFolder": "选择目标文件夹",
   "applyChange": "应用更改",
   "lengthDesc": "输入长度截取（两个数字之间加空格截取中间部分）",
   "caseDesc": "区分大小写",
@@ -78,6 +79,7 @@
   "openFolder": "打开文件夹",
   "openFolderDesc": "双击右边文件列表，可以快速打开文件所在文件夹",
   "tip": "拖动文件（夹）到这里",
+  "tipImage": "拖动图片文件（夹）到这里",
   "uploadDesc": "上传 .txt 文件",
   "download": "下载",
   "existsError": "重命名为 {name} 的文件已存在",
@@ -117,5 +119,7 @@
   "uploadCSV": "上传CSV文件",
   "tvSeriesInfo": "获取剧集信息",
   "tableInfo": "已选择原名称列为：",
-  "exit": "退出"
+  "exit": "退出",
+  "loadingImage": "加载中...",
+  "errorImage": "加载失败 "
 }

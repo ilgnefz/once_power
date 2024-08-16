@@ -94,7 +94,7 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
                   fit: BoxFit.scaleDown,
                   cacheHeight: MediaQuery.of(context).size.height.toInt(),
                   errorBuilder: (context, exception, stackTrace) =>
-                      const ErrorImage(),
+                      const ErrorImage(isPreview: true),
                 ),
               ),
             ),

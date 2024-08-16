@@ -30,6 +30,7 @@
   "addFile": "Add file",
   "addFolder": "Add folder",
   "selectFolder": "Select folder",
+  "selectTargetFolder": "Select target folder",
   "applyChange": "Apply",
   "lengthDesc": "Input length truncation (adding a space between two numbers to truncate the middle part)",
   "caseDesc": "Case sensitive",
@@ -77,7 +78,8 @@
   "organizeFolderDesc": "Move all added files or all sub-files under a folder into the destination folder",
   "openFolder": "Open Folder",
   "openFolderDesc": "Double-click on the list of files on the right to quickly open the folder where the file is located",
-  "tip": "Drag the file (folder) here",
+  "tip": "Drag the File/Folder here",
+  "tipImage": "Drag the Picture File/Folder here",
   "uploadDesc": "Upload .txt file",
   "download": "Download",
   "existsError": " The file renamed to {name} already exists",
@@ -117,5 +119,7 @@
   "uploadCSV": "Upload CSV",
   "tvSeriesInfo": "Get episode info",
   "tableInfo": "Selected original name column: ",
-  "exit": "Exit"
+  "exit": "Exit",
+  "loadingImage": "Loading...",
+  "errorImage": "Load Fail "
 }
