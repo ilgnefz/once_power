@@ -16,13 +16,18 @@ import 'core.dart';
 void formatXFile(WidgetRef ref, List<XFile> files) async {
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
+  final paths = files.map((e) => e.path).toList();
+  toFormatFile(ref, paths);
+}
+
+void toFormatFile(WidgetRef ref, List<String> files) async {
   int count = 0;
   ref.read(totalProvider.notifier).update(files.length);
   bool delay = files.length > AppNum.maxFileNum;
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (var file in files) {
     count++;
-    formatFile(ref, file.path, count);
+    formatFile(ref, file, count);
     if (delay) await Future.delayed(const Duration(microseconds: 1));
   }
   int endTime = DateTime.now().microsecondsSinceEpoch;
@@ -42,22 +47,10 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool isViewMode = ref.watch(viewModeProvider);
 
-  // 如果不是添加文件夹或者是推添加文件夹但是是是视图模式，并且添加的不是文件且不是整理模式
-  if ((!addFolder || addFolder && isViewMode) &&
-      (!isFile && mode != FunctionMode.organize)) {
+  // 如果不是添加文件夹并且添加的不是文件且不是整理模式
+  if (!addFolder && (!isFile && mode != FunctionMode.organize)) {
     final list = getAllFile(filePath);
-    int count = 0;
-    ref.read(totalProvider.notifier).update(list.length);
-    bool delay = list.length > AppNum.maxFileNum;
-    int startTime = DateTime.now().microsecondsSinceEpoch;
-    for (var file in list) {
-      count++;
-      formatFile(ref, file, count);
-      if (delay) await Future.delayed(const Duration(microseconds: 1));
-    }
-    int endTime = DateTime.now().microsecondsSinceEpoch;
-    double cost = (endTime - startTime) / 1000000;
-    ref.read(costProvider.notifier).update(cost);
+    toFormatFile(ref, list);
     return;
   }
 
