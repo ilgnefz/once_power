@@ -1,5 +1,10 @@
 {
   "info": [{
+    "version": "2.8.5",
+    "description": [
+      "优化了部分用户体验"
+    ]
+  },{
     "version": "2.8.4",
     "description": [
       "修复了CSV文件包含中文时出错的BUG"

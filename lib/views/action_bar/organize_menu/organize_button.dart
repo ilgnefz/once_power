@@ -114,9 +114,18 @@ class OrganizeButton extends ConsumerWidget {
         }
         realFiles.add(file);
       }
+      int count = 0;
+      int startTime = DateTime.now().microsecondsSinceEpoch;
       for (var file in realFiles) {
+        count++;
         moveFile(file);
+        ref.read(countProvider.notifier).update(count);
+        await Future.delayed(const Duration(microseconds: 1));
       }
+      int endTime = DateTime.now().microsecondsSinceEpoch;
+      double cost = (endTime - startTime) / 1000000;
+      ref.read(costProvider.notifier).update(cost);
+      if (!context.mounted) return;
       NotificationType type = errorList.isEmpty
           ? SuccessNotification(S.of(context).organizedSuccessfully,
               S.of(context).organizedSuccessfullyInfo)
