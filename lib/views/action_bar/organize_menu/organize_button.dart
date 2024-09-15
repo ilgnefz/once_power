@@ -139,7 +139,7 @@ class OrganizeButton extends ConsumerWidget {
           ref.watch(fileListProvider).isEmpty || !ref.watch(targetClearProvider)
               ? null
               : organizeFolder,
-      child: Text(S.of(context).organizeFolder),
+      child: Text(S.of(context).organizeMenu),
     );
   }
 }

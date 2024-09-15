@@ -57,7 +57,7 @@
   "targetFolder": "Target folder",
   "saveLog": "Save log",
   "deleteEmptyFolder": "Delete folder",
-  "organizeFolder": "Organize folder",
+  "organizeMenu": "Organize menu",
   "organizeDesc": "Enable file organization",
   "enableSaveConfig": "Saved Configurations Enabled",
   "closeSaveConfig": "Saved configurations not enabled",

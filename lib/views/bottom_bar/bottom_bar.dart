@@ -4,13 +4,14 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/provider.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/bottom_bar/download_button.dart';
-import 'package:once_power/views/bottom_bar/undo_button.dart';
-import 'package:once_power/views/bottom_bar/upload_csv.dart';
-import 'package:once_power/views/bottom_bar/view_mode_button.dart';
-import 'package:once_power/views/bottom_bar/language_toggle.dart';
-import 'package:once_power/views/bottom_bar/save_button.dart';
 
+import 'download_button.dart';
+import 'log_button.dart';
+import 'undo_button.dart';
+import 'upload_csv.dart';
+import 'view_mode_button.dart';
+import 'language_toggle.dart';
+import 'save_button.dart';
 import 'check_version.dart';
 import 'enable_organize_checkbox.dart';
 import 'repo_url.dart';
@@ -41,15 +42,17 @@ class BottomBar extends ConsumerWidget {
       child: Row(
         children: [
           const SaveButton(),
-          const SizedBox(width: AppNum.bottomBarInterval - 4),
+          const SizedBox(width: AppNum.bottomBtnInterval),
+          // const LogButton(),
+          // const SizedBox(width: AppNum.bottomBtnInterval),
           const ViewModeButton(),
-          const SizedBox(width: AppNum.bottomBarInterval - 4),
+          const SizedBox(width: AppNum.bottomBtnInterval),
           const UploadCSV(),
-          const SizedBox(width: AppNum.bottomBarInterval - 4),
+          const SizedBox(width: AppNum.bottomBtnInterval),
           const EnableOrganizeCheckbox(),
-          const SizedBox(width: AppNum.bottomBarInterval / 3),
+          const SizedBox(width: AppNum.bottomBtnInterval - 4),
           const LanguageToggle(),
-          const SizedBox(width: AppNum.bottomBarInterval / 3),
+          const SizedBox(width: AppNum.bottomBtnInterval - 4),
           const UndoButton(),
           const Spacer(),
           Text(

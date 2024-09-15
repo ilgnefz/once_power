@@ -44,7 +44,7 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganizeCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    final String arrangeFile = S.of(context).organizeFolder;
+    final String arrangeFile = S.of(context).organizeMenu;
 
     return InkWell(
       onTap: onChange,

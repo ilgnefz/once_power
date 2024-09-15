@@ -630,11 +630,11 @@ class S {
     );
   }
 
-  /// `Organize folder`
-  String get organizeFolder {
+  /// `Organize menu`
+  String get organizeMenu {
     return Intl.message(
-      'Organize folder',
-      name: 'organizeFolder',
+      'Organize menu',
+      name: 'organizeMenu',
       desc: '',
       args: [],
     );

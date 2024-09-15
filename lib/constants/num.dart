@@ -14,6 +14,7 @@ class AppNum {
   static const double bottomBarH = 32;
   static const double bottomBarP = 12;
   static const double bottomBarInterval = 12;
+  static const double bottomBtnInterval = 6;
   static const double topMenuH = 40;
   // static const double modeCardW = 56;
   static const double modeCardM = 18;

@@ -138,11 +138,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "organize": MessageLookupByLibrary.simpleMessage("Organize"),
         "organizeDesc":
             MessageLookupByLibrary.simpleMessage("Enable file organization"),
-        "organizeFolder":
-            MessageLookupByLibrary.simpleMessage("Organize folder"),
         "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Move all added files or all sub-files under a folder into the destination folder"),
         "organizeLogs": MessageLookupByLibrary.simpleMessage("organize logs"),
+        "organizeMenu": MessageLookupByLibrary.simpleMessage("Organize menu"),
         "organizedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Organized successfully"),
         "organizedSuccessfullyInfo": MessageLookupByLibrary.simpleMessage(

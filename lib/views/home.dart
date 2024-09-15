@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:once_power/config/global.dart';
 import 'package:once_power/views/action_bar/action_bar.dart';
@@ -36,6 +38,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
   void onWindowClose() async {
     saveOrNo();
     await windowManager.destroy();
+    exit(0);
   }
 
   @override

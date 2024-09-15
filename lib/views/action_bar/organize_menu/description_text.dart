@@ -31,7 +31,7 @@ class DescriptionText extends StatelessWidget {
         ),
         const SizedBox(height: AppNum.gapH / 2),
         BaseRichText(
-          title: S.of(context).organizeFolder,
+          title: S.of(context).organizeMenu,
           content: S.of(context).organizeFolderDesc,
         ),
         const SizedBox(height: AppNum.gapH / 2),
