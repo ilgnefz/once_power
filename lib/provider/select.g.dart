@@ -371,5 +371,36 @@ final refreshImageProvider =
 );
 
 typedef _$RefreshImage = AutoDisposeNotifier<bool>;
+String _$addSubfolderHash() => r'494945f00d74a968dd4c92db9be9e3b073167584';
+
+/// See also [AddSubfolder].
+@ProviderFor(AddSubfolder)
+final addSubfolderProvider =
+    AutoDisposeNotifierProvider<AddSubfolder, bool>.internal(
+  AddSubfolder.new,
+  name: r'addSubfolderProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$addSubfolderHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AddSubfolder = AutoDisposeNotifier<bool>;
+String _$saveRenameLogHash() => r'a723efb6392da1949836541ef3d714e284a4d818';
+
+/// See also [SaveRenameLog].
+@ProviderFor(SaveRenameLog)
+final saveRenameLogProvider =
+    AutoDisposeNotifierProvider<SaveRenameLog, bool>.internal(
+  SaveRenameLog.new,
+  name: r'saveRenameLogProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$saveRenameLogHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SaveRenameLog = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

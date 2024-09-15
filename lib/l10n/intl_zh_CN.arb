@@ -56,7 +56,6 @@
   "extension": "扩展",
   "targetFolder": "目标文件夹",
   "saveLog": "保存日志",
-  "selectTargetFolder": "选择目标文件夹",
   "deleteEmptyFolder": "删除空文件夹",
   "organizeFolder": "整理文件夹",
   "organizeDesc": "整理文件",
@@ -121,5 +120,6 @@
   "tableInfo": "已选择原名称列为：",
   "exit": "退出",
   "loadingImage": "加载中...",
-  "errorImage": "加载失败 "
+  "errorImage": "加载失败 ",
+  "addSubfolder": "获取文件夹的子文件夹"
 }

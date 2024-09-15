@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addFile": MessageLookupByLibrary.simpleMessage("Add file"),
         "addFolder": MessageLookupByLibrary.simpleMessage("Add folder"),
+        "addSubfolder": MessageLookupByLibrary.simpleMessage(
+            "Gets the subfolder of the folder"),
         "after": MessageLookupByLibrary.simpleMessage("After"),
         "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),

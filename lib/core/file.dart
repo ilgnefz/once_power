@@ -36,24 +36,43 @@ void toFormatFile(WidgetRef ref, List<String> files) async {
 }
 
 void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
+  // 查看是否是附加模式
   bool append = ref.watch(appendModeProvider);
+  // 是否添加文件夹
   bool addFolder = ref.watch(addFolderProvider);
+  // 附加模式下查看新加的文件是否已经存在
   if (append) {
     final files = ref.watch(fileListProvider);
     if (files.any((e) => e.filePath == filePath)) return;
   }
 
+  // 查看当前文件是不是文件
   bool isFile = FileSystemEntity.isFileSync(filePath);
+  // 查看当前菜单模式
   FunctionMode mode = ref.watch(currentModeProvider);
+  // 查看是不是视图模式
   bool isViewMode = ref.watch(viewModeProvider);
 
-  // 如果不是添加文件夹并且添加的不是文件且不是整理模式
+  // 如果没有勾选添加文件夹，并且传入的路径是一个文件夹，并且不是整理模式
+  // 获取当前路径下的所有子文件
   if (!addFolder && (!isFile && mode != FunctionMode.organize)) {
     final list = getAllFile(filePath);
     toFormatFile(ref, list);
     return;
   }
 
+  // 查看是否添加子文件夹
+  bool addSubfolder = ref.watch(addSubfolderProvider);
+
+  // 如果勾选了添加文件夹，并且传入的是文件夹并还勾选了添加子文件夹
+  // 获取文件夹下的所有子文件夹
+  if (addFolder && !isFile && addSubfolder && mode != FunctionMode.organize) {
+    //   获取文件夹下的所有子文件夹
+    final list = getAllFile(filePath, true);
+    if (list.isNotEmpty) toFormatFile(ref, list);
+  }
+
+  // 更新 count 的值
   ref.read(countProvider.notifier).update(count);
 
   FileInfo fileInfo = await generateFileInfo(ref, filePath);
@@ -75,15 +94,18 @@ void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
   }
 }
 
-List<String> getAllFile(String folder) {
+List<String> getAllFile(String folder, [bool addChild = false]) {
   Directory directory = Directory(folder);
   List<String> children = [];
-  List<FileSystemEntity> files = directory.listSync(recursive: true);
+  List<FileSystemEntity> files = directory.listSync(recursive: !addChild);
   for (var file in files) {
-    if (FileSystemEntity.isFileSync(file.path)) {
+    if (FileSystemEntity.isFileSync(file.path) && !addChild) {
       String extension = path.extension(file.path);
       extension = extension == '' ? extension : extension.substring(1);
       if (!filter.contains(extension)) children.add(file.path);
+    }
+    if (addChild && FileSystemEntity.isDirectorySync(file.path)) {
+      children.add(file.path);
     }
   }
   return children;

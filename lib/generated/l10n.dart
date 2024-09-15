@@ -1269,6 +1269,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Gets the subfolder of the folder`
+  String get addSubfolder {
+    return Intl.message(
+      'Gets the subfolder of the folder',
+      name: 'addSubfolder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -9,12 +9,14 @@ class BoxCard extends StatelessWidget {
     this.icon, {
     super.key,
     required this.message,
+    this.iconSize = 20,
     required this.selected,
     required this.onTap,
   });
 
   final String message;
   final String icon;
+  final double iconSize;
   final bool selected;
   final void Function() onTap;
 
@@ -37,7 +39,11 @@ class BoxCard extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),
           child: Align(
-            child: SvgIcon(icon, color: selected ? Colors.white : null),
+            child: SvgIcon(
+              icon,
+              color: selected ? Colors.white : null,
+              size: iconSize,
+            ),
           ),
         ),
       ),

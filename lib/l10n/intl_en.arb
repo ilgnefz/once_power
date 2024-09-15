@@ -56,7 +56,6 @@
   "extension": "Type",
   "targetFolder": "Target folder",
   "saveLog": "Save log",
-  "selectTargetFolder": "Select target folder",
   "deleteEmptyFolder": "Delete folder",
   "organizeFolder": "Organize folder",
   "organizeDesc": "Enable file organization",
@@ -121,5 +120,6 @@
   "tableInfo": "Selected original name column: ",
   "exit": "Exit",
   "loadingImage": "Loading...",
-  "errorImage": "Load Fail "
+  "errorImage": "Load Fail ",
+  "addSubfolder": "Gets the subfolder of the folder"
 }

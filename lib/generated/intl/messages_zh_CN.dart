@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addFile": MessageLookupByLibrary.simpleMessage("添加文件"),
         "addFolder": MessageLookupByLibrary.simpleMessage("添加文件夹"),
+        "addSubfolder": MessageLookupByLibrary.simpleMessage("获取文件夹的子文件夹"),
         "after": MessageLookupByLibrary.simpleMessage("之后的"),
         "appendMode": MessageLookupByLibrary.simpleMessage("追加模式"),
         "applyChange": MessageLookupByLibrary.simpleMessage("应用更改"),

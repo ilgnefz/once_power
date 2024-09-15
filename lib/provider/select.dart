@@ -241,3 +241,17 @@ class RefreshImage extends _$RefreshImage {
   bool build() => false;
   void update() => state = !state;
 }
+
+@riverpod
+class AddSubfolder extends _$AddSubfolder {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class SaveRenameLog extends _$SaveRenameLog {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
