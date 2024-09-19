@@ -1,11 +1,22 @@
-import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'select.g.dart';
+
+// TopBar Start
+
+@riverpod
+class MaxWindow extends _$MaxWindow {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+// ActionBar Start
 
 @riverpod
 class InputLength extends _$InputLength {
@@ -105,14 +116,13 @@ class AddFolder extends _$AddFolder {
 }
 
 @riverpod
-class SaveConfig extends _$SaveConfig {
+class AddSubfolder extends _$AddSubfolder {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isSave) ?? false;
-  Future<void> update() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isSave, state);
-  }
+  bool build() => false;
+  void update() => state = !state;
 }
+
+// ContentBar Start
 
 @riverpod
 bool selectAudio(SelectAudioRef ref) {
@@ -158,7 +168,7 @@ bool selectOther(SelectOtherRef ref) {
 bool selectText(SelectTextRef ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type == FileClassify.text)
+      .where((e) => e.type == FileClassify.doc)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -185,12 +195,31 @@ bool selectZip(SelectZipRef ref) {
 }
 
 @riverpod
-class EnableOrganize extends _$EnableOrganize {
+class RefreshImage extends _$RefreshImage {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class ClassifiedFile extends _$ClassifiedFile {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isClassifiedFile) ?? false;
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isUseOrganize, state);
+    await StorageUtil.setBool(AppKeys.isClassifiedFile, state);
+  }
+}
+
+// BottomBar Start
+
+@riverpod
+class SaveConfig extends _$SaveConfig {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isSave) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSave, state);
   }
 }
 
@@ -205,27 +234,6 @@ class SaveLog extends _$SaveLog {
 }
 
 @riverpod
-class NewVersion extends _$NewVersion {
-  @override
-  bool build() => false;
-  void update(bool value) => state = value;
-}
-
-@riverpod
-class MaxWindow extends _$MaxWindow {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-}
-
-@riverpod
-class ShowTextTip extends _$ShowTextTip {
-  @override
-  bool build() => false;
-  void update() => state = true;
-}
-
-@riverpod
 class ViewMode extends _$ViewMode {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isViewMode) ?? false;
@@ -236,22 +244,25 @@ class ViewMode extends _$ViewMode {
 }
 
 @riverpod
-class RefreshImage extends _$RefreshImage {
+class EnableOrganize extends _$EnableOrganize {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isUseOrganize, state);
+  }
 }
 
 @riverpod
-class AddSubfolder extends _$AddSubfolder {
+class ShowTip extends _$ShowTip {
   @override
   bool build() => false;
-  void update() => state = !state;
+  void update() => state = true;
 }
 
 @riverpod
-class SaveRenameLog extends _$SaveRenameLog {
+class NewVersion extends _$NewVersion {
   @override
   bool build() => false;
-  void update() => state = !state;
+  void update(bool value) => state = value;
 }

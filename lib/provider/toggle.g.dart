@@ -36,22 +36,23 @@ final currentModeProvider =
 );
 
 typedef _$CurrentMode = AutoDisposeNotifier<FunctionMode>;
-String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
+String _$currentReplaceTypeHash() =>
+    r'07aa15da6269b0694828a8bda36884851400bc8b';
 
-/// See also [CurrentDateType].
-@ProviderFor(CurrentDateType)
-final currentDateTypeProvider =
-    AutoDisposeNotifierProvider<CurrentDateType, DateType>.internal(
-  CurrentDateType.new,
-  name: r'currentDateTypeProvider',
+/// See also [CurrentReplaceType].
+@ProviderFor(CurrentReplaceType)
+final currentReplaceTypeProvider =
+    AutoDisposeNotifierProvider<CurrentReplaceType, List<ReplaceType>>.internal(
+  CurrentReplaceType.new,
+  name: r'currentReplaceTypeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$currentDateTypeHash,
+      : _$currentReplaceTypeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
+typedef _$CurrentReplaceType = AutoDisposeNotifier<List<ReplaceType>>;
 String _$currentReserveTypeHash() =>
     r'02c15eb223573060b6be422452d976a9bbc62c3d';
 
@@ -69,22 +70,22 @@ final currentReserveTypeProvider =
 );
 
 typedef _$CurrentReserveType = AutoDisposeNotifier<List<ReserveType>>;
-String _$currentRemoveTypeHash() => r'bb985225ad9cf5d23b5840e89a9d7d3d492bcf25';
+String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
 
-/// See also [CurrentRemoveType].
-@ProviderFor(CurrentRemoveType)
-final currentRemoveTypeProvider =
-    AutoDisposeNotifierProvider<CurrentRemoveType, RemoveType>.internal(
-  CurrentRemoveType.new,
-  name: r'currentRemoveTypeProvider',
+/// See also [CurrentDateType].
+@ProviderFor(CurrentDateType)
+final currentDateTypeProvider =
+    AutoDisposeNotifierProvider<CurrentDateType, DateType>.internal(
+  CurrentDateType.new,
+  name: r'currentDateTypeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$currentRemoveTypeHash,
+      : _$currentDateTypeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CurrentRemoveType = AutoDisposeNotifier<RemoveType>;
+typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
 String _$fileSortTypeHash() => r'004bb4e8d65374df0807f4a06a990ef44a87d278';
 
 /// See also [FileSortType].
@@ -100,6 +101,22 @@ final fileSortTypeProvider =
 );
 
 typedef _$FileSortType = AutoDisposeNotifier<SortType>;
+String _$cSVNameColumnHash() => r'a22cfdcaf61f5420a2ceacd7b1dd3a1bb65385e9';
+
+/// See also [CSVNameColumn].
+@ProviderFor(CSVNameColumn)
+final cSVNameColumnProvider =
+    AutoDisposeNotifierProvider<CSVNameColumn, int>.internal(
+  CSVNameColumn.new,
+  name: r'cSVNameColumnProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$cSVNameColumnHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CSVNameColumn = AutoDisposeNotifier<int>;
 String _$languageHash() => r'45f175e269e3bc0f669d2d64e86b66b14c0364f7';
 
 /// See also [Language].
@@ -115,21 +132,5 @@ final languageProvider =
 );
 
 typedef _$Language = AutoDisposeNotifier<Locale?>;
-String _$originNameColumnHash() => r'66dba04013493f1d06a1803e56120197cef63203';
-
-/// See also [OriginNameColumn].
-@ProviderFor(OriginNameColumn)
-final originNameColumnProvider =
-    AutoDisposeNotifierProvider<OriginNameColumn, int>.internal(
-  OriginNameColumn.new,
-  name: r'originNameColumnProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$originNameColumnHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$OriginNameColumn = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

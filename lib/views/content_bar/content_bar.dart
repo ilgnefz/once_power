@@ -4,17 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/core.dart';
-import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/widgets/custom_scrollbar.dart';
+import 'package:once_power/model/enum.dart';
+import 'package:once_power/model/file_info.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/easy_scroll_bar.dart';
 
 import 'empty.dart';
-import 'arrange/arrange_file_tile.dart';
-import 'arrange/arrange_title_bar.dart';
+import 'organize/organize_file_tile.dart';
+import 'organize/organize_title_bar.dart';
 import 'rename/rename_file_tile.dart';
 import 'rename/rename_title_bar.dart';
-import 'rename/view_mode/view_grid_view.dart';
-import 'rename/view_mode/view_mode_title_bar.dart';
+import 'rename/view_model/view_grid_view.dart';
+import 'rename/view_model/view_model_title_bar.dart';
 
 class ContentBar extends ConsumerWidget {
   const ContentBar({super.key});
@@ -26,45 +30,37 @@ class ContentBar extends ConsumerWidget {
     bool isViewMode = ref.watch(viewModeProvider);
 
     void dropAdd(DropDoneDetails details) {
-      List<XFile> files = details.files;
-      if (files.isNotEmpty) {
-        ref.read(totalProvider.notifier).update(files.length);
-        formatXFile(ref, files);
-      }
+      List<XFile> paths = details.files;
+      if (paths.isNotEmpty) formatDropPath(ref, paths);
+    }
+
+    Widget buildTitleBar() {
+      if (isOrganize) return const OrganizeTitleBar();
+      if (isViewMode) return const ViewModeTitleBar();
+      return const RenameTitleBar();
     }
 
     return Expanded(
-      child: Container(
-        // padding: const EdgeInsets.only(right: 4),
-        color: Colors.white,
-        child: Column(
-          children: [
-            SizedBox(
-              height: AppNum.fileCardH,
-              child: isOrganize
-                  ? const ArrangeTitleBar()
-                  : isViewMode
-                      ? const ViewModeTitleBar()
-                      : const RenameTitleBar(),
-            ),
-            Expanded(
-              child: DropTarget(
-                onDragDone: dropAdd,
-                child: BuildListView(
-                  isViewMode: isViewMode,
-                  isOrganize: isOrganize,
-                ),
+      child: Column(
+        children: [
+          SizedBox(height: AppNum.fileCardH, child: buildTitleBar()),
+          Expanded(
+            child: DropTarget(
+              onDragDone: dropAdd,
+              child: ContentListView(
+                isViewMode: isViewMode,
+                isOrganize: isOrganize,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class BuildListView extends ConsumerWidget {
-  const BuildListView({
+class ContentListView extends ConsumerWidget {
+  const ContentListView({
     super.key,
     required this.isViewMode,
     required this.isOrganize,
@@ -99,12 +95,12 @@ class BuildListView extends ConsumerWidget {
       updateExtension(ref);
     }
 
-    return CustomScrollbar(
+    return EasyScrollbar(
       controller: controller,
       child: ReorderableListView.builder(
         scrollController: controller,
         itemCount: files.length,
-        padding: const EdgeInsets.only(right: AppNum.contentRP),
+        padding: const EdgeInsets.only(right: AppNum.defaultP),
         buildDefaultDragHandles: false,
         onReorder: reorderList,
         itemBuilder: (BuildContext context, int index) {
@@ -112,7 +108,7 @@ class BuildListView extends ConsumerWidget {
             index: index,
             key: ValueKey(files[index].id),
             child: isOrganize
-                ? ArrangeFileTile(files[index])
+                ? OrganizeFileTile(files[index])
                 : RenameFileTile(files[index]),
           );
         },

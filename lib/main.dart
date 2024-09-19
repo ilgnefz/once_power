@@ -2,8 +2,10 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/config.dart';
-import 'package:once_power/provider/provider.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/views/home.dart';
+
+import 'provider/select.dart';
 
 void main() async {
   await Global.init();
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BorderRadiusFrames(
       child: MaterialApp(
-        title: 'OncePower',
+        title: AppText.name,
         debugShowCheckedModeBanner: false,
         theme: ThemeConfig.light,
         builder: BotToastInit(),
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
             supportedLocales,
           );
         },
-        home: const HomePage(),
+        home: const HomeView(),
       ),
     );
   }
@@ -45,6 +47,7 @@ class BorderRadiusFrames extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool max = ref.watch(maxWindowProvider);
+
     return Container(
       margin: max ? EdgeInsets.zero : const EdgeInsets.all(8),
       clipBehavior: max ? Clip.none : Clip.antiAliasWithSaveLayer,

@@ -2,20 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:once_power/config/global.dart';
-import 'package:once_power/views/action_bar/action_bar.dart';
-import 'package:once_power/views/bottom_bar/bottom_bar.dart';
-import 'package:once_power/views/content_bar/content_bar.dart';
-import 'package:once_power/views/top_title_bar.dart';
 import 'package:window_manager/window_manager.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import 'action_bar/action_bar.dart';
+import 'bottom_bar/bottom_bar.dart';
+import 'content_bar/content_bar.dart';
+import 'top_bar/top_bar.dart';
+
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> with WindowListener {
+class _HomeViewState extends State<HomeView> with WindowListener {
   void _init() async {
     await windowManager.setPreventClose(true);
     setState(() {});
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
       body: DragToResizeArea(
         child: Column(
           children: [
-            TopTitleBar(),
+            TopBar(),
             Expanded(child: Row(children: [ActionBar(), ContentBar()])),
             BottomBar(),
           ],

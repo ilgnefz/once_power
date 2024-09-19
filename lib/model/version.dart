@@ -1,18 +1,17 @@
-class VersionInfoResponse {
+class VersionInfoRes {
   List<VersionInfo> info;
 
-  VersionInfoResponse({
+  VersionInfoRes({
     required this.info,
   });
 
-  factory VersionInfoResponse.fromJson(Map<String, dynamic> json) =>
-      VersionInfoResponse(
+  factory VersionInfoRes.fromJson(Map<String, dynamic> json) => VersionInfoRes(
         info: List<VersionInfo>.from(
             json["info"].map((x) => VersionInfo.fromJson(x))),
       );
 
   @override
-  String toString() => 'VersionInfoResponse{info: $info}';
+  String toString() => 'VersionInfoRes{info: $info}';
 }
 
 class VersionInfo {

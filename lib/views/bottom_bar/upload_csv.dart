@@ -1,63 +1,46 @@
-import 'dart:convert';
-
-import 'package:charset/charset.dart';
-import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/core.dart';
+import 'package:once_power/core/file.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/utils/utils.dart';
-import 'package:once_power/widgets/click_icon.dart';
-import 'package:once_power/widgets/custom_tooltip.dart';
-import 'package:tolyui_feedback/tolyui_feedback.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/tooltip_icon.dart';
+import 'package:path/path.dart' as path;
 
-class UploadCSV extends ConsumerWidget {
-  const UploadCSV({super.key});
+class UploadCSVBtn extends ConsumerWidget {
+  const UploadCSVBtn({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String uploadCSV = S.of(context).uploadCSV;
+    final String tip = S.of(context).uploadCSV;
 
     void upload() async {
-      const xType = XTypeGroup(label: 'CSV', extensions: ['csv']);
+      const xType =
+          XTypeGroup(label: 'CSV', extensions: ['csv', 'txt', 'oplog']);
       final XFile? file = await openFile(acceptedTypeGroups: [xType]);
-      if (file != null) {
+      if (file != null && !ref.watch(currentModeProvider).isOrganize) {
         ref.read(cSVDataProvider.notifier).update([]);
-        final bytes = await file.readAsBytes();
-        String content = '';
-        try {
-          content = utf8.decode(bytes);
-        } catch (e) {
-          try {
-            content = gbk.decode(bytes);
-          } catch (e) {
-            Log.e('无法解析的编码格式：$e');
-          }
+        String ext = path.extension(file.path);
+        List<List<String>> list = [];
+        if (ext == '.oplog') {
+          list.addAll(await decodeOPLogData(file));
+        } else {
+          list.addAll(await decodeCSVData(file));
         }
-        List<List<String>> list = content.trimRight().split('\n').map((e) {
-          final list = e.trimRight().split(',');
-          return [list[0], list[1]];
-        }).toList();
         ref.read(cSVDataProvider.notifier).update(list);
       }
-      newFeatureRename(ref);
-      // updateName(ref);
+      cSVDataRename(ref);
+      updateName(ref);
     }
 
-    return CustomTooltip(
-      message: uploadCSV,
-      textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
-          .useSystemChineseFont(),
-      placement: Placement.top,
-      child: ClickIcon(
-        size: 24,
-        svg: AppIcons.csv,
-        color: Colors.grey,
-        onTap: upload,
-      ),
+    return TooltipIcon(
+      message: tip,
+      icon: AppIcons.csv,
+      onTap: upload,
     );
   }
 }

@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/provider.dart';
+import 'package:once_power/model/notification_info.dart';
+import 'package:once_power/model/version.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/widgets/small_text_button.dart';
+import 'package:once_power/views/bottom_bar/download.dart';
+import 'package:once_power/widgets/common/notification.dart';
+import 'package:once_power/widgets/common/text_btn.dart';
 
 class CheckVersion extends ConsumerStatefulWidget {
   const CheckVersion({super.key});
@@ -18,10 +21,6 @@ class CheckVersion extends ConsumerStatefulWidget {
 }
 
 class _CheckVersionState extends ConsumerState<CheckVersion> {
-  // final String githubUrl = 'https://raw.githubusercontent.com/ilgnefz/once_power/master/version.json';
-  String versionUrl =
-      'https://gitee.com/ilgnefz/once_power/raw/master/version.json';
-
   bool hover = false;
   bool check = false;
 
@@ -30,9 +29,9 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
     setState(() {});
     try {
       Dio dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 5)));
-      final response = await dio.get(versionUrl);
-      VersionInfoResponse res =
-          VersionInfoResponse.fromJson(jsonDecode(response.toString()));
+      final response = await dio.get(AppText.versionUrl);
+      VersionInfoRes res =
+          VersionInfoRes.fromJson(jsonDecode(response.toString()));
       Log.i(res.toString());
       int version = getVersionNumber(res.info.first.version);
       int currentVersion = getVersionNumber(PackageDesc.getVersion());
@@ -66,18 +65,20 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
     final String checking = S.of(context).checking;
     // final String checkComplete = S.of(context).checkCompleted;
 
-    return SmallTextButton(
-      text: check ? checking : checkUpdates,
-      onTap: check ? null : checkVersion,
-      action: Container(
-        margin: const EdgeInsets.only(left: 4),
-        width: check ? 12 : 0,
-        height: 12,
-        child: const FittedBox(
-          fit: BoxFit.fill,
-          child: CircularProgressIndicator(strokeWidth: 6),
-        ),
-      ),
-    );
+    return ref.watch(newVersionProvider)
+        ? const DownloadTextBtn()
+        : TextBtn(
+            text: check ? checking : checkUpdates,
+            onTap: check ? null : checkVersion,
+            action: Container(
+              margin: const EdgeInsets.only(left: 4),
+              width: check ? 12 : 0,
+              height: 12,
+              child: const FittedBox(
+                fit: BoxFit.fill,
+                child: CircularProgressIndicator(strokeWidth: 6),
+              ),
+            ),
+          );
   }
 }

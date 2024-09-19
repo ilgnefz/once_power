@@ -1,10 +1,10 @@
+import 'package:once_power/core/file.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
-import 'package:once_power/model/types.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/core/rename.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'toggle.dart';
 
 part 'file.g.dart';
 
@@ -37,15 +37,16 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
-  void checkPart(FileClassify classify, bool check) => state = state.map((e) {
+  void checkClassify(FileClassify classify, bool check) =>
+      state = state.map((e) {
         if (e.type == classify) e.checked = check;
         return e;
       }).toList();
 
-  // void uncheckClassify(FileClassify classify) => state = state.map((e) {
-  //       if (e.type != classify) e.checked = false;
-  //       return e;
-  //     }).toList();
+  void checkExtension(String ext) => state = state.map((e) {
+        if (e.extension == ext) e.checked = !e.checked;
+        return e;
+      }).toList();
 
   void updateOriginName(String id, String name) => state = state.map((e) {
         if (e.id == id) e.name = name;
@@ -88,10 +89,10 @@ List<FileInfo> sortList(SortListRef ref) {
 
   switch (type) {
     case SortType.nameDescending:
-      sortedList = [...list]..sort((a, b) => a.name.compareTo(b.name));
+      sortedList = splitSortList(list, false);
       break;
     case SortType.nameAscending:
-      sortedList = [...list]..sort((a, b) => b.name.compareTo(a.name));
+      sortedList = splitSortList(list, true);
       break;
     case SortType.dateDescending:
       sortedList = [...list]..sort((a, b) {
@@ -157,24 +158,42 @@ class SelectAll extends _$SelectAll {
 }
 
 @riverpod
-FileClassify getFileClassify(GetFileClassifyRef ref, String extension) {
-  FileClassify classify = FileClassify.other;
-  if (audio.contains(extension)) classify = FileClassify.audio;
-  if (folder == extension) classify = FileClassify.folder;
-  if (image.contains(extension)) classify = FileClassify.image;
-  if (text.contains(extension)) classify = FileClassify.text;
-  if (video.contains(extension)) classify = FileClassify.video;
-  if (zip.contains(extension)) classify = FileClassify.zip;
-  return classify;
-}
-
-@riverpod
 List<FileClassify> classifyList(ClassifyListRef ref) {
   List<FileClassify> classifyList = [];
   for (var e in ref.watch(fileListProvider)) {
     if (!classifyList.contains(e.type)) classifyList.add(e.type);
   }
   return classifyList;
+}
+
+// {
+//  "image": ["jpg", "png"],
+// "doc": ["txt"]
+// }
+@riverpod
+Map<FileClassify, List<String>> extensionListMap(ExtensionListMapRef ref) {
+  Map<FileClassify, List<String>> extMap = {};
+  for (var e in ref.watch(fileListProvider)) {
+    if (!extMap.containsKey(e.type)) {
+      extMap[e.type] = [e.extension];
+    } else {
+      if (!extMap[e.type]!.contains(e.extension)) {
+        extMap[e.type]!.add(e.extension);
+      }
+    }
+  }
+  for (var e in extMap.keys) {
+    extMap[e]!.sort();
+  }
+  return extMap;
+}
+
+@riverpod
+bool selectedExtension(SelectedExtensionRef ref, String ext) {
+  return ref.watch(fileListProvider).every((e) {
+    if (e.extension == ext) return e.checked;
+    return true;
+  });
 }
 
 @riverpod
@@ -209,10 +228,3 @@ List<EasyRenameInfo> easyRenameInfoList(EasyRenameInfoListRef ref) {
   }
   return list;
 }
-
-// @riverpod
-// class EasyRenameList extends _$EasyRenameList {
-//   @override
-//   List<EasyRenameInfo> build() => ref.cSVDataProvider.map((e) => ).toList();
-//   void update(List<EasyRenameInfo> value) => state = value;
-// }

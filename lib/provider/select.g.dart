@@ -62,7 +62,7 @@ final selectOtherProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectOtherRef = AutoDisposeProviderRef<bool>;
-String _$selectTextHash() => r'35e10308fb94e2be3a0dc343d139d5c6e6774c37';
+String _$selectTextHash() => r'c29e378205654a5ac579758ef389f090cb473102';
 
 /// See also [selectText].
 @ProviderFor(selectText)
@@ -104,6 +104,20 @@ final selectZipProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef SelectZipRef = AutoDisposeProviderRef<bool>;
+String _$maxWindowHash() => r'9607a8ce8e2e3e0ee2096869f8268afca04aebbd';
+
+/// See also [MaxWindow].
+@ProviderFor(MaxWindow)
+final maxWindowProvider = AutoDisposeNotifierProvider<MaxWindow, bool>.internal(
+  MaxWindow.new,
+  name: r'maxWindowProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$maxWindowHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MaxWindow = AutoDisposeNotifier<bool>;
 String _$inputLengthHash() => r'36efc24b2769d6ee735b56c27ae432bc4b6afbb9';
 
 /// See also [InputLength].
@@ -253,6 +267,52 @@ final addFolderProvider = AutoDisposeNotifierProvider<AddFolder, bool>.internal(
 );
 
 typedef _$AddFolder = AutoDisposeNotifier<bool>;
+String _$addSubfolderHash() => r'494945f00d74a968dd4c92db9be9e3b073167584';
+
+/// See also [AddSubfolder].
+@ProviderFor(AddSubfolder)
+final addSubfolderProvider =
+    AutoDisposeNotifierProvider<AddSubfolder, bool>.internal(
+  AddSubfolder.new,
+  name: r'addSubfolderProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$addSubfolderHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AddSubfolder = AutoDisposeNotifier<bool>;
+String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
+
+/// See also [RefreshImage].
+@ProviderFor(RefreshImage)
+final refreshImageProvider =
+    AutoDisposeNotifierProvider<RefreshImage, bool>.internal(
+  RefreshImage.new,
+  name: r'refreshImageProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$refreshImageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RefreshImage = AutoDisposeNotifier<bool>;
+String _$classifiedFileHash() => r'f1ab5a0e0602c7980b5b1d55d6a4d969db8db9eb';
+
+/// See also [ClassifiedFile].
+@ProviderFor(ClassifiedFile)
+final classifiedFileProvider =
+    AutoDisposeNotifierProvider<ClassifiedFile, bool>.internal(
+  ClassifiedFile.new,
+  name: r'classifiedFileProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$classifiedFileHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ClassifiedFile = AutoDisposeNotifier<bool>;
 String _$saveConfigHash() => r'75f973a43293af3d65623a751f42f81a68e436c2';
 
 /// See also [SaveConfig].
@@ -268,6 +328,34 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
+String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
+
+/// See also [SaveLog].
+@ProviderFor(SaveLog)
+final saveLogProvider = AutoDisposeNotifierProvider<SaveLog, bool>.internal(
+  SaveLog.new,
+  name: r'saveLogProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$saveLogHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SaveLog = AutoDisposeNotifier<bool>;
+String _$viewModeHash() => r'5d0f3e933e954d2400aa8dbd84d379d8dd97ca4e';
+
+/// See also [ViewMode].
+@ProviderFor(ViewMode)
+final viewModeProvider = AutoDisposeNotifierProvider<ViewMode, bool>.internal(
+  ViewMode.new,
+  name: r'viewModeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$viewModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ViewMode = AutoDisposeNotifier<bool>;
 String _$enableOrganizeHash() => r'9250ecf0fb8247ac48ca1c7b3796da1ba25ffe42';
 
 /// See also [EnableOrganize].
@@ -284,20 +372,20 @@ final enableOrganizeProvider =
 );
 
 typedef _$EnableOrganize = AutoDisposeNotifier<bool>;
-String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
+String _$showTipHash() => r'b9c99132e9d07266affbfb34efa92e4679d77410';
 
-/// See also [SaveLog].
-@ProviderFor(SaveLog)
-final saveLogProvider = AutoDisposeNotifierProvider<SaveLog, bool>.internal(
-  SaveLog.new,
-  name: r'saveLogProvider',
+/// See also [ShowTip].
+@ProviderFor(ShowTip)
+final showTipProvider = AutoDisposeNotifierProvider<ShowTip, bool>.internal(
+  ShowTip.new,
+  name: r'showTipProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$saveLogHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$showTipHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SaveLog = AutoDisposeNotifier<bool>;
+typedef _$ShowTip = AutoDisposeNotifier<bool>;
 String _$newVersionHash() => r'1536df237495a7345199a54e87352c0fb56865a8';
 
 /// See also [NewVersion].
@@ -313,94 +401,5 @@ final newVersionProvider =
 );
 
 typedef _$NewVersion = AutoDisposeNotifier<bool>;
-String _$maxWindowHash() => r'9607a8ce8e2e3e0ee2096869f8268afca04aebbd';
-
-/// See also [MaxWindow].
-@ProviderFor(MaxWindow)
-final maxWindowProvider = AutoDisposeNotifierProvider<MaxWindow, bool>.internal(
-  MaxWindow.new,
-  name: r'maxWindowProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$maxWindowHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$MaxWindow = AutoDisposeNotifier<bool>;
-String _$showTextTipHash() => r'edadcbe0374b099638b25a35258238483ebe1fa6';
-
-/// See also [ShowTextTip].
-@ProviderFor(ShowTextTip)
-final showTextTipProvider =
-    AutoDisposeNotifierProvider<ShowTextTip, bool>.internal(
-  ShowTextTip.new,
-  name: r'showTextTipProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$showTextTipHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ShowTextTip = AutoDisposeNotifier<bool>;
-String _$viewModeHash() => r'5d0f3e933e954d2400aa8dbd84d379d8dd97ca4e';
-
-/// See also [ViewMode].
-@ProviderFor(ViewMode)
-final viewModeProvider = AutoDisposeNotifierProvider<ViewMode, bool>.internal(
-  ViewMode.new,
-  name: r'viewModeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$viewModeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ViewMode = AutoDisposeNotifier<bool>;
-String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
-
-/// See also [RefreshImage].
-@ProviderFor(RefreshImage)
-final refreshImageProvider =
-    AutoDisposeNotifierProvider<RefreshImage, bool>.internal(
-  RefreshImage.new,
-  name: r'refreshImageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$refreshImageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$RefreshImage = AutoDisposeNotifier<bool>;
-String _$addSubfolderHash() => r'494945f00d74a968dd4c92db9be9e3b073167584';
-
-/// See also [AddSubfolder].
-@ProviderFor(AddSubfolder)
-final addSubfolderProvider =
-    AutoDisposeNotifierProvider<AddSubfolder, bool>.internal(
-  AddSubfolder.new,
-  name: r'addSubfolderProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$addSubfolderHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$AddSubfolder = AutoDisposeNotifier<bool>;
-String _$saveRenameLogHash() => r'a723efb6392da1949836541ef3d714e284a4d818';
-
-/// See also [SaveRenameLog].
-@ProviderFor(SaveRenameLog)
-final saveRenameLogProvider =
-    AutoDisposeNotifierProvider<SaveRenameLog, bool>.internal(
-  SaveRenameLog.new,
-  name: r'saveRenameLogProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$saveRenameLogHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$SaveRenameLog = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

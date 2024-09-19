@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
-import 'package:once_power/widgets/custom_tooltip.dart';
+import 'package:once_power/widgets/common/custom_tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
 class RenameTileTooltip extends StatelessWidget {
@@ -19,7 +19,7 @@ class RenameTileTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String name = S.of(context).originalName;
-    final String newName = S.of(context).renamedName;
+    final String newName = S.of(context).newName;
     final String folder = S.of(context).folder;
     final String createTime = S.of(context).createdTime;
     final String modifyDate = S.of(context).modifiedTime;
@@ -28,7 +28,7 @@ class RenameTileTooltip extends StatelessWidget {
     String dot = file.extension == '' ? '' : '.';
     String newDot = file.newExtension == '' ? '' : '.';
 
-    return CustomTooltip(
+    return EasyTooltip(
       placement: Placement.bottom,
       waitDuration: waitDuration,
       richMessage: TextSpan(

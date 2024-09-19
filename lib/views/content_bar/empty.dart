@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/widgets/svg_icon.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/svg_icon.dart';
 
 class EmptyView extends ConsumerWidget {
   const EmptyView({super.key});
@@ -14,13 +15,13 @@ class EmptyView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isViewMode = ref.watch(viewModeProvider);
     FunctionMode mode = ref.watch(currentModeProvider);
-    bool isShowImage = isViewMode && mode != FunctionMode.organize;
-    String tipLabel = isShowImage ? S.of(context).tipImage : S.of(context).tip;
+    bool showImage = isViewMode && mode != FunctionMode.organize;
+    String tipLabel = showImage ? S.of(context).tipImage : S.of(context).tip;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          isShowImage
+          showImage
               ? SvgIcon(AppIcons.image,
                   size: 80, color: Theme.of(context).primaryColor)
               : Icon(

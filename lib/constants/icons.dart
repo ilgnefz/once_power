@@ -11,7 +11,6 @@ class AppIcons {
   static const String dateAscending = '${basePath}date-ascending.svg';
   static const String dateDescending = '${basePath}date-descending.svg';
   static const String error = '${basePath}error.svg';
-  static const String folder = '${basePath}folder.svg';
   static const String gitee = '${basePath}gitee.svg';
   static const String github = '${basePath}github.svg';
   static const String image = '${basePath}image.svg';

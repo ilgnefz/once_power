@@ -40,6 +40,16 @@ class StorageUtil {
     return value;
   }
 
+  // 存储List<String>
+  static Future<bool> setStringList(String key, List<String> value) {
+    return _prefs.setStringList(key, value);
+  }
+
+  static List<String>? getStringList(String key) {
+    List<String>? value = _prefs.getStringList(key);
+    return value;
+  }
+
   static Future<bool> remove(String key) {
     return _prefs.remove(key);
   }

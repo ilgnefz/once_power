@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'toggle.dart';
+
 part 'input.g.dart';
+
+// Rename Mode
 
 @riverpod
 class MatchController extends _$MatchController {
@@ -203,6 +206,8 @@ class ExtensionClear extends _$ExtensionClear {
   void update(bool value) => state = value;
 }
 
+// Organize Mode
+
 @riverpod
 class TargetController extends _$TargetController {
   @override
@@ -225,6 +230,8 @@ class TargetClear extends _$TargetClear {
   bool build() => StorageUtil.getString(AppKeys.targetFolder) != null;
   void update(bool value) => state = value;
 }
+
+// ContentBar
 
 @riverpod
 class ScrollBarController extends _$ScrollBarController {

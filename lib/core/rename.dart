@@ -2,54 +2,34 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/log.dart';
-import 'package:once_power/utils/type.dart';
-import 'package:once_power/widgets/notification.dart';
+import 'package:once_power/model/enum.dart';
+import 'package:once_power/model/file_info.dart';
+import 'package:once_power/model/notification_info.dart';
+import 'package:once_power/model/types.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
-import 'mode.dart';
-
-FileInfo nullFile = FileInfo(
-  id: '',
-  name: '',
-  newName: '',
-  parent: '',
-  filePath: '',
-  extension: '',
-  newExtension: '',
-  beforePath: '',
-  createdDate: DateTime.now(),
-  modifiedDate: DateTime.now(),
-  type: FileClassify.other,
-  checked: false,
-);
-
-// Map<String, Map<String, List<String>>> map = {
-//     "today": {"jpg": [], "mp4": []},
-//     "yesterday": {"jpg": [], "mp4": []},
-//   };
-typedef DateFormatMap = Map<String, Map<String, List<String>>>;
-
-void updateExtension(dynamic ref) {
+void updateExtension(WidgetRef ref) {
   List<FileInfo> files = ref.read(fileListProvider);
+  String inputExt = ref.watch(extensionControllerProvider).text;
+  bool isModifyExt = ref.watch(modifyExtensionProvider);
   for (var file in files) {
-    if (file.checked && file.type != FileClassify.folder) {
-      String newExtension = ref.watch(extensionControllerProvider).text;
-      String newExt = newExtension == '' ? file.extension : newExtension;
-      ref.read(fileListProvider.notifier).updateExtension(file.id, newExt);
-    } else {
-      ref
-          .read(fileListProvider.notifier)
-          .updateExtension(file.id, file.extension);
-    }
+    String newExt = file.extension;
+    if (file.checked && !file.type.isFolder && isModifyExt) newExt = inputExt;
+    ref.read(fileListProvider.notifier).updateExtension(file.id, newExt);
   }
 }
 
-int actualIndex(dynamic ref, DateFormatMap dfMap, FileInfo file) {
+int actualIndex(WidgetRef ref, DateFormatMap dfMap, FileInfo file) {
   // Log.i(dfMap.toString());
   // 默认 index 为 0
   int index = 0;
@@ -58,42 +38,39 @@ int actualIndex(dynamic ref, DateFormatMap dfMap, FileInfo file) {
   // 获取列表中的所有以日期为名的 key
   List<String> dateKeyList = dfMap.keys.toList();
   // 获取当前文件的格式分类名称
-  String extensionName = getFileClassifyName(file.extension);
+  String classify = getFileClassifyName(file.type);
   // 如果获取的日期列表中包含了当前的日期
   if (dateKeyList.contains(dateText)) {
     // 获取当前日期下的多有格式分类
-    List<String> extensionList = dfMap[dateText]!.keys.toList();
+    List<String> classifyList = dfMap[dateText]!.keys.toList();
     // 查看日期下是否有当前分类
-    if (extensionList.contains(extensionName)) {
+    if (classifyList.contains(classify)) {
       // 如果有当前分类就获取文件的长度并将该文件添加到数组中
-      List<String>? fileNameList = dfMap[dateText]![extensionName];
+      List<String>? fileNameList = dfMap[dateText]![classify];
       index += fileNameList!.length;
       fileNameList.add(file.name);
     } else {
       // 如果没有当前分类就添加当前分类并添加文件到数组中
       dfMap[dateText]?.addAll({
-        extensionName: [file.name]
+        classify: [file.name]
       });
     }
   } else {
     dfMap.addAll({
       dateText: {
-        extensionName: [file.name]
+        classify: [file.name]
       }
     });
   }
   return index;
 }
 
-void updateName(dynamic ref) {
-  // bool isCSV = ref.watch(cSVDataProvider).isNotEmpty;
-  // if (isCSV) return newFeatureRename(ref);
+void updateName(WidgetRef ref) {
+  if (ref.watch(cSVDataProvider).isNotEmpty) return cSVDataRename(ref);
   List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
-  // int prefixIndex = int.parse(prefixIndexText.replaceAll('开始', ''));
   int prefixIndex = getNum(prefixIndexText);
   String suffixIndexText = ref.watch(suffixStartControllerProvider).text;
-  // int suffixIndex = int.parse(suffixIndexText.replaceAll('开始', ''));
   int suffixIndex = getNum(suffixIndexText);
   int fileIndex = 0;
   // 文件列表，用来存储日期和文件名
@@ -119,26 +96,27 @@ void updateName(dynamic ref) {
   }
 }
 
-String matchContent(dynamic ref, FileInfo file, int fileIndex, int prefixIndex,
-    int suffixIndex) {
+String matchContent(WidgetRef ref, FileInfo file, int fileIndex,
+    int prefixIndex, int suffixIndex) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool isLength = ref.watch(inputLengthProvider);
   bool matchCase = ref.watch(matchCaseProvider);
   bool dateRename = ref.watch(dateRenameProvider);
   String? dateText = dateRename ? dateName(ref, file) : null;
   String matchText = ref.watch(matchControllerProvider).text;
-  String modifyText = ref.watch(modifyControllerProvider).text;
+  String modifyText = dateText ?? ref.watch(modifyControllerProvider).text;
   String name = file.name;
 
-  if (mode == FunctionMode.replace) {
-    RemoveType removeType = ref.watch(currentRemoveTypeProvider);
+  if (mode.isReplace) {
+    List<ReplaceType> replaceTypeList = ref.watch(currentReplaceTypeProvider);
     name = replaceName(
-        removeType, matchText, modifyText, name, isLength, matchCase, dateText);
+        replaceTypeList, matchText, modifyText, name, isLength, matchCase);
   }
 
-  if (mode == FunctionMode.reserve) {
-    name = reserveName(
-        ref, matchText, modifyText, name, isLength, matchCase, dateText);
+  if (mode.isReserve) {
+    List<ReserveType> typeList = ref.watch(currentReserveTypeProvider);
+    name =
+        reserveName(typeList, matchText, modifyText, name, isLength, matchCase);
   }
 
   name = prefixName(ref, fileIndex, prefixIndex) +
@@ -148,20 +126,14 @@ String matchContent(dynamic ref, FileInfo file, int fileIndex, int prefixIndex,
 }
 
 String dateName(WidgetRef ref, FileInfo file) {
-  String date = '';
+  String date = formatDateTime(file.createdDate);
   String dateDigitText = ref.watch(dateLengthControllerProvider).text;
-  // int dateDigit = int.parse(dateDigitText.replaceAll('位', ''));
   int dateDigit = getNum(dateDigitText);
   DateType type = ref.watch(currentDateTypeProvider);
-  if (type == DateType.modifiedDate) date = formatDateTime(file.modifiedDate);
-  if (type == DateType.earliestDate) {
-    date = formatDateTime(sortDateTime(file).first);
-  }
-  if (type == DateType.latestDate) {
-    date = formatDateTime(sortDateTime(file).last);
-  }
-  if (type == DateType.createdDate) date = formatDateTime(file.createdDate);
-  if (type == DateType.exifDate) {
+  if (type.isModifiedDate) date = formatDateTime(file.modifiedDate);
+  if (type.isEarliestDate) date = formatDateTime(sortDateTime(file).first);
+  if (type.isLatestDate) date = formatDateTime(sortDateTime(file).last);
+  if (type.isExifDate) {
     DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
     date = formatDateTime(dateTime);
   }
@@ -179,7 +151,6 @@ List<DateTime> sortDateTime(FileInfo file) {
 String prefixName(WidgetRef ref, int fileIndex, int prefixIndex) {
   bool swap = ref.watch(swapPrefixProvider);
   String widthStr = ref.watch(prefixLengthControllerProvider).text;
-  // int width = widthStr == '' ? 0 : int.parse(widthStr.replaceAll('位', ''));
   int width = widthStr == '' ? 0 : getNum(widthStr);
   String num = formatNumber(prefixIndex, width);
   String prefixText = ref.watch(prefixControllerProvider).text;
@@ -242,7 +213,7 @@ void undo(WidgetRef ref) async {
     String oldPath = file.filePath;
     String newPath = file.beforePath;
     if (oldPath == newPath) continue;
-    NotificationInfo? info = renameFile(ref, (file.id, oldPath, newPath));
+    NotificationInfo? info = await renameFile(ref, (file.id, oldPath, newPath));
     if (info != null) errorList.add(info);
     if (delay) await Future.delayed(const Duration(microseconds: 1));
   }
@@ -277,10 +248,14 @@ void renameTemp(WidgetRef ref) {
   }
 }
 
-NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
+Future<NotificationInfo?> renameFile(
+    WidgetRef ref, RenameInfo renameInfo) async {
   final (id, oldPath, newPath) = renameInfo;
   String extension = getFileExtension(oldPath);
   bool isFolder = extension == folder;
+
+  String oldName = path.basename(oldPath);
+  String newName = path.basename(newPath);
 
   if (File(newPath).existsSync()) {
     List<FileInfo> list =
@@ -296,8 +271,7 @@ NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
       ref.read(tempListProvider.notifier).add((id, newPath + id, newPath));
       return null;
     }
-    String oldName = path.basename(oldPath);
-    String newName = path.basename(newPath);
+
     return NotificationInfo(
         file: oldName, message: ' ${S.current.existsError(newName)}');
   }
@@ -307,6 +281,13 @@ NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
       Directory(oldPath).renameSync(newPath);
     } else {
       File(oldPath).renameSync(newPath);
+    }
+    if (ref.watch(saveLogProvider)) {
+      Directory docPath = await getApplicationDocumentsDirectory();
+      String filePath = path.join(docPath.path, 'OncePower');
+      Directory dir = Directory(filePath);
+      if (!dir.existsSync()) await dir.create();
+      createLog(filePath, S.current.renameLogs, oldName, newName);
     }
     final fileInfo = ref.read(fileListProvider.notifier);
     String name = path.basenameWithoutExtension(newPath);
@@ -329,12 +310,11 @@ NotificationInfo? renameFile(WidgetRef ref, RenameInfo renameInfo) {
   }
 }
 
-void newFeatureRename(WidgetRef ref) {
+void cSVDataRename(WidgetRef ref) {
   List<FileInfo> list = ref.watch(fileListProvider);
   List<EasyRenameInfo> easyList = ref.watch(easyRenameInfoListProvider);
-  bool isA = ref.watch(originNameColumnProvider) == 0;
+  bool isA = ref.watch(cSVNameColumnProvider) == 0;
   EasyRenameInfo badInfo = EasyRenameInfo(nameA: '', nameB: '');
-  // print(easyList.toString());
   for (FileInfo file in list) {
     if (!file.checked) continue;
     if (isA) {

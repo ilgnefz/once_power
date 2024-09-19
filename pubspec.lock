@@ -747,7 +747,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: fec0d61223fba3154d87759e3cc27fe2c8dc498f6386c6d6fc80d1afdd1bf378
@@ -802,6 +802,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.0.2"
+  pinyin:
+    dependency: "direct main"
+    description:
+      name: pinyin
+      sha256: "240f271a3c71af20c8d2757756b5ee8e9d79a955d37abad4b3568fd406b22411"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.3.0"
   platform:
     dependency: transitive
     description:
@@ -1203,10 +1211,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.5"
   vs_scrollbar:
     dependency: "direct main"
     description:

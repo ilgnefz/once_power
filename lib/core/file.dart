@@ -1,110 +1,95 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:charset/charset.dart';
 import 'package:exif/exif.dart';
 import 'package:file_selector/file_selector.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:once_power/constants/constants.dart';
-import 'package:once_power/model/model.dart';
-import 'package:once_power/provider/provider.dart';
+import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/model/enum.dart';
+import 'package:once_power/model/file_info.dart';
+import 'package:once_power/model/notification_info.dart';
+import 'package:once_power/model/types.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
+import 'package:pinyin/pinyin.dart';
 
 import 'core.dart';
 
-void formatXFile(WidgetRef ref, List<XFile> files) async {
-  bool append = ref.watch(appendModeProvider);
-  if (!append) ref.read(fileListProvider.notifier).clear();
-  final paths = files.map((e) => e.path).toList();
-  toFormatFile(ref, paths);
+// 处理通过拖动添加的文件或文件夹
+void formatDropPath(WidgetRef ref, List<XFile> paths) async {
+  List<String> files = [];
+  List<String> folders = [];
+  for (var p in paths) {
+    bool isFile = await FileSystemEntity.isFile(p.path);
+    if (isFile) files.add(p.path);
+    if (!isFile) folders.add(p.path);
+  }
+  if (folders.isNotEmpty) formatFolder(ref, folders);
+  if (files.isNotEmpty) addFileInfo(ref, files);
 }
 
-void toFormatFile(WidgetRef ref, List<String> files) async {
+// 处理通过按钮添加的文件
+void formatXFile(WidgetRef ref, List<XFile> files) async {
+  final paths = files.map((e) => e.path).toList();
+  addFileInfo(ref, paths);
+}
+
+// 处理传入来的文件夹，如果是添加文件夹就直接格式文件夹，不是就获取文件夹中的子文件
+void formatFolder(WidgetRef ref, List<String?> folders) async {
+  bool addFolder = ref.watch(addFolderProvider);
+  bool addSubfolder = ref.watch(addSubfolderProvider);
+  FunctionMode mode = ref.watch(currentModeProvider);
+  List<String> list = [];
+  for (var folder in folders) {
+    if (addFolder && !addSubfolder || mode.isOrganize) list.add(folder!);
+    if (addFolder && addSubfolder && !mode.isOrganize) {
+      list.addAll([folder!, ...getAllPath(folder, true)]);
+    }
+    if (!addFolder && !mode.isOrganize) list.addAll(getAllPath(folder!));
+  }
+  addFileInfo(ref, list);
+}
+
+void addFileInfo(WidgetRef ref, List<String> list) async {
+  bool append = ref.watch(appendModeProvider);
+  if (!append) ref.read(fileListProvider.notifier).clear();
   int count = 0;
-  ref.read(totalProvider.notifier).update(files.length);
-  bool delay = files.length > AppNum.maxFileNum;
+  ref.read(totalProvider.notifier).update(list.length);
   int startTime = DateTime.now().microsecondsSinceEpoch;
-  for (var file in files) {
-    count++;
-    formatFile(ref, file, count);
-    if (delay) await Future.delayed(const Duration(microseconds: 1));
+  for (var filePath in list) {
+    ref.read(countProvider.notifier).update(++count);
+    bool exist = ref.watch(fileListProvider).any((e) => e.filePath == filePath);
+    if (exist) continue;
+    FileInfo fileInfo = await generateFileInfo(ref, filePath);
+    ref.read(fileListProvider.notifier).add(fileInfo);
+    await Future.delayed(const Duration(microseconds: 1));
   }
   int endTime = DateTime.now().microsecondsSinceEpoch;
   double cost = (endTime - startTime) / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  updateName(ref);
+  updateExtension(ref);
 }
 
-void formatFile(WidgetRef ref, String filePath, [int count = 0]) async {
-  // 查看是否是附加模式
-  bool append = ref.watch(appendModeProvider);
-  // 是否添加文件夹
-  bool addFolder = ref.watch(addFolderProvider);
-  // 附加模式下查看新加的文件是否已经存在
-  if (append) {
-    final files = ref.watch(fileListProvider);
-    if (files.any((e) => e.filePath == filePath)) return;
-  }
-
-  // 查看当前文件是不是文件
-  bool isFile = FileSystemEntity.isFileSync(filePath);
-  // 查看当前菜单模式
-  FunctionMode mode = ref.watch(currentModeProvider);
-  // 查看是不是视图模式
-  bool isViewMode = ref.watch(viewModeProvider);
-
-  // 如果没有勾选添加文件夹，并且传入的路径是一个文件夹，并且不是整理模式
-  // 获取当前路径下的所有子文件
-  if (!addFolder && (!isFile && mode != FunctionMode.organize)) {
-    final list = getAllFile(filePath);
-    toFormatFile(ref, list);
-    return;
-  }
-
-  // 查看是否添加子文件夹
-  bool addSubfolder = ref.watch(addSubfolderProvider);
-
-  // 如果勾选了添加文件夹，并且传入的是文件夹并还勾选了添加子文件夹
-  // 获取文件夹下的所有子文件夹
-  if (addFolder && !isFile && addSubfolder && mode != FunctionMode.organize) {
-    //   获取文件夹下的所有子文件夹
-    final list = getAllFile(filePath, true);
-    if (list.isNotEmpty) toFormatFile(ref, list);
-  }
-
-  // 更新 count 的值
-  ref.read(countProvider.notifier).update(count);
-
-  FileInfo fileInfo = await generateFileInfo(ref, filePath);
-  if (isViewMode && fileInfo.type != FileClassify.image) return;
-  ref.read(fileListProvider.notifier).add(fileInfo);
-
-  if (mode == FunctionMode.organize) {
-    TextEditingController controller = ref.watch(targetControllerProvider);
-    if (controller.text.isEmpty) {
-      controller.text = isFile ? fileInfo.parent : filePath;
-    }
-  }
-
-  if (ref.watch(cSVDataProvider).isNotEmpty) {
-    newFeatureRename(ref);
-  } else {
-    updateName(ref);
-    updateExtension(ref);
-  }
-}
-
-List<String> getAllFile(String folder, [bool addChild = false]) {
+List<String> getAllPath(String folder, [bool addSubfolder = false]) {
   Directory directory = Directory(folder);
   List<String> children = [];
-  List<FileSystemEntity> files = directory.listSync(recursive: !addChild);
+  List<FileSystemEntity> files = directory.listSync(recursive: true);
   for (var file in files) {
-    if (FileSystemEntity.isFileSync(file.path) && !addChild) {
+    if (FileSystemEntity.isFileSync(file.path) && !addSubfolder) {
       String extension = path.extension(file.path);
       extension = extension == '' ? extension : extension.substring(1);
       if (!filter.contains(extension)) children.add(file.path);
     }
-    if (addChild && FileSystemEntity.isDirectorySync(file.path)) {
+    if (FileSystemEntity.isDirectorySync(file.path) && addSubfolder) {
       children.add(file.path);
     }
   }
@@ -114,17 +99,18 @@ List<String> getAllFile(String folder, [bool addChild = false]) {
 Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   String id = nanoid(10);
   String name = path.basenameWithoutExtension(filePath);
-  String extension = 'dir';
+  String phonetic = isChinese(name) ? PinyinHelper.getPinyinE(name) : name;
   String parent = path.dirname(filePath);
   DateTime? exifDate;
   DateTime createDate = File(filePath).statSync().changed;
   DateTime modifyDate = File(filePath).statSync().modified;
-  extension = getFileExtension(filePath);
+  String extension = getFileExtension(filePath);
   if (image.contains(extension)) exifDate = await getExifDate(filePath);
-  FileClassify type = ref.read(getFileClassifyProvider(extension));
-  FileInfo fileInfo = FileInfo(
+  FileClassify type = getFileClassify(extension);
+  return FileInfo(
     id: id,
     name: name,
+    phonetic: phonetic,
     newName: name,
     parent: parent,
     filePath: filePath,
@@ -137,7 +123,6 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     type: type,
     checked: true,
   );
-  return fileInfo;
 }
 
 Future<DateTime?> getExifDate(String filePath) async {
@@ -194,4 +179,88 @@ void toggleCheck(WidgetRef ref, String id) {
 void deleteOne(WidgetRef ref, String id) {
   ref.read(fileListProvider.notifier).remove(id);
   updateName(ref);
+}
+
+bool isCheck(WidgetRef ref, FileClassify classify) {
+  if (classify == FileClassify.audio) return ref.watch(selectAudioProvider);
+  if (classify == FileClassify.other) return ref.watch(selectOtherProvider);
+  if (classify == FileClassify.image) return ref.watch(selectImageProvider);
+  if (classify == FileClassify.doc) return ref.watch(selectTextProvider);
+  if (classify == FileClassify.video) return ref.watch(selectVideoProvider);
+  if (classify == FileClassify.zip) return ref.watch(selectZipProvider);
+  return ref.watch(selectFolderProvider);
+}
+
+void createLog(String filePath, String fileName, String first, String second) {
+  final time = formatDateTime(DateTime.now()).substring(0, 14);
+  final log = File(path.join(filePath, '$fileName-$time.oplog'));
+  String contents = '${DateTime.now()}: 【$first】===>【$second】';
+  log.writeAsStringSync('$contents\n', mode: FileMode.append);
+}
+
+Future<List<List<String>>> decodeOPLogData(XFile file) async {
+  String content = await file.readAsString();
+  final lines = content.split('\n');
+  lines.removeLast();
+  return lines.map((line) {
+    final parts = line.split('===>');
+    final before =
+        parts[0].split(':').last.trim().replaceAll(RegExp(r'【|】'), '');
+    final after = parts[1].trim().replaceAll(RegExp(r'【|】'), '');
+    final beforeWithoutExtension = before.split('.').first;
+    final afterWithoutExtension = after.split('.').first;
+    return [afterWithoutExtension, beforeWithoutExtension];
+  }).toList();
+}
+
+Future<List<List<String>>> decodeCSVData(XFile file) async {
+  // NotificationInfo? errInfo;
+  final bytes = await file.readAsBytes();
+  String content = '';
+  try {
+    content = utf8.decode(bytes);
+  } catch (e) {
+    try {
+      content = gbk.decode(bytes);
+    } catch (e) {
+      Log.e('无法解析的编码格式：$e');
+      // errInfo = NotificationInfo(file: file.path, message: '${S.current.decodeCSVError}: $e');
+      NotificationMessage.show(
+          ErrorNotification(S.current.decodeCSVError, e.toString()));
+    }
+  }
+  List<List<String>> list = content.trimRight().split('\n').map((e) {
+    final list = e.trim().split(',');
+    return [list[0].trim(), list[1].trim()];
+  }).toList();
+  return list.where((e) => e[0] != '' || e[1] != '').toList();
+}
+
+String createClassifyFolder(FileInfo file, String folderPath) {
+  String classify = file.type.value;
+  String classifyPath = path.join(folderPath, classify);
+  if (!Directory(classifyPath).existsSync()) {
+    Directory(classifyPath).createSync();
+  }
+  return classifyPath;
+}
+
+List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
+  List<FileInfo> chineseList = [];
+  List<FileInfo> otherList = [];
+  for (var e in fileList) {
+    if (isChinese(e.name)) {
+      chineseList.add(e);
+    } else {
+      otherList.add(e);
+    }
+  }
+  if (reverse) {
+    chineseList.sort((a, b) => b.phonetic.compareTo(a.phonetic));
+    otherList.sort((a, b) => b.name.compareTo(a.name));
+    return [...chineseList, ...otherList];
+  }
+  chineseList.sort((a, b) => a.phonetic.compareTo(b.phonetic));
+  otherList.sort((a, b) => a.name.compareTo(b.name));
+  return [...otherList, ...chineseList];
 }

@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/widgets/small_text_button.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/text_btn.dart';
 
-class LanguageToggle extends ConsumerWidget {
-  const LanguageToggle({super.key});
+class LanguageToggleBtn extends ConsumerWidget {
+  const LanguageToggleBtn({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     LanguageType currentLanguage = ref.watch(currentLanguageProvider);
-    bool showTextTip = ref.watch(showTextTipProvider);
+    bool showTip = ref.watch(showTipProvider);
 
-    String text = currentLanguage.value;
+    String label = currentLanguage.value;
     String tip = '(${S.of(context).restartTip})';
 
     void toggleLanguage() {
@@ -23,11 +24,11 @@ class LanguageToggle extends ConsumerWidget {
       } else {
         ref.read(languageProvider.notifier).update(const Locale('zh', 'CN'));
       }
-      ref.read(showTextTipProvider.notifier).update();
+      ref.read(showTipProvider.notifier).update();
     }
 
-    return SmallTextButton(
-      text: showTextTip ? "$text$tip" : text,
+    return TextBtn(
+      text: showTip ? "$label$tip" : label,
       onTap: toggleLanguage,
     );
   }

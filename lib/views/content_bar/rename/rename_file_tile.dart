@@ -4,8 +4,8 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/views/content_bar/rename/rename_tile_tooltip.dart';
-import 'package:once_power/widgets/check_tile.dart';
-import 'package:once_power/widgets/normal_tile.dart';
+import 'package:once_power/widgets/content_bar/check_tile.dart';
+import 'package:once_power/widgets/content_bar/normal_tile.dart';
 
 class RenameFileTile extends ConsumerWidget {
   const RenameFileTile(this.file, {super.key});
@@ -45,7 +45,7 @@ class RenameFileTile extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(
-                  width: AppNum.deleteW,
+                  width: AppNum.deleteBtnS,
                   child: Center(
                     child: IconButton(
                       onPressed: () => deleteOne(ref, file.id),

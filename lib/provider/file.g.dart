@@ -34,7 +34,38 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$getFileClassifyHash() => r'c9426f45552036b498e9b59109dd93cc1cfb392f';
+String _$classifyListHash() => r'10845e41cc26efebe4d86d275f66b480dd2877e3';
+
+/// See also [classifyList].
+@ProviderFor(classifyList)
+final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
+  classifyList,
+  name: r'classifyListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$classifyListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
+String _$extensionListMapHash() => r'56b79a9076d6200b51a1f30cff2f0227a5e81a60';
+
+/// See also [extensionListMap].
+@ProviderFor(extensionListMap)
+final extensionListMapProvider =
+    AutoDisposeProvider<Map<FileClassify, List<String>>>.internal(
+  extensionListMap,
+  name: r'extensionListMapProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$extensionListMapHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ExtensionListMapRef
+    = AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
+String _$selectedExtensionHash() => r'bed35cce95c8904157a1636adc16bebcde1b0818';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -57,30 +88,30 @@ class _SystemHash {
   }
 }
 
-/// See also [getFileClassify].
-@ProviderFor(getFileClassify)
-const getFileClassifyProvider = GetFileClassifyFamily();
+/// See also [selectedExtension].
+@ProviderFor(selectedExtension)
+const selectedExtensionProvider = SelectedExtensionFamily();
 
-/// See also [getFileClassify].
-class GetFileClassifyFamily extends Family<FileClassify> {
-  /// See also [getFileClassify].
-  const GetFileClassifyFamily();
+/// See also [selectedExtension].
+class SelectedExtensionFamily extends Family<bool> {
+  /// See also [selectedExtension].
+  const SelectedExtensionFamily();
 
-  /// See also [getFileClassify].
-  GetFileClassifyProvider call(
-    String extension,
+  /// See also [selectedExtension].
+  SelectedExtensionProvider call(
+    String ext,
   ) {
-    return GetFileClassifyProvider(
-      extension,
+    return SelectedExtensionProvider(
+      ext,
     );
   }
 
   @override
-  GetFileClassifyProvider getProviderOverride(
-    covariant GetFileClassifyProvider provider,
+  SelectedExtensionProvider getProviderOverride(
+    covariant SelectedExtensionProvider provider,
   ) {
     return call(
-      provider.extension,
+      provider.ext,
     );
   }
 
@@ -96,107 +127,93 @@ class GetFileClassifyFamily extends Family<FileClassify> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getFileClassifyProvider';
+  String? get name => r'selectedExtensionProvider';
 }
 
-/// See also [getFileClassify].
-class GetFileClassifyProvider extends AutoDisposeProvider<FileClassify> {
-  /// See also [getFileClassify].
-  GetFileClassifyProvider(
-    String extension,
+/// See also [selectedExtension].
+class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
+  /// See also [selectedExtension].
+  SelectedExtensionProvider(
+    String ext,
   ) : this._internal(
-          (ref) => getFileClassify(
-            ref as GetFileClassifyRef,
-            extension,
+          (ref) => selectedExtension(
+            ref as SelectedExtensionRef,
+            ext,
           ),
-          from: getFileClassifyProvider,
-          name: r'getFileClassifyProvider',
+          from: selectedExtensionProvider,
+          name: r'selectedExtensionProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getFileClassifyHash,
-          dependencies: GetFileClassifyFamily._dependencies,
+                  : _$selectedExtensionHash,
+          dependencies: SelectedExtensionFamily._dependencies,
           allTransitiveDependencies:
-              GetFileClassifyFamily._allTransitiveDependencies,
-          extension: extension,
+              SelectedExtensionFamily._allTransitiveDependencies,
+          ext: ext,
         );
 
-  GetFileClassifyProvider._internal(
+  SelectedExtensionProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.extension,
+    required this.ext,
   }) : super.internal();
 
-  final String extension;
+  final String ext;
 
   @override
   Override overrideWith(
-    FileClassify Function(GetFileClassifyRef provider) create,
+    bool Function(SelectedExtensionRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: GetFileClassifyProvider._internal(
-        (ref) => create(ref as GetFileClassifyRef),
+      override: SelectedExtensionProvider._internal(
+        (ref) => create(ref as SelectedExtensionRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        extension: extension,
+        ext: ext,
       ),
     );
   }
 
   @override
-  AutoDisposeProviderElement<FileClassify> createElement() {
-    return _GetFileClassifyProviderElement(this);
+  AutoDisposeProviderElement<bool> createElement() {
+    return _SelectedExtensionProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetFileClassifyProvider && other.extension == extension;
+    return other is SelectedExtensionProvider && other.ext == ext;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, extension.hashCode);
+    hash = _SystemHash.combine(hash, ext.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin GetFileClassifyRef on AutoDisposeProviderRef<FileClassify> {
-  /// The parameter `extension` of this provider.
-  String get extension;
+mixin SelectedExtensionRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `ext` of this provider.
+  String get ext;
 }
 
-class _GetFileClassifyProviderElement
-    extends AutoDisposeProviderElement<FileClassify> with GetFileClassifyRef {
-  _GetFileClassifyProviderElement(super.provider);
+class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
+    with SelectedExtensionRef {
+  _SelectedExtensionProviderElement(super.provider);
 
   @override
-  String get extension => (origin as GetFileClassifyProvider).extension;
+  String get ext => (origin as SelectedExtensionProvider).ext;
 }
 
-String _$classifyListHash() => r'10845e41cc26efebe4d86d275f66b480dd2877e3';
-
-/// See also [classifyList].
-@ProviderFor(classifyList)
-final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
-  classifyList,
-  name: r'classifyListProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$classifyListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
 String _$easyRenameInfoListHash() =>
     r'f50cd9df7222f93c32226f777b70c55706ae76dd';
 
@@ -214,7 +231,7 @@ final easyRenameInfoListProvider =
 );
 
 typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
-String _$fileListHash() => r'18c16e18ee9093f8b32e5b4cab6c7c73efd5bd9a';
+String _$fileListHash() => r'5e3d52652382933019f8547cb50e17feda131e61';
 
 /// See also [FileList].
 @ProviderFor(FileList)

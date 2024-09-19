@@ -3,6 +3,7 @@ import 'package:once_power/model/enum.dart';
 class FileInfo {
   String id;
   String name;
+  String phonetic;
   String newName;
   String parent;
   String filePath;
@@ -18,6 +19,7 @@ class FileInfo {
   FileInfo({
     required this.id,
     required this.name,
+    required this.phonetic,
     required this.newName,
     required this.parent,
     required this.filePath,
@@ -33,7 +35,7 @@ class FileInfo {
 
   @override
   String toString() {
-    return 'FileInfo(id: $id, name: $name, newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, exifDate: $exifDate, type: $type, checked: $checked)';
+    return 'FileInfo(id: $id, name: $name, phonetic: $phonetic,newName: $newName, parent: $parent,filePath: $filePath, extension: $extension, newExtension: $newExtension, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, exifDate: $exifDate, type: $type, checked: $checked)';
   }
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/widgets/svg_icon.dart';
+import 'package:once_power/widgets/common/svg_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RepoUrl extends StatefulWidget {

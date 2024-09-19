@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addSubfolder": MessageLookupByLibrary.simpleMessage(
             "Gets the subfolder of the folder"),
         "after": MessageLookupByLibrary.simpleMessage("After"),
+        "allExtension": MessageLookupByLibrary.simpleMessage("All Extension"),
         "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
@@ -66,13 +67,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Circular prefix content"),
         "circularSuffixDesc":
             MessageLookupByLibrary.simpleMessage("Circular suffix content"),
-        "closeSaveConfig": MessageLookupByLibrary.simpleMessage(
-            "Saved configurations not enabled"),
+        "classifiedFile":
+            MessageLookupByLibrary.simpleMessage("Classified file"),
+        "classifiedFileDesc": MessageLookupByLibrary.simpleMessage(
+            "Create folders for different types of files"),
         "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
         "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
         "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
+        "decodeCSVError":
+            MessageLookupByLibrary.simpleMessage("File parsing error occurred"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete folder"),
@@ -83,16 +88,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
-        "deleted": MessageLookupByLibrary.simpleMessage("DeleteUnselected"),
+        "deleteUnselected":
+            MessageLookupByLibrary.simpleMessage("Delete Unselected"),
+        "detailTitle":
+            MessageLookupByLibrary.simpleMessage("All File Extensions"),
         "digits": MessageLookupByLibrary.simpleMessage("digits"),
+        "document": MessageLookupByLibrary.simpleMessage("Document"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
         "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
-        "enableSaveConfig": MessageLookupByLibrary.simpleMessage(
-            "Saved Configurations Enabled"),
         "errorImage": MessageLookupByLibrary.simpleMessage("Load Fail "),
         "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
         "existsError": m1,
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exitOperation": MessageLookupByLibrary.simpleMessage("Exit Operation"),
         "extension": MessageLookupByLibrary.simpleMessage("Type"),
         "extensionDesc":
             MessageLookupByLibrary.simpleMessage("Modify file extensions"),
@@ -115,7 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
         "log": MessageLookupByLibrary.simpleMessage("Log"),
         "logDesc": MessageLookupByLibrary.simpleMessage(
-            "Saved logs will be in the target folder"),
+            "Organize Mode saved in the Target Folder, Rename Mode saved in the Documents Folder of drive C"),
         "match": MessageLookupByLibrary.simpleMessage("Matching"),
         "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
         "matchLength":
@@ -127,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
         "moveError": MessageLookupByLibrary.simpleMessage("Moving error"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("Move failed"),
+        "newName": MessageLookupByLibrary.simpleMessage("New name"),
         "newVersionInfo": m5,
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(
             "Currently in the latest version"),
@@ -155,13 +164,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
         "prefixContent":
             MessageLookupByLibrary.simpleMessage("Add prefix content"),
-        "renamedName": MessageLookupByLibrary.simpleMessage("New name"),
+        "renameLogs": MessageLookupByLibrary.simpleMessage("rename logs"),
+        "renameName": MessageLookupByLibrary.simpleMessage("Rename name"),
         "replace": MessageLookupByLibrary.simpleMessage("Replace"),
         "reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
         "restartTip":
             MessageLookupByLibrary.simpleMessage("Restart takes effect"),
-        "saveLog": MessageLookupByLibrary.simpleMessage("Save log"),
+        "saveConfig":
+            MessageLookupByLibrary.simpleMessage("Saved Configurations"),
+        "saveLog": MessageLookupByLibrary.simpleMessage(
+            "Save log (In the User Documents folder on the C drive)"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "selectAllSwitch":
+            MessageLookupByLibrary.simpleMessage("Select All Switch"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Select target folder"),
@@ -201,7 +216,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Undo Successful"),
         "undoSuccessfulNum": m9,
         "unselect": MessageLookupByLibrary.simpleMessage("Unselect"),
-        "uploadCSV": MessageLookupByLibrary.simpleMessage("Upload CSV"),
+        "uploadCSV": MessageLookupByLibrary.simpleMessage(
+            "Upload CSV and TXT files with \",\" separating old and new names, or OPLOG file generated by OncePower"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),

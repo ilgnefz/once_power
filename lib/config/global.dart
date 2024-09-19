@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/num.dart';
+import 'package:once_power/constants/text.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -16,10 +18,10 @@ class Global {
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(1016, 616),
-      minimumSize: Size(1016, 616),
+      size: Size(AppNum.defaultW, AppNum.defaultH),
+      minimumSize: Size(AppNum.defaultW, AppNum.defaultH),
       center: true,
-      title: 'OncePower',
+      title: AppText.name,
       backgroundColor: Colors.transparent,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {

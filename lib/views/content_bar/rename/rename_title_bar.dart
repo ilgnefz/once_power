@@ -4,11 +4,13 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/provider.dart';
-import 'package:once_power/views/content_bar/filter_file_button.dart';
-import 'package:once_power/widgets/check_tile.dart';
-import 'package:once_power/widgets/click_icon.dart';
-import 'package:once_power/widgets/normal_tile.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:once_power/widgets/content_bar/check_tile.dart';
+import 'package:once_power/widgets/content_bar/normal_tile.dart';
+
+import 'filter_file_btn.dart';
 
 class RenameTitleBar extends ConsumerWidget {
   const RenameTitleBar({super.key});
@@ -16,7 +18,7 @@ class RenameTitleBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String originName = S.of(context).originalName;
-    final String renameName = S.of(context).renamedName;
+    final String renameName = S.of(context).renameName;
 
     int selected = ref.watch(selectFileProvider);
     int total = ref.watch(fileListProvider).length;
@@ -26,11 +28,12 @@ class RenameTitleBar extends ConsumerWidget {
         CheckTile(
           check: ref.watch(selectAllProvider),
           label: '$originName ($selected/$total)',
+          fontSize: 14,
           onChanged: (v) => selectAll(ref),
           action: ClickIcon(
             svg: ref.watch(fileSortTypeProvider).value,
             size: AppNum.fileCardH,
-            iconSize: 22,
+            iconSize: AppNum.defaultIconS - 2,
             color: AppColors.icon,
             onTap: () => toggleSortType(ref),
           ),
@@ -38,10 +41,10 @@ class RenameTitleBar extends ConsumerWidget {
         NormalTile(label: renameName),
         const SizedBox(
           width: AppNum.extensionW,
-          child: Center(child: FilterFileButton()),
+          child: Center(child: FilterFileBtn()),
         ),
         SizedBox(
-          width: AppNum.deleteW,
+          width: AppNum.deleteBtnS,
           child: Center(
             child: IconButton(
               onPressed: () => deleteAll(ref),
@@ -50,7 +53,7 @@ class RenameTitleBar extends ConsumerWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppNum.contentRP),
+        const SizedBox(width: AppNum.defaultP),
       ],
     );
   }

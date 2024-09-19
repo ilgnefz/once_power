@@ -1,29 +1,27 @@
-import 'package:once_power/constants/constants.dart';
+import 'package:once_power/constants/icons.dart';
 import 'package:once_power/generated/l10n.dart';
 
 enum FunctionMode { replace, reserve, organize }
 
-enum DateType {
-  createdDate,
-  modifiedDate,
-  exifDate,
-  earliestDate,
-  latestDate,
+extension FunctionModeExtension on FunctionMode {
+  bool get isOrganize => this == FunctionMode.organize;
+  bool get isReserve => this == FunctionMode.reserve;
+  bool get isReplace => this == FunctionMode.replace;
 }
 
-extension DateTypeExtension on DateType {
+enum ReplaceType { match, before, after, middle }
+
+extension RemoveTypeExtension on ReplaceType {
   String get value {
     switch (this) {
-      case DateType.createdDate:
-        return S.current.createdDate;
-      case DateType.modifiedDate:
-        return S.current.modifiedDate;
-      case DateType.exifDate:
-        return S.current.exifDate;
-      case DateType.earliestDate:
-        return S.current.earliestDate;
-      case DateType.latestDate:
-        return S.current.latestDate;
+      case ReplaceType.match:
+        return S.current.match;
+      case ReplaceType.before:
+        return S.current.before;
+      case ReplaceType.middle:
+        return S.current.between;
+      case ReplaceType.after:
+        return S.current.after;
     }
   }
 }
@@ -53,21 +51,68 @@ extension ReservedTypeExtension on ReserveType {
   }
 }
 
-enum RemoveType { match, before, after, middle }
+enum DateType {
+  createdDate,
+  modifiedDate,
+  exifDate,
+  earliestDate,
+  latestDate,
+}
 
-extension RemoveTypeExtension on RemoveType {
+extension DateTypeExtension on DateType {
   String get value {
     switch (this) {
-      case RemoveType.match:
-        return S.current.match;
-      case RemoveType.before:
-        return S.current.before;
-      case RemoveType.middle:
-        return S.current.between;
-      case RemoveType.after:
-        return S.current.after;
+      case DateType.createdDate:
+        return S.current.createdDate;
+      case DateType.modifiedDate:
+        return S.current.modifiedDate;
+      case DateType.exifDate:
+        return S.current.exifDate;
+      case DateType.earliestDate:
+        return S.current.earliestDate;
+      case DateType.latestDate:
+        return S.current.latestDate;
     }
   }
+
+  bool get isCreatedDate => this == DateType.createdDate;
+  bool get isModifiedDate => this == DateType.modifiedDate;
+  bool get isExifDate => this == DateType.exifDate;
+  bool get isEarliestDate => this == DateType.earliestDate;
+  bool get isLatestDate => this == DateType.latestDate;
+}
+
+enum FileUploadType { prefix, suffix }
+
+enum FileClassify { image, video, doc, audio, folder, zip, other }
+
+extension FileClassifyExtension on FileClassify {
+  String get value {
+    switch (this) {
+      case FileClassify.image:
+        return S.current.image;
+      case FileClassify.video:
+        return S.current.video;
+      case FileClassify.doc:
+        return S.current.document;
+      case FileClassify.audio:
+        return S.current.audio;
+      case FileClassify.folder:
+        return S.current.folder;
+      case FileClassify.zip:
+        return S.current.zip;
+      case FileClassify.other:
+        return S.current.other;
+    }
+  }
+
+  bool get isFolder => this == FileClassify.folder;
+  bool get isImage => this == FileClassify.image;
+  bool get isVideo => this == FileClassify.video;
+  bool get isDoc => this == FileClassify.doc;
+  bool get isAudio => this == FileClassify.audio;
+  bool get isZip => this == FileClassify.zip;
+  bool get isOther => this == FileClassify.other;
 }
 
 enum SortType {
@@ -106,31 +151,6 @@ extension SortTypeExtension on SortType {
     }
   }
 }
-
-enum FileClassify { image, video, text, audio, folder, zip, other }
-
-extension FileClassifyExtension on FileClassify {
-  String get value {
-    switch (this) {
-      case FileClassify.image:
-        return S.current.image;
-      case FileClassify.video:
-        return S.current.video;
-      case FileClassify.text:
-        return S.current.text;
-      case FileClassify.audio:
-        return S.current.audio;
-      case FileClassify.folder:
-        return S.current.folder;
-      case FileClassify.zip:
-        return S.current.zip;
-      case FileClassify.other:
-        return S.current.other;
-    }
-  }
-}
-
-enum FileUploadType { prefix, suffix }
 
 enum LanguageType {
   english('English'),
