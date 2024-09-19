@@ -48,7 +48,7 @@ dependencies:
   package_info_plus: ^8.0.2
   url_launcher: ^6.3.0
   dio: ^5.7.0
-  desktop_drop: ^0.4.4
+  desktop_drop: ^0.5.0
   cross_file: any
   flutter_launcher_icons: ^0.13.1
   exif: ^3.3.0
