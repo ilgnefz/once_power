@@ -21,6 +21,12 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Match length with negative input
+
+When the matching length is negative, start truncating from the end of the file name
+
+![16](doc/16.gif)
+
 ## Filter files by extension
 
 ![15](doc/15.gif)
