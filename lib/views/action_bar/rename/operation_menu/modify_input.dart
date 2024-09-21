@@ -27,9 +27,10 @@ class ModifyInput extends ConsumerWidget {
     bool dateRename = ref.watch(dateRenameProvider);
     bool reverseMode = ref.watch(currentModeProvider) == FunctionMode.reserve;
     bool inputNotEmpty = ref.watch(matchClearProvider);
+    bool inputLength = ref.watch(inputLengthProvider);
     bool reserveTypeEmpty = ref.watch(currentReserveTypeProvider).isNotEmpty;
-    bool disable =
-        dateRename || (reverseMode && (inputNotEmpty || reserveTypeEmpty));
+    bool disable = dateRename ||
+        (reverseMode && (inputNotEmpty || reserveTypeEmpty || inputLength));
     final TextEditingController controller =
         ref.watch(modifyControllerProvider);
 
