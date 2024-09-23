@@ -59,18 +59,28 @@ void formatFolder(WidgetRef ref, List<String?> folders) async {
 }
 
 void addFileInfo(WidgetRef ref, List<String> list) async {
+  bool isViewMode = ref.watch(viewModeProvider);
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
   int count = 0;
   ref.read(totalProvider.notifier).update(list.length);
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (var filePath in list) {
+    if (isViewMode && !image.contains(getFileExtension(filePath))) continue;
     ref.read(countProvider.notifier).update(++count);
     bool exist = ref.watch(fileListProvider).any((e) => e.filePath == filePath);
     if (exist) continue;
     FileInfo fileInfo = await generateFileInfo(ref, filePath);
     ref.read(fileListProvider.notifier).add(fileInfo);
     await Future.delayed(const Duration(microseconds: 1));
+  }
+  if (isViewMode) {
+    int removeCount = list.length - count;
+    if (removeCount > 0) {
+      NotificationType type = SuccessNotification(
+          S.current.viewMode, S.current.removeNonImage(removeCount));
+      NotificationMessage.show(type, 3);
+    }
   }
   int endTime = DateTime.now().microsecondsSinceEpoch;
   double cost = (endTime - startTime) / 1000000;

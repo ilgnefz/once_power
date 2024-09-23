@@ -1369,6 +1369,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Removed {count} non-image files`
+  String removeNonImage(Object count) {
+    return Intl.message(
+      'Removed $count non-image files',
+      name: 'removeNonImage',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

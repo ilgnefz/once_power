@@ -4,9 +4,10 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 
 class ErrorImage extends StatelessWidget {
-  const ErrorImage({super.key, this.isPreview = false});
+  const ErrorImage({super.key, this.isPreview = false, required this.file});
 
   final bool isPreview;
+  final String file;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,39 @@ class ErrorImage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(AppImages.error, fit: BoxFit.contain),
+        isPreview
+            ? Image.asset(AppImages.error, fit: BoxFit.none)
+            : Expanded(
+                child: Image.asset(AppImages.error, fit: BoxFit.contain)),
         SizedBox(height: isPreview ? 12 : 4),
+        if (isPreview) ...[
+          Stack(
+            children: <Widget>[
+              // Stroked text as border.
+              Text(
+                file,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 6
+                    ..color = Colors.white,
+                ).useSystemChineseFont(),
+              ),
+              // Solid text as fill.
+              Text(
+                file,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ).useSystemChineseFont(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+        ],
         Text(
           '$errorLabel(((;꒪ꈊ꒪;)))',
           style: isPreview

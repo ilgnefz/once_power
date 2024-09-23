@@ -19,7 +19,6 @@ class NotificationMessage {
   static show(NotificationType type, [int time = 5]) {
     final (color, icon) = showMark(type);
     if (type is SuccessNotification && type.infoList.isNotEmpty) time = 30;
-
     BotToast.showCustomNotification(
       toastBuilder: (context) {
         return Container(

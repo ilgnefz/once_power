@@ -130,5 +130,6 @@
   "allExtension": "All Extension",
   "detailTitle": "All File Extensions",
   "selectAllSwitch": "Select All Switch",
-  "exitOperation": "Exit Operation"
+  "exitOperation": "Exit Operation",
+  "removeNonImage": "Removed {count} non-image files"
 }

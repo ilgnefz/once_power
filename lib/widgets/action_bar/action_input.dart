@@ -40,12 +40,12 @@ class ActionInput extends StatelessWidget {
       label: label,
       slot: BaseInput(
         disable: disable,
+        focusNode: focusNode,
         onKeyEvent: onKeyEvent,
         controller: controller,
         hintText: hintText,
         show: show,
         action: action,
-        focusNode: focusNode,
         onChanged: onChanged,
       ),
       message: message,

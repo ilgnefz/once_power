@@ -93,8 +93,8 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
                   File(widget.files[index].filePath),
                   fit: BoxFit.scaleDown,
                   cacheHeight: MediaQuery.of(context).size.height.toInt(),
-                  errorBuilder: (context, exception, stackTrace) =>
-                      const ErrorImage(isPreview: true),
+                  errorBuilder: (context, exception, stackTrace) => ErrorImage(
+                      isPreview: true, file: widget.files[index].filePath),
                 ),
               ),
             ),

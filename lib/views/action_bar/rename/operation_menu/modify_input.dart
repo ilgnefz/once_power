@@ -31,8 +31,7 @@ class ModifyInput extends ConsumerWidget {
     bool reserveTypeEmpty = ref.watch(currentReserveTypeProvider).isNotEmpty;
     bool disable = dateRename ||
         (reverseMode && (inputNotEmpty || reserveTypeEmpty || inputLength));
-    final TextEditingController controller =
-        ref.watch(modifyControllerProvider);
+    final controller = ref.watch(modifyControllerProvider);
 
     void toggleCase() {
       ref.read(matchCaseProvider.notifier).update();
@@ -53,11 +52,17 @@ class ModifyInput extends ConsumerWidget {
       int? num = int.tryParse(controller.text);
       if (num != null && event is KeyUpEvent) {
         if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-          num += 1;
-        } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-          num -= 1;
+          ref
+              .read(modifyControllerProvider.notifier)
+              .updateText((num += 1).toString());
+          updateName(ref);
         }
-        ref.read(modifyControllerProvider.notifier).updateText(num.toString());
+        if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+          ref
+              .read(modifyControllerProvider.notifier)
+              .updateText((num -= 1).toString());
+          updateName(ref);
+        }
       }
     }
 

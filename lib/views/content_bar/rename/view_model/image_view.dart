@@ -24,7 +24,8 @@ class ImageView extends ConsumerWidget {
       color: file.checked ? null : Colors.grey,
       colorBlendMode: BlendMode.saturation,
       cacheWidth: AppNum.imageW.toInt() + (isRefresh ? 1 : 0),
-      errorBuilder: (context, exception, stackTrace) => const ErrorImage(),
+      errorBuilder: (context, exception, stackTrace) =>
+          ErrorImage(file: file.filePath),
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {
           return child;

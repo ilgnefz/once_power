@@ -17,12 +17,12 @@ class BaseInput extends StatelessWidget {
     this.padding,
     this.textStyle,
     this.leading,
+    this.focusNode,
     this.onKeyEvent,
     this.controller,
     this.hintText,
     this.textAlign = TextAlign.start,
     this.inputFormatters,
-    this.focusNode,
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
@@ -35,12 +35,12 @@ class BaseInput extends StatelessWidget {
   final EdgeInsets? padding;
   final TextStyle? textStyle;
   final Widget? leading;
+  final FocusNode? focusNode;
   final void Function(KeyEvent)? onKeyEvent;
   final TextEditingController? controller;
   final String? hintText;
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
-  final FocusNode? focusNode;
   final void Function(String)? onChanged;
   final void Function()? onEditingComplete;
   final void Function(String)? onSubmitted;
@@ -74,6 +74,7 @@ class BaseInput extends StatelessWidget {
                   controller: controller,
                   readOnly: readOnly,
                   style: textStyle,
+                  focusNode: focusNode,
                   decoration: InputDecoration(
                     hintText: hintText,
                     isDense: true,
@@ -82,7 +83,6 @@ class BaseInput extends StatelessWidget {
                   ),
                   textAlign: textAlign,
                   inputFormatters: inputFormatters,
-                  focusNode: focusNode,
                   onChanged: onChanged,
                   onEditingComplete: onEditingComplete,
                   onSubmitted: onSubmitted,

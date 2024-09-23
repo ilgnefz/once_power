@@ -130,5 +130,6 @@
   "allExtension": "全部扩展",
   "detailTitle": "所有文件扩展",
   "selectAllSwitch": "全选切换",
-  "exitOperation": "退出操作"
+  "exitOperation": "退出操作",
+  "removeNonImage": "已移除{count}个非图片文件"
 }
