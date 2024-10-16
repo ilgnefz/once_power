@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "other": MessageLookupByLibrary.simpleMessage("其他"),
         "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
         "prefixContent": MessageLookupByLibrary.simpleMessage("添加前缀内容"),
+        "regeditTip": MessageLookupByLibrary.simpleMessage(
+            "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\"发送到\"传入）"),
         "removeNonImage": m7,
         "renameLogs": MessageLookupByLibrary.simpleMessage("重命名日志"),
         "renameName": MessageLookupByLibrary.simpleMessage("重命名名称"),
@@ -156,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
         "selectTargetFolder": MessageLookupByLibrary.simpleMessage("选择目标文件夹"),
         "serial": MessageLookupByLibrary.simpleMessage("增数"),
+        "shortcutTip1": MessageLookupByLibrary.simpleMessage("添加所有子文件到"),
+        "shortcutTip2": MessageLookupByLibrary.simpleMessage("添加到"),
         "start": MessageLookupByLibrary.simpleMessage("开始"),
         "successInfo": MessageLookupByLibrary.simpleMessage("已成功删除所有空文件夹"),
         "successful": MessageLookupByLibrary.simpleMessage("重命名成功"),

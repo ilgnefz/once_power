@@ -2,7 +2,7 @@ import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/num.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -10,6 +10,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/common/easy_scroll_bar.dart';
 
 import 'empty.dart';
@@ -20,18 +21,38 @@ import 'rename/rename_title_bar.dart';
 import 'rename/view_model/view_grid_view.dart';
 import 'rename/view_model/view_model_title_bar.dart';
 
-class ContentBar extends ConsumerWidget {
+class ContentBar extends ConsumerStatefulWidget {
   const ContentBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _ContentBarState();
+}
+
+class _ContentBarState extends ConsumerState<ContentBar> {
+  @override
+  void initState() {
+    super.initState();
+    List<String> fPath = StorageUtil.getStringList(AppKeys.folderPathCache);
+    if (fPath.isNotEmpty) {
+      Future.delayed(Duration.zero, () async {
+        await formatPath(ref, fPath);
+      });
+      StorageUtil.remove(AppKeys.folderPathCache);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     FunctionMode mode = ref.watch(currentModeProvider);
     bool isOrganize = mode == FunctionMode.organize;
     bool isViewMode = ref.watch(viewModeProvider);
 
-    void dropAdd(DropDoneDetails details) {
+    Future<void> dropAdd(DropDoneDetails details) async {
       List<XFile> paths = details.files;
-      if (paths.isNotEmpty) formatDropPath(ref, paths);
+      if (paths.isNotEmpty) {
+        List<String> pathsList = paths.map((e) => e.path).toList();
+        await formatPath(ref, pathsList);
+      }
     }
 
     Widget buildTitleBar() {

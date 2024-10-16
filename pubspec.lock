@@ -986,6 +986,30 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
+  shortcut_menu_extender:
+    dependency: "direct main"
+    description:
+      name: shortcut_menu_extender
+      sha256: "958a1f1808376edc0efe4c8fb210594eecaa7cc939c266cd8fb05cbe588f461f"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.1"
+  shortcut_menu_extender_platform_interface:
+    dependency: transitive
+    description:
+      name: shortcut_menu_extender_platform_interface
+      sha256: "268c8ac115f49c0f8f710a08ad846799978bdc2683ba19e2b89ab218f8e64bf8"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.1"
+  shortcut_menu_extender_windows:
+    dependency: transitive
+    description:
+      name: shortcut_menu_extender_windows
+      sha256: "8c07c162e3f68aa4fa4e5eb9fdd5d82eed95e42592d990428f01819369c19312"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1263,6 +1287,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.5.4"
+  win32_registry:
+    dependency: "direct main"
+    description:
+      name: win32_registry
+      sha256: "21ec76dfc731550fd3e2ce7a33a9ea90b828fdf19a5c3bcf556fa992cfa99852"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.5"
   window_manager:
     dependency: "direct main"
     description:

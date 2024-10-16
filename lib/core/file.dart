@@ -24,26 +24,26 @@ import 'package:pinyin/pinyin.dart';
 import 'core.dart';
 
 // 处理通过拖动添加的文件或文件夹
-void formatDropPath(WidgetRef ref, List<XFile> paths) async {
+Future<void> formatPath(WidgetRef ref, List<String> paths) async {
   List<String> files = [];
   List<String> folders = [];
   for (var p in paths) {
-    bool isFile = await FileSystemEntity.isFile(p.path);
-    if (isFile) files.add(p.path);
-    if (!isFile) folders.add(p.path);
+    bool isFile = await FileSystemEntity.isFile(p);
+    if (isFile) files.add(p);
+    if (!isFile) folders.add(p);
   }
   if (folders.isNotEmpty) formatFolder(ref, folders);
   if (files.isNotEmpty) addFileInfo(ref, files);
 }
 
 // 处理通过按钮添加的文件
-void formatXFile(WidgetRef ref, List<XFile> files) async {
+Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
   final paths = files.map((e) => e.path).toList();
   addFileInfo(ref, paths);
 }
 
 // 处理传入来的文件夹，如果是添加文件夹就直接格式文件夹，不是就获取文件夹中的子文件
-void formatFolder(WidgetRef ref, List<String?> folders) async {
+Future<void> formatFolder(WidgetRef ref, List<String?> folders) async {
   bool addFolder = ref.watch(addFolderProvider);
   bool addSubfolder = ref.watch(addSubfolderProvider);
   FunctionMode mode = ref.watch(currentModeProvider);
@@ -58,7 +58,7 @@ void formatFolder(WidgetRef ref, List<String?> folders) async {
   addFileInfo(ref, list);
 }
 
-void addFileInfo(WidgetRef ref, List<String> list) async {
+Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
   bool isViewMode = ref.watch(viewModeProvider);
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();

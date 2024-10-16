@@ -30,7 +30,7 @@ class OrganizeAction extends ConsumerWidget {
 
     TextEditingController controller = ref.watch(targetControllerProvider);
 
-    void selectTargetFolder() async {
+    Future<void> selectTargetFolder() async {
       final String? folder = await getDirectoryPath();
       if (folder != null) {
         controller.text = folder;
@@ -40,14 +40,14 @@ class OrganizeAction extends ConsumerWidget {
       }
     }
 
-    void addFile() async {
+    Future<void> addFile() async {
       final List<XFile> files = await openFiles();
-      if (files.isNotEmpty) formatXFile(ref, files);
+      if (files.isNotEmpty) await formatXFile(ref, files);
     }
 
-    void addFolder() async {
+    Future<void> addFolder() async {
       final List<String?> folders = await getDirectoryPaths();
-      if (folders.isNotEmpty) formatFolder(ref, folders);
+      if (folders.isNotEmpty) await formatFolder(ref, folders);
     }
 
     return Column(

@@ -45,9 +45,9 @@ class StorageUtil {
     return _prefs.setStringList(key, value);
   }
 
-  static List<String>? getStringList(String key) {
+  static List<String> getStringList(String key) {
     List<String>? value = _prefs.getStringList(key);
-    return value;
+    return value ?? [];
   }
 
   static Future<bool> remove(String key) {

@@ -2,6 +2,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/utils/regedit.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -220,6 +221,23 @@ class SaveConfig extends _$SaveConfig {
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isSave, state);
+  }
+}
+
+@riverpod
+class UseRegedit extends _$UseRegedit {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
+  Future<void> update() async {
+    state = !state;
+    if (state) {
+      createGlobalRegedit();
+      createLocalRegedit();
+    } else {
+      removeGlobalRegedit();
+      removeLocalRegedit();
+    }
+    await StorageUtil.setBool(AppKeys.isUseRegedit, state);
   }
 }
 

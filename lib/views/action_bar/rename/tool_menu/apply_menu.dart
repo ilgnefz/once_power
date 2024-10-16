@@ -12,14 +12,14 @@ class ApplyMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void addFile() async {
+    Future<void> addFile() async {
       final List<XFile> files = await openFiles();
-      if (files.isNotEmpty) formatXFile(ref, files);
+      if (files.isNotEmpty) await formatXFile(ref, files);
     }
 
-    void addFolder() async {
+    Future<void> addFolder() async {
       final List<String?> folders = await getDirectoryPaths();
-      if (folders.isNotEmpty) formatFolder(ref, folders);
+      if (folders.isNotEmpty) await formatFolder(ref, folders);
     }
 
     return Row(

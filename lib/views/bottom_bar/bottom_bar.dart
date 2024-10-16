@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/bottom_bar/check_version.dart';
+import 'package:once_power/views/bottom_bar/regedit.dart';
 import 'package:once_power/views/bottom_bar/repo_url.dart';
 import 'package:once_power/views/bottom_bar/task_info.dart';
 
@@ -32,6 +35,10 @@ class BottomBar extends StatelessWidget {
         children: [
           const SaveBtn(),
           SizedBox(width: _smallG),
+          if (Platform.isWindows) ...[
+            const RegeditBtn(),
+            SizedBox(width: _smallG),
+          ],
           const LogBtn(),
           SizedBox(width: _smallG),
           const ViewModeBtn(),

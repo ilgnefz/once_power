@@ -131,5 +131,8 @@
   "detailTitle": "所有文件扩展",
   "selectAllSwitch": "全选切换",
   "exitOperation": "退出操作",
-  "removeNonImage": "已移除{count}个非图片文件"
+  "removeNonImage": "已移除{count}个非图片文件",
+  "regeditTip": "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\"发送到\"传入）",
+  "shortcutTip1": "添加所有子文件到",
+  "shortcutTip2": "添加到"
 }

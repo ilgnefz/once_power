@@ -7,8 +7,8 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
-void main() async {
-  await Global.init();
+void main(List<String> args) async {
+  await Global.init(args);
   runApp(const ProviderScope(child: MyApp()));
 }
 

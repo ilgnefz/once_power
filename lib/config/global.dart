@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/constants/text.dart';
+import 'package:once_power/utils/regedit.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Global {
-  static init() async {
+  static init(List<String> args) async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    if (shortcutMenuExtenderCommand.runIfNeeded(args)) exit(0);
+
     await PackageDesc.init();
 
     await StorageUtil.init();
@@ -29,6 +36,16 @@ class Global {
       await windowManager.focus();
       await windowManager.setAsFrameless();
     });
+
+    if (args.isNotEmpty) {
+      await StorageUtil.setStringList(AppKeys.folderPathCache, args);
+    }
+
+    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
+    if (useRegedit) {
+      removeGlobalRegedit();
+      createLocalRegedit();
+    }
   }
 }
 
@@ -51,6 +68,7 @@ void saveOrNo() {
       AppKeys.isPrefixSwap,
       AppKeys.isSuffixCycle,
       AppKeys.isSuffixSwap,
+      AppKeys.isUseRegedit,
       AppKeys.locale,
       AppKeys.prefixLength,
       AppKeys.prefixStart,

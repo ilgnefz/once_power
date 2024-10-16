@@ -27,6 +27,7 @@ class AppKeys {
   static String isAppend = 'isAppend';
   static String isFolder = 'isFolder';
   static String isSave = 'isSave';
+  static String isUseRegedit = 'isUseRegedit';
   static String isUseOrganize = 'isUseOrganize';
   static String isSaveLog = 'isSaveLog';
   static String isViewMode = 'isViewMode';
@@ -45,4 +46,5 @@ class AppKeys {
   // temp cache
   static String matchCache = 'matchCache';
   static String modifyCache = 'modifyCache';
+  static String folderPathCache = 'folderPathCache';
 }

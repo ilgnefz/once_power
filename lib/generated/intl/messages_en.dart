@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
         "prefixContent":
             MessageLookupByLibrary.simpleMessage("Add prefix content"),
+        "regeditTip": MessageLookupByLibrary.simpleMessage(
+            "Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)"),
         "removeNonImage": m7,
         "renameLogs": MessageLookupByLibrary.simpleMessage("rename logs"),
         "renameName": MessageLookupByLibrary.simpleMessage("Rename name"),
@@ -184,6 +186,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Select target folder"),
         "serial": MessageLookupByLibrary.simpleMessage("Serial"),
+        "shortcutTip1":
+            MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
+        "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
         "successInfo": MessageLookupByLibrary.simpleMessage(
             "Successfully deleted all empty folders"),

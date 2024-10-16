@@ -328,6 +328,21 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
+String _$useRegeditHash() => r'e7b0cf38c5a2ff87605080f135ef69e5a32d80d6';
+
+/// See also [UseRegedit].
+@ProviderFor(UseRegedit)
+final useRegeditProvider =
+    AutoDisposeNotifierProvider<UseRegedit, bool>.internal(
+  UseRegedit.new,
+  name: r'useRegeditProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$useRegeditHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseRegedit = AutoDisposeNotifier<bool>;
 String _$saveLogHash() => r'1dbe16fe30076b8e4880f59ea748c1d122315e4f';
 
 /// See also [SaveLog].

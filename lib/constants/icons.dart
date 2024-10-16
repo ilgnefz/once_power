@@ -21,6 +21,7 @@ class AppIcons {
   static const String nameDescending = '${basePath}name-descending.svg';
   static const String ruler = '${basePath}ruler.svg';
   static const String save = '${basePath}save.svg';
+  static const String shortcutMenu = '${basePath}shortcut-menu.svg';
   static const String sort = '${basePath}sort.svg';
   static const String success = '${basePath}success.svg';
   static const String swap = '${basePath}swap.svg';

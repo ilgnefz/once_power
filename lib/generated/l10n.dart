@@ -1379,6 +1379,36 @@ class S {
       args: [count],
     );
   }
+
+  /// `Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)`
+  String get regeditTip {
+    return Intl.message(
+      'Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)',
+      name: 'regeditTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add all subfiles to`
+  String get shortcutTip1 {
+    return Intl.message(
+      'Add all subfiles to',
+      name: 'shortcutTip1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to`
+  String get shortcutTip2 {
+    return Intl.message(
+      'Add to',
+      name: 'shortcutTip2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
