@@ -1,3 +1,4 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +8,11 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:once_power/widgets/common/custom_tooltip.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 import 'package:once_power/widgets/common/easy_text_btn.dart';
+import 'package:tolyui_feedback/tolyui_feedback.dart';
 
 import 'organize_button.dart';
 import 'delete_folder_button.dart';
@@ -58,7 +62,7 @@ class OrganizeAction extends ConsumerWidget {
         const TargetFolderInput(),
         const SizedBox(height: gap),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             EasyCheckbox(
               classifiedFileLabel,
@@ -66,6 +70,22 @@ class OrganizeAction extends ConsumerWidget {
               onChanged: (v) =>
                   ref.read(classifiedFileProvider.notifier).update(),
             ),
+            const SizedBox(width: AppNum.mediumG),
+            EasyTooltip(
+              message: S.of(context).useTimeClassification,
+              textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+                  .useSystemChineseFont(),
+              placement: Placement.right,
+              child: ClickIcon(
+                size: 20,
+                svg: AppIcons.date,
+                color: ref.watch(useTimeClassificationProvider)
+                    ? Theme.of(context).primaryColor
+                    : AppColors.unselectIcon,
+                onTap: ref.read(useTimeClassificationProvider.notifier).update,
+              ),
+            ),
+            const Spacer(),
             EasyTextBtn(selectFolderLabel, onTap: selectTargetFolder),
           ],
         ),

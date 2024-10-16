@@ -21,6 +21,30 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Add files through the system right-click menu
+
+Activate this function in the lower left corner
+
+![03](doc/03-e.png)
+
+After opening it, we can right-click in the File Explorer to view the menu for directly adding files to the software when selecting or not selecting a folder. 
+
+Due to the limitation of the Windows system that only one file path can be passed in at a time, this feature can only select folders when the program is not running.
+
+![17](doc/17.gif)
+
+If you want to use multiple file or folder paths, you can place the shortcut of this software in the "Launch to" folder.
+
+![18](doc/18.gif)
+
+Then select the file that needs to be passed in and right-click
+
+![19](doc/19.gif)
+
+In the running state of the software, multiple files can be directly added using the right-click menu without the need to use "send to" to add multiple files (when running, adding by right clicking will automatically select the append mode).
+
+![20](doc/20.gif)
+
 ## Match length with negative input
 
 When the matching length is negative, start truncating from the end of the file name

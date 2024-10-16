@@ -30,7 +30,7 @@
   "addFile": "Add file",
   "addFolder": "Add folder",
   "selectFolder": "Select folder",
-  "selectTargetFolder": "Select target folder",
+  "selectTargetFolder": "Target folder",
   "applyChange": "Apply",
   "lengthDesc": "Input length truncation (adding a space between two numbers to truncate the middle part)",
   "caseDesc": "Case sensitive",
@@ -125,14 +125,15 @@
   "errorImage": "Load Fail ",
   "addSubfolder": "Gets the subfolder of the folder",
   "classifiedFile": "Classified file",
-  "classifiedFileDesc": "Create folders for different types of files",
+  "classifiedFileDesc": "Create parent folders for files based on different types or modification times",
   "decodeCSVError": "File parsing error occurred",
   "allExtension": "All Extension",
   "detailTitle": "All File Extensions",
   "selectAllSwitch": "Select All Switch",
   "exitOperation": "Exit Operation",
   "removeNonImage": "Removed {count} non-image files",
-  "regeditTip": "Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)",
+  "regeditTip": "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)",
   "shortcutTip1": "Add all subfiles to",
-  "shortcutTip2": "Add to"
+  "shortcutTip2": "Add to",
+  "useTimeClassification": "Classify using file modification time"
 }

@@ -313,6 +313,23 @@ final classifiedFileProvider =
 );
 
 typedef _$ClassifiedFile = AutoDisposeNotifier<bool>;
+String _$useTimeClassificationHash() =>
+    r'bcd75674b1c1c573a0c3e2c6aa6ddc5f3e38c0e9';
+
+/// See also [UseTimeClassification].
+@ProviderFor(UseTimeClassification)
+final useTimeClassificationProvider =
+    AutoDisposeNotifierProvider<UseTimeClassification, bool>.internal(
+  UseTimeClassification.new,
+  name: r'useTimeClassificationProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$useTimeClassificationHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseTimeClassification = AutoDisposeNotifier<bool>;
 String _$saveConfigHash() => r'75f973a43293af3d65623a751f42f81a68e436c2';
 
 /// See also [SaveConfig].
@@ -328,7 +345,7 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
-String _$useRegeditHash() => r'e7b0cf38c5a2ff87605080f135ef69e5a32d80d6';
+String _$useRegeditHash() => r'691abd4237deed74b0aaf1ee1351647c4e72928c';
 
 /// See also [UseRegedit].
 @ProviderFor(UseRegedit)

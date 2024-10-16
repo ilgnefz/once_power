@@ -63,7 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "circularSuffixDesc": MessageLookupByLibrary.simpleMessage("循环后缀内容"),
         "classifiedFile": MessageLookupByLibrary.simpleMessage("分类文件"),
         "classifiedFileDesc":
-            MessageLookupByLibrary.simpleMessage("按不同类型的文件创建文件夹"),
+            MessageLookupByLibrary.simpleMessage("根据不同类型或不同修改时间为文件创建父文件夹"),
         "createdDate": MessageLookupByLibrary.simpleMessage("创建日期"),
         "createdTime": MessageLookupByLibrary.simpleMessage("创建日期"),
         "currentTask": MessageLookupByLibrary.simpleMessage("当前任务"),
@@ -188,6 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "上传以\",\"分隔新旧名称的csv、txt文件或本软件生成的oplog文件"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("上传 .txt 文件"),
         "useDesc": MessageLookupByLibrary.simpleMessage("功能使用说明"),
+        "useTimeClassification":
+            MessageLookupByLibrary.simpleMessage("使用文件修改时间进行分类"),
         "video": MessageLookupByLibrary.simpleMessage("视频"),
         "viewMode": MessageLookupByLibrary.simpleMessage("视图模式"),
         "zip": MessageLookupByLibrary.simpleMessage("压缩包")

@@ -27,6 +27,11 @@ class _HomeViewState extends ConsumerState<HomeView>
     with WindowListener, ShortcutMenuListener {
   void _init() async {
     await windowManager.setPreventClose(true);
+    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
+    if (useRegedit) {
+      removeGlobalRegedit();
+      createLocalRegedit();
+    }
     setState(() {});
   }
 
@@ -59,7 +64,12 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   @override
   Future<void> onShortcutMenuClicked(String key, String path) async {
-    if (key == AppText.name) await formatPath(ref, [path]);
+    if (key == AppText.name) {
+      if (!ref.watch(appendModeProvider)) {
+        ref.read(appendModeProvider.notifier).update();
+      }
+      await formatPath(ref, [path]);
+    }
   }
 
   @override

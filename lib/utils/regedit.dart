@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:path/path.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:win32_registry/win32_registry.dart';
 

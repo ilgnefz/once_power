@@ -6,6 +6,7 @@ import 'package:exif/exif.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -246,13 +247,16 @@ Future<List<List<String>>> decodeCSVData(XFile file) async {
   return list.where((e) => e[0] != '' || e[1] != '').toList();
 }
 
-String createClassifyFolder(FileInfo file, String folderPath) {
-  String classify = file.type.value;
-  String classifyPath = path.join(folderPath, classify);
-  if (!Directory(classifyPath).existsSync()) {
-    Directory(classifyPath).createSync();
+String createClassifyFolder(FileInfo file, String parentFolderPath) {
+  bool useTime = StorageUtil.getBool(AppKeys.isUseTimeClassification) ?? false;
+  String folderName = useTime
+      ? formatDateTime(file.modifiedDate).substring(0, 8)
+      : file.type.value;
+  String folderPath = path.join(parentFolderPath, folderName);
+  if (!Directory(folderPath).existsSync()) {
+    Directory(folderPath).createSync();
   }
-  return classifyPath;
+  return folderPath;
 }
 
 List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {

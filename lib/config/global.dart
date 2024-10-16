@@ -40,12 +40,6 @@ class Global {
     if (args.isNotEmpty) {
       await StorageUtil.setStringList(AppKeys.folderPathCache, args);
     }
-
-    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
-    if (useRegedit) {
-      removeGlobalRegedit();
-      createLocalRegedit();
-    }
   }
 }
 

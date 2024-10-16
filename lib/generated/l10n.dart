@@ -360,10 +360,10 @@ class S {
     );
   }
 
-  /// `Select target folder`
+  /// `Target folder`
   String get selectTargetFolder {
     return Intl.message(
-      'Select target folder',
+      'Target folder',
       name: 'selectTargetFolder',
       desc: '',
       args: [],
@@ -1310,10 +1310,10 @@ class S {
     );
   }
 
-  /// `Create folders for different types of files`
+  /// `Create parent folders for files based on different types or modification times`
   String get classifiedFileDesc {
     return Intl.message(
-      'Create folders for different types of files',
+      'Create parent folders for files based on different types or modification times',
       name: 'classifiedFileDesc',
       desc: '',
       args: [],
@@ -1380,10 +1380,10 @@ class S {
     );
   }
 
-  /// `Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)`
+  /// `Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)`
   String get regeditTip {
     return Intl.message(
-      'Open right-click shortcut menu(When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)',
+      'Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the "Send To" folder (open File Explorer, enter "shell: sendto" in the address bar and press enter), and use "Send to" to pass in)',
       name: 'regeditTip',
       desc: '',
       args: [],
@@ -1405,6 +1405,16 @@ class S {
     return Intl.message(
       'Add to',
       name: 'shortcutTip2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Classify using file modification time`
+  String get useTimeClassification {
+    return Intl.message(
+      'Classify using file modification time',
+      name: 'useTimeClassification',
       desc: '',
       args: [],
     );

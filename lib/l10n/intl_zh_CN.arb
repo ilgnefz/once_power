@@ -125,7 +125,7 @@
   "errorImage": "加载失败 ",
   "addSubfolder": "获取文件夹的子文件夹",
   "classifiedFile": "分类文件",
-  "classifiedFileDesc": "按不同类型的文件创建文件夹",
+  "classifiedFileDesc": "根据不同类型或不同修改时间为文件创建父文件夹",
   "decodeCSVError": "文件解析出错了",
   "allExtension": "全部扩展",
   "detailTitle": "所有文件扩展",
@@ -134,5 +134,6 @@
   "removeNonImage": "已移除{count}个非图片文件",
   "regeditTip": "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\"发送到\"传入）",
   "shortcutTip1": "添加所有子文件到",
-  "shortcutTip2": "添加到"
+  "shortcutTip2": "添加到",
+  "useTimeClassification": "使用文件修改时间进行分类"
 }

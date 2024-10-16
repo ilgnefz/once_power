@@ -212,6 +212,16 @@ class ClassifiedFile extends _$ClassifiedFile {
   }
 }
 
+@riverpod
+class UseTimeClassification extends _$UseTimeClassification {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseTimeClassification) ?? false;
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isUseTimeClassification, state);
+  }
+}
+
 // BottomBar Start
 
 @riverpod
