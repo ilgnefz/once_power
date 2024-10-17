@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:charset/charset.dart';
 import 'package:exif/exif.dart';
 import 'package:file_selector/file_selector.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/constants.dart';
@@ -19,6 +20,7 @@ import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
+import 'package:once_power/widgets/content_bar/type_detail_panel.dart';
 import 'package:path/path.dart' as path;
 import 'package:pinyin/pinyin.dart';
 
@@ -160,6 +162,14 @@ void toggleSortType(WidgetRef ref) {
   ref.read(fileSortTypeProvider.notifier).update(type);
   updateName(ref);
   updateExtension(ref);
+}
+
+void showAllType(BuildContext context, [bool needPop = false]) async {
+  if (needPop) Navigator.of(context).pop();
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) => const TypeDetailPanel(),
+  );
 }
 
 void deleteAll(WidgetRef ref) {

@@ -27,7 +27,6 @@ class DetailExtArea extends ConsumerWidget {
 
     return Column(
       children: [
-        const SizedBox(height: AppNum.mediumG),
         Stack(
           alignment: Alignment.center,
           children: [

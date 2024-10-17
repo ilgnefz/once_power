@@ -28,19 +28,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count, total) => "选中 ${total} 个中 ${count} 个重命名失败";
 
-  static String m4(total, count) => "${total} 个文件已选择 ${count} 个";
+  static String m4(count, total) => "已选择 ${count}/${total}";
 
   static String m5(version) => "新的版本 ${version} 可以更新";
 
   static String m6(name) => "在 ${name} 中已不存在";
 
-  static String m7(count) => "已移除${count}个非图片文件";
+  static String m7(count, uncheck) =>
+      "已成功移动所选择的 ${count} 个文件，${uncheck} 个未选择的文件未移动，可前往其他菜单选中后继续操作";
 
-  static String m8(total) => "选中的 ${total} 个已全部重命名成功";
+  static String m8(count) => "已移除${count}个非图片文件";
 
-  static String m9(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+  static String m9(total) => "选中的 ${total} 个已全部重命名成功";
 
-  static String m10(total) => "选中的 ${total} 个已全部撤销重命名";
+  static String m10(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+
+  static String m11(total) => "选中的 ${total} 个已全部撤销重命名";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -136,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizedSuccessfully": MessageLookupByLibrary.simpleMessage("整理成功"),
         "organizedSuccessfullyInfo":
             MessageLookupByLibrary.simpleMessage("已成功移动所有文件"),
+        "organizedSuccessfullyInfo2": m7,
         "organizingFailed": MessageLookupByLibrary.simpleMessage("整理失败"),
         "organizingFailedInfo":
             MessageLookupByLibrary.simpleMessage("以下几个移动失败"),
@@ -145,7 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefixContent": MessageLookupByLibrary.simpleMessage("添加前缀内容"),
         "regeditTip": MessageLookupByLibrary.simpleMessage(
             "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\"发送到\"传入）"),
-        "removeNonImage": m7,
+        "removeNonImage": m8,
         "renameLogs": MessageLookupByLibrary.simpleMessage("重命名日志"),
         "renameName": MessageLookupByLibrary.simpleMessage("重命名名称"),
         "replace": MessageLookupByLibrary.simpleMessage("替换"),
@@ -163,7 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("开始"),
         "successInfo": MessageLookupByLibrary.simpleMessage("已成功删除所有空文件夹"),
         "successful": MessageLookupByLibrary.simpleMessage("重命名成功"),
-        "successfulNum": m8,
+        "successfulNum": m9,
         "suffix": MessageLookupByLibrary.simpleMessage("后缀"),
         "suffixContent": MessageLookupByLibrary.simpleMessage("添加后缀内容"),
         "swapPrefixDesc": MessageLookupByLibrary.simpleMessage("交换前缀和递增数字位置"),
@@ -180,9 +184,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("获取剧集信息"),
         "undo": MessageLookupByLibrary.simpleMessage("撤销"),
         "undoFailed": MessageLookupByLibrary.simpleMessage("撤销重命名失败"),
-        "undoFailedNum": m9,
+        "undoFailedNum": m10,
         "undoSuccessful": MessageLookupByLibrary.simpleMessage("已成功撤销"),
-        "undoSuccessfulNum": m10,
+        "undoSuccessfulNum": m11,
         "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
         "uploadCSV": MessageLookupByLibrary.simpleMessage(
             "上传以\",\"分隔新旧名称的csv、txt文件或本软件生成的oplog文件"),

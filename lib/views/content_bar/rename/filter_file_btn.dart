@@ -8,7 +8,6 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/core/rename.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
-import 'package:once_power/widgets/content_bar/type_detail_panel.dart';
 
 class FilterFileBtn extends ConsumerWidget {
   const FilterFileBtn({super.key});
@@ -21,14 +20,6 @@ class FilterFileBtn extends ConsumerWidget {
     void removeUnchecked() {
       ref.read(fileListProvider.notifier).removeUncheck();
       Navigator.of(context).pop();
-    }
-
-    void showAllType() async {
-      Navigator.of(context).pop();
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) => const TypeDetailPanel(),
-      );
     }
 
     DropdownMenuItem easyDropdownItem(
@@ -89,7 +80,7 @@ class FilterFileBtn extends ConsumerWidget {
             easyDropdownItem(
               allExtLabel,
               Theme.of(context).primaryColor,
-              showAllType,
+              () => showAllType(context, true),
             ),
         ],
         onChanged: (v) {},

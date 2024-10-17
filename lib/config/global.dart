@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/constants/text.dart';
-import 'package:once_power/utils/regedit.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:window_manager/window_manager.dart';

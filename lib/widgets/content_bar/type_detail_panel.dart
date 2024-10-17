@@ -56,7 +56,7 @@ class TypeDetailPanel extends ConsumerWidget {
           child: Column(
             children: [
               Text(titleLabel, style: titleStyle),
-              const SizedBox(height: AppNum.smallG),
+              const SizedBox(height: AppNum.largeG),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(

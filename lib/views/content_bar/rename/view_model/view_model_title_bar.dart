@@ -7,7 +7,7 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
-import 'package:once_power/widgets/content_bar/normal_tile.dart';
+import 'package:once_power/widgets/content_bar/check_tile.dart';
 
 class ViewModeTitleBar extends ConsumerWidget {
   const ViewModeTitleBar({super.key});
@@ -16,11 +16,16 @@ class ViewModeTitleBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int total = ref.watch(fileListProvider).length;
     int selected = ref.watch(selectFileProvider);
-    final String title = S.of(context).fileCount(total, selected);
+    final String title = S.of(context).fileCount(selected, total);
 
     return Row(
       children: [
-        NormalTile(label: title, padding: EdgeInsets.zero),
+        CheckTile(
+          check: ref.watch(selectAllProvider),
+          label: title,
+          fontSize: 14,
+          onChanged: (v) => selectAll(ref),
+        ),
         const Spacer(),
         ClickIcon(
           svg: ref.watch(fileSortTypeProvider).value,
@@ -28,6 +33,16 @@ class ViewModeTitleBar extends ConsumerWidget {
           iconSize: 22,
           color: AppColors.icon,
           onTap: () => toggleSortType(ref),
+        ),
+        SizedBox(
+          width: AppNum.deleteBtnS,
+          child: Center(
+            child: IconButton(
+              onPressed: () => showAllType(context),
+              color: AppColors.icon,
+              icon: const Icon(Icons.filter_alt_rounded),
+            ),
+          ),
         ),
         SizedBox(
           width: AppNum.deleteBtnS,

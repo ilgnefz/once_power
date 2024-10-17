@@ -98,7 +98,12 @@ class OrganizeButton extends ConsumerWidget {
 
     void organizeFolder() async {
       List<FileInfo> files = ref.watch(fileListProvider);
+      int uncheckedCount = 0;
       for (var file in files) {
+        if (!file.checked) {
+          uncheckedCount++;
+          continue;
+        }
         if (file.type.isFolder) {
           if (!Directory(file.filePath).existsSync()) {
             errorList.add(
@@ -130,8 +135,13 @@ class OrganizeButton extends ConsumerWidget {
       ref.read(costProvider.notifier).update(cost);
       if (!context.mounted) return;
       NotificationType type = errorList.isEmpty
-          ? SuccessNotification(S.of(context).organizedSuccessfully,
-              S.of(context).organizedSuccessfullyInfo)
+          ? SuccessNotification(
+              S.of(context).organizedSuccessfully,
+              uncheckedCount == 0
+                  ? S.of(context).organizedSuccessfullyInfo
+                  : S
+                      .of(context)
+                      .organizedSuccessfullyInfo2(count, uncheckedCount))
           : ErrorNotification(S.of(context).organizingFailed,
               S.of(context).organizingFailedInfo, errorList);
       NotificationMessage.show(type);

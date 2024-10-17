@@ -1090,6 +1090,16 @@ class S {
     );
   }
 
+  /// `The selected {count} files have been successfully moved, and {uncheck} unselected files have not been moved. You can go to another menu to select and continue the operation`
+  String organizedSuccessfullyInfo2(Object count, Object uncheck) {
+    return Intl.message(
+      'The selected $count files have been successfully moved, and $uncheck unselected files have not been moved. You can go to another menu to select and continue the operation',
+      name: 'organizedSuccessfullyInfo2',
+      desc: '',
+      args: [count, uncheck],
+    );
+  }
+
   /// `The following moves failed`
   String get organizingFailedInfo {
     return Intl.message(
@@ -1120,13 +1130,13 @@ class S {
     );
   }
 
-  /// `{total} files {count} selected`
-  String fileCount(Object total, Object count) {
+  /// `Selected {count}/{total}`
+  String fileCount(Object count, Object total) {
     return Intl.message(
-      '$total files $count selected',
+      'Selected $count/$total',
       name: 'fileCount',
       desc: '',
-      args: [total, count],
+      args: [count, total],
     );
   }
 
