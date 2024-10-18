@@ -35,8 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(name) => "No longer exists in ${name}";
 
-  static String m7(count, uncheck) =>
-      "The selected ${count} files have been successfully moved, and ${uncheck} unselected files have not been moved. You can go to another menu to select and continue the operation";
+  static String m7(total) => "Successfully moved the selected ${total} files";
 
   static String m8(count) => "Removed ${count} non-image files";
 
@@ -47,7 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "${count} out of ${total} selected undo renames failed";
 
   static String m11(total) =>
-      "All ${total} selected items have been successfully undone";
+      "The selected ${total} operations have all been revoked";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -91,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
         "deleteInfo": m0,
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
+        "deleteSelected":
+            MessageLookupByLibrary.simpleMessage("Delete Selected"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
         "deleteUnselected":
@@ -158,9 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizeMenu": MessageLookupByLibrary.simpleMessage("Organize menu"),
         "organizedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Organized successfully"),
-        "organizedSuccessfullyInfo": MessageLookupByLibrary.simpleMessage(
-            "Successfully moved all files"),
-        "organizedSuccessfullyInfo2": m7,
+        "organizedSuccessfullyInfo": m7,
         "organizingFailed":
             MessageLookupByLibrary.simpleMessage("Organizing failed"),
         "organizingFailedInfo":
@@ -187,6 +186,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectAllSwitch":
             MessageLookupByLibrary.simpleMessage("Select All Switch"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
+        "selectReserve":
+            MessageLookupByLibrary.simpleMessage("Reverse Selection"),
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Target folder"),
         "serial": MessageLookupByLibrary.simpleMessage("Serial"),

@@ -55,8 +55,8 @@ class _HomeViewState extends ConsumerState<HomeView>
     saveOrNo();
     bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
     if (useRegedit) {
-      createGlobalRegedit();
       removeLocalRegedit();
+      createGlobalRegedit();
     }
     await windowManager.destroy();
     exit(0);

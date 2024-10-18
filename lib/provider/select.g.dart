@@ -345,7 +345,7 @@ final saveConfigProvider =
 );
 
 typedef _$SaveConfig = AutoDisposeNotifier<bool>;
-String _$useRegeditHash() => r'691abd4237deed74b0aaf1ee1351647c4e72928c';
+String _$useRegeditHash() => r'db503082a1fb3fff36991e29d8dfd53b2e9c222c';
 
 /// See also [UseRegedit].
 @ProviderFor(UseRegedit)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/rename.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
@@ -26,7 +26,7 @@ class FunctionModeTab extends ConsumerWidget {
     void toggleMode() {
       FunctionMode before = ref.watch(currentModeProvider);
       if (before == mode) return;
-      if (mode == FunctionMode.reserve) {
+      if (mode.isReserve) {
         bool matchNotEmpty = ref.watch(matchClearProvider);
         bool modifyNotEmpty = ref.watch(modifyClearProvider);
         if (matchNotEmpty && modifyNotEmpty) {
@@ -37,6 +37,9 @@ class FunctionModeTab extends ConsumerWidget {
         }
       }
       ref.read(currentModeProvider.notifier).update(mode);
+      if (!mode.isOrganize && ref.watch(viewModeProvider)) {
+        filterFile(context, ref);
+      }
       updateName(ref);
     }
 

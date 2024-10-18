@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/core/file.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/custom_tooltip.dart';
+import 'package:once_power/widgets/content_bar/check_tile.dart';
 import 'package:once_power/widgets/content_bar/normal_tile.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,20 +63,38 @@ class OrganizeFileTile extends ConsumerWidget {
             onDoubleTap: openFolder,
             child: Row(
               children: [
-                const SizedBox(width: AppNum.smallG),
-                Icon(
-                  getFileIcon(file.extension),
-                  color: Theme.of(context).primaryColor,
-                  size: AppNum.defaultIconS,
+                CheckTile(
+                  check: file.checked,
+                  label: fileName,
+                  fontSize: AppNum.tileFontSize,
+                  onChanged: (v) => toggleCheck(ref, file.id),
+                  color: Colors.grey,
                 ),
-                NormalTile(label: fileName, fontSize: AppNum.tileFontSize),
+                // const SizedBox(width: AppNum.smallG),
+                // Icon(
+                //   getFileIcon(file.extension),
+                //   color: Theme.of(context).primaryColor,
+                //   size: AppNum.defaultIconS,
+                // ),
+                // NormalTile(label: fileName, fontSize: AppNum.tileFontSize),
                 NormalTile(label: fileFolder, fontSize: AppNum.tileFontSize),
+                // SizedBox(
+                //   width: AppNum.deleteBtnS,
+                //   child: Center(
+                //     child: Text(
+                //       file.extension == 'dir' ? '' : file.extension,
+                //       style: const TextStyle(fontSize: AppNum.tileFontSize),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
-                  width: AppNum.deleteBtnS,
+                  width: AppNum.extensionW,
                   child: Center(
                     child: Text(
-                      file.extension == 'dir' ? '' : file.extension,
+                      file.newExtension,
                       style: const TextStyle(fontSize: AppNum.tileFontSize),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),

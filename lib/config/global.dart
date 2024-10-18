@@ -61,7 +61,6 @@ void saveOrNo() {
       AppKeys.isPrefixSwap,
       AppKeys.isSuffixCycle,
       AppKeys.isSuffixSwap,
-      AppKeys.isUseRegedit,
       AppKeys.locale,
       AppKeys.prefixLength,
       AppKeys.prefixStart,

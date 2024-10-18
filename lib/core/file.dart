@@ -63,13 +63,18 @@ Future<void> formatFolder(WidgetRef ref, List<String?> folders) async {
 
 Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
   bool isViewMode = ref.watch(viewModeProvider);
+  bool isOrganize = ref.watch(currentModeProvider).isOrganize;
   bool append = ref.watch(appendModeProvider);
   if (!append) ref.read(fileListProvider.notifier).clear();
   int count = 0;
   ref.read(totalProvider.notifier).update(list.length);
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (var filePath in list) {
-    if (isViewMode && !image.contains(getFileExtension(filePath))) continue;
+    if (isViewMode &&
+        !isOrganize &&
+        !image.contains(getFileExtension(filePath))) {
+      continue;
+    }
     ref.read(countProvider.notifier).update(++count);
     bool exist = ref.watch(fileListProvider).any((e) => e.filePath == filePath);
     if (exist) continue;
@@ -77,7 +82,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
     ref.read(fileListProvider.notifier).add(fileInfo);
     await Future.delayed(const Duration(microseconds: 1));
   }
-  if (isViewMode) {
+  if (isViewMode && !isOrganize) {
     int removeCount = list.length - count;
     if (removeCount > 0) {
       NotificationType type = SuccessNotification(
@@ -287,4 +292,21 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   chineseList.sort((a, b) => a.phonetic.compareTo(b.phonetic));
   otherList.sort((a, b) => a.name.compareTo(b.name));
   return [...otherList, ...chineseList];
+}
+
+void filterFile(BuildContext context, WidgetRef ref) {
+  bool selected = ref.watch(viewModeProvider);
+  bool a = ref.watch(currentModeProvider).isOrganize;
+  if (selected && !a) {
+    final provider = ref.read(fileListProvider.notifier);
+    final before = ref.watch(fileListProvider).length;
+    provider.removeOtherClassify(FileClassify.image);
+    final after = ref.watch(fileListProvider).length;
+    if (before > after) {
+      int removeCount = before - after;
+      NotificationType type = SuccessNotification(
+          S.of(context).viewMode, S.of(context).removeNonImage(removeCount));
+      NotificationMessage.show(type, 3);
+    }
+  }
 }

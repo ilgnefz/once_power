@@ -271,7 +271,6 @@ Future<NotificationInfo?> renameFile(
       ref.read(tempListProvider.notifier).add((id, newPath + id, newPath));
       return null;
     }
-
     return NotificationInfo(
         file: oldName, message: ' ${S.current.existsError(newName)}');
   }
@@ -295,6 +294,9 @@ Future<NotificationInfo?> renameFile(
     fileInfo.updateFilePath(id, newPath);
     String newExtension = getFileExtension(newPath);
     fileInfo.updateOriginExtension(id, newExtension);
+    if (ref.watch(currentModeProvider).isOrganize) {
+      fileInfo.updateFileParent(id, path.dirname(newPath));
+    }
     return null;
   } catch (e) {
     Log.e(e.runtimeType.toString());

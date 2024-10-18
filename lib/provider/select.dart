@@ -241,10 +241,10 @@ class UseRegedit extends _$UseRegedit {
   Future<void> update() async {
     state = !state;
     if (state) {
-      createGlobalRegedit();
+      // createGlobalRegedit();
       createLocalRegedit();
     } else {
-      removeGlobalRegedit();
+      // removeGlobalRegedit();
       removeLocalRegedit();
     }
     await StorageUtil.setBool(AppKeys.isUseRegedit, state);

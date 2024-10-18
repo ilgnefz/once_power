@@ -16,7 +16,9 @@ class TypeDetailPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String titleLabel = S.of(context).detailTitle;
-    final String removeLabel = S.of(context).deleteUnselected;
+    final String removeUncheckLabel = S.of(context).deleteUnselected;
+    final String removeCheckLabel = S.of(context).deleteSelected;
+    final String checkReserveLabel = S.of(context).selectReserve;
     final String selectSwitchLabel = S.of(context).selectAllSwitch;
     final String exitOperationLabel = S.of(context).exitOperation;
 
@@ -33,6 +35,13 @@ class TypeDetailPanel extends ConsumerWidget {
 
     void removeUncheck() {
       ref.read(fileListProvider.notifier).removeUncheck();
+      if (ref.watch(fileListProvider).isEmpty) {
+        Navigator.pop(context);
+      }
+    }
+
+    void removeCheck() {
+      ref.read(fileListProvider.notifier).removeCheck();
       if (ref.watch(fileListProvider).isEmpty) {
         Navigator.pop(context);
       }
@@ -73,7 +82,14 @@ class TypeDetailPanel extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  EasyTextBtn(removeLabel, onTap: removeUncheck),
+                  EasyTextBtn(removeUncheckLabel, onTap: removeUncheck),
+                  const SizedBox(width: gepM),
+                  EasyTextBtn(removeCheckLabel, onTap: removeCheck),
+                  const SizedBox(width: gepM),
+                  EasyTextBtn(
+                    checkReserveLabel,
+                    onTap: ref.read(fileListProvider.notifier).checkReverse,
+                  ),
                   const SizedBox(width: gepM),
                   EasyTextBtn(selectSwitchLabel, onTap: () => selectAll(ref)),
                   const SizedBox(width: gepM),

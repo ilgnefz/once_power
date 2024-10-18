@@ -231,7 +231,7 @@ final easyRenameInfoListProvider =
 );
 
 typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
-String _$fileListHash() => r'5e3d52652382933019f8547cb50e17feda131e61';
+String _$fileListHash() => r'b8c33bdcd12565968c2f4363da5454158814ef5b';
 
 /// See also [FileList].
 @ProviderFor(FileList)

@@ -34,8 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(name) => "在 ${name} 中已不存在";
 
-  static String m7(count, uncheck) =>
-      "已成功移动所选择的 ${count} 个文件，${uncheck} 个未选择的文件未移动，可前往其他菜单选中后继续操作";
+  static String m7(total) => "已成功移动所选中的${total}个文件";
 
   static String m8(count) => "已移除${count}个非图片文件";
 
@@ -43,7 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
 
-  static String m11(total) => "选中的 ${total} 个已全部撤销重命名";
+  static String m11(total) => "选中的 ${total} 个已全部撤销操作";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -80,8 +79,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteFailed": MessageLookupByLibrary.simpleMessage("删除失败"),
         "deleteInfo": m0,
         "deleteLog": MessageLookupByLibrary.simpleMessage("删除日志"),
+        "deleteSelected": MessageLookupByLibrary.simpleMessage("删除已选中"),
         "deleteSuccessful": MessageLookupByLibrary.simpleMessage("删除成功"),
-        "deleteUnselected": MessageLookupByLibrary.simpleMessage("删除未选择"),
+        "deleteUnselected": MessageLookupByLibrary.simpleMessage("删除未选中"),
         "detailTitle": MessageLookupByLibrary.simpleMessage("所有文件扩展"),
         "digits": MessageLookupByLibrary.simpleMessage("位"),
         "document": MessageLookupByLibrary.simpleMessage("文档"),
@@ -137,9 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "organizeLogs": MessageLookupByLibrary.simpleMessage("整理日志"),
         "organizeMenu": MessageLookupByLibrary.simpleMessage("整理菜单"),
         "organizedSuccessfully": MessageLookupByLibrary.simpleMessage("整理成功"),
-        "organizedSuccessfullyInfo":
-            MessageLookupByLibrary.simpleMessage("已成功移动所有文件"),
-        "organizedSuccessfullyInfo2": m7,
+        "organizedSuccessfullyInfo": m7,
         "organizingFailed": MessageLookupByLibrary.simpleMessage("整理失败"),
         "organizingFailedInfo":
             MessageLookupByLibrary.simpleMessage("以下几个移动失败"),
@@ -160,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select": MessageLookupByLibrary.simpleMessage("选择"),
         "selectAllSwitch": MessageLookupByLibrary.simpleMessage("全选切换"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
+        "selectReserve": MessageLookupByLibrary.simpleMessage("全部反选"),
         "selectTargetFolder": MessageLookupByLibrary.simpleMessage("选择目标文件夹"),
         "serial": MessageLookupByLibrary.simpleMessage("增数"),
         "shortcutTip1": MessageLookupByLibrary.simpleMessage("添加所有子文件到"),

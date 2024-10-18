@@ -26,6 +26,8 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
+  void removeCheck() => state = state.where((e) => !e.checked).toList();
+
   void removeUncheck() => state = state.where((e) => e.checked).toList();
 
   void removeOtherClassify(FileClassify classify) {
@@ -34,6 +36,11 @@ class FileList extends _$FileList {
 
   void checkAll(bool check) => state = state.map((e) {
         if (e.checked != check) e.checked = check;
+        return e;
+      }).toList();
+
+  void checkReverse() => state = state.map((e) {
+        e.checked = !e.checked;
         return e;
       }).toList();
 

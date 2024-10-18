@@ -43,8 +43,7 @@ class _ContentBarState extends ConsumerState<ContentBar> {
 
   @override
   Widget build(BuildContext context) {
-    FunctionMode mode = ref.watch(currentModeProvider);
-    bool isOrganize = mode == FunctionMode.organize;
+    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     bool isViewMode = ref.watch(viewModeProvider);
 
     Future<void> dropAdd(DropDoneDetails details) async {

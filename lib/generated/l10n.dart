@@ -520,6 +520,16 @@ class S {
     );
   }
 
+  /// `Delete Selected`
+  String get deleteSelected {
+    return Intl.message(
+      'Delete Selected',
+      name: 'deleteSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Image`
   String get image {
     return Intl.message(
@@ -1080,23 +1090,13 @@ class S {
     );
   }
 
-  /// `Successfully moved all files`
-  String get organizedSuccessfullyInfo {
+  /// `Successfully moved the selected {total} files`
+  String organizedSuccessfullyInfo(Object total) {
     return Intl.message(
-      'Successfully moved all files',
+      'Successfully moved the selected $total files',
       name: 'organizedSuccessfullyInfo',
       desc: '',
-      args: [],
-    );
-  }
-
-  /// `The selected {count} files have been successfully moved, and {uncheck} unselected files have not been moved. You can go to another menu to select and continue the operation`
-  String organizedSuccessfullyInfo2(Object count, Object uncheck) {
-    return Intl.message(
-      'The selected $count files have been successfully moved, and $uncheck unselected files have not been moved. You can go to another menu to select and continue the operation',
-      name: 'organizedSuccessfullyInfo2',
-      desc: '',
-      args: [count, uncheck],
+      args: [total],
     );
   }
 
@@ -1210,10 +1210,10 @@ class S {
     );
   }
 
-  /// `All {total} selected items have been successfully undone`
+  /// `The selected {total} operations have all been revoked`
   String undoSuccessfulNum(Object total) {
     return Intl.message(
-      'All $total selected items have been successfully undone',
+      'The selected $total operations have all been revoked',
       name: 'undoSuccessfulNum',
       desc: '',
       args: [total],
@@ -1355,6 +1355,16 @@ class S {
     return Intl.message(
       'All File Extensions',
       name: 'detailTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reverse Selection`
+  String get selectReserve {
+    return Intl.message(
+      'Reverse Selection',
+      name: 'selectReserve',
       desc: '',
       args: [],
     );
