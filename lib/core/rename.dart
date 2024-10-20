@@ -18,13 +18,15 @@ import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
-void updateExtension(WidgetRef ref) {
+void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   List<FileInfo> files = ref.read(fileListProvider);
   String inputExt = ref.watch(extensionControllerProvider).text;
   bool isModifyExt = ref.watch(modifyExtensionProvider);
   for (var file in files) {
     String newExt = file.extension;
-    if (file.checked && !file.type.isFolder && isModifyExt) newExt = inputExt;
+    if (!isUndo) {
+      if (file.checked && !file.type.isFolder && isModifyExt) newExt = inputExt;
+    }
     ref.read(fileListProvider.notifier).updateExtension(file.id, newExt);
   }
 }
@@ -225,7 +227,7 @@ void undo(WidgetRef ref) async {
   bool isViewMode = ref.watch(viewModeProvider);
   if (isViewMode) ref.read(refreshImageProvider.notifier).update();
   updateName(ref);
-  updateExtension(ref);
+  updateExtension(ref, true);
   NotificationType type = errorList.isNotEmpty
       ? ErrorNotification(S.current.undoFailed,
           S.current.undoFailedNum(errorList.length, total), errorList)

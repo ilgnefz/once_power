@@ -1,5 +1,10 @@
 {
   "info": [{
+    "version": "2.10.3",
+    "description": [
+      "修复了撤销后缀命名操作后界面显示内容未更新的BUG"
+    ]
+  },{
     "version": "2.10.2",
     "description": [
       "优化了整理文件的用户体验",

@@ -718,10 +718,10 @@ packages:
     dependency: "direct main"
     description:
       name: package_info_plus
-      sha256: "894f37107424311bdae3e476552229476777b8752c5a2a2369c0cb9a2d5442ef"
+      sha256: df3eb3e0aed5c1107bb0fdb80a8e82e778114958b1c5ac5644fb1ac9cae8a998
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "8.0.3"
+    version: "8.1.0"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
