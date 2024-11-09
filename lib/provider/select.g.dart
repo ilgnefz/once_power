@@ -267,7 +267,7 @@ final appendModeProvider =
 );
 
 typedef _$AppendMode = AutoDisposeNotifier<bool>;
-String _$addFolderHash() => r'256c58cc97721dc008eedcfd5f25ed331ffd394c';
+String _$addFolderHash() => r'f381bdd8dfe93ae878676fba42788a2070652f46';
 
 /// See also [AddFolder].
 @ProviderFor(AddFolder)
@@ -281,7 +281,7 @@ final addFolderProvider = AutoDisposeNotifierProvider<AddFolder, bool>.internal(
 );
 
 typedef _$AddFolder = AutoDisposeNotifier<bool>;
-String _$addSubfolderHash() => r'494945f00d74a968dd4c92db9be9e3b073167584';
+String _$addSubfolderHash() => r'2ec4ddc5b795b10df77c09ffe248c85ee6a91900';
 
 /// See also [AddSubfolder].
 @ProviderFor(AddSubfolder)
@@ -296,6 +296,21 @@ final addSubfolderProvider =
 );
 
 typedef _$AddSubfolder = AutoDisposeNotifier<bool>;
+String _$useTopFolderHash() => r'4a7e20eef69428da126e776d7ae32d56e235aefc';
+
+/// See also [UseTopFolder].
+@ProviderFor(UseTopFolder)
+final useTopFolderProvider =
+    AutoDisposeNotifierProvider<UseTopFolder, bool>.internal(
+  UseTopFolder.new,
+  name: r'useTopFolderProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$useTopFolderHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseTopFolder = AutoDisposeNotifier<bool>;
 String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
 
 /// See also [RefreshImage].

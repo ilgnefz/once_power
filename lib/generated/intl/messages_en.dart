@@ -82,11 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
         "decodeCSVError":
             MessageLookupByLibrary.simpleMessage("File parsing error occurred"),
-        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete folder"),
-        "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
-            "Delete all empty folders under the added folder"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
         "deleteInfo": m0,
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
@@ -94,8 +91,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Selected"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
-        "deleteUnselected":
-            MessageLookupByLibrary.simpleMessage("Delete Unselected"),
         "detailTitle":
             MessageLookupByLibrary.simpleMessage("All File Extensions"),
         "digits": MessageLookupByLibrary.simpleMessage("digits"),
@@ -113,7 +108,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "failed": MessageLookupByLibrary.simpleMessage("Renaming failed"),
         "failedError": m2,
         "failedNum": m3,
-        "failureInfo": MessageLookupByLibrary.simpleMessage(
+        "failureDeleteInfo": MessageLookupByLibrary.simpleMessage(
+            "Failed to delete selected files"),
+        "failureEmptyInfo": MessageLookupByLibrary.simpleMessage(
             "Failed to delete empty folder"),
         "fileCount": m4,
         "fileExtension": MessageLookupByLibrary.simpleMessage("FileExtension"),
@@ -129,7 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
         "log": MessageLookupByLibrary.simpleMessage("Log"),
         "logDesc": MessageLookupByLibrary.simpleMessage(
-            "Organize Mode saved in the Target Folder, Rename Mode saved in the Documents Folder of drive C"),
+            "The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory"),
         "match": MessageLookupByLibrary.simpleMessage("Matching"),
         "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
         "matchLength":
@@ -151,14 +148,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "notExistsError": m6,
         "openFolder": MessageLookupByLibrary.simpleMessage("Open Folder"),
         "openFolderDesc": MessageLookupByLibrary.simpleMessage(
-            "Double-click on the list of files on the right to quickly open the folder where the file is located"),
+            "Left mouse click on the file list to quickly open the folder where the file is located"),
         "organize": MessageLookupByLibrary.simpleMessage("Organize"),
-        "organizeDesc":
-            MessageLookupByLibrary.simpleMessage("Enable file organization"),
+        "organizeBtn": MessageLookupByLibrary.simpleMessage("Organize"),
         "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
-            "Move all added files or all sub-files under a folder into the destination folder"),
+            "Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder"),
         "organizeLogs": MessageLookupByLibrary.simpleMessage("organize logs"),
-        "organizeMenu": MessageLookupByLibrary.simpleMessage("Organize menu"),
+        "organizeMenu": MessageLookupByLibrary.simpleMessage("OrganizeMenu"),
         "organizedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Organized successfully"),
         "organizedSuccessfullyInfo": m7,
@@ -173,7 +169,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add prefix content"),
         "regeditTip": MessageLookupByLibrary.simpleMessage(
             "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeNonImage": m8,
+        "removeSelected":
+            MessageLookupByLibrary.simpleMessage("Remove Selected"),
+        "removeUnselected":
+            MessageLookupByLibrary.simpleMessage("Remove Unselected"),
         "renameLogs": MessageLookupByLibrary.simpleMessage("rename logs"),
         "renameName": MessageLookupByLibrary.simpleMessage("Rename name"),
         "replace": MessageLookupByLibrary.simpleMessage("Replace"),
@@ -197,7 +198,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
         "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
-        "successInfo": MessageLookupByLibrary.simpleMessage(
+        "successDeleteInfo": MessageLookupByLibrary.simpleMessage(
+            "Successfully deleted all selected files"),
+        "successEmptyInfo": MessageLookupByLibrary.simpleMessage(
             "Successfully deleted all empty folders"),
         "successful":
             MessageLookupByLibrary.simpleMessage("Renaming successful"),
@@ -213,14 +216,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Selected original name column: "),
         "takeTime": MessageLookupByLibrary.simpleMessage("Time"),
         "targetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
-        "targetFolderDesc": MessageLookupByLibrary.simpleMessage(
-            "Defaults to the parent folder of the first file added to the list or the folder itself"),
         "text": MessageLookupByLibrary.simpleMessage("Text"),
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the File/Folder here"),
+        "tipButton1":
+            MessageLookupByLibrary.simpleMessage("I know. No more reminders"),
+        "tipButton2": MessageLookupByLibrary.simpleMessage("I know"),
         "tipImage": MessageLookupByLibrary.simpleMessage(
             "Drag the Picture File/Folder here"),
+        "tipMessage": MessageLookupByLibrary.simpleMessage(
+            "This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window."),
+        "tipTitle": MessageLookupByLibrary.simpleMessage("Tip"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "topParentFolder":
+            MessageLookupByLibrary.simpleMessage("Top parent folder"),
         "tvSeriesInfo":
             MessageLookupByLibrary.simpleMessage("Get episode info"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),

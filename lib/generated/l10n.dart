@@ -510,21 +510,21 @@ class S {
     );
   }
 
-  /// `Delete Unselected`
-  String get deleteUnselected {
+  /// `Remove Unselected`
+  String get removeUnselected {
     return Intl.message(
-      'Delete Unselected',
-      name: 'deleteUnselected',
+      'Remove Unselected',
+      name: 'removeUnselected',
       desc: '',
       args: [],
     );
   }
 
-  /// `Delete Selected`
-  String get deleteSelected {
+  /// `Remove Selected`
+  String get removeSelected {
     return Intl.message(
-      'Delete Selected',
-      name: 'deleteSelected',
+      'Remove Selected',
+      name: 'removeSelected',
       desc: '',
       args: [],
     );
@@ -660,21 +660,21 @@ class S {
     );
   }
 
-  /// `Organize menu`
+  /// `OrganizeMenu`
   String get organizeMenu {
     return Intl.message(
-      'Organize menu',
+      'OrganizeMenu',
       name: 'organizeMenu',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enable file organization`
-  String get organizeDesc {
+  /// `Organize`
+  String get organizeBtn {
     return Intl.message(
-      'Enable file organization',
-      name: 'organizeDesc',
+      'Organize',
+      name: 'organizeBtn',
       desc: '',
       args: [],
     );
@@ -780,16 +780,6 @@ class S {
     );
   }
 
-  /// `Defaults to the parent folder of the first file added to the list or the folder itself`
-  String get targetFolderDesc {
-    return Intl.message(
-      'Defaults to the parent folder of the first file added to the list or the folder itself',
-      name: 'targetFolderDesc',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Log`
   String get log {
     return Intl.message(
@@ -800,30 +790,20 @@ class S {
     );
   }
 
-  /// `Organize Mode saved in the Target Folder, Rename Mode saved in the Documents Folder of drive C`
+  /// `The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory`
   String get logDesc {
     return Intl.message(
-      'Organize Mode saved in the Target Folder, Rename Mode saved in the Documents Folder of drive C',
+      'The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory',
       name: 'logDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Delete all empty folders under the added folder`
-  String get deleteEmptyFolderDesc {
-    return Intl.message(
-      'Delete all empty folders under the added folder',
-      name: 'deleteEmptyFolderDesc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Move all added files or all sub-files under a folder into the destination folder`
+  /// `Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder`
   String get organizeFolderDesc {
     return Intl.message(
-      'Move all added files or all sub-files under a folder into the destination folder',
+      'Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder',
       name: 'organizeFolderDesc',
       desc: '',
       args: [],
@@ -840,10 +820,10 @@ class S {
     );
   }
 
-  /// `Double-click on the list of files on the right to quickly open the folder where the file is located`
+  /// `Left mouse click on the file list to quickly open the folder where the file is located`
   String get openFolderDesc {
     return Intl.message(
-      'Double-click on the list of files on the right to quickly open the folder where the file is located',
+      'Left mouse click on the file list to quickly open the folder where the file is located',
       name: 'openFolderDesc',
       desc: '',
       args: [],
@@ -1001,20 +981,40 @@ class S {
   }
 
   /// `Successfully deleted all empty folders`
-  String get successInfo {
+  String get successEmptyInfo {
     return Intl.message(
       'Successfully deleted all empty folders',
-      name: 'successInfo',
+      name: 'successEmptyInfo',
       desc: '',
       args: [],
     );
   }
 
   /// `Failed to delete empty folder`
-  String get failureInfo {
+  String get failureEmptyInfo {
     return Intl.message(
       'Failed to delete empty folder',
-      name: 'failureInfo',
+      name: 'failureEmptyInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully deleted all selected files`
+  String get successDeleteInfo {
+    return Intl.message(
+      'Successfully deleted all selected files',
+      name: 'successDeleteInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to delete selected files`
+  String get failureDeleteInfo {
+    return Intl.message(
+      'Failed to delete selected files',
+      name: 'failureDeleteInfo',
       desc: '',
       args: [],
     );
@@ -1160,11 +1160,11 @@ class S {
     );
   }
 
-  /// `Delete`
-  String get delete {
+  /// `Remove`
+  String get remove {
     return Intl.message(
-      'Delete',
-      name: 'delete',
+      'Remove',
+      name: 'remove',
       desc: '',
       args: [],
     );
@@ -1455,6 +1455,66 @@ class S {
     return Intl.message(
       'To the last',
       name: 'moveToLast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Selected`
+  String get deleteSelected {
+    return Intl.message(
+      'Delete Selected',
+      name: 'deleteSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tip`
+  String get tipTitle {
+    return Intl.message(
+      'Tip',
+      name: 'tipTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window.`
+  String get tipMessage {
+    return Intl.message(
+      'This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window.',
+      name: 'tipMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I know. No more reminders`
+  String get tipButton1 {
+    return Intl.message(
+      'I know. No more reminders',
+      name: 'tipButton1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I know`
+  String get tipButton2 {
+    return Intl.message(
+      'I know',
+      name: 'tipButton2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top parent folder`
+  String get topParentFolder {
+    return Intl.message(
+      'Top parent folder',
+      name: 'topParentFolder',
       desc: '',
       args: [],
     );
