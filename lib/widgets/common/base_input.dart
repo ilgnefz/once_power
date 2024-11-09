@@ -96,11 +96,16 @@ class BaseInput extends StatelessWidget {
                   icon: Icons.close_rounded,
                   color: Colors.black54,
                   onTap: () async {
-                    controller!.clear();
-                    if (ref.watch(currentModeProvider) ==
-                        FunctionMode.organize) {
+                    if (ref.watch(currentModeProvider).isOrganize) {
+                      String? folder = controller!.text;
+                      List<String> list =
+                          StorageUtil.getStringList(AppKeys.targetFolderList);
+                      if (list.contains(folder)) list.remove(folder);
+                      await StorageUtil.setStringList(
+                          AppKeys.targetFolderList, list);
                       await StorageUtil.remove(AppKeys.targetFolder);
                     }
+                    controller!.clear();
                     updateName(ref);
                     updateExtension(ref);
                   },

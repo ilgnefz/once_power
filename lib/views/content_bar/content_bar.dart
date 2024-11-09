@@ -32,12 +32,12 @@ class _ContentBarState extends ConsumerState<ContentBar> {
   @override
   void initState() {
     super.initState();
-    List<String> fPath = StorageUtil.getStringList(AppKeys.folderPathCache);
+    List<String> fPath = StorageUtil.getStringList(AppKeys.rightMenuFolderPath);
     if (fPath.isNotEmpty) {
       Future.delayed(Duration.zero, () async {
         await formatPath(ref, fPath);
       });
-      StorageUtil.remove(AppKeys.folderPathCache);
+      StorageUtil.remove(AppKeys.rightMenuFolderPath);
     }
   }
 

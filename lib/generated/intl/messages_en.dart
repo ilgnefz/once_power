@@ -141,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
         "moveError": MessageLookupByLibrary.simpleMessage("Moving error"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("Move failed"),
+        "moveToFirst": MessageLookupByLibrary.simpleMessage("To the first"),
+        "moveToLast": MessageLookupByLibrary.simpleMessage("To the last"),
         "newName": MessageLookupByLibrary.simpleMessage("New name"),
         "newVersionInfo": m5,
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(

@@ -34,6 +34,9 @@ class AppKeys {
   static String isClassifiedFile = 'isClassifiedFile';
   static String isUseTimeClassification = 'isUseTimeClassification';
 
+  // List
+  static String targetFolderList = 'targetFolderList';
+
   // enum
   static String functionMode = 'functionMode';
   // static String matchType = 'matchType';
@@ -47,5 +50,7 @@ class AppKeys {
   // temp cache
   static String matchCache = 'matchCache';
   static String modifyCache = 'modifyCache';
-  static String folderPathCache = 'folderPathCache';
+
+  /// Right click menu to add files
+  static String rightMenuFolderPath = 'folderPathCache';
 }

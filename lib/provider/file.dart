@@ -21,6 +21,10 @@ class FileList extends _$FileList {
 
   void remove(String id) => state = state.where((e) => e.id != id).toList();
 
+  void insertFirst(FileInfo file) => state = [file, ...state];
+
+  void insertLast(FileInfo file) => state = [...state, file];
+
   void check(String id) => state = state.map((e) {
         if (e.id == id) e.checked = !e.checked;
         return e;

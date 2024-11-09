@@ -19,6 +19,8 @@ final sortListProvider = AutoDisposeProvider<List<FileInfo>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SortListRef = AutoDisposeProviderRef<List<FileInfo>>;
 String _$selectFileHash() => r'4b923f6166c9029bd60fcd235bb69dae1b9cd00c';
 
@@ -33,6 +35,8 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
 String _$classifyListHash() => r'10845e41cc26efebe4d86d275f66b480dd2877e3';
 
@@ -47,6 +51,8 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
 String _$extensionListMapHash() => r'56b79a9076d6200b51a1f30cff2f0227a5e81a60';
 
@@ -63,6 +69,8 @@ final extensionListMapProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ExtensionListMapRef
     = AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
 String _$selectedExtensionHash() => r'bed35cce95c8904157a1636adc16bebcde1b0818';
@@ -201,6 +209,8 @@ class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin SelectedExtensionRef on AutoDisposeProviderRef<bool> {
   /// The parameter `ext` of this provider.
   String get ext;
@@ -230,8 +240,10 @@ final easyRenameInfoListProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
-String _$fileListHash() => r'b8c33bdcd12565968c2f4363da5454158814ef5b';
+String _$fileListHash() => r'33251fc0a4fe27793b46c8dcf5bf1862d30d269e';
 
 /// See also [FileList].
 @ProviderFor(FileList)
@@ -306,4 +318,4 @@ final cSVDataProvider =
 
 typedef _$CSVData = AutoDisposeNotifier<List<List<String>>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

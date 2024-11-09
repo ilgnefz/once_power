@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -11,6 +12,7 @@ import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/log.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 
@@ -131,4 +133,14 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
       : ErrorNotification(S.of(context).organizingFailed,
           S.of(context).organizingFailedInfo, errorList);
   NotificationMessage.show(type);
+}
+
+void targetFolderCache(WidgetRef ref, String folder) async {
+  if (ref.watch(saveConfigProvider)) {
+    await StorageUtil.setString(AppKeys.targetFolder, folder);
+    List<String> list = StorageUtil.getStringList(AppKeys.targetFolderList);
+    if (list.contains(folder)) list.remove(folder);
+    list.add(folder);
+    await StorageUtil.setStringList(AppKeys.targetFolderList, list);
+  }
 }

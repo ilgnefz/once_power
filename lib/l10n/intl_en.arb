@@ -137,5 +137,7 @@
   "regeditTip": "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)",
   "shortcutTip1": "Add all subfiles to",
   "shortcutTip2": "Add to",
-  "useTimeClassification": "Classify using file modification time"
+  "useTimeClassification": "Classify using file modification time",
+  "moveToFirst": "To the first",
+  "moveToLast": "To the last"
 }

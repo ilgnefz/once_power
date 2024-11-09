@@ -5,8 +5,13 @@ import 'package:once_power/utils/utils.dart';
 import 'package:window_manager/window_manager.dart';
 
 class EasyContextMenu extends StatelessWidget {
-  const EasyContextMenu({super.key, required this.menu, required this.child});
+  const EasyContextMenu(
+      {super.key,
+      required this.count,
+      required this.menu,
+      required this.child});
 
+  final int count;
   final Widget menu;
   final Widget child;
 
@@ -17,7 +22,7 @@ class EasyContextMenu extends StatelessWidget {
     double width = 80;
     Locale? cacheLocale = StorageUtil.getLocale(AppKeys.locale);
     if (cacheLocale?.languageCode != 'zh') width = 120;
-    const double height = safeH * 4;
+    double height = safeH * count;
 
     return GestureDetector(
       onSecondaryTapDown: (detail) async {

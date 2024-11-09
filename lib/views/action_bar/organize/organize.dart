@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
+import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
@@ -39,7 +40,7 @@ class OrganizeAction extends ConsumerWidget {
       if (folder != null) {
         controller.text = folder;
         if (ref.watch(saveConfigProvider)) {
-          StorageUtil.setString(AppKeys.targetFolder, folder);
+          targetFolderCache(ref, folder);
         }
       }
     }

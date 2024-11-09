@@ -207,6 +207,16 @@ void deleteOne(WidgetRef ref, String id) {
   updateName(ref);
 }
 
+void insertFirst(WidgetRef ref, FileInfo file) {
+  ref.read(fileListProvider.notifier).insertFirst(file);
+  updateName(ref);
+}
+
+void insertLast(WidgetRef ref, FileInfo file) {
+  ref.read(fileListProvider.notifier).insertLast(file);
+  updateName(ref);
+}
+
 bool isCheck(WidgetRef ref, FileClassify classify) {
   if (classify == FileClassify.audio) return ref.watch(selectAudioProvider);
   if (classify == FileClassify.other) return ref.watch(selectOtherProvider);

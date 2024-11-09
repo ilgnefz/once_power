@@ -1439,6 +1439,26 @@ class S {
       args: [],
     );
   }
+
+  /// `To the first`
+  String get moveToFirst {
+    return Intl.message(
+      'To the first',
+      name: 'moveToFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To the last`
+  String get moveToLast {
+    return Intl.message(
+      'To the last',
+      name: 'moveToLast',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

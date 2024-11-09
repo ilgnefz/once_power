@@ -5,7 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   file_selector_windows
-  screen_retriever
+  screen_retriever_windows
   shortcut_menu_extender_windows
   url_launcher_windows
   window_manager

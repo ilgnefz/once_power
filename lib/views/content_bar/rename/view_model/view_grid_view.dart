@@ -28,6 +28,8 @@ class ViewGridView extends ConsumerWidget {
     final String deleteLabel = S.of(context).delete;
     final String matchName = S.of(context).matchName;
     final String modifyName = S.of(context).modifyName;
+    final String moveToFirst = S.of(context).moveToFirst;
+    final String moveToLast = S.of(context).moveToLast;
 
     void reorderList(int oldIndex, int newIndex) {
       // if (newIndex > oldIndex) newIndex -= 1;
@@ -63,6 +65,22 @@ class ViewGridView extends ConsumerWidget {
       updateName(ref);
     }
 
+    void toTheFirst(FileInfo file) {
+      int index = files.indexWhere((e) => e == file);
+      if (index == 0) return;
+      deleteOne(ref, file.id);
+      insertFirst(ref, file);
+      updateExtension(ref);
+    }
+
+    void toTheLast(FileInfo file) {
+      int index = files.indexWhere((e) => e == file);
+      if (index == files.length - 1) return;
+      deleteOne(ref, file.id);
+      insertLast(ref, file);
+      updateExtension(ref);
+    }
+
     return LayoutBuilder(
       builder: (context, constraints) => EasyScrollbar(
         controller: controller,
@@ -86,6 +104,7 @@ class ViewGridView extends ConsumerWidget {
               file: e,
               waitDuration: const Duration(seconds: 1),
               child: EasyContextMenu(
+                count: 6,
                 menu: Column(
                   children: [
                     MenuContextItem(
@@ -97,6 +116,16 @@ class ViewGridView extends ConsumerWidget {
                       label: modifyName,
                       color: Colors.black,
                       callback: () => autoModifyInput(e.name),
+                    ),
+                    MenuContextItem(
+                      label: moveToFirst,
+                      color: Colors.black,
+                      callback: () => toTheFirst(e),
+                    ),
+                    MenuContextItem(
+                      label: moveToLast,
+                      color: Colors.black,
+                      callback: () => toTheLast(e),
                     ),
                     MenuContextItem(
                       label: checked ? unselectLabel : selectLabel,

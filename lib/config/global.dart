@@ -37,7 +37,7 @@ class Global {
     });
 
     if (args.isNotEmpty) {
-      await StorageUtil.setStringList(AppKeys.folderPathCache, args);
+      await StorageUtil.setStringList(AppKeys.rightMenuFolderPath, args);
     }
   }
 }
@@ -67,7 +67,8 @@ void saveOrNo() {
       AppKeys.suffixLength,
       AppKeys.suffixStart,
       AppKeys.sortType,
-      AppKeys.targetFolder
+      AppKeys.targetFolder,
+      AppKeys.targetFolderList,
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);

@@ -20,6 +20,8 @@ final currentLanguageProvider = AutoDisposeProvider<LanguageType>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CurrentLanguageRef = AutoDisposeProviderRef<LanguageType>;
 String _$currentModeHash() => r'b34f5ae2ee5f4a9ebda79e16b0be3e6d42dc2092';
 
@@ -133,4 +135,4 @@ final languageProvider =
 
 typedef _$Language = AutoDisposeNotifier<Locale?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

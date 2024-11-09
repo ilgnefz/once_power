@@ -19,6 +19,8 @@ final selectAudioProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectAudioRef = AutoDisposeProviderRef<bool>;
 String _$selectFolderHash() => r'30006b7b5cdb6c910f1cbc2d9eaf65a7dcff26b9';
 
@@ -33,6 +35,8 @@ final selectFolderProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectFolderRef = AutoDisposeProviderRef<bool>;
 String _$selectImageHash() => r'c8731e006ea31c7d1e1ba2191a783da91b573fab';
 
@@ -47,6 +51,8 @@ final selectImageProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectImageRef = AutoDisposeProviderRef<bool>;
 String _$selectOtherHash() => r'877bd31c72d09035c5d2d84c1b4ebedca35cd5e0';
 
@@ -61,6 +67,8 @@ final selectOtherProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectOtherRef = AutoDisposeProviderRef<bool>;
 String _$selectTextHash() => r'c29e378205654a5ac579758ef389f090cb473102';
 
@@ -75,6 +83,8 @@ final selectTextProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectTextRef = AutoDisposeProviderRef<bool>;
 String _$selectVideoHash() => r'7cb3bc15998dc9cdfd92f325dd3c7a2b222d886e';
 
@@ -89,6 +99,8 @@ final selectVideoProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
 String _$selectZipHash() => r'd2e37dba7a6e21a146b6f5687889f3bde6021149';
 
@@ -103,6 +115,8 @@ final selectZipProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SelectZipRef = AutoDisposeProviderRef<bool>;
 String _$maxWindowHash() => r'9607a8ce8e2e3e0ee2096869f8268afca04aebbd';
 
@@ -434,4 +448,4 @@ final newVersionProvider =
 
 typedef _$NewVersion = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
