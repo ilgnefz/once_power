@@ -6,7 +6,7 @@ part of 'toggle.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentLanguageHash() => r'321d0ed8e8298e021a26068d8f0c621f884dc246';
+String _$currentLanguageHash() => r'494ee31d2e6d0e562c7a5b59ca9639e67b365dba';
 
 /// See also [currentLanguage].
 @ProviderFor(currentLanguage)

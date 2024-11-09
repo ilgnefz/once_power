@@ -6,7 +6,7 @@ part of 'select.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectAudioHash() => r'ffe034a78d452f5afc56750c3a3c55507bdb35ac';
+String _$selectAudioHash() => r'7f13f4e22c391ac2baf6b7cb40585a0620f2c4f7';
 
 /// See also [selectAudio].
 @ProviderFor(selectAudio)
@@ -22,7 +22,7 @@ final selectAudioProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectAudioRef = AutoDisposeProviderRef<bool>;
-String _$selectFolderHash() => r'30006b7b5cdb6c910f1cbc2d9eaf65a7dcff26b9';
+String _$selectFolderHash() => r'f944e214442c6fddfaa5b4c7d874c786c82b9065';
 
 /// See also [selectFolder].
 @ProviderFor(selectFolder)
@@ -38,7 +38,7 @@ final selectFolderProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectFolderRef = AutoDisposeProviderRef<bool>;
-String _$selectImageHash() => r'c8731e006ea31c7d1e1ba2191a783da91b573fab';
+String _$selectImageHash() => r'1262c94581bde641147aa9409ba90e40155e3c33';
 
 /// See also [selectImage].
 @ProviderFor(selectImage)
@@ -54,7 +54,7 @@ final selectImageProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectImageRef = AutoDisposeProviderRef<bool>;
-String _$selectOtherHash() => r'877bd31c72d09035c5d2d84c1b4ebedca35cd5e0';
+String _$selectOtherHash() => r'e24edd2fc020b195ba225ec37fdc27bbe494acbb';
 
 /// See also [selectOther].
 @ProviderFor(selectOther)
@@ -70,7 +70,7 @@ final selectOtherProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectOtherRef = AutoDisposeProviderRef<bool>;
-String _$selectTextHash() => r'c29e378205654a5ac579758ef389f090cb473102';
+String _$selectTextHash() => r'654d59b3662253755214dd9723835b03108d3573';
 
 /// See also [selectText].
 @ProviderFor(selectText)
@@ -86,7 +86,7 @@ final selectTextProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectTextRef = AutoDisposeProviderRef<bool>;
-String _$selectVideoHash() => r'7cb3bc15998dc9cdfd92f325dd3c7a2b222d886e';
+String _$selectVideoHash() => r'fd3f5085970d8847616dcd94a8025f3ac1e6bf95';
 
 /// See also [selectVideo].
 @ProviderFor(selectVideo)
@@ -102,7 +102,7 @@ final selectVideoProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectVideoRef = AutoDisposeProviderRef<bool>;
-String _$selectZipHash() => r'd2e37dba7a6e21a146b6f5687889f3bde6021149';
+String _$selectZipHash() => r'd90ba306c689f16d28847655157993d164ea0701';
 
 /// See also [selectZip].
 @ProviderFor(selectZip)

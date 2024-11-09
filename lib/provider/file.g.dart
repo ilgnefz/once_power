@@ -6,7 +6,7 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sortListHash() => r'1bd057027e3392399365be8d160c0cf869a2e3b7';
+String _$sortListHash() => r'f0467067f3234efcfb0dda3f2b1ed56523d8dd7c';
 
 /// See also [sortList].
 @ProviderFor(sortList)
@@ -22,7 +22,7 @@ final sortListProvider = AutoDisposeProvider<List<FileInfo>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SortListRef = AutoDisposeProviderRef<List<FileInfo>>;
-String _$selectFileHash() => r'4b923f6166c9029bd60fcd235bb69dae1b9cd00c';
+String _$selectFileHash() => r'd32feda656490dd60f3b87299e22c6b1680070c7';
 
 /// See also [selectFile].
 @ProviderFor(selectFile)
@@ -38,7 +38,7 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$classifyListHash() => r'10845e41cc26efebe4d86d275f66b480dd2877e3';
+String _$classifyListHash() => r'f7e93b2936d4c3bea40440692b010d31d4139865';
 
 /// See also [classifyList].
 @ProviderFor(classifyList)
@@ -54,7 +54,7 @@ final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ClassifyListRef = AutoDisposeProviderRef<List<FileClassify>>;
-String _$extensionListMapHash() => r'56b79a9076d6200b51a1f30cff2f0227a5e81a60';
+String _$extensionListMapHash() => r'8f0256506288891e5df036718968f6dd37856b79';
 
 /// See also [extensionListMap].
 @ProviderFor(extensionListMap)
@@ -73,7 +73,7 @@ final extensionListMapProvider =
 // ignore: unused_element
 typedef ExtensionListMapRef
     = AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
-String _$selectedExtensionHash() => r'bed35cce95c8904157a1636adc16bebcde1b0818';
+String _$selectedExtensionHash() => r'9099f30769bba0f9a4b258cc30a7f89cc6d6dc2d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -225,7 +225,7 @@ class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
 }
 
 String _$easyRenameInfoListHash() =>
-    r'f50cd9df7222f93c32226f777b70c55706ae76dd';
+    r'1b9f7fa03f8c6639a4373b0319bdbc02adfdbcc9';
 
 /// See also [easyRenameInfoList].
 @ProviderFor(easyRenameInfoList)

@@ -11,6 +11,7 @@ import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/common/notification.dart';
 
 class DeleteSelectedButton extends ConsumerWidget {
@@ -82,7 +83,10 @@ class DeleteSelectedButton extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
-                        onPressed: () => Navigator.pop(context, true),
+                        onPressed: () {
+                          StorageUtil.setBool(AppKeys.isKnow, true);
+                          Navigator.pop(context, true);
+                        },
                         child: Text(S.of(context).tipButton1),
                       ),
                       TextButton(
@@ -100,8 +104,11 @@ class DeleteSelectedButton extends ConsumerWidget {
     }
 
     void deleteSelected() async {
-      bool? result = await dialogTipInfo();
-      if (result == null) return;
+      bool isKnow = StorageUtil.getBool(AppKeys.isKnow) ?? false;
+      if (!isKnow) {
+        bool? result = await dialogTipInfo();
+        if (result == null) return;
+      }
       List<FileInfo> files = ref.read(fileListProvider);
       for (var file in files) {
         if (!file.checked) continue;
