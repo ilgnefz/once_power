@@ -107,7 +107,7 @@ class OrganizeAction extends ConsumerWidget {
         const SizedBox(height: gap),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [DeleteFolderButton(), DeleteSelectedButton()],
+          children: [DeleteSelectedButton(), DeleteFolderButton()],
         ),
         const SizedBox(height: gap),
         Row(
