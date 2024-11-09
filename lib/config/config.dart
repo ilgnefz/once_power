@@ -1,4 +1,4 @@
-library config;
+library;
 
 export 'global.dart';
 export 'language.dart';

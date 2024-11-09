@@ -11,6 +11,11 @@ class OrganizeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
+      style: ButtonStyle(
+        fixedSize: WidgetStateProperty.all(Size.fromWidth(
+          MediaQuery.of(context).size.width,
+        )),
+      ),
       onPressed:
           ref.watch(fileListProvider).isEmpty || !ref.watch(targetClearProvider)
               ? null

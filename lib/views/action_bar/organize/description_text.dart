@@ -15,8 +15,8 @@ class DescriptionText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(S.of(context).useDesc, style: titleStyle),
-        const SizedBox(height: gap),
+        // Text(S.of(context).useDesc, style: titleStyle),
+        // const SizedBox(height: gap),
         BaseRichText(
           title: S.of(context).targetFolder,
           content: S.of(context).targetFolderDesc,

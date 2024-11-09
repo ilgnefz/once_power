@@ -25,7 +25,7 @@ class ViewGridView extends ConsumerWidget {
     List<FileInfo> files = ref.watch(sortListProvider);
     final String selectLabel = S.of(context).select;
     final String unselectLabel = S.of(context).unselect;
-    final String deleteLabel = S.of(context).delete;
+    final String removeLabel = S.of(context).remove;
     final String matchName = S.of(context).matchName;
     final String modifyName = S.of(context).modifyName;
     final String moveToFirst = S.of(context).moveToFirst;
@@ -133,7 +133,7 @@ class ViewGridView extends ConsumerWidget {
                       callback: () => toggleCheck(ref, id),
                     ),
                     MenuContextItem(
-                      label: deleteLabel,
+                      label: removeLabel,
                       color: Colors.red,
                       callback: () => deleteOne(ref, id),
                     ),

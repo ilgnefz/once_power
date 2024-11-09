@@ -11,6 +11,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/log.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/common/notification.dart';
@@ -143,4 +144,13 @@ void targetFolderCache(WidgetRef ref, String folder) async {
     list.add(folder);
     await StorageUtil.setStringList(AppKeys.targetFolderList, list);
   }
+}
+
+void saveLogContent(String filePath) {
+  final fileName = formatDateTime(DateTime.now()).substring(0, 8);
+  final appDir = Platform.resolvedExecutable;
+  final log =
+      File(path.join(appDir, 'logs', '${S.current.deleteLog}-$fileName.log'));
+  String contents = S.current.deleteInfo(filePath);
+  log.writeAsStringSync('$contents\n', mode: FileMode.append);
 }

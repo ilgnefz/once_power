@@ -1,10 +1,8 @@
 // import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
-import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:tolyui_feedback/tolyui_feedback.dart';
-import 'package:nil/nil.dart';
 
 class EasyTooltip extends StatelessWidget {
   const EasyTooltip({
@@ -26,12 +24,6 @@ class EasyTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return ElTooltip(
-    //   content: message != null ? Text(message!) : RichText(text: richMessage!),
-    //   timeout: Duration(seconds: 3),
-    //   child: child,
-    // );
-
     return TolyTooltip(
       message: message,
       textStyle: textStyle,

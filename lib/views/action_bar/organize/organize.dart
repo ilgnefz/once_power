@@ -8,7 +8,7 @@ import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/utils.dart';
+import 'package:once_power/views/action_bar/organize/delete_selected_button.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 import 'package:once_power/widgets/common/custom_tooltip.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
@@ -107,8 +107,10 @@ class OrganizeAction extends ConsumerWidget {
         const SizedBox(height: gap),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [DeleteFolderButton(), OrganizeButton()],
+          children: [DeleteFolderButton(), DeleteSelectedButton()],
         ),
+        const SizedBox(height: gap),
+        OrganizeButton(),
       ],
     );
   }

@@ -7,11 +7,8 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
-// TODO 视图模式可以直接标记图片的位置
-// TODO 整理模式记录上一次填入的目标文件的位置
 // TODO 没有目标文件的位置时自动以父级文件夹的名字作为目标文件的名字
 // TODO 整理文件可以删除选中的文件
-// TODO 移至首位和末尾
 
 void main(List<String> args) async {
   await Global.init(args);

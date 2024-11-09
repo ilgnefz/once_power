@@ -1,4 +1,4 @@
-library utils;
+library;
 
 export 'format.dart';
 export 'type.dart';

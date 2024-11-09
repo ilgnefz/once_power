@@ -14,8 +14,8 @@ class FilterFileBtn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String deleteUncheckLabel = S.of(context).deleteUnselected;
-    final String deleteCheckLabel = S.of(context).deleteSelected;
+    final String removeUnselectedLabel = S.of(context).removeUnselected;
+    final String removeSelectedLabel = S.of(context).removeSelected;
     final String allExtLabel = S.of(context).allExtension;
 
     void removeUnchecked() {
@@ -80,8 +80,8 @@ class FilterFileBtn extends ConsumerWidget {
           color: AppColors.icon,
         ),
         items: [
-          easyDropdownItem(deleteUncheckLabel, Colors.red, removeUnchecked),
-          easyDropdownItem(deleteCheckLabel, Colors.red, removeChecked),
+          easyDropdownItem(removeUnselectedLabel, Colors.red, removeUnchecked),
+          easyDropdownItem(removeSelectedLabel, Colors.red, removeChecked),
           ...items,
           if (items.isNotEmpty)
             easyDropdownItem(

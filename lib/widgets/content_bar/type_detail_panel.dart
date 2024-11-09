@@ -16,8 +16,8 @@ class TypeDetailPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String titleLabel = S.of(context).detailTitle;
-    final String removeUncheckLabel = S.of(context).deleteUnselected;
-    final String removeCheckLabel = S.of(context).deleteSelected;
+    final String removeUncheckLabel = S.of(context).removeUnselected;
+    final String removeCheckLabel = S.of(context).removeSelected;
     final String checkReserveLabel = S.of(context).selectReserve;
     final String selectSwitchLabel = S.of(context).selectAllSwitch;
     final String exitOperationLabel = S.of(context).exitOperation;
