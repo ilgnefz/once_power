@@ -27,11 +27,11 @@ class DescriptionText extends StatelessWidget {
           content: S.of(context).classifiedFileDesc,
         ),
         const SizedBox(height: gap),
-        // BaseRichText(
-        //   title: S.of(context).deleteEmptyFolder,
-        //   content: S.of(context).deleteEmptyFolderDesc,
-        // ),
-        // const SizedBox(height: gap),
+        BaseRichText(
+          title: S.of(context).deleteEmptyFolder,
+          content: S.of(context).deleteEmptyFolderDesc,
+        ),
+        const SizedBox(height: gap),
         BaseRichText(
           title: S.of(context).organizeBtn,
           content: S.of(context).organizeFolderDesc,

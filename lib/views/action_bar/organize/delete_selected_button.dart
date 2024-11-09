@@ -127,7 +127,7 @@ class DeleteSelectedButton extends ConsumerWidget {
 
     return ElevatedButton(
       onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteSelected,
-      child: Text(S.of(context).deleteSelected),
+      child: Text(S.of(context).deleteChecked, style: TextStyle(fontSize: 14)),
     );
   }
 }

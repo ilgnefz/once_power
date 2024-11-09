@@ -82,13 +82,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
         "decodeCSVError":
             MessageLookupByLibrary.simpleMessage("File parsing error occurred"),
+        "deleteChecked": MessageLookupByLibrary.simpleMessage("Delete checked"),
         "deleteEmptyFolder":
-            MessageLookupByLibrary.simpleMessage("Delete folder"),
+            MessageLookupByLibrary.simpleMessage("Delete empty"),
+        "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
+            "Delete all empty folders under the selected folder"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
         "deleteInfo": m0,
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
-        "deleteSelected":
-            MessageLookupByLibrary.simpleMessage("Delete Selected"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
         "detailTitle":

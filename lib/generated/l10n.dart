@@ -650,11 +650,21 @@ class S {
     );
   }
 
-  /// `Delete folder`
+  /// `Delete empty`
   String get deleteEmptyFolder {
     return Intl.message(
-      'Delete folder',
+      'Delete empty',
       name: 'deleteEmptyFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all empty folders under the selected folder`
+  String get deleteEmptyFolderDesc {
+    return Intl.message(
+      'Delete all empty folders under the selected folder',
+      name: 'deleteEmptyFolderDesc',
       desc: '',
       args: [],
     );
@@ -1460,11 +1470,11 @@ class S {
     );
   }
 
-  /// `Delete Selected`
-  String get deleteSelected {
+  /// `Delete checked`
+  String get deleteChecked {
     return Intl.message(
-      'Delete Selected',
-      name: 'deleteSelected',
+      'Delete checked',
+      name: 'deleteChecked',
       desc: '',
       args: [],
     );

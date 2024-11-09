@@ -62,7 +62,8 @@ class DeleteFolderButton extends ConsumerWidget {
 
     return ElevatedButton(
       onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteEmptyFolder,
-      child: Text(S.of(context).deleteEmptyFolder),
+      child:
+          Text(S.of(context).deleteEmptyFolder, style: TextStyle(fontSize: 14)),
     );
   }
 }
