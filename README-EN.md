@@ -21,7 +21,15 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
-## Add files through the system right-click menu
+## View mode adds the ability to move images to the beginning and end
+
+![21](doc/21.gif)
+
+## Organize mode can move the selected files directly to the respective top parent folder
+
+## The target file input box in Collate mode can be switched by the up and down keys
+
+## Add files through the Windows system right-click menu
 
 Activate this function in the lower left corner
 
