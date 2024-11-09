@@ -43,6 +43,7 @@ String getFileName(String name, String extension) {
 String regexReplace(
     String text, String pattern, String replacement, bool caseSensitive) {
   RegExp regExp;
+  pattern = addEscapeIfPunctuation(pattern);
   if (caseSensitive) {
     regExp = RegExp(pattern);
   } else {
@@ -53,6 +54,7 @@ String regexReplace(
 
 String getMatchedStrings(String pattern, String input, bool matchCase) {
   // 创建正则表达式，设置为不区分大小写
+  pattern = addEscapeIfPunctuation(pattern);
   RegExp regex = RegExp(pattern, caseSensitive: matchCase);
   // 使用allMatches方法获取所有匹配的字符串
   Iterable<Match> matches = regex.allMatches(input);
@@ -81,4 +83,31 @@ String reserveTypeString(List<ReserveType> typeList, String name) {
   }
   RegExp reg = RegExp("[$pattern]");
   return name.replaceAll(reg, "");
+}
+
+String addEscapeIfPunctuation(String text) {
+  final punctuations = [
+    '.',
+    ',',
+    ';',
+    ':',
+    '!',
+    '?',
+    '(',
+    ')',
+    '[',
+    ']',
+    '{',
+    '}'
+  ];
+  String result = '';
+  for (int i = 0; i < text.length; i++) {
+    final char = text[i];
+    if (punctuations.contains(char)) {
+      result += '\\$char';
+    } else {
+      result += char;
+    }
+  }
+  return result;
 }

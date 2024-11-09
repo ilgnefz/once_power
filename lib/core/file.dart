@@ -227,9 +227,15 @@ bool isCheck(WidgetRef ref, FileClassify classify) {
   return ref.watch(selectFolderProvider);
 }
 
-void createLog(String filePath, String fileName, String first, String second) {
-  final time = formatDateTime(DateTime.now()).substring(0, 14);
-  final log = File(path.join(filePath, '$fileName-$time.oplog'));
+Future<void> createLog(
+    String filePath, String fileName, String first, String second) async {
+  final time = formatDateTime(DateTime.now()).substring(0, 8);
+  String folder = filePath == ''
+      ? path.join(path.dirname(Platform.resolvedExecutable), 'logs')
+      : filePath;
+  Directory dir = Directory(folder);
+  if (!dir.existsSync()) await dir.create();
+  final log = File(path.join(folder, '$fileName-$time.oplog'));
   String contents = '${DateTime.now()}: 【$first】===>【$second】';
   log.writeAsStringSync('$contents\n', mode: FileMode.append);
 }

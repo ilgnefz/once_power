@@ -110,7 +110,18 @@ class OrganizeAction extends ConsumerWidget {
           children: [DeleteFolderButton(), DeleteSelectedButton()],
         ),
         const SizedBox(height: gap),
-        OrganizeButton(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            EasyCheckbox(
+              S.of(context).topParentFolder,
+              checked: ref.watch(useTopFolderProvider),
+              onChanged: (v) =>
+                  ref.read(useTopFolderProvider.notifier).update(),
+            ),
+            OrganizeButton(),
+          ],
+        ),
       ],
     );
   }

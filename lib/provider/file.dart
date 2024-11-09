@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/file.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -92,7 +93,7 @@ class FileList extends _$FileList {
 }
 
 @riverpod
-List<FileInfo> sortList(SortListRef ref) {
+List<FileInfo> sortList(Ref ref) {
   final type = ref.watch(fileSortTypeProvider);
   final list = ref.watch(fileListProvider);
 
@@ -145,7 +146,7 @@ List<FileInfo> sortList(SortListRef ref) {
 }
 
 @riverpod
-int selectFile(SelectFileRef ref) =>
+int selectFile(Ref ref) =>
     ref.watch(fileListProvider).where((e) => e.checked).toList().length;
 
 @riverpod
@@ -169,7 +170,7 @@ class SelectAll extends _$SelectAll {
 }
 
 @riverpod
-List<FileClassify> classifyList(ClassifyListRef ref) {
+List<FileClassify> classifyList(Ref ref) {
   List<FileClassify> classifyList = [];
   for (var e in ref.watch(fileListProvider)) {
     if (!classifyList.contains(e.type)) classifyList.add(e.type);
@@ -182,7 +183,7 @@ List<FileClassify> classifyList(ClassifyListRef ref) {
 // "doc": ["txt"]
 // }
 @riverpod
-Map<FileClassify, List<String>> extensionListMap(ExtensionListMapRef ref) {
+Map<FileClassify, List<String>> extensionListMap(Ref ref) {
   Map<FileClassify, List<String>> extMap = {};
   for (var e in ref.watch(fileListProvider)) {
     if (!extMap.containsKey(e.type)) {
@@ -200,7 +201,7 @@ Map<FileClassify, List<String>> extensionListMap(ExtensionListMapRef ref) {
 }
 
 @riverpod
-bool selectedExtension(SelectedExtensionRef ref, String ext) {
+bool selectedExtension(Ref ref, String ext) {
   return ref.watch(fileListProvider).every((e) {
     if (e.extension == ext) return e.checked;
     return true;
@@ -232,7 +233,7 @@ class CSVData extends _$CSVData {
 }
 
 @riverpod
-List<EasyRenameInfo> easyRenameInfoList(EasyRenameInfoListRef ref) {
+List<EasyRenameInfo> easyRenameInfoList(Ref ref) {
   List<EasyRenameInfo> list = [];
   for (var e in ref.watch(cSVDataProvider)) {
     list.add(EasyRenameInfo(nameA: e.firstOrNull!, nameB: e.lastOrNull!));

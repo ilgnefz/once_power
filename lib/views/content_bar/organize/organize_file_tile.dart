@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/file.dart';
+import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/widgets/common/custom_tooltip.dart';
 import 'package:once_power/widgets/content_bar/check_tile.dart';
 import 'package:once_power/widgets/content_bar/normal_tile.dart';
@@ -30,7 +32,15 @@ class OrganizeFileTile extends ConsumerWidget {
     String fileFolder =
         file.type == FileClassify.folder ? file.filePath : file.parent;
 
+    void setTargetFolder() {
+      TextEditingController controller = ref.watch(targetControllerProvider);
+      controller.text = file.parent;
+      targetFolderCache(ref, file.parent);
+    }
+
     void openFolder() async {
+      if (!Platform.isWindows) return;
+
       String encodedPath = Uri.encodeComponent(fileFolder);
 
       if (Platform.isWindows) {
@@ -60,7 +70,8 @@ class OrganizeFileTile extends ConsumerWidget {
           color: Colors.white,
           child: InkWell(
             hoverColor: Theme.of(context).primaryColor.withOpacity(.1),
-            onDoubleTap: openFolder,
+            onDoubleTap: setTargetFolder,
+            onSecondaryTap: openFolder,
             child: Row(
               children: [
                 CheckTile(

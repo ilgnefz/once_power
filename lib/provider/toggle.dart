@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
@@ -108,7 +109,7 @@ class Language extends _$Language {
 }
 
 @riverpod
-LanguageType currentLanguage(CurrentLanguageRef ref) {
+LanguageType currentLanguage(Ref ref) {
   Locale? locale = ref.watch(languageProvider);
   if (locale == const Locale('en', 'US')) return LanguageType.english;
   return LanguageType.chinese;

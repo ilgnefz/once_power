@@ -7,9 +7,6 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
-// TODO 没有目标文件的位置时自动以父级文件夹的名字作为目标文件的名字
-// TODO 整理文件可以删除选中的文件
-
 void main(List<String> args) async {
   await Global.init(args);
   runApp(const ProviderScope(child: MyApp()));

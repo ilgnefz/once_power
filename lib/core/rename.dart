@@ -16,7 +16,6 @@ import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
 
 void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   List<FileInfo> files = ref.read(fileListProvider);
@@ -284,11 +283,11 @@ Future<NotificationInfo?> renameFile(
       File(oldPath).renameSync(newPath);
     }
     if (ref.watch(saveLogProvider)) {
-      Directory docPath = await getApplicationDocumentsDirectory();
-      String filePath = path.join(docPath.path, 'OncePower');
-      Directory dir = Directory(filePath);
-      if (!dir.existsSync()) await dir.create();
-      createLog(filePath, S.current.renameLogs, oldName, newName);
+      // Directory docPath = await getApplicationDocumentsDirectory();
+      // String filePath = path.join(docPath.path, 'OncePower');
+      // Directory dir = Directory(filePath);
+      // if (!dir.existsSync()) await dir.create();
+      createLog('', S.current.renameLogs, oldName, newName);
     }
     final fileInfo = ref.read(fileListProvider.notifier);
     String name = path.basenameWithoutExtension(newPath);

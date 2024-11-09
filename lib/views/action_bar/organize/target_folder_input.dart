@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
@@ -16,9 +15,8 @@ class TargetFolderInput extends ConsumerWidget {
     final String targetFolder = S.of(context).targetFolder;
     TextEditingController controller = ref.watch(targetControllerProvider);
 
-    void onChanged(String folder) async {
+    void onChanged(String folder) {
       controller.text = folder;
-      targetFolderCache(ref, folder);
     }
 
     void onKeyEvent(event) {

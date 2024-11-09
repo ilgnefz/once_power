@@ -2,18 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/core/core.dart';
 import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
-import 'package:path/path.dart' as path;
 
 class DeleteFolderButton extends ConsumerWidget {
   const DeleteFolderButton({super.key});
@@ -22,7 +18,6 @@ class DeleteFolderButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<NotificationInfo> errorList = [];
     bool saveLog = ref.watch(saveLogProvider);
-    TextEditingController controller = ref.watch(targetControllerProvider);
 
     void delete(Directory directory) {
       try {

@@ -25,7 +25,7 @@ class AppKeys {
   static String isSuffixSwap = 'isSuffixSwap';
   // static String isExtension = 'isExtension';
   static String isAppend = 'isAppend';
-  static String isFolder = 'isFolder';
+  static String isAddFolder = 'isAddFolder';
   static String isSave = 'isSave';
   static String isUseRegedit = 'isUseRegedit';
   static String isUseOrganize = 'isUseOrganize';
@@ -33,6 +33,8 @@ class AppKeys {
   static String isViewMode = 'isViewMode';
   static String isClassifiedFile = 'isClassifiedFile';
   static String isUseTimeClassification = 'isUseTimeClassification';
+  static String isAddSubfolder = 'isAddSubfolder';
+  static String isUseTopFolder = 'isUseTopFolder';
 
   // List
   static String targetFolderList = 'targetFolderList';

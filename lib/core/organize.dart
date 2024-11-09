@@ -11,9 +11,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/log.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 
@@ -33,60 +31,108 @@ String renameFile(String newPath) {
   return '${newPath.substring(0, index)} - $num${newPath.substring(index)}';
 }
 
+Future<void> easyMoveFiles(String newPath, String oldPath, bool saveLog) async {
+  bool isFile = await FileSystemEntity.isFile(oldPath);
+  try {
+    if (isFile) {
+      File(oldPath).renameSync(newPath);
+    } else {
+      Directory(oldPath).renameSync(newPath);
+    }
+    if (saveLog) {
+      createLog('', S.current.organizeLogs, oldPath, newPath);
+    }
+  } catch (e) {
+    errorList.add(NotificationInfo(
+      file: oldPath,
+      message: '${S.current.moveFailed}: $e',
+    ));
+    Log.e(e.toString());
+  }
+}
+
 void moveFile(BuildContext context, WidgetRef ref, FileInfo file) {
   TextEditingController controller = ref.watch(targetControllerProvider);
   bool saveLog = ref.watch(saveLogProvider);
+
   String folderPath = controller.text;
+  if (folderPath == '') {
+    noTargetFolder(ref, file, saveLog);
+  } else {
+    haveTargetFolder(ref, folderPath, file, saveLog);
+  }
+}
+
+void noTargetFolder(WidgetRef ref, FileInfo file, bool saveLog) async {
+  bool useTopFolder = ref.watch(useTopFolderProvider);
+  if (useTopFolder) {
+    String folderPath = getTopPath(file.filePath);
+    if (folderPath == file.parent) return;
+    String newPath = path.join(folderPath, path.basename(file.filePath));
+    if (File(newPath).existsSync()) newPath = renameFile(newPath);
+    await easyMoveFiles(newPath, file.filePath, saveLog);
+    final fileInfo = ref.read(fileListProvider.notifier);
+    fileInfo.updateFilePath(file.id, newPath);
+    fileInfo.updateFileParent(file.id, folderPath);
+  }
+  // else {
+  //   List<(String, bool)> folders = getParentPath(file.filePath);
+  //   print(folders);
+  //   for (var folder in folders.reversed) {
+  //     if (folder.$2) continue;
+  //     if (folder != folders.first) {}
+  //     String newPath = path.join(folder.$1, path.basename(file.filePath));
+  //     if (File(newPath).existsSync()) newPath = renameFile(newPath);
+  //   }
+  // }
+}
+
+void haveTargetFolder(
+    WidgetRef ref, String folderPath, FileInfo file, bool saveLog) {
   if (ref.watch(classifiedFileProvider) && !file.type.isFolder) {
     folderPath = createClassifyFolder(file, folderPath);
   }
   String newPath = path.join(folderPath, path.basename(file.filePath));
   if (!File(file.filePath).existsSync()) {
     errorList.add(
-      NotificationInfo(
-        file: file.filePath,
-        message: S.of(context).notExist,
-      ),
+      NotificationInfo(file: file.filePath, message: S.current.notExist),
     );
     return;
   }
 
-  if (newPath != file.filePath) {
-    if (File(newPath).existsSync()) newPath = renameFile(newPath);
-    if (saveLog) {
-      createLog(
-          controller.text, S.of(context).organizeLogs, file.filePath, newPath);
-    }
-
-    bool sameDisc = file.filePath[0] == newPath[0];
-    if (sameDisc) {
-      try {
-        File(file.filePath).renameSync(newPath);
-      } catch (e) {
-        errorList.add(NotificationInfo(
-          file: file.filePath,
-          message: '${S.of(context).moveFailed}: $e',
-        ));
-        Log.e(e.toString());
-      }
-    } else {
-      try {
-        File(file.filePath).copySync(newPath);
-        File(file.filePath).deleteSync();
-      } catch (e) {
-        errorList.add(NotificationInfo(
-          file: file.filePath,
-          message: '${S.of(context).moveError}: $e',
-        ));
-        Log.e(e.toString());
-        return;
-      }
-    }
-
-    final fileInfo = ref.read(fileListProvider.notifier);
-    fileInfo.updateFilePath(file.id, newPath);
-    fileInfo.updateFileParent(file.id, controller.text);
+  if (folderPath == file.parent) return;
+  if (File(newPath).existsSync()) newPath = renameFile(newPath);
+  if (saveLog) {
+    createLog(folderPath, S.current.organizeLogs, file.filePath, newPath);
   }
+  bool sameDisk = file.filePath[0] == newPath[0];
+  if (sameDisk) {
+    try {
+      File(file.filePath).renameSync(newPath);
+    } catch (e) {
+      errorList.add(NotificationInfo(
+        file: file.filePath,
+        message: '${S.current.moveFailed}: $e',
+      ));
+      Log.e(e.toString());
+    }
+  } else {
+    try {
+      File(file.filePath).copySync(newPath);
+      File(file.filePath).deleteSync();
+    } catch (e) {
+      errorList.add(NotificationInfo(
+        file: file.filePath,
+        message: '${S.current.moveError}: $e',
+      ));
+      Log.e(e.toString());
+      return;
+    }
+  }
+
+  final fileInfo = ref.read(fileListProvider.notifier);
+  fileInfo.updateFilePath(file.id, newPath);
+  fileInfo.updateFileParent(file.id, folderPath);
 }
 
 void organizeFolder(BuildContext context, WidgetRef ref) async {
@@ -107,9 +153,9 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
         continue;
       }
       final list = getAllPath(file.filePath);
-      for (var file in list) {
-        FileInfo fileInfo = await generateFileInfo(ref, file);
-        realFiles.add(fileInfo);
+      for (var child in list) {
+        FileInfo childFile = await generateFileInfo(ref, child);
+        realFiles.add(childFile);
       }
       continue;
     }
@@ -136,7 +182,7 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
   NotificationMessage.show(type);
 }
 
-void targetFolderCache(WidgetRef ref, String folder) async {
+Future<void> targetFolderCache(WidgetRef ref, String folder) async {
   if (ref.watch(saveConfigProvider)) {
     await StorageUtil.setString(AppKeys.targetFolder, folder);
     List<String> list = StorageUtil.getStringList(AppKeys.targetFolderList);

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -109,24 +110,37 @@ class AppendMode extends _$AppendMode {
 @riverpod
 class AddFolder extends _$AddFolder {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isFolder) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isAddFolder) ?? false;
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isFolder, state);
+    await StorageUtil.setBool(AppKeys.isAddFolder, state);
   }
 }
 
 @riverpod
 class AddSubfolder extends _$AddSubfolder {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isAddSubfolder) ?? false;
+  void update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isAddSubfolder, state);
+  }
+}
+
+@riverpod
+class UseTopFolder extends _$UseTopFolder {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseTopFolder) ?? false;
+  void update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isUseTopFolder, state);
+  }
 }
 
 // ContentBar Start
 
 @riverpod
-bool selectAudio(SelectAudioRef ref) {
+bool selectAudio(Ref ref) {
   List<FileInfo> audioList = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.audio)
@@ -136,7 +150,7 @@ bool selectAudio(SelectAudioRef ref) {
 }
 
 @riverpod
-bool selectFolder(SelectFolderRef ref) {
+bool selectFolder(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.folder)
@@ -146,7 +160,7 @@ bool selectFolder(SelectFolderRef ref) {
 }
 
 @riverpod
-bool selectImage(SelectImageRef ref) {
+bool selectImage(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.image)
@@ -156,7 +170,7 @@ bool selectImage(SelectImageRef ref) {
 }
 
 @riverpod
-bool selectOther(SelectOtherRef ref) {
+bool selectOther(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.other)
@@ -166,7 +180,7 @@ bool selectOther(SelectOtherRef ref) {
 }
 
 @riverpod
-bool selectText(SelectTextRef ref) {
+bool selectText(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.doc)
@@ -176,7 +190,7 @@ bool selectText(SelectTextRef ref) {
 }
 
 @riverpod
-bool selectVideo(SelectVideoRef ref) {
+bool selectVideo(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.video)
@@ -186,7 +200,7 @@ bool selectVideo(SelectVideoRef ref) {
 }
 
 @riverpod
-bool selectZip(SelectZipRef ref) {
+bool selectZip(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
       .where((e) => e.type == FileClassify.zip)

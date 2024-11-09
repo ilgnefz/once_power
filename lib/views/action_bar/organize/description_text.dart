@@ -7,8 +7,8 @@ class DescriptionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle =
-        const TextStyle(color: Color(0xFF333333), fontSize: 15);
+    // TextStyle titleStyle =
+    //     const TextStyle(color: Color(0xFF333333), fontSize: 15);
 
     const double gap = AppNum.smallG;
 
@@ -17,23 +17,23 @@ class DescriptionText extends StatelessWidget {
       children: [
         // Text(S.of(context).useDesc, style: titleStyle),
         // const SizedBox(height: gap),
-        BaseRichText(
-          title: S.of(context).targetFolder,
-          content: S.of(context).targetFolderDesc,
-        ),
-        const SizedBox(height: gap),
+        // BaseRichText(
+        //   title: S.of(context).targetFolder,
+        //   content: S.of(context).targetFolderDesc,
+        // ),
+        // const SizedBox(height: gap),
         BaseRichText(
           title: S.of(context).classifiedFile,
           content: S.of(context).classifiedFileDesc,
         ),
         const SizedBox(height: gap),
+        // BaseRichText(
+        //   title: S.of(context).deleteEmptyFolder,
+        //   content: S.of(context).deleteEmptyFolderDesc,
+        // ),
+        // const SizedBox(height: gap),
         BaseRichText(
-          title: S.of(context).deleteEmptyFolder,
-          content: S.of(context).deleteEmptyFolderDesc,
-        ),
-        const SizedBox(height: gap),
-        BaseRichText(
-          title: S.of(context).organizeMenu,
+          title: S.of(context).organizeBtn,
           content: S.of(context).organizeFolderDesc,
         ),
         const SizedBox(height: gap),

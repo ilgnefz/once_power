@@ -4,6 +4,7 @@ import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
+import 'package:once_power/provider/select.dart';
 
 class OrganizeButton extends ConsumerWidget {
   const OrganizeButton({super.key});
@@ -11,16 +12,12 @@ class OrganizeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
-      style: ButtonStyle(
-        fixedSize: WidgetStateProperty.all(Size.fromWidth(
-          MediaQuery.of(context).size.width,
-        )),
-      ),
-      onPressed:
-          ref.watch(fileListProvider).isEmpty || !ref.watch(targetClearProvider)
-              ? null
-              : () => organizeFolder(context, ref),
-      child: Text(S.of(context).organizeMenu),
+      onPressed: ref.watch(fileListProvider).isNotEmpty &&
+              (ref.watch(targetClearProvider) ||
+                  ref.watch(useTopFolderProvider))
+          ? () => organizeFolder(context, ref)
+          : null,
+      child: Text(S.of(context).organizeBtn),
     );
   }
 }

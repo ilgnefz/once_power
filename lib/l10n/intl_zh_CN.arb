@@ -61,7 +61,7 @@
   "saveLog": "保存日志（在C盘用户文档文件夹内）",
   "deleteEmptyFolder": "删除空文件夹",
   "organizeMenu": "整理菜单",
-  "organizeDesc": "整理文件",
+  "organizeBtn": "整理文件",
   "saveConfig": "保存配置",
   "currentTask": "当前任务",
   "takeTime": "用时",
@@ -72,13 +72,11 @@
   "newVersionInfo": "新的版本 {version} 可以更新",
   "noNewVersionInfo": "当前已是最新版本",
   "useDesc": "功能使用说明",
-  "targetFolderDesc": "默认为列表第一个添加的文件的父文件夹或文件夹本身",
   "log": "日志",
-  "logDesc": "整理模式保存在目标文件夹下，重命名模式保存在C盘的文档文件夹下",
-  "deleteEmptyFolderDesc": "删除添加的文件夹下的所有空文件夹",
-  "organizeFolderDesc": "将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内",
+  "logDesc": "目标文件夹不为空保存在目标文件夹下，否则保存在软件目录 logs 文件夹下",
+  "organizeFolderDesc": "将添加的所有文件或文件夹下的所有子文件移动到目标文件夹内，如果目标文件夹为空，并且选择使用顶级父文件夹，则会将所有文件移动到所选文件除磁盘根目录以外的顶级父文件夹内",
   "openFolder": "打开文件夹",
-  "openFolderDesc": "双击右边文件列表，可以快速打开文件所在文件夹",
+  "openFolderDesc": "鼠标左键点击文件列表可以快速打开文件所在文件夹",
   "tip": "拖动文件（夹）到这里",
   "tipImage": "拖动图片文件（夹）到这里",
   "uploadDesc": "上传 .txt 文件",
@@ -146,5 +144,6 @@
   "tipTitle": "提示",
   "tipMessage": "该操作会将文件从系统中删除，且无法恢复。取消请点击弹窗外面的区域。",
   "tipButton1": "我已知晓，不再提醒",
-  "tipButton2": "我已知晓"
+  "tipButton2": "我已知晓",
+  "topParentFolder": "顶级父文件夹"
 }

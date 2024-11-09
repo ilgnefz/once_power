@@ -46,8 +46,6 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganizeBtn> {
 
   @override
   Widget build(BuildContext context) {
-    final String label = S.of(context).organizeMenu;
-
     return InkWell(
       onTap: onChange,
       onHover: toggleColor,
@@ -69,7 +67,7 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganizeBtn> {
             ),
           ),
           Text(
-            label,
+            S.of(context).organizeMenu,
             style: TextStyle(fontSize: 13, color: color).useSystemChineseFont(),
           ),
         ],
