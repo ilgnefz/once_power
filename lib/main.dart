@@ -7,6 +7,8 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
+// TODO 分类文件
+
 void main(List<String> args) async {
   await Global.init(args);
   runApp(const ProviderScope(child: MyApp()));

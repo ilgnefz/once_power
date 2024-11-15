@@ -243,7 +243,7 @@ final easyRenameInfoListProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
-String _$fileListHash() => r'33251fc0a4fe27793b46c8dcf5bf1862d30d269e';
+String _$fileListHash() => r'f50b125b397ff38d1fea86060777a4ebb3b70ed4';
 
 /// See also [FileList].
 @ProviderFor(FileList)

@@ -1,13 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/core.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
 
-import 'err_image.dart';
+import 'preview_image.dart';
+import 'preview_video.dart';
 
 class PreviewImageView extends ConsumerStatefulWidget {
   const PreviewImageView(this.files, this.file, {super.key});
@@ -31,33 +30,39 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
 
   FocusNode focusNode = FocusNode();
   int index = 0;
+  List<FileInfo> tempList = [];
 
   @override
   void initState() {
     super.initState();
-    index = widget.files.indexOf(widget.file);
+    tempList.addAll(widget.files);
+    index = tempList.indexOf(widget.file);
     setState(() {});
   }
 
   void previous() {
-    index = index == 0 ? widget.files.length - 1 : index - 1;
+    index = index == 0 ? tempList.length - 1 : index - 1;
     setState(() {});
   }
 
   void next() {
-    index = index == widget.files.length - 1 ? 0 : index + 1;
+    index = index == tempList.length - 1 ? 0 : index + 1;
     setState(() {});
   }
 
   void delete() {
-    String id = widget.files[index].id;
+    String id = tempList[index].id;
+    int currentIndex = index;
     deleteOne(ref, id);
-    if (ref.watch(fileListProvider).isNotEmpty) {
-      next();
-      setState(() {});
-    } else {
+    tempList.remove(tempList[currentIndex]);
+    if (tempList.isEmpty) {
       Navigator.pop(context);
+      return;
     }
+    if (currentIndex == tempList.length) {
+      index = 0;
+    }
+    setState(() {});
   }
 
   void onKeyEvent(KeyEvent e) {
@@ -85,19 +90,12 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            InteractiveViewer(
-              maxScale: 8,
-              child: InkWell(
-                onTap: () => Navigator.pop(context),
-                child: Image.file(
-                  File(widget.files[index].filePath),
-                  fit: BoxFit.scaleDown,
-                  cacheHeight: MediaQuery.of(context).size.height.toInt(),
-                  errorBuilder: (context, exception, stackTrace) => ErrorImage(
-                      isPreview: true, file: widget.files[index].filePath),
-                ),
-              ),
-            ),
+            tempList[index].type == FileClassify.image
+                ? ImagePreview(file: tempList[index].filePath)
+                : VideoPreview(
+                    file: tempList[index].filePath,
+                    key: ValueKey(tempList[index].id),
+                  ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

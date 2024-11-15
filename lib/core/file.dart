@@ -72,7 +72,8 @@ Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
   for (var filePath in list) {
     if (isViewMode &&
         !isOrganize &&
-        !image.contains(getFileExtension(filePath))) {
+        (!image.contains(getFileExtension(filePath))) &&
+        !video.contains(getFileExtension(filePath))) {
       continue;
     }
     ref.read(countProvider.notifier).update(++count);
@@ -312,11 +313,11 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
 
 void filterFile(BuildContext context, WidgetRef ref) {
   bool selected = ref.watch(viewModeProvider);
-  bool a = ref.watch(currentModeProvider).isOrganize;
-  if (selected && !a) {
+  bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+  if (selected && !isOrganize) {
     final provider = ref.read(fileListProvider.notifier);
     final before = ref.watch(fileListProvider).length;
-    provider.removeOtherClassify(FileClassify.image);
+    provider.removeOtherClassify([FileClassify.image, FileClassify.video]);
     final after = ref.watch(fileListProvider).length;
     if (before > after) {
       int removeCount = before - after;

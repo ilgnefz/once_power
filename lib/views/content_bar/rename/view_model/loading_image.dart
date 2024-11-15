@@ -12,7 +12,11 @@ class LoadingImage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(child: Image.asset(AppImages.loading, fit: BoxFit.contain)),
+        Expanded(
+          child: UnconstrainedBox(
+            child: Image.asset(AppImages.loading, fit: BoxFit.contain),
+          ),
+        ),
         Text(
           loadingLabel,
           style: const TextStyle(fontSize: 12).useSystemChineseFont(),
