@@ -28,26 +28,34 @@ class ViewModeTile extends StatelessWidget {
       child: InkWell(
         onDoubleTap: previewView,
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: file.type == FileClassify.image
-                    ? ImageView(file: file, key: ValueKey(file.id))
-                    : VideoView(file: file, key: ValueKey(file.id)),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                getFileName(file.newName, file.newExtension),
-                style: TextStyle(
-                  fontSize: AppNum.tileFontSize,
-                  color: file.checked ? Colors.black : Colors.grey,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 4,
+              right: 4,
+              top: 0,
+              bottom: 4,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: file.type == FileClassify.image
+                      ? ImageView(file: file, key: ValueKey(file.id))
+                      : VideoView(file: file, key: ValueKey(file.id)),
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
-              ),
-            ],
+                const SizedBox(height: 4),
+                Text(
+                  getFileName(file.newName, file.newExtension),
+                  style: TextStyle(
+                    fontSize: AppNum.tileFontSize,
+                    color: file.checked ? Colors.black : Colors.grey,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -30,37 +30,104 @@ void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   }
 }
 
-int actualIndex(WidgetRef ref, DateFormatMap dfMap, FileInfo file) {
-  // Log.i(dfMap.toString());
-  // 默认 index 为 0
+int dateRenameIndex(
+  WidgetRef ref,
+  DateFormatMap dfMap,
+  FileInfo file,
+) {
+  bool caseClassify = ref.watch(caseClassifyProvider);
+  bool caseExtension = ref.watch(caseExtensionProvider);
   int index = 0;
-  // 获取日期名称
   String dateText = dateName(ref, file);
-  // 获取列表中的所有以日期为名的 key
+
+  if (caseClassify && !caseExtension) {
+    String classify = getFileClassifyName(file.type);
+    index = generateDFMapIndex(ref, dfMap, dateText, classify, file.name);
+  }
+
+  if (caseExtension) {
+    String extension = file.extension;
+    index = generateDFMapIndex(ref, dfMap, dateText, extension, file.name);
+  }
+
+  return index;
+}
+
+int generateDFMapIndex(
+  WidgetRef ref,
+  DateFormatMap dfMap,
+  String dateText,
+  String key,
+  String value,
+) {
+  int index = 0;
   List<String> dateKeyList = dfMap.keys.toList();
-  // 获取当前文件的格式分类名称
-  String classify = getFileClassifyName(file.type);
-  // 如果获取的日期列表中包含了当前的日期
   if (dateKeyList.contains(dateText)) {
-    // 获取当前日期下的多有格式分类
     List<String> classifyList = dfMap[dateText]!.keys.toList();
-    // 查看日期下是否有当前分类
-    if (classifyList.contains(classify)) {
-      // 如果有当前分类就获取文件的长度并将该文件添加到数组中
-      List<String>? fileNameList = dfMap[dateText]![classify];
+    if (classifyList.contains(key)) {
+      List<String>? fileNameList = dfMap[dateText]![key];
       index += fileNameList!.length;
-      fileNameList.add(file.name);
+      fileNameList.add(value);
     } else {
-      // 如果没有当前分类就添加当前分类并添加文件到数组中
       dfMap[dateText]?.addAll({
-        classify: [file.name]
+        key: [value]
       });
     }
   } else {
     dfMap.addAll({
       dateText: {
-        classify: [file.name]
+        key: [value]
       }
+    });
+  }
+  return index;
+}
+
+int actualIndex(
+  WidgetRef ref,
+  DateFormatMap dfMap,
+  Map<String, List<String>> tempTypeMap,
+  FileInfo file,
+) {
+  int index = 0;
+  bool dateRename = ref.watch(dateRenameProvider);
+  bool caseClassify = ref.watch(caseClassifyProvider);
+  bool caseExtension = ref.watch(caseExtensionProvider);
+
+  if (dateRename && !caseClassify && !caseExtension) {
+    String dateText = dateName(ref, file);
+    index = generateMapIndex(tempTypeMap, dateText, file.name);
+  }
+
+  if (dateRename && (caseClassify || caseExtension)) {
+    dateRenameIndex(ref, dfMap, file);
+  }
+
+  if (caseClassify && !caseExtension) {
+    String classify = file.type.value;
+    index = generateMapIndex(tempTypeMap, classify, file.name);
+  }
+
+  if (caseExtension) {
+    String extension = getFileExtension(file.filePath);
+    index = generateMapIndex(tempTypeMap, extension, file.name);
+  }
+
+  return index;
+}
+
+int generateMapIndex(
+  Map<String, List<String>> tempTypeMap,
+  String key,
+  String value,
+) {
+  int index = 0;
+  if (tempTypeMap.keys.contains(key)) {
+    tempTypeMap[key]?.add(value);
+    index += tempTypeMap[key]!.length - 1;
+  } else {
+    tempTypeMap.addAll({
+      key: [value]
     });
   }
   return index;
@@ -76,18 +143,20 @@ void updateName(WidgetRef ref) {
   int fileIndex = 0;
   // 文件列表，用来存储日期和文件名
   DateFormatMap dfMap = {};
+  Map<String, List<String>> tempTypeMap = {};
   bool dateRename = ref.watch(dateRenameProvider);
+  bool caseClassify = ref.watch(caseClassifyProvider);
+  bool caseExtension = ref.watch(caseExtensionProvider);
   for (var file in files) {
     if (file.checked) {
-      // 实际索引 = 以日期命名 ?  : 0;
-      int actualFileIndex = dateRename ? actualIndex(ref, dfMap, file) : 0;
+      int actualFileIndex = actualIndex(ref, dfMap, tempTypeMap, file);
       int actualPrefixIndex = prefixIndex + actualFileIndex;
       int actualSuffixIndex = suffixIndex + actualFileIndex;
       String newName = matchContent(
           ref, file, fileIndex, actualPrefixIndex, actualSuffixIndex);
       ref.read(fileListProvider.notifier).updateName(file.id, newName);
       fileIndex++;
-      if (!dateRename) {
+      if (!dateRename && !caseClassify && !caseExtension) {
         prefixIndex++;
         suffixIndex++;
       }

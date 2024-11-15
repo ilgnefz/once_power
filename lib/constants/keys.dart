@@ -36,6 +36,8 @@ class AppKeys {
   static String isAddSubfolder = 'isAddSubfolder';
   static String isUseTopFolder = 'isUseTopFolder';
   static String isKnow = 'isKnow';
+  static String isCaseClassify = 'isCaseClassify';
+  static String isCaseExtension = 'isCaseExtension';
 
   // List
   static String targetFolderList = 'targetFolderList';

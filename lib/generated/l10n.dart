@@ -1400,10 +1400,10 @@ class S {
     );
   }
 
-  /// `Removed {count} non-image files`
+  /// `Removed {count} non image or video files`
   String removeNonImage(Object count) {
     return Intl.message(
-      'Removed $count non-image files',
+      'Removed $count non image or video files',
       name: 'removeNonImage',
       desc: '',
       args: [count],
@@ -1525,6 +1525,26 @@ class S {
     return Intl.message(
       'Top parent folder',
       name: 'topParentFolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case classify`
+  String get caseClassify {
+    return Intl.message(
+      'Case classify',
+      name: 'caseClassify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case extension`
+  String get caseExtension {
+    return Intl.message(
+      'Case extension',
+      name: 'caseExtension',
       desc: '',
       args: [],
     );

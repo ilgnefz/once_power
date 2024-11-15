@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(total) => "Successfully moved the selected ${total} files";
 
-  static String m8(count) => "Removed ${count} non-image files";
+  static String m8(count) => "Removed ${count} non image or video files";
 
   static String m9(total) =>
       "All ${total} selected items have been successfully renamed";
@@ -61,7 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "between": MessageLookupByLibrary.simpleMessage("Between"),
+        "caseClassify": MessageLookupByLibrary.simpleMessage("Case classify"),
         "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
+        "caseExtension": MessageLookupByLibrary.simpleMessage("Case extension"),
         "checkCompleted":
             MessageLookupByLibrary.simpleMessage("Check completed"),
         "checkFailed": MessageLookupByLibrary.simpleMessage("Check failed"),

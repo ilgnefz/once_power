@@ -311,6 +311,37 @@ final useTopFolderProvider =
 );
 
 typedef _$UseTopFolder = AutoDisposeNotifier<bool>;
+String _$caseClassifyHash() => r'133f51ca8eb778b4afd4eba8b431111507da9eb0';
+
+/// See also [CaseClassify].
+@ProviderFor(CaseClassify)
+final caseClassifyProvider =
+    AutoDisposeNotifierProvider<CaseClassify, bool>.internal(
+  CaseClassify.new,
+  name: r'caseClassifyProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$caseClassifyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CaseClassify = AutoDisposeNotifier<bool>;
+String _$caseExtensionHash() => r'954ed8f48eab476e612db49fc6cf5f5e16fa7dfb';
+
+/// See also [CaseExtension].
+@ProviderFor(CaseExtension)
+final caseExtensionProvider =
+    AutoDisposeNotifierProvider<CaseExtension, bool>.internal(
+  CaseExtension.new,
+  name: r'caseExtensionProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$caseExtensionHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CaseExtension = AutoDisposeNotifier<bool>;
 String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
 
 /// See also [RefreshImage].

@@ -4,7 +4,9 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 
 class LoadingImage extends StatelessWidget {
-  const LoadingImage({super.key});
+  const LoadingImage({super.key, required this.isPreview});
+
+  final bool isPreview;
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +15,10 @@ class LoadingImage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: UnconstrainedBox(
-            child: Image.asset(AppImages.loading, fit: BoxFit.contain),
-          ),
+          child: isPreview
+              ? UnconstrainedBox(
+                  child: Image.asset(AppImages.loading, fit: BoxFit.contain))
+              : Image.asset(AppImages.loading, fit: BoxFit.contain),
         ),
         Text(
           loadingLabel,

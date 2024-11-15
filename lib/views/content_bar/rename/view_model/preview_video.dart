@@ -68,6 +68,6 @@ class _VideoPreviewState extends State<VideoPreview> {
         );
       }
     }
-    return Center(child: LoadingImage());
+    return Center(child: LoadingImage(isPreview: true));
   }
 }

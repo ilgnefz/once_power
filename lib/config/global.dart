@@ -60,6 +60,8 @@ void saveOrNo() {
       AppKeys.functionMode,
       AppKeys.isAppend,
       AppKeys.isCase,
+      AppKeys.isCaseClassify,
+      AppKeys.isCaseExtension,
       AppKeys.isDate,
       AppKeys.isAddFolder,
       AppKeys.isViewMode,

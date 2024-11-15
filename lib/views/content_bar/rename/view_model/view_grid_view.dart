@@ -70,7 +70,7 @@ class ViewGridView extends ConsumerWidget {
       if (index == 0) return;
       deleteOne(ref, file.id);
       insertFirst(ref, file);
-      updateExtension(ref);
+      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
     }
 
     void toTheLast(FileInfo file) {
@@ -78,7 +78,7 @@ class ViewGridView extends ConsumerWidget {
       if (index == files.length - 1) return;
       deleteOne(ref, file.id);
       insertLast(ref, file);
-      updateExtension(ref);
+      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
     }
 
     return LayoutBuilder(
@@ -91,7 +91,7 @@ class ViewGridView extends ConsumerWidget {
           maxCrossAxisExtent: AppNum.imageW,
           childAspectRatio: 5 / 6,
           mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
+          crossAxisSpacing: 0,
           proxyDecorator: (child, index, animation) => Container(
             color: Colors.transparent,
             child: child,

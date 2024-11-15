@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(total) => "已成功移动所选中的${total}个文件";
 
-  static String m8(count) => "已移除${count}个非图片文件";
+  static String m8(count) => "已移除${count}个非图片视频文件";
 
   static String m9(total) => "选中的 ${total} 个已全部重命名成功";
 
@@ -56,7 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "audio": MessageLookupByLibrary.simpleMessage("音频"),
         "before": MessageLookupByLibrary.simpleMessage("之前的"),
         "between": MessageLookupByLibrary.simpleMessage("之间的"),
+        "caseClassify": MessageLookupByLibrary.simpleMessage("区分类型"),
         "caseDesc": MessageLookupByLibrary.simpleMessage("区分大小写"),
+        "caseExtension": MessageLookupByLibrary.simpleMessage("区分扩展"),
         "checkCompleted": MessageLookupByLibrary.simpleMessage("检查完成"),
         "checkFailed": MessageLookupByLibrary.simpleMessage("检查失败"),
         "checkUpdate": MessageLookupByLibrary.simpleMessage("检查更新"),

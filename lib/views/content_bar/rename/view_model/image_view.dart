@@ -30,7 +30,7 @@ class ImageView extends ConsumerWidget {
         } else {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
-            child: frame != null ? child : const LoadingImage(),
+            child: frame != null ? child : const LoadingImage(isPreview: false),
           );
         }
       },

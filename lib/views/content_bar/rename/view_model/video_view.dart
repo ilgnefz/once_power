@@ -77,6 +77,6 @@ class _VideoViewState extends State<VideoView> {
               ),
             ),
           )
-        : const Center(child: LoadingImage());
+        : const Center(child: LoadingImage(isPreview: false));
   }
 }

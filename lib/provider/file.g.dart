@@ -6,7 +6,7 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sortListHash() => r'f0467067f3234efcfb0dda3f2b1ed56523d8dd7c';
+String _$sortListHash() => r'9065e229149b1967f636c3e013e5a5ba5944ec62';
 
 /// See also [sortList].
 @ProviderFor(sortList)

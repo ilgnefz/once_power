@@ -108,13 +108,13 @@ List<FileInfo> sortList(Ref ref) {
       break;
     case SortType.dateDescending:
       sortedList = [...list]..sort((a, b) {
-          int result = sortDateTime(a).first.compareTo(sortDateTime(b).first);
+          int result = a.createdDate.compareTo(b.createdDate);
           return result == 0 ? a.name.compareTo(b.name) : result;
         });
       break;
     case SortType.dateAscending:
       sortedList = [...list]..sort((a, b) {
-          int result = sortDateTime(b).first.compareTo(sortDateTime(a).first);
+          int result = b.createdDate.compareTo(a.createdDate);
           return result == 0 ? b.name.compareTo(a.name) : result;
         });
       break;

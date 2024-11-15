@@ -137,6 +137,26 @@ class UseTopFolder extends _$UseTopFolder {
   }
 }
 
+@riverpod
+class CaseClassify extends _$CaseClassify {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isCaseClassify) ?? false;
+  void update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isCaseClassify, state);
+  }
+}
+
+@riverpod
+class CaseExtension extends _$CaseExtension {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isCaseExtension) ?? false;
+  void update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isCaseExtension, state);
+  }
+}
+
 // ContentBar Start
 
 @riverpod
