@@ -57,15 +57,11 @@ dependencies:
   flutter_riverpod: ^2.6.1
   dropdown_button2: ^2.3.9
   logger: ^2.4.0
-  nil: ^1.1.1
   animations: ^2.0.11
-  contextmenu: ^3.0.0
   tolyui_feedback: ^0.3.4+7
   vs_scrollbar: ^1.0.0
-  extended_text: ^14.1.0
   reorderable_grid: ^1.0.10
   charset: ^2.0.1
-  path_provider: ^2.1.5
   pinyin: ^3.3.0
   win32_registry: ^1.1.5
   shortcut_menu_extender: ^0.1.1
@@ -74,11 +70,6 @@ dependencies:
   media_kit_libs_windows_video: any
   media_kit_libs_linux: any
   video_player: ^2.9.2
-#  vclibs: ^0.1.3
-#  pretty_dio_logger: ^1.3.1
-#  dio_cookie_manager: ^3.1.1
-#  dio_cache_interceptor: ^3.5.0
-#  cookie_jar: ^4.0.8
 
 dev_dependencies:
   flutter_test:
