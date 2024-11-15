@@ -21,6 +21,10 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## View mode has added the function of previewing videos
+
+![22](doc/22.gif)
+
 ## View mode adds the ability to move images to the beginning and end
 
 ![21](doc/21.gif)
