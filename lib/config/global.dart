@@ -6,7 +6,6 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/constants/text.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
-import 'package:video_player_media_kit/video_player_media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Global {
@@ -21,12 +20,6 @@ class Global {
     StorageUtil.remove(AppKeys.apiKey);
     Log.init();
     saveOrNo();
-
-    VideoPlayerMediaKit.ensureInitialized(
-      macOS: true,
-      windows: true,
-      linux: true,
-    );
 
     await windowManager.ensureInitialized();
 

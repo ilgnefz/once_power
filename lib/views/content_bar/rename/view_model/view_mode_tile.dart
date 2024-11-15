@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/utils/utils.dart';
 
 import 'image_view.dart';
 import 'preview_view.dart';
-import 'video_view.dart';
 
 class ViewModeTile extends StatelessWidget {
   const ViewModeTile(this.files, this.file, {super.key});
@@ -39,9 +37,7 @@ class ViewModeTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: file.type == FileClassify.image
-                      ? ImageView(file: file, key: ValueKey(file.id))
-                      : VideoView(file: file, key: ValueKey(file.id)),
+                  child: ImageView(file: file, key: ValueKey(file.id)),
                 ),
                 const SizedBox(height: 4),
                 Text(
