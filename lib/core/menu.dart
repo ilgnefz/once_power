@@ -44,7 +44,7 @@ void toTheFirst(WidgetRef ref, FileInfo file) {
 void toTheCenter(WidgetRef ref, FileInfo file) {
   List<FileInfo> files = ref.watch(sortListProvider);
   int index = files.indexWhere((e) => e == file);
-  if (index == 0) return;
+  if (index == files.length ~/ 2) return;
   deleteOne(ref, file.id);
   insertCenter(ref, file);
   ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
