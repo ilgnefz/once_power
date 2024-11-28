@@ -7,8 +7,6 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
-// TODO:更改README和提示的日志文件的存储位置
-
 void main(List<String> args) async {
   await Global.init(args);
   runApp(const ProviderScope(child: MyApp()));

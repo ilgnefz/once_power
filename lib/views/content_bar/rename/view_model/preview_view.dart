@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/core.dart';
+import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 
 import 'preview_image.dart';
+import 'preview_video.dart';
 
 class PreviewImageView extends ConsumerStatefulWidget {
   const PreviewImageView(this.files, this.file, {super.key});
@@ -88,7 +90,12 @@ class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            ImagePreview(file: tempList[index].filePath),
+            tempList[index].type == FileClassify.image
+                ? ImagePreview(file: tempList[index].filePath)
+                : VideoPreview(
+                    file: tempList[index].filePath,
+                    key: ValueKey(tempList[index].id),
+                  ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

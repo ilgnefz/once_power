@@ -1400,10 +1400,10 @@ class S {
     );
   }
 
-  /// `Removed {count} non image files`
+  /// `Removed {count} non image or video files`
   String removeNonImage(Object count) {
     return Intl.message(
-      'Removed $count non image files',
+      'Removed $count non image or video files',
       name: 'removeNonImage',
       desc: '',
       args: [count],

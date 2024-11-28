@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(total) => "已成功移动所选中的${total}个文件";
 
-  static String m8(count) => "已移除${count}个非图片文件";
+  static String m8(count) => "已移除${count}个非图片视频文件";
 
   static String m9(total) => "选中的 ${total} 个已全部重命名成功";
 

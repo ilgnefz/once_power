@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(total) => "Successfully moved the selected ${total} files";
 
-  static String m8(count) => "Removed ${count} non image files";
+  static String m8(count) => "Removed ${count} non image or video files";
 
   static String m9(total) =>
       "All ${total} selected items have been successfully renamed";
