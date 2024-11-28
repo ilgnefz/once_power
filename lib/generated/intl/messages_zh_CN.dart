@@ -160,7 +160,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reserve": MessageLookupByLibrary.simpleMessage("保留"),
         "restartTip": MessageLookupByLibrary.simpleMessage("重启生效"),
         "saveConfig": MessageLookupByLibrary.simpleMessage("保存配置"),
-        "saveLog": MessageLookupByLibrary.simpleMessage("保存日志（在C盘用户文档文件夹内）"),
+        "saveLog":
+            MessageLookupByLibrary.simpleMessage("保存日志（默认在软件文件夹下的 logs 文件夹内）"),
         "select": MessageLookupByLibrary.simpleMessage("选择"),
         "selectAllSwitch": MessageLookupByLibrary.simpleMessage("全选切换"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),

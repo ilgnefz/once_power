@@ -58,7 +58,7 @@
   "fileName": "File name",
   "extension": "Type",
   "targetFolder": "Target folder",
-  "saveLog": "Save log (In the User Documents folder on the C drive)",
+  "saveLog": "Save log (The default is in the logs folder under the software folder)",
   "deleteEmptyFolder": "Delete empty",
   "deleteEmptyFolderDesc": "Delete all empty folders under the selected folder",
   "organizeMenu": "OrganizeMenu",

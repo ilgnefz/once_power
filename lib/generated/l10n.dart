@@ -640,10 +640,10 @@ class S {
     );
   }
 
-  /// `Save log (In the User Documents folder on the C drive)`
+  /// `Save log (The default is in the logs folder under the software folder)`
   String get saveLog {
     return Intl.message(
-      'Save log (In the User Documents folder on the C drive)',
+      'Save log (The default is in the logs folder under the software folder)',
       name: 'saveLog',
       desc: '',
       args: [],

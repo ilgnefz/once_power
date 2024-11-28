@@ -187,7 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveConfig":
             MessageLookupByLibrary.simpleMessage("Saved Configurations"),
         "saveLog": MessageLookupByLibrary.simpleMessage(
-            "Save log (In the User Documents folder on the C drive)"),
+            "Save log (The default is in the logs folder under the software folder)"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "selectAllSwitch":
             MessageLookupByLibrary.simpleMessage("Select All Switch"),

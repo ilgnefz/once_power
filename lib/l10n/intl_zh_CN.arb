@@ -58,7 +58,7 @@
   "fileName": "文件名",
   "extension": "扩展",
   "targetFolder": "目标文件夹",
-  "saveLog": "保存日志（在C盘用户文档文件夹内）",
+  "saveLog": "保存日志（默认在软件文件夹下的 logs 文件夹内）",
   "deleteEmptyFolder": "删除空文件夹",
   "deleteEmptyFolderDesc": "删除所选文件夹下的所有空文件夹",
   "organizeMenu": "整理菜单",
