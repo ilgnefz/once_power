@@ -7,7 +7,6 @@ import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/easy_context_menu.dart';
 import 'package:once_power/widgets/common/easy_scroll_bar.dart';
@@ -29,6 +28,7 @@ class ViewGridView extends ConsumerWidget {
     final String matchName = S.of(context).matchName;
     final String modifyName = S.of(context).modifyName;
     final String moveToFirst = S.of(context).moveToFirst;
+    final String moveToCenter = S.of(context).moveToCenter;
     final String moveToLast = S.of(context).moveToLast;
 
     void reorderList(int oldIndex, int newIndex) {
@@ -39,46 +39,6 @@ class ViewGridView extends ConsumerWidget {
       ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
       updateName(ref);
       updateExtension(ref);
-    }
-
-    void unselectDateName() {
-      if (ref.watch(dateRenameProvider)) {
-        ref.read(dateRenameProvider.notifier).update();
-      }
-    }
-
-    void autoMatchInput(String name) {
-      if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
-        ref.read(modifyControllerProvider).clear();
-        unselectDateName();
-      }
-      ref.read(matchControllerProvider.notifier).updateText(name);
-      updateName(ref);
-    }
-
-    void autoModifyInput(String name) {
-      if (ref.watch(currentModeProvider) == FunctionMode.reserve) {
-        ref.read(matchControllerProvider).clear();
-      }
-      unselectDateName();
-      ref.read(modifyControllerProvider.notifier).updateText(name);
-      updateName(ref);
-    }
-
-    void toTheFirst(FileInfo file) {
-      int index = files.indexWhere((e) => e == file);
-      if (index == 0) return;
-      deleteOne(ref, file.id);
-      insertFirst(ref, file);
-      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
-    }
-
-    void toTheLast(FileInfo file) {
-      int index = files.indexWhere((e) => e == file);
-      if (index == files.length - 1) return;
-      deleteOne(ref, file.id);
-      insertLast(ref, file);
-      ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
     }
 
     return LayoutBuilder(
@@ -104,28 +64,33 @@ class ViewGridView extends ConsumerWidget {
               file: e,
               waitDuration: const Duration(seconds: 1),
               child: EasyContextMenu(
-                count: 6,
+                count: 7,
                 menu: Column(
                   children: [
                     MenuContextItem(
                       label: matchName,
                       color: Colors.black,
-                      callback: () => autoMatchInput(e.name),
+                      callback: () => autoMatchInput(ref, e.name),
                     ),
                     MenuContextItem(
                       label: modifyName,
                       color: Colors.black,
-                      callback: () => autoModifyInput(e.name),
+                      callback: () => autoModifyInput(ref, e.name),
                     ),
                     MenuContextItem(
                       label: moveToFirst,
                       color: Colors.black,
-                      callback: () => toTheFirst(e),
+                      callback: () => toTheFirst(ref, e),
+                    ),
+                    MenuContextItem(
+                      label: moveToCenter,
+                      color: Colors.black,
+                      callback: () => toTheCenter(ref, e),
                     ),
                     MenuContextItem(
                       label: moveToLast,
                       color: Colors.black,
-                      callback: () => toTheLast(e),
+                      callback: () => toTheLast(ref, e),
                     ),
                     MenuContextItem(
                       label: checked ? unselectLabel : selectLabel,

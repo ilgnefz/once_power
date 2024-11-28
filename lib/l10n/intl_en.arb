@@ -140,6 +140,7 @@
   "shortcutTip2": "Add to",
   "useTimeClassification": "Classify using file modification time",
   "moveToFirst": "To the first",
+  "moveToCenter": "To the center",
   "moveToLast": "To the last",
   "deleteChecked": "Delete checked",
   "tipTitle": "Tip",

@@ -140,6 +140,7 @@
   "shortcutTip2": "添加到",
   "useTimeClassification": "使用文件修改时间进行分类",
   "moveToFirst": "移至首位",
+  "moveToCenter": "移至中间",
   "moveToLast": "移至末尾",
   "deleteChecked": "删除选中的文件",
   "tipTitle": "提示",

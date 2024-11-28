@@ -212,6 +212,11 @@ void insertFirst(WidgetRef ref, FileInfo file) {
   updateName(ref);
 }
 
+void insertCenter(WidgetRef ref, FileInfo file) {
+  ref.read(fileListProvider.notifier).insertCenter(file);
+  updateName(ref);
+}
+
 void insertLast(WidgetRef ref, FileInfo file) {
   ref.read(fileListProvider.notifier).insertLast(file);
   updateName(ref);

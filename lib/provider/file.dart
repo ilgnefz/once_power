@@ -24,6 +24,8 @@ class FileList extends _$FileList {
 
   void insertFirst(FileInfo file) => state = [file, ...state];
 
+  void insertCenter(FileInfo file) => state = [...state.take(state.length ~/ 2), file, ...state.skip(state.length ~/ 2)];
+
   void insertLast(FileInfo file) => state = [...state, file];
 
   void check(String id) => state = state.map((e) {

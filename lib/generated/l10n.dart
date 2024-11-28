@@ -1460,6 +1460,16 @@ class S {
     );
   }
 
+  /// `To the center`
+  String get moveToCenter {
+    return Intl.message(
+      'To the center',
+      name: 'moveToCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `To the last`
   String get moveToLast {
     return Intl.message(

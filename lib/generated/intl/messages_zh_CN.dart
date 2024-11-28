@@ -123,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "modifyTo": MessageLookupByLibrary.simpleMessage("修改为"),
         "moveError": MessageLookupByLibrary.simpleMessage("移动出错了"),
         "moveFailed": MessageLookupByLibrary.simpleMessage("移动失败"),
+        "moveToCenter": MessageLookupByLibrary.simpleMessage("移至中间"),
         "moveToFirst": MessageLookupByLibrary.simpleMessage("移至首位"),
         "moveToLast": MessageLookupByLibrary.simpleMessage("移至末尾"),
         "newName": MessageLookupByLibrary.simpleMessage("新名称"),
