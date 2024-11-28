@@ -89,8 +89,8 @@ class FileSortType extends _$FileSortType {
 @riverpod
 class CSVNameColumn extends _$CSVNameColumn {
   @override
-  int build() => 0;
-  void update(int value) => state = value;
+  String build() => 'A';
+  void update(String value) => state = value;
 }
 
 // BottomBar Start

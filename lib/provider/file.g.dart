@@ -224,25 +224,6 @@ class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
   String get ext => (origin as SelectedExtensionProvider).ext;
 }
 
-String _$easyRenameInfoListHash() =>
-    r'1b9f7fa03f8c6639a4373b0319bdbc02adfdbcc9';
-
-/// See also [easyRenameInfoList].
-@ProviderFor(easyRenameInfoList)
-final easyRenameInfoListProvider =
-    AutoDisposeProvider<List<EasyRenameInfo>>.internal(
-  easyRenameInfoList,
-  name: r'easyRenameInfoListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$easyRenameInfoListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef EasyRenameInfoListRef = AutoDisposeProviderRef<List<EasyRenameInfo>>;
 String _$fileListHash() => r'f50b125b397ff38d1fea86060777a4ebb3b70ed4';
 
 /// See also [FileList].
@@ -302,12 +283,12 @@ final badListProvider =
 );
 
 typedef _$BadList = AutoDisposeNotifier<List<String>>;
-String _$cSVDataHash() => r'f191af1b6fec9422f6cdb24734d70af8f9b8db11';
+String _$cSVDataHash() => r'0796f163632583fca7c020dbb6099dc0bad76d89';
 
 /// See also [CSVData].
 @ProviderFor(CSVData)
 final cSVDataProvider =
-    AutoDisposeNotifierProvider<CSVData, List<List<String>>>.internal(
+    AutoDisposeNotifierProvider<CSVData, List<EasyRenameInfo>>.internal(
   CSVData.new,
   name: r'cSVDataProvider',
   debugGetCreateSourceHash:
@@ -316,6 +297,22 @@ final cSVDataProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$CSVData = AutoDisposeNotifier<List<List<String>>>;
+typedef _$CSVData = AutoDisposeNotifier<List<EasyRenameInfo>>;
+String _$operateLogListHash() => r'1b9d8bce7747da16fffe57ce25285161b0022933';
+
+/// See also [OperateLogList].
+@ProviderFor(OperateLogList)
+final operateLogListProvider =
+    AutoDisposeNotifierProvider<OperateLogList, List<String>>.internal(
+  OperateLogList.new,
+  name: r'operateLogListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$operateLogListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$OperateLogList = AutoDisposeNotifier<List<String>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

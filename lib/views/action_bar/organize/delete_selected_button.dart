@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
-import 'package:once_power/core/organize.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/notification_info.dart';
@@ -26,7 +25,7 @@ class DeleteSelectedButton extends ConsumerWidget {
       try {
         Directory(folder.filePath).deleteSync(recursive: true);
         deleteOne(ref, folder.id);
-        if (saveLog) saveLogContent(folder.filePath);
+        if (saveLog) tempSaveDeleteLog(ref, folder.filePath);
       } catch (e) {
         errorList.add(NotificationInfo(
           file: folder.filePath,
@@ -39,7 +38,7 @@ class DeleteSelectedButton extends ConsumerWidget {
       try {
         File(file.filePath).deleteSync();
         deleteOne(ref, file.id);
-        if (saveLog) saveLogContent(file.filePath);
+        if (saveLog) tempSaveDeleteLog(ref, file.filePath);
       } catch (e) {
         errorList.add(NotificationInfo(
           file: file.filePath,
@@ -116,12 +115,16 @@ class DeleteSelectedButton extends ConsumerWidget {
         if (isFile) deleteSelectedFiles(file);
         if (!isFile) deleteSelectedFolders(file);
       }
-      if (!context.mounted) return;
+      if (ref.watch(saveLogProvider)) {
+        List<String> logs = ref.watch(operateLogListProvider);
+        await createLog('', S.current.deleteLog, logs);
+        ref.read(operateLogListProvider.notifier).clear();
+      }
       NotificationType type = errorList.isEmpty
           ? SuccessNotification(
-              S.of(context).deleteSuccessful, S.of(context).successDeleteInfo)
-          : ErrorNotification(S.of(context).deleteFailed,
-              S.of(context).failureDeleteInfo, errorList);
+              S.current.deleteSuccessful, S.current.successDeleteInfo)
+          : ErrorNotification(
+              S.current.deleteFailed, S.current.failureDeleteInfo, errorList);
       NotificationMessage.show(type);
     }
 

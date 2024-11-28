@@ -14,7 +14,7 @@ class CsvDataTitle extends ConsumerWidget {
     final String tableInfo = S.of(context).tableInfo;
     final String label = S.of(context).exit;
 
-    int originNameColumn = ref.watch(cSVNameColumnProvider);
+    String originNameColumn = ref.watch(cSVNameColumnProvider);
 
     void exit() {
       ref.read(cSVDataProvider.notifier).update([]);
@@ -34,7 +34,7 @@ class CsvDataTitle extends ConsumerWidget {
                   const TextStyle(color: Colors.black).useSystemChineseFont(),
               children: [
                 TextSpan(
-                  text: originNameColumn == 0 ? 'A' : 'B',
+                  text: originNameColumn,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,

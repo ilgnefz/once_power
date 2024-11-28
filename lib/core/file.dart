@@ -228,22 +228,34 @@ bool isCheck(WidgetRef ref, FileClassify classify) {
 }
 
 Future<void> createLog(
-    String filePath, String fileName, String first, String second) async {
-  final time = formatDateTime(DateTime.now()).substring(0, 8);
+    String filePath, String fileName, List<String> logs) async {
+  final time = formatDateTime(DateTime.now()).substring(0, 14);
   String folder = filePath == ''
       ? path.join(path.dirname(Platform.resolvedExecutable), 'logs')
       : filePath;
   Directory dir = Directory(folder);
   if (!dir.existsSync()) await dir.create();
   final log = File(path.join(folder, '$fileName-$time.oplog'));
-  String contents = '${DateTime.now()}: 【$first】===>【$second】';
-  log.writeAsStringSync('$contents\n', mode: FileMode.append);
+  String content = logs.join('\n');
+  // print('已成功创建日志文件:${log.path}');
+  log.writeAsStringSync(content, mode: FileMode.write);
 }
 
-Future<List<List<String>>> decodeOPLogData(XFile file) async {
+void tempSaveLog(WidgetRef ref, String oldPath, String newPath) {
+  String content = '${DateTime.now()}: 【$oldPath】===>【$newPath】';
+  ref.read(operateLogListProvider.notifier).add(content);
+  ref.watch(operateLogListProvider);
+}
+
+void tempSaveDeleteLog(WidgetRef ref, String filePath) {
+  String content = S.current.deleteInfo(filePath);
+  ref.read(operateLogListProvider.notifier).add(content);
+  ref.watch(operateLogListProvider);
+}
+
+Future<List<EasyRenameInfo>> decodeOPLogData(XFile file) async {
   String content = await file.readAsString();
-  final lines = content.split('\n');
-  lines.removeLast();
+  List<String> lines = content.split('\n');
   return lines.map((line) {
     final parts = line.split('===>');
     final before =
@@ -251,11 +263,12 @@ Future<List<List<String>>> decodeOPLogData(XFile file) async {
     final after = parts[1].trim().replaceAll(RegExp(r'【|】'), '');
     final beforeWithoutExtension = before.split('.').first;
     final afterWithoutExtension = after.split('.').first;
-    return [afterWithoutExtension, beforeWithoutExtension];
+    return EasyRenameInfo(
+        nameA: afterWithoutExtension, nameB: beforeWithoutExtension);
   }).toList();
 }
 
-Future<List<List<String>>> decodeCSVData(XFile file) async {
+Future<List<EasyRenameInfo>> decodeCSVData(XFile file) async {
   // NotificationInfo? errInfo;
   final bytes = await file.readAsBytes();
   String content = '';
@@ -271,11 +284,14 @@ Future<List<List<String>>> decodeCSVData(XFile file) async {
           ErrorNotification(S.current.decodeCSVError, e.toString()));
     }
   }
-  List<List<String>> list = content.trimRight().split('\n').map((e) {
-    final list = e.trim().split(',');
-    return [list[0].trim(), list[1].trim()];
-  }).toList();
-  return list.where((e) => e[0] != '' || e[1] != '').toList();
+  List<String> splitList = content.trim().split('\n');
+  List<EasyRenameInfo> list = [];
+  for (String value in splitList) {
+    List<String> temp = value.split(',').map((e) => e.trim()).toList();
+    list.add(EasyRenameInfo(nameA: temp[0], nameB: temp[1]));
+  }
+  return list;
+  // return list.where((e) => e.nameA != '' || e.nameB != '').toList();
 }
 
 String createClassifyFolder(FileInfo file, String parentFolderPath) {

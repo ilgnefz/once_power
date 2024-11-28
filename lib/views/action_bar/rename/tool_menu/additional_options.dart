@@ -11,33 +11,36 @@ import 'package:once_power/widgets/common/easy_checkbox.dart';
 import 'package:tolyui_feedback/tolyui_feedback.dart';
 
 class AdditionalOptions extends ConsumerWidget {
-  const AdditionalOptions({super.key});
+  const AdditionalOptions({super.key, this.show = true});
+
+  final bool show;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            EasyCheckbox(
-              S.of(context).caseClassify,
-              checked: ref.watch(caseClassifyProvider),
-              onChanged: (v) {
-                ref.read(caseClassifyProvider.notifier).update();
-                updateName(ref);
-              },
-            ),
-            EasyCheckbox(
-              S.of(context).caseExtension,
-              checked: ref.watch(caseExtensionProvider),
-              onChanged: (v) {
-                ref.read(caseExtensionProvider.notifier).update();
-                updateName(ref);
-              },
-            ),
-          ],
-        ),
+        if (show)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              EasyCheckbox(
+                S.of(context).caseClassify,
+                checked: ref.watch(caseClassifyProvider),
+                onChanged: (v) {
+                  ref.read(caseClassifyProvider.notifier).update();
+                  updateName(ref);
+                },
+              ),
+              EasyCheckbox(
+                S.of(context).caseExtension,
+                checked: ref.watch(caseExtensionProvider),
+                onChanged: (v) {
+                  ref.read(caseExtensionProvider.notifier).update();
+                  updateName(ref);
+                },
+              ),
+            ],
+          ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

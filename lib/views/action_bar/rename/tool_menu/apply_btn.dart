@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/rename.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/model/notification_info.dart';
@@ -38,6 +38,11 @@ class ApplyBtn extends ConsumerWidget {
       if (isViewMode) ref.read(refreshImageProvider.notifier).update();
       updateName(ref);
       updateExtension(ref);
+      if (ref.watch(saveLogProvider)) {
+        List<String> logs = ref.watch(operateLogListProvider);
+        await createLog('', S.current.renameLogs, logs);
+        ref.read(operateLogListProvider.notifier).clear();
+      }
       NotificationType type = errorList.isNotEmpty
           ? ErrorNotification(S.current.failed,
               S.current.failedNum(errorList.length, total), errorList)

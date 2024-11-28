@@ -6,6 +6,7 @@ import 'package:once_power/core/file.dart';
 import 'package:once_power/core/rename.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
@@ -25,16 +26,17 @@ class UploadCSVBtn extends ConsumerWidget {
       if (file != null && !ref.watch(currentModeProvider).isOrganize) {
         ref.read(cSVDataProvider.notifier).update([]);
         String ext = path.extension(file.path);
-        List<List<String>> list = [];
+        List<EasyRenameInfo> list = [];
         if (ext == '.oplog') {
           list.addAll(await decodeOPLogData(file));
         } else {
           list.addAll(await decodeCSVData(file));
         }
+        // print(list);
         ref.read(cSVDataProvider.notifier).update(list);
       }
       cSVDataRename(ref);
-      updateName(ref);
+      // updateName(ref);
     }
 
     return TooltipIcon(

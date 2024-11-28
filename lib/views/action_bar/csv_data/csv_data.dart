@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/core.dart';
+import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/views/action_bar/csv_data/csv_data_tile.dart';
@@ -21,31 +22,72 @@ class CsvDataView extends ConsumerWidget {
             fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)
         .useSystemChineseFont();
 
-    List<List<String>> list = ref.watch(cSVDataProvider);
+    List<EasyRenameInfo> list = ref.watch(cSVDataProvider);
 
-    void toggleCSVNameColumn(int index) {
-      ref.read(cSVNameColumnProvider.notifier).update(index);
+    void toggleCSVNameColumn(String value) {
+      ref.read(cSVNameColumnProvider.notifier).update(value);
       cSVDataRename(ref);
     }
 
     return ViewStructure(
       topAction: Column(
         children: [
-          CsvDataTile(
-            height: AppNum.cSVDataTileH,
-            color: Theme.of(context).primaryColor.withOpacity(.4),
-            list: titles,
-            textStyle: tileTextStyle,
-            onTap: (index) => toggleCSVNameColumn(index),
+          Row(
+            children: titles
+                .map((e) => Expanded(
+                      child: InkWell(
+                        onTap: () => toggleCSVNameColumn(e),
+                        child: Container(
+                          height: AppNum.cSVDataTileH,
+                          color: Theme.of(context).primaryColor.withOpacity(.4),
+                          alignment: Alignment.center,
+                          child: Text(e, style: tileTextStyle),
+                        ),
+                      ),
+                    ))
+                .toList(),
           ),
           Expanded(
-            child: SelectionArea(
-              child: ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => CsvDataTile(
-                  minHeight: AppNum.cSVDataMinH,
-                  color: index % 2 == 0 ? Colors.white : Colors.grey.shade100,
-                  list: list[index],
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) => ColoredBox(
+                color: index % 2 == 0 ? Colors.white : Colors.grey.shade100,
+                child: Row(
+                  children: [
+                    CsvDataTile(
+                      index: index,
+                      flag: 'A',
+                      text: list[index].nameA,
+                    ),
+                    CsvDataTile(
+                      index: index,
+                      flag: 'B',
+                      text: list[index].nameB,
+                    ),
+                    // CsvDataTile(text: list[index].nameA, index: null,),
+                    // CsvDataTile(text: list[index].nameB, index: null,),
+                    // Expanded(
+                    //   child: InkWell(
+                    //     child: Container(
+                    //       constraints: BoxConstraints(
+                    //         minHeight: AppNum.cSVDataMinH,
+                    //       ),
+                    //       padding: const EdgeInsets.symmetric(
+                    //         horizontal: 8,
+                    //         vertical: 4,
+                    //       ),
+                    //       width: double.infinity,
+                    //       alignment: Alignment.center,
+                    //       child: Text(
+                    //         list[index].nameB,
+                    //         textAlign: TextAlign.center,
+                    //         style: const TextStyle(fontSize: 13)
+                    //             .useSystemChineseFont(),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
               ),
             ),
@@ -53,7 +95,7 @@ class CsvDataView extends ConsumerWidget {
         ],
       ),
       bottomActions: const [
-        AdditionalOptions(),
+        AdditionalOptions(show: false),
         SizedBox(height: AppNum.mediumG),
         ApplyMenu()
       ],

@@ -103,12 +103,12 @@ final fileSortTypeProvider =
 );
 
 typedef _$FileSortType = AutoDisposeNotifier<SortType>;
-String _$cSVNameColumnHash() => r'a22cfdcaf61f5420a2ceacd7b1dd3a1bb65385e9';
+String _$cSVNameColumnHash() => r'6c198e17bed68d7487d8a79f7c66b5d18276824c';
 
 /// See also [CSVNameColumn].
 @ProviderFor(CSVNameColumn)
 final cSVNameColumnProvider =
-    AutoDisposeNotifierProvider<CSVNameColumn, int>.internal(
+    AutoDisposeNotifierProvider<CSVNameColumn, String>.internal(
   CSVNameColumn.new,
   name: r'cSVNameColumnProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -118,7 +118,7 @@ final cSVNameColumnProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$CSVNameColumn = AutoDisposeNotifier<int>;
+typedef _$CSVNameColumn = AutoDisposeNotifier<String>;
 String _$languageHash() => r'45f175e269e3bc0f669d2d64e86b66b14c0364f7';
 
 /// See also [Language].

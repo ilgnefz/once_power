@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/core/organize.dart';
+import 'package:once_power/core/file.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -22,7 +22,8 @@ class DeleteFolderButton extends ConsumerWidget {
     void delete(Directory directory) {
       try {
         directory.deleteSync();
-        if (saveLog) saveLogContent(directory.path);
+        // if (saveLog) saveLogContent(directory.path);
+        if (saveLog) tempSaveDeleteLog(ref, directory.path);
       } catch (e) {
         errorList.add(NotificationInfo(
           file: directory.path,
@@ -45,18 +46,23 @@ class DeleteFolderButton extends ConsumerWidget {
       }
     }
 
-    void deleteEmptyFolder() {
+    Future<void> deleteEmptyFolder() async {
       List<FileInfo> files = ref.read(fileListProvider);
       for (var file in files) {
         if (!file.checked) continue;
         if (file.type != FileClassify.folder) continue;
         deleteFolders(file.filePath);
       }
+      if (ref.watch(saveLogProvider)) {
+        List<String> logs = ref.watch(operateLogListProvider);
+        await createLog('', S.current.deleteLog, logs);
+        ref.read(operateLogListProvider.notifier).clear();
+      }
       NotificationType type = errorList.isEmpty
           ? SuccessNotification(
-              S.of(context).deleteSuccessful, S.of(context).successEmptyInfo)
-          : ErrorNotification(S.of(context).deleteFailed,
-              S.of(context).failureEmptyInfo, errorList);
+              S.current.deleteSuccessful, S.current.successEmptyInfo)
+          : ErrorNotification(
+              S.current.deleteFailed, S.current.failureEmptyInfo, errorList);
       NotificationMessage.show(type);
     }
 

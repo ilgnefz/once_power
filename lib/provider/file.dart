@@ -228,15 +228,21 @@ class BadList extends _$BadList {
 @riverpod
 class CSVData extends _$CSVData {
   @override
-  List<List<String>> build() => [];
-  void update(List<List<String>> value) => state = value;
+  List<EasyRenameInfo> build() => [];
+  void update(List<EasyRenameInfo> value) => state = value;
+  void updateOne(int index, String flag, String value) =>
+      state = state.map((e) {
+        if (state.indexOf(e) == index) {
+          flag == 'A' ? e.nameA = value : e.nameB = value;
+        }
+        return e;
+      }).toList();
 }
 
 @riverpod
-List<EasyRenameInfo> easyRenameInfoList(Ref ref) {
-  List<EasyRenameInfo> list = [];
-  for (var e in ref.watch(cSVDataProvider)) {
-    list.add(EasyRenameInfo(nameA: e.firstOrNull!, nameB: e.lastOrNull!));
-  }
-  return list;
+class OperateLogList extends _$OperateLogList {
+  @override
+  List<String> build() => [];
+  void add(String value) => state = [...state, value];
+  void clear() => state = [];
 }

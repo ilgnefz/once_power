@@ -351,13 +351,7 @@ Future<NotificationInfo?> renameFile(
     } else {
       File(oldPath).renameSync(newPath);
     }
-    if (ref.watch(saveLogProvider)) {
-      // Directory docPath = await getApplicationDocumentsDirectory();
-      // String filePath = path.join(docPath.path, 'OncePower');
-      // Directory dir = Directory(filePath);
-      // if (!dir.existsSync()) await dir.create();
-      createLog('', S.current.renameLogs, oldName, newName);
-    }
+    if (ref.watch(saveLogProvider)) tempSaveLog(ref, oldName, newName);
     final fileInfo = ref.read(fileListProvider.notifier);
     String name = path.basenameWithoutExtension(newPath);
     fileInfo.updateOriginName(id, name);
@@ -384,8 +378,8 @@ Future<NotificationInfo?> renameFile(
 
 void cSVDataRename(WidgetRef ref) {
   List<FileInfo> list = ref.watch(fileListProvider);
-  List<EasyRenameInfo> easyList = ref.watch(easyRenameInfoListProvider);
-  bool isA = ref.watch(cSVNameColumnProvider) == 0;
+  List<EasyRenameInfo> easyList = ref.watch(cSVDataProvider);
+  bool isA = ref.watch(cSVNameColumnProvider) == 'A';
   EasyRenameInfo badInfo = EasyRenameInfo(nameA: '', nameB: '');
   for (FileInfo file in list) {
     if (!file.checked) continue;
