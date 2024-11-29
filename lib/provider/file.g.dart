@@ -224,7 +224,7 @@ class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
   String get ext => (origin as SelectedExtensionProvider).ext;
 }
 
-String _$fileListHash() => r'aea2f5bd739365ac65b0dbb0ba83a1fb7445713e';
+String _$fileListHash() => r'026f4212d120dfde7f75bd4182e97c9eac3baeeb';
 
 /// See also [FileList].
 @ProviderFor(FileList)

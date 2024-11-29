@@ -31,10 +31,8 @@ String renameFile(String newPath) {
   return '${newPath.substring(0, index)} - $num${newPath.substring(index)}';
 }
 
-Future<void> moveFile(
-    BuildContext context, WidgetRef ref, FileInfo file) async {
+Future<void> moveFile(WidgetRef ref, FileInfo file) async {
   TextEditingController controller = ref.watch(targetControllerProvider);
-
   String folderPath = controller.text;
   if (folderPath == '') {
     await noTargetFolder(ref, file);
@@ -43,8 +41,7 @@ Future<void> moveFile(
   }
 }
 
-Future<void> easyMoveFiles(
-    WidgetRef ref, String newPath, String oldPath) async {
+Future<void> easyMoveFile(WidgetRef ref, String newPath, String oldPath) async {
   bool isFile = await FileSystemEntity.isFile(oldPath);
   bool saveLog = ref.watch(saveLogProvider);
   try {
@@ -55,10 +52,9 @@ Future<void> easyMoveFiles(
     }
     if (saveLog) tempSaveLog(ref, oldPath, newPath);
   } catch (e) {
-    errorList.add(NotificationInfo(
-      file: oldPath,
-      message: '${S.current.moveFailed}: $e',
-    ));
+    String message = '${S.current.moveFailed}: $e';
+    errorList.add(NotificationInfo(file: oldPath, message: message));
+    if (saveLog) tempSaveLog(ref, oldPath, oldPath);
     Log.e(e.toString());
   }
 }
@@ -70,8 +66,8 @@ Future<void> noTargetFolder(WidgetRef ref, FileInfo file) async {
     if (folderPath == file.parent) return;
     String newPath = path.join(folderPath, path.basename(file.filePath));
     if (File(newPath).existsSync()) newPath = renameFile(newPath);
-    await easyMoveFiles(ref, newPath, file.filePath);
-    final fileInfo = ref.read(fileListProvider.notifier);
+    await easyMoveFile(ref, newPath, file.filePath);
+    final FileList fileInfo = ref.read(fileListProvider.notifier);
     fileInfo.updateFilePath(file.id, newPath);
     fileInfo.updateFileParent(file.id, folderPath);
   }
@@ -93,33 +89,24 @@ void haveTargetFolder(WidgetRef ref, String folderPath, FileInfo file) {
   if (folderPath == file.parent) return;
   if (File(newPath).existsSync()) newPath = renameFile(newPath);
   bool sameDisk = file.filePath[0] == newPath[0];
-  if (sameDisk) {
-    try {
+  try {
+    if (sameDisk) {
       File(file.filePath).renameSync(newPath);
-      if (saveLog) tempSaveLog(ref, file.filePath, newPath);
-    } catch (e) {
-      errorList.add(NotificationInfo(
-        file: file.filePath,
-        message: '${S.current.moveFailed}: $e',
-      ));
-      Log.e(e.toString());
-    }
-  } else {
-    try {
+    } else {
       File(file.filePath).copySync(newPath);
       File(file.filePath).deleteSync();
-      if (saveLog) tempSaveLog(ref, file.filePath, newPath);
-    } catch (e) {
-      errorList.add(NotificationInfo(
-        file: file.filePath,
-        message: '${S.current.moveError}: $e',
-      ));
-      Log.e(e.toString());
-      return;
     }
+    if (saveLog) tempSaveLog(ref, file.filePath, newPath);
+  } catch (e) {
+    String message = '${S.current.moveFailed}: $e';
+    if (sameDisk) message = '${S.current.moveError}: $e';
+    errorList.add(NotificationInfo(file: file.filePath, message: message));
+    if (saveLog) tempSaveLog(ref, file.filePath, file.filePath);
+    Log.e(e.toString());
+    return;
   }
 
-  final fileInfo = ref.read(fileListProvider.notifier);
+  final FileList fileInfo = ref.read(fileListProvider.notifier);
   fileInfo.updateFilePath(file.id, newPath);
   fileInfo.updateFileParent(file.id, folderPath);
 }
@@ -133,12 +120,8 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
     total++;
     if (file.type.isFolder) {
       if (!Directory(file.filePath).existsSync()) {
-        errorList.add(
-          NotificationInfo(
-            file: file.filePath,
-            message: S.of(context).notExist,
-          ),
-        );
+        String message = S.of(context).notExist;
+        errorList.add(NotificationInfo(file: file.filePath, message: message));
         continue;
       }
       final List<String> list = getAllPath(file.filePath);
@@ -155,7 +138,7 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
   for (FileInfo file in realFiles) {
     count++;
     if (!context.mounted) return;
-    await moveFile(context, ref, file);
+    await moveFile(ref, file);
     ref.read(countProvider.notifier).update(count);
     await Future.delayed(const Duration(microseconds: 1));
   }
@@ -164,6 +147,7 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
   ref.read(costProvider.notifier).update(cost);
   if (ref.watch(saveLogProvider)) {
     List<String> logs = ref.watch(operateLogListProvider);
+    // print(logs);
     String folder = ref.watch(targetControllerProvider).text;
     await createLog(folder, S.current.organizeLogs, logs);
     ref.read(operateLogListProvider.notifier).clear();
@@ -187,10 +171,10 @@ Future<void> targetFolderCache(WidgetRef ref, String folder) async {
 }
 
 void saveLogContent1(String filePath) {
-  final fileName = formatDateTime(DateTime.now()).substring(0, 14);
-  final appDir = Platform.resolvedExecutable;
-  final log =
-      File(path.join(appDir, 'logs', '${S.current.deleteLog}-$fileName.log'));
+  final String fileName = formatDateTime(DateTime.now()).substring(0, 14);
+  final String appDir = Platform.resolvedExecutable;
+  String fullFileName = '${S.current.deleteLog}-$fileName.log';
+  final File logFile = File(path.join(appDir, 'logs', fullFileName));
   String contents = S.current.deleteInfo(filePath);
-  log.writeAsStringSync('$contents\n', mode: FileMode.write);
+  logFile.writeAsStringSync('$contents\n', mode: FileMode.write);
 }

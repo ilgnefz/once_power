@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:charset/charset.dart';
 import 'package:exif/exif.dart';
@@ -30,7 +31,7 @@ import 'core.dart';
 Future<void> formatPath(WidgetRef ref, List<String> paths) async {
   List<String> files = [];
   List<String> folders = [];
-  for (var p in paths) {
+  for (String p in paths) {
     bool isFile = await FileSystemEntity.isFile(p);
     if (isFile) files.add(p);
     if (!isFile) folders.add(p);
@@ -41,7 +42,7 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
 
 // 处理通过按钮添加的文件
 Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
-  final paths = files.map((e) => e.path).toList();
+  final List<String> paths = files.map((e) => e.path).toList();
   addFileInfo(ref, paths);
 }
 
@@ -51,7 +52,7 @@ Future<void> formatFolder(WidgetRef ref, List<String?> folders) async {
   bool addSubfolder = ref.watch(addSubfolderProvider);
   FunctionMode mode = ref.watch(currentModeProvider);
   List<String> list = [];
-  for (var folder in folders) {
+  for (String? folder in folders) {
     if (addFolder && !addSubfolder || mode.isOrganize) list.add(folder!);
     if (addFolder && addSubfolder && !mode.isOrganize) {
       list.addAll([folder!, ...getAllPath(folder, true)]);
@@ -69,13 +70,10 @@ Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
   int count = 0;
   ref.read(totalProvider.notifier).update(list.length);
   int startTime = DateTime.now().microsecondsSinceEpoch;
-  for (var filePath in list) {
-    if (isViewMode &&
-        !isOrganize &&
-        (!image.contains(getFileExtension(filePath))) &&
-        !video.contains(getFileExtension(filePath))) {
-      continue;
-    }
+  for (String filePath in list) {
+    String ext = getFileExtension(filePath);
+    bool noImageVideo = !image.contains(ext) && !video.contains(ext);
+    if (isViewMode && !isOrganize && noImageVideo) continue;
     ref.read(countProvider.notifier).update(++count);
     bool exist = ref.watch(fileListProvider).any((e) => e.filePath == filePath);
     if (exist) continue;
@@ -102,7 +100,7 @@ List<String> getAllPath(String folder, [bool addSubfolder = false]) {
   Directory directory = Directory(folder);
   List<String> children = [];
   List<FileSystemEntity> files = directory.listSync(recursive: true);
-  for (var file in files) {
+  for (FileSystemEntity file in files) {
     if (FileSystemEntity.isFileSync(file.path) && !addSubfolder) {
       String extension = path.extension(file.path);
       extension = extension == '' ? extension : extension.substring(1);
@@ -145,7 +143,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
 }
 
 Future<DateTime?> getExifDate(String filePath) async {
-  final fileBytes = File(filePath).readAsBytesSync();
+  final Uint8List fileBytes = File(filePath).readAsBytesSync();
   final data = await readExifFromBytes(fileBytes);
   if (!data.containsKey('Image DateTime')) return null;
   String? dateTime = data['Image DateTime'].toString();
@@ -235,16 +233,16 @@ bool isCheck(WidgetRef ref, FileClassify classify) {
 
 Future<void> createLog(
     String filePath, String fileName, List<String> logs) async {
-  final time = formatDateTime(DateTime.now()).substring(0, 14);
+  final String time = formatDateTime(DateTime.now()).substring(0, 14);
   String folder = filePath == ''
       ? path.join(path.dirname(Platform.resolvedExecutable), 'logs')
       : filePath;
   Directory dir = Directory(folder);
   if (!dir.existsSync()) await dir.create();
-  final log = File(path.join(folder, '$fileName-$time.oplog'));
+  final File logFile = File(path.join(folder, '$fileName-$time.oplog'));
   String content = logs.join('\n');
-  // print('已成功创建日志文件:${log.path}');
-  log.writeAsStringSync(content, mode: FileMode.write);
+  debugPrint('已成功创建日志文件:${logFile.path}');
+  logFile.writeAsStringSync(content, mode: FileMode.write);
 }
 
 void tempSaveLog(WidgetRef ref, String oldPath, String newPath) {
@@ -263,12 +261,12 @@ Future<List<EasyRenameInfo>> decodeOPLogData(XFile file) async {
   String content = await file.readAsString();
   List<String> lines = content.split('\n');
   return lines.map((line) {
-    final parts = line.split('===>');
-    final before =
+    final List<String> parts = line.split('===>');
+    final String before =
         parts[0].split(':').last.trim().replaceAll(RegExp(r'【|】'), '');
-    final after = parts[1].trim().replaceAll(RegExp(r'【|】'), '');
-    final beforeWithoutExtension = before.split('.').first;
-    final afterWithoutExtension = after.split('.').first;
+    final String after = parts[1].trim().replaceAll(RegExp(r'【|】'), '');
+    final String beforeWithoutExtension = before.split('.').first;
+    final String afterWithoutExtension = after.split('.').first;
     return EasyRenameInfo(
         nameA: afterWithoutExtension, nameB: beforeWithoutExtension);
   }).toList();
@@ -276,7 +274,7 @@ Future<List<EasyRenameInfo>> decodeOPLogData(XFile file) async {
 
 Future<List<EasyRenameInfo>> decodeCSVData(XFile file) async {
   // NotificationInfo? errInfo;
-  final bytes = await file.readAsBytes();
+  final Uint8List bytes = await file.readAsBytes();
   String content = '';
   try {
     content = utf8.decode(bytes);
@@ -315,7 +313,7 @@ String createClassifyFolder(FileInfo file, String parentFolderPath) {
 List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   List<FileInfo> chineseList = [];
   List<FileInfo> otherList = [];
-  for (var e in fileList) {
+  for (FileInfo e in fileList) {
     if (isChinese(e.name)) {
       chineseList.add(e);
     } else {
@@ -336,10 +334,10 @@ void filterFile(BuildContext context, WidgetRef ref) {
   bool selected = ref.watch(viewModeProvider);
   bool isOrganize = ref.watch(currentModeProvider).isOrganize;
   if (selected && !isOrganize) {
-    final provider = ref.read(fileListProvider.notifier);
-    final before = ref.watch(fileListProvider).length;
+    final FileList provider = ref.read(fileListProvider.notifier);
+    final int before = ref.watch(fileListProvider).length;
     provider.removeOtherClassify([FileClassify.image, FileClassify.video]);
-    final after = ref.watch(fileListProvider).length;
+    final int after = ref.watch(fileListProvider).length;
     if (before > after) {
       int removeCount = before - after;
       NotificationType type = SuccessNotification(

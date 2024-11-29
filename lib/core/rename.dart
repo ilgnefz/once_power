@@ -21,7 +21,7 @@ void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   List<FileInfo> files = ref.read(fileListProvider);
   String inputExt = ref.watch(extensionControllerProvider).text;
   bool isModifyExt = ref.watch(modifyExtensionProvider);
-  for (var file in files) {
+  for (FileInfo file in files) {
     String newExt = file.extension;
     if (!isUndo) {
       if (file.checked && !file.type.isFolder && isModifyExt) newExt = inputExt;
@@ -30,26 +30,19 @@ void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   }
 }
 
-int dateRenameIndex(
-  WidgetRef ref,
-  DateFormatMap dfMap,
-  FileInfo file,
-) {
+int dateRenameIndex(WidgetRef ref, DateFormatMap dfMap, FileInfo file) {
   bool caseClassify = ref.watch(caseClassifyProvider);
   bool caseExtension = ref.watch(caseExtensionProvider);
   int index = 0;
   String dateText = dateName(ref, file);
-
   if (caseClassify && !caseExtension) {
     String classify = getFileClassifyName(file.type);
     index = generateDFMapIndex(ref, dfMap, dateText, classify, file.name);
   }
-
   if (caseExtension) {
     String extension = file.extension;
     index = generateDFMapIndex(ref, dfMap, dateText, extension, file.name);
   }
-
   return index;
 }
 
@@ -93,26 +86,21 @@ int actualIndex(
   bool dateRename = ref.watch(dateRenameProvider);
   bool caseClassify = ref.watch(caseClassifyProvider);
   bool caseExtension = ref.watch(caseExtensionProvider);
-
   if (dateRename && !caseClassify && !caseExtension) {
     String dateText = dateName(ref, file);
     index = generateMapIndex(tempTypeMap, dateText, file.name);
   }
-
   if (dateRename && (caseClassify || caseExtension)) {
     dateRenameIndex(ref, dfMap, file);
   }
-
   if (caseClassify && !caseExtension) {
     String classify = file.type.value;
     index = generateMapIndex(tempTypeMap, classify, file.name);
   }
-
   if (caseExtension) {
     String extension = getFileExtension(file.filePath);
     index = generateMapIndex(tempTypeMap, extension, file.name);
   }
-
   return index;
 }
 
@@ -147,7 +135,7 @@ void updateName(WidgetRef ref) {
   bool dateRename = ref.watch(dateRenameProvider);
   bool caseClassify = ref.watch(caseClassifyProvider);
   bool caseExtension = ref.watch(caseExtensionProvider);
-  for (var file in files) {
+  for (FileInfo file in files) {
     if (file.checked) {
       int actualFileIndex = actualIndex(ref, dfMap, tempTypeMap, file);
       int actualPrefixIndex = prefixIndex + actualFileIndex;
@@ -278,7 +266,7 @@ void undo(WidgetRef ref) async {
   bool delay = list.length > AppNum.maxFileNum;
   int startTime = DateTime.now().microsecondsSinceEpoch;
 
-  for (final file in checkList) {
+  for (FileInfo file in checkList) {
     count++;
     String oldPath = file.filePath;
     String newPath = file.beforePath;
@@ -352,7 +340,7 @@ Future<NotificationInfo?> renameFile(
       File(oldPath).renameSync(newPath);
     }
     if (ref.watch(saveLogProvider)) tempSaveLog(ref, oldName, newName);
-    final fileInfo = ref.read(fileListProvider.notifier);
+    final FileList fileInfo = ref.read(fileListProvider.notifier);
     String name = path.basenameWithoutExtension(newPath);
     fileInfo.updateOriginName(id, name);
     fileInfo.updateFilePath(id, newPath);
