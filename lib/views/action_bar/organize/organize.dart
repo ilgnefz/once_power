@@ -57,11 +57,10 @@ class OrganizeAction extends ConsumerWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: gap,
       children: [
         const Expanded(child: SingleChildScrollView(child: DescriptionText())),
-        const SizedBox(height: gap),
         const TargetFolderInput(),
-        const SizedBox(height: gap),
         Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -90,7 +89,6 @@ class OrganizeAction extends ConsumerWidget {
             EasyTextBtn(selectFolderLabel, onTap: selectTargetFolder),
           ],
         ),
-        const SizedBox(height: gap),
         Row(
           children: [
             EasyCheckbox(
@@ -104,12 +102,10 @@ class OrganizeAction extends ConsumerWidget {
             EasyTextBtn(addFolderLabel, onTap: addFolder),
           ],
         ),
-        const SizedBox(height: gap),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [DeleteSelectedButton(), DeleteFolderButton()],
         ),
-        const SizedBox(height: gap),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
