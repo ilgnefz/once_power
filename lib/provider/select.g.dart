@@ -236,7 +236,7 @@ final swapSuffixProvider =
 );
 
 typedef _$SwapSuffix = AutoDisposeNotifier<bool>;
-String _$modifyExtensionHash() => r'378aa8c336ea66c0685b00e0cb7b8cf876f31728';
+String _$modifyExtensionHash() => r'2982a583202ca66e9b7c0ae230644d567d764518';
 
 /// See also [ModifyExtension].
 @ProviderFor(ModifyExtension)

@@ -284,6 +284,7 @@ void undo(WidgetRef ref) async {
   if (isViewMode) ref.read(refreshImageProvider.notifier).update();
   updateName(ref);
   updateExtension(ref, true);
+  resetExtension(ref);
   NotificationType type = errorList.isNotEmpty
       ? ErrorNotification(S.current.undoFailed,
           S.current.undoFailedNum(errorList.length, total), errorList)
@@ -346,6 +347,7 @@ Future<NotificationInfo?> renameFile(
     fileInfo.updateFilePath(id, newPath);
     String newExtension = getFileExtension(newPath);
     fileInfo.updateOriginExtension(id, newExtension);
+    resetExtension(ref);
     if (ref.watch(currentModeProvider).isOrganize) {
       fileInfo.updateFileParent(id, path.dirname(newPath));
     }
@@ -391,4 +393,9 @@ void cSVDataRename(WidgetRef ref) {
       }
     }
   }
+}
+
+void resetExtension(WidgetRef ref) {
+  ref.read(modifyExtensionProvider.notifier).close();
+  ref.read(extensionControllerProvider).clear();
 }

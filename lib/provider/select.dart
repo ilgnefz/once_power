@@ -95,6 +95,7 @@ class ModifyExtension extends _$ModifyExtension {
   @override
   bool build() => false;
   void update() => state = !state;
+  void close() => state = false;
 }
 
 @riverpod
