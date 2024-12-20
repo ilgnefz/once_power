@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:once_power/views/content_bar/rename/sort_btn.dart';
 import 'package:once_power/widgets/content_bar/check_tile.dart';
 import 'package:once_power/widgets/content_bar/normal_tile.dart';
 
@@ -30,13 +28,10 @@ class RenameTitleBar extends ConsumerWidget {
           label: '$originName ($selected/$total)',
           fontSize: 14,
           onChanged: (v) => selectAll(ref),
-          action: ClickIcon(
-            svg: ref.watch(fileSortTypeProvider).value,
-            size: AppNum.fileCardH,
-            iconSize: AppNum.defaultIconS - 2,
-            color: AppColors.icon,
-            onTap: () => toggleSortType(ref),
-          ),
+        ),
+        const SizedBox(
+          width: AppNum.extensionW,
+          child: Center(child: SortBtn()),
         ),
         NormalTile(label: renameName),
         const SizedBox(

@@ -1559,6 +1559,96 @@ class S {
       args: [],
     );
   }
+
+  /// `DefaultSort`
+  String get defaultSort {
+    return Intl.message(
+      'DefaultSort',
+      name: 'defaultSort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NameDescending`
+  String get nameDescending {
+    return Intl.message(
+      'NameDescending',
+      name: 'nameDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NameAscending`
+  String get nameAscending {
+    return Intl.message(
+      'NameAscending',
+      name: 'nameAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DateDescending`
+  String get dateDescending {
+    return Intl.message(
+      'DateDescending',
+      name: 'dateDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DateAscending`
+  String get dateAscending {
+    return Intl.message(
+      'DateAscending',
+      name: 'dateAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TypeDescending`
+  String get typeDescending {
+    return Intl.message(
+      'TypeDescending',
+      name: 'typeDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TypeAscending`
+  String get typeAscending {
+    return Intl.message(
+      'TypeAscending',
+      name: 'typeAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CheckDescending`
+  String get checkDescending {
+    return Intl.message(
+      'CheckDescending',
+      name: 'checkDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CheckAscending`
+  String get checkAscending {
+    return Intl.message(
+      'CheckAscending',
+      name: 'checkAscending',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

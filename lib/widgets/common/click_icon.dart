@@ -25,7 +25,7 @@ class ClickIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
         child: InkWell(

@@ -24,7 +24,11 @@ class FileList extends _$FileList {
 
   void insertFirst(FileInfo file) => state = [file, ...state];
 
-  void insertCenter(FileInfo file) => state = [...state.take(state.length ~/ 2), file, ...state.skip(state.length ~/ 2)];
+  void insertCenter(FileInfo file) => state = [
+        ...state.take(state.length ~/ 2),
+        file,
+        ...state.skip(state.length ~/ 2)
+      ];
 
   void insertLast(FileInfo file) => state = [...state, file];
 
@@ -102,39 +106,39 @@ List<FileInfo> sortList(Ref ref) {
   List<FileInfo> sortedList;
 
   switch (type) {
-    case SortType.nameDescending:
+    case SortType.nameAscending:
       sortedList = splitSortList(list, false);
       break;
-    case SortType.nameAscending:
+    case SortType.nameDescending:
       sortedList = splitSortList(list, true);
       break;
-    case SortType.dateDescending:
+    case SortType.dateAscending:
       sortedList = [...list]..sort((a, b) {
           int result = a.createdDate.compareTo(b.createdDate);
           return result == 0 ? a.name.compareTo(b.name) : result;
         });
       break;
-    case SortType.dateAscending:
+    case SortType.dateDescending:
       sortedList = [...list]..sort((a, b) {
           int result = b.createdDate.compareTo(a.createdDate);
           return result == 0 ? b.name.compareTo(a.name) : result;
         });
       break;
-    case SortType.typeDescending:
+    case SortType.typeAscending:
       sortedList = [...list]
         ..sort((a, b) => a.extension.compareTo(b.extension));
       break;
-    case SortType.typeAscending:
+    case SortType.typeDescending:
       sortedList = [...list]
         ..sort((a, b) => b.extension.compareTo(a.extension));
       break;
-    case SortType.checkDescending:
+    case SortType.checkAscending:
       sortedList = [...list]..sort((a, b) {
           if (a.checked == b.checked) return 0;
           return a.checked ? -1 : 1;
         });
       break;
-    case SortType.checkAscending:
+    case SortType.checkDescending:
       sortedList = [...list]..sort((a, b) {
           if (a.checked == b.checked) return 0;
           return b.checked ? -1 : 1;

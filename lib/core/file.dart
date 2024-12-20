@@ -158,16 +158,6 @@ void selectAll(WidgetRef ref) {
   updateExtension(ref);
 }
 
-void toggleSortType(WidgetRef ref) {
-  int index = SortType.values.indexOf(ref.read(fileSortTypeProvider));
-  ++index;
-  if (index > SortType.values.length - 1) index = 0;
-  SortType type = SortType.values[index];
-  ref.read(fileSortTypeProvider.notifier).update(type);
-  updateName(ref);
-  updateExtension(ref);
-}
-
 void showAllType(BuildContext context, [bool needPop = false]) async {
   if (needPop) Navigator.of(context).pop();
   await showDialog(

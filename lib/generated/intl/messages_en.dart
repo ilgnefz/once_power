@@ -64,8 +64,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "caseClassify": MessageLookupByLibrary.simpleMessage("Case classify"),
         "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
         "caseExtension": MessageLookupByLibrary.simpleMessage("Case extension"),
+        "checkAscending":
+            MessageLookupByLibrary.simpleMessage("CheckAscending"),
         "checkCompleted":
             MessageLookupByLibrary.simpleMessage("Check completed"),
+        "checkDescending":
+            MessageLookupByLibrary.simpleMessage("CheckDescending"),
         "checkFailed": MessageLookupByLibrary.simpleMessage("Check failed"),
         "checkUpdate": MessageLookupByLibrary.simpleMessage("Check Version"),
         "checking": MessageLookupByLibrary.simpleMessage("Checking"),
@@ -81,9 +85,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
         "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "dateAscending": MessageLookupByLibrary.simpleMessage("DateAscending"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
+        "dateDescending":
+            MessageLookupByLibrary.simpleMessage("DateDescending"),
         "decodeCSVError":
             MessageLookupByLibrary.simpleMessage("File parsing error occurred"),
+        "defaultSort": MessageLookupByLibrary.simpleMessage("DefaultSort"),
         "deleteChecked": MessageLookupByLibrary.simpleMessage("Delete checked"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete empty"),
@@ -144,6 +152,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "moveToCenter": MessageLookupByLibrary.simpleMessage("To the center"),
         "moveToFirst": MessageLookupByLibrary.simpleMessage("To the first"),
         "moveToLast": MessageLookupByLibrary.simpleMessage("To the last"),
+        "nameAscending": MessageLookupByLibrary.simpleMessage("NameAscending"),
+        "nameDescending":
+            MessageLookupByLibrary.simpleMessage("NameDescending"),
         "newName": MessageLookupByLibrary.simpleMessage("New name"),
         "newVersionInfo": m5,
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(
@@ -236,6 +247,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Top parent folder"),
         "tvSeriesInfo":
             MessageLookupByLibrary.simpleMessage("Get episode info"),
+        "typeAscending": MessageLookupByLibrary.simpleMessage("TypeAscending"),
+        "typeDescending":
+            MessageLookupByLibrary.simpleMessage("TypeDescending"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "undoFailed":
             MessageLookupByLibrary.simpleMessage("Undo rename failed"),

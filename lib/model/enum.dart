@@ -117,14 +117,14 @@ extension FileClassifyExtension on FileClassify {
 
 enum SortType {
   defaultSort,
-  nameDescending,
   nameAscending,
-  dateDescending,
+  nameDescending,
   dateAscending,
-  typeDescending,
+  dateDescending,
   typeAscending,
-  checkDescending,
-  checkAscending
+  typeDescending,
+  checkAscending,
+  checkDescending
 }
 
 extension SortTypeExtension on SortType {
@@ -132,22 +132,45 @@ extension SortTypeExtension on SortType {
     switch (this) {
       case SortType.defaultSort:
         return AppIcons.sort;
-      case SortType.nameDescending:
-        return AppIcons.nameDescending;
       case SortType.nameAscending:
         return AppIcons.nameAscending;
-      case SortType.dateDescending:
-        return AppIcons.dateDescending;
+      case SortType.nameDescending:
+        return AppIcons.nameDescending;
       case SortType.dateAscending:
         return AppIcons.dateAscending;
-      case SortType.typeDescending:
-        return AppIcons.typeDescending;
+      case SortType.dateDescending:
+        return AppIcons.dateDescending;
       case SortType.typeAscending:
         return AppIcons.typeAscending;
-      case SortType.checkDescending:
-        return AppIcons.checkDescending;
+      case SortType.typeDescending:
+        return AppIcons.typeDescending;
       case SortType.checkAscending:
         return AppIcons.checkAscending;
+      case SortType.checkDescending:
+        return AppIcons.checkDescending;
+    }
+  }
+
+  String get label {
+    switch (this) {
+      case SortType.defaultSort:
+        return S.current.defaultSort;
+      case SortType.nameDescending:
+        return S.current.nameDescending;
+      case SortType.nameAscending:
+        return S.current.nameAscending;
+      case SortType.dateDescending:
+        return S.current.dateDescending;
+      case SortType.dateAscending:
+        return S.current.dateAscending;
+      case SortType.typeDescending:
+        return S.current.typeDescending;
+      case SortType.typeAscending:
+        return S.current.typeAscending;
+      case SortType.checkDescending:
+        return S.current.checkDescending;
+      case SortType.checkAscending:
+        return S.current.checkAscending;
     }
   }
 }

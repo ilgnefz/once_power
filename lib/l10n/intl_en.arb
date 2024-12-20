@@ -149,5 +149,14 @@
   "tipButton2": "I know",
   "topParentFolder": "Top parent folder",
   "caseClassify": "Case classify",
-  "caseExtension": "Case extension"
+  "caseExtension": "Case extension",
+  "defaultSort": "DefaultSort",
+  "nameDescending": "NameDescending",
+  "nameAscending": "NameAscending",
+  "dateDescending": "DateDescending",
+  "dateAscending": "DateAscending",
+  "typeDescending": "TypeDescending",
+  "typeAscending": "TypeAscending",
+  "checkDescending": "CheckDescending",
+  "checkAscending": "CheckAscending"
 }

@@ -149,5 +149,14 @@
   "tipButton2": "我已知晓",
   "topParentFolder": "顶级父文件夹",
   "caseClassify": "区分类型",
-  "caseExtension": "区分扩展"
+  "caseExtension": "区分扩展",
+  "defaultSort": "默认排序",
+  "nameDescending": "名称降序",
+  "nameAscending": "名称升序",
+  "dateDescending": "日期降序",
+  "dateAscending": "日期升序",
+  "typeDescending": "类型降序",
+  "typeAscending": "类型升序",
+  "checkDescending": "选择降序",
+  "checkAscending": "选择升序"
 }

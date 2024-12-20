@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/file.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:once_power/views/content_bar/rename/sort_btn.dart';
 import 'package:once_power/widgets/content_bar/check_tile.dart';
 
 class ViewModeTitleBar extends ConsumerWidget {
@@ -27,12 +25,9 @@ class ViewModeTitleBar extends ConsumerWidget {
           onChanged: (v) => selectAll(ref),
         ),
         const Spacer(),
-        ClickIcon(
-          svg: ref.watch(fileSortTypeProvider).value,
-          size: AppNum.fileCardH,
-          iconSize: 22,
-          color: AppColors.icon,
-          onTap: () => toggleSortType(ref),
+        const SizedBox(
+          width: AppNum.extensionW,
+          child: Center(child: SortBtn()),
         ),
         SizedBox(
           width: AppNum.deleteBtnS,
