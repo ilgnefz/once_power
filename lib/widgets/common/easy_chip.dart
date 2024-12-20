@@ -29,7 +29,7 @@ class EasyChip extends ConsumerWidget {
     Color background = enable
         ? (selected
             ? Theme.of(context).primaryColor
-            : Theme.of(context).primaryColor.withOpacity(.2))
+            : Theme.of(context).primaryColor.withValues(alpha: .2))
         : Colors.black12;
     Color text = enable
         ? (selected ? Colors.white : Theme.of(context).primaryColor)

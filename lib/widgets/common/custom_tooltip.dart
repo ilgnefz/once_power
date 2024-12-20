@@ -48,7 +48,7 @@ TextSpan richTextTooltip(BuildContext context, String label, String desc,
     text: '$label: ',
     style: TextStyle(
       fontSize: 13,
-      color: Theme.of(context).primaryColor.withOpacity(.8),
+      color: Theme.of(context).primaryColor.withValues(alpha: .8),
     ).useSystemChineseFont(),
     children: [
       TextSpan(

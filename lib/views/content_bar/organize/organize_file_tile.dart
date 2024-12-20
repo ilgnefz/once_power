@@ -69,7 +69,7 @@ class OrganizeFileTile extends ConsumerWidget {
         child: Ink(
           color: Colors.white,
           child: InkWell(
-            hoverColor: Theme.of(context).primaryColor.withOpacity(.1),
+            hoverColor: Theme.of(context).primaryColor.withValues(alpha: .1),
             onDoubleTap: setTargetFolder,
             onSecondaryTap: openFolder,
             child: Row(

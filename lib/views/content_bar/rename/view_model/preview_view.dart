@@ -22,7 +22,7 @@ class PreviewImageView extends ConsumerStatefulWidget {
 class _PreviewImageViewState extends ConsumerState<PreviewImageView> {
   List<Shadow> shadow = [
     Shadow(
-      color: Colors.black.withOpacity(.4),
+      color: Colors.black.withValues(alpha: .4),
       blurRadius: 8,
       offset: Offset.zero,
     )

@@ -19,7 +19,7 @@ class DetailExtArea extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Color dividerColor = Theme.of(context).primaryColor.withOpacity(.2);
+    Color dividerColor = Theme.of(context).primaryColor.withValues(alpha: .2);
 
     TextStyle subtitleStyle = TextStyle(
       color: Theme.of(context).primaryColor,

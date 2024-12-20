@@ -30,7 +30,8 @@ class NotificationMessage {
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(.1), blurRadius: 8),
+              BoxShadow(
+                  color: Colors.black.withValues(alpha: .1), blurRadius: 8),
             ],
           ),
           child: Column(

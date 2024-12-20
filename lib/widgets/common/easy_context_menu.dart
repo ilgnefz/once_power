@@ -51,7 +51,7 @@ class EasyContextMenu extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 2,
-                      color: Colors.black.withOpacity(.2),
+                      color: Colors.black.withValues(alpha: .2),
                     ),
                   ],
                 ),

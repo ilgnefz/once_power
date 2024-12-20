@@ -59,7 +59,7 @@ class BaseInput extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(.1), blurRadius: 2)
+            BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2)
           ],
         ),
         alignment: Alignment.centerLeft,
