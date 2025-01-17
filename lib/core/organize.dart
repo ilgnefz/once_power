@@ -126,7 +126,8 @@ void organizeFolder(BuildContext context, WidgetRef ref) async {
       }
       final List<String> list = getAllPath(file.filePath);
       for (String child in list) {
-        FileInfo childFile = await generateFileInfo(ref, child);
+        bool isFile = await FileSystemEntity.isFile(child);
+        FileInfo childFile = await generateFileInfo(ref, child, isFile);
         realFiles.add(childFile);
       }
       continue;

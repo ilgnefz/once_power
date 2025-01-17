@@ -72,12 +72,13 @@ Future<void> addFileInfo(WidgetRef ref, List<String> list) async {
   int startTime = DateTime.now().microsecondsSinceEpoch;
   for (String filePath in list) {
     String ext = getFileExtension(filePath);
+    bool isFile = ext != 'dir';
     bool noImageVideo = !image.contains(ext) && !video.contains(ext);
     if (isViewMode && !isOrganize && noImageVideo) continue;
     ref.read(countProvider.notifier).update(++count);
     bool exist = ref.watch(fileListProvider).any((e) => e.filePath == filePath);
     if (exist) continue;
-    FileInfo fileInfo = await generateFileInfo(ref, filePath);
+    FileInfo fileInfo = await generateFileInfo(ref, filePath, isFile);
     ref.read(fileListProvider.notifier).add(fileInfo);
     await Future.delayed(const Duration(microseconds: 1));
   }
@@ -113,9 +114,12 @@ List<String> getAllPath(String folder, [bool addSubfolder = false]) {
   return children;
 }
 
-Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
+Future<FileInfo> generateFileInfo(
+    WidgetRef ref, String filePath, bool isFile) async {
   String id = nanoid(10);
-  String name = path.basenameWithoutExtension(filePath);
+  String name = isFile
+      ? path.basenameWithoutExtension(filePath)
+      : path.basename(filePath);
   String phonetic = isChinese(name) ? PinyinHelper.getPinyinE(name) : name;
   String parent = path.dirname(filePath);
   DateTime? exifDate;
