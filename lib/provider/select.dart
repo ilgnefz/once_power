@@ -307,6 +307,16 @@ class ViewMode extends _$ViewMode {
 }
 
 @riverpod
+class AutoRun extends _$AutoRun {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isAutoRun) ?? false;
+  void update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isAutoRun, state);
+  }
+}
+
+@riverpod
 class EnableOrganize extends _$EnableOrganize {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;

@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/constants/text.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/utils/utils.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:video_player_media_kit/video_player_media_kit.dart';
 import 'package:window_manager/window_manager.dart';
@@ -28,9 +31,18 @@ class Global {
       linux: true,
     );
 
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    launchAtStartup.setup(
+      appName: packageInfo.appName,
+      appPath: Platform.resolvedExecutable,
+      packageName: 'com.ilgenfz.oncepower',
+    );
+
+    bool powerBoot = await launchAtStartup.isEnabled();
+
     await windowManager.ensureInitialized();
 
-    WindowOptions windowOptions = const WindowOptions(
+    WindowOptions windowOptions = WindowOptions(
       size: Size(AppNum.defaultW, AppNum.defaultH),
       minimumSize: Size(AppNum.defaultW, AppNum.defaultH),
       center: true,
@@ -38,8 +50,14 @@ class Global {
       backgroundColor: Colors.transparent,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
+      if (powerBoot) {
+        await windowManager.minimize();
+        await windowManager.setSkipTaskbar(true);
+        await addTray();
+      } else {
+        await windowManager.show();
+        await windowManager.focus();
+      }
       await windowManager.setAsFrameless();
     });
 
@@ -58,19 +76,19 @@ void saveOrNo() {
       AppKeys.dateLength,
       AppKeys.dateType,
       AppKeys.functionMode,
+      AppKeys.isAddFolder,
       AppKeys.isAppend,
       AppKeys.isCase,
       AppKeys.isCaseClassify,
       AppKeys.isCaseExtension,
       AppKeys.isDate,
-      AppKeys.isAddFolder,
-      AppKeys.isViewMode,
       AppKeys.isLength,
       AppKeys.isPrefixCycle,
       AppKeys.isPrefixSwap,
       AppKeys.isSuffixCycle,
       AppKeys.isSuffixSwap,
       AppKeys.isUseTopFolder,
+      AppKeys.isViewMode,
       AppKeys.locale,
       AppKeys.prefixLength,
       AppKeys.prefixStart,

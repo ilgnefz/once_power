@@ -448,6 +448,20 @@ final viewModeProvider = AutoDisposeNotifierProvider<ViewMode, bool>.internal(
 );
 
 typedef _$ViewMode = AutoDisposeNotifier<bool>;
+String _$autoRunHash() => r'96e80821ab1666b2d238fcd24ee4b0be368206d0';
+
+/// See also [AutoRun].
+@ProviderFor(AutoRun)
+final autoRunProvider = AutoDisposeNotifierProvider<AutoRun, bool>.internal(
+  AutoRun.new,
+  name: r'autoRunProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$autoRunHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AutoRun = AutoDisposeNotifier<bool>;
 String _$enableOrganizeHash() => r'9250ecf0fb8247ac48ca1c7b3796da1ba25ffe42';
 
 /// See also [EnableOrganize].

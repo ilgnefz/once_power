@@ -1500,31 +1500,31 @@ class S {
     );
   }
 
-  /// `This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window.`
-  String get tipMessage {
+  /// `This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.`
+  String get deleteTipMessage {
     return Intl.message(
-      'This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window.',
-      name: 'tipMessage',
+      'This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.',
+      name: 'deleteTipMessage',
       desc: '',
       args: [],
     );
   }
 
   /// `I know. No more reminders`
-  String get tipButton1 {
+  String get deleteTipButton1 {
     return Intl.message(
       'I know. No more reminders',
-      name: 'tipButton1',
+      name: 'deleteTipButton1',
       desc: '',
       args: [],
     );
   }
 
   /// `I know`
-  String get tipButton2 {
+  String get deleteTipButton2 {
     return Intl.message(
       'I know',
-      name: 'tipButton2',
+      name: 'deleteTipButton2',
       desc: '',
       args: [],
     );
@@ -1645,6 +1645,96 @@ class S {
     return Intl.message(
       'CheckAscending',
       name: 'checkAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Run OncePower when the computer starts up`
+  String get autoRun {
+    return Intl.message(
+      'Run OncePower when the computer starts up',
+      name: 'autoRun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Operation`
+  String get cancelOperation {
+    return Intl.message(
+      'Cancel Operation',
+      name: 'cancelOperation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Window`
+  String get showWindow {
+    return Intl.message(
+      'Show Window',
+      name: 'showWindow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit App`
+  String get exitApp {
+    return Intl.message(
+      'Exit App',
+      name: 'exitApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close Window`
+  String get closeTipTitle {
+    return Intl.message(
+      'Close Window',
+      name: 'closeTipTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This program is about to close. Do you want to continue?`
+  String get closeTipMessage {
+    return Intl.message(
+      'This program is about to close. Do you want to continue?',
+      name: 'closeTipMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keep minimizing when booting up`
+  String get closeCheckMessage {
+    return Intl.message(
+      'Keep minimizing when booting up',
+      name: 'closeCheckMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get closeTipButton1 {
+    return Intl.message(
+      'Yes',
+      name: 'closeTipButton1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimize to tray`
+  String get closeTipButton2 {
+    return Intl.message(
+      'Minimize to tray',
+      name: 'closeTipButton2',
       desc: '',
       args: [],
     );

@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/constants.dart';
+import 'package:once_power/constants/images.dart';
+import 'package:once_power/constants/keys.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/utils.dart';
+import 'package:tray_manager/tray_manager.dart';
 
 import 'core.dart';
 
@@ -57,4 +65,28 @@ void toTheLast(WidgetRef ref, FileInfo file) {
   deleteOne(ref, file.id);
   insertLast(ref, file);
   ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
+}
+
+Future<void> addTray() async {
+  String icon = Platform.isWindows ? AppImages.logoWin : AppImages.logo;
+  await trayManager.setIcon(icon);
+  trayManager.setToolTip(AppText.name);
+  Menu menu = Menu(
+    items: [
+      MenuItem(
+        key: AppKeys.cancelOperate,
+        label: S.current.cancelOperation,
+      ),
+      MenuItem(
+        key: AppKeys.showWindow,
+        label: S.current.showWindow,
+      ),
+      MenuItem.separator(),
+      MenuItem(
+        key: AppKeys.exitApp,
+        label: S.current.exitApp,
+      ),
+    ],
+  );
+  await trayManager.setContextMenu(menu);
 }

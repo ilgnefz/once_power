@@ -144,9 +144,9 @@
   "moveToLast": "To the last",
   "deleteChecked": "Delete checked",
   "tipTitle": "Tip",
-  "tipMessage": "This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window.",
-  "tipButton1": "I know. No more reminders",
-  "tipButton2": "I know",
+  "deleteTipMessage": "This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.",
+  "deleteTipButton1": "I know. No more reminders",
+  "deleteTipButton2": "I know",
   "topParentFolder": "Top parent folder",
   "caseClassify": "Case classify",
   "caseExtension": "Case extension",
@@ -158,5 +158,14 @@
   "typeDescending": "TypeDescending",
   "typeAscending": "TypeAscending",
   "checkDescending": "CheckDescending",
-  "checkAscending": "CheckAscending"
+  "checkAscending": "CheckAscending",
+  "autoRun": "Run OncePower when the computer starts up",
+  "cancelOperation": "Cancel Operation",
+  "showWindow": "Show Window",
+  "exitApp": "Exit App",
+  "closeTipTitle": "Close Window",
+  "closeTipMessage": "This program is about to close. Do you want to continue?",
+  "closeCheckMessage": "Keep minimizing when booting up",
+  "closeTipButton1": "Yes",
+  "closeTipButton2": "Minimize to tray"
 }

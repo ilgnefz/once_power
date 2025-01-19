@@ -31,6 +31,7 @@ class AppKeys {
   static String isUseOrganize = 'isUseOrganize';
   static String isSaveLog = 'isSaveLog';
   static String isViewMode = 'isViewMode';
+  static String isAutoRun = 'isAutoRun';
   static String isClassifiedFile = 'isClassifiedFile';
   static String isUseTimeClassification = 'isUseTimeClassification';
   static String isAddSubfolder = 'isAddSubfolder';
@@ -58,4 +59,10 @@ class AppKeys {
 
   /// Right click menu to add files
   static String rightMenuFolderPath = 'folderPathCache';
+
+  /// label
+  static String cancelOperate = 'cancel_operate';
+  static String showWindow = 'show_window';
+  static String autoRun = 'auto_run';
+  static String exitApp = 'exit_app';
 }

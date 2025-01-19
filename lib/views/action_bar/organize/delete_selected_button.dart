@@ -11,6 +11,7 @@ import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/utils/storage.dart';
+import 'package:once_power/widgets/common/easy_dialog.dart';
 import 'package:once_power/widgets/common/notification.dart';
 
 class DeleteSelectedButton extends ConsumerWidget {
@@ -51,52 +52,17 @@ class DeleteSelectedButton extends ConsumerWidget {
       return await showDialog(
         context: context,
         builder: (context) {
-          return UnconstrainedBox(
-            child: Container(
-              width: 360,
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.info_rounded, color: Colors.blue, size: 20),
-                      SizedBox(width: AppNum.smallG),
-                      Text(
-                        S.of(context).tipTitle,
-                        style: TextStyle(fontSize: 16).useSystemChineseFont(),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: AppNum.largeG),
-                  Text(
-                    S.of(context).tipMessage,
-                    style: TextStyle(fontSize: 16).useSystemChineseFont(),
-                  ),
-                  SizedBox(height: AppNum.largeG),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          StorageUtil.setBool(AppKeys.isKnow, true);
-                          Navigator.pop(context, true);
-                        },
-                        child: Text(S.of(context).tipButton1),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, true),
-                        child: Text(S.of(context).tipButton2),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+          return EasyDialog(
+            icon: Icons.info_rounded,
+            title: S.of(context).tipTitle,
+            content: S.of(context).deleteTipMessage,
+            okText: S.of(context).deleteTipButton1,
+            cancelText: S.of(context).deleteTipButton2,
+            onOk: () {
+              StorageUtil.setBool(AppKeys.isKnow, true);
+              Navigator.pop(context, true);
+            },
+            onCancel: () => Navigator.pop(context, true),
           );
         },
       );

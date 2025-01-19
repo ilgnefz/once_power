@@ -144,9 +144,9 @@
   "moveToLast": "移至末尾",
   "deleteChecked": "删除选中的文件",
   "tipTitle": "提示",
-  "tipMessage": "该操作会将文件从系统中删除，且无法恢复。取消请点击弹窗外面的区域。",
-  "tipButton1": "我已知晓，不再提醒",
-  "tipButton2": "我已知晓",
+  "deleteTipMessage": "该操作会将文件从系统中删除，且无法恢复。取消操纵请点击弹窗外面的区域。",
+  "deleteTipButton1": "我已知晓，不再提醒",
+  "deleteTipButton2": "我已知晓",
   "topParentFolder": "顶级父文件夹",
   "caseClassify": "区分类型",
   "caseExtension": "区分扩展",
@@ -158,5 +158,14 @@
   "typeDescending": "类型降序",
   "typeAscending": "类型升序",
   "checkDescending": "选择降序",
-  "checkAscending": "选择升序"
+  "checkAscending": "选择升序",
+  "autoRun": "开机自启",
+  "cancelOperation": "点错了",
+  "showWindow": "显示窗口",
+  "exitApp": "退出软件",
+  "closeTipTitle": "关闭窗口",
+  "closeTipMessage": "即将关闭本程序，是否继续？",
+  "closeCheckMessage": "开机自启时一直最小化",
+  "closeTipButton1": "确定关闭",
+  "closeTipButton2": "最小化到托盘"
 }

@@ -59,8 +59,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
+        "autoRun": MessageLookupByLibrary.simpleMessage(
+            "Run OncePower when the computer starts up"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "between": MessageLookupByLibrary.simpleMessage("Between"),
+        "cancelOperation":
+            MessageLookupByLibrary.simpleMessage("Cancel Operation"),
         "caseClassify": MessageLookupByLibrary.simpleMessage("Case classify"),
         "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
         "caseExtension": MessageLookupByLibrary.simpleMessage("Case extension"),
@@ -81,6 +85,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Classified file"),
         "classifiedFileDesc": MessageLookupByLibrary.simpleMessage(
             "Create parent folders for files based on different types or modification times"),
+        "closeCheckMessage": MessageLookupByLibrary.simpleMessage(
+            "Keep minimizing when booting up"),
+        "closeTipButton1": MessageLookupByLibrary.simpleMessage("Yes"),
+        "closeTipButton2":
+            MessageLookupByLibrary.simpleMessage("Minimize to tray"),
+        "closeTipMessage": MessageLookupByLibrary.simpleMessage(
+            "This program is about to close. Do you want to continue?"),
+        "closeTipTitle": MessageLookupByLibrary.simpleMessage("Close Window"),
         "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
         "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
         "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
@@ -102,6 +114,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
+        "deleteTipButton1":
+            MessageLookupByLibrary.simpleMessage("I know. No more reminders"),
+        "deleteTipButton2": MessageLookupByLibrary.simpleMessage("I know"),
+        "deleteTipMessage": MessageLookupByLibrary.simpleMessage(
+            "This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window."),
         "detailTitle":
             MessageLookupByLibrary.simpleMessage("All File Extensions"),
         "digits": MessageLookupByLibrary.simpleMessage("digits"),
@@ -112,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
         "existsError": m1,
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exitApp": MessageLookupByLibrary.simpleMessage("Exit App"),
         "exitOperation": MessageLookupByLibrary.simpleMessage("Exit Operation"),
         "extension": MessageLookupByLibrary.simpleMessage("Type"),
         "extensionDesc":
@@ -212,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shortcutTip1":
             MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
         "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
+        "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
         "successDeleteInfo": MessageLookupByLibrary.simpleMessage(
             "Successfully deleted all selected files"),
@@ -234,13 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "text": MessageLookupByLibrary.simpleMessage("Text"),
         "tip":
             MessageLookupByLibrary.simpleMessage("Drag the File/Folder here"),
-        "tipButton1":
-            MessageLookupByLibrary.simpleMessage("I know. No more reminders"),
-        "tipButton2": MessageLookupByLibrary.simpleMessage("I know"),
         "tipImage": MessageLookupByLibrary.simpleMessage(
             "Drag the Picture File/Folder here"),
-        "tipMessage": MessageLookupByLibrary.simpleMessage(
-            "This operation will delete the file from the system and cannot be restored. To cancel please click on the area above the popup window."),
         "tipTitle": MessageLookupByLibrary.simpleMessage("Tip"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "topParentFolder":
