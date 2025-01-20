@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/core/advance.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/advance_menu.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/views/action_bar/advance/advance_list_item.dart';
@@ -40,7 +41,7 @@ class AdvanceList extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppNum.mediumG),
           child: Row(
             children: [
-              Text('共 ${list.length} 项', style: textStyle),
+              Text(S.current.totalInstructions(list.length), style: textStyle),
               const Spacer(),
               ClickIcon(
                 size: 18,

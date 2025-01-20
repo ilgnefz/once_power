@@ -64,7 +64,7 @@
   "organizeMenu": "OrganizeMenu",
   "organizeBtn": "Organize",
   "saveConfig": "Saved Configurations",
-  "currentTask": "CurrentTask",
+  "currentTask": "Task",
   "takeTime": "Time",
   "checkUpdate": "Check Version",
   "checking": "Checking",
@@ -203,5 +203,6 @@
   "advanceEmpty1": "No instructions have been added yet",
   "advanceEmpty2": "Click the",
   "advanceEmpty3": "\"Delete\", \"Add\", or \"Replace\"",
-  "advanceEmpty4": "buttons to add them"
+  "advanceEmpty4": "buttons to add them",
+  "totalInstructions": "Total {count}"
 }

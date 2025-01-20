@@ -700,10 +700,10 @@ class S {
     );
   }
 
-  /// `CurrentTask`
+  /// `Task`
   String get currentTask {
     return Intl.message(
-      'CurrentTask',
+      'Task',
       name: 'currentTask',
       desc: '',
       args: [],
@@ -2097,6 +2097,16 @@ class S {
       name: 'advanceEmpty4',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Total {count}`
+  String totalInstructions(Object count) {
+    return Intl.message(
+      'Total $count',
+      name: 'totalInstructions',
+      desc: '',
+      args: [count],
     );
   }
 }

@@ -64,7 +64,7 @@
   "organizeMenu": "整理菜单",
   "organizeBtn": "整理文件",
   "saveConfig": "保存配置",
-  "currentTask": "当前任务",
+  "currentTask": "任务",
   "takeTime": "用时",
   "checkUpdate": "检查更新",
   "checking": "检查中",
@@ -203,5 +203,6 @@
   "advanceEmpty1": "还没添加任何指令",
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
-  "advanceEmpty4": "按钮来添加"
+  "advanceEmpty4": "按钮来添加",
+  "totalInstructions": "共 {count} 条"
 }

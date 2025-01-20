@@ -21,6 +21,24 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Advance Menu Function
+
+Open and enter through the menu in the bottom left corner
+
+![04](doc/04.png)
+
+In the advanced menu, use the command to rename
+
+![05](doc/05.png)
+
+Adding different instructions and the order of instructions will cause different changes in the file name
+
+![23](doc/23.gif)
+
+We can store commonly used instructions as presets for future use
+
+![24](doc/24.gif)
+
 ## View mode has added the function of previewing videos
 
 ![22](doc/22.gif)

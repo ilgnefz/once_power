@@ -40,9 +40,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m9(total) => "选中的 ${total} 个已全部重命名成功";
 
-  static String m10(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+  static String m10(count) => "共 ${count} 条";
 
-  static String m11(total) => "选中的 ${total} 个已全部撤销操作";
+  static String m11(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+
+  static String m12(total) => "选中的 ${total} 个已全部撤销操作";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -92,7 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "convertLetters": MessageLookupByLibrary.simpleMessage("转换字母"),
         "createdDate": MessageLookupByLibrary.simpleMessage("创建日期"),
         "createdTime": MessageLookupByLibrary.simpleMessage("创建日期"),
-        "currentTask": MessageLookupByLibrary.simpleMessage("当前任务"),
+        "currentTask": MessageLookupByLibrary.simpleMessage("任务"),
         "date": MessageLookupByLibrary.simpleMessage("日期"),
         "dateAscending": MessageLookupByLibrary.simpleMessage("日期升序"),
         "dateDesc": MessageLookupByLibrary.simpleMessage("以日期命名"),
@@ -245,14 +247,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "today": MessageLookupByLibrary.simpleMessage("今天日期"),
         "toggleCase": MessageLookupByLibrary.simpleMessage("大小写切换"),
         "topParentFolder": MessageLookupByLibrary.simpleMessage("顶级父文件夹"),
+        "totalInstructions": m10,
         "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("获取剧集信息"),
         "typeAscending": MessageLookupByLibrary.simpleMessage("类型升序"),
         "typeDescending": MessageLookupByLibrary.simpleMessage("类型降序"),
         "undo": MessageLookupByLibrary.simpleMessage("撤销"),
         "undoFailed": MessageLookupByLibrary.simpleMessage("撤销重命名失败"),
-        "undoFailedNum": m10,
+        "undoFailedNum": m11,
         "undoSuccessful": MessageLookupByLibrary.simpleMessage("已成功撤销"),
-        "undoSuccessfulNum": m11,
+        "undoSuccessfulNum": m12,
         "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
         "uploadCSV": MessageLookupByLibrary.simpleMessage(
             "上传以\",\"分隔新旧名称的csv、txt文件或本软件生成的oplog文件"),
