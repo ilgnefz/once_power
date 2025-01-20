@@ -25,6 +25,7 @@ import 'package:once_power/widgets/content_bar/type_detail_panel.dart';
 import 'package:path/path.dart' as path;
 import 'package:pinyin/pinyin.dart';
 
+import 'advance.dart';
 import 'core.dart';
 
 // 处理通过拖动添加的文件或文件夹

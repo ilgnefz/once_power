@@ -81,18 +81,19 @@ class TypeDetailPanel extends ConsumerWidget {
               const SizedBox(height: gepM),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                spacing: gepM,
                 children: [
                   EasyTextBtn(removeUncheckLabel, onTap: removeUncheck),
-                  const SizedBox(width: gepM),
                   EasyTextBtn(removeCheckLabel, onTap: removeCheck),
-                  const SizedBox(width: gepM),
                   EasyTextBtn(
                     checkReserveLabel,
-                    onTap: ref.read(fileListProvider.notifier).checkReverse,
+                    onTap: () {
+                      ref.read(fileListProvider.notifier).checkReverse();
+                      updateName(ref);
+                      updateExtension(ref);
+                    },
                   ),
-                  const SizedBox(width: gepM),
                   EasyTextBtn(selectSwitchLabel, onTap: () => selectAll(ref)),
-                  const SizedBox(width: gepM),
                   EasyTextBtn(exitOperationLabel, onTap: quit),
                 ],
               ),

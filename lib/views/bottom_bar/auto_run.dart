@@ -43,10 +43,10 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
     trayManager.popUpContextMenu();
   }
 
-  @override
-  void onTrayIconRightMouseUp() {
-    print('right mouse up');
-  }
+  // @override
+  // void onTrayIconRightMouseUp() {
+  //
+  // }
 
   @override
   void onTrayMenuItemClick(MenuItem menuItem) async {
@@ -74,9 +74,7 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
 
     Future<void> toggleView() async {
       bool isEnabled = await launchAtStartup.isEnabled();
-      print('isEnabled: $isEnabled');
       bool cacheEnabled = ref.watch(autoRunProvider);
-      print('cacheEnabled: $cacheEnabled');
       if (isEnabled != cacheEnabled) {
         ref.read(autoRunProvider.notifier).update();
         return;

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 
+import 'package:once_power/model/advance_menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUtil {
@@ -69,5 +71,43 @@ class StorageUtil {
       locale = Locale(localeList[0], localeList[1]);
     }
     return locale;
+  }
+
+  // 存储高级规则
+  static Future<bool> setAdvanceList(String key, List<AdvanceMenuModel> value) {
+    List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取高级规则
+  static List<AdvanceMenuModel> getAdvanceList(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    List<AdvanceMenuModel> result = [];
+    if (list != null) {
+      result = list.map((e) {
+        return AdvanceMenuModel.fromJson(jsonDecode(e));
+      }).toList();
+    }
+    return result;
+  }
+
+  // 存储预设规则
+  static Future<bool> setAdvancePreset(String key, List<AdvancePreset> value) {
+    List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
+    print('存储的规则:');
+    print(list);
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取预设规则
+  static List<AdvancePreset> getAdvancePreset(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    List<AdvancePreset> result = [];
+    if (list != null) {
+      result = list.map((e) {
+        return AdvancePreset.fromJson(jsonDecode(e));
+      }).toList();
+    }
+    return result;
   }
 }

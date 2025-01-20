@@ -1,6 +1,7 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/widgets/common/one_line_text.dart';
 
 class NormalTile extends StatelessWidget {
   const NormalTile({
@@ -16,17 +17,11 @@ class NormalTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding:
-            padding ?? const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
-        child: Text(
-          label,
-          style: TextStyle(fontSize: fontSize).useSystemChineseFont(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
+    return OneLineText(
+      label,
+      padding:
+          padding ?? const EdgeInsets.symmetric(horizontal: AppNum.fileCardP),
+      style: TextStyle(fontSize: fontSize).useSystemChineseFont(),
     );
   }
 }

@@ -66,29 +66,6 @@ class CsvDataView extends ConsumerWidget {
                       flag: 'B',
                       text: list[index].nameB,
                     ),
-                    // CsvDataTile(text: list[index].nameA, index: null,),
-                    // CsvDataTile(text: list[index].nameB, index: null,),
-                    // Expanded(
-                    //   child: InkWell(
-                    //     child: Container(
-                    //       constraints: BoxConstraints(
-                    //         minHeight: AppNum.cSVDataMinH,
-                    //       ),
-                    //       padding: const EdgeInsets.symmetric(
-                    //         horizontal: 8,
-                    //         vertical: 4,
-                    //       ),
-                    //       width: double.infinity,
-                    //       alignment: Alignment.center,
-                    //       child: Text(
-                    //         list[index].nameB,
-                    //         textAlign: TextAlign.center,
-                    //         style: const TextStyle(fontSize: 13)
-                    //             .useSystemChineseFont(),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -99,7 +76,7 @@ class CsvDataView extends ConsumerWidget {
       bottomActions: const [
         AdditionalOptions(show: false),
         SizedBox(height: AppNum.mediumG),
-        ApplyMenu()
+        ApplyMenu(),
       ],
     );
   }

@@ -16,7 +16,7 @@ class NotificationMessage {
     }
   }
 
-  static show(NotificationType type, [int time = 5]) {
+  static show(NotificationType type, [int time = 5, int? errTime]) {
     final (color, icon) = showMark(type);
     if (type is SuccessNotification && type.infoList.isNotEmpty) time = 30;
     BotToast.showCustomNotification(
@@ -94,7 +94,11 @@ class NotificationMessage {
         );
       },
       wrapToastAnimation: notificationAnimation,
-      duration: type is SuccessNotification ? Duration(seconds: time) : null,
+      duration: type is SuccessNotification
+          ? Duration(seconds: time)
+          : errTime != null
+              ? Duration(seconds: errTime)
+              : null,
       align: Alignment.bottomRight,
     );
   }

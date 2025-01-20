@@ -6,15 +6,16 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widgets/common/easy_checkbox.dart';
 
-class EnableOrganizeBtn extends ConsumerStatefulWidget {
-  const EnableOrganizeBtn({super.key});
+class ExtraFunctionBtn extends ConsumerStatefulWidget {
+  const ExtraFunctionBtn({super.key});
 
   @override
-  ConsumerState<EnableOrganizeBtn> createState() => _EnableOrganizeState();
+  ConsumerState<ExtraFunctionBtn> createState() => _EnableOrganizeState();
 }
 
-class _EnableOrganizeState extends ConsumerState<EnableOrganizeBtn> {
+class _EnableOrganizeState extends ConsumerState<ExtraFunctionBtn> {
   Color color = Colors.grey;
 
   Color getColor(Set<WidgetState> states) {
@@ -33,12 +34,12 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganizeBtn> {
   }
 
   void onChange() {
-    ref.read(enableOrganizeProvider.notifier).update();
-    bool enable = ref.read(enableOrganizeProvider);
+    ref.read(extraFunctionProvider.notifier).update();
+    bool enable = ref.read(extraFunctionProvider);
     FunctionMode currentMode = ref.watch(currentModeProvider);
     FunctionMode mode = enable
-        ? FunctionMode.organize
-        : currentMode == FunctionMode.organize
+        ? FunctionMode.advance
+        : currentMode == FunctionMode.advance
             ? FunctionMode.replace
             : currentMode;
     ref.read(currentModeProvider.notifier).update(mode);
@@ -49,28 +50,14 @@ class _EnableOrganizeState extends ConsumerState<EnableOrganizeBtn> {
     return InkWell(
       onTap: onChange,
       onHover: toggleColor,
-      child: Row(
-        children: [
-          SizedBox(
-            height: AppNum.bottomBarH - 4,
-            child: FittedBox(
-              fit: BoxFit.fill,
-              child: Checkbox(
-                value: ref.watch(enableOrganizeProvider),
-                fillColor: WidgetStateProperty.resolveWith(getColor),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                side: BorderSide(color: color, width: 1),
-                onChanged: (v) => onChange(),
-              ),
-            ),
-          ),
-          Text(
-            S.of(context).organizeMenu,
-            style: TextStyle(fontSize: 13, color: color).useSystemChineseFont(),
-          ),
-        ],
+      child: EasyCheckbox(
+        S.of(context).advanceMenu,
+        height: AppNum.bottomBarH - 4,
+        checked: ref.watch(extraFunctionProvider),
+        style: TextStyle(fontSize: 13, color: color).useSystemChineseFont(),
+        fillColor: WidgetStateProperty.resolveWith(getColor),
+        borderColor: color,
+        onChanged: (v) => onChange(),
       ),
     );
   }

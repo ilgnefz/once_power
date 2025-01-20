@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/constants/images.dart';
-import 'package:once_power/constants/keys.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/model/file_info.dart';
@@ -11,7 +9,6 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/utils/utils.dart';
 import 'package:tray_manager/tray_manager.dart';
 
 import 'core.dart';

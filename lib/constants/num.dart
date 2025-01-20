@@ -20,19 +20,22 @@ class AppNum {
   // ActionBar
   static const double actionBarW = 320;
   static const double modeCardH = 40;
-  static const double modeCardM = 16;
+  // static const double modeCardM = 12;
+  static const double modeCardG = 8;
   static const double cSVDataTileH = 40;
   static const double cSVDataMinH = 36;
+  static const double presetMenuW = 144;
+  static const double presetMenuItemH = 32;
 
   // ContentBar
-  static const double fileCardP = 8;
+  static const double fileCardP = 6;
   static const double fileCardH = 40;
   static const double deleteBtnS = 40;
   static const double extensionW = 48;
   static const double imageW = 136;
   static const double tileFontSize = 13;
   static const double dropdownMenuP = 6;
-  static const double dropdownMenuW = 152;
+  static const double dropdownMenuW = 156;
   static const double dropdownMenuItemH = 36;
 
   // BottomBar

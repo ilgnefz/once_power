@@ -317,12 +317,12 @@ class AutoRun extends _$AutoRun {
 }
 
 @riverpod
-class EnableOrganize extends _$EnableOrganize {
+class ExtraFunction extends _$ExtraFunction {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseOrganize) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isUseExtraFunction) ?? false;
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isUseOrganize, state);
+    await StorageUtil.setBool(AppKeys.isUseExtraFunction, state);
   }
 }
 

@@ -28,7 +28,7 @@ class AppKeys {
   static String isAddFolder = 'isAddFolder';
   static String isSave = 'isSave';
   static String isUseRegedit = 'isUseRegedit';
-  static String isUseOrganize = 'isUseOrganize';
+  static String isUseExtraFunction = 'isUseExtraFunction';
   static String isSaveLog = 'isSaveLog';
   static String isViewMode = 'isViewMode';
   static String isAutoRun = 'isAutoRun';
@@ -42,6 +42,8 @@ class AppKeys {
 
   // List
   static String targetFolderList = 'targetFolderList';
+  static String advanceList = 'advanceList';
+  static String advancePresetList = 'advancePresetList';
 
   // enum
   static String functionMode = 'functionMode';

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';

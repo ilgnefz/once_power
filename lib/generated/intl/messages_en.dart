@@ -50,11 +50,30 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "addAfter": MessageLookupByLibrary.simpleMessage("After"),
+        "addBefore": MessageLookupByLibrary.simpleMessage("Before"),
         "addFile": MessageLookupByLibrary.simpleMessage("Add file"),
         "addFolder": MessageLookupByLibrary.simpleMessage("Add folder"),
+        "addInputHint": MessageLookupByLibrary.simpleMessage(
+            "Please enter the added content"),
+        "addPosition": MessageLookupByLibrary.simpleMessage("Add Position"),
+        "addPreset": MessageLookupByLibrary.simpleMessage("Add Preset"),
         "addSubfolder": MessageLookupByLibrary.simpleMessage(
             "Gets the subfolder of the folder"),
+        "addTitle": MessageLookupByLibrary.simpleMessage("Add Content"),
+        "addType": MessageLookupByLibrary.simpleMessage("Add Type"),
+        "advance": MessageLookupByLibrary.simpleMessage("Advance"),
+        "advanceEmpty1": MessageLookupByLibrary.simpleMessage(
+            "No rules have been added yet"),
+        "advanceEmpty2": MessageLookupByLibrary.simpleMessage("Click the"),
+        "advanceEmpty3": MessageLookupByLibrary.simpleMessage(
+            "\"Delete\", \"Add\", or \"Replace\""),
+        "advanceEmpty4":
+            MessageLookupByLibrary.simpleMessage("buttons to add them"),
+        "advanceMenu": MessageLookupByLibrary.simpleMessage("AdvanceMenu"),
         "after": MessageLookupByLibrary.simpleMessage("After"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "allExtension": MessageLookupByLibrary.simpleMessage("All Extension"),
         "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
         "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),
@@ -63,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Run OncePower when the computer starts up"),
         "before": MessageLookupByLibrary.simpleMessage("Before"),
         "between": MessageLookupByLibrary.simpleMessage("Between"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelOperation":
             MessageLookupByLibrary.simpleMessage("Cancel Operation"),
         "caseClassify": MessageLookupByLibrary.simpleMessage("Case classify"),
@@ -85,14 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Classified file"),
         "classifiedFileDesc": MessageLookupByLibrary.simpleMessage(
             "Create parent folders for files based on different types or modification times"),
-        "closeCheckMessage": MessageLookupByLibrary.simpleMessage(
-            "Keep minimizing when booting up"),
-        "closeTipButton1": MessageLookupByLibrary.simpleMessage("Yes"),
-        "closeTipButton2":
-            MessageLookupByLibrary.simpleMessage("Minimize to tray"),
-        "closeTipMessage": MessageLookupByLibrary.simpleMessage(
-            "This program is about to close. Do you want to continue?"),
-        "closeTipTitle": MessageLookupByLibrary.simpleMessage("Close Window"),
+        "convertLetters":
+            MessageLookupByLibrary.simpleMessage("Convert Letters"),
         "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
         "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
         "currentTask": MessageLookupByLibrary.simpleMessage("CurrentTask"),
@@ -104,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "decodeCSVError":
             MessageLookupByLibrary.simpleMessage("File parsing error occurred"),
         "defaultSort": MessageLookupByLibrary.simpleMessage("DefaultSort"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteChecked": MessageLookupByLibrary.simpleMessage("Delete checked"),
         "deleteEmptyFolder":
             MessageLookupByLibrary.simpleMessage("Delete empty"),
@@ -111,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Delete all empty folders under the selected folder"),
         "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
         "deleteInfo": m0,
+        "deleteInputHint": MessageLookupByLibrary.simpleMessage(
+            "Please enter the deleted content"),
         "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
         "deleteSuccessful":
             MessageLookupByLibrary.simpleMessage("Delete successful"),
@@ -119,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteTipButton2": MessageLookupByLibrary.simpleMessage("I know"),
         "deleteTipMessage": MessageLookupByLibrary.simpleMessage(
             "This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window."),
+        "deleteTitle": MessageLookupByLibrary.simpleMessage("Delete Content"),
         "detailTitle":
             MessageLookupByLibrary.simpleMessage("All File Extensions"),
         "digits": MessageLookupByLibrary.simpleMessage("digits"),
@@ -130,7 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "existsError": m1,
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exitApp": MessageLookupByLibrary.simpleMessage("Exit App"),
-        "exitOperation": MessageLookupByLibrary.simpleMessage("Exit Operation"),
+        "exitOperation": MessageLookupByLibrary.simpleMessage("Exit"),
         "extension": MessageLookupByLibrary.simpleMessage("Type"),
         "extensionDesc":
             MessageLookupByLibrary.simpleMessage("Modify file extensions"),
@@ -146,20 +164,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileExtensionDesc":
             MessageLookupByLibrary.simpleMessage("New file extension"),
         "fileName": MessageLookupByLibrary.simpleMessage("File name"),
+        "first": MessageLookupByLibrary.simpleMessage("First"),
         "folder": MessageLookupByLibrary.simpleMessage("Folder"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
         "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
+        "last": MessageLookupByLibrary.simpleMessage("Last"),
         "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
         "lengthDesc": MessageLookupByLibrary.simpleMessage(
             "Input length truncation (adding a space between two numbers to truncate the middle part)"),
+        "letters": MessageLookupByLibrary.simpleMessage("Letters"),
         "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
         "log": MessageLookupByLibrary.simpleMessage("Log"),
         "logDesc": MessageLookupByLibrary.simpleMessage(
             "The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory"),
+        "lowercase": MessageLookupByLibrary.simpleMessage("Lowercase"),
         "match": MessageLookupByLibrary.simpleMessage("Matching"),
         "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
         "matchLength":
             MessageLookupByLibrary.simpleMessage("Number or length string"),
+        "matchLocation": MessageLookupByLibrary.simpleMessage("Match Location"),
         "matchName": MessageLookupByLibrary.simpleMessage("Match name"),
         "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
         "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
@@ -175,10 +198,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("NameDescending"),
         "newName": MessageLookupByLibrary.simpleMessage("New name"),
         "newVersionInfo": m5,
+        "noConversion": MessageLookupByLibrary.simpleMessage("No"),
         "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(
             "Currently in the latest version"),
         "notExist": MessageLookupByLibrary.simpleMessage("not exist"),
         "notExistsError": m6,
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "openFolder": MessageLookupByLibrary.simpleMessage("Open Folder"),
         "openFolderDesc": MessageLookupByLibrary.simpleMessage(
             "Left mouse click on the file list to quickly open the folder where the file is located"),
@@ -200,6 +225,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
         "prefixContent":
             MessageLookupByLibrary.simpleMessage("Add prefix content"),
+        "preset": MessageLookupByLibrary.simpleMessage("Preset"),
+        "presetName": MessageLookupByLibrary.simpleMessage("Preset Name"),
+        "presetNameError": MessageLookupByLibrary.simpleMessage(
+            "The preset name cannot be empty"),
+        "presetNameErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Preset name error"),
+        "presetNameHint": MessageLookupByLibrary.simpleMessage(
+            "Please enter the preset name"),
         "regeditTip": MessageLookupByLibrary.simpleMessage(
             "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
@@ -211,6 +244,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "renameLogs": MessageLookupByLibrary.simpleMessage("rename logs"),
         "renameName": MessageLookupByLibrary.simpleMessage("Rename name"),
         "replace": MessageLookupByLibrary.simpleMessage("Replace"),
+        "replaceInputHint": MessageLookupByLibrary.simpleMessage(
+            "Please enter the matching content"),
+        "replaceInputHint2": MessageLookupByLibrary.simpleMessage(
+            "Please enter the replacement content"),
+        "replaceTitle": MessageLookupByLibrary.simpleMessage("Replace Content"),
         "reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
         "restartTip":
             MessageLookupByLibrary.simpleMessage("Restart takes effect"),
@@ -220,18 +258,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Save log (The default is in the logs folder under the software folder)"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "selectAllSwitch":
-            MessageLookupByLibrary.simpleMessage("Select All Switch"),
+            MessageLookupByLibrary.simpleMessage("Select Switch"),
         "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
         "selectReserve":
             MessageLookupByLibrary.simpleMessage("Reverse Selection"),
         "selectTargetFolder":
             MessageLookupByLibrary.simpleMessage("Target folder"),
         "serial": MessageLookupByLibrary.simpleMessage("Serial"),
+        "serialNumber": MessageLookupByLibrary.simpleMessage("Serial Number"),
         "shortcutTip1":
             MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
         "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
         "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
+        "startSequence": MessageLookupByLibrary.simpleMessage("start"),
         "successDeleteInfo": MessageLookupByLibrary.simpleMessage(
             "Successfully deleted all selected files"),
         "successEmptyInfo": MessageLookupByLibrary.simpleMessage(
@@ -256,7 +296,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tipImage": MessageLookupByLibrary.simpleMessage(
             "Drag the Picture File/Folder here"),
         "tipTitle": MessageLookupByLibrary.simpleMessage("Tip"),
+        "to": MessageLookupByLibrary.simpleMessage("to"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "toggleCase": MessageLookupByLibrary.simpleMessage("Toggle"),
         "topParentFolder":
             MessageLookupByLibrary.simpleMessage("Top parent folder"),
         "tvSeriesInfo":
@@ -275,11 +317,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadCSV": MessageLookupByLibrary.simpleMessage(
             "Upload CSV and TXT files with \",\" separating old and new names, or OPLOG file generated by OncePower"),
         "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
+        "uppercase": MessageLookupByLibrary.simpleMessage("Uppercase"),
         "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
         "useTimeClassification": MessageLookupByLibrary.simpleMessage(
             "Classify using file modification time"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),
+        "withT": MessageLookupByLibrary.simpleMessage("with"),
         "zip": MessageLookupByLibrary.simpleMessage("Zip")
       };
 }

@@ -14,7 +14,9 @@ import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 
 class ApplyBtn extends ConsumerWidget {
-  const ApplyBtn({super.key});
+  const ApplyBtn({super.key, this.onTap});
+
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +54,7 @@ class ApplyBtn extends ConsumerWidget {
     }
 
     return ElevatedButton(
-      onPressed: fileList.isEmpty ? null : applyRename,
+      onPressed: fileList.isEmpty ? null : onTap ?? applyRename,
       child: Text(S.of(context).applyChange),
     );
   }

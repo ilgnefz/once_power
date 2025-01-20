@@ -14,8 +14,12 @@ class ActionTabBar extends ConsumerWidget {
     return Container(
       width: AppNum.actionBarW,
       height: AppNum.modeCardH,
+      padding: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
       color: Colors.white,
       child: Row(
+        spacing: ref.watch(extraFunctionProvider)
+            ? AppNum.modeCardG
+            : AppNum.modeCardG / 2,
         children: [
           FunctionModeTab(
             label: S.of(context).replace,
@@ -23,11 +27,15 @@ class ActionTabBar extends ConsumerWidget {
           ),
           FunctionModeTab(
               label: S.of(context).reserve, mode: FunctionMode.reserve),
-          if (ref.watch(enableOrganizeProvider))
+          if (ref.watch(extraFunctionProvider))
             FunctionModeTab(
-              label: S.of(context).organize,
-              mode: FunctionMode.organize,
+              label: S.of(context).advance,
+              mode: FunctionMode.advance,
             ),
+          FunctionModeTab(
+            label: S.of(context).organize,
+            mode: FunctionMode.organize,
+          ),
         ],
       ),
     );

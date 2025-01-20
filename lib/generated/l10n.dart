@@ -1380,20 +1380,20 @@ class S {
     );
   }
 
-  /// `Select All Switch`
+  /// `Select Switch`
   String get selectAllSwitch {
     return Intl.message(
-      'Select All Switch',
+      'Select Switch',
       name: 'selectAllSwitch',
       desc: '',
       args: [],
     );
   }
 
-  /// `Exit Operation`
+  /// `Exit`
   String get exitOperation {
     return Intl.message(
-      'Exit Operation',
+      'Exit',
       name: 'exitOperation',
       desc: '',
       args: [],
@@ -1690,51 +1690,411 @@ class S {
     );
   }
 
-  /// `Close Window`
-  String get closeTipTitle {
+  /// `Advance`
+  String get advance {
     return Intl.message(
-      'Close Window',
-      name: 'closeTipTitle',
+      'Advance',
+      name: 'advance',
       desc: '',
       args: [],
     );
   }
 
-  /// `This program is about to close. Do you want to continue?`
-  String get closeTipMessage {
+  /// `AdvanceMenu`
+  String get advanceMenu {
     return Intl.message(
-      'This program is about to close. Do you want to continue?',
-      name: 'closeTipMessage',
+      'AdvanceMenu',
+      name: 'advanceMenu',
       desc: '',
       args: [],
     );
   }
 
-  /// `Keep minimizing when booting up`
-  String get closeCheckMessage {
+  /// `Delete`
+  String get delete {
     return Intl.message(
-      'Keep minimizing when booting up',
-      name: 'closeCheckMessage',
+      'Delete',
+      name: 'delete',
       desc: '',
       args: [],
     );
   }
 
-  /// `Yes`
-  String get closeTipButton1 {
+  /// `Add`
+  String get add {
     return Intl.message(
-      'Yes',
-      name: 'closeTipButton1',
+      'Add',
+      name: 'add',
       desc: '',
       args: [],
     );
   }
 
-  /// `Minimize to tray`
-  String get closeTipButton2 {
+  /// `Preset`
+  String get preset {
     return Intl.message(
-      'Minimize to tray',
-      name: 'closeTipButton2',
+      'Preset',
+      name: 'preset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Preset`
+  String get addPreset {
+    return Intl.message(
+      'Add Preset',
+      name: 'addPreset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First`
+  String get first {
+    return Intl.message(
+      'First',
+      name: 'first',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last`
+  String get last {
+    return Intl.message(
+      'Last',
+      name: 'last',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Serial Number`
+  String get serialNumber {
+    return Intl.message(
+      'Serial Number',
+      name: 'serialNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Before`
+  String get addBefore {
+    return Intl.message(
+      'Before',
+      name: 'addBefore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After`
+  String get addAfter {
+    return Intl.message(
+      'After',
+      name: 'addAfter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Content`
+  String get deleteTitle {
+    return Intl.message(
+      'Delete Content',
+      name: 'deleteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Content`
+  String get addTitle {
+    return Intl.message(
+      'Add Content',
+      name: 'addTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replace Content`
+  String get replaceTitle {
+    return Intl.message(
+      'Replace Content',
+      name: 'replaceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Match Location`
+  String get matchLocation {
+    return Intl.message(
+      'Match Location',
+      name: 'matchLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Type`
+  String get addType {
+    return Intl.message(
+      'Add Type',
+      name: 'addType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Position`
+  String get addPosition {
+    return Intl.message(
+      'Add Position',
+      name: 'addPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the added content`
+  String get addInputHint {
+    return Intl.message(
+      'Please enter the added content',
+      name: 'addInputHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the deleted content`
+  String get deleteInputHint {
+    return Intl.message(
+      'Please enter the deleted content',
+      name: 'deleteInputHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the matching content`
+  String get replaceInputHint {
+    return Intl.message(
+      'Please enter the matching content',
+      name: 'replaceInputHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the replacement content`
+  String get replaceInputHint2 {
+    return Intl.message(
+      'Please enter the replacement content',
+      name: 'replaceInputHint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with`
+  String get withT {
+    return Intl.message(
+      'with',
+      name: 'withT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to`
+  String get to {
+    return Intl.message(
+      'to',
+      name: 'to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `start`
+  String get startSequence {
+    return Intl.message(
+      'start',
+      name: 'startSequence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preset Name`
+  String get presetName {
+    return Intl.message(
+      'Preset Name',
+      name: 'presetName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the preset name`
+  String get presetNameHint {
+    return Intl.message(
+      'Please enter the preset name',
+      name: 'presetNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The preset name cannot be empty`
+  String get presetNameError {
+    return Intl.message(
+      'The preset name cannot be empty',
+      name: 'presetNameError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preset name error`
+  String get presetNameErrorTitle {
+    return Intl.message(
+      'Preset name error',
+      name: 'presetNameErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Convert Letters`
+  String get convertLetters {
+    return Intl.message(
+      'Convert Letters',
+      name: 'convertLetters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uppercase`
+  String get uppercase {
+    return Intl.message(
+      'Uppercase',
+      name: 'uppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lowercase`
+  String get lowercase {
+    return Intl.message(
+      'Lowercase',
+      name: 'lowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toggle`
+  String get toggleCase {
+    return Intl.message(
+      'Toggle',
+      name: 'toggleCase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get noConversion {
+    return Intl.message(
+      'No',
+      name: 'noConversion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Letters`
+  String get letters {
+    return Intl.message(
+      'Letters',
+      name: 'letters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No rules have been added yet`
+  String get advanceEmpty1 {
+    return Intl.message(
+      'No rules have been added yet',
+      name: 'advanceEmpty1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click the`
+  String get advanceEmpty2 {
+    return Intl.message(
+      'Click the',
+      name: 'advanceEmpty2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `"Delete", "Add", or "Replace"`
+  String get advanceEmpty3 {
+    return Intl.message(
+      '"Delete", "Add", or "Replace"',
+      name: 'advanceEmpty3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `buttons to add them`
+  String get advanceEmpty4 {
+    return Intl.message(
+      'buttons to add them',
+      name: 'advanceEmpty4',
       desc: '',
       args: [],
     );

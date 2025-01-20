@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/generated/l10n.dart';
 
-enum FunctionMode { replace, reserve, organize }
+enum FunctionMode { replace, reserve, advance, organize }
 
 extension FunctionModeExtension on FunctionMode {
   bool get isOrganize => this == FunctionMode.organize;
   bool get isReserve => this == FunctionMode.reserve;
+  bool get isAdvance => this == FunctionMode.advance;
   bool get isReplace => this == FunctionMode.replace;
 }
 
@@ -181,4 +183,103 @@ enum LanguageType {
 
   final String value;
   const LanguageType(this.value);
+}
+
+enum AdvanceType { delete, add, replace }
+
+extension AdvanceTypeExtension on AdvanceType {
+  String get value {
+    switch (this) {
+      case AdvanceType.delete:
+        return S.current.delete;
+      case AdvanceType.add:
+        return S.current.add;
+      case AdvanceType.replace:
+        return S.current.replace;
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case AdvanceType.delete:
+        return Colors.red;
+      case AdvanceType.add:
+        return Colors.green;
+      case AdvanceType.replace:
+        return Colors.blue;
+    }
+  }
+
+  bool get isDelete => this == AdvanceType.delete;
+  bool get isAdd => this == AdvanceType.add;
+  bool get isReplace => this == AdvanceType.replace;
+}
+
+enum MatchLocation { first, last, all }
+
+extension MatchLocationExtension on MatchLocation {
+  String get value {
+    switch (this) {
+      case MatchLocation.first:
+        return S.current.first;
+      case MatchLocation.last:
+        return S.current.last;
+      case MatchLocation.all:
+        return S.current.all;
+    }
+  }
+}
+
+enum AddType { text, serialNumber }
+
+extension AddTypeExtension on AddType {
+  String get value {
+    switch (this) {
+      case AddType.text:
+        return S.current.text;
+      case AddType.serialNumber:
+        return S.current.serialNumber;
+    }
+  }
+
+  bool get isText => this == AddType.text;
+  bool get isSerialNumber => this == AddType.serialNumber;
+}
+
+enum AddPosition { before, after }
+
+extension AddPositionExtension on AddPosition {
+  String get value {
+    switch (this) {
+      case AddPosition.before:
+        return S.current.addBefore;
+      case AddPosition.after:
+        return S.current.addAfter;
+    }
+  }
+
+  bool get isBefore => this == AddPosition.before;
+  bool get isAfter => this == AddPosition.after;
+}
+
+enum CaseType { noConversion, uppercase, lowercase, toggleCase }
+
+extension CaseTypeExtension on CaseType {
+  String get value {
+    switch (this) {
+      case CaseType.uppercase:
+        return S.current.uppercase;
+      case CaseType.lowercase:
+        return S.current.lowercase;
+      case CaseType.toggleCase:
+        return S.current.toggleCase;
+      case CaseType.noConversion:
+        return S.current.noConversion;
+    }
+  }
+
+  bool get isNoConversion => this == CaseType.noConversion;
+  bool get isUppercase => this == CaseType.uppercase;
+  bool get isLowercase => this == CaseType.lowercase;
+  bool get isToggleCase => this == CaseType.toggleCase;
 }

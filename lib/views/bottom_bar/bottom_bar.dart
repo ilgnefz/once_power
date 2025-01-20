@@ -9,7 +9,7 @@ import 'package:once_power/views/bottom_bar/regedit.dart';
 import 'package:once_power/views/bottom_bar/repo_url.dart';
 import 'package:once_power/views/bottom_bar/task_info.dart';
 
-import 'enable_organize.dart';
+import 'extra_function.dart';
 import 'language_toggle.dart';
 import 'log.dart';
 import 'save.dart';
@@ -48,7 +48,7 @@ class BottomBar extends StatelessWidget {
           SizedBox(width: _smallG),
           const UploadCSVBtn(),
           SizedBox(width: _smallG),
-          const EnableOrganizeBtn(),
+          const ExtraFunctionBtn(),
           SizedBox(width: _mediumG),
           const LanguageToggleBtn(),
           SizedBox(width: _mediumG),

@@ -17,6 +17,8 @@ import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 
+import 'advance.dart';
+
 void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   List<FileInfo> files = ref.read(fileListProvider);
   String inputExt = ref.watch(extensionControllerProvider).text;
@@ -121,7 +123,7 @@ int generateMapIndex(
   return index;
 }
 
-void updateName(WidgetRef ref) {
+void normalUpdateName(WidgetRef ref) {
   if (ref.watch(cSVDataProvider).isNotEmpty) return cSVDataRename(ref);
   List<FileInfo> files = ref.read(sortListProvider);
   String prefixIndexText = ref.watch(prefixStartControllerProvider).text;
@@ -398,4 +400,12 @@ void cSVDataRename(WidgetRef ref) {
 void resetExtension(WidgetRef ref) {
   ref.read(modifyExtensionProvider.notifier).close();
   ref.read(extensionControllerProvider).clear();
+}
+
+void updateName(WidgetRef ref) {
+  if (ref.watch(currentModeProvider).isAdvance) {
+    advanceUpdateName(ref);
+  } else {
+    normalUpdateName(ref);
+  }
 }

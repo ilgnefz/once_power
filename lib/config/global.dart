@@ -73,6 +73,8 @@ void saveOrNo() {
   StorageUtil.remove(AppKeys.modifyCache);
   if (!save) {
     List<String> appKeyList = [
+      AppKeys.advanceList,
+      // AppKeys.advancePresetList,
       AppKeys.dateLength,
       AppKeys.dateType,
       AppKeys.functionMode,

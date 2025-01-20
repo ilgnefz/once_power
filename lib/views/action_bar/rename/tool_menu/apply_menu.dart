@@ -8,7 +8,9 @@ import 'package:once_power/views/action_bar/rename/tool_menu/apply_btn.dart';
 import 'package:once_power/widgets/common/easy_text_btn.dart';
 
 class ApplyMenu extends ConsumerWidget {
-  const ApplyMenu({super.key});
+  const ApplyMenu({super.key, this.onTap});
+
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +30,7 @@ class ApplyMenu extends ConsumerWidget {
         const SizedBox(width: AppNum.smallG),
         EasyTextBtn(S.of(context).selectFolder, onTap: addFolder),
         const Spacer(),
-        const ApplyBtn(),
+        ApplyBtn(onTap: onTap),
       ],
     );
   }

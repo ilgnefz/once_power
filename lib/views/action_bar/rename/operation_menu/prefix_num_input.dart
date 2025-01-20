@@ -69,7 +69,7 @@ class PrefixNumInput extends ConsumerWidget {
               onChanged: lengthNumInput,
             ),
           ),
-          const SizedBox(width: 8.0),
+          const SizedBox(width: AppNum.mediumG),
           Expanded(
             child: DigitInput(
               controller: startController,

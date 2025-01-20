@@ -8,6 +8,7 @@ import 'package:once_power/views/action_bar/action_tab_bar.dart';
 import 'package:once_power/views/action_bar/organize/organize.dart';
 import 'package:once_power/views/action_bar/rename/rename.dart';
 
+import 'advance/advance.dart';
 import 'csv_data/csv_data.dart';
 import 'csv_data/csv_data_title.dart';
 
@@ -34,11 +35,14 @@ class ActionBar extends ConsumerWidget {
         Expanded(
           child: Container(
             width: AppNum.actionBarW,
-            padding: padding,
+            padding: ref.watch(currentModeProvider).isAdvance
+                ? EdgeInsets.zero
+                : padding,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
                 FunctionMode mode = ref.watch(currentModeProvider);
                 if (mode.isOrganize) return const OrganizeAction();
+                if (mode.isAdvance) return const AdvanceAction();
                 return renameAction;
               },
             ),

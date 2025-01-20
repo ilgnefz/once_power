@@ -462,22 +462,22 @@ final autoRunProvider = AutoDisposeNotifierProvider<AutoRun, bool>.internal(
 );
 
 typedef _$AutoRun = AutoDisposeNotifier<bool>;
-String _$enableOrganizeHash() => r'9250ecf0fb8247ac48ca1c7b3796da1ba25ffe42';
+String _$extraFunctionHash() => r'9571363f916ca73e0afd30637ad22507ec8ed789';
 
-/// See also [EnableOrganize].
-@ProviderFor(EnableOrganize)
-final enableOrganizeProvider =
-    AutoDisposeNotifierProvider<EnableOrganize, bool>.internal(
-  EnableOrganize.new,
-  name: r'enableOrganizeProvider',
+/// See also [ExtraFunction].
+@ProviderFor(ExtraFunction)
+final extraFunctionProvider =
+    AutoDisposeNotifierProvider<ExtraFunction, bool>.internal(
+  ExtraFunction.new,
+  name: r'extraFunctionProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$enableOrganizeHash,
+      : _$extraFunctionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EnableOrganize = AutoDisposeNotifier<bool>;
+typedef _$ExtraFunction = AutoDisposeNotifier<bool>;
 String _$showTipHash() => r'b9c99132e9d07266affbfb34efa92e4679d77410';
 
 /// See also [ShowTip].

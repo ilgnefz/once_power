@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/advance.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';
@@ -49,7 +50,9 @@ class FunctionModeTab extends ConsumerWidget {
         onTap: toggleMode,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          margin: const EdgeInsets.symmetric(horizontal: AppNum.modeCardM),
+          // margin: EdgeInsets.symmetric(
+          //   horizontal: AppNum.modeCardM
+          // ),
           decoration: BoxDecoration(border: border),
           alignment: Alignment.center,
           child: Text(label, style: style),

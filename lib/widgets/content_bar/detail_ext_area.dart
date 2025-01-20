@@ -2,6 +2,7 @@ import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/core/rename.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 
@@ -52,8 +53,11 @@ class DetailExtArea extends ConsumerWidget {
               v,
               checked: ref.watch(selectedExtensionProvider(v)),
               mainAxisSize: MainAxisSize.min,
-              onChanged: (b) =>
-                  ref.read(fileListProvider.notifier).checkExtension(v),
+              onChanged: (b) {
+                ref.read(fileListProvider.notifier).checkExtension(v);
+                updateName(ref);
+                updateExtension(ref);
+              },
             );
           }).toList(),
         ),

@@ -37,6 +37,7 @@ class FilterFileBtn extends ConsumerWidget {
           hoverColor: Colors.transparent,
           child: Container(
             width: double.infinity,
+            // color: Colors.green,
             padding: const EdgeInsets.only(left: AppNum.fileCardP),
             child: Text(label, style: TextStyle(color: color)),
           ),
@@ -58,10 +59,16 @@ class FilterFileBtn extends ConsumerWidget {
                 setState(() {});
               }
 
-              return EasyCheckbox(
-                e.value,
-                checked: isCheck(ref, e),
-                onChanged: toggleCheck,
+              return GestureDetector(
+                onTap: () => toggleCheck(false),
+                child: Container(
+                  color: Colors.transparent,
+                  child: EasyCheckbox(
+                    e.value,
+                    checked: isCheck(ref, e),
+                    onChanged: toggleCheck,
+                  ),
+                ),
               );
             },
           ),
@@ -83,12 +90,22 @@ class FilterFileBtn extends ConsumerWidget {
           easyDropdownItem(removeUnselectedLabel, Colors.red, removeUnchecked),
           easyDropdownItem(removeSelectedLabel, Colors.red, removeChecked),
           ...items,
-          if (items.isNotEmpty)
+          if (items.isNotEmpty) ...[
             easyDropdownItem(
               allExtLabel,
               Theme.of(context).primaryColor,
               () => showAllType(context, true),
             ),
+            easyDropdownItem(
+              S.of(context).selectReserve,
+              Theme.of(context).primaryColor,
+              () {
+                ref.read(fileListProvider.notifier).checkReverse();
+                updateName(ref);
+                updateExtension(ref);
+              },
+            ),
+          ]
         ],
         onChanged: (v) {},
         dropdownStyleData: DropdownStyleData(

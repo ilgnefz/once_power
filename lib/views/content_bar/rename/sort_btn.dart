@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/core/core.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
@@ -18,6 +19,7 @@ class SortBtn extends ConsumerWidget {
     void toggleSort(SortType type) {
       ref.read(fileSortTypeProvider.notifier).update(type);
       Navigator.pop(context);
+      updateName(ref);
     }
 
     List<DropdownMenuItem> items = SortType.values.map(
