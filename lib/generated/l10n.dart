@@ -2060,10 +2060,10 @@ class S {
     );
   }
 
-  /// `No rules have been added yet`
+  /// `No instructions have been added yet`
   String get advanceEmpty1 {
     return Intl.message(
-      'No rules have been added yet',
+      'No instructions have been added yet',
       name: 'advanceEmpty1',
       desc: '',
       args: [],

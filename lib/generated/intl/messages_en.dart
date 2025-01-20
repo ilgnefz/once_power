@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addType": MessageLookupByLibrary.simpleMessage("Add Type"),
         "advance": MessageLookupByLibrary.simpleMessage("Advance"),
         "advanceEmpty1": MessageLookupByLibrary.simpleMessage(
-            "No rules have been added yet"),
+            "No instructions have been added yet"),
         "advanceEmpty2": MessageLookupByLibrary.simpleMessage("Click the"),
         "advanceEmpty3": MessageLookupByLibrary.simpleMessage(
             "\"Delete\", \"Add\", or \"Replace\""),

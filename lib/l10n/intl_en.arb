@@ -200,7 +200,7 @@
   "toggleCase": "Toggle",
   "noConversion": "No",
   "letters": "Letters",
-  "advanceEmpty1": "No rules have been added yet",
+  "advanceEmpty1": "No instructions have been added yet",
   "advanceEmpty2": "Click the",
   "advanceEmpty3": "\"Delete\", \"Add\", or \"Replace\"",
   "advanceEmpty4": "buttons to add them"

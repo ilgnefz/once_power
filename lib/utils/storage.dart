@@ -94,8 +94,6 @@ class StorageUtil {
   // 存储预设规则
   static Future<bool> setAdvancePreset(String key, List<AdvancePreset> value) {
     List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
-    print('存储的规则:');
-    print(list);
     return _prefs.setStringList(key, list);
   }
 

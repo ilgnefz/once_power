@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/advance.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/model/enum.dart';
 import 'package:once_power/provider/input.dart';

@@ -16,7 +16,6 @@ import 'package:once_power/views/action_bar/advance/dialog/common_base_input.dar
 import 'package:once_power/views/action_bar/advance/dialog/common_dialog.dart';
 import 'package:once_power/views/action_bar/advance/dialog/common_location_group.dart';
 import 'package:once_power/views/action_bar/advance/dialog/num_input_group.dart';
-import 'package:once_power/widgets/common/base_input.dart';
 import 'package:once_power/widgets/common/notification.dart';
 
 void deleteText(BuildContext context, WidgetRef ref,

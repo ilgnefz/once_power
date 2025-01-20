@@ -200,7 +200,7 @@
   "toggleCase": "大小写切换",
   "noConversion": "不转换",
   "letters": "字母",
-  "advanceEmpty1": "还没添加任何规则",
+  "advanceEmpty1": "还没添加任何指令",
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
   "advanceEmpty4": "按钮来添加"

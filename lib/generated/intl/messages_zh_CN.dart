@@ -58,7 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addTitle": MessageLookupByLibrary.simpleMessage("添加内容"),
         "addType": MessageLookupByLibrary.simpleMessage("添加类型"),
         "advance": MessageLookupByLibrary.simpleMessage("高级"),
-        "advanceEmpty1": MessageLookupByLibrary.simpleMessage("还没添加任何规则"),
+        "advanceEmpty1": MessageLookupByLibrary.simpleMessage("还没添加任何指令"),
         "advanceEmpty2": MessageLookupByLibrary.simpleMessage("点击下方的"),
         "advanceEmpty3":
             MessageLookupByLibrary.simpleMessage("\"删除\"、\"添加\"、\"替换\""),
