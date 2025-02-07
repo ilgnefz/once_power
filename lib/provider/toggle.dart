@@ -70,6 +70,14 @@ class CurrentDateType extends _$CurrentDateType {
   }
 }
 
+@riverpod
+class CurrentReplaceMode extends _$CurrentReplaceMode {
+  @override
+  ReplaceMode build() => ReplaceMode.normal;
+
+  void update(ReplaceMode mode) => state = mode;
+}
+
 // ContentBar Start
 
 @riverpod

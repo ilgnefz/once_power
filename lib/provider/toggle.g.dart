@@ -88,6 +88,23 @@ final currentDateTypeProvider =
 );
 
 typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
+String _$currentReplaceModeHash() =>
+    r'30b59ba29b767b827ecaa5178ffe796ea8266d90';
+
+/// See also [CurrentReplaceMode].
+@ProviderFor(CurrentReplaceMode)
+final currentReplaceModeProvider =
+    AutoDisposeNotifierProvider<CurrentReplaceMode, ReplaceMode>.internal(
+  CurrentReplaceMode.new,
+  name: r'currentReplaceModeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentReplaceModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CurrentReplaceMode = AutoDisposeNotifier<ReplaceMode>;
 String _$fileSortTypeHash() => r'004bb4e8d65374df0807f4a06a990ef44a87d278';
 
 /// See also [FileSortType].

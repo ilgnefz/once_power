@@ -56,11 +56,12 @@ abstract class AdvanceMenuModel {
 
 class AdvanceMenuDelete extends AdvanceMenuModel {
   final MatchLocation matchLocation;
-
+  final List<DeleteType> deleteTypes;
   AdvanceMenuDelete({
     required super.id,
     required String super.value,
     required this.matchLocation,
+    required this.deleteTypes,
   }) : super(type: AdvanceType.delete);
 
   factory AdvanceMenuDelete.fromJson(Map<String, dynamic> json) =>
@@ -68,6 +69,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         id: json["id"],
         value: json["value"],
         matchLocation: MatchLocation.values[json["matchLocation"]],
+        deleteTypes: List<DeleteType>.from(
+            json["deleteTypes"].map((x) => DeleteType.values[x])),
       );
 
   @override
@@ -76,11 +79,12 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         "id": id,
         "value": value,
         "matchLocation": matchLocation.index,
+        "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuDelete{id: $id, value: $value, matchLocation: $matchLocation}';
+    return 'AdvanceMenuDelete{id: $id, value: $value, matchLocation: $matchLocation, deleteTypes: $deleteTypes}';
   }
 }
 
@@ -126,11 +130,13 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 }
 
 class AdvanceMenuReplace extends AdvanceMenuModel {
+  final ReplaceMode replaceMode;
   final MatchLocation matchLocation;
   final CaseType caseType;
   AdvanceMenuReplace({
     required super.id,
     required List<String> super.value,
+    required this.replaceMode,
     required this.matchLocation,
     required this.caseType,
   }) : super(type: AdvanceType.replace);
@@ -139,6 +145,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       AdvanceMenuReplace(
         id: json["id"],
         value: List<String>.from(json["value"].map((x) => x)),
+        replaceMode: ReplaceMode.values[json["replaceMode"]],
         matchLocation: MatchLocation.values[json["matchLocation"]],
         caseType: CaseType.values[json["caseType"]],
       );
@@ -148,12 +155,13 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "type": type.index,
         "id": id,
         "value": List<String>.from(value.map((x) => x)),
+        "replaceMode": replaceMode.index,
         "matchLocation": matchLocation.index,
         "caseType": caseType.index,
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuReplace{id: $id, value: $value, matchLocation: $matchLocation, caseType: $caseType}';
+    return 'AdvanceMenuReplace{id: $id, value: $value, replaceMode: $replaceMode, matchLocation: $matchLocation, caseType: $caseType}';
   }
 }

@@ -283,3 +283,47 @@ extension CaseTypeExtension on CaseType {
   bool get isLowercase => this == CaseType.lowercase;
   bool get isToggleCase => this == CaseType.toggleCase;
 }
+
+enum ReplaceMode { normal, format }
+
+extension ReplaceModeExtension on ReplaceMode {
+  String get value {
+    switch (this) {
+      case ReplaceMode.normal:
+        return S.current.normal;
+      case ReplaceMode.format:
+        return S.current.format;
+    }
+  }
+
+  bool get isNormal => this == ReplaceMode.normal;
+  bool get isFormat => this == ReplaceMode.format;
+}
+
+enum DeleteType {
+  digit,
+  capitalLetter,
+  lowercaseLetters,
+  nonLetter,
+  punctuation,
+  space
+}
+
+extension DeleteTypeExtension on DeleteType {
+  String get value {
+    switch (this) {
+      case DeleteType.digit:
+        return S.current.digit;
+      case DeleteType.capitalLetter:
+        return S.current.capitalLetter;
+      case DeleteType.lowercaseLetters:
+        return S.current.lowercaseLetters;
+      case DeleteType.nonLetter:
+        return S.current.nonLetter;
+      case DeleteType.punctuation:
+        return S.current.punctuation;
+      case DeleteType.space:
+        return S.current.space;
+    }
+  }
+}

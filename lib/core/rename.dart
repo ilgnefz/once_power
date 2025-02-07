@@ -17,8 +17,6 @@ import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/notification.dart';
 import 'package:path/path.dart' as path;
 
-import 'advance.dart';
-
 void updateExtension(WidgetRef ref, [bool isUndo = false]) {
   List<FileInfo> files = ref.read(fileListProvider);
   String inputExt = ref.watch(extensionControllerProvider).text;

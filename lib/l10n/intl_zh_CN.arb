@@ -204,5 +204,21 @@
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
   "advanceEmpty4": "按钮来添加",
-  "totalInstructions": "共 {count} 条"
+  "totalInstructions": "共 {count} 条",
+  "replaceMode": "替换模式",
+  "formatDigit": "请输入名称长度",
+  "completeContent": "请输入补全内容",
+  "normal": "普通",
+  "format": "格式化",
+  "formatDesc1": "名称长",
+  "formatDesc2": "用",
+  "formatDesc3": "补全",
+  "deleteType": "删除类型",
+  "capitalLetter": "大写字母",
+  "lowercaseLetters": "小写字母",
+  "nonLetter": "非字母",
+  "digit": "数字",
+  "punctuation": "标点符号",
+  "space": "空格",
+  "delimiter": "、"
 }

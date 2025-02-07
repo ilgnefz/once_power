@@ -4,6 +4,7 @@ import 'package:once_power/constants/constants.dart';
 import 'package:once_power/core/file.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/views/content_bar/rename/filter_file_btn.dart';
 import 'package:once_power/views/content_bar/rename/sort_btn.dart';
 import 'package:once_power/widgets/content_bar/check_tile.dart';
 
@@ -29,15 +30,19 @@ class ViewModeTitleBar extends ConsumerWidget {
           width: AppNum.extensionW,
           child: Center(child: SortBtn()),
         ),
-        SizedBox(
-          width: AppNum.deleteBtnS,
-          child: Center(
-            child: IconButton(
-              onPressed: () => showAllType(context),
-              color: AppColors.icon,
-              icon: const Icon(Icons.filter_alt_rounded),
-            ),
-          ),
+        // SizedBox(
+        //   width: AppNum.deleteBtnS,
+        //   child: Center(
+        //     child: IconButton(
+        //       onPressed: () => showAllType(context),
+        //       color: AppColors.icon,
+        //       icon: const Icon(Icons.filter_alt_rounded),
+        //     ),
+        //   ),
+        // ),
+        const SizedBox(
+          width: AppNum.extensionW,
+          child: Center(child: FilterFileBtn()),
         ),
         SizedBox(
           width: AppNum.deleteBtnS,

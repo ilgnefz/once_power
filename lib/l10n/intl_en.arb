@@ -204,5 +204,21 @@
   "advanceEmpty2": "Click the",
   "advanceEmpty3": "\"Delete\", \"Add\", or \"Replace\"",
   "advanceEmpty4": "buttons to add them",
-  "totalInstructions": "Total {count}"
+  "totalInstructions": "Total {count}",
+  "replaceMode": "Replace Mode",
+  "formatDigit": "Please enter the length of the name",
+  "completeContent": "Please input the completed content",
+  "normal": "Normal",
+  "format": "Format",
+  "formatDesc1": "Name length",
+  "formatDesc2": "is filled with",
+  "formatDesc3": "",
+  "deleteType": "Delete Type",
+  "capitalLetter": "CapitalLetter",
+  "lowercaseLetters": "LowercaseLetters",
+  "nonLetter": "NonLetter",
+  "digit": "Digit",
+  "punctuation": "Punctuation",
+  "space": "Space",
+  "delimiter": ", "
 }

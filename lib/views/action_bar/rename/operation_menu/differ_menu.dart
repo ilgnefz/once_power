@@ -14,9 +14,13 @@ class DifferMenu extends ConsumerWidget {
     final mode = ref.watch(currentModeProvider);
     // 保留模式时也应该出现修改输入框
     if (mode == FunctionMode.reserve) {
-      final currentReserveType = ref.watch(currentReserveTypeProvider);
       bool enable =
           !ref.watch(matchClearProvider) && !ref.watch(modifyClearProvider);
+
+      // 创建一个新的ReserveType，包含除ReserveType。unknown之外的所有值
+      // List<ReserveType> newReserveType = ReserveType.values
+      //     .where((type) => type != ReserveType.unknown)
+      //     .toList();
 
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,11 +29,11 @@ class DifferMenu extends ConsumerWidget {
             (e) {
               return EasyChip(
                 label: e.value,
-                selected: currentReserveType.contains(e),
+                selected: ref.watch(currentReserveTypeProvider).contains(e),
                 enable: enable,
                 onTap: () {
-                  ref.read(currentReserveTypeProvider.notifier).update(e);
                   ref.watch(matchControllerProvider).clear();
+                  ref.read(currentReserveTypeProvider.notifier).update(e);
                   updateName(ref);
                 },
               );

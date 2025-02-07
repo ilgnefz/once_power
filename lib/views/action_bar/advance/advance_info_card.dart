@@ -18,15 +18,24 @@ class AdvanceDeleteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDeleteType = menu.deleteTypes.isNotEmpty;
     return AdvanceRichText(
       text: TextSpan(
-        text: menu.matchLocation.value,
+        text: isDeleteType ? '' : menu.matchLocation.value,
         style: defaultStyle,
         children: [
-          TextSpan(
-            text: ' "${menu.value}"',
-            style: highlightStyle,
-          ),
+          if (isDeleteType)
+            ...List.generate(menu.deleteTypes.length, (index) {
+              String delimiter = index == menu.deleteTypes.length - 1
+                  ? ''
+                  : S.of(context).delimiter;
+              return TextSpan(
+                text: '${menu.deleteTypes[index].value}$delimiter',
+                style: highlightStyle,
+              );
+            }),
+          if (!isDeleteType)
+            TextSpan(text: ' "${menu.value}"', style: highlightStyle),
         ],
       ),
     );
@@ -94,20 +103,29 @@ class AdvanceReplaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFormat = menu.replaceMode.isFormat;
     return AdvanceRichText(
       text: TextSpan(
-        text: menu.caseType.isNoConversion
-            ? menu.matchLocation.value
-            : '${S.of(context).letters} ',
+        text: isFormat
+            ? S.of(context).formatDesc1
+            : menu.caseType.isNoConversion
+                ? menu.matchLocation.value
+                : S.of(context).letters,
         style: defaultStyle,
         children: [
-          if (menu.caseType.isNoConversion) ...[
+          if (isFormat) ...[
+            TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
+            TextSpan(text: S.of(context).formatDesc2),
+            TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
+            TextSpan(text: S.of(context).formatDesc3, style: highlightStyle),
+          ],
+          if (!isFormat && menu.caseType.isNoConversion) ...[
             TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).withT),
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
           ],
-          if (!menu.caseType.isNoConversion) ...[
-            TextSpan(text: '"${menu.caseType.value}" ', style: highlightStyle),
+          if (!isFormat && !menu.caseType.isNoConversion) ...[
+            TextSpan(text: ' "${menu.caseType.value}"', style: highlightStyle),
           ]
         ],
       ),
