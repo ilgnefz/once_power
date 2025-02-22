@@ -49,3 +49,12 @@ String getTopPath(String filePath) {
 //   }
 //   return list;
 // }
+
+bool fileTrueExists(String filePath) {
+  String parentPath = path.dirname(filePath);
+  List<FileSystemEntity> files = Directory(parentPath).listSync();
+  for (FileSystemEntity f in files) {
+    if (f.path == filePath) return true;
+  }
+  return false;
+}

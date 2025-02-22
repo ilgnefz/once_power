@@ -316,7 +316,7 @@ Future<NotificationInfo?> renameFile(
   String oldName = path.basename(oldPath);
   String newName = path.basename(newPath);
 
-  if (File(newPath).existsSync()) {
+  if (File(newPath).existsSync() && fileTrueExists(newPath)) {
     List<FileInfo> list =
         ref.watch(fileListProvider).where((e) => e.checked).toList();
     FileInfo result =
