@@ -774,18 +774,18 @@ packages:
     dependency: "direct main"
     description:
       name: package_info_plus
-      sha256: "67eae327b1b0faf761964a1d2e5d323c797f3799db0e85aa232db8d9e922bc35"
+      sha256: "7976bfe4c583170d6cdc7077e3237560b364149fcd268b5f53d95a991963b191"
       url: "https://pub.dev"
     source: hosted
-    version: "8.2.1"
+    version: "8.3.0"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
       name: package_info_plus_platform_interface
-      sha256: "205ec83335c2ab9107bbba3f8997f9356d72ca3c715d2f038fc773d0366b4c76"
+      sha256: "6c935fb612dff8e3cc9632c2b301720c77450a126114126ffaafe28d2e87956c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.2.0"
   path:
     dependency: "direct main"
     description:
@@ -1275,18 +1275,18 @@ packages:
     dependency: "direct main"
     description:
       name: tolyui_feedback
-      sha256: "1a24744c7a1573a5fdf4b69709f9217aa572f3ac6e763cea003cf57527762c5c"
+      sha256: "191375272acaf0b31db91299a6d7be8749bc68840cfb8b52ff855960df38c58d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.5+2"
+    version: "0.3.6+1"
   tolyui_message:
     dependency: transitive
     description:
       name: tolyui_message
-      sha256: c34d8ac00a97e6c3d44e7d34109f7d004b8350e87d5694ca3fe1b50d3bcaeb1c
+      sha256: "1fcef0211de537ee9ec69178693b624d1921dc486d8c7e41ea827c4460d7b83b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.3"
+    version: "0.2.4"
   tray_manager:
     dependency: "direct main"
     description:

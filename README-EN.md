@@ -21,6 +21,16 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Multiple Choice Function
+
+You can sort files by numbering them with a single click using the Ctrl key
+
+![25](doc/25.gif)
+
+You can also use the Shift key to select multiple files and sort them by numbering them at once
+
+![26](doc/26.gif)
+
 ## Advance Menu Function
 
 Open and enter through the menu in the bottom left corner
