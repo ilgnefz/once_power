@@ -8,6 +8,9 @@ import 'package:once_power/views/home.dart';
 import 'provider/select.dart';
 
 // TODO: 多选功能 core/menu.dart
+// TODO: 更新版本
+// TODO: 删除 widgets/common/easy_context_menu.dart
+// TODO: shift键多选功能
 
 void main(List<String> args) async {
   await Global.init(args);

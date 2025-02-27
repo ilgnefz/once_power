@@ -25,15 +25,15 @@ class FileList extends _$FileList {
 
   void remove(String id) => state = state.where((e) => e.id != id).toList();
 
-  void insertFirst(FileInfo file) => state = [file, ...state];
+  void insertFirst(List<FileInfo> files) => state = [...files, ...state];
 
-  void insertCenter(FileInfo file) => state = [
+  void insertCenter(List<FileInfo> files) => state = [
         ...state.take(state.length ~/ 2),
-        file,
+        ...files,
         ...state.skip(state.length ~/ 2)
       ];
 
-  void insertLast(FileInfo file) => state = [...state, file];
+  void insertLast(List<FileInfo> files) => state = [...state, ...files];
 
   void check(String id) => state = state.map((e) {
         if (e.id == id) e.checked = !e.checked;
@@ -309,4 +309,23 @@ class AdvancePresetList extends _$AdvancePresetList {
   //   }).toList();
   //   await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
   // }
+}
+
+@riverpod
+class SortSelectList extends _$SortSelectList {
+  @override
+  List<FileInfo> build() => [];
+  void add(FileInfo value) => state = [...state, value];
+  void addAll(List<FileInfo> value) => state = [...state, ...value];
+  void remove(FileInfo value) =>
+      state = state.where((e) => e != value).toList();
+  void one(FileInfo value) => state = [value];
+  void clear() => state = [];
+}
+
+@riverpod
+class SortHoverFile extends _$SortHoverFile {
+  @override
+  FileInfo? build() => null;
+  void update(FileInfo? value) => state = value;
 }

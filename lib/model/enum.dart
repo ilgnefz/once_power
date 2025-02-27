@@ -337,3 +337,5 @@ extension DeleteTypeExtension on DeleteType {
     }
   }
 }
+
+enum MovePosition { first, center, last, idle }

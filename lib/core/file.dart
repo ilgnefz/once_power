@@ -200,18 +200,18 @@ void deleteOne(WidgetRef ref, String id) {
   updateName(ref);
 }
 
-void insertFirst(WidgetRef ref, FileInfo file) {
-  ref.read(fileListProvider.notifier).insertFirst(file);
+void insertFirst(WidgetRef ref, List<FileInfo> files) {
+  ref.read(fileListProvider.notifier).insertFirst(files);
   updateName(ref);
 }
 
-void insertCenter(WidgetRef ref, FileInfo file) {
-  ref.read(fileListProvider.notifier).insertCenter(file);
+void insertCenter(WidgetRef ref, List<FileInfo> files) {
+  ref.read(fileListProvider.notifier).insertCenter(files);
   updateName(ref);
 }
 
-void insertLast(WidgetRef ref, FileInfo file) {
-  ref.read(fileListProvider.notifier).insertLast(file);
+void insertLast(WidgetRef ref, List<FileInfo> files) {
+  ref.read(fileListProvider.notifier).insertLast(files);
   updateName(ref);
 }
 

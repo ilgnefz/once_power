@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:animations/animations.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -9,7 +12,10 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/utils/storage.dart';
+import 'package:once_power/widgets/common/right_click_menu.dart';
 import 'package:tray_manager/tray_manager.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'core.dart';
 
@@ -37,31 +43,48 @@ void autoModifyInput(WidgetRef ref, String name) {
   updateName(ref);
 }
 
-void toTheFirst(WidgetRef ref, FileInfo file) {
+List<FileInfo> tempSortSelectList = [];
+MovePosition tempMP = MovePosition.idle;
+
+void toThePosition(
+  WidgetRef ref,
+  Function(List<FileInfo> list) insertFunction,
+  int targetIndex,
+  MovePosition mp,
+) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  int index = files.indexWhere((e) => e == file);
-  if (index == 0) return;
-  deleteOne(ref, file.id);
-  insertFirst(ref, file);
+  List<FileInfo> sortSelectList = ref.watch(sortSelectListProvider);
+  if (listEquals(tempSortSelectList, sortSelectList) && tempMP == mp) {
+    return;
+  }
+  tempMP = mp;
+  tempSortSelectList.clear();
+  tempSortSelectList.addAll(sortSelectList);
+  if (sortSelectList.length == 1) {
+    int index = files.indexWhere((e) => e == sortSelectList.single);
+    if (index == targetIndex) return;
+  }
+  for (FileInfo file in sortSelectList) {
+    deleteOne(ref, file.id);
+  }
+  insertFunction(sortSelectList);
   ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
 }
 
-void toTheCenter(WidgetRef ref, FileInfo file) {
-  List<FileInfo> files = ref.watch(sortListProvider);
-  int index = files.indexWhere((e) => e == file);
-  if (index == files.length ~/ 2) return;
-  deleteOne(ref, file.id);
-  insertCenter(ref, file);
-  ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
+void toTheFirst(WidgetRef ref) {
+  toThePosition(ref, (list) => insertFirst(ref, list), 0, MovePosition.first);
 }
 
-void toTheLast(WidgetRef ref, FileInfo file) {
+void toTheCenter(WidgetRef ref) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  int index = files.indexWhere((e) => e == file);
-  if (index == files.length - 1) return;
-  deleteOne(ref, file.id);
-  insertLast(ref, file);
-  ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
+  toThePosition(ref, (list) => insertCenter(ref, list), files.length ~/ 2,
+      MovePosition.center);
+}
+
+void toTheLast(WidgetRef ref) {
+  List<FileInfo> files = ref.watch(sortListProvider);
+  toThePosition(ref, (list) => insertLast(ref, list.reversed.toList()),
+      files.length - 1, MovePosition.last);
 }
 
 Future<void> addTray() async {
@@ -86,4 +109,31 @@ Future<void> addTray() async {
     ],
   );
   await trayManager.setContextMenu(menu);
+}
+
+Future<void> showRightMenu(
+  BuildContext context,
+  WidgetRef ref,
+  TapDownDetails details,
+  FileInfo e,
+) async {
+  const double safeW = 12, safeH = 32;
+  Locale? loe = StorageUtil.getLocale(AppKeys.locale);
+  double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * 7;
+  Size size = await windowManager.getSize();
+  // debugPrint('窗口尺寸：$size，鼠标坐标：${details.globalPosition}');
+  if (!context.mounted) return;
+  showModal(
+    context: context,
+    configuration: const FadeScaleTransitionConfiguration(
+      barrierColor: Colors.transparent,
+    ),
+    builder: (BuildContext context) {
+      double x = details.globalPosition.dx;
+      double y = details.globalPosition.dy;
+      if (x + width > size.width - safeW) x -= width;
+      if (y + height > size.height - safeH) y -= height;
+      return RightClickMenu(width: width, height: height, x: x, y: y, e: e);
+    },
+  );
 }

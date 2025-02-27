@@ -224,7 +224,7 @@ class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
   String get ext => (origin as SelectedExtensionProvider).ext;
 }
 
-String _$fileListHash() => r'026f4212d120dfde7f75bd4182e97c9eac3baeeb';
+String _$fileListHash() => r'fc4cb5ba7c5ad888a07a50a85bd42a4d95db488a';
 
 /// See also [FileList].
 @ProviderFor(FileList)
@@ -346,5 +346,37 @@ final advancePresetListProvider = AutoDisposeNotifierProvider<AdvancePresetList,
 );
 
 typedef _$AdvancePresetList = AutoDisposeNotifier<List<AdvancePreset>>;
+String _$sortSelectListHash() => r'4f635dcbc64b08c1eeceefcce63f0f92d9d31e10';
+
+/// See also [SortSelectList].
+@ProviderFor(SortSelectList)
+final sortSelectListProvider =
+    AutoDisposeNotifierProvider<SortSelectList, List<FileInfo>>.internal(
+  SortSelectList.new,
+  name: r'sortSelectListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sortSelectListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SortSelectList = AutoDisposeNotifier<List<FileInfo>>;
+String _$sortHoverFileHash() => r'e86ba6f0a0b120375aa4fb28f83b38f422a20f9d';
+
+/// See also [SortHoverFile].
+@ProviderFor(SortHoverFile)
+final sortHoverFileProvider =
+    AutoDisposeNotifierProvider<SortHoverFile, FileInfo?>.internal(
+  SortHoverFile.new,
+  name: r'sortHoverFileProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sortHoverFileHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SortHoverFile = AutoDisposeNotifier<FileInfo?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
