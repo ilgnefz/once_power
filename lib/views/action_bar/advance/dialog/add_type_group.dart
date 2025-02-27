@@ -30,6 +30,13 @@ class AddTypeRadio extends StatelessWidget {
           onChanged: (value) => typeChanged(value!),
         ),
         Text(S.of(context).serialNumber),
+        Spacer(),
+        Radio(
+          groupValue: type,
+          value: AddType.parentsName,
+          onChanged: (value) => typeChanged(value!),
+        ),
+        Text(S.of(context).parentsName),
       ],
     );
   }

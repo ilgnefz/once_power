@@ -222,5 +222,6 @@
   "space": "空格",
   "delimiter": "、",
   "position": "位置",
-  "end": "结束"
+  "end": "结束",
+  "parentsName": "文件夹名"
 }

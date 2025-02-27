@@ -172,7 +172,7 @@
   "first": "First",
   "last": "Last",
   "all": "All",
-  "serialNumber": "Serial Number",
+  "serialNumber": "SerialNum",
   "addBefore": "Before",
   "addAfter": "After",
   "ok": "OK",
@@ -222,5 +222,6 @@
   "space": "Space",
   "delimiter": ", ",
   "position": "position",
-  "end": "end"
+  "end": "end",
+  "parentsName": "FolderName"
 }

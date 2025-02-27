@@ -42,8 +42,8 @@ void deleteText(BuildContext context, WidgetRef ref,
               CommonBaseInput(
                 value: value,
                 hintText: S.of(context).deleteInputHint,
-                onChanged: (value) {
-                  value = value;
+                onChanged: (newValue) {
+                  value = newValue;
                   setState(() {});
                 },
               ),
@@ -123,8 +123,8 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                 CommonBaseInput(
                     value: value,
                     hintText: S.of(context).addInputHint,
-                    onChanged: (value) {
-                      value = value;
+                    onChanged: (newValue) {
+                      value = newValue;
                       setState(() {});
                     }),
                 NumInputGroup(
@@ -347,7 +347,8 @@ void advanceUpdateName(WidgetRef ref) {
           name = advanceDeleteName(menu as AdvanceMenuDelete, name);
         }
         if (menu.type.isAdd) {
-          name = advanceAddName(menu as AdvanceMenuAdd, name, index);
+          String folder = getFolderName(file.parent);
+          name = advanceAddName(menu as AdvanceMenuAdd, name, index, folder);
         }
         if (menu.type.isReplace) {
           name = advanceReplaceName(menu as AdvanceMenuReplace, name);
@@ -412,15 +413,17 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
   }
 }
 
-String advanceAddName(AdvanceMenuAdd menu, String name, int index) {
+String advanceAddName(
+    AdvanceMenuAdd menu, String name, int index, String folder) {
   String value = menu.value;
   int digits = menu.digits;
   int start = menu.start + index;
   AddType addType = menu.addType;
   AddPosition addPosition = menu.addPosition;
   int posIndex = menu.posIndex;
-  if (addType.isText) {
+  if (!addType.isSerialNumber) {
     // name = addPosition.isBefore ? '$value$name' : '$name$value';
+    value = addType.isParentsName ? folder : value;
     switch (addPosition) {
       case AddPosition.before:
         name = '$value$name';

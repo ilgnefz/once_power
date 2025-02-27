@@ -1,4 +1,5 @@
 import 'package:once_power/model/enum.dart';
+import 'package:path/path.dart' as path;
 
 String formatDateTime(DateTime dateTime) {
   String formattedDateTime = '${dateTime.year}'
@@ -111,3 +112,5 @@ String addEscapeIfPunctuation(String text) {
   }
   return result;
 }
+
+String getFolderName(String folder) => path.basename(folder);

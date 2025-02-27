@@ -212,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "organizingFailedInfo": MessageLookupByLibrary.simpleMessage("以下几个移动失败"),
     "originalName": MessageLookupByLibrary.simpleMessage("原名称"),
     "other": MessageLookupByLibrary.simpleMessage("其他"),
+    "parentsName": MessageLookupByLibrary.simpleMessage("文件夹名"),
     "position": MessageLookupByLibrary.simpleMessage("位置"),
     "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
     "prefixContent": MessageLookupByLibrary.simpleMessage("添加前缀内容"),

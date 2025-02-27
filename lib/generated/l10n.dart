@@ -1395,14 +1395,9 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `Serial Number`
+  /// `SerialNum`
   String get serialNumber {
-    return Intl.message(
-      'Serial Number',
-      name: 'serialNumber',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('SerialNum', name: 'serialNumber', desc: '', args: []);
   }
 
   /// `Before`
@@ -1763,6 +1758,11 @@ class S {
   /// `end`
   String get end {
     return Intl.message('end', name: 'end', desc: '', args: []);
+  }
+
+  /// `FolderName`
+  String get parentsName {
+    return Intl.message('FolderName', name: 'parentsName', desc: '', args: []);
   }
 }
 

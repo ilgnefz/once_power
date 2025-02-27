@@ -71,23 +71,26 @@ class AdvanceAddCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (menu.addType.isText) {
+    if (!menu.addType.isSerialNumber) {
+      String startStr = menu.addType.isParentsName
+          ? S.of(context).parentsName
+          : '"${menu.value}"';
       String posStr = menu.addPosition.isPosition
           ? '${S.of(context).position} ${menu.posIndex}'
           : menu.addPosition.value;
       return AdvanceRichText(
         text: TextSpan(
-          text: ' "${menu.value}" ',
+          text: startStr,
           style: highlightStyle,
           children: [
             TextSpan(
-              text: '${S.of(context).to} ',
+              text: ' ${S.of(context).to} ',
               style: defaultStyle,
             ),
             TextSpan(
               text: posStr,
               style: highlightStyle,
-            )
+            ),
           ],
         ),
       );
@@ -102,9 +105,13 @@ class AdvanceAddCard extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
           TextSpan(
-            text: ' ${S.of(context).to} ${menu.addPosition.value}',
+            text: ' ${S.of(context).to} ',
             style: defaultStyle,
           ),
+          TextSpan(
+            text: menu.addPosition.value,
+            style: highlightStyle,
+          )
         ],
       ),
     );

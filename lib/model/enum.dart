@@ -237,7 +237,7 @@ extension MatchLocationExtension on MatchLocation {
   bool get isPosition => this == MatchLocation.position;
 }
 
-enum AddType { text, serialNumber }
+enum AddType { text, serialNumber, parentsName }
 
 extension AddTypeExtension on AddType {
   String get value {
@@ -246,11 +246,14 @@ extension AddTypeExtension on AddType {
         return S.current.text;
       case AddType.serialNumber:
         return S.current.serialNumber;
+      case AddType.parentsName:
+        return S.current.parentsName;
     }
   }
 
   bool get isText => this == AddType.text;
   bool get isSerialNumber => this == AddType.serialNumber;
+  bool get isParentsName => this == AddType.parentsName;
 }
 
 enum AddPosition { before, after, position }
