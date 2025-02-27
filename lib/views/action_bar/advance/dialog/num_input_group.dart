@@ -14,8 +14,8 @@ class NumInputGroup extends StatelessWidget {
 
   final int digits;
   final int start;
-  final void Function(String) onDigitsChanged;
-  final void Function(String) onStartChanged;
+  final void Function(int) onDigitsChanged;
+  final void Function(int) onStartChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +23,20 @@ class NumInputGroup extends StatelessWidget {
       children: [
         Text('${S.of(context).serialNumber}: '),
         const SizedBox(width: AppNum.smallG),
-        AdvanceDigitInput(
-          value: digits,
-          label: S.of(context).digits,
-          onChanged: onDigitsChanged,
+        Expanded(
+          child: AdvanceDigitInput(
+            value: digits,
+            label: S.of(context).digits,
+            onChanged: onDigitsChanged,
+          ),
         ),
         const SizedBox(width: AppNum.mediumG),
-        AdvanceDigitInput(
-          value: start,
-          label: S.of(context).start,
-          onChanged: onStartChanged,
+        Expanded(
+          child: AdvanceDigitInput(
+            value: start,
+            label: S.of(context).start,
+            onChanged: onStartChanged,
+          ),
         ),
       ],
     );

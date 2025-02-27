@@ -30,6 +30,8 @@ void deleteText(BuildContext context, WidgetRef ref,
       String value = menu != null ? menu.value : '';
       MatchLocation location =
           menu != null ? menu.matchLocation : MatchLocation.first;
+      int start = menu != null ? menu.start : 1;
+      int end = menu != null ? menu.end : 1;
       List<DeleteType> deleteTypes = menu != null ? menu.deleteTypes : [];
       return StatefulBuilder(
         builder: (context, setState) => CommonDialog(
@@ -40,8 +42,8 @@ void deleteText(BuildContext context, WidgetRef ref,
               CommonBaseInput(
                 value: value,
                 hintText: S.of(context).deleteInputHint,
-                onChanged: (v) {
-                  value = v;
+                onChanged: (value) {
+                  value = value;
                   setState(() {});
                 },
               ),
@@ -51,14 +53,24 @@ void deleteText(BuildContext context, WidgetRef ref,
                   location = value;
                   setState(() {});
                 },
+                start: start,
+                end: end,
+                onStartChanged: (value) {
+                  start = value;
+                  setState(() {});
+                },
+                onEndChanged: (value) {
+                  end = value;
+                  setState(() {});
+                },
               ),
               DeleteTypeGroup(
                 deleteTypes: deleteTypes,
-                onChanged: (v) {
-                  if (deleteTypes.contains(v)) {
-                    deleteTypes.remove(v);
+                onChanged: (value) {
+                  if (deleteTypes.contains(value)) {
+                    deleteTypes.remove(value);
                   } else {
-                    deleteTypes.add(v);
+                    deleteTypes.add(value);
                   }
                   setState(() {});
                 },
@@ -71,6 +83,8 @@ void deleteText(BuildContext context, WidgetRef ref,
               id: id,
               value: value,
               matchLocation: location,
+              start: start,
+              end: end,
               deleteTypes: deleteTypes,
             );
             if (menu != null) {
@@ -95,6 +109,7 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
       String value = menu != null ? menu.value : '';
       int digits = menu != null ? menu.digits : 0;
       int start = menu != null ? menu.start : 0;
+      int posIndex = menu != null ? menu.posIndex : 1;
       AddType type = menu != null ? menu.addType : AddType.text;
       AddPosition position =
           menu != null ? menu.addPosition : AddPosition.after;
@@ -108,19 +123,19 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                 CommonBaseInput(
                     value: value,
                     hintText: S.of(context).addInputHint,
-                    onChanged: (v) {
-                      value = v;
+                    onChanged: (value) {
+                      value = value;
                       setState(() {});
                     }),
                 NumInputGroup(
                   digits: digits,
                   start: start,
-                  onDigitsChanged: (v) {
-                    digits = int.parse(v);
+                  onDigitsChanged: (value) {
+                    digits = value;
                     setState(() {});
                   },
-                  onStartChanged: (v) {
-                    start = int.parse(v);
+                  onStartChanged: (value) {
+                    start = value;
                     setState(() {});
                   },
                 ),
@@ -132,9 +147,14 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                   },
                 ),
                 AddPositionRadio(
-                  position: position,
+                  addPosition: position,
                   positionChanged: (value) {
                     position = value;
+                    setState(() {});
+                  },
+                  posIndex: posIndex,
+                  posIndexChanged: (value) {
+                    posIndex = value;
                     setState(() {});
                   },
                 ),
@@ -149,6 +169,7 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                 start: start,
                 addType: type,
                 addPosition: position,
+                posIndex: posIndex,
               );
               if (menu != null) {
                 ref.read(advanceMenuListProvider.notifier).update(menu.id, add);
@@ -174,6 +195,8 @@ void replaceText(BuildContext context, WidgetRef ref,
       ReplaceMode mode = menu != null ? menu.replaceMode : ReplaceMode.normal;
       MatchLocation location =
           menu != null ? menu.matchLocation : MatchLocation.first;
+      int start = menu != null ? menu.start : 1;
+      int end = menu != null ? menu.end : 1;
       CaseType type = menu != null ? menu.caseType : CaseType.noConversion;
       return CommonDialog(
         title: S.of(context).replaceTitle,
@@ -228,6 +251,16 @@ void replaceText(BuildContext context, WidgetRef ref,
                       location = value;
                       setState(() {});
                     },
+                    start: start,
+                    end: end,
+                    onStartChanged: (value) {
+                      start = value;
+                      setState(() {});
+                    },
+                    onEndChanged: (value) {
+                      end = value;
+                      setState(() {});
+                    },
                   ),
                   CaseConversionGroup(
                     type: type,
@@ -248,6 +281,8 @@ void replaceText(BuildContext context, WidgetRef ref,
             value: [oldValue, newValue],
             replaceMode: mode,
             matchLocation: location,
+            start: start,
+            end: end,
             caseType: type,
           );
           if (menu != null) {
@@ -289,8 +324,8 @@ void addPreset(BuildContext context, WidgetRef ref) {
           builder: (context, setState) => CommonBaseInput(
             value: name,
             hintText: S.of(context).presetNameHint,
-            onChanged: (v) {
-              name = v;
+            onChanged: (value) {
+              name = value;
               setState(() {});
             },
           ),
@@ -372,6 +407,8 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
     case MatchLocation.all:
       name = name.replaceAll(value, '');
       return name;
+    case MatchLocation.position:
+      return matchPosition(name, '', menu.start, menu.end);
   }
 }
 
@@ -381,8 +418,27 @@ String advanceAddName(AdvanceMenuAdd menu, String name, int index) {
   int start = menu.start + index;
   AddType addType = menu.addType;
   AddPosition addPosition = menu.addPosition;
+  int posIndex = menu.posIndex;
   if (addType.isText) {
-    name = addPosition.isBefore ? '$value$name' : '$name$value';
+    // name = addPosition.isBefore ? '$value$name' : '$name$value';
+    switch (addPosition) {
+      case AddPosition.before:
+        name = '$value$name';
+        break;
+      case AddPosition.after:
+        name = '$name$value';
+        break;
+      case AddPosition.position:
+        // 有可能会越界
+        if (posIndex > name.length) {
+          posIndex = name.length;
+          name = '$name$value';
+        } else {
+          String left = name.substring(0, posIndex - 1);
+          String right = name.substring(posIndex - 1);
+          name = '$left$value$right';
+        }
+    }
   }
   if (addType.isSerialNumber) {
     String num = formatNumber(start, digits);
@@ -422,6 +478,8 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
       case MatchLocation.all:
         name = name.replaceAll(oldValue, newValue);
         return name;
+      case MatchLocation.position:
+        return matchPosition(name, newValue, menu.start, menu.end);
     }
   } else {
     switch (type) {
@@ -446,4 +504,12 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
         return name;
     }
   }
+}
+
+String matchPosition(String name, String replaceStr, int start, int end) {
+  if (start > name.length) return name;
+  if (end > name.length || end < start) end = name.length;
+  String left = name.substring(0, start - 1);
+  String right = name.substring(end);
+  return left + replaceStr + right;
 }

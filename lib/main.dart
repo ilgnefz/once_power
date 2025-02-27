@@ -7,6 +7,8 @@ import 'package:once_power/views/home.dart';
 
 import 'provider/select.dart';
 
+// TODO: 多选功能 core/menu.dart
+
 void main(List<String> args) async {
   await Global.init(args);
   runApp(const ProviderScope(child: MyApp()));

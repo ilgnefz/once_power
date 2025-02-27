@@ -56,11 +56,16 @@ abstract class AdvanceMenuModel {
 
 class AdvanceMenuDelete extends AdvanceMenuModel {
   final MatchLocation matchLocation;
+  final int start;
+  final int end;
   final List<DeleteType> deleteTypes;
+
   AdvanceMenuDelete({
     required super.id,
     required String super.value,
     required this.matchLocation,
+    required this.start,
+    required this.end,
     required this.deleteTypes,
   }) : super(type: AdvanceType.delete);
 
@@ -69,6 +74,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         id: json["id"],
         value: json["value"],
         matchLocation: MatchLocation.values[json["matchLocation"]],
+        start: json["start"],
+        end: json["end"],
         deleteTypes: List<DeleteType>.from(
             json["deleteTypes"].map((x) => DeleteType.values[x])),
       );
@@ -79,12 +86,14 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         "id": id,
         "value": value,
         "matchLocation": matchLocation.index,
+        "start": start,
+        "end": end,
         "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuDelete{id: $id, value: $value, matchLocation: $matchLocation, deleteTypes: $deleteTypes}';
+    return 'AdvanceMenuDelete{id: $id, value: $value, matchLocation: $matchLocation, start: $start, end: $end, deleteTypes: $deleteTypes}';
   }
 }
 
@@ -93,6 +102,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final int start;
   final AddType addType;
   final AddPosition addPosition;
+  final int posIndex;
 
   AdvanceMenuAdd({
     required super.id,
@@ -101,6 +111,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.start,
     required this.addType,
     required this.addPosition,
+    required this.posIndex,
   }) : super(type: AdvanceType.add);
 
   factory AdvanceMenuAdd.fromJson(Map<String, dynamic> json) => AdvanceMenuAdd(
@@ -110,6 +121,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         start: json["start"],
         addType: AddType.values[json["addType"]],
         addPosition: AddPosition.values[json["addPosition"]],
+        posIndex: json["posIndex"],
       );
 
   @override
@@ -121,23 +133,29 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "start": start,
         "addType": addType.index,
         "addPosition": addPosition.index,
+        "posIndex": posIndex,
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start, addType: $addType, addPosition: $addPosition}';
+    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start, addType: $addType, addPosition: $addPosition, posIndex: $posIndex}';
   }
 }
 
 class AdvanceMenuReplace extends AdvanceMenuModel {
   final ReplaceMode replaceMode;
   final MatchLocation matchLocation;
+  final int start;
+  final int end;
   final CaseType caseType;
+
   AdvanceMenuReplace({
     required super.id,
     required List<String> super.value,
     required this.replaceMode,
     required this.matchLocation,
+    required this.start,
+    required this.end,
     required this.caseType,
   }) : super(type: AdvanceType.replace);
 
@@ -147,6 +165,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         value: List<String>.from(json["value"].map((x) => x)),
         replaceMode: ReplaceMode.values[json["replaceMode"]],
         matchLocation: MatchLocation.values[json["matchLocation"]],
+        start: json["start"],
+        end: json["end"],
         caseType: CaseType.values[json["caseType"]],
       );
 
@@ -157,11 +177,13 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "value": List<String>.from(value.map((x) => x)),
         "replaceMode": replaceMode.index,
         "matchLocation": matchLocation.index,
+        "start": start,
+        "end": end,
         "caseType": caseType.index,
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuReplace{id: $id, value: $value, replaceMode: $replaceMode, matchLocation: $matchLocation, caseType: $caseType}';
+    return 'AdvanceMenuReplace{id: $id, value: $value, replaceMode: $replaceMode, matchLocation: $matchLocation, start: $start, end: $end, caseType: $caseType}';
   }
 }

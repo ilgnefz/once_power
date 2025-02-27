@@ -220,5 +220,7 @@
   "digit": "Digit",
   "punctuation": "Punctuation",
   "space": "Space",
-  "delimiter": ", "
+  "delimiter": ", ",
+  "position": "position",
+  "end": "end"
 }

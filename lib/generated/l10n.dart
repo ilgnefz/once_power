@@ -1754,6 +1754,16 @@ class S {
   String get delimiter {
     return Intl.message(', ', name: 'delimiter', desc: '', args: []);
   }
+
+  /// `position`
+  String get position {
+    return Intl.message('position', name: 'position', desc: '', args: []);
+  }
+
+  /// `end`
+  String get end {
+    return Intl.message('end', name: 'end', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

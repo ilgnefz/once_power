@@ -215,7 +215,7 @@ extension AdvanceTypeExtension on AdvanceType {
   bool get isReplace => this == AdvanceType.replace;
 }
 
-enum MatchLocation { first, last, all }
+enum MatchLocation { first, last, all, position }
 
 extension MatchLocationExtension on MatchLocation {
   String get value {
@@ -226,8 +226,15 @@ extension MatchLocationExtension on MatchLocation {
         return S.current.last;
       case MatchLocation.all:
         return S.current.all;
+      case MatchLocation.position:
+        return '';
     }
   }
+
+  bool get isFirst => this == MatchLocation.first;
+  bool get isLast => this == MatchLocation.last;
+  bool get isAll => this == MatchLocation.all;
+  bool get isPosition => this == MatchLocation.position;
 }
 
 enum AddType { text, serialNumber }
@@ -246,7 +253,7 @@ extension AddTypeExtension on AddType {
   bool get isSerialNumber => this == AddType.serialNumber;
 }
 
-enum AddPosition { before, after }
+enum AddPosition { before, after, position }
 
 extension AddPositionExtension on AddPosition {
   String get value {
@@ -255,11 +262,14 @@ extension AddPositionExtension on AddPosition {
         return S.current.addBefore;
       case AddPosition.after:
         return S.current.addAfter;
+      case AddPosition.position:
+        return '';
     }
   }
 
   bool get isBefore => this == AddPosition.before;
   bool get isAfter => this == AddPosition.after;
+  bool get isPosition => this == AddPosition.position;
 }
 
 enum CaseType { noConversion, uppercase, lowercase, toggleCase }

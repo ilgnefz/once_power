@@ -35,7 +35,22 @@ class AdvanceDeleteCard extends StatelessWidget {
               );
             }),
           if (!isDeleteType)
-            TextSpan(text: ' "${menu.value}"', style: highlightStyle),
+            menu.matchLocation.isPosition
+                ? TextSpan(
+                    text: '${S.of(context).position} ${menu.start} ',
+                    children: [
+                      TextSpan(
+                        text: S.of(context).to,
+                        style: defaultStyle,
+                      ),
+                      TextSpan(
+                        text: ' ${menu.end}',
+                        style: highlightStyle,
+                      ),
+                    ],
+                    style: highlightStyle,
+                  )
+                : TextSpan(text: ' "${menu.value}"', style: highlightStyle),
         ],
       ),
     );
@@ -57,15 +72,22 @@ class AdvanceAddCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (menu.addType.isText) {
+      String posStr = menu.addPosition.isPosition
+          ? '${S.of(context).position} ${menu.posIndex}'
+          : menu.addPosition.value;
       return AdvanceRichText(
         text: TextSpan(
           text: ' "${menu.value}" ',
           style: highlightStyle,
           children: [
             TextSpan(
-              text: '${S.of(context).to} ${menu.addPosition.value}',
+              text: '${S.of(context).to} ',
               style: defaultStyle,
             ),
+            TextSpan(
+              text: posStr,
+              style: highlightStyle,
+            )
           ],
         ),
       );
@@ -119,10 +141,24 @@ class AdvanceReplaceCard extends StatelessWidget {
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).formatDesc3, style: highlightStyle),
           ],
-          if (!isFormat && menu.caseType.isNoConversion) ...[
+          if (!isFormat &&
+              menu.caseType.isNoConversion &&
+              !menu.matchLocation.isPosition) ...[
             TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).withT),
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
+          ],
+          if (!isFormat &&
+              menu.caseType.isNoConversion &&
+              menu.matchLocation.isPosition) ...[
+            TextSpan(
+              text: '${S.of(context).position} ${menu.start} ',
+              style: highlightStyle,
+            ),
+            TextSpan(text: S.of(context).to, style: defaultStyle),
+            TextSpan(text: ' ${menu.end} ', style: highlightStyle),
+            TextSpan(text: S.of(context).withT, style: defaultStyle),
+            TextSpan(text: ' ${menu.value[1]}', style: highlightStyle),
           ],
           if (!isFormat && !menu.caseType.isNoConversion) ...[
             TextSpan(text: ' "${menu.caseType.value}"', style: highlightStyle),

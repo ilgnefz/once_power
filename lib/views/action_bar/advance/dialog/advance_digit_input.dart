@@ -9,12 +9,14 @@ class AdvanceDigitInput extends StatefulWidget {
     super.key,
     required this.value,
     required this.label,
+    this.min = 0,
     required this.onChanged,
   });
 
   final int value;
   final String label;
-  final void Function(String) onChanged;
+  final int min;
+  final void Function(int) onChanged;
 
   @override
   State<AdvanceDigitInput> createState() => _AdvanceDigitInputState();
@@ -43,13 +45,15 @@ class _AdvanceDigitInputState extends State<AdvanceDigitInput> {
   }
 
   void editCompleted(int num) {
+    if (num < widget.min) num = widget.min;
     controller.text = '${num.toString()}${widget.label}';
-    widget.onChanged(num.toString());
+    widget.onChanged(num);
   }
 
   void reduce() {
     int num = getNum(controller.text);
     num--;
+    if (num < widget.min) num = widget.min;
     editCompleted(num);
   }
 
@@ -59,20 +63,23 @@ class _AdvanceDigitInputState extends State<AdvanceDigitInput> {
     editCompleted(num);
   }
 
+  void onChanged(String value) {
+    int result = int.tryParse(value) ?? widget.min;
+    widget.onChanged(result);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BaseInput(
-        focusNode: focusNode,
-        controller: controller,
-        padding: EdgeInsets.zero,
-        show: false,
-        textAlign: TextAlign.center,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        onChanged: widget.onChanged,
-        leading: OperatorButton('-', onTap: reduce),
-        action: OperatorButton('+', start: false, onTap: increment),
-      ),
+    return BaseInput(
+      focusNode: focusNode,
+      controller: controller,
+      padding: EdgeInsets.zero,
+      show: false,
+      textAlign: TextAlign.center,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      onChanged: onChanged,
+      leading: OperatorButton('-', onTap: reduce),
+      action: OperatorButton('+', start: false, onTap: increment),
     );
   }
 }

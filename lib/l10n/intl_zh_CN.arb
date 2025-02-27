@@ -220,5 +220,7 @@
   "digit": "数字",
   "punctuation": "标点符号",
   "space": "空格",
-  "delimiter": "、"
+  "delimiter": "、",
+  "position": "位置",
+  "end": "结束"
 }
