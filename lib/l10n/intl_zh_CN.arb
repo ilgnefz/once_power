@@ -223,5 +223,11 @@
   "delimiter": "、",
   "position": "位置",
   "end": "结束",
-  "parentsName": "文件夹名"
+  "parentsName": "文件夹名",
+  "disable": "禁用",
+  "serialDistinguish": "序列区分",
+  "fileType": "文件",
+  "distinguish": "区分",
+  "allFolder": "全部路径",
+  "allFolderTitle": "所有文件夹路径"
 }

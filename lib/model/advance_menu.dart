@@ -100,6 +100,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
 class AdvanceMenuAdd extends AdvanceMenuModel {
   final int digits;
   final int start;
+  final DistinguishType distinguishType;
   final AddType addType;
   final AddPosition addPosition;
   final int posIndex;
@@ -109,6 +110,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required String super.value,
     required this.digits,
     required this.start,
+    required this.distinguishType,
     required this.addType,
     required this.addPosition,
     required this.posIndex,
@@ -119,6 +121,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         value: json["value"],
         digits: json["digits"],
         start: json["start"],
+        distinguishType: DistinguishType.values[json["distinguishType"]],
         addType: AddType.values[json["addType"]],
         addPosition: AddPosition.values[json["addPosition"]],
         posIndex: json["posIndex"],
@@ -131,6 +134,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "value": value,
         "digits": digits,
         "start": start,
+        "distinguishType": distinguishType.index,
         "addType": addType.index,
         "addPosition": addPosition.index,
         "posIndex": posIndex,
@@ -138,7 +142,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 
   @override
   String toString() {
-    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start, addType: $addType, addPosition: $addPosition, posIndex: $posIndex}';
+    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start,  distinguishType: $distinguishType, addType: $addType, addPosition: $addPosition, posIndex: $posIndex}';
   }
 }
 

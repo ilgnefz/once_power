@@ -1395,9 +1395,9 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `SerialNum`
+  /// `Serial Num`
   String get serialNumber {
-    return Intl.message('SerialNum', name: 'serialNumber', desc: '', args: []);
+    return Intl.message('Serial Num', name: 'serialNumber', desc: '', args: []);
   }
 
   /// `Before`
@@ -1763,6 +1763,46 @@ class S {
   /// `FolderName`
   String get parentsName {
     return Intl.message('FolderName', name: 'parentsName', desc: '', args: []);
+  }
+
+  /// `Disable`
+  String get disable {
+    return Intl.message('Disable', name: 'disable', desc: '', args: []);
+  }
+
+  /// `Serial Distinguish`
+  String get serialDistinguish {
+    return Intl.message(
+      'Serial Distinguish',
+      name: 'serialDistinguish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File`
+  String get fileType {
+    return Intl.message('File', name: 'fileType', desc: '', args: []);
+  }
+
+  /// `distinguish`
+  String get distinguish {
+    return Intl.message('distinguish', name: 'distinguish', desc: '', args: []);
+  }
+
+  /// `All Folder`
+  String get allFolder {
+    return Intl.message('All Folder', name: 'allFolder', desc: '', args: []);
+  }
+
+  /// `All Folder Path`
+  String get allFolderTitle {
+    return Intl.message(
+      'All Folder Path',
+      name: 'allFolderTitle',
+      desc: '',
+      args: [],
+    );
   }
 }
 

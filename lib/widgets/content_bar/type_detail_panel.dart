@@ -9,13 +9,17 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/widgets/common/easy_text_btn.dart';
 
 import 'detail_ext_area.dart';
+import 'path_classify_list.dart';
 
 class TypeDetailPanel extends ConsumerWidget {
-  const TypeDetailPanel({super.key});
+  const TypeDetailPanel(this.type, {super.key});
+
+  final int type;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String titleLabel = S.of(context).detailTitle;
+    final String titleLabel =
+        type == 0 ? S.of(context).detailTitle : S.of(context).allFolderTitle;
     final String removeUncheckLabel = S.of(context).removeUnselected;
     final String removeCheckLabel = S.of(context).removeSelected;
     final String checkReserveLabel = S.of(context).selectReserve;
@@ -69,12 +73,14 @@ class TypeDetailPanel extends ConsumerWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: extMap.entries.map((e) {
-                      return DetailExtArea(
-                        label: e.key.value,
-                        extList: e.value,
-                      );
-                    }).toList(),
+                    children: type == 0
+                        ? extMap.entries.map((e) {
+                            return DetailExtArea(
+                              label: e.key.value,
+                              extList: e.value,
+                            );
+                          }).toList()
+                        : [PathClassifyList()],
                   ),
                 ),
               ),

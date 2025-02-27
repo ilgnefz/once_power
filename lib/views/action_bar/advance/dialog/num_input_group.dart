@@ -30,7 +30,7 @@ class NumInputGroup extends StatelessWidget {
             onChanged: onDigitsChanged,
           ),
         ),
-        const SizedBox(width: AppNum.mediumG),
+        const SizedBox(width: AppNum.largeG),
         Expanded(
           child: AdvanceDigitInput(
             value: start,

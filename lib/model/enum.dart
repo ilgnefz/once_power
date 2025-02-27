@@ -342,3 +342,25 @@ extension DeleteTypeExtension on DeleteType {
 }
 
 enum MovePosition { first, center, last, idle }
+
+enum DistinguishType { folder, file, extension, none }
+
+extension DistinguishTypeExtension on DistinguishType {
+  String get value {
+    switch (this) {
+      case DistinguishType.folder:
+        return S.current.folder;
+      case DistinguishType.file:
+        return S.current.fileType;
+      case DistinguishType.extension:
+        return S.current.extension;
+      case DistinguishType.none:
+        return S.current.disable;
+    }
+  }
+
+  bool get isFolder => this == DistinguishType.folder;
+  bool get isFile => this == DistinguishType.file;
+  bool get isExtension => this == DistinguishType.extension;
+  bool get isNone => this == DistinguishType.none;
+}

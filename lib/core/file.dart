@@ -162,11 +162,11 @@ void selectAll(WidgetRef ref) {
   updateExtension(ref);
 }
 
-void showAllType(BuildContext context, [bool needPop = false]) async {
+void showAllType(BuildContext context, int type, [bool needPop = false]) async {
   if (needPop) Navigator.of(context).pop();
   await showDialog(
     context: context,
-    builder: (BuildContext context) => const TypeDetailPanel(),
+    builder: (BuildContext context) => TypeDetailPanel(type),
   );
 }
 

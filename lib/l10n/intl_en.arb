@@ -172,7 +172,7 @@
   "first": "First",
   "last": "Last",
   "all": "All",
-  "serialNumber": "SerialNum",
+  "serialNumber": "Serial Num",
   "addBefore": "Before",
   "addAfter": "After",
   "ok": "OK",
@@ -223,5 +223,11 @@
   "delimiter": ", ",
   "position": "position",
   "end": "end",
-  "parentsName": "FolderName"
+  "parentsName": "FolderName",
+  "disable": "Disable",
+  "serialDistinguish": "Serial Distinguish",
+  "fileType": "File",
+  "distinguish": "distinguish",
+  "allFolder": "All Folder",
+  "allFolderTitle": "All Folder Path"
 }

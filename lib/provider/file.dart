@@ -69,6 +69,11 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
+  void checkFolder(String folder) => state = state.map((e) {
+        if (e.parent == folder) e.checked = !e.checked;
+        return e;
+      }).toList();
+
   void updateOriginName(String id, String name) => state = state.map((e) {
         if (e.id == id) e.name = name;
         return e;
@@ -213,6 +218,23 @@ Map<FileClassify, List<String>> extensionListMap(Ref ref) {
 bool selectedExtension(Ref ref, String ext) {
   return ref.watch(fileListProvider).every((e) {
     if (e.extension == ext) return e.checked;
+    return true;
+  });
+}
+
+@riverpod
+List<String> pathList(Ref ref) {
+  List<String> list = [];
+  for (FileInfo e in ref.watch(fileListProvider)) {
+    if (!list.contains(e.parent)) list.add(e.parent);
+  }
+  return list;
+}
+
+@riverpod
+bool selectedPath(Ref ref, String folder) {
+  return ref.watch(fileListProvider).every((e) {
+    if (e.parent == folder) return e.checked;
     return true;
   });
 }

@@ -224,7 +224,153 @@ class _SelectedExtensionProviderElement extends AutoDisposeProviderElement<bool>
   String get ext => (origin as SelectedExtensionProvider).ext;
 }
 
-String _$fileListHash() => r'fc4cb5ba7c5ad888a07a50a85bd42a4d95db488a';
+String _$pathListHash() => r'6b063b2d123b1fda494c39b5463debc3e7f21cdc';
+
+/// See also [pathList].
+@ProviderFor(pathList)
+final pathListProvider = AutoDisposeProvider<List<String>>.internal(
+  pathList,
+  name: r'pathListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$pathListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef PathListRef = AutoDisposeProviderRef<List<String>>;
+String _$selectedPathHash() => r'06a67e969b1320871c12dab9d4ea6efb8c968365';
+
+/// See also [selectedPath].
+@ProviderFor(selectedPath)
+const selectedPathProvider = SelectedPathFamily();
+
+/// See also [selectedPath].
+class SelectedPathFamily extends Family<bool> {
+  /// See also [selectedPath].
+  const SelectedPathFamily();
+
+  /// See also [selectedPath].
+  SelectedPathProvider call(
+    String folder,
+  ) {
+    return SelectedPathProvider(
+      folder,
+    );
+  }
+
+  @override
+  SelectedPathProvider getProviderOverride(
+    covariant SelectedPathProvider provider,
+  ) {
+    return call(
+      provider.folder,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'selectedPathProvider';
+}
+
+/// See also [selectedPath].
+class SelectedPathProvider extends AutoDisposeProvider<bool> {
+  /// See also [selectedPath].
+  SelectedPathProvider(
+    String folder,
+  ) : this._internal(
+          (ref) => selectedPath(
+            ref as SelectedPathRef,
+            folder,
+          ),
+          from: selectedPathProvider,
+          name: r'selectedPathProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$selectedPathHash,
+          dependencies: SelectedPathFamily._dependencies,
+          allTransitiveDependencies:
+              SelectedPathFamily._allTransitiveDependencies,
+          folder: folder,
+        );
+
+  SelectedPathProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.folder,
+  }) : super.internal();
+
+  final String folder;
+
+  @override
+  Override overrideWith(
+    bool Function(SelectedPathRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: SelectedPathProvider._internal(
+        (ref) => create(ref as SelectedPathRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        folder: folder,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _SelectedPathProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SelectedPathProvider && other.folder == folder;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, folder.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin SelectedPathRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `folder` of this provider.
+  String get folder;
+}
+
+class _SelectedPathProviderElement extends AutoDisposeProviderElement<bool>
+    with SelectedPathRef {
+  _SelectedPathProviderElement(super.provider);
+
+  @override
+  String get folder => (origin as SelectedPathProvider).folder;
+}
+
+String _$fileListHash() => r'83710c84df6bff9eb141fa65e09efb443eaf795d';
 
 /// See also [FileList].
 @ProviderFor(FileList)

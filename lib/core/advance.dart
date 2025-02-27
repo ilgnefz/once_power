@@ -11,6 +11,7 @@ import 'package:once_power/model/notification_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/format.dart';
+import 'package:once_power/views/action_bar/advance/dialog/add_distinguish_group.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_position_radio.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_type_group.dart';
 import 'package:once_power/views/action_bar/advance/dialog/case_conversion_group.dart';
@@ -110,6 +111,8 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
       int digits = menu != null ? menu.digits : 0;
       int start = menu != null ? menu.start : 0;
       int posIndex = menu != null ? menu.posIndex : 1;
+      DistinguishType distinguishType =
+          menu != null ? menu.distinguishType : DistinguishType.none;
       AddType type = menu != null ? menu.addType : AddType.text;
       AddPosition position =
           menu != null ? menu.addPosition : AddPosition.after;
@@ -136,6 +139,13 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                   },
                   onStartChanged: (value) {
                     start = value;
+                    setState(() {});
+                  },
+                ),
+                AddSerialDistinguish(
+                  type: distinguishType,
+                  typeChanged: (value) {
+                    distinguishType = value;
                     setState(() {});
                   },
                 ),
@@ -168,6 +178,7 @@ void addText(BuildContext context, WidgetRef ref, [AdvanceMenuAdd? menu]) {
                 digits: digits,
                 start: start,
                 addType: type,
+                distinguishType: distinguishType,
                 addPosition: position,
                 posIndex: posIndex,
               );
@@ -339,6 +350,7 @@ void advanceUpdateName(WidgetRef ref) {
   List<FileInfo> fileList = ref.watch(sortListProvider);
   List<AdvanceMenuModel> menus = ref.watch(advanceMenuListProvider);
   int index = 0;
+  Map<String, List<FileInfo>> classifyMap = {};
   for (FileInfo file in fileList) {
     if (file.checked) {
       String name = file.name;
@@ -347,8 +359,20 @@ void advanceUpdateName(WidgetRef ref) {
           name = advanceDeleteName(menu as AdvanceMenuDelete, name);
         }
         if (menu.type.isAdd) {
+          menu as AdvanceMenuAdd;
           String folder = getFolderName(file.parent);
-          name = advanceAddName(menu as AdvanceMenuAdd, name, index, folder);
+          String extension = file.extension;
+          String type = file.type.value;
+          if (menu.distinguishType.isFolder) {
+            index = calculateIndex(classifyMap, folder, file);
+          }
+          if (menu.distinguishType.isExtension) {
+            index = calculateIndex(classifyMap, extension, file);
+          }
+          if (menu.distinguishType.isFile) {
+            index = calculateIndex(classifyMap, type, file);
+          }
+          name = advanceAddName(menu, name, index, folder);
         }
         if (menu.type.isReplace) {
           name = advanceReplaceName(menu as AdvanceMenuReplace, name);
@@ -432,7 +456,6 @@ String advanceAddName(
         name = '$name$value';
         break;
       case AddPosition.position:
-        // 有可能会越界
         if (posIndex > name.length) {
           posIndex = name.length;
           name = '$name$value';
@@ -515,4 +538,39 @@ String matchPosition(String name, String replaceStr, int start, int end) {
   String left = name.substring(0, start - 1);
   String right = name.substring(end);
   return left + replaceStr + right;
+}
+
+// int rulesIndex(WidgetRef ref, DistinguishType distinguishType) {
+//   int index = 0;
+//   Map<String, List<FileInfo>> classifyMap = {};
+//   List<FileInfo> files = ref.watch(sortListProvider);
+//   for (FileInfo file in files) {
+//     if (!file.checked) continue;
+//     String folder = getFolderName(file.parent);
+//     String extension = file.extension;
+//     String type = file.type.value;
+//     if (distinguishType.isFolder) {
+//       index = calculateIndex(classifyMap, folder, file);
+//     }
+//     if (distinguishType.isExtension) {
+//       index = calculateIndex(classifyMap, extension, file);
+//     }
+//     if (distinguishType.isFile) {
+//       index = calculateIndex(classifyMap, type, file);
+//     }
+//   }
+//   return index;
+// }
+
+int calculateIndex(
+  Map<String, List<FileInfo>> classifyMap,
+  String key,
+  FileInfo file,
+) {
+  List<String> keyList = classifyMap.keys.toList();
+  if (!keyList.contains(key)) {
+    classifyMap[key] = [];
+  }
+  classifyMap[key]!.add(file);
+  return classifyMap[key]!.indexOf(file);
 }

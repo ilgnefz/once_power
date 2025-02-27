@@ -17,6 +17,7 @@ class FilterFileBtn extends ConsumerWidget {
     final String removeUnselectedLabel = S.of(context).removeUnselected;
     final String removeSelectedLabel = S.of(context).removeSelected;
     final String allExtLabel = S.of(context).allExtension;
+    final String allPathLabel = S.of(context).allFolder;
 
     void removeUnchecked() {
       ref.read(fileListProvider.notifier).removeUncheck();
@@ -94,7 +95,12 @@ class FilterFileBtn extends ConsumerWidget {
             easyDropdownItem(
               allExtLabel,
               Theme.of(context).primaryColor,
-              () => showAllType(context, true),
+              () => showAllType(context, 0, true),
+            ),
+            easyDropdownItem(
+              allPathLabel,
+              Theme.of(context).primaryColor,
+              () => showAllType(context, 1, true),
             ),
             easyDropdownItem(
               S.of(context).selectReserve,

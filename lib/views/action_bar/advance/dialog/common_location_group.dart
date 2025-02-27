@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/enum.dart';
 
@@ -74,7 +75,7 @@ class CommonLocationRadio extends StatelessWidget {
                       onChanged: onStartChanged,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: AppNum.largeG),
                   Expanded(
                     child: AdvanceDigitInput(
                       value: end,
