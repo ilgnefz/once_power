@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/core.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/model/file_info.dart';
+import 'package:once_power/provider/file.dart';
 
 import 'menu_context_item.dart';
 
@@ -82,12 +83,21 @@ class RightClickMenu extends ConsumerWidget {
               MenuContextItem(
                 label: e.checked ? unselectLabel : selectLabel,
                 color: e.checked ? Colors.grey : Colors.black,
-                callback: () => toggleCheck(ref, e.id),
+                callback: () {
+                  for (var f in ref.watch(sortSelectListProvider)) {
+                    toggleCheck(ref, f.id);
+                  }
+                },
               ),
               MenuContextItem(
                 label: removeLabel,
                 color: Colors.red,
-                callback: () => deleteOne(ref, e.id),
+                callback: () {
+                  for (var f in ref.watch(sortSelectListProvider)) {
+                    deleteOne(ref, f.id);
+                    ref.read(sortSelectListProvider.notifier).remove(f);
+                  }
+                },
               ),
             ],
           ),

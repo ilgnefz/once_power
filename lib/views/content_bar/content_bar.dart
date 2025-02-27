@@ -129,7 +129,7 @@ class ContentListView extends ConsumerWidget {
             key: ValueKey(files[index].id),
             child: isOrganize
                 ? OrganizeFileTile(files[index])
-                : RenameFileTile(files[index]),
+                : RenameFileTile(file: files[index], files: files),
           );
         },
       ),

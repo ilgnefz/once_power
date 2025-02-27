@@ -7,7 +7,6 @@ import 'package:once_power/model/file_info.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/views/content_bar/rename/rename_tile_tooltip.dart';
 import 'package:once_power/widgets/common/easy_scroll_bar.dart';
 import 'package:reorderable_grid/reorderable_grid.dart';
 
@@ -49,13 +48,7 @@ class ViewGridView extends ConsumerWidget {
               child: child,
             ),
             children: files.map((e) {
-              String id = e.id;
-              return RenameTileTooltip(
-                key: ValueKey(id),
-                file: e,
-                waitDuration: const Duration(seconds: 1),
-                child: ViewModeTile(files, e),
-              );
+              return ViewModeTile(files, e, key: ValueKey(e.id));
             }).toList(),
           ),
         ),
