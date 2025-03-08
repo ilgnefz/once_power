@@ -1,156 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:once_power/utils/format.dart';
-import 'package:once_power/widgets/common/base_input.dart';
+import 'package:once_power/utils/info.dart';
+import 'package:once_power/widgets/action_bar/operator_btn.dart';
+import 'package:once_power/widgets/base/base_input.dart';
 
 class DigitInput extends StatefulWidget {
   const DigitInput({
     super.key,
-    required this.controller,
     required this.value,
     required this.label,
-    this.textStyle,
-    this.length,
-    this.callback,
-    this.onChanged,
+    this.min = 0,
+    required this.onChanged,
   });
 
-  final TextEditingController controller;
   final int value;
   final String label;
-  final TextStyle? textStyle;
-  final int? length;
-  final VoidCallback? callback;
-  final void Function(String)? onChanged;
+  final int min;
+  final void Function(int) onChanged;
 
   @override
   State<DigitInput> createState() => _DigitInputState();
 }
 
 class _DigitInputState extends State<DigitInput> {
-  // late TextEditingController controller;
+  late TextEditingController controller;
   final FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    // controller = TextEditingController(text: '${widget.value}${widget.label}');
+    controller = TextEditingController(text: '${widget.value} ${widget.label}');
     focusNode.addListener(() {
-      final text = widget.controller.text;
-      if (focusNode.hasFocus) {
-        widget.controller.text = text.replaceAll(widget.label, '');
-        widget.controller.selection = TextSelection(
-            baseOffset: 0, extentOffset: widget.controller.text.length);
-      } else {
-        widget.controller.text = widget.controller.text.isEmpty
-            ? '${widget.value}${widget.label}'
-            : "${int.parse(text)}${widget.label}";
+      if (!focusNode.hasFocus) {
+        int num = getNum(controller.text);
+        editCompleted(num);
       }
-      setState(() {});
     });
   }
 
   @override
   void dispose() {
-    // widget.controller.dispose();
-    focusNode.dispose();
+    controller.dispose();
     super.dispose();
   }
 
-  void onSubmitted(value) {
-    widget.controller.text = '${int.parse(value)}${widget.label}';
-    setState(() {});
-  }
-
-  void increment() {
-    // final num = widget.controller.text.replaceAll(widget.label, '');
-    final num = getNum(widget.controller.text);
-    widget.controller.text = "${num + 1}${widget.label}";
-    widget.callback!();
-    setState(() {});
+  void editCompleted(int num) {
+    if (num < widget.min) num = widget.min;
+    controller.text = '$num ${widget.label}';
+    widget.onChanged(num);
   }
 
   void reduce() {
-    // final num = widget.controller.text.replaceAll(widget.label, '');
-    final num = getNum(widget.controller.text);
-    if (num == 0) return;
-    widget.controller.text = "${num - 1}${widget.label}";
-    widget.callback!();
-    setState(() {});
+    int num = getNum(controller.text);
+    num--;
+    if (num < widget.min) num = widget.min;
+    editCompleted(num);
   }
 
-  void onKeyEvent(event) {
-    if (event is KeyDownEvent) {
-      if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-        increment();
-      } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-        reduce();
-      }
-    }
+  void increment() {
+    int num = getNum(controller.text);
+    num++;
+    editCompleted(num);
+  }
+
+  void onChanged(String value) {
+    int result = int.tryParse(value) ?? widget.min;
+    widget.onChanged(result);
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseInput(
+      // focusNode: focusNode,
+      controller: controller,
       padding: EdgeInsets.zero,
-      onKeyEvent: onKeyEvent,
-      controller: widget.controller,
-      show: false,
-      textStyle: widget.textStyle,
       textAlign: TextAlign.center,
-      inputFormatters: [
-        if (widget.length != null)
-          LengthLimitingTextInputFormatter(widget.length),
-        FilteringTextInputFormatter.digitsOnly
-      ],
-      onChanged: widget.onChanged,
-      onSubmitted: onSubmitted,
-      focusNode: focusNode,
-      leading: OperatorButton('-', onTap: reduce),
-      action: OperatorButton('+', start: false, onTap: increment),
-    );
-  }
-}
-
-class OperatorButton extends StatelessWidget {
-  const OperatorButton(
-    this.operator, {
-    super.key,
-    this.start = true,
-    required this.onTap,
-  });
-
-  final String operator;
-  final bool start;
-  final void Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final radius = start
-        ? const BorderRadius.only(
-            topLeft: Radius.circular(8.0),
-            bottomLeft: Radius.circular(8.0),
-          )
-        : const BorderRadius.only(
-            topRight: Radius.circular(8.0),
-            bottomRight: Radius.circular(8.0),
-          );
-
-    return Material(
-      child: Ink(
-        decoration: BoxDecoration(borderRadius: radius),
-        child: InkWell(
-          borderRadius: radius,
-          onTap: onTap,
-          child: Container(
-            width: 20,
-            // height: 32,
-            alignment: Alignment.center,
-            // TODO color: Color(0xFFF5F5F5),
-            child: Text(operator, style: const TextStyle(fontSize: 18)),
-          ),
-        ),
-      ),
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      onChanged: onChanged,
+      leading: OperatorBtn('-', onTap: reduce),
+      trailing: OperatorBtn('+', start: false, onTap: increment),
     );
   }
 }

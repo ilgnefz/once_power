@@ -1,14 +1,14 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/config/config.dart';
-import 'package:once_power/constants/constants.dart';
-import 'package:once_power/views/home.dart';
 
-import 'provider/select.dart';
+import 'config/config.dart';
+import 'constants/constants.dart';
+import 'providers/toggle.dart';
+import 'views/home.dart';
 
 void main(List<String> args) async {
-  await Global.init(args);
+  await AppConfig.init(args);
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -46,17 +46,17 @@ class BorderRadiusFrames extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool max = ref.watch(maxWindowProvider);
+    bool isMax = ref.watch(isMaxProvider);
+
+    BoxDecoration decoration = const BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 8)],
+    );
 
     return Container(
-      margin: max ? EdgeInsets.zero : const EdgeInsets.all(8),
-      clipBehavior: max ? Clip.none : Clip.antiAliasWithSaveLayer,
-      decoration: max
-          ? null
-          : const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 8)],
-            ),
+      margin: isMax ? EdgeInsets.zero : const EdgeInsets.all(8),
+      clipBehavior: isMax ? Clip.none : Clip.antiAliasWithSaveLayer,
+      decoration: isMax ? null : decoration,
       child: child,
     );
   }

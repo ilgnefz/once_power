@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 
 class EasyCheckbox extends StatelessWidget {
-  const EasyCheckbox(
-    this.label, {
+  const EasyCheckbox({
     super.key,
     this.mainAxisSize = MainAxisSize.max,
     this.height,
     this.width,
+    this.label,
+    this.child,
     required this.checked,
     this.fillColor,
     this.borderColor = Colors.black,
     this.style,
+    this.sideWidth = 1,
     this.onChanged,
-  });
+  }) : assert(label != null || child != null);
 
   final MainAxisSize mainAxisSize;
   final double? height;
   final double? width;
-  final String label;
+  final String? label;
+  final Widget? child;
   final bool checked;
   final WidgetStateProperty<Color?>? fillColor;
   final Color borderColor;
   final TextStyle? style;
+  final double? sideWidth;
   final void Function(bool?)? onChanged;
 
   @override
@@ -37,14 +41,16 @@ class EasyCheckbox extends StatelessWidget {
               value: checked,
               onChanged: onChanged,
               fillColor: fillColor,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              side: BorderSide(width: 1, color: borderColor),
+              side: BorderSide(width: sideWidth!, color: borderColor),
             ),
           ),
         ),
-        Text(label, style: style),
+        if (label != null) Text(label!, style: style),
+        if (child != null) child!,
       ],
     );
   }

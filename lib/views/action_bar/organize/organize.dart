@@ -1,123 +1,47 @@
-import 'package:chinese_font_library/chinese_font_library.dart';
-import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/core.dart';
-import 'package:once_power/core/organize.dart';
-import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/views/action_bar/organize/delete_selected_button.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
-import 'package:once_power/widgets/common/custom_tooltip.dart';
-import 'package:once_power/widgets/common/easy_checkbox.dart';
-import 'package:once_power/widgets/common/easy_text_btn.dart';
-import 'package:tolyui_feedback/tolyui_feedback.dart';
+import 'package:once_power/constants/num.dart';
+import 'package:once_power/views/action_bar/organize/instructions_text.dart';
+import 'package:once_power/views/action_bar/organize/target_folder_input.dart';
+import 'package:once_power/views/action_bar/organize/top_parents_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
+import 'package:once_power/widgets/action_bar/add_file_group.dart';
+import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
 
-import 'organize_button.dart';
-import 'delete_folder_button.dart';
-import 'description_text.dart';
-import 'target_folder_input.dart';
+import 'apply_organize_btn.dart';
+import 'classify_file_checkbox.dart';
+import 'delete_empty_btn.dart';
+import 'delete_selected_btn.dart';
+import 'open_rule_checkbox.dart';
+import 'rule_setting_btn.dart';
 
-class OrganizeAction extends ConsumerWidget {
-  const OrganizeAction({super.key});
+class OrganizeMenu extends StatelessWidget {
+  const OrganizeMenu({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final String classifiedFileLabel = S.of(context).classifiedFile;
-    final String selectFolderLabel = S.of(context).selectTargetFolder;
-    final String appendModeLabel = S.of(context).appendMode;
-    final String addFileLabel = S.of(context).addFile;
-    final String addFolderLabel = S.of(context).addFolder;
-
-    const double gap = AppNum.mediumG;
-
-    TextEditingController controller = ref.watch(targetControllerProvider);
-
-    Future<void> selectTargetFolder() async {
-      final String? folder = await getDirectoryPath();
-      if (folder != null) {
-        controller.text = folder;
-        if (ref.watch(saveConfigProvider)) {
-          targetFolderCache(ref, folder);
-        }
-      }
-    }
-
-    Future<void> addFile() async {
-      final List<XFile> files = await openFiles();
-      if (files.isNotEmpty) await formatXFile(ref, files);
-    }
-
-    Future<void> addFolder() async {
-      final List<String?> folders = await getDirectoryPaths();
-      if (folders.isNotEmpty) await formatFolder(ref, folders);
-    }
-
+  Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: gap,
+      spacing: AppNum.smallG,
       children: [
-        const Expanded(child: SingleChildScrollView(child: DescriptionText())),
-        const TargetFolderInput(),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            EasyCheckbox(
-              classifiedFileLabel,
-              checked: ref.watch(classifiedFileProvider),
-              onChanged: (v) =>
-                  ref.read(classifiedFileProvider.notifier).update(),
-            ),
-            const SizedBox(width: AppNum.mediumG),
-            EasyTooltip(
-              message: S.of(context).useTimeClassification,
-              textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
-                  .useSystemChineseFont(),
-              placement: Placement.right,
-              child: ClickIcon(
-                size: 20,
-                svg: AppIcons.date,
-                color: ref.watch(useTimeClassificationProvider)
-                    ? Theme.of(context).primaryColor
-                    : AppColors.unselectIcon,
-                onTap: ref.read(useTimeClassificationProvider.notifier).update,
-              ),
-            ),
-            const Spacer(),
-            EasyTextBtn(selectFolderLabel, onTap: selectTargetFolder),
-          ],
+        Expanded(child: SingleChildScrollView(child: InstructionsText())),
+        SizedBox(height: AppNum.smallG / 2),
+        TargetFolderInput(),
+        TwoCheckboxGroup(
+          left: AppNum.defaultP,
+          children: [RuleSettingBtn(), OpenRuleCheckbox()],
         ),
-        Row(
-          children: [
-            EasyCheckbox(
-              appendModeLabel,
-              checked: ref.watch(appendModeProvider),
-              onChanged: (v) => ref.read(appendModeProvider.notifier).update(),
-            ),
-            const Spacer(),
-            EasyTextBtn(addFileLabel, onTap: addFile),
-            const SizedBox(width: gap),
-            EasyTextBtn(addFolderLabel, onTap: addFolder),
-          ],
+        TwoCheckboxGroup(
+          children: [TimeClassifyCheckbox(), TopParentsCheckbox()],
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [DeleteSelectedButton(), DeleteFolderButton()],
+        TwoCheckboxGroup(children: [AddFolderCheckbox(), AppendCheckbox()]),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [DeleteSelectedBtn(), DeleteEmptyBtn()],
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            EasyCheckbox(
-              S.of(context).topParentFolder,
-              checked: ref.watch(useTopFolderProvider),
-              onChanged: (v) =>
-                  ref.read(useTopFolderProvider.notifier).update(),
-            ),
-            OrganizeButton(),
-          ],
-        ),
+        AddFolderGroup(child: ApplyOrganizeBtn()),
       ],
     );
   }

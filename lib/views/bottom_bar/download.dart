@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/models/app_enum.dart';
+import 'package:once_power/providers/select.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DownloadTextBtn extends ConsumerWidget {
@@ -12,8 +12,6 @@ class DownloadTextBtn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String download = S.of(context).download;
-
     void downloadWeb() async {
       LanguageType type = ref.watch(currentLanguageProvider);
       String url = AppText.giteeDownload;
@@ -27,7 +25,7 @@ class DownloadTextBtn extends ConsumerWidget {
       child: InkWell(
         onTap: downloadWeb,
         child: Text(
-          download,
+          S.of(context).download,
           style: const TextStyle(fontSize: 13, color: Colors.blue)
               .useSystemChineseFont(),
         ),

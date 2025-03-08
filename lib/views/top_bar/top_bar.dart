@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/views/top_bar/drag_area.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 import 'package:window_manager/window_manager.dart';
@@ -15,7 +15,7 @@ class TopBar extends ConsumerWidget {
     const double iconS = AppNum.iconSmallS;
     const double iconG = AppNum.largeG;
 
-    bool isMax = ref.watch(maxWindowProvider);
+    bool isMax = ref.watch(isMaxProvider);
 
     void minimize() async {
       await windowManager.minimize();
@@ -27,7 +27,7 @@ class TopBar extends ConsumerWidget {
       } else {
         await windowManager.maximize();
       }
-      ref.read(maxWindowProvider.notifier).update();
+      ref.read(isMaxProvider.notifier).update();
     }
 
     void close() async {

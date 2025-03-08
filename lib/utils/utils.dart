@@ -1,8 +1,10 @@
 library;
 
 export 'format.dart';
-export 'type.dart';
+export 'info.dart';
 export 'log.dart';
-export 'package_desc.dart';
-export 'path.dart';
+export 'match.dart';
+export 'pack_info.dart';
+export 'regedit.dart';
 export 'storage.dart';
+export 'verify.dart';

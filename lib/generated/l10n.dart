@@ -140,9 +140,9 @@ class S {
     return Intl.message('Modified', name: 'modifiedDate', desc: '', args: []);
   }
 
-  /// `ExifDate`
+  /// `Exif Date`
   String get exifDate {
-    return Intl.message('ExifDate', name: 'exifDate', desc: '', args: []);
+    return Intl.message('Exif Date', name: 'exifDate', desc: '', args: []);
   }
 
   /// `Earliest`
@@ -440,9 +440,9 @@ class S {
     return Intl.message('File name', name: 'fileName', desc: '', args: []);
   }
 
-  /// `Type`
+  /// `Extension`
   String get extension {
-    return Intl.message('Type', name: 'extension', desc: '', args: []);
+    return Intl.message('Extension', name: 'extension', desc: '', args: []);
   }
 
   /// `Target folder`
@@ -495,9 +495,9 @@ class S {
     );
   }
 
-  /// `Organize`
+  /// `Move`
   String get organizeBtn {
-    return Intl.message('Organize', name: 'organizeBtn', desc: '', args: []);
+    return Intl.message('Move', name: 'organizeBtn', desc: '', args: []);
   }
 
   /// `Saved Configurations`
@@ -585,46 +585,6 @@ class S {
     );
   }
 
-  /// `Log`
-  String get log {
-    return Intl.message('Log', name: 'log', desc: '', args: []);
-  }
-
-  /// `The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory`
-  String get logDesc {
-    return Intl.message(
-      'The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory',
-      name: 'logDesc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder`
-  String get organizeFolderDesc {
-    return Intl.message(
-      'Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder',
-      name: 'organizeFolderDesc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Open Folder`
-  String get openFolder {
-    return Intl.message('Open Folder', name: 'openFolder', desc: '', args: []);
-  }
-
-  /// `Left mouse click on the file list to quickly open the folder where the file is located`
-  String get openFolderDesc {
-    return Intl.message(
-      'Left mouse click on the file list to quickly open the folder where the file is located',
-      name: 'openFolderDesc',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Drag the File/Folder here`
   String get tip {
     return Intl.message(
@@ -645,10 +605,10 @@ class S {
     );
   }
 
-  /// `Upload .txt file`
+  /// `Upload. txt files separated by spaces or line breaks for each name`
   String get uploadDesc {
     return Intl.message(
-      'Upload .txt file',
+      'Upload. txt files separated by spaces or line breaks for each name',
       name: 'uploadDesc',
       desc: '',
       args: [],
@@ -760,10 +720,10 @@ class S {
     );
   }
 
-  /// `Successfully deleted all empty folders`
+  /// `Successfully deleted all empty folders under the selected folder`
   String get successEmptyInfo {
     return Intl.message(
-      'Successfully deleted all empty folders',
+      'Successfully deleted all empty folders under the selected folder',
       name: 'successEmptyInfo',
       desc: '',
       args: [],
@@ -985,10 +945,10 @@ class S {
     );
   }
 
-  /// `Selected original name column: `
+  /// `Original name column: `
   String get tableInfo {
     return Intl.message(
-      'Selected original name column: ',
+      'Original name column: ',
       name: 'tableInfo',
       desc: '',
       args: [],
@@ -1015,26 +975,6 @@ class S {
     return Intl.message(
       'Gets the subfolder of the folder',
       name: 'addSubfolder',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Classified file`
-  String get classifiedFile {
-    return Intl.message(
-      'Classified file',
-      name: 'classifiedFile',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create parent folders for files based on different types or modification times`
-  String get classifiedFileDesc {
-    return Intl.message(
-      'Create parent folders for files based on different types or modification times',
-      name: 'classifiedFileDesc',
       desc: '',
       args: [],
     );
@@ -1130,11 +1070,11 @@ class S {
     return Intl.message('Add to', name: 'shortcutTip2', desc: '', args: []);
   }
 
-  /// `Classify using file modification time`
-  String get useTimeClassification {
+  /// `Date classification`
+  String get dateClassification {
     return Intl.message(
-      'Classify using file modification time',
-      name: 'useTimeClassification',
+      'Date classification',
+      name: 'dateClassification',
       desc: '',
       args: [],
     );
@@ -1205,116 +1145,131 @@ class S {
     return Intl.message('I know', name: 'deleteTipButton2', desc: '', args: []);
   }
 
-  /// `Top parent folder`
+  /// `Top folder`
   String get topParentFolder {
     return Intl.message(
-      'Top parent folder',
+      'Top folder',
       name: 'topParentFolder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Case classify`
-  String get caseClassify {
-    return Intl.message(
-      'Case classify',
-      name: 'caseClassify',
-      desc: '',
-      args: [],
-    );
+  /// `Case file`
+  String get caseFile {
+    return Intl.message('Case file', name: 'caseFile', desc: '', args: []);
   }
 
-  /// `Case extension`
+  /// `Case ext.`
   String get caseExtension {
+    return Intl.message('Case ext.', name: 'caseExtension', desc: '', args: []);
+  }
+
+  /// `Default Sort`
+  String get defaultSort {
     return Intl.message(
-      'Case extension',
-      name: 'caseExtension',
+      'Default Sort',
+      name: 'defaultSort',
       desc: '',
       args: [],
     );
   }
 
-  /// `DefaultSort`
-  String get defaultSort {
-    return Intl.message('DefaultSort', name: 'defaultSort', desc: '', args: []);
-  }
-
-  /// `NameDescending`
+  /// `Name Descending`
   String get nameDescending {
     return Intl.message(
-      'NameDescending',
+      'Name Descending',
       name: 'nameDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `NameAscending`
+  /// `Name Ascending`
   String get nameAscending {
     return Intl.message(
-      'NameAscending',
+      'Name Ascending',
       name: 'nameAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `DateDescending`
+  /// `Date Descending`
   String get dateDescending {
     return Intl.message(
-      'DateDescending',
+      'Date Descending',
       name: 'dateDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `DateAscending`
+  /// `Date Ascending`
   String get dateAscending {
     return Intl.message(
-      'DateAscending',
+      'Date Ascending',
       name: 'dateAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `TypeDescending`
+  /// `Type Descending`
   String get typeDescending {
     return Intl.message(
-      'TypeDescending',
+      'Type Descending',
       name: 'typeDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `TypeAscending`
+  /// `Type Ascending`
   String get typeAscending {
     return Intl.message(
-      'TypeAscending',
+      'Type Ascending',
       name: 'typeAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `CheckDescending`
+  /// `Check Descending`
   String get checkDescending {
     return Intl.message(
-      'CheckDescending',
+      'Check Descending',
       name: 'checkDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `CheckAscending`
+  /// `Check Ascending`
   String get checkAscending {
     return Intl.message(
-      'CheckAscending',
+      'Check Ascending',
       name: 'checkAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folder Descending`
+  String get folderDescending {
+    return Intl.message(
+      'Folder Descending',
+      name: 'folderDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folder Ascending`
+  String get folderAscending {
+    return Intl.message(
+      'Folder Ascending',
+      name: 'folderAscending',
       desc: '',
       args: [],
     );
@@ -1418,6 +1373,11 @@ class S {
   /// `Cancel`
   String get cancel {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
   }
 
   /// `Delete Content`
@@ -1800,6 +1760,151 @@ class S {
     return Intl.message(
       'All Folder Path',
       name: 'allFolderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `place`
+  String get place {
+    return Intl.message('place', name: 'place', desc: '', args: []);
+  }
+
+  /// ``
+  String get di {
+    return Intl.message('', name: 'di', desc: '', args: []);
+  }
+
+  /// `Fill front`
+  String get fillFront {
+    return Intl.message('Fill front', name: 'fillFront', desc: '', args: []);
+  }
+
+  /// `Fill back`
+  String get fillBack {
+    return Intl.message('Fill back', name: 'fillBack', desc: '', args: []);
+  }
+
+  /// `Random`
+  String get random {
+    return Intl.message('Random', name: 'random', desc: '', args: []);
+  }
+
+  /// `Please enter custom content`
+  String get randomInputHint {
+    return Intl.message(
+      'Please enter custom content',
+      name: 'randomInputHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Match ext.`
+  String get matchExtension {
+    return Intl.message(
+      'Match ext.',
+      name: 'matchExtension',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete ext.`
+  String get deleteExtension {
+    return Intl.message(
+      'Delete ext.',
+      name: 'deleteExtension',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set type folder`
+  String get classifyType {
+    return Intl.message(
+      'Set type folder',
+      name: 'classifyType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type classification`
+  String get useRule {
+    return Intl.message(
+      'Type classification',
+      name: 'useRule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The type folder is empty!`
+  String get classifyFolderError {
+    return Intl.message(
+      'The type folder is empty!',
+      name: 'classifyFolderError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open position`
+  String get openPosition {
+    return Intl.message(
+      'Open position',
+      name: 'openPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to open the folder containing the file`
+  String get openError {
+    return Intl.message(
+      'Failed to open the folder containing the file',
+      name: 'openError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The target folder is empty!`
+  String get targetFolderError {
+    return Intl.message(
+      'The target folder is empty!',
+      name: 'targetFolderError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move files of different types to different folders`
+  String get useRuleDesc {
+    return Intl.message(
+      'Move files of different types to different folders',
+      name: 'useRuleDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a folder named after the date of file creation in the target folder and move it to that folder`
+  String get dateClassificationDesc {
+    return Intl.message(
+      'Create a folder named after the date of file creation in the target folder and move it to that folder',
+      name: 'dateClassificationDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move the file to a top-level parent folder other than the disk root directory`
+  String get topParentFolderDesc {
+    return Intl.message(
+      'Move the file to a top-level parent folder other than the disk root directory',
+      name: 'topParentFolderDesc',
       desc: '',
       args: [],
     );

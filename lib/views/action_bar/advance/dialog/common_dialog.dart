@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/widgets/common/easy_dialog.dart';
+
+import 'easy_dialog.dart';
 
 class CommonDialog extends StatelessWidget {
   const CommonDialog({

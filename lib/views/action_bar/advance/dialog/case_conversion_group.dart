@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
+import 'package:once_power/models/advance_menu_enum.dart';
 
 class CaseConversionGroup extends StatelessWidget {
   const CaseConversionGroup({

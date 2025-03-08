@@ -1,5 +1,5 @@
 library;
 
-export 'global.dart';
+export 'app.dart';
 export 'language.dart';
 export 'theme.dart';

@@ -1,6 +1,7 @@
-import 'package:once_power/model/enum.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:path/path.dart' as path;
 
+// TODO: 有些代码不适合在这
 String formatDateTime(DateTime dateTime) {
   String formattedDateTime = '${dateTime.year}'
       '${dateTime.month.toString().padLeft(2, '0')}'
@@ -11,8 +12,10 @@ String formatDateTime(DateTime dateTime) {
   return formattedDateTime;
 }
 
-String formatNumber(int n, int width) {
+String formatNum(int n, int width) {
   if (width == 0) return '';
+  // TODO: 是否严严格一点返回数字
+  if (n.toString().length > width) return n.toString();
   return n.toString().padLeft(width, '0');
 }
 
@@ -23,94 +26,36 @@ DateTime formatExifDate(String date) {
   return DateTime.parse(list.join(' '));
 }
 
-int getVersionNumber(String version) {
+int formatVersionNum(String version) {
   List versionCells = version.split('.');
   versionCells = versionCells.map((i) => int.parse(i)).toList();
   return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
 }
 
-int getNum(String value) {
-  RegExp exp = RegExp(r'\d+');
-  RegExpMatch? match = exp.firstMatch(value);
-  if (match != null) return int.parse(match.group(0)!);
-  return 0;
+// String getFolderName(String folder) => path.basename(folder);
+
+String formatVideoTime(Duration total, Duration current) {
+  String currentM = formatNum(current.inMinutes, 2);
+  String currentS = formatNum(current.inSeconds.remainder(60), 2);
+  String totalM = formatNum(total.inMinutes, 2);
+  String totalS = formatNum(total.inSeconds.remainder(60), 2);
+  return '$currentM:$currentS / $totalM:$totalS';
 }
 
-String getFileName(String name, String extension) {
-  if (extension == '' || extension == 'dir') return name;
-  return '$name.$extension';
-}
-
-String regexReplace(
-    String text, String pattern, String replacement, bool caseSensitive) {
-  RegExp regExp;
-  pattern = addEscapeIfPunctuation(pattern);
-  if (caseSensitive) {
-    regExp = RegExp(pattern);
-  } else {
-    regExp = RegExp(pattern, caseSensitive: false);
-  }
-  return text.replaceAll(regExp, replacement);
-}
-
-String getMatchedStrings(String pattern, String input, bool matchCase) {
-  // 创建正则表达式，设置为不区分大小写
-  pattern = addEscapeIfPunctuation(pattern);
-  RegExp regex = RegExp(pattern, caseSensitive: matchCase);
-  // 使用allMatches方法获取所有匹配的字符串
-  Iterable<Match> matches = regex.allMatches(input);
-  // 从匹配中提取字符串并返回
-  List<String?> matchedStrings = matches.map((m) => m.group(0)).toList();
-  return matchedStrings.isEmpty ? '' : matchedStrings.join('');
-}
-
-String reserveTypeString(List<ReserveType> typeList, String name) {
-  bool lowercase = typeList.contains(ReserveType.lowercaseLetter);
-  bool capital = typeList.contains(ReserveType.capitalLetter);
-  bool digit = typeList.contains(ReserveType.digit);
-  bool nonLetter = typeList.contains(ReserveType.nonLetter);
-  bool punctuation = typeList.contains(ReserveType.punctuation);
-  String pattern = "";
-  if (!lowercase) pattern += "a-z";
-  if (!capital) pattern += "A-Z";
-  if (!digit) pattern += "0-9";
-  if (!nonLetter) {
-    // 中文、日文、朝鲜文、藏文
-    pattern +=
-        r"\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u0f00-\u0fff";
-  }
-  if (!punctuation) {
-    pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”（）【】{}<>《》「」";
-  }
-  RegExp reg = RegExp("[$pattern]");
-  return name.replaceAll(reg, "");
-}
-
-String addEscapeIfPunctuation(String text) {
-  final punctuations = [
-    '.',
-    ',',
-    ';',
-    ':',
-    '!',
-    '?',
-    '(',
-    ')',
-    '[',
-    ']',
-    '{',
-    '}'
-  ];
-  String result = '';
-  for (int i = 0; i < text.length; i++) {
-    final char = text[i];
-    if (punctuations.contains(char)) {
-      result += '\\$char';
-    } else {
-      result += char;
+List<String> strToList(String content) {
+  List<String> list = [];
+  if (content.contains('\n')) {
+    List<String> tempList = content.split('\n');
+    for (String i in tempList) {
+      if (i.contains('\r')) {
+        list.add(i.replaceAll('\r', ''));
+      } else {
+        list.add(i);
+      }
     }
   }
-  return result;
+  if (!content.contains('\n') && content.contains(' ')) {
+    list.addAll(content.trim().split(' '));
+  }
+  return list;
 }
-
-String getFolderName(String folder) => path.basename(folder);

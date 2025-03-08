@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/models/app_enum.dart';
+import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 
 class ExtraFunctionBtn extends ConsumerStatefulWidget {
@@ -33,27 +33,28 @@ class _EnableOrganizeState extends ConsumerState<ExtraFunctionBtn> {
     setState(() {});
   }
 
-  void onChange() {
-    ref.read(extraFunctionProvider.notifier).update();
-    bool enable = ref.read(extraFunctionProvider);
-    FunctionMode currentMode = ref.watch(currentModeProvider);
-    FunctionMode mode = enable
-        ? FunctionMode.advance
-        : currentMode == FunctionMode.advance
-            ? FunctionMode.replace
-            : currentMode;
-    ref.read(currentModeProvider.notifier).update(mode);
-  }
-
   @override
   Widget build(BuildContext context) {
+    bool enable = ref.watch(openExtraFunctionProvider);
+
+    void onChange() {
+      ref.read(openExtraFunctionProvider.notifier).update();
+      FunctionMode currentMode = ref.watch(currentModeProvider);
+      FunctionMode mode = enable
+          ? FunctionMode.advance
+          : currentMode.isAdvance
+              ? FunctionMode.replace
+              : currentMode;
+      ref.read(currentModeProvider.notifier).update(mode);
+    }
+
     return InkWell(
       onTap: onChange,
       onHover: toggleColor,
       child: EasyCheckbox(
-        S.of(context).advanceMenu,
+        label: S.of(context).advanceMenu,
         height: AppNum.bottomBarH - 4,
-        checked: ref.watch(extraFunctionProvider),
+        checked: enable,
         style: TextStyle(fontSize: 13, color: color).useSystemChineseFont(),
         fillColor: WidgetStateProperty.resolveWith(getColor),
         borderColor: color,

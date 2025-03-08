@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'svg_icon.dart';
+import 'package:once_power/widgets/base/svg_icon.dart';
+import 'package:once_power/widgets/common/easy_icon.dart';
 
 class ClickIcon extends StatelessWidget {
   const ClickIcon({
     super.key,
-    this.message,
     this.icon,
     this.svg,
     this.size = 24,
@@ -14,7 +13,6 @@ class ClickIcon extends StatelessWidget {
     this.onTap,
   });
 
-  final String? message;
   final double? size;
   final IconData? icon;
   final String? svg;
@@ -35,9 +33,12 @@ class ClickIcon extends StatelessWidget {
             height: size,
             width: size,
             alignment: Alignment.center,
-            child: icon != null
-                ? FittedBox(child: Icon(icon, size: iconSize, color: color))
-                : SvgIcon(svg!, size: iconSize, color: color),
+            child: EasyIcon(
+              iconSize: iconSize,
+              icon: icon,
+              svg: svg,
+              color: color,
+            ),
           ),
         ),
       ),

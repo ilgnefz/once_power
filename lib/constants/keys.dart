@@ -10,10 +10,10 @@ class AppKeys {
 
   // int
   static String dateLength = 'dateLength';
-  static String prefixLength = 'prefixLength';
-  static String prefixStart = 'prefixStart';
-  static String suffixLength = 'suffixLength';
-  static String suffixStart = 'suffixStart';
+  static String prefixSerialLength = 'prefixSerialLength';
+  static String prefixSerialStart = 'prefixSerialStart';
+  static String suffixSerialLength = 'suffixSerialLength';
+  static String suffixSerialStart = 'suffixSerialStart';
 
   // bool
   static String isLength = 'isLength';
@@ -32,18 +32,21 @@ class AppKeys {
   static String isSaveLog = 'isSaveLog';
   static String isViewMode = 'isViewMode';
   static String isAutoRun = 'isAutoRun';
-  static String isClassifiedFile = 'isClassifiedFile';
-  static String isUseTimeClassification = 'isUseTimeClassification';
-  static String isAddSubfolder = 'isAddSubfolder';
+  static String isClassifyFile = 'isClassifyFile';
+  static String isUseDateClassify = 'isUseDateClassify';
+  static String isUseRuleOrganize = 'isUseRuleOrganize';
   static String isUseTopFolder = 'isUseTopFolder';
+  static String isAddSubfolder = 'isAddSubfolder';
   static String isKnow = 'isKnow';
-  static String isCaseClassify = 'isCaseClassify';
+  static String isCaseFile = 'isCaseFile';
   static String isCaseExtension = 'isCaseExtension';
+  static String isMatchExtension = 'isMatchExtension';
 
   // List
   static String targetFolderList = 'targetFolderList';
-  static String advanceList = 'advanceList';
+  static String advanceMenuList = 'advanceMenuList';
   static String advancePresetList = 'advancePresetList';
+  static String operateLogList = 'operateLogList';
 
   // enum
   static String functionMode = 'functionMode';
@@ -51,13 +54,17 @@ class AppKeys {
   // static String reverseType = 'reverseType';
   static String dateType = 'dateType';
   static String sortType = 'sortType';
+  static String classifyType = 'classifyType';
 
   // Locale
   static String locale = 'locale';
 
+  // RuleTypeValue
+  static String ruleTypeValue = 'ruleTypeValue';
+
   // temp cache
-  static String matchCache = 'matchCache';
-  static String modifyCache = 'modifyCache';
+  // static String matchCachea = 'matchCache';
+  // static String modifyCachea = 'modifyCache';
 
   /// Right click menu to add files
   static String rightMenuFolderPath = 'folderPathCache';

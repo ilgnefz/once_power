@@ -1,57 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/num.dart';
-import 'package:once_power/core/advance.dart';
-import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/additional_options.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/apply_menu.dart';
-import 'package:once_power/widgets/common/easy_text_btn.dart';
+import 'package:once_power/views/action_bar/advance/advance_directive_list.dart';
+import 'package:once_power/views/action_bar/advance/advance_top_bar.dart';
+import 'package:once_power/views/action_bar/advance/directive_group.dart';
+import 'package:once_power/views/action_bar/advance/preset_btn.dart';
+import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/apply_rename_btn.dart';
+import 'package:once_power/widgets/action_bar/add_file_group.dart';
+import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
 
-import 'advance_list.dart';
-import 'preset_btn.dart';
-
-class AdvanceAction extends ConsumerWidget {
-  const AdvanceAction({super.key});
+class AdvanceMenu extends StatelessWidget {
+  const AdvanceMenu({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
-      spacing: AppNum.mediumG,
       children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppNum.mediumG),
-            child: AdvanceList(),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: AppNum.defaultP,
-            right: AppNum.defaultP,
-            bottom: AppNum.defaultP,
-            top: AppNum.smallG,
-          ),
-          child: Column(
-            spacing: AppNum.mediumG,
-            children: [
-              Row(
-                spacing: AppNum.smallG,
-                children: [
-                  EasyTextBtn(S.of(context).delete,
-                      onTap: () => deleteText(context, ref)),
-                  EasyTextBtn(S.of(context).add,
-                      onTap: () => addText(context, ref)),
-                  EasyTextBtn(S.of(context).replace,
-                      onTap: () => replaceText(context, ref)),
-                  Spacer(),
-                  PresetBtn(),
-                ],
-              ),
-              AdditionalOptions(show: false),
-              ApplyMenu(),
-            ],
-          ),
-        ),
+        AdvanceTopBar(),
+        Expanded(child: AdvanceDirectiveList()),
+        DirectiveGroup(child: PresetBtn()),
+        TwoCheckboxGroup(children: [AddFolderCheckbox(), AppendCheckbox()]),
+        AddFolderGroup(child: ApplyRenameBtn()),
       ],
     );
   }

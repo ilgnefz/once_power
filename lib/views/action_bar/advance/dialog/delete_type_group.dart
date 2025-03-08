@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
+import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/widgets/common/easy_checkbox.dart';
 
 class DeleteTypeGroup extends StatelessWidget {
   const DeleteTypeGroup({
@@ -25,15 +26,12 @@ class DeleteTypeGroup extends StatelessWidget {
           child: Wrap(
             spacing: 10,
             children: DeleteType.values.map((e) {
-              return Row(
+              return EasyCheckbox(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  Checkbox(
-                    value: deleteTypes.contains(e),
-                    onChanged: (v) => onChanged(e),
-                  ),
-                  Text(e.value),
-                ],
+                label: e.label,
+                sideWidth: 1.5,
+                checked: deleteTypes.contains(e),
+                onChanged: (v) => onChanged(e),
               );
             }).toList(),
           ),

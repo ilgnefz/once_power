@@ -1,55 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/additional_options.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/apply_menu.dart';
-
+import 'package:once_power/widgets/action_bar/add_file_group.dart';
+import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
 import 'package:once_power/widgets/action_bar/view_structure.dart';
 
-import 'operation_menu/date_input.dart';
-import 'operation_menu/differ_menu.dart';
-import 'operation_menu/extension_input.dart';
-import 'operation_menu/match_input.dart';
-import 'operation_menu/modify_input.dart';
-import 'operation_menu/prefix_input.dart';
-import 'operation_menu/prefix_num_input.dart';
-import 'operation_menu/suffix_input.dart';
-import 'operation_menu/suffix_num_input.dart';
+import 'add_folder_checkbox.dart';
+import 'append_checkbox.dart';
+import 'apply_rename_btn.dart';
+import 'case_extension_checkbox.dart';
+import 'case_file_checkbox.dart';
+import 'date_input.dart';
+import 'extension_input.dart';
+import 'match_input.dart';
+import 'modify_input.dart';
+import 'prefix_input.dart';
+import 'prefix_serial.dart';
+import 'suffix_input.dart';
+import 'suffix_serial.dart';
 
-class RenameAction extends StatelessWidget {
-  const RenameAction({super.key});
+class RenameMenu extends StatelessWidget {
+  const RenameMenu({super.key, required this.child});
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    const double gap = AppNum.mediumG;
-
-    return const ViewStructure(
-      topAction: SingleChildScrollView(
-        child: Column(
-          children: [
-            MatchInput(),
-            SizedBox(height: gap),
-            DifferMenu(),
-            SizedBox(height: gap),
-            ModifyInput(),
-            SizedBox(height: gap),
-            DateInput(),
-            SizedBox(height: gap),
-            PrefixInput(),
-            SizedBox(height: gap),
-            PrefixNumInput(),
-            SizedBox(height: gap),
-            SuffixInput(),
-            SizedBox(height: gap),
-            SuffixNumInput(),
-            SizedBox(height: gap),
-            ExtensionInput(),
-          ],
+    return ViewStructure(
+      operateList: [
+        MatchInput(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
+          child: child,
         ),
-      ),
-      bottomActions: [
-        AdditionalOptions(),
-        SizedBox(height: gap),
-        ApplyMenu(),
+        ModifyInput(),
+        DateInput(),
+        PrefixInput(),
+        PrefixSerial(),
+        SuffixInput(),
+        SuffixSerial(),
+        ExtensionInput(),
+      ],
+      bottomAction: [
+        TwoCheckboxGroup(
+          children: [CaseFileCheckbox(), CaseExtensionCheckbox()],
+        ),
+        TwoCheckboxGroup(children: [AddFolderCheckbox(), AppendCheckbox()]),
+        AddFolderGroup(child: ApplyRenameBtn()),
       ],
     );
   }

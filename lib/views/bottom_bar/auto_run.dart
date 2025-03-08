@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/menu.dart';
+import 'package:once_power/cores/menu.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/provider/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:tray_manager/tray_manager.dart';
@@ -55,7 +55,7 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
       await windowManager.show();
       await windowManager.focus();
     } else if (menuItem.key == AppKeys.autoRun) {
-      ref.read(autoRunProvider.notifier).update();
+      ref.read(isAutoRunProvider.notifier).update();
     } else if (menuItem.key == AppKeys.exitApp) {
       await windowManager.destroy();
       exit(0);
@@ -64,25 +64,16 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
 
   @override
   Widget build(BuildContext context) {
-    final String tip = S.of(context).autoRun;
-
-    bool selected = ref.watch(autoRunProvider);
-
-    Future<void> removeTray() async {
-      await trayManager.destroy();
-    }
-
     Future<void> toggleView() async {
       bool isEnabled = await launchAtStartup.isEnabled();
-      bool cacheEnabled = ref.watch(autoRunProvider);
+      bool cacheEnabled = ref.watch(isAutoRunProvider);
       if (isEnabled != cacheEnabled) {
-        ref.read(autoRunProvider.notifier).update();
-        return;
+        return ref.read(isAutoRunProvider.notifier).update();
       }
       if (isEnabled) await launchAtStartup.disable();
       if (!isEnabled) await launchAtStartup.enable();
-      ref.read(autoRunProvider.notifier).update();
-      if (ref.watch(autoRunProvider)) {
+      ref.read(isAutoRunProvider.notifier).update();
+      if (ref.watch(isAutoRunProvider)) {
         await addTray();
       } else {
         await removeTray();
@@ -90,9 +81,9 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
     }
 
     return TooltipIcon(
-      message: tip,
-      icon: AppIcons.autoRun,
-      selected: selected,
+      tip: S.of(context).autoRun,
+      svg: AppIcons.autoRun,
+      selected: ref.watch(isAutoRunProvider),
       onTap: toggleView,
     );
   }

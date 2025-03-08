@@ -11,7 +11,8 @@ class AppNum {
   static const double inputH = 32;
   static const double inputP = 8;
   static const int maxFileNum = 150;
-  static const double defaultIconS = 24;
+  static const double defaultIconS = 22;
+  static const double dropdownIconS = 20;
 
   // TopBar
   static const double topBarH = 32;
@@ -26,16 +27,20 @@ class AppNum {
   static const double cSVDataMinH = 36;
   static const double presetMenuW = 144;
   static const double presetMenuItemH = 32;
+  static const double uploadCardW = 80;
 
   // ContentBar
-  static const double fileCardP = 6;
+  static const double fileCardP = 8;
   static const double fileCardH = 40;
   static const double deleteBtnS = 40;
-  static const double extensionW = 48;
+  // static const double extensionW = 48;
+  static const double extensionW = 40;
   static const double imageW = 136;
   static const double tileFontSize = 13;
-  static const double dropdownMenuP = 6;
+  // static const double dropdownMenuP = 6;
   static const double dropdownMenuW = 156;
+  static const double dropdownMenuWC = 112;
+  static const double dropdownMenuWE = 168;
   static const double dropdownMenuItemH = 36;
 
   // BottomBar

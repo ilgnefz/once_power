@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/views/action_bar/advance/dialog/advance_digit_input.dart';
+import 'package:once_power/widgets/action_bar/digit_input.dart';
 
 class NumInputGroup extends StatelessWidget {
   const NumInputGroup({
@@ -24,7 +24,7 @@ class NumInputGroup extends StatelessWidget {
         Text('${S.of(context).serialNumber}: '),
         const SizedBox(width: AppNum.smallG),
         Expanded(
-          child: AdvanceDigitInput(
+          child: DigitInput(
             value: digits,
             label: S.of(context).digits,
             onChanged: onDigitsChanged,
@@ -32,7 +32,7 @@ class NumInputGroup extends StatelessWidget {
         ),
         const SizedBox(width: AppNum.largeG),
         Expanded(
-          child: AdvanceDigitInput(
+          child: DigitInput(
             value: start,
             label: S.of(context).start,
             onChanged: onStartChanged,

@@ -95,12 +95,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelOperation": MessageLookupByLibrary.simpleMessage("Cancel Operation"),
     "capitalLetter": MessageLookupByLibrary.simpleMessage("CapitalLetter"),
-    "caseClassify": MessageLookupByLibrary.simpleMessage("Case classify"),
     "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
-    "caseExtension": MessageLookupByLibrary.simpleMessage("Case extension"),
-    "checkAscending": MessageLookupByLibrary.simpleMessage("CheckAscending"),
+    "caseExtension": MessageLookupByLibrary.simpleMessage("Case ext."),
+    "caseFile": MessageLookupByLibrary.simpleMessage("Case file"),
+    "checkAscending": MessageLookupByLibrary.simpleMessage("Check Ascending"),
     "checkCompleted": MessageLookupByLibrary.simpleMessage("Check completed"),
-    "checkDescending": MessageLookupByLibrary.simpleMessage("CheckDescending"),
+    "checkDescending": MessageLookupByLibrary.simpleMessage("Check Descending"),
     "checkFailed": MessageLookupByLibrary.simpleMessage("Check failed"),
     "checkUpdate": MessageLookupByLibrary.simpleMessage("Check Version"),
     "checking": MessageLookupByLibrary.simpleMessage("Checking"),
@@ -110,10 +110,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "circularSuffixDesc": MessageLookupByLibrary.simpleMessage(
       "Circular suffix content",
     ),
-    "classifiedFile": MessageLookupByLibrary.simpleMessage("Classified file"),
-    "classifiedFileDesc": MessageLookupByLibrary.simpleMessage(
-      "Create parent folders for files based on different types or modification times",
+    "classifyFolderError": MessageLookupByLibrary.simpleMessage(
+      "The type folder is empty!",
     ),
+    "classifyType": MessageLookupByLibrary.simpleMessage("Set type folder"),
     "completeContent": MessageLookupByLibrary.simpleMessage(
       "Please input the completed content",
     ),
@@ -122,19 +122,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
     "currentTask": MessageLookupByLibrary.simpleMessage("Task"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
-    "dateAscending": MessageLookupByLibrary.simpleMessage("DateAscending"),
+    "dateAscending": MessageLookupByLibrary.simpleMessage("Date Ascending"),
+    "dateClassification": MessageLookupByLibrary.simpleMessage(
+      "Date classification",
+    ),
+    "dateClassificationDesc": MessageLookupByLibrary.simpleMessage(
+      "Create a folder named after the date of file creation in the target folder and move it to that folder",
+    ),
     "dateDesc": MessageLookupByLibrary.simpleMessage("Named by date"),
-    "dateDescending": MessageLookupByLibrary.simpleMessage("DateDescending"),
+    "dateDescending": MessageLookupByLibrary.simpleMessage("Date Descending"),
     "decodeCSVError": MessageLookupByLibrary.simpleMessage(
       "File parsing error occurred",
     ),
-    "defaultSort": MessageLookupByLibrary.simpleMessage("DefaultSort"),
+    "defaultSort": MessageLookupByLibrary.simpleMessage("Default Sort"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteChecked": MessageLookupByLibrary.simpleMessage("Delete checked"),
     "deleteEmptyFolder": MessageLookupByLibrary.simpleMessage("Delete empty"),
     "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Delete all empty folders under the selected folder",
     ),
+    "deleteExtension": MessageLookupByLibrary.simpleMessage("Delete ext."),
     "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
     "deleteInfo": m0,
     "deleteInputHint": MessageLookupByLibrary.simpleMessage(
@@ -155,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteType": MessageLookupByLibrary.simpleMessage("Delete Type"),
     "delimiter": MessageLookupByLibrary.simpleMessage(", "),
     "detailTitle": MessageLookupByLibrary.simpleMessage("All File Extensions"),
+    "di": MessageLookupByLibrary.simpleMessage(""),
     "digit": MessageLookupByLibrary.simpleMessage("Digit"),
     "digits": MessageLookupByLibrary.simpleMessage("digits"),
     "disable": MessageLookupByLibrary.simpleMessage("Disable"),
@@ -164,12 +172,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
     "end": MessageLookupByLibrary.simpleMessage("end"),
     "errorImage": MessageLookupByLibrary.simpleMessage("Load Fail "),
-    "exifDate": MessageLookupByLibrary.simpleMessage("ExifDate"),
+    "exifDate": MessageLookupByLibrary.simpleMessage("Exif Date"),
     "existsError": m1,
     "exit": MessageLookupByLibrary.simpleMessage("Exit"),
     "exitApp": MessageLookupByLibrary.simpleMessage("Exit App"),
     "exitOperation": MessageLookupByLibrary.simpleMessage("Exit"),
-    "extension": MessageLookupByLibrary.simpleMessage("Type"),
+    "extension": MessageLookupByLibrary.simpleMessage("Extension"),
     "extensionDesc": MessageLookupByLibrary.simpleMessage(
       "Modify file extensions",
     ),
@@ -189,8 +197,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "fileName": MessageLookupByLibrary.simpleMessage("File name"),
     "fileType": MessageLookupByLibrary.simpleMessage("File"),
+    "fillBack": MessageLookupByLibrary.simpleMessage("Fill back"),
+    "fillFront": MessageLookupByLibrary.simpleMessage("Fill front"),
     "first": MessageLookupByLibrary.simpleMessage("First"),
     "folder": MessageLookupByLibrary.simpleMessage("Folder"),
+    "folderAscending": MessageLookupByLibrary.simpleMessage("Folder Ascending"),
+    "folderDescending": MessageLookupByLibrary.simpleMessage(
+      "Folder Descending",
+    ),
     "format": MessageLookupByLibrary.simpleMessage("Format"),
     "formatDesc1": MessageLookupByLibrary.simpleMessage("Name length"),
     "formatDesc2": MessageLookupByLibrary.simpleMessage("is filled with"),
@@ -207,15 +221,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "letters": MessageLookupByLibrary.simpleMessage("Letters"),
     "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
-    "log": MessageLookupByLibrary.simpleMessage("Log"),
-    "logDesc": MessageLookupByLibrary.simpleMessage(
-      "The target folder is not empty and is saved in the target folder, otherwise it is saved in the logs folder of the software directory",
-    ),
     "lowercase": MessageLookupByLibrary.simpleMessage("Lowercase"),
     "lowercaseLetters": MessageLookupByLibrary.simpleMessage(
       "LowercaseLetters",
     ),
     "match": MessageLookupByLibrary.simpleMessage("Matching"),
+    "matchExtension": MessageLookupByLibrary.simpleMessage("Match ext."),
     "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
     "matchLength": MessageLookupByLibrary.simpleMessage(
       "Number or length string",
@@ -231,8 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "moveToCenter": MessageLookupByLibrary.simpleMessage("To the center"),
     "moveToFirst": MessageLookupByLibrary.simpleMessage("To the first"),
     "moveToLast": MessageLookupByLibrary.simpleMessage("To the last"),
-    "nameAscending": MessageLookupByLibrary.simpleMessage("NameAscending"),
-    "nameDescending": MessageLookupByLibrary.simpleMessage("NameDescending"),
+    "nameAscending": MessageLookupByLibrary.simpleMessage("Name Ascending"),
+    "nameDescending": MessageLookupByLibrary.simpleMessage("Name Descending"),
     "newName": MessageLookupByLibrary.simpleMessage("New name"),
     "newVersionInfo": m5,
     "noConversion": MessageLookupByLibrary.simpleMessage("No"),
@@ -244,15 +255,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "notExist": MessageLookupByLibrary.simpleMessage("not exist"),
     "notExistsError": m6,
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
-    "openFolder": MessageLookupByLibrary.simpleMessage("Open Folder"),
-    "openFolderDesc": MessageLookupByLibrary.simpleMessage(
-      "Left mouse click on the file list to quickly open the folder where the file is located",
+    "openError": MessageLookupByLibrary.simpleMessage(
+      "Failed to open the folder containing the file",
     ),
+    "openPosition": MessageLookupByLibrary.simpleMessage("Open position"),
     "organize": MessageLookupByLibrary.simpleMessage("Organize"),
-    "organizeBtn": MessageLookupByLibrary.simpleMessage("Organize"),
-    "organizeFolderDesc": MessageLookupByLibrary.simpleMessage(
-      "Move all added files or all sub-files under a folder into the destination folder. If the destination folder is empty and you choose to use the top-level parent folder, all files will be moved to the top-level parent folder of the selected files in addition to the disk root folder",
-    ),
+    "organizeBtn": MessageLookupByLibrary.simpleMessage("Move"),
     "organizeLogs": MessageLookupByLibrary.simpleMessage("organize logs"),
     "organizeMenu": MessageLookupByLibrary.simpleMessage("OrganizeMenu"),
     "organizedSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -268,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "originalName": MessageLookupByLibrary.simpleMessage("Original name"),
     "other": MessageLookupByLibrary.simpleMessage("Other"),
     "parentsName": MessageLookupByLibrary.simpleMessage("FolderName"),
+    "place": MessageLookupByLibrary.simpleMessage("place"),
     "position": MessageLookupByLibrary.simpleMessage("position"),
     "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
     "prefixContent": MessageLookupByLibrary.simpleMessage("Add prefix content"),
@@ -283,6 +292,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter the preset name",
     ),
     "punctuation": MessageLookupByLibrary.simpleMessage("Punctuation"),
+    "random": MessageLookupByLibrary.simpleMessage("Random"),
+    "randomInputHint": MessageLookupByLibrary.simpleMessage(
+      "Please enter custom content",
+    ),
     "regeditTip": MessageLookupByLibrary.simpleMessage(
       "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)",
     ),
@@ -305,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "replaceTitle": MessageLookupByLibrary.simpleMessage("Replace Content"),
     "reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
     "restartTip": MessageLookupByLibrary.simpleMessage("Restart takes effect"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveConfig": MessageLookupByLibrary.simpleMessage("Saved Configurations"),
     "saveLog": MessageLookupByLibrary.simpleMessage(
       "Save log (The default is in the logs folder under the software folder)",
@@ -329,7 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Successfully deleted all selected files",
     ),
     "successEmptyInfo": MessageLookupByLibrary.simpleMessage(
-      "Successfully deleted all empty folders",
+      "Successfully deleted all empty folders under the selected folder",
     ),
     "successful": MessageLookupByLibrary.simpleMessage("Renaming successful"),
     "successfulNum": m9,
@@ -341,11 +355,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "swapSuffixDesc": MessageLookupByLibrary.simpleMessage(
       "Swap suffixes and incremental number positions",
     ),
-    "tableInfo": MessageLookupByLibrary.simpleMessage(
-      "Selected original name column: ",
-    ),
+    "tableInfo": MessageLookupByLibrary.simpleMessage("Original name column: "),
     "takeTime": MessageLookupByLibrary.simpleMessage("Time"),
     "targetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
+    "targetFolderError": MessageLookupByLibrary.simpleMessage(
+      "The target folder is empty!",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "tip": MessageLookupByLibrary.simpleMessage("Drag the File/Folder here"),
     "tipImage": MessageLookupByLibrary.simpleMessage(
@@ -355,13 +370,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "to": MessageLookupByLibrary.simpleMessage("to"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
     "toggleCase": MessageLookupByLibrary.simpleMessage("Toggle"),
-    "topParentFolder": MessageLookupByLibrary.simpleMessage(
-      "Top parent folder",
+    "topParentFolder": MessageLookupByLibrary.simpleMessage("Top folder"),
+    "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
+      "Move the file to a top-level parent folder other than the disk root directory",
     ),
     "totalInstructions": m10,
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("Get episode info"),
-    "typeAscending": MessageLookupByLibrary.simpleMessage("TypeAscending"),
-    "typeDescending": MessageLookupByLibrary.simpleMessage("TypeDescending"),
+    "typeAscending": MessageLookupByLibrary.simpleMessage("Type Ascending"),
+    "typeDescending": MessageLookupByLibrary.simpleMessage("Type Descending"),
     "undo": MessageLookupByLibrary.simpleMessage("Undo"),
     "undoFailed": MessageLookupByLibrary.simpleMessage("Undo rename failed"),
     "undoFailedNum": m11,
@@ -371,11 +387,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "uploadCSV": MessageLookupByLibrary.simpleMessage(
       "Upload CSV and TXT files with \",\" separating old and new names, or OPLOG file generated by OncePower",
     ),
-    "uploadDesc": MessageLookupByLibrary.simpleMessage("Upload .txt file"),
+    "uploadDesc": MessageLookupByLibrary.simpleMessage(
+      "Upload. txt files separated by spaces or line breaks for each name",
+    ),
     "uppercase": MessageLookupByLibrary.simpleMessage("Uppercase"),
     "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
-    "useTimeClassification": MessageLookupByLibrary.simpleMessage(
-      "Classify using file modification time",
+    "useRule": MessageLookupByLibrary.simpleMessage("Type classification"),
+    "useRuleDesc": MessageLookupByLibrary.simpleMessage(
+      "Move files of different types to different folders",
     ),
     "video": MessageLookupByLibrary.simpleMessage("Video"),
     "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),

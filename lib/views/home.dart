@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/config/global.dart';
+import 'package:once_power/config/app.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/file.dart';
-import 'package:once_power/provider/select.dart';
-import 'package:once_power/utils/regedit.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/cores/file.dart';
+import 'package:once_power/providers/toggle.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -27,7 +26,7 @@ class _HomeViewState extends ConsumerState<HomeView>
     with WindowListener, ShortcutMenuListener {
   void _init() async {
     await windowManager.setPreventClose(true);
-    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
+    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit);
     if (useRegedit) {
       removeGlobalRegedit();
       createLocalRegedit();
@@ -62,7 +61,7 @@ class _HomeViewState extends ConsumerState<HomeView>
   }
 
   void toggleRegedit() {
-    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit) ?? false;
+    bool useRegedit = StorageUtil.getBool(AppKeys.isUseRegedit);
     if (useRegedit) {
       removeLocalRegedit();
       createGlobalRegedit();
@@ -72,7 +71,7 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   void onWindowClose() async {
     saveOrNo();
-    bool isPowerBoot = ref.watch(autoRunProvider);
+    bool isPowerBoot = ref.watch(isAutoRunProvider);
     if (isPowerBoot) {
       await minimizeWindow();
     } else {
@@ -83,8 +82,8 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   Future<void> onShortcutMenuClicked(String key, String path) async {
     if (key == AppText.name) {
-      if (!ref.watch(appendModeProvider)) {
-        ref.read(appendModeProvider.notifier).update();
+      if (!ref.watch(isAppendModeProvider)) {
+        ref.read(isAppendModeProvider.notifier).update();
       }
       await formatPath(ref, [path]);
       await windowManager.setSkipTaskbar(false);

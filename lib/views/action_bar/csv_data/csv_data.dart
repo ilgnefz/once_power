@@ -2,14 +2,24 @@ import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/core/core.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/views/action_bar/csv_data/csv_data_tile.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/additional_options.dart';
-import 'package:once_power/views/action_bar/rename/tool_menu/apply_menu.dart';
+import 'package:once_power/cores/csv_rename.dart';
+import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/input.dart';
+import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/toggle.dart';
+import 'package:once_power/providers/value.dart';
+import 'package:once_power/views/action_bar/csv_data/delete_extension_checkbox.dart';
+import 'package:once_power/views/action_bar/csv_data/match_extension_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/apply_rename_btn.dart';
+import 'package:once_power/widgets/action_bar/add_file_group.dart';
+import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
 import 'package:once_power/widgets/action_bar/view_structure.dart';
+import 'package:once_power/widgets/common/easy_checkbox.dart';
+
+import 'csv_data_card.dart';
+import 'csv_data_top_bar.dart';
 
 class CsvDataView extends ConsumerWidget {
   const CsvDataView({super.key});
@@ -18,65 +28,59 @@ class CsvDataView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final List<String> titles = ['A', 'B'];
 
-    final TextStyle tileTextStyle = const TextStyle(
+    TextStyle textStyle = const TextStyle(
             fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)
         .useSystemChineseFont();
 
-    List<EasyRenameInfo> list = ref.watch(cSVDataProvider);
+    List<CsvRenameInfo> list = ref.watch(cSVDataProvider);
 
     void toggleCSVNameColumn(String value) {
       ref.read(cSVNameColumnProvider.notifier).update(value);
       cSVDataRename(ref);
     }
 
-    return ViewStructure(
-      topAction: Column(
-        children: [
-          Row(
-            children: titles
-                .map((e) => Expanded(
-                      child: InkWell(
-                        onTap: () => toggleCSVNameColumn(e),
-                        child: Container(
-                          height: AppNum.cSVDataTileH,
-                          color: Theme.of(context)
-                              .primaryColor
-                              .withValues(alpha: .4),
-                          alignment: Alignment.center,
-                          child: Text(e, style: tileTextStyle),
-                        ),
-                      ),
-                    ))
-                .toList(),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, index) => ColoredBox(
-                color: index % 2 == 0 ? Colors.white : Colors.grey.shade100,
-                child: Row(
-                  children: [
-                    CsvDataTile(
-                      index: index,
-                      flag: 'A',
-                      text: list[index].nameA,
-                    ),
-                    CsvDataTile(
-                      index: index,
-                      flag: 'B',
-                      text: list[index].nameB,
-                    ),
-                  ],
+    return Column(
+      children: [
+        CsvDataTopBar(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
+          child: Row(
+            children: titles.map((e) {
+              return Expanded(
+                child: InkWell(
+                  onTap: () => toggleCSVNameColumn(e),
+                  child: Container(
+                    height: AppNum.cSVDataTileH,
+                    color: Theme.of(context).primaryColor.withValues(alpha: .4),
+                    alignment: Alignment.center,
+                    child: Text(e, style: textStyle),
+                  ),
                 ),
+              );
+            }).toList(),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index) => Container(
+              margin: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
+              color: index % 2 == 0 ? Colors.white : Colors.grey.shade100,
+              child: Row(
+                children: [
+                  CsvDataCard(index: index, flag: 'A', text: list[index].nameA),
+                  CsvDataCard(index: index, flag: 'B', text: list[index].nameB),
+                ],
               ),
             ),
           ),
-        ],
-      ),
-      bottomActions: const [
-        AdditionalOptions(show: false),
-        SizedBox(height: AppNum.mediumG),
-        ApplyMenu(),
+        ),
+        SizedBox(height: AppNum.smallG),
+        TwoCheckboxGroup(
+          children: [DeleteExtensionCheckbox(), MatchExtensionCheckbox()],
+        ),
+        TwoCheckboxGroup(children: [AddFolderCheckbox(), AppendCheckbox()]),
+        AddFolderGroup(child: ApplyRenameBtn()),
       ],
     );
   }

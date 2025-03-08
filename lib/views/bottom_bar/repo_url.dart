@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/widgets/common/svg_icon.dart';
+import 'package:once_power/widgets/base/svg_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RepoUrl extends StatefulWidget {
@@ -15,20 +15,19 @@ class RepoUrl extends StatefulWidget {
 class _RepoUrlState extends State<RepoUrl> {
   bool flag = false;
 
+  void onHover(bool value) {
+    flag = value;
+    setState(() {});
+  }
+
+  void onTap() async => await launchUrl(Uri.parse(widget.url));
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onHover: (value) {
-        flag = value;
-        setState(() {});
-      },
-      onTap: () async {
-        await launchUrl(Uri.parse(widget.url));
-      },
-      child: SvgIcon(
-        widget.icon,
-        color: flag ? null : Colors.grey,
-      ),
+      onHover: onHover,
+      onTap: onTap,
+      child: SvgIcon(widget.icon, color: flag ? null : Colors.grey),
     );
   }
 }

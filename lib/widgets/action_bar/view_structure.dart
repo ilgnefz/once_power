@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/constants.dart';
+import 'package:once_power/constants/num.dart';
+import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
+import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
 
 class ViewStructure extends StatelessWidget {
   const ViewStructure({
     super.key,
-    required this.topAction,
-    required this.bottomActions,
+    required this.operateList,
+    required this.bottomAction,
   });
 
-  final Widget topAction;
-  final List<Widget> bottomActions;
+  final List<Widget> operateList;
+  final List<Widget> bottomAction;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: topAction),
-        const SizedBox(height: AppNum.mediumG),
-        ...bottomActions,
-      ],
+    return Padding(
+      padding: EdgeInsets.only(top: AppNum.mediumG),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(spacing: AppNum.mediumG, children: operateList),
+            ),
+          ),
+          ...bottomAction
+        ],
+      ),
     );
   }
 }

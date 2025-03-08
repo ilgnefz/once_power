@@ -5,64 +5,83 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/core/rename.dart';
+import 'package:once_power/cores/rename.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/input.dart';
-import 'package:once_power/widgets/common/base_input.dart';
+import 'package:once_power/models/file_info.dart';
+import 'package:once_power/widgets/action_bar/operate_item.dart';
+import 'package:once_power/widgets/action_bar/upload_file_card.dart';
+import 'package:once_power/widgets/base/base_input.dart';
+import 'package:once_power/widgets/base/easy_tooltip.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
-import 'package:once_power/widgets/common/custom_tooltip.dart';
+import 'package:once_power/widgets/common/tooltip_icon.dart';
+import 'package:path/path.dart' as path;
+import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
+import '../../cores/update_name.dart';
+
+// TODO: 更改为 StatelessWidget
 class UploadInput extends ConsumerWidget {
   const UploadInput({
     super.key,
-    required this.controller,
+    required this.label,
+    required this.tip,
+    required this.selected,
+    required this.onToggle,
     required this.hintText,
-    required this.show,
-    this.onChanged,
-    required this.type,
+    required this.controller,
+    required this.showClear,
+    required this.info,
+    required this.onUpload,
+    required this.onClear,
   });
 
-  final TextEditingController controller;
+  final String label;
+  final String tip;
+  final bool selected;
+  final void Function() onToggle;
   final String hintText;
-  final bool show;
-  final void Function(String)? onChanged;
-  final FileUploadType type;
+  final TextEditingController controller;
+  final bool showClear;
+  final UploadMarkInfo? info;
+  final void Function(File file) onUpload;
+  final void Function() onClear;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String label = S.of(context).text;
-
     void uploadFile() async {
-      final xType = XTypeGroup(label: label, extensions: const ['txt']);
+      final xType =
+          XTypeGroup(label: S.of(context).text, extensions: const ['txt']);
       final XFile? result = await openFile(acceptedTypeGroups: [xType]);
       if (result != null) {
         File file = File(result.path);
-        var content = file.readAsStringSync();
-        if (type == FileUploadType.prefix) {
-          ref.watch(prefixControllerProvider).text = content;
-        }
-        if (type == FileUploadType.suffix) {
-          ref.watch(suffixControllerProvider).text = content;
-        }
+        onUpload(file);
       }
-      updateName(ref);
     }
 
-    return BaseInput(
-      controller: controller,
-      hintText: hintText,
-      show: show,
-      onChanged: onChanged,
-      action: EasyTooltip(
-        message: S.of(context).uploadDesc,
-        textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
-            .useSystemChineseFont(),
-        child: ClickIcon(
+    return OperateItem(
+      label: label,
+      icon: AppIcons.cycle,
+      tip: tip,
+      selected: selected,
+      onToggle: onToggle,
+      child: BaseInput(
+        hintText: hintText,
+        controller: controller,
+        // padding: EdgeInsets.only(left: AppNum.inputP, right: AppNum.smallG),
+        showClear: showClear || info != null,
+        onClear: () {
+          onClear();
+          updateName(ref);
+        },
+        onChanged: (value) => updateName(ref),
+        trailing: TooltipIcon(
+          tip: S.of(context).uploadDesc,
+          placement: Placement.right,
           icon: Icons.upload_file_rounded,
           color: AppColors.unselectIcon,
           onTap: uploadFile,
         ),
+        leading: info != null ? UploadNameCard(info: info!) : null,
       ),
     );
   }

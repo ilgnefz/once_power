@@ -2,58 +2,26 @@ import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/core/core.dart';
+import 'package:once_power/cores/list.dart';
+import 'package:once_power/cores/rename.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/widgets/common/easy_text_btn.dart';
+import 'package:once_power/models/file_enum.dart';
+import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/list.dart';
+import 'package:once_power/views/content_bar/detail_extension_area.dart';
+import 'package:once_power/views/content_bar/path_classify_list.dart';
+import 'package:once_power/widgets/action_bar/easy_btn.dart';
 
-import 'detail_ext_area.dart';
-import 'path_classify_list.dart';
+import '../../cores/update_name.dart';
 
 class TypeDetailPanel extends ConsumerWidget {
-  const TypeDetailPanel(this.type, {super.key});
+  const TypeDetailPanel({super.key, this.isPath = false});
 
-  final int type;
+  final bool isPath;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String titleLabel =
-        type == 0 ? S.of(context).detailTitle : S.of(context).allFolderTitle;
-    final String removeUncheckLabel = S.of(context).removeUnselected;
-    final String removeCheckLabel = S.of(context).removeSelected;
-    final String checkReserveLabel = S.of(context).selectReserve;
-    final String selectSwitchLabel = S.of(context).selectAllSwitch;
-    final String exitOperationLabel = S.of(context).exitOperation;
-
-    Map<FileClassify, List<String>> extMap =
-        ref.watch(extensionListMapProvider);
-
-    TextStyle titleStyle = TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-      color: Theme.of(context).primaryColor,
-    ).useSystemChineseFont();
-
     const double gepM = AppNum.mediumG;
-
-    void removeUncheck() {
-      ref.read(fileListProvider.notifier).removeUncheck();
-      if (ref.watch(fileListProvider).isEmpty) {
-        Navigator.pop(context);
-      }
-    }
-
-    void removeCheck() {
-      ref.read(fileListProvider.notifier).removeCheck();
-      if (ref.watch(fileListProvider).isEmpty) {
-        Navigator.pop(context);
-      }
-    }
-
-    void quit() {
-      Navigator.pop(context);
-    }
 
     return UnconstrainedBox(
       child: Material(
@@ -68,39 +36,72 @@ class TypeDetailPanel extends ConsumerWidget {
           ),
           child: Column(
             children: [
-              Text(titleLabel, style: titleStyle),
+              Text(
+                isPath
+                    ? S.of(context).allFolderTitle
+                    : S.of(context).detailTitle,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ).useSystemChineseFont(),
+              ),
               const SizedBox(height: AppNum.largeG),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: type == 0
-                        ? extMap.entries.map((e) {
-                            return DetailExtArea(
-                              label: e.key.value,
+                child: isPath
+                    ? PathClassifyList()
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: ref
+                              .watch(extensionListMapProvider)
+                              .entries
+                              .map((e) {
+                            return DetailExtensionArea(
+                              label: e.key.label,
                               extList: e.value,
                             );
-                          }).toList()
-                        : [PathClassifyList()],
-                  ),
-                ),
+                          }).toList(),
+                        ),
+                      ),
               ),
               const SizedBox(height: gepM),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: gepM,
                 children: [
-                  EasyTextBtn(removeUncheckLabel, onTap: removeUncheck),
-                  EasyTextBtn(removeCheckLabel, onTap: removeCheck),
-                  EasyTextBtn(
-                    checkReserveLabel,
+                  EasyBtn(
+                    S.of(context).removeUnselected,
+                    onTap: () {
+                      ref.read(fileListProvider.notifier).removeUncheck();
+                      if (ref.watch(fileListProvider).isEmpty) {
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
+                  EasyBtn(
+                    S.of(context).removeSelected,
+                    onTap: () {
+                      ref.read(fileListProvider.notifier).removeCheck();
+                      if (ref.watch(fileListProvider).isEmpty) {
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
+                  EasyBtn(
+                    S.of(context).selectReserve,
                     onTap: () {
                       ref.read(fileListProvider.notifier).checkReverse();
                       updateName(ref);
-                      updateExtension(ref);
                     },
                   ),
-                  EasyTextBtn(selectSwitchLabel, onTap: () => selectAll(ref)),
-                  EasyTextBtn(exitOperationLabel, onTap: quit),
+                  EasyBtn(
+                    S.of(context).selectAllSwitch,
+                    onTap: () => selectAll(ref),
+                  ),
+                  EasyBtn(
+                    S.of(context).exitOperation,
+                    onTap: () => Navigator.pop(context),
+                  ),
                 ],
               ),
             ],

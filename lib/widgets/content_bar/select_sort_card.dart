@@ -2,21 +2,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/core/core.dart';
-import 'package:once_power/model/file_info.dart';
-import 'package:once_power/provider/file.dart';
-import 'package:once_power/views/content_bar/rename/rename_tile_tooltip.dart';
+import 'package:once_power/cores/menu.dart';
+import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/list.dart';
+
+import 'rename_tile_tooltip.dart';
 
 class SelectSortCard extends ConsumerWidget {
   const SelectSortCard({
     super.key,
-    required this.files,
+    required this.index,
     required this.file,
     required this.child,
     this.onDoubleTap,
   });
 
-  final List<FileInfo> files;
+  // final List<FileInfo> files;
+  final int index;
   final FileInfo file;
   final Widget child;
   final void Function()? onDoubleTap;
@@ -53,16 +56,16 @@ class SelectSortCard extends ConsumerWidget {
         } else if (isShiftPressed) {
           List<FileInfo> sortList = ref.read(sortListProvider);
           int beginIndex = 0;
-          int endIndex = files.indexOf(file);
+          // int endIndex = files.indexOf(file);
           if (sortSelectList.isNotEmpty) {
             beginIndex = sortList.indexOf(sortSelectList.first);
           }
           List<FileInfo> newSelectList = [];
-          if (beginIndex < endIndex) {
-            newSelectList.addAll(sortList.sublist(beginIndex, endIndex + 1));
+          if (beginIndex < index) {
+            newSelectList.addAll(sortList.sublist(beginIndex, index + 1));
           } else {
             newSelectList
-                .addAll(sortList.sublist(endIndex, beginIndex + 1).reversed);
+                .addAll(sortList.sublist(index, beginIndex + 1).reversed);
           }
           ref.read(sortSelectListProvider.notifier).clear();
           ref.read(sortSelectListProvider.notifier).addAll(newSelectList);

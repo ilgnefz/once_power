@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/model/enum.dart';
-
-import 'advance_digit_input.dart';
+import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/widgets/action_bar/digit_input.dart';
 
 class AddPositionRadio extends StatelessWidget {
   const AddPositionRadio({
@@ -37,16 +36,11 @@ class AddPositionRadio extends StatelessWidget {
         ),
         Text(S.of(context).addAfter),
         Spacer(),
-        Radio(
-          groupValue: addPosition,
-          value: AddPosition.position,
-          onChanged: (value) => positionChanged(value!),
-        ),
         SizedBox(
-          width: 100,
-          child: AdvanceDigitInput(
+          width: 120,
+          child: DigitInput(
             value: posIndex,
-            label: '',
+            label: S.of(context).place,
             min: 1,
             onChanged: posIndexChanged,
           ),
