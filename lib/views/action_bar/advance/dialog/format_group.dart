@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:once_power/widgets/common/easy_text_dropdown.dart';
 
 class FormatGroup extends StatelessWidget {

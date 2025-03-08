@@ -1,22 +1,10 @@
-import 'package:cross_file/cross_file.dart';
-import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/file.dart';
-import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
-import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/sort_enum.dart';
-import 'package:once_power/providers/file.dart';
-import 'package:once_power/providers/list.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/value.dart';
-import 'package:once_power/utils/verify.dart';
-import 'package:once_power/views/content_bar/grid_view/content_grid.dart';
 import 'package:once_power/views/content_bar/list_view/content_list_item.dart';
-import 'package:once_power/views/content_bar/empty_content.dart';
 import 'package:once_power/widgets/content_bar/easy_scrollbar.dart';
 
 class ContentList extends ConsumerWidget {

@@ -9,16 +9,13 @@ import 'package:once_power/cores/rename.dart';
 import 'package:once_power/models/extension.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';
 import 'package:path/path.dart' as path;
 
 import 'format.dart';
-import 'log.dart';
 
 String getExtension(String filePath) {
   bool isFile = FileSystemEntity.isFileSync(filePath);

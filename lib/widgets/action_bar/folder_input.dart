@@ -1,17 +1,8 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/organize.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/providers/input.dart';
-import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/base/base_input.dart';
-import 'package:once_power/widgets/base/easy_tooltip.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 
 class FolderInput extends StatefulWidget {

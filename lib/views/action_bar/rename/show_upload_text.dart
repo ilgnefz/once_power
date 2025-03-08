@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/widgets/action_bar/easy_btn.dart';
-
-import '../../../cores/update_name.dart';
 
 class ShowUploadText extends StatefulWidget {
   const ShowUploadText({super.key, required this.info});

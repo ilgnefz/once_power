@@ -3,8 +3,7 @@ import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/utils/info.dart';
-import 'package:once_power/utils/match.dart';
+import 'package:once_power/utils/utils.dart';
 
 String reserveModeName(WidgetRef ref, String name) {
   String match = ref.watch(matchControllerProvider).text;

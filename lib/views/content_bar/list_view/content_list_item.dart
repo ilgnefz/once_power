@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/list.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/views/content_bar/remove_btn.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 import 'package:once_power/widgets/common/one_line_text.dart';
 import 'package:once_power/widgets/content_bar/select_sort_card.dart';
-
-import '../../../cores/update_name.dart';
 
 class ContentListItem extends ConsumerWidget {
   const ContentListItem({super.key, required this.index, required this.file});

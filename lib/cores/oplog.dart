@@ -1,22 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:charset/charset.dart';
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/models/app_enum.dart';
-import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/notification.dart';
-import 'package:once_power/providers/list.dart';
-import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
-
-import '../utils/log.dart';
 
 Future<void> createLog(
     String filePath, String fileName, List<String> logs) async {

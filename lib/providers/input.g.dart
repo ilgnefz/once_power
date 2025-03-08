@@ -99,40 +99,6 @@ final prefixClearProvider =
 );
 
 typedef _$PrefixClear = AutoDisposeNotifier<bool>;
-String _$prefixLengthControllerHash() =>
-    r'0b3d95c01a4e2377ef2bb11e7e0d066555110a36';
-
-/// See also [PrefixLengthController].
-@ProviderFor(PrefixLengthController)
-final prefixLengthControllerProvider = AutoDisposeNotifierProvider<
-    PrefixLengthController, TextEditingController>.internal(
-  PrefixLengthController.new,
-  name: r'prefixLengthControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixLengthControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$PrefixLengthController = AutoDisposeNotifier<TextEditingController>;
-String _$prefixStartControllerHash() =>
-    r'f29c3a6e6f7fbdf3945f8aaaf1a43c1574d0f089';
-
-/// See also [PrefixStartController].
-@ProviderFor(PrefixStartController)
-final prefixStartControllerProvider = AutoDisposeNotifierProvider<
-    PrefixStartController, TextEditingController>.internal(
-  PrefixStartController.new,
-  name: r'prefixStartControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixStartControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$PrefixStartController = AutoDisposeNotifier<TextEditingController>;
 String _$suffixControllerHash() => r'4260433f271503dcf96c9cc66225261bece10a67';
 
 /// See also [SuffixController].

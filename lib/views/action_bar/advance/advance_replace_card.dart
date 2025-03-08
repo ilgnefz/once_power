@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
-import 'package:once_power/models/models.dart';
+import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/widgets/action_bar/advance_rich_text.dart';
 
 class AdvanceReplaceCard extends StatelessWidget {

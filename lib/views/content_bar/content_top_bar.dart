@@ -10,7 +10,6 @@ import 'package:once_power/views/content_bar/count_checkbox.dart';
 import 'package:once_power/views/content_bar/filter_btn.dart';
 import 'package:once_power/views/content_bar/remove_btn.dart';
 import 'package:once_power/views/content_bar/sort_btn.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
 
 class ContentTopBar extends ConsumerWidget {
   const ContentTopBar({super.key});

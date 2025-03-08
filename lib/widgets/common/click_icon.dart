@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/widgets/base/svg_icon.dart';
 import 'package:once_power/widgets/common/easy_icon.dart';
 
 class ClickIcon extends StatelessWidget {

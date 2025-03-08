@@ -1,9 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/file.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/sort_enum.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file.g.dart';

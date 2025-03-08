@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/icons.dart';
-import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/providers/input.dart';
@@ -16,8 +15,6 @@ import 'package:once_power/utils/verify.dart';
 import 'package:once_power/widgets/action_bar/operate_item.dart';
 import 'package:once_power/widgets/base/base_input.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
-
-import '../../../cores/update_name.dart';
 
 class ModifyInput extends ConsumerWidget {
   const ModifyInput({super.key});

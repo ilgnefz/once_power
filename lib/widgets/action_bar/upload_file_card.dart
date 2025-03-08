@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/colors.dart';
-import 'package:once_power/constants/num.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/widgets/base/svg_icon.dart';
 import 'package:once_power/widgets/common/one_line_text.dart';
-
-import '../../constants/icons.dart';
-import '../base/svg_icon.dart';
 
 class UploadNameCard extends StatelessWidget {
   const UploadNameCard({super.key, required this.info});

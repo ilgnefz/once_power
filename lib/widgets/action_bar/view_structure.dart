@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
-import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
 
 class ViewStructure extends StatelessWidget {
   const ViewStructure({

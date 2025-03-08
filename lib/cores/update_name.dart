@@ -1,37 +1,20 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/advance.dart';
-import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/rename.dart';
-import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
-import 'package:once_power/models/extension.dart';
-import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/notification.dart';
-import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/list.dart';
-import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/providers/value.dart';
-import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
-import 'package:once_power/utils/log.dart';
-import 'package:once_power/utils/verify.dart';
 import 'package:path/path.dart' as path;
 
 import 'csv_rename.dart';
-import 'notification.dart';
 import 'oplog.dart';
 import 'rename_replace.dart';
 import 'rename_reserve.dart';
-import 'sort.dart';
 
 void updateName(WidgetRef ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
@@ -107,7 +90,8 @@ void normalUpdateName(WidgetRef ref) {
   }
 }
 
-Future<void> updateShowInfo(WidgetRef ref, FileInfo file, String newPath) async{
+Future<void> updateShowInfo(
+    WidgetRef ref, FileInfo file, String newPath) async {
   String id = file.id;
   String newName = path.basenameWithoutExtension(newPath);
   String newExtension = getExtension(newPath);

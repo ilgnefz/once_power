@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/widgets/action_bar/operator_btn.dart';
 import 'package:once_power/widgets/base/base_input.dart';

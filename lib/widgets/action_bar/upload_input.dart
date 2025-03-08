@@ -1,25 +1,18 @@
 import 'dart:io';
 
-import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/widgets/action_bar/operate_item.dart';
 import 'package:once_power/widgets/action_bar/upload_file_card.dart';
 import 'package:once_power/widgets/base/base_input.dart';
-import 'package:once_power/widgets/base/easy_tooltip.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
-import 'package:path/path.dart' as path;
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
-import '../../cores/update_name.dart';
-
-// TODO: 更改为 StatelessWidget
 class UploadInput extends ConsumerWidget {
   const UploadInput({
     super.key,

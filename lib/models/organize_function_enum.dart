@@ -7,5 +7,3 @@ extension OrganizeFunctionEnumExtension on OrganizeFunction {
   bool get isTime => this == OrganizeFunction.time;
   bool get isNone => this == OrganizeFunction.none;
 }
-
-//TODO: 没用删除

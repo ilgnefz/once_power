@@ -1,6 +1,3 @@
-import 'package:once_power/models/file_enum.dart';
-import 'package:once_power/models/file_info.dart';
-
 class RuleTypeValue {
   final String image;
   final String video;

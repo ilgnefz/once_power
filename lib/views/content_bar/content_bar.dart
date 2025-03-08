@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +6,13 @@ import 'package:once_power/constants/keys.dart' show AppKeys;
 import 'package:once_power/cores/file.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/list.dart';
-import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
 
+import 'content_top_bar.dart';
 import 'empty_content.dart';
 import 'grid_view/content_grid.dart';
 import 'list_view/content_list.dart';
-import 'content_top_bar.dart';
 
 class ContentBar extends ConsumerStatefulWidget {
   const ContentBar({super.key});

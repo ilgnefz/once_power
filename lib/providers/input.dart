@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/keys.dart';
-import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'input.g.dart';
 
-// TODO: 去掉注释
 @riverpod
 class MatchController extends _$MatchController {
   @override
@@ -113,36 +111,36 @@ class PrefixClear extends _$PrefixClear {
 // }
 
 //  TODO: Delete
-@riverpod
-class PrefixLengthController extends _$PrefixLengthController {
-  @override
-  TextEditingController build() {
-    int text = StorageUtil.getInt(AppKeys.prefixSerialLength) ?? 0;
-    String unit = S.current.digits;
-    TextEditingController controller =
-        TextEditingController(text: '$text$unit');
-    ref.onDispose(() {
-      controller.dispose();
-    });
-    return controller;
-  }
-}
+// @riverpod
+// class PrefixLengthController extends _$PrefixLengthController {
+//   @override
+//   TextEditingController build() {
+//     int text = StorageUtil.getInt(AppKeys.prefixSerialLength) ?? 0;
+//     String unit = S.current.digits;
+//     TextEditingController controller =
+//         TextEditingController(text: '$text$unit');
+//     ref.onDispose(() {
+//       controller.dispose();
+//     });
+//     return controller;
+//   }
+// }
 
 //  TODO: Delete
-@riverpod
-class PrefixStartController extends _$PrefixStartController {
-  @override
-  TextEditingController build() {
-    int text = StorageUtil.getInt(AppKeys.prefixSerialStart) ?? 0;
-    String unit = S.current.start;
-    TextEditingController controller =
-        TextEditingController(text: '$text$unit');
-    ref.onDispose(() {
-      controller.dispose();
-    });
-    return controller;
-  }
-}
+// @riverpod
+// class PrefixStartController extends _$PrefixStartController {
+//   @override
+//   TextEditingController build() {
+//     int text = StorageUtil.getInt(AppKeys.prefixSerialStart) ?? 0;
+//     String unit = S.current.start;
+//     TextEditingController controller =
+//         TextEditingController(text: '$text$unit');
+//     ref.onDispose(() {
+//       controller.dispose();
+//     });
+//     return controller;
+//   }
+// }
 
 @riverpod
 class SuffixController extends _$SuffixController {

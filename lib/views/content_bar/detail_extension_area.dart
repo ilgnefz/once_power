@@ -2,12 +2,10 @@ import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
-
-import '../../cores/update_name.dart';
 
 class DetailExtensionArea extends ConsumerWidget {
   const DetailExtensionArea({

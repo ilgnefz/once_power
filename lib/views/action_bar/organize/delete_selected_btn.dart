@@ -14,7 +14,6 @@ import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
 import '../../../cores/list.dart';
 import '../../../providers/file.dart';
-import '../../../providers/list.dart';
 import '../advance/dialog/easy_dialog.dart';
 
 class DeleteSelectedBtn extends ConsumerWidget {
@@ -25,7 +24,7 @@ class DeleteSelectedBtn extends ConsumerWidget {
     List<InfoDetail> errorList = [];
     bool saveLog = ref.watch(isSaveLogProvider);
 
-    Future<void> deleteSelectedFolders(FileInfo folder) async{
+    Future<void> deleteSelectedFolders(FileInfo folder) async {
       try {
         Directory(folder.filePath).deleteSync(recursive: true);
         removeOne(ref, folder.id);
@@ -33,12 +32,12 @@ class DeleteSelectedBtn extends ConsumerWidget {
       } catch (e) {
         errorList.add(InfoDetail(
           file: folder.filePath,
-          message: '${S.of(context).deleteFailed}: $e',
+          message: '${S.current.deleteFailed}: $e',
         ));
       }
     }
 
-    Future<void> deleteSelectedFiles(FileInfo file) async{
+    Future<void> deleteSelectedFiles(FileInfo file) async {
       try {
         File(file.filePath).deleteSync();
         removeOne(ref, file.id);
@@ -46,7 +45,7 @@ class DeleteSelectedBtn extends ConsumerWidget {
       } catch (e) {
         errorList.add(InfoDetail(
           file: file.filePath,
-          message: '${S.of(context).deleteFailed}: $e',
+          message: '${S.current.deleteFailed}: $e',
         ));
       }
     }
@@ -85,7 +84,8 @@ class DeleteSelectedBtn extends ConsumerWidget {
         if (!isFile) deleteSelectedFolders(file);
       }
       showDeleteNotification(errorList);
-      if (ref.watch(isSaveLogProvider)) await removeLogCache(S.current.deleteLog);
+      if (ref.watch(isSaveLogProvider))
+        await removeLogCache(S.current.deleteLog);
     }
 
     return EasyElevatedBtn(

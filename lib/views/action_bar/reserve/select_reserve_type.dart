@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/action_bar/easy_chip.dart';
-
-import '../../../cores/update_name.dart';
 
 class SelectReserveType extends ConsumerWidget {
   const SelectReserveType({super.key});

@@ -2,18 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/file.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/providers/value.dart';
 import 'package:once_power/widgets/action_bar/upload_input.dart';
 import 'package:path/path.dart' as path;
-
-import '../../../cores/update_name.dart';
 
 class PrefixInput extends ConsumerWidget {
   const PrefixInput({super.key});

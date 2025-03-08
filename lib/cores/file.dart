@@ -78,7 +78,6 @@ List<String> getAllPath(String folder, [bool addSubfolder = false]) {
   return children;
 }
 
-// TODO：使用多线程
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();

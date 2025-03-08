@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/widgets/base/svg_icon.dart';
 
 class EasyTextDropdown<T> extends StatelessWidget {
   const EasyTextDropdown(

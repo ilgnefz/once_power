@@ -1,6 +1,3 @@
-import 'file_enum.dart';
-import 'file_info.dart';
-
 const filter = ['ini', 'lnk'];
 
 const audio = [

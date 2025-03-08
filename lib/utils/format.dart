@@ -1,7 +1,3 @@
-import 'package:once_power/models/two_re_enum.dart';
-import 'package:path/path.dart' as path;
-
-// TODO: 有些代码不适合在这
 String formatDateTime(DateTime dateTime) {
   String formattedDateTime = '${dateTime.year}'
       '${dateTime.month.toString().padLeft(2, '0')}'
@@ -14,7 +10,6 @@ String formatDateTime(DateTime dateTime) {
 
 String formatNum(int n, int width) {
   if (width == 0) return '';
-  // TODO: 是否严严格一点返回数字
   if (n.toString().length > width) return n.toString();
   return n.toString().padLeft(width, '0');
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
-import 'package:once_power/cores/rename.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';

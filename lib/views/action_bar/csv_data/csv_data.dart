@@ -4,9 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/csv_rename.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
-import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';
 import 'package:once_power/views/action_bar/csv_data/delete_extension_checkbox.dart';
 import 'package:once_power/views/action_bar/csv_data/match_extension_checkbox.dart';
@@ -15,8 +13,6 @@ import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
 import 'package:once_power/views/action_bar/rename/apply_rename_btn.dart';
 import 'package:once_power/widgets/action_bar/add_file_group.dart';
 import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
-import 'package:once_power/widgets/action_bar/view_structure.dart';
-import 'package:once_power/widgets/common/easy_checkbox.dart';
 
 import 'csv_data_card.dart';
 import 'csv_data_top_bar.dart';

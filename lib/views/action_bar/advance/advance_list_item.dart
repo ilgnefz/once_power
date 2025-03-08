@@ -5,13 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/advance.dart';
-import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/advance_menu.dart';
-import 'package:once_power/models/models.dart';
+import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
-import '../../../cores/update_name.dart';
 import 'advance_add_card.dart';
 import 'advance_delete_card.dart';
 import 'advance_replace_card.dart';

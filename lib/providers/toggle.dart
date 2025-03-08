@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/utils/regedit.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/file_enum.dart';

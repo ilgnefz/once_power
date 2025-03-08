@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/sort_enum.dart';
 import 'package:once_power/providers/file.dart';
-import 'package:once_power/providers/list.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/value.dart';
 import 'package:once_power/views/content_bar/grid_view/content_grid_item.dart';
 import 'package:once_power/widgets/content_bar/easy_scrollbar.dart';

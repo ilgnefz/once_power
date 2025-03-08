@@ -1,7 +1,6 @@
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/generated/l10n.dart';
 
-// TODO: 添加文件夹排序
 enum SortType {
   defaultSort,
   nameAscending,

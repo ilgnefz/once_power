@@ -3,10 +3,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/cores/oplog.dart';
-import 'package:once_power/cores/rename.dart';
-import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/models/extension.dart' as FileType;
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
@@ -15,10 +12,7 @@ import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/utils/format.dart';
-import 'package:once_power/utils/info.dart';
-import 'package:once_power/utils/storage.dart';
-import 'package:once_power/utils/verify.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
 import 'notification.dart';
@@ -202,8 +196,6 @@ Future<InfoDetail?> organize(
     ref.read(fileListProvider.notifier).updateFilePath(file.id, newPath);
     return null;
   } catch (e) {
-    // TODO: 保存错误日志
-    // if (ref.watch(isSaveLogProvider)) tempSaveLog(ref, oldPath, newPath);
     return moveErrorInfo(e, isSame, oldPath, newPath);
   }
 }

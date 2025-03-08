@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/update_name.dart';
@@ -8,12 +10,10 @@ import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/utils/verify.dart';
-import 'dart:io';
 import 'package:path/path.dart' as path;
 
 import 'list.dart';
 import 'notification.dart';
-import 'rename.dart';
 
 List<FileInfo> tempSortSelectList = [];
 MovePosition tempMP = MovePosition.idle;
