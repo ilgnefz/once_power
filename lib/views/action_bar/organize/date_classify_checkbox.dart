@@ -4,8 +4,8 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 
-class TimeClassifyCheckbox extends ConsumerWidget {
-  const TimeClassifyCheckbox({super.key});
+class DateClassifyCheckbox extends ConsumerWidget {
+  const DateClassifyCheckbox({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -4,8 +4,10 @@ import 'package:once_power/cores/input.dart';
 import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/select.dart';
 
 import 'right_menu_item.dart';
 
@@ -27,6 +29,7 @@ class RightClickMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     return UnconstrainedBox(
       alignment: Alignment.topLeft,
       child: Container(
@@ -53,16 +56,18 @@ class RightClickMenu extends ConsumerWidget {
                 color: Colors.black,
                 callback: () => openFileLocation(e.filePath),
               ),
-              RightMenuItem(
-                label: S.of(context).matchName,
-                color: Colors.black,
-                callback: () => autoMatchInput(ref, e.name),
-              ),
-              RightMenuItem(
-                label: S.of(context).modifyName,
-                color: Colors.black,
-                callback: () => autoModifyInput(ref, e.name),
-              ),
+              if (!isOrganize)
+                RightMenuItem(
+                  label: S.of(context).matchName,
+                  color: Colors.black,
+                  callback: () => autoMatchInput(ref, e.name),
+                ),
+              if (!isOrganize)
+                RightMenuItem(
+                  label: S.of(context).modifyName,
+                  color: Colors.black,
+                  callback: () => autoModifyInput(ref, e.name),
+                ),
               RightMenuItem(
                 label: S.of(context).moveToFirst,
                 color: Colors.black,

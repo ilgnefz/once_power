@@ -19,6 +19,8 @@ class MatchController extends _$MatchController {
     return controller;
   }
 
+  void updateText(String text) => state.text = text;
+
   void clear() {
     state.clear();
     ref.read(matchClearProvider.notifier).update(false);

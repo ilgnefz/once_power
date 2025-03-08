@@ -9,7 +9,7 @@ import 'package:once_power/widgets/action_bar/add_file_group.dart';
 import 'package:once_power/widgets/action_bar/two_checkbox_group.dart';
 
 import 'apply_organize_btn.dart';
-import 'classify_file_checkbox.dart';
+import 'date_classify_checkbox.dart';
 import 'delete_empty_btn.dart';
 import 'delete_selected_btn.dart';
 import 'open_rule_checkbox.dart';
@@ -31,7 +31,7 @@ class OrganizeMenu extends StatelessWidget {
           children: [RuleSettingBtn(), OpenRuleCheckbox()],
         ),
         TwoCheckboxGroup(
-          children: [TimeClassifyCheckbox(), TopParentsCheckbox()],
+          children: [TopParentsCheckbox(), DateClassifyCheckbox()],
         ),
         TwoCheckboxGroup(children: [AddFolderCheckbox(), AppendCheckbox()]),
         Padding(

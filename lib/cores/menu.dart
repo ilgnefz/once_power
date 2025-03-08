@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/select.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/content_bar/right_click_menu.dart';
 import 'package:tray_manager/tray_manager.dart';
@@ -38,7 +40,8 @@ Future<void> showRightMenu(
 ) async {
   const double safeW = 12, safeH = 32;
   Locale? loe = StorageUtil.getLocale(AppKeys.locale);
-  double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * 8;
+  int count = ref.watch(currentModeProvider).isOrganize ? 6 : 8;
+  double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * count;
   Size size = await windowManager.getSize();
   // debugPrint('窗口尺寸：$size，鼠标坐标：${details.globalPosition}');
   if (!context.mounted) return;
