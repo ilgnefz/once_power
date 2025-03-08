@@ -23,7 +23,6 @@ class ContentGrid extends ConsumerWidget {
       child: EasyScrollbar(
         controller: controller,
         child: ReorderableGridView.extent(
-          cacheExtent: 2,
           controller: controller,
           padding: const EdgeInsets.only(right: AppNum.defaultP),
           onReorder: (oldIndex, newIndex) =>
