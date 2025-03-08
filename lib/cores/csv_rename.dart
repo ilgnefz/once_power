@@ -62,6 +62,16 @@ Future<List<CsvRenameInfo>> decodeCSVData(XFile file) async {
     }
   }
   List<String> splitList = content.trim().split('\n');
+  bool isLegal = splitList.every((e) => e.split(',').length == 2);
+  if (!isLegal) {
+    NotificationInfo(
+      type: NotificationType.error,
+      title: S.current.decodeCSVError,
+      message: S.current.decodeCSVError2,
+      time: 5,
+    ).show();
+    return [];
+  }
   List<CsvRenameInfo> list = [];
   for (String value in splitList) {
     List<String> temp = value.split(',').map((e) => e.trim()).toList();

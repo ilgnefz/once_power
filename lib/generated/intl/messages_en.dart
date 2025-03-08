@@ -134,6 +134,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "decodeCSVError": MessageLookupByLibrary.simpleMessage(
       "File parsing error occurred",
     ),
+    "decodeCSVError2": MessageLookupByLibrary.simpleMessage(
+      "Not a compliant CSV file",
+    ),
     "defaultSort": MessageLookupByLibrary.simpleMessage("Default Sort"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteChecked": MessageLookupByLibrary.simpleMessage("Delete checked"),

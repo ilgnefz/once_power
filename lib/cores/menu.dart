@@ -40,7 +40,10 @@ Future<void> showRightMenu(
 ) async {
   const double safeW = 12, safeH = 32;
   Locale? loe = StorageUtil.getLocale(AppKeys.locale);
-  int count = ref.watch(currentModeProvider).isOrganize ? 6 : 8;
+  FunctionMode mode = ref.watch(currentModeProvider);
+  bool show =
+      (mode.isReplace || mode.isReserve) && ref.watch(cSVDataProvider).isEmpty;
+  int count = show ? 8 : 6;
   double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * count;
   Size size = await windowManager.getSize();
   // debugPrint('窗口尺寸：$size，鼠标坐标：${details.globalPosition}');
@@ -55,7 +58,8 @@ Future<void> showRightMenu(
       double y = details.globalPosition.dy;
       if (x + width > size.width - safeW) x -= width;
       if (y + height > size.height - safeH) y -= height;
-      return RightClickMenu(width: width, height: height, x: x, y: y, e: e);
+      return RightClickMenu(
+          width: width, height: height, x: x, y: y, e: e, show: show);
     },
   );
 }

@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dateDesc": MessageLookupByLibrary.simpleMessage("以日期命名"),
     "dateDescending": MessageLookupByLibrary.simpleMessage("日期降序"),
     "decodeCSVError": MessageLookupByLibrary.simpleMessage("文件解析出错了"),
+    "decodeCSVError2": MessageLookupByLibrary.simpleMessage("不是合规的 CSV 文件"),
     "defaultSort": MessageLookupByLibrary.simpleMessage("默认排序"),
     "delete": MessageLookupByLibrary.simpleMessage("删除"),
     "deleteChecked": MessageLookupByLibrary.simpleMessage("删除选中文件"),

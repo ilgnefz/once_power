@@ -990,6 +990,16 @@ class S {
     );
   }
 
+  /// `Not a compliant CSV file`
+  String get decodeCSVError2 {
+    return Intl.message(
+      'Not a compliant CSV file',
+      name: 'decodeCSVError2',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `All Extension`
   String get allExtension {
     return Intl.message(

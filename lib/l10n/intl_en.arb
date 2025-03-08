@@ -122,6 +122,7 @@
   "errorImage": "Load Fail ",
   "addSubfolder": "Gets the subfolder of the folder",
   "decodeCSVError": "File parsing error occurred",
+  "decodeCSVError2":"Not a compliant CSV file",
   "allExtension": "All Extension",
   "detailTitle": "All File Extensions",
   "selectReserve": "Reverse Selection",

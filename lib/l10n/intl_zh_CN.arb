@@ -122,6 +122,7 @@
   "errorImage": "加载失败 ",
   "addSubfolder": "获取文件夹的子文件夹",
   "decodeCSVError": "文件解析出错了",
+  "decodeCSVError2": "不是合规的 CSV 文件",
   "allExtension": "所有扩展",
   "detailTitle": "所有文件扩展",
   "selectReserve": "反选文件",
