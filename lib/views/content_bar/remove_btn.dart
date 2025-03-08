@@ -12,7 +12,6 @@ class RemoveBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      // padding: EdgeInsets.symmetric(horizontal: AppNum.mediumG),
       padding: EdgeInsets.only(right: 4),
       child: ClickIcon(
         size: 32,

@@ -74,7 +74,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                 ),
                 DialogBaseInput(
                   value: newValue,
-                  enable: !location.isPosition && type.isNoConversion,
+                  enable: type.isNoConversion,
                   hintText: isFormat
                       ? S.of(context).completeContent
                       : S.of(context).replaceInputHint2,

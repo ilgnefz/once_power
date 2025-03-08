@@ -4,8 +4,6 @@ import 'dart:typed_data';
 import 'package:charset/charset.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/rename.dart';
-import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -43,28 +41,10 @@ void cSVDataRename(WidgetRef ref) {
     ref
         .read(fileListProvider.notifier)
         .updateName(file.id, matching != badInfo ? value(matching) : file.name);
-    // if (isA) {
-    //   CsvRenameInfo matching = csvList.firstWhere((e) => e.nameA == file.name,
-    //       orElse: () => badInfo);
-    //   if (matching != badInfo) {
-    //     ref.read(fileListProvider.notifier).updateName(file.id, matching.nameB);
-    //   } else {
-    //     ref.read(fileListProvider.notifier).updateName(file.id, file.name);
-    //   }
-    // } else {
-    //   CsvRenameInfo matching = csvList.firstWhere((e) => e.nameB == file.name,
-    //       orElse: () => badInfo);
-    //   if (matching != badInfo) {
-    //     ref.read(fileListProvider.notifier).updateName(file.id, matching.nameA);
-    //   } else {
-    //     ref.read(fileListProvider.notifier).updateName(file.id, file.name);
-    //   }
-    // }
   }
 }
 
 Future<List<CsvRenameInfo>> decodeCSVData(XFile file) async {
-  // NotificationInfo? errInfo;
   final Uint8List bytes = await file.readAsBytes();
   String content = '';
   try {
@@ -88,7 +68,6 @@ Future<List<CsvRenameInfo>> decodeCSVData(XFile file) async {
     list.add(CsvRenameInfo(nameA: temp[0], nameB: temp[1]));
   }
   return list;
-  // return list.where((e) => e.nameA != '' || e.nameB != '').toList();
 }
 
 Future<List<CsvRenameInfo>> decodeOPLogData(XFile file) async {

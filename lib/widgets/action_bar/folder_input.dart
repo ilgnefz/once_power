@@ -43,8 +43,6 @@ class _FolderInputState extends State<FolderInput> {
     controller = widget.controller ?? TextEditingController(text: widget.value);
     controller.addListener(() {
       showClear = controller.text != '';
-      print('是空的吗？${controller.text.isNotEmpty}');
-      print('值是？${controller.text}');
       widget.onChanged?.call(controller.text);
     });
     setState(() {});

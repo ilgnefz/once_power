@@ -88,23 +88,9 @@ class TargetFolderInput extends ConsumerWidget {
         trailing: TooltipIcon(
           tip: S.of(context).targetFolder,
           icon: Icons.folder_open_rounded,
-          // color: Theme.of(context).primaryColor,
-          // size: 32,
-          // iconSize: 24,
           onTap: selectTargetFolder,
         ),
       ),
     );
-
-    // return FolderInput(
-    //   hintText: S.of(context).targetFolder,
-    //   controller: controller,
-    //   enable: !ref.watch(isRuleOrganizeProvider),
-    //   onChanged: onChanged,
-    //   onKeyEvent: onKeyEvent,
-    //   showClear: ref.watch(folderClearProvider),
-    //   onClear: onClear,
-    //   onTap: selectTargetFolder,
-    // );
   }
 }

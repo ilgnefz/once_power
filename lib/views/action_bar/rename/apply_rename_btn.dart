@@ -29,7 +29,6 @@ class ApplyRenameBtn extends ConsumerWidget {
         FileInfo file,
       ) async {
         // 获取带有扩展名的新文件名
-        // String newFullName = getNameWithExt(file.newName, file.newExtension);
         String oldPath = file.tempPath == '' ? file.filePath : file.tempPath;
         String newPath = getNewPath(file);
         if (file.filePath == newPath) return null;

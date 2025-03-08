@@ -20,17 +20,12 @@ void updateName(WidgetRef ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool hasCSV = ref.watch(cSVDataProvider).isNotEmpty;
   if (hasCSV) {
-    // print('core/rename: 我来了 CSV');
-    // resetExtension(ref);
     cSVDataRename(ref);
   }
   if (mode.isAdvance && !hasCSV) {
-    // print('core/rename: 我来了 Advance');
-    // resetExtension(ref);
     advanceUpdateName(ref);
   }
   if ((mode.isReplace || mode.isReserve) && !hasCSV) {
-    // print('core/rename: 我来了 Normal');
     normalUpdateName(ref);
   }
   updateExtension(ref);
@@ -104,12 +99,10 @@ Future<void> updateShowInfo(
     ref.read(fileListProvider.notifier).updateOriginName(id, newName);
   }
   ref.read(fileListProvider.notifier).updateFilePath(id, newPath);
-  // ref.read(fileListProvider.notifier).updateExtension(id, newExtension);
   if (file.extension != newExtension) {
     ref.read(fileListProvider.notifier).updateOriginExtension(id, newExtension);
   }
   if (file.tempPath != '') {
     ref.read(fileListProvider.notifier).updateTempPath(id, '');
   }
-  // updateExtension(ref, file);
 }

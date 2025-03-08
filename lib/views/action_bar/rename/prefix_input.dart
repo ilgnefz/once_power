@@ -27,7 +27,6 @@ class PrefixInput extends ConsumerWidget {
       hintText: S.of(context).prefixContent,
       controller: ref.watch(prefixControllerProvider),
       showClear: ref.watch(prefixClearProvider),
-      // fileName: ref.watch(prefixFileNameProvider),
       info: ref.watch(prefixUploadMarkProvider),
       onUpload: (File file) async {
         String fileName = path.basename(file.path);

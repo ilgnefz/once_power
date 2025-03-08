@@ -29,7 +29,6 @@ class AppConfig {
     );
 
     await PackInfo.init();
-    // PackageInfo packageInfo = await PackageInfo.fromPlatform();
     launchAtStartup.setup(
       appName: PackInfo.appName,
       appPath: Platform.resolvedExecutable,

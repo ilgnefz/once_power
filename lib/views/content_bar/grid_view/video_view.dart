@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/views/content_bar/grid_view/play_btn.dart';
 import 'package:video_player/video_player.dart';
 
 import 'loading_image.dart';
@@ -42,11 +41,8 @@ class _VideoViewState extends State<VideoView> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _controller.initialize(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return AspectRatio(
+    return _controller.value.isInitialized
+        ? AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: ColoredBox(
               color: Colors.black,
@@ -55,16 +51,33 @@ class _VideoViewState extends State<VideoView> {
                   VideoPlayer(_controller),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: PlayBtn(controller: _controller),
+                    child: IconButton(
+                      icon: Icon(
+                        _controller.value.isPlaying
+                            ? Icons.pause_circle_filled_rounded
+                            : Icons.play_circle_fill_rounded,
+                        color: Colors.white,
+                        shadows: [
+                          BoxShadow(
+                            color: Colors.black54,
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _controller.value.isPlaying
+                              ? _controller.pause()
+                              : _controller.play();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
-          );
-        } else {
-          return const Center(child: LoadingImage(isPreview: false));
-        }
-      },
-    );
+          )
+        : const Center(child: LoadingImage(isPreview: false));
   }
 }

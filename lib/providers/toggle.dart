@@ -200,7 +200,7 @@ class IsAddFolder extends _$IsAddFolder {
 @riverpod
 class IsAddSubfolder extends _$IsAddSubfolder {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isAddSubfolder) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isAddSubfolder);
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isAddSubfolder, state);
@@ -210,7 +210,7 @@ class IsAddSubfolder extends _$IsAddSubfolder {
 @riverpod
 class CaseFile extends _$CaseFile {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isCaseFile) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isCaseFile);
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isCaseFile, state);
@@ -220,7 +220,7 @@ class CaseFile extends _$CaseFile {
 @riverpod
 class CaseExtension extends _$CaseExtension {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isCaseExtension) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isCaseExtension);
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isCaseExtension, state);
@@ -230,7 +230,7 @@ class CaseExtension extends _$CaseExtension {
 @riverpod
 class ClassifyFile extends _$ClassifyFile {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isClassifyFile) ?? false;
+  bool build() => StorageUtil.getBool(AppKeys.isClassifyFile);
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isClassifyFile, state);

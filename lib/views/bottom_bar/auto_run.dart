@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/menu.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
-import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -42,11 +42,6 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
   void onTrayIconRightMouseDown() {
     trayManager.popUpContextMenu();
   }
-
-  // @override
-  // void onTrayIconRightMouseUp() {
-  //
-  // }
 
   @override
   void onTrayMenuItemClick(MenuItem menuItem) async {

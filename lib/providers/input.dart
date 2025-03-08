@@ -12,17 +12,12 @@ class MatchController extends _$MatchController {
     TextEditingController controller = TextEditingController();
     controller.addListener(() {
       ref.read(matchClearProvider.notifier).update(controller.text.isNotEmpty);
-      // ref.read(currentReserveTypeProvider.notifier).clear();
     });
     ref.onDispose(() {
       controller.dispose();
     });
     return controller;
   }
-
-  // void updateText(String text) {
-  //   state.text = text;
-  // }
 
   void clear() {
     state.clear();
@@ -80,8 +75,6 @@ class PrefixController extends _$PrefixController {
     return controller;
   }
 
-  // void updateText(String text) => state.text = text;
-
   void clear() {
     state.clear();
     ref.read(prefixClearProvider.notifier).update(false);
@@ -94,53 +87,6 @@ class PrefixClear extends _$PrefixClear {
   bool build() => false;
   void update(bool value) => state = value;
 }
-
-// @riverpod
-// class DateLengthController extends _$DateLengthController {
-//   @override
-//   TextEditingController build() {
-//     int text = StorageUtil.getInt(AppKeys.dateLength) ?? 8;
-//     String unit = S.current.digits;
-//     TextEditingController controller =
-//         TextEditingController(text: '$text$unit');
-//     ref.onDispose(() {
-//       controller.dispose();
-//     });
-//     return controller;
-//   }
-// }
-
-//  TODO: Delete
-// @riverpod
-// class PrefixLengthController extends _$PrefixLengthController {
-//   @override
-//   TextEditingController build() {
-//     int text = StorageUtil.getInt(AppKeys.prefixSerialLength) ?? 0;
-//     String unit = S.current.digits;
-//     TextEditingController controller =
-//         TextEditingController(text: '$text$unit');
-//     ref.onDispose(() {
-//       controller.dispose();
-//     });
-//     return controller;
-//   }
-// }
-
-//  TODO: Delete
-// @riverpod
-// class PrefixStartController extends _$PrefixStartController {
-//   @override
-//   TextEditingController build() {
-//     int text = StorageUtil.getInt(AppKeys.prefixSerialStart) ?? 0;
-//     String unit = S.current.start;
-//     TextEditingController controller =
-//         TextEditingController(text: '$text$unit');
-//     ref.onDispose(() {
-//       controller.dispose();
-//     });
-//     return controller;
-//   }
-// }
 
 @riverpod
 class SuffixController extends _$SuffixController {

@@ -24,7 +24,6 @@ class ErrorImage extends StatelessWidget {
         if (isPreview) ...[
           Stack(
             children: <Widget>[
-              // Stroked text as border.
               Text(
                 file,
                 style: TextStyle(
@@ -36,7 +35,6 @@ class ErrorImage extends StatelessWidget {
                     ..color = Colors.white,
                 ).useSystemChineseFont(),
               ),
-              // Solid text as fill.
               Text(
                 file,
                 style: const TextStyle(

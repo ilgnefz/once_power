@@ -84,8 +84,9 @@ class DeleteSelectedBtn extends ConsumerWidget {
         if (!isFile) deleteSelectedFolders(file);
       }
       showDeleteNotification(errorList);
-      if (ref.watch(isSaveLogProvider))
+      if (ref.watch(isSaveLogProvider)) {
         await removeLogCache(S.current.deleteLog);
+      }
     }
 
     return EasyElevatedBtn(

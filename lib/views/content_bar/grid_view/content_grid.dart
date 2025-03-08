@@ -18,18 +18,6 @@ class ContentGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ScrollController controller = ref.watch(scrollBarControllerProvider);
 
-    // final list = files.map((e) => e.name).toList();
-
-    // void reorderList(int oldIndex, int newIndex) {
-    // if (newIndex > oldIndex) newIndex -= 1;
-    // FileInfo item = files.elementAt(oldIndex);
-    // ref.read(fileListProvider.notifier).removeAt(oldIndex);
-    // ref.read(fileListProvider.notifier).insertAt(newIndex, item);
-    // ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
-    // updateName(ref);
-    // updateExtension(ref);
-    // }
-
     return GestureDetector(
       onTap: ref.read(sortSelectListProvider.notifier).clear,
       child: EasyScrollbar(

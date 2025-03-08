@@ -55,38 +55,6 @@ FileClassify getFileClassify(String extension) {
   return FileClassify.other;
 }
 
-// (String, String) getPrefixSuffix(
-//     WidgetRef ref, int index, String prefix, String suffix) {
-//   // String prefix = ref.watch(prefixControllerProvider).text;
-//   String prefixSerial = formatNum(ref.watch(prefixSerialStartProvider) + index,
-//       ref.watch(prefixSerialLengthProvider));
-//   // String suffix = ref.watch(suffixControllerProvider).text;
-//   String suffixSerial = formatNum(ref.watch(suffixSerialStartProvider) + index,
-//       ref.watch(suffixSerialLengthProvider));
-//   String newPrefix = ref.watch(isSwapPrefixProvider)
-//       ? prefixSerial + prefix
-//       : prefix + prefixSerial;
-//   String newSuffix = ref.watch(isSwapSuffixProvider)
-//       ? suffixSerial + suffix
-//       : suffix + suffixSerial;
-//   return (newPrefix, newSuffix);
-// }
-
-// String getActualPrefix(
-//     WidgetRef ref, int index, ClassifyMap classifyMap, FileInfo file) {
-//   bool isSwap = ref.watch(isSwapPrefixProvider);
-//   String prefix = ref.watch(prefixControllerProvider).text;
-//   if (ref.watch(caseFileProvider) && !ref.watch(caseExtensionProvider)) {
-//     index = calculateIndex(classifyMap, file.type.label, file);
-//   }
-//   if (ref.watch(caseExtensionProvider)) {
-//     index = calculateIndex(classifyMap, file.extension, file);
-//   }
-//   int startIndex = ref.watch(prefixSerialStartProvider) + index;
-//   String prefixSerial =
-//       formatNum(startIndex, ref.watch(prefixSerialLengthProvider));
-//   return isSwap ? '$prefixSerial$prefix' : '$prefix$prefixSerial';
-// }
 (bool, String, int, int) getPrefixInfo(WidgetRef ref) {
   bool swapPrefix = ref.watch(isSwapPrefixProvider);
   String prefixStr = ref.watch(prefixControllerProvider).text;
@@ -154,23 +122,6 @@ String getMarkStr(
   return isSwap ? '$serial$str' : '$str$serial';
 }
 
-// (Map<String, dynamic>, int) calculateIndex(
-//   Map<String, dynamic> classifyMap,
-//   String key,
-//   FileInfo file,
-// ) {
-//   List<String> keyList = classifyMap.keys.toList();
-//   if (!keyList.contains(key)) {
-//     classifyMap[key] = [];
-//     classifyMap[key]!.add(file);
-//   } else {
-//     if (!classifyMap[key]!.contains(file)) {
-//       classifyMap[key]!.add(file);
-//     }
-//   }
-//   return (classifyMap, classifyMap[key]!.indexOf(file));
-// }
-
 /// DeepSeek-R1 生成的代码
 (Map<String, dynamic>, int) calculateIndex(
   Map<String, dynamic> classifyMap,
@@ -199,8 +150,9 @@ String getMarkStr(
         currentLevel[key] = {'_files': existingFiles};
       }
 
-      if (!currentLevel.containsKey(key))
+      if (!currentLevel.containsKey(key)) {
         currentLevel[key] = <String, dynamic>{};
+      }
       currentLevel = currentLevel[key] as Map<String, dynamic>;
     }
   }
@@ -312,7 +264,6 @@ String getTopPath(String filePath) {
   if (Platform.isWindows) {
     if (pathList.isEmpty) return filePath;
     final disk = pathList[0];
-    print(disk);
 // 仅C盘处理系统目录
     if (disk.toUpperCase() == 'C:') {
       // 处理根目录通用文件夹（如 C:\Pictures）

@@ -32,11 +32,12 @@ class OperatorBtn extends StatelessWidget {
           onTap: onTap,
           child: Container(
             width: 20,
-            // height: 32,
             decoration: BoxDecoration(borderRadius: radius),
             alignment: Alignment.center,
-            // TODO color: Color(0xFFF5F5F5),
-            child: Text(operator, style: const TextStyle(fontSize: 18)),
+            child: Text(
+              operator,
+              style: const TextStyle(fontSize: 18),
+            ),
           ),
         ),
       ),

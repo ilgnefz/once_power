@@ -27,8 +27,6 @@ int formatVersionNum(String version) {
   return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
 }
 
-// String getFolderName(String folder) => path.basename(folder);
-
 String formatVideoTime(Duration total, Duration current) {
   String currentM = formatNum(current.inMinutes, 2);
   String currentS = formatNum(current.inSeconds.remainder(60), 2);

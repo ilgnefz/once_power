@@ -135,8 +135,6 @@ String advanceAddName(
   AddPosition addPosition = menu.addPosition;
   int posIndex = menu.posIndex;
   if (!addType.isSerialNumber) {
-    // name = addPosition.isBefore ? '$value$name' : '$name$value';
-    // value = addType.isParentsName ? folder : value;
     if (addType.isParentsName) value = folder;
     if (addType.isRandom) {
       value = getRandomValue(menu.randomValue, menu.randomLen);

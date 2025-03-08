@@ -64,7 +64,6 @@ class _CheckVersionState extends ConsumerState<CheckVersion> {
 
   @override
   Widget build(BuildContext context) {
-    // final String checkComplete = S.of(context).checkCompleted;
     if (ref.watch(hasNewVersionProvider)) return const DownloadTextBtn();
     return TextBtn(
       text: check ? S.of(context).checking : S.of(context).checkUpdate,

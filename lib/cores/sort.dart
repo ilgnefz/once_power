@@ -90,17 +90,6 @@ void openFileLocation(String filePath) async {
   }
 }
 
-// void reorderList(
-//     WidgetRef ref, List<FileInfo> files, int oldIndex, int newIndex) {
-//   FileInfo item = files.removeAt(oldIndex);
-//   files.insert(newIndex, item);
-//   ref.watch(fileListProvider);
-//   ref.read(fileListProvider.notifier).clear();
-//   ref.read(fileListProvider.notifier).addAll(files);
-//   ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
-//   updateName(ref);
-// }
-
 /// 处理混合语言排序
 List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   List<FileInfo> chineseList = [];

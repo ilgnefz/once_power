@@ -60,7 +60,6 @@ class UploadInput extends ConsumerWidget {
       child: BaseInput(
         hintText: hintText,
         controller: controller,
-        // padding: EdgeInsets.only(left: AppNum.inputP, right: AppNum.smallG),
         showClear: showClear || info != null,
         onClear: () {
           onClear();

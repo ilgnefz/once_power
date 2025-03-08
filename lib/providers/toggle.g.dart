@@ -406,7 +406,7 @@ final isAddFolderProvider =
 );
 
 typedef _$IsAddFolder = AutoDisposeNotifier<bool>;
-String _$isAddSubfolderHash() => r'22c926d5a8b2f689137560ecf7ed5383d1c3457f';
+String _$isAddSubfolderHash() => r'262c12c4e599c8bcf20d5c98aa6dc54aaeeb1c7d';
 
 /// See also [IsAddSubfolder].
 @ProviderFor(IsAddSubfolder)
@@ -422,7 +422,7 @@ final isAddSubfolderProvider =
 );
 
 typedef _$IsAddSubfolder = AutoDisposeNotifier<bool>;
-String _$caseFileHash() => r'a36bec2dc7ad321f0b55f5355f5eaf448337233e';
+String _$caseFileHash() => r'aaf3dc4b086e907a8f2cc37b98b06162541d5286';
 
 /// See also [CaseFile].
 @ProviderFor(CaseFile)
@@ -436,7 +436,7 @@ final caseFileProvider = AutoDisposeNotifierProvider<CaseFile, bool>.internal(
 );
 
 typedef _$CaseFile = AutoDisposeNotifier<bool>;
-String _$caseExtensionHash() => r'402c1726227ec941dc5f148433cd763453522eb5';
+String _$caseExtensionHash() => r'0c411933500e9b21ba79b10a80efa9716683207c';
 
 /// See also [CaseExtension].
 @ProviderFor(CaseExtension)
@@ -452,7 +452,7 @@ final caseExtensionProvider =
 );
 
 typedef _$CaseExtension = AutoDisposeNotifier<bool>;
-String _$classifyFileHash() => r'b8ae1430b92e2961778016bb9af6b076a34fd630';
+String _$classifyFileHash() => r'fb2e574c8749fac9b7f491f694e8cf67429fc31b';
 
 /// See also [ClassifyFile].
 @ProviderFor(ClassifyFile)

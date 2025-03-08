@@ -92,31 +92,3 @@ class UploadMarkInfo {
     return 'UploadMarkInfo{name: $name, content: $content, isPrefix: $isPrefix}';
   }
 }
-
-// class TempFileInfo {
-//   final FileInfo file;
-//   final String tempPath;
-//   final String oldPath;
-//   final String newPath;
-//
-//   TempFileInfo({
-//     required this.file,
-//     required this.tempPath,
-//     required this.oldPath,
-//     required this.newPath,
-//   });
-//
-//   @override
-//   String toString() {
-//     return 'TempFileInfo{file: $file, tempPath: $tempPath, oldPath: $oldPath, newPath: $newPath}';
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'file': file.toJson(),
-//       'tempPath': tempPath,
-//       'oldPath': oldPath,
-//       'newPath': newPath,
-//     };
-//   }
-// }

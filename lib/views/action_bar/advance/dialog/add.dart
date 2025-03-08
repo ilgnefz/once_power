@@ -93,6 +93,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           ),
           AddTypeRadio(
             type: type,
+            len: randomLen,
             typeChanged: (value) {
               type = value;
               setState(() {});
@@ -130,7 +131,6 @@ class _DeleteViewState extends ConsumerState<AddView> {
           addPosition: position,
           posIndex: posIndex,
         );
-        print(add);
         if (widget.menu != null) {
           ref.read(advanceMenuListProvider.notifier).update(id, add);
         } else {

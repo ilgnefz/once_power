@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/widgets/content_bar/select_sort_card.dart';
 

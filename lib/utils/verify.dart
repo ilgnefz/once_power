@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/extension.dart';
 import 'package:once_power/models/file_enum.dart';
+import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
@@ -89,4 +90,12 @@ bool isSameDisk(String oldPath, String newPath) {
   }
   // 其他系统比较根目录
   return path.rootPrefix(oldPath) == path.rootPrefix(newPath);
+}
+
+bool isSameNewPath(List<FileInfo> list, String newPath) {
+  int count = list.fold(0, (sum, file) {
+    String currentPath = getNewPath(file);
+    return sum + (currentPath == newPath ? 1 : 0);
+  });
+  return count > 1;
 }

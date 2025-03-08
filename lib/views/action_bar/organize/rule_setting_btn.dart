@@ -20,29 +20,6 @@ class RuleSettingBtn extends ConsumerWidget {
       height: 30,
       onTap: showAllRule,
     );
-
-    // return Ink(
-    //   decoration: BoxDecoration(borderRadius: borderRadius),
-    //   child: InkWell(
-    //     borderRadius: borderRadius,
-    //     onTap: showAllRule,
-    //     child: Container(
-    //       height: AppNum.inputH,
-    //       padding: EdgeInsets.symmetric(horizontal: AppNum.mediumG),
-    //       decoration: BoxDecoration(
-    //         borderRadius: borderRadius,
-    //       ),
-    //       alignment: Alignment.center,
-    //       child: Text(
-    //         S.of(context).classifyType,
-    //         style: TextStyle(
-    //           fontSize: 14,
-    //           color: Theme.of(context).primaryColor.withValues(alpha: .8),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
 
@@ -57,7 +34,6 @@ class EasyChild extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: AppNum.inputP, vertical: AppNum.smallG),
       child: Row(
-        // spacing: AppNum.smallG,
         children: [
           Text('$title:'),
           Expanded(child: FolderInput()),

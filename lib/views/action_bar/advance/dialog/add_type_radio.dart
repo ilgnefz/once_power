@@ -9,11 +9,13 @@ class AddTypeRadio extends StatelessWidget {
   const AddTypeRadio({
     super.key,
     required this.type,
+    required this.len,
     required this.typeChanged,
     required this.randomLenChange,
   });
 
   final AddType type;
+  final int len;
   final void Function(AddType) typeChanged;
   final void Function(int) randomLenChange;
 
@@ -42,7 +44,7 @@ class AddTypeRadio extends StatelessWidget {
                           width: 120,
                           margin: EdgeInsets.only(left: AppNum.mediumG),
                           child: DigitInput(
-                            value: 1,
+                            value: len,
                             label: S.of(context).digits,
                             min: 1,
                             onChanged: randomLenChange,

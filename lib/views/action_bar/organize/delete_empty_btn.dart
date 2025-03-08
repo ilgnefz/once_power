@@ -28,7 +28,7 @@ class DeleteEmptyBtn extends ConsumerWidget {
       } catch (e) {
         errorList.add(InfoDetail(
           file: directory.path,
-          message: '${S.of(context).deleteFailed}: $e',
+          message: '${S.current.deleteFailed}: $e',
         ));
       }
     }

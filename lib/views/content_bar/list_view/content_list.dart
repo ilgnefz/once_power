@@ -40,9 +40,6 @@ class ContentList extends ConsumerWidget {
             index: index,
             key: ValueKey(files[index].id),
             child: ContentListItem(index: index, file: files[index]),
-            // child: isOrganize
-            //     ? OrganizeFileTile(files[index])
-            //     : RenameFileTile(file: files[index], files: files),
           );
         },
       ),

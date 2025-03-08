@@ -47,7 +47,6 @@ Future<void> runRename(
     InfoDetail? info = await callback(ref, list, file);
     if (info != null) errors.add(info);
     ref.read(countProvider.notifier).update(++count);
-    // TODO: 是否需要添加延迟
     // await Future.delayed(const Duration(microseconds: 1));
   }
   Duration duration = DateTime.now().difference(startTime);
@@ -86,6 +85,8 @@ Future<bool> checkExist(WidgetRef ref, List<FileInfo> list, String filePath,
     if (sameFile != null) {
       // 如果是isSecond说明是临时重命名的文件，在列表中就不用管，
       // 不在说明在磁盘中无法修改，所以需要返回 true
+      bool hasMultipSamePath = isSameNewPath(list, filePath);
+      if (hasMultipSamePath) return true;
       if (isSecond) return false;
       // print('文件在列表中，当前文件$filePath}');
       return await tempRenameFile(ref, list, sameFile, isUndo);
@@ -111,10 +112,6 @@ Future<bool> tempRenameFile(WidgetRef ref, List<FileInfo> list, FileInfo file,
   if (isExist) return true;
   // 不存在文件就被修改为新名称+随机生成的字符串
   String tempPath = getTempPath(file.parent, newFullName);
-  // print('crore/rename: -----------------------------');
-  // print('crore/rename: 原来的名称: $oldPath');
-  // print('crore/rename: 新建的临时名称: $tempPath');
-  // print('crore/rename: -----------------------------');
   try {
     if (file.type.isFolder) {
       await Directory(oldPath).rename(tempPath);
@@ -128,26 +125,3 @@ Future<bool> tempRenameFile(WidgetRef ref, List<FileInfo> list, FileInfo file,
   }
   return false;
 }
-
-// Future<InfoDetail?> renameTempFile(WidgetRef ref, TempFileInfo tf) async {
-//   try {
-//     if (tf.file.type.isFolder) {
-//       await Directory(tf.tempPath).rename(tf.newPath);
-//     } else {
-//       await File(tf.tempPath).rename(tf.newPath);
-//     }
-//     updateShowInfo(ref, tf.file, tf.newPath);
-//     print('crore/rename: -----------------------------');
-//     print('crore/rename: 临时名称: ${tf.tempPath}');
-//     print('crore/rename: 新名称: ${tf.newPath}');
-//     print('crore/rename: -----------------------------');
-//   } catch (e) {
-//     if (tf.file.type.isFolder) {
-//       await Directory(tf.tempPath).rename(tf.oldPath);
-//     } else {
-//       await File(tf.tempPath).rename(tf.oldPath);
-//     }
-//     return renameErrorInfo(e, tf.oldPath, tf.oldPath);
-//   }
-//   return null;
-// }

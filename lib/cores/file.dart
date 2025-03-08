@@ -148,7 +148,6 @@ Future<InfoDetail?> checkFile(WidgetRef ref, List<FileInfo> list, FileInfo file,
   String newPath =
       isUndo ? file.beforePath : path.join(file.parent, newNameWithExt);
   bool isExist = await checkExist(ref, list, newPath, isUndo: isUndo);
-  // print('结果是咋样: $isExist');
   if (isExist) {
     return InfoDetail(
       file: getNameWithExt(file.name, file.extension),

@@ -26,7 +26,6 @@ class UploadNameCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 2,
           children: [
-            // Icon(Icons.text_snippet_outlined, size: 16, color: color),
             SvgIcon(AppIcons.file, size: 16, color: color),
             OneLineText(info.name, fontSize: 12, color: color),
           ],

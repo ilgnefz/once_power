@@ -31,7 +31,6 @@ class UploadCSVBtn extends ConsumerWidget {
         }
         ref.read(cSVDataProvider.notifier).update(list);
       }
-      // cSVDataRename(ref);
       updateName(ref);
     }
 

@@ -50,12 +50,4 @@ class AdvancePresetList extends _$AdvancePresetList {
     state = state.where((e) => e != value).toList();
     await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
   }
-
-// void update(String name, AdvancePreset value) async {
-//   state = state.map((e) {
-//     if (e.name == name) return value;
-//     return e;
-//   }).toList();
-//   await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
-// }
 }

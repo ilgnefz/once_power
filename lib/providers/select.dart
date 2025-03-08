@@ -127,36 +127,3 @@ class CurrentReplaceMode extends _$CurrentReplaceMode {
   ReplaceMode build() => ReplaceMode.normal;
   void update(ReplaceMode value) => state = value;
 }
-
-// @riverpod
-// class CurrentOrganizeFunction extends _$CurrentOrganizeFunction {
-//   @override
-//   OrganizeFunction build() {
-//     return OrganizeFunction.none;
-//   }
-//
-//   void update(OrganizeFunction value) => state = value;
-// }
-
-// @riverpod
-// class CurrentCompletePosition extends _$CurrentCompletePosition {
-//   @override
-//   CompletePosition build() => CompletePosition.before;
-//
-//   void update(CompletePosition value) => state = value;
-// }
-
-/* Deprecated */
-// @riverpod
-// class CurrentClassifyFileType extends _$CurrentClassifyFileType {
-//   @override
-//   ClassifyFileType build() {
-//     int index = StorageUtil.getInt(AppKeys.classifyType) ?? 0;
-//     return ClassifyFileType.values[index];
-//   }
-//
-//   Future<void> update(ClassifyFileType type) async {
-//     state = type;
-//     await StorageUtil.setInt(AppKeys.classifyType, type.index);
-//   }
-// }

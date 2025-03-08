@@ -96,28 +96,3 @@ const video = [
 ];
 const zip = ['zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'iso', 'dmg'];
 const String folder = 'dir';
-
-// FileInfo nullFile = FileInfo(
-//   id: '',
-//   name: '',
-//   phonetic: '',
-//   newName: '',
-//   parent: '',
-//   filePath: '',
-//   tempPath: '',
-//   extension: '',
-//   newExtension: '',
-//   beforePath: '',
-//   createdDate: DateTime.now(),
-//   modifiedDate: DateTime.now(),
-//   type: FileClassify.other,
-//   checked: false,
-// );
-
-// Map<String, Map<String, List<String>>> map = {
-//     "today": {"image": [], "video": []},
-//     "yesterday": {"image": [], "video": []},
-//   };
-// typedef DateFormatMap = Map<String, Map<String, List<String>>>;
-//
-// typedef ClassifyMap = Map<String, List<FileInfo>>;

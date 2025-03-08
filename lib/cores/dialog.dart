@@ -15,8 +15,6 @@ Future<void> showAllType(BuildContext context,
 
 Future<void> showText(BuildContext context, UploadMarkInfo info) async {
   Size size = MediaQuery.of(context).size;
-  // print(size);
-  // print(size.height * .9);
   await showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -26,7 +24,6 @@ Future<void> showText(BuildContext context, UploadMarkInfo info) async {
           color: Colors.white,
           child: Container(
             width: AppNum.detailDialogW,
-            // height: AppNum.detailDialogH + 100,
             height: size.height * .85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),

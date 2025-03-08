@@ -35,7 +35,6 @@ class _AddPresetState extends ConsumerState<AddPreset> {
           ).show();
         }
         List<AdvanceMenuModel> menus = ref.watch(advanceMenuListProvider);
-        print(menus);
         AdvancePreset preset =
             AdvancePreset(id: nanoid(10), name: name, menus: menus);
         ref.read(advancePresetListProvider.notifier).add(preset);

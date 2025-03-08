@@ -12,22 +12,6 @@ class DateLengthValue extends _$DateLengthValue {
   void update(int value) => state = value;
 }
 
-// @riverpod
-// class PrefixFileName extends _$PrefixFileName {
-//   @override
-//   String? build() => null;
-//   void update(String value) => state = value;
-//   void clear() => state = null;
-// }
-//
-// @riverpod
-// class PrefixFileContent extends _$PrefixFileContent {
-//   @override
-//   String? build() => null;
-//   void update(String value) => state = value;
-//   void clear() => state = null;
-// }
-
 @riverpod
 class PrefixSerialLength extends _$PrefixSerialLength {
   @override
@@ -47,14 +31,6 @@ class PrefixSerialStart extends _$PrefixSerialStart {
     StorageUtil.setInt(AppKeys.prefixSerialStart, value);
   }
 }
-
-// @riverpod
-// class SuffixFileName extends _$SuffixFileName {
-//   @override
-//   String? build() => null;
-//   void update(String value) => state = value;
-//   void clear() => state = null;
-// }
 
 @riverpod
 class SuffixSerialLength extends _$SuffixSerialLength {
