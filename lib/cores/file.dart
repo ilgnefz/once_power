@@ -108,7 +108,10 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   DateTime createdDate = File(filePath).statSync().changed;
   DateTime modifyDate = File(filePath).statSync().modified;
   String extension = getExtension(filePath);
-  if (image.contains(extension)) exifDate = await getExifDate(filePath);
+  print('文件扩展：$extension');
+  if (image.contains(extension.toLowerCase())) {
+    exifDate = await getExifDate(filePath);
+  }
   FileClassify type = getFileClassify(extension);
   return FileInfo(
     id: id,

@@ -18,7 +18,7 @@ bool isViewNoOrganize(WidgetRef ref) =>
 bool isChinese(String text) => RegExp(r'[\u4e00-\u9fff]').hasMatch(text);
 
 bool isImgVideo(String file) {
-  String extension = getExtension(file);
+  String extension = getExtension(file).toLowerCase();
   return image.contains(extension) || video.contains(extension);
 }
 
