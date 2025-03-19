@@ -3,6 +3,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
@@ -29,7 +30,6 @@ void advanceUpdateName(WidgetRef ref) {
       if (menu.type.isAdd) {
         menu as AdvanceMenuAdd;
         String folder = getFolderName(file.parent);
-        String extension = file.extension;
         String type = file.type.label;
         if (menu.distinguishType.isFolder) {
           (_, index) = calculateIndex(classifyMap, [folder], file);
@@ -40,7 +40,7 @@ void advanceUpdateName(WidgetRef ref) {
         if (menu.distinguishType.isFile) {
           (_, index) = calculateIndex(classifyMap, [type], file);
         }
-        name = advanceAddName(menu, name, index, folder, extension);
+        name = advanceAddName(menu, file, name, index, folder);
       }
       if (menu.type.isReplace) {
         name = advanceReplaceName(menu as AdvanceMenuReplace, name);
@@ -105,23 +105,25 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
 
 String advanceAddName(
   AdvanceMenuAdd menu,
+  FileInfo file,
   String name,
   int index,
   String folder,
-  String extension,
 ) {
   String value = menu.value;
   int digits = menu.digits;
   int start = menu.start + index;
   AddType addType = menu.addType;
+  DateType dateType = menu.dateType;
   AddPosition addPosition = menu.addPosition;
   int posIndex = menu.posIndex;
   if (!addType.isSerialNumber) {
     if (addType.isParentsName) value = folder;
-    if (addType.isExtension) value = getDotWithExt(extension);
+    if (addType.isExtension) value = getDotWithExt(file.extension);
     if (addType.isRandom) {
       value = getRandomValue(menu.randomValue, menu.randomLen);
     }
+    if (addType.isDate) value = getDateName(dateType, 8, file);
     switch (addPosition) {
       case AddPosition.before:
         if (posIndex > name.length) {

@@ -72,12 +72,14 @@ class _RandomCheckboxState extends State<RandomCheckbox> {
             spacing: AppNum.largeG,
             children: [
               ...all.map((e) => EasyCheckbox(
+                    sideWidth: 1.5,
                     mainAxisSize: MainAxisSize.min,
                     checked: widget.randoms.contains(e),
                     onChanged: (value) => add(e),
                     child: SelectableText(e),
                   )),
               EasyCheckbox(
+                sideWidth: 1.5,
                 mainAxisSize: MainAxisSize.min,
                 checked: show,
                 onChanged: show ? (value) {} : null,

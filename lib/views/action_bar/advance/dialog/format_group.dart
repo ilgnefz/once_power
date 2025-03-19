@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/constants.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/widgets/common/easy_text_dropdown.dart';
@@ -36,7 +36,7 @@ class FormatGroup extends StatelessWidget {
           onChanged: (value) => onChanged(value!),
         ),
         Text(S.of(context).format),
-        SizedBox(width: AppNum.largeG),
+        SizedBox(width: AppNum.smallG),
         EasyTextDropdown(
           items: FillPosition.values
               .map((item) => DropdownMenuItem(
@@ -45,7 +45,8 @@ class FormatGroup extends StatelessWidget {
                     child: Text(item.label),
                   ))
               .toList(),
-          width: 100,
+          width: 98,
+          color: Colors.grey[100],
           value: position,
           onChanged: (value) => onPositionChanged(value!),
         ),

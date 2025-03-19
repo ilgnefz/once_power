@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/widgets/action_bar/digit_input.dart';
 import 'package:once_power/widgets/action_bar/easy_radio.dart';
+import 'package:once_power/widgets/common/easy_text_dropdown.dart';
 
 class AddTypeRadio extends StatelessWidget {
   const AddTypeRadio({
     super.key,
     required this.type,
     required this.len,
+    required this.date,
     required this.typeChanged,
     required this.randomLenChange,
+    required this.dateChange,
   });
 
   final AddType type;
   final int len;
+  final DateType date;
   final void Function(AddType) typeChanged;
   final void Function(int) randomLenChange;
+  final void Function(DateType?) dateChange;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +37,9 @@ class AddTypeRadio extends StatelessWidget {
         ),
         Expanded(
           child: Wrap(
-            spacing: 43,
-            runSpacing: AppNum.mediumG,
+            runSpacing: AppNum.smallG,
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.start,
             children: [
               ...AddType.values.map((e) {
                 return EasyRadio(
@@ -41,8 +49,8 @@ class AddTypeRadio extends StatelessWidget {
                   onChanged: (value) => typeChanged(value!),
                   trailing: e.isRandom
                       ? Container(
-                          width: 120,
-                          margin: EdgeInsets.only(left: AppNum.largeG),
+                          width: 104,
+                          margin: EdgeInsets.only(left: AppNum.mediumG),
                           child: DigitInput(
                             value: len,
                             label: S.of(context).digits,
@@ -50,7 +58,23 @@ class AddTypeRadio extends StatelessWidget {
                             onChanged: randomLenChange,
                           ),
                         )
-                      : null,
+                      : e.isDate
+                          ? Consumer(
+                              builder: (_, ref, __) => EasyTextDropdown(
+                                items: DateType.values
+                                    .map((item) => DropdownMenuItem(
+                                          key: ValueKey(item),
+                                          value: item,
+                                          child: Text(item.label),
+                                        ))
+                                    .toList(),
+                                width: 102,
+                                color: Colors.grey[100],
+                                value: date,
+                                onChanged: dateChange,
+                              ),
+                            )
+                          : null,
                 );
               }),
             ],

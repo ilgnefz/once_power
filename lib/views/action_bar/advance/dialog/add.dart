@@ -6,6 +6,7 @@ import 'package:once_power/cores/advance.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 
 import 'add_position_radio.dart';
@@ -32,6 +33,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   DistinguishType distinguishType = DistinguishType.none;
   AddType type = AddType.text;
   int randomLen = 1;
+  DateType dateType = DateType.createdDate;
   AddPosition position = AddPosition.after;
 
   @override
@@ -46,6 +48,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       distinguishType = widget.menu!.distinguishType;
       type = widget.menu!.addType;
       randomLen = widget.menu!.randomLen;
+      dateType = widget.menu!.dateType;
       position = widget.menu!.addPosition;
     }
   }
@@ -65,6 +68,23 @@ class _DeleteViewState extends ConsumerState<AddView> {
                 value = newValue;
                 setState(() {});
               }),
+          AddTypeRadio(
+            type: type,
+            len: randomLen,
+            date: dateType,
+            typeChanged: (value) {
+              type = value;
+              setState(() {});
+            },
+            randomLenChange: (value) {
+              randomLen = value;
+              setState(() {});
+            },
+            dateChange: (value) {
+              dateType = value!;
+              setState(() {});
+            },
+          ),
           NumInputGroup(
             digits: digits,
             start: start,
@@ -88,18 +108,6 @@ class _DeleteViewState extends ConsumerState<AddView> {
             type: distinguishType,
             typeChanged: (value) {
               distinguishType = value;
-              setState(() {});
-            },
-          ),
-          AddTypeRadio(
-            type: type,
-            len: randomLen,
-            typeChanged: (value) {
-              type = value;
-              setState(() {});
-            },
-            randomLenChange: (value) {
-              randomLen = value;
               setState(() {});
             },
           ),
@@ -129,6 +137,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           distinguishType: distinguishType,
           randomLen: randomLen,
           addPosition: position,
+          dateType: dateType,
           posIndex: posIndex,
         );
         if (widget.menu != null) {

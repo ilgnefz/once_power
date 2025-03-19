@@ -1,4 +1,5 @@
 import 'advance_menu_enum.dart';
+import 'two_re_enum.dart';
 
 class AdvancePreset {
   final String id;
@@ -74,14 +75,19 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
   }) : super(type: AdvanceType.delete);
 
   @override
-  AdvanceMenuDelete copyWith({String? id}) {
+  AdvanceMenuDelete copyWith({
+    String? id,
+    List<DeleteType>? deleteTypes,
+  }) {
     return AdvanceMenuDelete(
       id: id ?? this.id,
       value: value,
       matchLocation: matchLocation,
       start: start,
       end: end,
-      deleteTypes: deleteTypes,
+      deleteTypes: deleteTypes != null
+          ? List<DeleteType>.from(deleteTypes) // 创建新数组
+          : List<DeleteType>.from(this.deleteTypes),
       deleteExt: deleteExt,
     );
   }
@@ -123,6 +129,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final DistinguishType distinguishType;
   final AddType addType;
   final int randomLen;
+  final DateType dateType;
   final AddPosition addPosition;
   final int posIndex;
 
@@ -135,21 +142,28 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.distinguishType,
     required this.addType,
     required this.randomLen,
+    required this.dateType,
     required this.addPosition,
     required this.posIndex,
   }) : super(type: AdvanceType.add);
 
   @override
-  AdvanceMenuAdd copyWith({String? id}) {
+  AdvanceMenuAdd copyWith({
+    String? id,
+    List<String>? randomValue,
+  }) {
     return AdvanceMenuAdd(
       id: id ?? this.id,
       value: value,
       digits: digits,
       start: start,
-      randomValue: randomValue,
+      randomValue: randomValue != null
+          ? List<String>.from(randomValue) // 创建新数组
+          : List<String>.from(this.randomValue),
       distinguishType: distinguishType,
       addType: addType,
       randomLen: randomLen,
+      dateType: dateType,
       addPosition: addPosition,
       posIndex: posIndex,
     );
@@ -164,6 +178,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         distinguishType: DistinguishType.values[json["distinguishType"]],
         addType: AddType.values[json["addType"]],
         randomLen: json["randomLen"],
+        dateType: DateType.values[json["dateType"]],
         addPosition: AddPosition.values[json["addPosition"]],
         posIndex: json["posIndex"],
       );
@@ -179,13 +194,14 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "distinguishType": distinguishType.index,
         "addType": addType.index,
         "randomLen": randomLen,
+        "dateType": dateType.index,
         "addPosition": addPosition.index,
         "posIndex": posIndex,
       };
 
   @override
   String toString() {
-    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start,  randomValue: $randomValue,  distinguishType: $distinguishType, addType: $addType, randomLen: $randomLen, addPosition: $addPosition, posIndex: $posIndex}';
+    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start,  randomValue: $randomValue,  distinguishType: $distinguishType, addType: $addType, randomLen: $randomLen, dateType: $dateType, addPosition: $addPosition, posIndex: $posIndex}';
   }
 }
 

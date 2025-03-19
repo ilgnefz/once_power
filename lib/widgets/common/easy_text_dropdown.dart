@@ -2,12 +2,19 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 class EasyTextDropdown<T> extends StatelessWidget {
-  const EasyTextDropdown(
-      {super.key, this.items, this.value, this.width, this.onChanged});
+  const EasyTextDropdown({
+    super.key,
+    this.items,
+    this.value,
+    this.width,
+    this.onChanged,
+    this.color,
+  });
 
   final List<DropdownMenuItem<T>>? items;
   final T? value;
   final double? width;
+  final Color? color;
   final void Function(T?)? onChanged;
 
   @override
@@ -22,7 +29,7 @@ class EasyTextDropdown<T> extends StatelessWidget {
           height: 32,
           width: width ?? 96,
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(borderRadius: borderRadius),
+          decoration: BoxDecoration(borderRadius: borderRadius, color: color),
         ),
         dropdownStyleData: DropdownStyleData(
           width: width ?? 100,

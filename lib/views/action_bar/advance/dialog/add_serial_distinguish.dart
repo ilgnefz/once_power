@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/widgets/action_bar/easy_radio.dart';
 
 class AddSerialDistinguish extends StatelessWidget {
   const AddSerialDistinguish({
@@ -22,43 +23,17 @@ class AddSerialDistinguish extends StatelessWidget {
           child: Text('${S.of(context).serialDistinguish}: '),
         ),
         Expanded(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Radio(
-                    groupValue: type,
-                    value: DistinguishType.none,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(DistinguishType.none.label),
-                  Spacer(),
-                  Radio(
-                    groupValue: type,
-                    value: DistinguishType.file,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(DistinguishType.file.label),
-                ],
-              ),
-              Row(
-                children: [
-                  Radio(
-                    groupValue: type,
-                    value: DistinguishType.extension,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(DistinguishType.extension.label),
-                  Spacer(),
-                  Radio(
-                    groupValue: type,
-                    value: DistinguishType.folder,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(DistinguishType.folder.label),
-                ],
-              ),
-            ],
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: DistinguishType.values
+                .map((e) => EasyRadio(
+                      label: e.label,
+                      value: e,
+                      groupValue: type,
+                      onChanged: (value) => typeChanged(value!),
+                    ))
+                .toList(),
           ),
         )
       ],

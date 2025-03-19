@@ -1,6 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/csv_rename.dart';
 import 'package:once_power/providers/select.dart';
@@ -55,9 +55,7 @@ class _CsvDataTileState extends ConsumerState<CsvDataCard> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: AppNum.cSVDataMinH,
-        ),
+        constraints: BoxConstraints(minHeight: AppNum.cSVDataH),
         padding: const EdgeInsets.symmetric(
           horizontal: 8,
           vertical: 4,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/widgets/action_bar/advance_rich_text.dart';
 
@@ -20,8 +21,13 @@ class AdvanceAddCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!menu.addType.isSerialNumber) {
-      String startStr =
-          menu.addType.isText ? '"${menu.value}"' : menu.addType.label;
+      String startStr = menu.addType.label;
+      if (menu.addType.isText) startStr = '"${menu.value}"';
+      if (menu.addType.isDate) startStr = menu.dateType.label;
+      if (menu.addType.isRandom) {
+        startStr =
+            '${menu.addType.label} ${menu.randomLen} ${S.current.digits}';
+      }
       return AdvanceRichText(
         text: TextSpan(
           text: startStr,

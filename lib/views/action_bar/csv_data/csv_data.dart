@@ -46,7 +46,7 @@ class CsvDataView extends ConsumerWidget {
                 child: InkWell(
                   onTap: () => toggleCSVNameColumn(e),
                   child: Container(
-                    height: AppNum.cSVDataTileH,
+                    height: AppNum.cSVDataH,
                     color: Theme.of(context).primaryColor.withValues(alpha: .4),
                     alignment: Alignment.center,
                     child: Text(e, style: textStyle),

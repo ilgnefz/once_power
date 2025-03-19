@@ -6,9 +6,11 @@ import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/extension.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
@@ -305,4 +307,16 @@ String getTopPath(String filePath) {
     // 处理根目录下的第一层目录
     return pathList.isEmpty ? filePath : path.join(separator, pathList.first);
   }
+}
+
+String getDateName(DateType type, int dateLen, FileInfo file) {
+  String date = formatDateTime(file.createdDate);
+  if (type.isModifiedDate) date = formatDateTime(file.modifiedDate);
+  if (type.isEarliestDate) date = formatDateTime(sortDateTime(file).first);
+  if (type.isLatestDate) date = formatDateTime(sortDateTime(file).last);
+  if (type.isExifDate) {
+    DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
+    date = formatDateTime(dateTime);
+  }
+  return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }

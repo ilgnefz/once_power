@@ -7,10 +7,6 @@ import 'constants/constants.dart';
 import 'providers/toggle.dart';
 import 'views/home.dart';
 
-// TODO: 添加多线程
-// TODO: 高级模式添加功能添加扩展
-// TODO: 文件很多尺寸很大时切换菜单卡顿
-
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(const ProviderScope(child: MyApp()));

@@ -23,8 +23,8 @@ class AppNum {
   static const double modeCardH = 40;
   // static const double modeCardM = 12;
   static const double modeCardG = 8;
-  static const double cSVDataTileH = 40;
-  static const double cSVDataMinH = 36;
+  // static const double cSVDataTileH = 40;
+  static const double cSVDataH = 36;
   static const double presetMenuW = 144;
   static const double presetMenuItemH = 32;
   static const double uploadCardW = 80;

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -16,20 +15,11 @@ import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
 
 import 'notification.dart';
-import 'sort.dart';
 
 String dateName(WidgetRef ref, FileInfo file) {
-  String date = formatDateTime(file.createdDate);
   int dateLen = ref.watch(dateLengthValueProvider);
   DateType type = ref.watch(currentDateTypeProvider);
-  if (type.isModifiedDate) date = formatDateTime(file.modifiedDate);
-  if (type.isEarliestDate) date = formatDateTime(sortDateTime(file).first);
-  if (type.isLatestDate) date = formatDateTime(sortDateTime(file).last);
-  if (type.isExifDate) {
-    DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
-    date = formatDateTime(dateTime);
-  }
-  return date.substring(0, dateLen > date.length ? date.length : dateLen);
+  return getDateName(type, dateLen, file);
 }
 
 Future<void> runRename(
@@ -46,7 +36,7 @@ Future<void> runRename(
   int count = 0;
   final stopwatch = Stopwatch()..start();
 
-  const batchSize = AppNum.batchSize;
+  const batchSize = 50;
   for (int i = 0; i < checkList.length; i += batchSize) {
     final batch = checkList.sublist(
         i, i + batchSize > checkList.length ? checkList.length : i + batchSize);

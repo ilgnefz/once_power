@@ -90,21 +90,25 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
             SizedBox(width: AppNum.mediumG),
             buildInfo(widget.menu),
             SizedBox(width: AppNum.mediumG),
-            AnimatedOpacity(
-              opacity: isHover ? 1.0 : 0.0,
+            AnimatedContainer(
               duration: Duration(milliseconds: 300),
-              child: Consumer(
-                builder: (context, ref, child) => ClickIcon(
-                  size: size,
-                  iconSize: iconSize,
-                  icon: Icons.copy_all_rounded,
-                  color: iconColor,
-                  onTap: () {
-                    AdvanceMenuModel menu =
-                        widget.menu.copyWith(id: nanoid(10));
-                    ref.read(advanceMenuListProvider.notifier).add(menu);
-                    updateName(ref);
-                  },
+              width: isHover ? size : 0,
+              child: AnimatedOpacity(
+                opacity: isHover ? 1.0 : 0.0,
+                duration: Duration(milliseconds: 300),
+                child: Consumer(
+                  builder: (context, ref, child) => ClickIcon(
+                    size: size,
+                    iconSize: iconSize,
+                    icon: Icons.copy_all_rounded,
+                    color: iconColor,
+                    onTap: () {
+                      AdvanceMenuModel menu =
+                          widget.menu.copyWith(id: nanoid(10));
+                      ref.read(advanceMenuListProvider.notifier).add(menu);
+                      updateName(ref);
+                    },
+                  ),
                 ),
               ),
             ),

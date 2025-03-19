@@ -24,7 +24,6 @@ class TypeDetailPanel extends ConsumerWidget {
     return Container(
       width: AppNum.detailDialogW,
       height: MediaQuery.of(context).size.height * .85,
-      padding: const EdgeInsets.all(AppNum.detailDialogP),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),

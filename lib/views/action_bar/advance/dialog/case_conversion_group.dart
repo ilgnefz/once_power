@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
+import 'package:once_power/widgets/action_bar/easy_radio.dart';
 
 class CaseConversionGroup extends StatelessWidget {
   const CaseConversionGroup({
@@ -22,47 +23,16 @@ class CaseConversionGroup extends StatelessWidget {
           child: Text('${S.of(context).convertLetters}: '),
         ),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Radio(
-                    groupValue: type,
-                    value: CaseType.noConversion,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(S.of(context).noConversion),
-                  Spacer(),
-                  Radio(
-                    groupValue: type,
-                    value: CaseType.toggleCase,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(S.of(context).toggleCase),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Radio(
-                    groupValue: type,
-                    value: CaseType.uppercase,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(S.of(context).uppercase),
-                  Spacer(),
-                  Radio(
-                    groupValue: type,
-                    value: CaseType.lowercase,
-                    onChanged: (value) => typeChanged(value!),
-                  ),
-                  Text(S.of(context).lowercase),
-                ],
-              )
-            ],
-          ),
+          child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: CaseType.values
+                  .map((e) => EasyRadio(
+                      label: e.label,
+                      value: e,
+                      groupValue: type,
+                      onChanged: (value) => typeChanged(value!)))
+                  .toList()),
         ),
       ],
     );
