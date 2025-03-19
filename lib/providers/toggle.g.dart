@@ -467,21 +467,6 @@ final classifyFileProvider =
 );
 
 typedef _$ClassifyFile = AutoDisposeNotifier<bool>;
-String _$refreshImageHash() => r'1b3d892a5a6b465ad2d3e94568d925c401fa54cf';
-
-/// See also [RefreshImage].
-@ProviderFor(RefreshImage)
-final refreshImageProvider =
-    AutoDisposeNotifierProvider<RefreshImage, bool>.internal(
-  RefreshImage.new,
-  name: r'refreshImageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$refreshImageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$RefreshImage = AutoDisposeNotifier<bool>;
 String _$isMatchExtensionHash() => r'af576b74be524d080dc57b7402d2efdb48373724';
 
 /// See also [IsMatchExtension].

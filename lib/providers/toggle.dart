@@ -308,13 +308,6 @@ bool checkZip(Ref ref) {
 }
 
 @riverpod
-class RefreshImage extends _$RefreshImage {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-}
-
-@riverpod
 class IsMatchExtension extends _$IsMatchExtension {
   @override
   bool build() => false;

@@ -7,6 +7,7 @@ import 'package:once_power/widgets/content_bar/select_sort_card.dart';
 import '../../../models/file_enum.dart';
 import 'image_view.dart';
 import 'preview_view.dart';
+import 'svg_view.dart';
 import 'video_view.dart';
 
 class ContentGridItem extends StatelessWidget {
@@ -35,9 +36,11 @@ class ContentGridItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: file.type == FileClassify.image
-                    ? ImageView(file: file, key: ValueKey(file.id))
-                    : VideoView(file: file, key: ValueKey(file.id)),
+                child: file.type == FileClassify.video
+                    ? VideoView(file: file, key: ValueKey(file.id))
+                    : file.extension == 'svg'
+                        ? SvgView(file: file, key: ValueKey(file.id))
+                        : ImageView(file: file, key: ValueKey(file.id)),
               ),
               const SizedBox(height: 4),
               Text(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/list.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/views/content_bar/grid_view/preview_svg.dart';
 
 import '../../../models/file_enum.dart';
 import 'preview_image.dart';
@@ -96,14 +97,19 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            previewList[index].type == FileClassify.image
-                ? PreviewImage(
-                    id: previewList[index].id,
-                    file: previewList[index].filePath)
-                : PreviewVideo(
+            previewList[index].type == FileClassify.video
+                ? PreviewVideo(
                     file: previewList[index].filePath,
                     key: ValueKey(previewList[index].id),
-                  ),
+                  )
+                : previewList[index].extension == 'svg'
+                    ? PreviewSvg(
+                        id: previewList[index].id,
+                        file: previewList[index].filePath,
+                      )
+                    : PreviewImage(
+                        id: previewList[index].id,
+                        file: previewList[index].filePath),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
