@@ -51,4 +51,7 @@ class AppNum {
   static const double detailDialogW = 680;
   // static const double detailDialogH = 400;
   static const double detailDialogP = 16;
+
+  // performance
+  static const batchSize = 50;
 }

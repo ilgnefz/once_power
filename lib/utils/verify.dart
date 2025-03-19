@@ -35,15 +35,6 @@ bool isCheck(WidgetRef ref, FileClassify classify) {
   return ref.watch(checkFolderProvider);
 }
 
-bool fileTrueExists(String filePath) {
-  String parentPath = path.dirname(filePath);
-  List<FileSystemEntity> files = Directory(parentPath).listSync();
-  for (FileSystemEntity f in files) {
-    if (f.path == filePath) return true;
-  }
-  return false;
-}
-
 bool isEnableMatch(WidgetRef ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
   if (mode.isReserve) {
@@ -67,11 +58,11 @@ bool isEnableModify(WidgetRef ref) {
   return true;
 }
 
-bool isTrueExist(String filePath) {
+Future<bool> isTrueExist(String filePath) async {
   String parentPath = path.dirname(filePath);
-  List<FileSystemEntity> files = Directory(parentPath).listSync();
-  for (FileSystemEntity f in files) {
-    if (f.path == filePath) return true;
+  final entities = await Directory(parentPath).list().toList();
+  for (final entity in entities) {
+    if (entity.path == filePath) return true;
   }
   return false;
 }

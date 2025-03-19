@@ -35,15 +35,21 @@ class DeleteEmptyBtn extends ConsumerWidget {
 
     Future<void> deleteFolders(String folderPath) async {
       var directory = Directory(folderPath);
-      if (directory.existsSync()) {
-        bool isEmpty = directory.listSync().isEmpty;
-        if (isEmpty) return await delete(directory);
-        directory.listSync().forEach((file) {
-          if (FileSystemEntity.isDirectorySync(file.path)) {
-            deleteFolders(file.path);
+      if (await directory.exists()) {
+        final entities = await directory.list().toList();
+        // 检查初始空目录
+        if (entities.isEmpty) return await delete(directory);
+
+        // 异步递归处理子目录
+        await for (final entity in directory.list(recursive: false)) {
+          if (await FileSystemEntity.isDirectory(entity.path)) {
+            await deleteFolders(entity.path);
           }
-        });
-        if (directory.listSync().isEmpty) delete(directory);
+        }
+
+        // 处理完子项后重新检查目录是否为空
+        final remainingEntities = await directory.list().toList();
+        if (remainingEntities.isEmpty) await delete(directory);
       }
     }
 

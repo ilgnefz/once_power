@@ -154,7 +154,7 @@ Future<String> renameExistFile(String newPath) async {
   final baseName = path.basenameWithoutExtension(newPath);
   while (true) {
     bool isExist = await File(newPath).exists();
-    if (Platform.isWindows) isExist = isExist && isTrueExist(newPath);
+    if (Platform.isWindows) isExist = isExist && await isTrueExist(newPath);
     if (!isExist) break;
     final newFileName = '$baseName - $counter$ext';
     newPath = path.join(dir, newFileName);
@@ -209,7 +209,7 @@ Future<void> moveDirectory(
   await Directory(targetDir).create(recursive: true);
 
   // 递归遍历所有子项（包含空目录）
-  final entities = Directory(oldFolder).listSync(recursive: true);
+  final entities = await Directory(oldFolder).list(recursive: true).toList();
 
   // 先处理文件
   for (var entity in entities.whereType<File>()) {

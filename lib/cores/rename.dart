@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -32,9 +33,10 @@ String dateName(WidgetRef ref, FileInfo file) {
 }
 
 Future<void> runRename(
-    WidgetRef ref,
-    Future<InfoDetail?> Function(WidgetRef, List<FileInfo>, FileInfo) callback,
-    Function(List<InfoDetail>, int) onEnd) async {
+  WidgetRef ref,
+  Future<InfoDetail?> Function(WidgetRef, List<FileInfo>, FileInfo) callback,
+  Function(List<InfoDetail>, int) onEnd,
+) async {
   List<FileInfo> list = ref.watch(fileListProvider);
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   int total = checkList.length;
@@ -42,15 +44,25 @@ Future<void> runRename(
   ref.read(totalProvider.notifier).update(total);
   List<InfoDetail> errors = [];
   int count = 0;
-  DateTime startTime = DateTime.now();
-  for (FileInfo file in checkList) {
-    InfoDetail? info = await callback(ref, list, file);
-    if (info != null) errors.add(info);
-    ref.read(countProvider.notifier).update(++count);
-    // await Future.delayed(const Duration(microseconds: 1));
+  final stopwatch = Stopwatch()..start();
+
+  const batchSize = AppNum.batchSize;
+  for (int i = 0; i < checkList.length; i += batchSize) {
+    final batch = checkList.sublist(
+        i, i + batchSize > checkList.length ? checkList.length : i + batchSize);
+
+    await Future.wait(
+      batch.map((file) async {
+        final info = await callback(ref, list, file);
+        if (info != null) errors.add(info);
+        ref.read(countProvider.notifier).update(++count);
+      }),
+      eagerError: true,
+    );
   }
-  Duration duration = DateTime.now().difference(startTime);
-  double cost = duration.inMicroseconds / 1000000;
+
+  stopwatch.stop();
+  double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   await onEnd(errors, total);
 }
@@ -75,7 +87,7 @@ Future<bool> checkExist(WidgetRef ref, List<FileInfo> list, String filePath,
     {bool isSecond = false, bool isUndo = false}) async {
   // 检测文件是否存在
   bool isExist = await File(filePath).exists();
-  if (Platform.isWindows) isExist = isExist && isTrueExist(filePath);
+  if (Platform.isWindows) isExist = isExist && await isTrueExist(filePath);
   // 存在就继续,否则返回 false
   // print('文件在磁盘吗? $isExist');
   if (isExist) {
@@ -85,8 +97,8 @@ Future<bool> checkExist(WidgetRef ref, List<FileInfo> list, String filePath,
     if (sameFile != null) {
       // 如果是isSecond说明是临时重命名的文件，在列表中就不用管，
       // 不在说明在磁盘中无法修改，所以需要返回 true
-      bool hasMultipSamePath = isSameNewPath(list, filePath);
-      if (hasMultipSamePath) return true;
+      bool hasMultipleSamePath = isSameNewPath(list, filePath);
+      if (hasMultipleSamePath) return true;
       if (isSecond) return false;
       // print('文件在列表中，当前文件$filePath}');
       return await tempRenameFile(ref, list, sameFile, isUndo);

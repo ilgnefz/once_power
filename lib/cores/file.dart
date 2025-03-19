@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:cross_file/cross_file.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -54,26 +56,30 @@ Future<List<String>> handleFolder(WidgetRef ref, List<String?> folders) async {
   for (String? folder in folders) {
     if (addFolder && !addSubfolder) paths.add(folder!);
     if (addFolder && addSubfolder) {
-      paths.addAll([folder!, ...getAllPath(folder, true)]);
+      paths.addAll([folder!, ...await getAllPath(folder, true)]);
     }
-    if (!addFolder) paths.addAll(getAllPath(folder!));
+    if (!addFolder) paths.addAll(await getAllPath(folder!));
   }
   return paths;
 }
 
-List<String> getAllPath(String folder, [bool addSubfolder = false]) {
-  Directory directory = Directory(folder);
-  List<String> children = [];
-  List<FileSystemEntity> files = directory.listSync(recursive: true);
-  for (FileSystemEntity file in files) {
-    if (FileSystemEntity.isFileSync(file.path) && !addSubfolder) {
-      String extension = path.extension(file.path);
-      extension = extension == '' ? extension : extension.substring(1);
-      if (!filter.contains(extension)) children.add(file.path);
+// 将同步遍历改为异步流处理
+Future<List<String>> getAllPath(String folder,
+    [bool addSubfolder = false]) async {
+  final directory = Directory(folder);
+  final children = <String>[];
+
+  await for (final entity in directory.list(recursive: true)) {
+    final isFile = await FileSystemEntity.isFile(entity.path);
+    final isDir = await FileSystemEntity.isDirectory(entity.path);
+
+    if (isFile && !addSubfolder) {
+      final extension = path.extension(entity.path);
+      final ext = extension.isEmpty ? extension : extension.substring(1);
+      if (!filter.contains(ext)) children.add(entity.path);
     }
-    if (FileSystemEntity.isDirectorySync(file.path) && addSubfolder) {
-      children.add(file.path);
-    }
+
+    if (isDir && addSubfolder) children.add(entity.path);
   }
   return children;
 }
@@ -81,22 +87,57 @@ List<String> getAllPath(String folder, [bool addSubfolder = false]) {
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
-  int count = 0;
   ref.read(totalProvider.notifier).update(paths.length);
-  DateTime startTime = DateTime.now();
-  for (String p in paths) {
+  int count = 0;
+  final stopwatch = Stopwatch()..start();
+  const batchSize = AppNum.batchSize;
+  // 处理前 batchSize 个文件（原始逐个处理方式）
+  for (int i = 0; i < batchSize && i < paths.length; i++) {
+    String p = paths[i];
     if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
     if (isExist(ref, p)) continue;
     FileInfo fileInfo = await generateFileInfo(ref, p);
-    // Log.i(jsonEncode(fileInfo.toJson()));
     ref.read(fileListProvider.notifier).add(fileInfo);
     ref.read(countProvider.notifier).update(++count);
-    await Future.delayed(const Duration(microseconds: 1));
+    // await Future.delayed(const Duration(microseconds: 1));
   }
+
+  // 剩余文件使用 Future.wait 批量处理
+  for (int i = batchSize; i < paths.length; i += batchSize) {
+    final batch = paths.sublist(
+        i, i + batchSize > paths.length ? paths.length : i + batchSize);
+
+    await Future.wait(
+      batch.map((p) async {
+        if (isViewNoOrganize(ref) && !isImgVideo(p)) return;
+        if (isExist(ref, p)) return;
+
+        final result = await _processSingleFile(ref, p);
+        if (result != null) {
+          ref.read(fileListProvider.notifier).add(result);
+          ref.read(countProvider.notifier).update(++count);
+        }
+      }),
+      eagerError: true,
+    );
+  }
+
   if (isViewNoOrganize(ref)) showFilterNotification(paths.length - count);
-  double cost = DateTime.now().difference(startTime).inMicroseconds / 1000000;
+  stopwatch.stop();
+  double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   updateName(ref);
+}
+
+Future<FileInfo?> _processSingleFile(WidgetRef ref, String p) async {
+  try {
+    if (isViewNoOrganize(ref) && !isImgVideo(p)) return null;
+    if (isExist(ref, p)) return null;
+    return await generateFileInfo(ref, p);
+  } catch (e) {
+    debugPrint('文件处理失败: $p, 错误: $e');
+    return null;
+  }
 }
 
 Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
@@ -105,10 +146,10 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   String phonetic = isChinese(name) ? PinyinHelper.getPinyinE(name) : name;
   String parent = path.dirname(filePath);
   DateTime? exifDate;
-  DateTime createdDate = File(filePath).statSync().changed;
-  DateTime modifyDate = File(filePath).statSync().modified;
+  final stat = await File(filePath).stat();
+  DateTime createdDate = stat.changed;
+  DateTime modifyDate = stat.modified;
   String extension = getExtension(filePath);
-  print('文件扩展：$extension');
   if (image.contains(extension.toLowerCase())) {
     exifDate = await getExifDate(filePath);
   }
