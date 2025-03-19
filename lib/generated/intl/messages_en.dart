@@ -199,6 +199,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "New file extension",
     ),
     "fileName": MessageLookupByLibrary.simpleMessage("File name"),
+    "fileNotExistError": MessageLookupByLibrary.simpleMessage(
+      "The file location has been changed or the file has been deleted",
+    ),
     "fileType": MessageLookupByLibrary.simpleMessage("File"),
     "fillBack": MessageLookupByLibrary.simpleMessage("Fill back"),
     "fillFront": MessageLookupByLibrary.simpleMessage("Fill front"),

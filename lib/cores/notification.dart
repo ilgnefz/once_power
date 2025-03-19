@@ -89,6 +89,7 @@ void showOrganizeNotification(List<InfoDetail> errors, int total) {
 
 void showOpenErrorNotification(String info) {
   NotificationInfo(
+    type: NotificationType.error,
     title: S.current.openError,
     message: info,
   ).show();

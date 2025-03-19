@@ -157,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fileExtension": MessageLookupByLibrary.simpleMessage("文件扩展名"),
     "fileExtensionDesc": MessageLookupByLibrary.simpleMessage("新扩展名"),
     "fileName": MessageLookupByLibrary.simpleMessage("文件名"),
+    "fileNotExistError": MessageLookupByLibrary.simpleMessage("文件位置已更改或文件已被删除"),
     "fileType": MessageLookupByLibrary.simpleMessage("文件"),
     "fillBack": MessageLookupByLibrary.simpleMessage("补全后面"),
     "fillFront": MessageLookupByLibrary.simpleMessage("补全前面"),

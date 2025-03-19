@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/update_name.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/sort_enum.dart';
@@ -75,6 +76,9 @@ void openFileLocation(String filePath) async {
   final dirPath = path.dirname(filePath);
   try {
     if (Platform.isWindows) {
+      if (!await File(filePath).exists()) {
+        return showOpenErrorNotification(S.current.fileNotExistError);
+      }
       // Windows 使用 explorer 选中文件
       await Process.run('explorer.exe', ['/select,', filePath]);
     } else if (Platform.isMacOS) {

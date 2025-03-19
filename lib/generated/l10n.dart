@@ -1929,6 +1929,16 @@ class S {
       args: [],
     );
   }
+
+  /// `The file location has been changed or the file has been deleted`
+  String get fileNotExistError {
+    return Intl.message(
+      'The file location has been changed or the file has been deleted',
+      name: 'fileNotExistError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,12 +8,8 @@ import 'providers/toggle.dart';
 import 'views/home.dart';
 
 // TODO: 添加多线程
-// TODO: 设置列表显示方式像PowerRename一样
 // TODO: 高级模式添加功能添加扩展
 // TODO: 文件很多尺寸很大时切换菜单卡顿
-// TODO: 右键打开文件位置时如果文件不存在就提示
-// TODO: 路径过滤可以直接打开文件夹目录
-// TODO: 使用multi_split_view切换
 
 void main(List<String> args) async {
   await AppConfig.init(args);

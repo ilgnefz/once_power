@@ -245,5 +245,6 @@
   "useDateClassification": "日期分类",
   "dateClassificationDesc": "根据文件的创建日期在目标文件夹下创建以日期命名的文件夹，并移动到那个文件夹中",
   "topParentFolderDesc": "将文件移动到除磁盘根目录外的顶级父文件夹中",
-  "removeFolder": "移除路径"
+  "removeFolder": "移除路径",
+  "fileNotExistError": "文件位置已更改或文件已被删除"
 }

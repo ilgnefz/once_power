@@ -23,7 +23,6 @@ Future<void> showAllType(BuildContext context,
 }
 
 Future<void> showText(BuildContext context, UploadMarkInfo info) async {
-  Size size = MediaQuery.of(context).size;
   await showDialog(
     context: context,
     builder: (BuildContext context) {
