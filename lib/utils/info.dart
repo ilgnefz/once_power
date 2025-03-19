@@ -207,9 +207,15 @@ String getNameWithExt(String name, String extension) {
   return '$name.$extension';
 }
 
+String getDotWithExt(String extension) {
+  if (extension == '' || extension == 'dir') return '';
+  return '.$extension';
+}
+
 String getFolderName(String folder) => path.basename(folder);
 
 String getRandomValue(List<String> list, int len) {
+  if (list.isEmpty) return '';
   Random random = Random();
   String content = list.join('');
   String result = '';

@@ -40,7 +40,7 @@ void advanceUpdateName(WidgetRef ref) {
         if (menu.distinguishType.isFile) {
           (_, index) = calculateIndex(classifyMap, [type], file);
         }
-        name = advanceAddName(menu, name, index, folder);
+        name = advanceAddName(menu, name, index, folder, extension);
       }
       if (menu.type.isReplace) {
         name = advanceReplaceName(menu as AdvanceMenuReplace, name);
@@ -104,7 +104,12 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
 }
 
 String advanceAddName(
-    AdvanceMenuAdd menu, String name, int index, String folder) {
+  AdvanceMenuAdd menu,
+  String name,
+  int index,
+  String folder,
+  String extension,
+) {
   String value = menu.value;
   int digits = menu.digits;
   int start = menu.start + index;
@@ -113,6 +118,7 @@ String advanceAddName(
   int posIndex = menu.posIndex;
   if (!addType.isSerialNumber) {
     if (addType.isParentsName) value = folder;
+    if (addType.isExtension) value = getDotWithExt(extension);
     if (addType.isRandom) {
       value = getRandomValue(menu.randomValue, menu.randomLen);
     }

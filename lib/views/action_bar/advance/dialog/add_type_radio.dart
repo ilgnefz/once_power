@@ -42,7 +42,7 @@ class AddTypeRadio extends StatelessWidget {
                   trailing: e.isRandom
                       ? Container(
                           width: 120,
-                          margin: EdgeInsets.only(left: AppNum.mediumG),
+                          margin: EdgeInsets.only(left: AppNum.largeG),
                           child: DigitInput(
                             value: len,
                             label: S.of(context).digits,

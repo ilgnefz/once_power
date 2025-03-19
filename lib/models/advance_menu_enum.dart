@@ -53,7 +53,7 @@ extension MatchLocationExtension on MatchLocation {
   bool get isPosition => this == MatchLocation.position;
 }
 
-enum AddType { text, serialNumber, parentsName, random }
+enum AddType { text, serialNumber, parentsName, extension, random }
 
 extension AddTypeExtension on AddType {
   String get label {
@@ -64,6 +64,8 @@ extension AddTypeExtension on AddType {
         return S.current.serialNumber;
       case AddType.parentsName:
         return S.current.parentsName;
+      case AddType.extension:
+        return S.current.extension;
       case AddType.random:
         return S.current.random;
     }
@@ -72,6 +74,7 @@ extension AddTypeExtension on AddType {
   bool get isText => this == AddType.text;
   bool get isSerialNumber => this == AddType.serialNumber;
   bool get isParentsName => this == AddType.parentsName;
+  bool get isExtension => this == AddType.extension;
   bool get isRandom => this == AddType.random;
 }
 
