@@ -35,7 +35,7 @@ class EasyDialog extends StatelessWidget {
         child: Material(
           borderRadius: BorderRadius.circular(12),
           child: Container(
-            width: 408,
+            width: AppNum.easyDialogW,
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,

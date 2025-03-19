@@ -24,6 +24,11 @@ void removeOne(WidgetRef ref, String id) {
   updateName(ref);
 }
 
+void removeFolder(WidgetRef ref, String folder) {
+  ref.read(fileListProvider.notifier).removeFolder(folder);
+  updateName(ref);
+}
+
 void removeAll(WidgetRef ref) {
   ref.read(fileListProvider.notifier).clear();
   ref.read(countProvider.notifier).clear();

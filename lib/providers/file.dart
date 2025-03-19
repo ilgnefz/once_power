@@ -20,6 +20,9 @@ class FileList extends _$FileList {
 
   void removeAt(int index) => state = state..removeAt(index);
 
+  void removeFolder(String folder) =>
+      state = state.where((e) => e.parent != folder).toList();
+
   void insertAt(int index, FileInfo file) {
     if (index == 0) {
       state = [file, ...state];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/advance.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/widgets/action_bar/easy_btn.dart';
 

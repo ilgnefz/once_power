@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/advance.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';

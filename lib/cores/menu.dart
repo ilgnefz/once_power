@@ -36,14 +36,14 @@ Future<void> showRightMenu(
   BuildContext context,
   WidgetRef ref,
   TapDownDetails details,
-  FileInfo e,
+  FileInfo file,
 ) async {
-  const double safeW = 12, safeH = 32;
+  const double safeW = 16, safeH = 32;
   Locale? loe = StorageUtil.getLocale(AppKeys.locale);
   FunctionMode mode = ref.watch(currentModeProvider);
   bool show =
       (mode.isReplace || mode.isReserve) && ref.watch(cSVDataProvider).isEmpty;
-  int count = show ? 8 : 6;
+  int count = show ? 9 : 7;
   double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * count;
   Size size = await windowManager.getSize();
   // debugPrint('窗口尺寸：$size，鼠标坐标：${details.globalPosition}');
@@ -58,8 +58,7 @@ Future<void> showRightMenu(
       double y = details.globalPosition.dy;
       if (x + width > size.width - safeW) x -= width;
       if (y + height > size.height - safeH) y -= height;
-      return RightClickMenu(
-          width: width, height: height, x: x, y: y, e: e, show: show);
+      return RightClickMenu(width: width, x: x, y: y, file: file, show: show);
     },
   );
 }

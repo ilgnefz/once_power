@@ -243,5 +243,6 @@
   "targetFolderError": "The target folder is empty!",
   "useRuleDesc": "Move files of different types to different folders",
   "dateClassificationDesc": "Create a folder named after the date of file creation in the target folder and move it to that folder",
-  "topParentFolderDesc": "Move the file to a top-level parent folder other than the disk root directory"
+  "topParentFolderDesc": "Move the file to a top-level parent folder other than the disk root directory",
+  "removeFolder": "Remove folder"
 }

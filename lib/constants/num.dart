@@ -47,7 +47,8 @@ class AppNum {
   static const double bottomBarH = 32;
 
   // Detail Dialog
+  static const double easyDialogW = 408;
   static const double detailDialogW = 680;
-  static const double detailDialogH = 400;
+  // static const double detailDialogH = 400;
   static const double detailDialogP = 16;
 }

@@ -21,90 +21,81 @@ class TypeDetailPanel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const double gepM = AppNum.mediumG;
 
-    return UnconstrainedBox(
-      child: Material(
+    return Container(
+      width: AppNum.detailDialogW,
+      height: MediaQuery.of(context).size.height * .85,
+      padding: const EdgeInsets.all(AppNum.detailDialogP),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        child: Container(
-          width: AppNum.detailDialogW,
-          height: AppNum.detailDialogH,
-          padding: const EdgeInsets.all(AppNum.detailDialogP),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Text(
+            isPath ? S.of(context).allFolderTitle : S.of(context).detailTitle,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+            ).useSystemChineseFont(),
           ),
-          child: Column(
+          const SizedBox(height: AppNum.largeG),
+          Expanded(
+            child: isPath
+                ? PathClassifyList()
+                : SingleChildScrollView(
+                    child: Column(
+                      children:
+                          ref.watch(extensionListMapProvider).entries.map((e) {
+                        return DetailExtensionArea(
+                          label: e.key.label,
+                          extList: e.value,
+                        );
+                      }).toList(),
+                    ),
+                  ),
+          ),
+          const SizedBox(height: gepM),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: gepM,
             children: [
-              Text(
-                isPath
-                    ? S.of(context).allFolderTitle
-                    : S.of(context).detailTitle,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ).useSystemChineseFont(),
+              EasyBtn(
+                S.of(context).removeUnselected,
+                onTap: () {
+                  ref.read(fileListProvider.notifier).removeUncheck();
+                  if (ref.watch(fileListProvider).isEmpty) {
+                    Navigator.pop(context);
+                  }
+                },
               ),
-              const SizedBox(height: AppNum.largeG),
-              Expanded(
-                child: isPath
-                    ? PathClassifyList()
-                    : SingleChildScrollView(
-                        child: Column(
-                          children: ref
-                              .watch(extensionListMapProvider)
-                              .entries
-                              .map((e) {
-                            return DetailExtensionArea(
-                              label: e.key.label,
-                              extList: e.value,
-                            );
-                          }).toList(),
-                        ),
-                      ),
+              EasyBtn(
+                S.of(context).removeSelected,
+                onTap: () {
+                  ref.read(fileListProvider.notifier).removeCheck();
+                  if (ref.watch(fileListProvider).isEmpty) {
+                    Navigator.pop(context);
+                  }
+                },
               ),
-              const SizedBox(height: gepM),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: gepM,
-                children: [
-                  EasyBtn(
-                    S.of(context).removeUnselected,
-                    onTap: () {
-                      ref.read(fileListProvider.notifier).removeUncheck();
-                      if (ref.watch(fileListProvider).isEmpty) {
-                        Navigator.pop(context);
-                      }
-                    },
-                  ),
-                  EasyBtn(
-                    S.of(context).removeSelected,
-                    onTap: () {
-                      ref.read(fileListProvider.notifier).removeCheck();
-                      if (ref.watch(fileListProvider).isEmpty) {
-                        Navigator.pop(context);
-                      }
-                    },
-                  ),
-                  EasyBtn(
-                    S.of(context).selectReserve,
-                    onTap: () {
-                      ref.read(fileListProvider.notifier).checkReverse();
-                      updateName(ref);
-                    },
-                  ),
-                  EasyBtn(
-                    S.of(context).selectAllSwitch,
-                    onTap: () => selectAll(ref),
-                  ),
-                  EasyBtn(
-                    S.of(context).exitOperation,
-                    onTap: () => Navigator.pop(context),
-                  ),
-                ],
+              EasyBtn(
+                S.of(context).selectReserve,
+                onTap: () {
+                  ref.read(fileListProvider.notifier).checkReverse();
+                  updateName(ref);
+                },
+              ),
+              EasyBtn(
+                S.of(context).selectAllSwitch,
+                onTap: () => selectAll(ref),
+              ),
+              EasyBtn(
+                S.of(context).exitOperation,
+                onTap: () => Navigator.pop(context),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

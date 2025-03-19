@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
@@ -8,28 +7,6 @@ import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/utils/utils.dart';
-import 'package:once_power/views/action_bar/advance/dialog/add.dart';
-import 'package:once_power/views/action_bar/advance/dialog/add_preset.dart';
-import 'package:once_power/views/action_bar/advance/dialog/delete.dart';
-import 'package:once_power/views/action_bar/advance/dialog/replace.dart';
-
-void deleteText(BuildContext context, [AdvanceMenuDelete? menu]) {
-  showDialog(context: context, builder: (context) => DeleteView(menu: menu));
-}
-
-void addText(BuildContext context, [AdvanceMenuAdd? menu]) {
-  showDialog(context: context, builder: (context) => AddView(menu: menu));
-}
-
-void replaceText(BuildContext context, [AdvanceMenuReplace? menu]) {
-  showDialog(context: context, builder: (context) => ReplaceView(menu: menu));
-}
-
-void addPreset(BuildContext context, WidgetRef ref) {
-  List<AdvanceMenuModel> menus = ref.watch(advanceMenuListProvider);
-  if (menus.isEmpty) return;
-  showDialog(context: context, builder: (context) => AddPreset());
-}
 
 void advanceUpdateName(WidgetRef ref) {
   List<FileInfo> fileList = ref.watch(sortListProvider);

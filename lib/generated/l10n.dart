@@ -1919,6 +1919,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Remove folder`
+  String get removeFolder {
+    return Intl.message(
+      'Remove folder',
+      name: 'removeFolder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

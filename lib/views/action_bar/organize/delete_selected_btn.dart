@@ -14,7 +14,7 @@ import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
 import '../../../cores/list.dart';
 import '../../../providers/file.dart';
-import '../advance/dialog/easy_dialog.dart';
+import '../../../widgets/action_bar/easy_dialog.dart';
 
 class DeleteSelectedBtn extends ConsumerWidget {
   const DeleteSelectedBtn({super.key});
