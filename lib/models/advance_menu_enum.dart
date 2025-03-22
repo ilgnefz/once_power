@@ -165,7 +165,7 @@ extension DeleteTypeExtension on DeleteType {
 
 enum MovePosition { first, center, last, idle }
 
-enum DistinguishType { folder, file, extension, none }
+enum DistinguishType { none,folder, file, extension  }
 
 extension DistinguishTypeExtension on DistinguishType {
   String get label {

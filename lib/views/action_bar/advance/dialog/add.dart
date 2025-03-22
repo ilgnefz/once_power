@@ -129,6 +129,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
         String id = widget.menu != null ? widget.menu!.id : nanoid(10);
         AdvanceMenuAdd add = AdvanceMenuAdd(
           id: id,
+          checked: true,
           value: value,
           digits: digits,
           start: start,

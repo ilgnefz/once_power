@@ -34,7 +34,7 @@ class PresetBtn extends ConsumerWidget {
                     onTap: () {
                       ctrl.close();
                       List<AdvanceMenuModel> menus = [];
-                      menus.addAll(list[index].menus);
+                      menus.addAll(list[index].menus.map((e) => e.copyWith()));
                       ref.read(advanceMenuListProvider.notifier).setList(menus);
                       advanceUpdateName(ref);
                     },
@@ -50,7 +50,9 @@ class PresetBtn extends ConsumerWidget {
                 S.of(context).addPreset,
                 onTap: () {
                   ctrl.close();
-                  addPreset(context, ref);
+                  final current = ref.read(advanceMenuListProvider);
+                  final copies = current.map((e) => e.copyWith()).toList();
+                  addPreset(context, ref, copies);
                 },
               ),
             ],

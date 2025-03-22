@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/providers/advance.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_preset.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete.dart';
@@ -47,8 +46,8 @@ void replaceText(BuildContext context, [AdvanceMenuReplace? menu]) {
   showDialog(context: context, builder: (context) => ReplaceView(menu: menu));
 }
 
-void addPreset(BuildContext context, WidgetRef ref) {
-  List<AdvanceMenuModel> menus = ref.watch(advanceMenuListProvider);
+void addPreset(
+    BuildContext context, WidgetRef ref, List<AdvanceMenuModel> menus) {
   if (menus.isEmpty) return;
   showDialog(context: context, builder: (context) => AddPreset());
 }

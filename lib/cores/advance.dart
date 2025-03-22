@@ -11,7 +11,8 @@ import 'package:once_power/utils/utils.dart';
 
 void advanceUpdateName(WidgetRef ref) {
   List<FileInfo> fileList = ref.watch(sortListProvider);
-  List<AdvanceMenuModel> menus = ref.watch(advanceMenuListProvider);
+  List<AdvanceMenuModel> menus =
+      ref.watch(advanceMenuListProvider).where((menu) => menu.checked).toList();
   int index = 0;
   Map<String, List<FileInfo>> classifyMap = {};
   for (FileInfo file in fileList) {

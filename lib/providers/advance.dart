@@ -16,6 +16,14 @@ class AdvanceMenuList extends _$AdvanceMenuList {
     await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);
   }
 
+  void toggle(AdvanceMenuModel value) async {
+    state = state.map((e) {
+      if (e.id == value.id) value.checked = !value.checked;
+      return e;
+    }).toList();
+    await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);
+  }
+
   void remove(AdvanceMenuModel value) async {
     state = state.where((e) => e != value).toList();
     await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);

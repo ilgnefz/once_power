@@ -6,7 +6,7 @@ part of 'advance.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$advanceMenuListHash() => r'ddf3642c76342f8f691145c43a8f1c34b0b8686b';
+String _$advanceMenuListHash() => r'72be85000e40d1bbe48579e3f57968f06c1b3cac';
 
 /// See also [AdvanceMenuList].
 @ProviderFor(AdvanceMenuList)

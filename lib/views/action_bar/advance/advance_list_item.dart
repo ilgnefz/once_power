@@ -10,7 +10,8 @@ import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
-import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:once_power/widgets/action_bar/directive_item_btn.dart';
+import 'package:once_power/widgets/action_bar/dynamic_show_btn.dart';
 
 import 'advance_add_card.dart';
 import 'advance_delete_card.dart';
@@ -26,9 +27,6 @@ class AdvanceListItem extends StatefulWidget {
 }
 
 class _AdvanceListItemState extends State<AdvanceListItem> {
-  final double size = 20;
-  final double iconSize = 16;
-  final Color iconColor = Colors.grey;
   bool isHover = false;
 
   void onHover(PointerHoverEvent event) {
@@ -44,10 +42,12 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
   @override
   Widget build(BuildContext context) {
     final Color highlightColor = Theme.of(context).primaryColor;
-    final TextStyle highlightStyle =
-        TextStyle(color: highlightColor).useSystemChineseFont();
-    final TextStyle defaultStyle =
-        TextStyle(color: Colors.black).useSystemChineseFont();
+    final TextStyle highlightStyle = TextStyle(
+      color: widget.menu.checked ? highlightColor : AppColors.unselectText,
+    ).useSystemChineseFont();
+    final TextStyle defaultStyle = TextStyle(
+      color: widget.menu.checked ? Colors.black : AppColors.unselectText,
+    ).useSystemChineseFont();
 
     Widget buildInfo(AdvanceMenuModel menu) {
       if (menu.type.isDelete) {
@@ -85,40 +85,46 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
         ),
         child: Row(
           children: [
-            Text(widget.menu.type.label,
-                style: TextStyle(color: widget.menu.type.color)),
+            Text(
+              widget.menu.type.label,
+              style: TextStyle(
+                color:
+                    widget.menu.checked ? widget.menu.type.color : Colors.grey,
+              ),
+            ),
             SizedBox(width: AppNum.mediumG),
             buildInfo(widget.menu),
             SizedBox(width: AppNum.mediumG),
-            AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              width: isHover ? size : 0,
-              child: AnimatedOpacity(
-                opacity: isHover ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 300),
-                child: Consumer(
-                  builder: (context, ref, child) => ClickIcon(
-                    size: size,
-                    iconSize: iconSize,
-                    icon: Icons.copy_all_rounded,
-                    color: iconColor,
-                    onTap: () {
-                      AdvanceMenuModel menu =
-                          widget.menu.copyWith(id: nanoid(10));
-                      ref.read(advanceMenuListProvider.notifier).add(menu);
-                      updateName(ref);
-                    },
-                  ),
-                ),
+            Consumer(
+              builder: (_, ref, __) => DynamicShowBtn(
+                isHover: isHover,
+                icon: widget.menu.checked
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                onTap: () {
+                  ref
+                      .read(advanceMenuListProvider.notifier)
+                      .toggle(widget.menu);
+                  updateName(ref);
+                },
               ),
             ),
             SizedBox(width: AppNum.smallG),
             Consumer(
-              builder: (context, ref, _) => ClickIcon(
-                size: size,
-                iconSize: iconSize,
+              builder: (_, ref, __) => DynamicShowBtn(
+                isHover: isHover,
+                icon: Icons.copy_all_rounded,
+                onTap: () {
+                  AdvanceMenuModel menu = widget.menu.copyWith(id: nanoid(10));
+                  ref.read(advanceMenuListProvider.notifier).add(menu);
+                  updateName(ref);
+                },
+              ),
+            ),
+            SizedBox(width: AppNum.smallG),
+            Consumer(
+              builder: (context, ref, _) => DirectiveItemBtn(
                 icon: Icons.edit_note_rounded,
-                color: iconColor,
                 onTap: () {
                   if (widget.menu.type.isDelete) {
                     deleteText(context, widget.menu as AdvanceMenuDelete);
@@ -134,11 +140,8 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
             ),
             SizedBox(width: 1),
             Consumer(
-              builder: (context, ref, child) => ClickIcon(
-                size: size,
-                iconSize: iconSize,
+              builder: (context, ref, child) => DirectiveItemBtn(
                 icon: Icons.close_rounded,
-                color: iconColor,
                 onTap: () {
                   ref
                       .read(advanceMenuListProvider.notifier)

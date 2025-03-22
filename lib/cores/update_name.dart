@@ -19,15 +19,9 @@ import 'rename_reserve.dart';
 void updateName(WidgetRef ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool hasCSV = ref.watch(cSVDataProvider).isNotEmpty;
-  if (hasCSV) {
-    cSVDataRename(ref);
-  }
-  if (mode.isAdvance && !hasCSV) {
-    advanceUpdateName(ref);
-  }
-  if ((mode.isReplace || mode.isReserve) && !hasCSV) {
-    normalUpdateName(ref);
-  }
+  if (hasCSV) cSVDataRename(ref);
+  if (mode.isAdvance && !hasCSV) advanceUpdateName(ref);
+  if ((mode.isReplace || mode.isReserve) && !hasCSV) normalUpdateName(ref);
   updateExtension(ref);
 }
 

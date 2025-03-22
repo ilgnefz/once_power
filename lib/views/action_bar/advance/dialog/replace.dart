@@ -135,6 +135,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
         String id = widget.menu != null ? widget.menu!.id : nanoid(10);
         AdvanceMenuReplace replace = AdvanceMenuReplace(
           id: id,
+          checked: true,
           value: [oldValue, newValue],
           replaceMode: mode,
           fillPosition: position,

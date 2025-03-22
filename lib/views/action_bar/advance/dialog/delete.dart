@@ -100,6 +100,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
         String id = widget.menu != null ? widget.menu!.id : nanoid(10);
         AdvanceMenuDelete delete = AdvanceMenuDelete(
           id: id,
+          checked: true,
           value: value,
           matchLocation: location,
           start: start,

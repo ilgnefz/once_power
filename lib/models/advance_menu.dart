@@ -37,7 +37,13 @@ abstract class AdvanceMenuModel {
   String id;
   AdvanceType type;
   dynamic value;
-  AdvanceMenuModel({required this.id, required this.type, required this.value});
+  bool checked;
+  AdvanceMenuModel({
+    required this.id,
+    required this.type,
+    required this.value,
+    required this.checked,
+  });
 
   factory AdvanceMenuModel.fromJson(Map<String, dynamic> json) {
     AdvanceType advanceType = AdvanceType.values[json['type']];
@@ -66,6 +72,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
 
   AdvanceMenuDelete({
     required super.id,
+    required super.checked,
     required String super.value,
     required this.matchLocation,
     required this.start,
@@ -81,6 +88,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
   }) {
     return AdvanceMenuDelete(
       id: id ?? this.id,
+      checked: checked,
       value: value,
       matchLocation: matchLocation,
       start: start,
@@ -95,19 +103,23 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
   factory AdvanceMenuDelete.fromJson(Map<String, dynamic> json) =>
       AdvanceMenuDelete(
         id: json["id"],
+        checked: json["checked"] ?? true,
         value: json["value"],
-        matchLocation: MatchLocation.values[json["matchLocation"]],
-        start: json["start"],
-        end: json["end"],
-        deleteTypes: List<DeleteType>.from(
-            json["deleteTypes"].map((x) => DeleteType.values[x])),
-        deleteExt: json["deleteExt"],
+        matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        start: json["start"] ?? 1,
+        end: json["end"] ?? 1,
+        deleteTypes: json["deleteTypes"] == null
+            ? <DeleteType>[]
+            : List<DeleteType>.from(
+                json["deleteTypes"].map((x) => DeleteType.values[x])),
+        deleteExt: json["deleteExt"] ?? false,
       );
 
   @override
   Map<String, dynamic> toJson() => {
         "type": type.index,
         "id": id,
+        "checked": checked,
         "value": value,
         "matchLocation": matchLocation.index,
         "start": start,
@@ -118,7 +130,15 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
 
   @override
   String toString() {
-    return 'AdvanceMenuDelete{id: $id, value: $value, matchLocation: $matchLocation, start: $start, end: $end, deleteTypes: $deleteTypes, deleteExt: $deleteExt}';
+    return 'AdvanceMenuDelete{'
+        'id: $id, '
+        'checked: $checked, '
+        'value: $value, '
+        'matchLocation: $matchLocation, '
+        'start: $start, '
+        'end: $end, '
+        'deleteTypes: $deleteTypes, '
+        'deleteExt: $deleteExt}';
   }
 }
 
@@ -135,6 +155,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 
   AdvanceMenuAdd({
     required super.id,
+    required super.checked,
     required String super.value,
     required this.digits,
     required this.start,
@@ -154,6 +175,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   }) {
     return AdvanceMenuAdd(
       id: id ?? this.id,
+      checked: checked,
       value: value,
       digits: digits,
       start: start,
@@ -171,22 +193,26 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 
   factory AdvanceMenuAdd.fromJson(Map<String, dynamic> json) => AdvanceMenuAdd(
         id: json["id"],
+        checked: json["checked"] ?? true,
         value: json["value"],
-        digits: json["digits"],
-        start: json["start"],
-        randomValue: List<String>.from(json["randomValue"].map((x) => x)),
-        distinguishType: DistinguishType.values[json["distinguishType"]],
-        addType: AddType.values[json["addType"]],
-        randomLen: json["randomLen"],
-        dateType: DateType.values[json["dateType"]],
-        addPosition: AddPosition.values[json["addPosition"]],
-        posIndex: json["posIndex"],
+        digits: json["digits"] ?? 0,
+        start: json["start"] ?? 1,
+        randomValue: json["randomValue"] == null
+            ? <String>[]
+            : List<String>.from(json["randomValue"].map((x) => x)),
+        distinguishType: DistinguishType.values[json["distinguishType"] ?? 0],
+        addType: AddType.values[json["addType"] ?? 0],
+        randomLen: json["randomLen"] ?? 1,
+        dateType: DateType.values[json["dateType"] ?? 0],
+        addPosition: AddPosition.values[json["addPosition"] ?? 1],
+        posIndex: json["posIndex"] ?? 1,
       );
 
   @override
   Map<String, dynamic> toJson() => {
         "type": type.index,
         "id": id,
+        "checked": checked,
         "value": value,
         "digits": digits,
         "start": start,
@@ -201,7 +227,19 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 
   @override
   String toString() {
-    return 'AdvanceMenuAdd{id: $id, value: $value, digits: $digits, start: $start,  randomValue: $randomValue,  distinguishType: $distinguishType, addType: $addType, randomLen: $randomLen, dateType: $dateType, addPosition: $addPosition, posIndex: $posIndex}';
+    return 'AdvanceMenuAdd{'
+        'id: $id, '
+        'checked: $checked, '
+        'value: $value, '
+        'digits: $digits, '
+        'start: $start,  '
+        'randomValue: $randomValue, '
+        'distinguishType: $distinguishType, '
+        'addType: $addType, '
+        'randomLen: $randomLen, '
+        'dateType: $dateType, '
+        'addPosition: $addPosition, '
+        'posIndex: $posIndex}';
   }
 }
 
@@ -215,6 +253,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
 
   AdvanceMenuReplace({
     required super.id,
+    required super.checked,
     required List<String> super.value,
     required this.replaceMode,
     required this.fillPosition,
@@ -228,6 +267,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   AdvanceMenuReplace copyWith({String? id}) {
     return AdvanceMenuReplace(
       id: id ?? this.id,
+      checked: checked,
       value: value,
       replaceMode: replaceMode,
       fillPosition: fillPosition,
@@ -241,19 +281,23 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   factory AdvanceMenuReplace.fromJson(Map<String, dynamic> json) =>
       AdvanceMenuReplace(
         id: json["id"],
-        value: List<String>.from(json["value"].map((x) => x)),
-        replaceMode: ReplaceMode.values[json["replaceMode"]],
-        fillPosition: FillPosition.values[json["fillPosition"]],
-        matchLocation: MatchLocation.values[json["matchLocation"]],
-        start: json["start"],
-        end: json["end"],
-        caseType: CaseType.values[json["caseType"]],
+        checked: json["checked"] ?? true,
+        value: json["value"] == null
+            ? <String>[]
+            : List<String>.from(json["value"].map((x) => x)),
+        replaceMode: ReplaceMode.values[json["replaceMode"] ?? 0],
+        fillPosition: FillPosition.values[json["fillPosition"] ?? 0],
+        matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        start: json["start"] ?? 1,
+        end: json["end"] ?? 1,
+        caseType: CaseType.values[json["caseType"] ?? 0],
       );
 
   @override
   Map<String, dynamic> toJson() => {
         "type": type.index,
         "id": id,
+        "checked": checked,
         "value": List<String>.from(value.map((x) => x)),
         "replaceMode": replaceMode.index,
         "fillPosition": fillPosition.index,
@@ -265,6 +309,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
 
   @override
   String toString() {
-    return 'AdvanceMenuReplace{id: $id, value: $value, replaceMode: $replaceMode, fillPosition: $fillPosition, matchLocation: $matchLocation, start: $start, end: $end, caseType: $caseType}';
+    return 'AdvanceMenuReplace{'
+        'id: $id, '
+        'checked: $checked, '
+        'value: $value, '
+        'replaceMode: $replaceMode, '
+        'fillPosition: $fillPosition, '
+        'matchLocation: $matchLocation, '
+        'start: $start, '
+        'end: $end, '
+        'caseType: $caseType}';
   }
 }
