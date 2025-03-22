@@ -22,6 +22,7 @@ class _PreviewVideoState extends State<PreviewVideo> {
   late VideoPlayerController _controller;
   Duration totalDuration = Duration.zero;
   Duration currentPosition = Duration.zero;
+  String timeLine = '';
 
   @override
   void initState() {
@@ -37,7 +38,8 @@ class _PreviewVideoState extends State<PreviewVideo> {
           _controller.pause();
         }
         currentPosition = _controller.value.position;
-        // setState(() {});
+        timeLine = formatVideoTime(totalDuration, currentPosition);
+        setState(() {});
       });
   }
 
@@ -62,14 +64,12 @@ class _PreviewVideoState extends State<PreviewVideo> {
                 Expanded(child: VideoPlayer(_controller)),
                 Row(
                   children: [
-                    SizedBox(width: AppNum.largeG),
                     PlayBtn(controller: _controller),
                     Expanded(
                       child: VideoProgressIndicator(
                         _controller,
                         allowScrubbing: true,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                        padding: EdgeInsets.zero,
                         colors: VideoProgressColors(
                           playedColor: Theme.of(context).colorScheme.primary,
                           backgroundColor: Colors.white,
@@ -77,11 +77,8 @@ class _PreviewVideoState extends State<PreviewVideo> {
                       ),
                     ),
                     SizedBox(width: AppNum.largeG),
-                    Text(
-                      formatVideoTime(totalDuration, currentPosition),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(width: AppNum.largeG * 2),
+                    Text(timeLine, style: TextStyle(color: Colors.white)),
+                    SizedBox(width: AppNum.largeG),
                   ],
                 )
               ],
