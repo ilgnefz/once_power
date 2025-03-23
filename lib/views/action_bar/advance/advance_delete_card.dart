@@ -21,14 +21,9 @@ class AdvanceDeleteCard extends StatelessWidget {
     bool isDeleteType = menu.deleteTypes.isNotEmpty;
     bool isDeleteExt = menu.deleteExt;
 
-    late List<TextSpan> children;
-
     if (isDeleteExt) {
       return AdvanceRichText(
-        text: TextSpan(
-          text: S.of(context).extension,
-          style: highlightStyle,
-        ),
+        text: TextSpan(text: S.of(context).extension, style: highlightStyle),
       );
     }
 
