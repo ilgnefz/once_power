@@ -253,5 +253,8 @@
   "dimensions": "尺寸",
   "size": "大小",
   "imageW": "图片宽",
-  "imageH": "图片高"
+  "imageH": "图片高",
+  "wordSpacing": "单词间隔",
+  "wordSpacingHint": "请输入单词间隔(大写字母开头识别为一个单词)",
+  "separate": "分隔"
 }

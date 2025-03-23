@@ -265,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
     "selectReserve": MessageLookupByLibrary.simpleMessage("反选文件"),
     "selectTargetFolder": MessageLookupByLibrary.simpleMessage("选择目标文件夹"),
+    "separate": MessageLookupByLibrary.simpleMessage("分隔"),
     "serial": MessageLookupByLibrary.simpleMessage("增数"),
     "serialDistinguish": MessageLookupByLibrary.simpleMessage("序列区分"),
     "serialNumber": MessageLookupByLibrary.simpleMessage("序列号"),
@@ -323,6 +324,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "video": MessageLookupByLibrary.simpleMessage("视频"),
     "viewMode": MessageLookupByLibrary.simpleMessage("视图模式"),
     "withT": MessageLookupByLibrary.simpleMessage("为"),
+    "wordSpacing": MessageLookupByLibrary.simpleMessage("单词间隔"),
+    "wordSpacingHint": MessageLookupByLibrary.simpleMessage(
+      "请输入单词间隔(大写字母开头识别为一个单词)",
+    ),
     "zip": MessageLookupByLibrary.simpleMessage("压缩包"),
   };
 }

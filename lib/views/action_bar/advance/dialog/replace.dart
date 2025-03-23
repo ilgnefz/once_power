@@ -9,6 +9,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/views/action_bar/advance/dialog/word_spacing.dart';
 
 import 'case_conversion_group.dart';
 import 'common_dialog.dart';
@@ -32,6 +33,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   MatchLocation location = MatchLocation.first;
   int start = 1, end = 1;
   CaseType type = CaseType.noConversion;
+  String wordSpacing = '';
 
   @override
   void initState() {
@@ -45,6 +47,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
       start = widget.menu!.start;
       end = widget.menu!.end;
       type = widget.menu!.caseType;
+      wordSpacing = widget.menu!.wordSpacing;
     }
   }
 
@@ -126,6 +129,14 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                     setState(() {});
                   },
                 ),
+                WordSpacing(
+                  value: wordSpacing,
+                  enable: !type.isNoConversion,
+                  onChanged: (value) {
+                    wordSpacing = value;
+                    setState(() {});
+                  },
+                ),
               ],
             ),
           );
@@ -143,6 +154,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
           start: start,
           end: end,
           caseType: type,
+          wordSpacing: wordSpacing,
         );
         if (widget.menu != null) {
           ref.read(advanceMenuListProvider.notifier).update(id, replace);

@@ -19,6 +19,7 @@ class AdvanceReplaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isFormat = menu.replaceMode.isFormat;
+    bool noFormatNoCon = !isFormat && menu.caseType.isNoConversion;
     return AdvanceRichText(
       text: TextSpan(
         text: isFormat
@@ -34,16 +35,12 @@ class AdvanceReplaceCard extends StatelessWidget {
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).formatDesc3, style: highlightStyle),
           ],
-          if (!isFormat &&
-              menu.caseType.isNoConversion &&
-              !menu.matchLocation.isPosition) ...[
+          if (noFormatNoCon && !menu.matchLocation.isPosition) ...[
             TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).withT),
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
           ],
-          if (!isFormat &&
-              menu.caseType.isNoConversion &&
-              menu.matchLocation.isPosition) ...[
+          if (noFormatNoCon && menu.matchLocation.isPosition) ...[
             TextSpan(
               text: '${S.of(context).position} ${menu.start} ',
               style: highlightStyle,
@@ -55,6 +52,12 @@ class AdvanceReplaceCard extends StatelessWidget {
           ],
           if (!isFormat && !menu.caseType.isNoConversion) ...[
             TextSpan(text: ' "${menu.caseType.label}"', style: highlightStyle),
+            if (menu.wordSpacing != '') ...[
+              TextSpan(
+                  text: ' ${S.of(context).formatDesc2} ', style: defaultStyle),
+              TextSpan(text: '"${menu.wordSpacing}" ', style: highlightStyle),
+              TextSpan(text: S.of(context).separate, style: defaultStyle),
+            ]
           ]
         ],
       ),

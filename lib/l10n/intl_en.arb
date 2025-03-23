@@ -252,5 +252,8 @@
   "dimensions": "Dimensions",
   "size": "Size",
   "imageW": "ImageWidth",
-  "imageH": "ImageHeight"
+  "imageH": "ImageHeight",
+  "wordSpacing": "Word Spacing",
+  "wordSpacingHint": "Separate words starting with capital letters",
+  "separate": "Separate"
 }

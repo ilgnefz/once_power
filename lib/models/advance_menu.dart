@@ -250,7 +250,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final int start;
   final int end;
   final CaseType caseType;
-
+  final String wordSpacing;
   AdvanceMenuReplace({
     required super.id,
     required super.checked,
@@ -261,6 +261,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.start,
     required this.end,
     required this.caseType,
+    required this.wordSpacing,
   }) : super(type: AdvanceType.replace);
 
   @override
@@ -275,6 +276,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       start: start,
       end: end,
       caseType: caseType,
+      wordSpacing: wordSpacing,
     );
   }
 
@@ -291,6 +293,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         start: json["start"] ?? 1,
         end: json["end"] ?? 1,
         caseType: CaseType.values[json["caseType"] ?? 0],
+        wordSpacing: json["wordSpacing"] ?? "",
       );
 
   @override
@@ -305,6 +308,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "start": start,
         "end": end,
         "caseType": caseType.index,
+        "wordSpacing": wordSpacing,
       };
 
   @override
@@ -318,6 +322,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'matchLocation: $matchLocation, '
         'start: $start, '
         'end: $end, '
-        'caseType: $caseType}';
+        'caseType: $caseType, '
+        'wordSpacing: $wordSpacing}';
   }
 }

@@ -1984,6 +1984,31 @@ class S {
   String get imageH {
     return Intl.message('ImageHeight', name: 'imageH', desc: '', args: []);
   }
+
+  /// `Word Spacing`
+  String get wordSpacing {
+    return Intl.message(
+      'Word Spacing',
+      name: 'wordSpacing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Separate words starting with capital letters`
+  String get wordSpacingHint {
+    return Intl.message(
+      'Separate words starting with capital letters',
+      name: 'wordSpacingHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Separate`
+  String get separate {
+    return Intl.message('Separate', name: 'separate', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

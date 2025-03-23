@@ -343,6 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
     "selectReserve": MessageLookupByLibrary.simpleMessage("Reverse Selection"),
     "selectTargetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
+    "separate": MessageLookupByLibrary.simpleMessage("Separate"),
     "serial": MessageLookupByLibrary.simpleMessage("Serial"),
     "serialDistinguish": MessageLookupByLibrary.simpleMessage(
       "Serial Distinguish",
@@ -415,6 +416,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "video": MessageLookupByLibrary.simpleMessage("Video"),
     "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),
     "withT": MessageLookupByLibrary.simpleMessage("with"),
+    "wordSpacing": MessageLookupByLibrary.simpleMessage("Word Spacing"),
+    "wordSpacingHint": MessageLookupByLibrary.simpleMessage(
+      "Separate words starting with capital letters",
+    ),
     "zip": MessageLookupByLibrary.simpleMessage("Zip"),
   };
 }

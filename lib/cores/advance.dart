@@ -198,26 +198,21 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
         return matchPosition(name, newValue, menu.start, menu.end);
     }
   } else {
+    String wordSpacing = menu.wordSpacing;
     switch (type) {
       case CaseType.uppercase:
-        name = name.toUpperCase();
-        return name;
+        return splitWords(name).join(wordSpacing).toUpperCase();
       case CaseType.lowercase:
-        name = name.toLowerCase();
-        return name;
+        return splitWords(name).join(wordSpacing).toLowerCase();
       case CaseType.toggleCase:
-        String result = '';
-        for (int i = 0; i < name.length; i++) {
-          String char = name[i];
-          if (char == char.toUpperCase()) {
-            result += char.toLowerCase();
-          } else {
-            result += char.toUpperCase();
-          }
-        }
-        return result;
+        return splitWords(name).map((word) {
+          if (word.isEmpty) return word;
+          String first = word[0];
+          String rest = word.substring(1).toLowerCase();
+          return '${first.toUpperCase() == first ? first.toLowerCase() : first.toUpperCase()}$rest';
+        }).join(wordSpacing);
       case CaseType.noConversion:
-        return name;
+        return splitWords(name).join(wordSpacing);
     }
   }
 }
@@ -228,4 +223,13 @@ String matchPosition(String name, String replaceStr, int start, int end) {
   String left = name.substring(0, start - 1);
   String right = name.substring(end);
   return left + replaceStr + right;
+}
+
+List<String> splitWords(String name) {
+  return name
+      .split(RegExp(
+          r'(?<=[a-z])(?=[A-Z])|(?=[A-Z][a-z])|(?<=[A-Z])(?=[A-Z])' // 仅处理英文单词分割
+          ))
+      .where((word) => word.isNotEmpty)
+      .toList();
 }
