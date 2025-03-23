@@ -7,6 +7,7 @@ import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
+import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/info.dart';
@@ -89,4 +90,10 @@ bool isSameNewPath(List<FileInfo> list, String newPath) {
     return sum + (currentPath == newPath ? 1 : 0);
   });
   return count > 1;
+}
+
+bool disabledBtn(WidgetRef ref) {
+  bool isApplying = ref.watch(isApplyingProvider);
+  bool isEmpty = ref.watch(fileListProvider).where((e) => e.checked).isEmpty;
+  return isApplying || isEmpty;
 }

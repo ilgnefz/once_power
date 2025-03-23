@@ -88,7 +88,6 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
-  int count = 0;
   final stopwatch = Stopwatch()..start();
   const batchSize = AppNum.batchSize;
   // 处理前 batchSize 个文件（原始逐个处理方式）
@@ -98,7 +97,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
     if (isExist(ref, p)) continue;
     FileInfo fileInfo = await generateFileInfo(ref, p);
     ref.read(fileListProvider.notifier).add(fileInfo);
-    ref.read(countProvider.notifier).update(++count);
+    ref.read(countProvider.notifier).update();
     // await Future.delayed(const Duration(microseconds: 1));
   }
 
@@ -115,14 +114,16 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
         final result = await _processSingleFile(ref, p);
         if (result != null) {
           ref.read(fileListProvider.notifier).add(result);
-          ref.read(countProvider.notifier).update(++count);
+          ref.read(countProvider.notifier).update();
         }
       }),
       eagerError: true,
     );
   }
 
-  if (isViewNoOrganize(ref)) showFilterNotification(paths.length - count);
+  if (isViewNoOrganize(ref)) {
+    showFilterNotification(paths.length - ref.watch(countProvider));
+  }
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
@@ -154,6 +155,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     exifDate = await getExifDate(filePath);
   }
   FileClassify type = getFileClassify(extension);
+  int size = await calculateSize(filePath);
   return FileInfo(
     id: id,
     name: name,
@@ -169,6 +171,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     modifiedDate: modifyDate,
     exifDate: exifDate,
     type: type,
+    size: size,
     checked: true,
   );
 }

@@ -54,4 +54,5 @@ class AppNum {
 
   // performance
   static const batchSize = 50;
+  static const maxFileSize = 1024 * 1024 * 150;
 }

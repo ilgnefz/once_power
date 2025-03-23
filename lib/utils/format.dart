@@ -52,3 +52,25 @@ List<String> strToList(String content) {
   }
   return list;
 }
+
+/// 将字节数转换为友好格式
+/// 示例：1024 → 1.0 KB | 1536 → 1.5 KB | 2500000 → 2.38 MB | 1500000000 → 1.40 GB
+String formatFileSize(int bytes, {int precision = 2}) {
+  const units = ['B', 'KB', 'MB', 'GB'];
+  double size = bytes.toDouble();
+  int unitIndex = 0;
+
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex++;
+  }
+
+  switch (units[unitIndex]) {
+    case 'B':
+      return '$bytes B';
+    case 'KB':
+      return '${size.toStringAsFixed(1)} KB';
+    default:
+      return '${size.toStringAsFixed(precision)} ${units[unitIndex]}';
+  }
+}

@@ -9,7 +9,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
 import '../../../cores/list.dart';
@@ -90,7 +90,7 @@ class DeleteSelectedBtn extends ConsumerWidget {
     }
 
     return EasyElevatedBtn(
-      onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteSelected,
+      onPressed: disabledBtn(ref) ? null : deleteSelected,
       label: S.of(context).deleteChecked,
     );
   }

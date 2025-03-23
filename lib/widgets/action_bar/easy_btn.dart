@@ -16,7 +16,7 @@ class EasyBtn extends StatelessWidget {
   final double? height;
   final double? padding;
   final double? fontSize;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

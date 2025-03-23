@@ -11,7 +11,7 @@ import 'package:once_power/models/notification.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/toggle.dart';
-import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
 class ApplyRenameBtn extends ConsumerWidget {
@@ -20,7 +20,7 @@ class ApplyRenameBtn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<FileInfo> allList = ref.watch(sortListProvider);
-    List<FileInfo> list = allList.where((e) => e.checked).toList();
+    // List<FileInfo> list = allList.where((e) => e.checked).toList();
 
     void apply() async {
       await runRename(ref, (
@@ -53,7 +53,7 @@ class ApplyRenameBtn extends ConsumerWidget {
     }
 
     return EasyElevatedBtn(
-      onPressed: list.isNotEmpty ? apply : null,
+      onPressed: disabledBtn(ref) ? null : apply,
       label: S.of(context).applyChange,
     );
   }

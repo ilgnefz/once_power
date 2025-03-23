@@ -15,6 +15,7 @@ class FileInfo {
   DateTime modifiedDate;
   DateTime? exifDate;
   FileClassify type;
+  int size;
   bool checked;
 
   FileInfo({
@@ -32,12 +33,29 @@ class FileInfo {
     required this.modifiedDate,
     this.exifDate,
     required this.type,
+    required this.size,
     required this.checked,
   });
 
   @override
   String toString() {
-    return 'FileInfo{id: $id, name: $name, phonetic: $phonetic, newName: $newName, parent: $parent, filePath: $filePath, tempPath: $tempPath, extension: $extension, newExtension: $newExtension, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, exifDate: $exifDate, type: $type, checked: $checked}';
+    return 'FileInfo{'
+        'id: $id, '
+        'name: $name, '
+        'phonetic: $phonetic, '
+        'newName: $newName, '
+        'parent: $parent, '
+        'filePath: $filePath, '
+        'tempPath: $tempPath, '
+        'extension: $extension, '
+        'newExtension: $newExtension, '
+        'beforePath: $beforePath, '
+        'createdDate: $createdDate, '
+        'modifiedDate: $modifiedDate, '
+        'exifDate: $exifDate, '
+        'type: $type, '
+        'size: $size, '
+        'checked: $checked}';
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +74,7 @@ class FileInfo {
       'modifiedDate': modifiedDate.millisecondsSinceEpoch,
       'exifDate': exifDate?.millisecondsSinceEpoch,
       'type': type.index,
+      'size': size,
       'checked': checked,
     };
   }

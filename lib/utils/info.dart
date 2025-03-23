@@ -320,3 +320,25 @@ String getDateName(DateType type, int dateLen, FileInfo file) {
   }
   return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }
+
+int getAllSize(WidgetRef ref) {
+  int totalSize = 0;
+  for (FileInfo file in ref.watch(fileListProvider)) {
+    if (!file.checked) continue;
+    totalSize += file.size;
+  }
+  return totalSize;
+}
+
+// 新增文件夹大小计算方法
+Future<int> calculateSize(String path) async {
+  if (FileSystemEntity.isFileSync(path)) return await File(path).length();
+  int totalSize = 0;
+  final dir = Directory(path);
+  await for (final entity in dir.list(recursive: true)) {
+    if (entity is File) {
+      totalSize += await entity.length();
+    }
+  }
+  return totalSize;
+}

@@ -10,6 +10,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/toggle.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
 class DeleteEmptyBtn extends ConsumerWidget {
@@ -67,7 +68,7 @@ class DeleteEmptyBtn extends ConsumerWidget {
     }
 
     return EasyElevatedBtn(
-      onPressed: ref.watch(fileListProvider).isEmpty ? null : deleteEmptyFolder,
+      onPressed: disabledBtn(ref) ? null : deleteEmptyFolder,
       label: S.of(context).deleteEmptyFolder,
     );
   }

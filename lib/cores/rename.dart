@@ -32,8 +32,9 @@ Future<void> runRename(
   int total = checkList.length;
   if (checkList.isEmpty) return;
   ref.read(totalProvider.notifier).update(total);
+  ref.read(isApplyingProvider.notifier).start();
   List<InfoDetail> errors = [];
-  int count = 0;
+  ref.read(countProvider.notifier).clear();
   final stopwatch = Stopwatch()..start();
 
   const batchSize = 50;
@@ -45,7 +46,7 @@ Future<void> runRename(
       batch.map((file) async {
         final info = await callback(ref, list, file);
         if (info != null) errors.add(info);
-        ref.read(countProvider.notifier).update(++count);
+        ref.read(countProvider.notifier).update();
       }),
       eagerError: true,
     );
@@ -55,6 +56,7 @@ Future<void> runRename(
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   await onEnd(errors, total);
+  ref.read(isApplyingProvider.notifier).finish();
 }
 
 Future<InfoDetail?> rename(

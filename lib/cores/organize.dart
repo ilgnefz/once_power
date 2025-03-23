@@ -7,6 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
+import 'package:once_power/models/progress.dart';
 import 'package:once_power/models/rule_type.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
@@ -33,8 +34,9 @@ void organizeFolder(WidgetRef ref) async {
   int total = checkList.length;
   if (checkList.isEmpty) return;
   ref.read(totalProvider.notifier).update(total);
+  ref.read(countProvider.notifier).clear();
+  ref.read(isApplyingProvider.notifier).start();
   List<InfoDetail> errors = [];
-  int count = 0;
   DateTime startTime = DateTime.now();
 
   bool isRule = ref.watch(useRuleOrganizeProvider);
@@ -48,83 +50,68 @@ void organizeFolder(WidgetRef ref) async {
 
   if (isRule) {
     RuleTypeValue? rule = StorageUtil.getRuleTypeValue(AppKeys.ruleTypeValue);
-    if (rule == null || rule.isEmpty()) return showOrganizeNullNotification();
-    List<InfoDetail> list = await ruleOrganize(ref, checkList, rule, count);
-    if (list.isNotEmpty) errors.addAll(list);
+    if (rule == null || rule.isEmpty()) {
+      clearOrganize(ref);
+      return showOrganizeNullNotification();
+    }
+    errors.addAll(await ruleOrganize(ref, checkList, rule));
   } else if (isTop) {
-    List<InfoDetail> list = await topParentsOrganize(ref, checkList, count);
-    if (list.isNotEmpty) errors.addAll(list);
+    errors.addAll(await topParentsOrganize(ref, checkList));
   } else if (ref.watch(useDateClassifyProvider)) {
-    List<InfoDetail> list = await dateClassifyOrganize(ref, checkList, count);
-    if (list.isNotEmpty) errors.addAll(list);
+    errors.addAll(await dateClassifyOrganize(ref, checkList));
   } else {
-    List<InfoDetail> list = await normalOrganize(ref, checkList, count);
-    if (list.isNotEmpty) errors.addAll(list);
+    errors.addAll(await normalOrganize(ref, checkList));
   }
   Duration duration = DateTime.now().difference(startTime);
   double cost = duration.inMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  clearOrganize(ref);
   showOrganizeNotification(errors, total);
   if (ref.watch(isSaveLogProvider)) {
     await removeLogCache(S.current.organizeLogs);
   }
 }
 
+void clearOrganize(WidgetRef ref) {
+  ref.read(currentProgressFileProvider.notifier).clear();
+  ref.read(currentSizeProvider.notifier).clear();
+  ref.read(isApplyingProvider.notifier).finish();
+}
+
 Future<List<InfoDetail>> normalOrganize(
-    WidgetRef ref, List<FileInfo> list, int count) async {
+    WidgetRef ref, List<FileInfo> list) async {
   List<InfoDetail> errorList = [];
   String targetFolder = ref.watch(folderControllerProvider).text;
   for (FileInfo file in list) {
     InfoDetail? info = await organize(ref, file, targetFolder);
     if (info != null) errorList.add(info);
-    ref.read(countProvider.notifier).update(++count);
   }
   return errorList;
 }
 
 Future<List<InfoDetail>> ruleOrganize(
-    WidgetRef ref, List<FileInfo> list, RuleTypeValue rule, int count) async {
+    WidgetRef ref, List<FileInfo> list, RuleTypeValue rule) async {
   List<InfoDetail> errorList = [];
   // 检测 rule 中至少有一个不为空
   for (FileInfo file in list) {
-    if (rule.image != '' && file.type.isImage) {
-      InfoDetail? info = await organize(ref, file, rule.image);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.video != '' && file.type.isVideo) {
-      InfoDetail? info = await organize(ref, file, rule.video);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.audio != '' && file.type.isAudio) {
-      InfoDetail? info = await organize(ref, file, rule.audio);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.doc != '' && file.type.isDoc) {
-      InfoDetail? info = await organize(ref, file, rule.doc);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.zip != '' && file.type.isZip) {
-      InfoDetail? info = await organize(ref, file, rule.zip);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.folder != '' && file.type.isFolder) {
-      InfoDetail? info = await organize(ref, file, rule.folder);
-      if (info != null) errorList.add(info);
-    }
-    if (rule.other != '' && file.type.isOther) {
-      InfoDetail? info = await organize(ref, file, rule.other);
-      if (info != null) errorList.add(info);
-    }
-    ref.read(countProvider.notifier).update(++count);
+    String folder = file.parent;
+    if (rule.image != '' && file.type.isImage) folder = rule.image;
+    if (rule.video != '' && file.type.isVideo) folder = rule.video;
+    if (rule.audio != '' && file.type.isAudio) folder = rule.audio;
+    if (rule.doc != '' && file.type.isDoc) folder = rule.doc;
+    if (rule.zip != '' && file.type.isZip) folder = rule.zip;
+    if (rule.folder != '' && file.type.isFolder) folder = rule.folder;
+    if (rule.other != '' && file.type.isOther) folder = rule.other;
+    InfoDetail? info = await organize(ref, file, folder);
+    if (info != null) errorList.add(info);
   }
   return errorList;
 }
 
 Future<List<InfoDetail>> topParentsOrganize(
-    WidgetRef ref, List<FileInfo> list, int count) async {
+    WidgetRef ref, List<FileInfo> list) async {
   List<InfoDetail> errorList = [];
   for (FileInfo file in list) {
-    ref.read(countProvider.notifier).update(++count);
     String targetFolder = getTopPath(file.filePath);
     if (file.parent == targetFolder) continue;
     InfoDetail? info = await organize(ref, file, targetFolder);
@@ -134,7 +121,7 @@ Future<List<InfoDetail>> topParentsOrganize(
 }
 
 Future<List<InfoDetail>> dateClassifyOrganize(
-    WidgetRef ref, List<FileInfo> list, int count) async {
+    WidgetRef ref, List<FileInfo> list) async {
   List<InfoDetail> errorList = [];
   String inputFolder = ref.watch(folderControllerProvider).text;
   for (FileInfo file in list) {
@@ -142,7 +129,6 @@ Future<List<InfoDetail>> dateClassifyOrganize(
     String targetFolder = path.join(inputFolder, dateDir);
     InfoDetail? info = await organize(ref, file, targetFolder);
     if (info != null) errorList.add(info);
-    ref.read(countProvider.notifier).update(++count);
   }
   return errorList;
 }
@@ -171,22 +157,31 @@ Future<InfoDetail?> organize(
   String newPath = path.join(folder, path.basename(oldPath));
   newPath = await renameExistFile(newPath);
   bool isSame = isSameDisk(oldPath, newPath);
+  int totalSize = await calculateSize(oldPath);
+  ProgressFileInfo info = ProgressFileInfo(
+    name: path.basename(oldPath),
+    size: totalSize,
+    transferred: 0,
+  );
+  InfoDetail? infoDetail;
   try {
     final parentDir = Directory(path.dirname(newPath));
-    if (!await parentDir.exists()) {
-      await parentDir.create(recursive: true);
-    }
+    if (!await parentDir.exists()) await parentDir.create(recursive: true);
+    ref.read(currentProgressFileProvider.notifier).update(info);
     if (file.type.isFolder) {
       if (isSame) {
         await Directory(oldPath).rename(newPath);
+        ref
+            .read(currentProgressFileProvider.notifier)
+            .update(info.copyWith(transferred: totalSize));
       } else {
-        await moveDirectory(ref, oldPath, newPath);
+        await moveDirectory(ref, oldPath, newPath, info);
       }
     } else {
       if (isSame) {
         await File(oldPath).rename(newPath);
       } else {
-        await File(oldPath).copy(newPath);
+        await moveFileWithProgress(oldPath, newPath, ref);
         await File(oldPath).delete();
       }
     }
@@ -194,41 +189,62 @@ Future<InfoDetail?> organize(
     String parent = path.dirname(newPath);
     ref.read(fileListProvider.notifier).updateFileParent(file.id, parent);
     ref.read(fileListProvider.notifier).updateFilePath(file.id, newPath);
-    return null;
   } catch (e) {
-    return moveErrorInfo(e, isSame, oldPath, newPath);
+    ref
+        .read(currentProgressFileProvider.notifier)
+        .update(info.copyWith(transferred: info.size));
+    infoDetail = moveErrorInfo(e, isSame, oldPath, newPath);
   }
+  ref.read(countProvider.notifier).update();
+  return infoDetail;
 }
 
 // 查看文件夹下是否有文件，有就移动自身及所有文件到新文件夹
 // 没有就移动自身
-Future<void> moveDirectory(
-    WidgetRef ref, String oldFolder, String newFolder) async {
-  // 创建目标目录（保留原目录名称）
-  final targetDir = path.join(newFolder, path.basename(oldFolder));
-  await Directory(targetDir).create(recursive: true);
-
-  // 递归遍历所有子项（包含空目录）
+Future<void> moveDirectory(WidgetRef ref, String oldFolder, String newFolder,
+    ProgressFileInfo info) async {
+  // 先创建所有目录结构
   final entities = await Directory(oldFolder).list(recursive: true).toList();
 
-  // 先处理文件
-  for (var entity in entities.whereType<File>()) {
-    final relativePath = path.relative(entity.path, from: oldFolder);
-    final newPath = path.join(targetDir, relativePath);
-
-    // 处理可能的重名文件
-    final verifiedPath = await renameExistFile(newPath);
-    await entity.copy(verifiedPath);
-    await entity.delete();
-  }
-
-  // 最后处理目录（确保父目录存在）
-  for (var entity in entities.whereType<Directory>()) {
-    final relativePath = path.relative(entity.path, from: oldFolder);
-    final newDirPath = path.join(targetDir, relativePath);
+  // 优先处理目录创建（确保父目录存在）
+  for (var dir in entities.whereType<Directory>()) {
+    final dirRelative = path.relative(dir.path, from: oldFolder);
+    final newDirPath = path.join(newFolder, dirRelative);
     await Directory(newDirPath).create(recursive: true);
   }
 
-  // 删除源目录（包括空目录）
+  // 再处理文件移动
+  int size = 0;
+  for (var file in entities.whereType<File>()) {
+    final fileRelative = path.relative(file.path, from: oldFolder);
+    final newFilePath = path.join(newFolder, fileRelative);
+
+    final verifiedPath = await renameExistFile(newFilePath);
+    await moveFileWithProgress(file.path, verifiedPath, ref, size);
+    await file.delete();
+    size += await File(verifiedPath).length();
+  }
+
+  // 最后删除原目录
   await Directory(oldFolder).delete(recursive: true);
+}
+
+Future<void> moveFileWithProgress(String oldPath, String newPath, WidgetRef ref,
+    [int? size]) async {
+  const chunkSize = 1024 * 1024; // 1MB 分块
+  final input = File(oldPath).openRead();
+  final output = File(newPath).openWrite();
+  int copied = 0;
+  ProgressFileInfo? pf = ref.watch(currentProgressFileProvider);
+  await for (final chunk in input) {
+    output.add(chunk);
+    copied += chunk.length;
+    int currentCopied = copied;
+    if (size != null) currentCopied = size + copied;
+    ProgressFileInfo info = pf!.copyWith(transferred: currentCopied);
+    ref.read(currentProgressFileProvider.notifier).update(info);
+    ref.read(currentSizeProvider.notifier).update(chunk.length);
+    if (copied % chunkSize == 0) await Future.delayed(Duration.zero);
+  }
+  await output.close();
 }

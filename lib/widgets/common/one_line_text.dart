@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 
 class OneLineText extends StatelessWidget {
   const OneLineText(this.data,
-      {super.key,
-      this.padding,
-      this.style,
-      required this.fontSize,
-      this.color});
+      {super.key, this.padding, this.style, this.fontSize, this.color});
 
   final String data;
   final EdgeInsets? padding;
@@ -22,8 +18,9 @@ class OneLineText extends StatelessWidget {
         padding: padding ?? EdgeInsets.zero,
         child: Text(
           data,
-          style: TextStyle(fontSize: fontSize, color: color)
-              .useSystemChineseFont(),
+          style: style ??
+              TextStyle(fontSize: fontSize, color: color)
+                  .useSystemChineseFont(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
