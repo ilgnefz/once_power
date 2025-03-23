@@ -162,6 +162,8 @@ class FolderController extends _$FolderController {
     return controller;
   }
 
+  void updateText(String text) => state.text = text;
+
   void clear() {
     state.clear();
     ref.read(folderClearProvider.notifier).update(false);

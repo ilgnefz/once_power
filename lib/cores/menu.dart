@@ -44,6 +44,7 @@ Future<void> showRightMenu(
   bool show =
       (mode.isReplace || mode.isReserve) && ref.watch(cSVDataProvider).isEmpty;
   int count = show ? 9 : 7;
+  if (mode.isOrganize) count = 8;
   double width = loe?.languageCode != 'zh' ? 120 : 80, height = safeH * count;
   Size size = await windowManager.getSize();
   // debugPrint('窗口尺寸：$size，鼠标坐标：${details.globalPosition}');

@@ -189,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "matchLength": MessageLookupByLibrary.simpleMessage("输入数字或指定长度字符串"),
     "matchLocation": MessageLookupByLibrary.simpleMessage("匹配位置"),
     "matchName": MessageLookupByLibrary.simpleMessage("匹配名称"),
+    "matchParent": MessageLookupByLibrary.simpleMessage("匹配路径"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("修改日期"),
     "modifiedTime": MessageLookupByLibrary.simpleMessage("修改日期"),
     "modifyName": MessageLookupByLibrary.simpleMessage("修改名称"),

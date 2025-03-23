@@ -1959,6 +1959,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Match folder`
+  String get matchParent {
+    return Intl.message(
+      'Match folder',
+      name: 'matchParent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

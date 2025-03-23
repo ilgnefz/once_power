@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "matchLocation": MessageLookupByLibrary.simpleMessage("Match Location"),
     "matchName": MessageLookupByLibrary.simpleMessage("Match name"),
+    "matchParent": MessageLookupByLibrary.simpleMessage("Match folder"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
     "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
     "modifyName": MessageLookupByLibrary.simpleMessage("Modify name"),

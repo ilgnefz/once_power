@@ -4,7 +4,10 @@ import 'package:once_power/cores/input.dart';
 import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/input.dart';
+import 'package:once_power/providers/select.dart';
 
 import 'right_menu_item.dart';
 
@@ -82,6 +85,14 @@ class RightClickMenu extends ConsumerWidget {
                 color: Colors.black,
                 callback: () => toTheLast(ref),
               ),
+              if (ref.watch(currentModeProvider).isOrganize)
+                RightMenuItem(
+                  label: S.of(context).matchParent,
+                  color: Colors.black,
+                  callback: () => ref
+                      .read(folderControllerProvider.notifier)
+                      .updateText(file.parent),
+                ),
               RightMenuItem(
                 label: file.checked
                     ? S.of(context).unselect

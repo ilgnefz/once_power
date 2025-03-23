@@ -247,5 +247,6 @@
   "removeFolder": "Remove folder",
   "fileNotExistError": "The file location has been changed or the file has been deleted",
   "emptyFolderErrorTitle": "Fail to read file",
-  "emptyFolderError": "The selected folder is empty"
+  "emptyFolderError": "The selected folder is empty",
+  "matchParent": "Match folder"
 }

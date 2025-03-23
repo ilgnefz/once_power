@@ -248,5 +248,6 @@
   "removeFolder": "移除路径",
   "fileNotExistError": "文件位置已更改或文件已被删除",
   "emptyFolderErrorTitle": "读取文件失败",
-  "emptyFolderError": "所选文件夹为空"
+  "emptyFolderError": "所选文件夹为空",
+  "matchParent": "匹配路径"
 }
