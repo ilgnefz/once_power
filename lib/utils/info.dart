@@ -346,14 +346,6 @@ Future<int> calculateSize(String path) async {
   return totalSize;
 }
 
-// String getDimensions(String filePath) async{
-//   String dimensions = '';
-//   if (image.contains(getExtension(filePath))) {
-//     dimensions = getImageDimensions(filePath);
-//   }
-//   return dimensions;
-// }
-
 Future<Size> getImageDimensions(String assetPath) async {
   try {
     final file = File(assetPath);

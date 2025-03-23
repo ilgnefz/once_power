@@ -1870,14 +1870,9 @@ class S {
     );
   }
 
-  /// `Failed to open the folder containing the file`
+  /// `Open failed`
   String get openError {
-    return Intl.message(
-      'Failed to open the folder containing the file',
-      name: 'openError',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Open failed', name: 'openError', desc: '', args: []);
   }
 
   /// `The target folder is empty!`
@@ -1930,11 +1925,11 @@ class S {
     );
   }
 
-  /// `The file location has been changed or the file has been deleted`
-  String get fileNotExistError {
+  /// `The target location has been changed or deleted`
+  String get notExistError {
     return Intl.message(
-      'The file location has been changed or the file has been deleted',
-      name: 'fileNotExistError',
+      'The target location has been changed or deleted',
+      name: 'notExistError',
       desc: '',
       args: [],
     );

@@ -206,9 +206,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "New file extension",
     ),
     "fileName": MessageLookupByLibrary.simpleMessage("File name"),
-    "fileNotExistError": MessageLookupByLibrary.simpleMessage(
-      "The file location has been changed or the file has been deleted",
-    ),
     "fileType": MessageLookupByLibrary.simpleMessage("File"),
     "fillBack": MessageLookupByLibrary.simpleMessage("Fill back"),
     "fillFront": MessageLookupByLibrary.simpleMessage("Fill front"),
@@ -269,11 +266,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "nonLetter": MessageLookupByLibrary.simpleMessage("NonLetter"),
     "normal": MessageLookupByLibrary.simpleMessage("Normal"),
     "notExist": MessageLookupByLibrary.simpleMessage("not exist"),
+    "notExistError": MessageLookupByLibrary.simpleMessage(
+      "The target location has been changed or deleted",
+    ),
     "notExistsError": m6,
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
-    "openError": MessageLookupByLibrary.simpleMessage(
-      "Failed to open the folder containing the file",
-    ),
+    "openError": MessageLookupByLibrary.simpleMessage("Open failed"),
     "openPosition": MessageLookupByLibrary.simpleMessage("Open position"),
     "organize": MessageLookupByLibrary.simpleMessage("Organize"),
     "organizeBtn": MessageLookupByLibrary.simpleMessage("Move"),

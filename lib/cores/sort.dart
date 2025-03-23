@@ -76,8 +76,12 @@ void openFileLocation(String filePath) async {
   final dirPath = path.dirname(filePath);
   try {
     if (Platform.isWindows) {
-      if (!await File(filePath).exists()) {
-        return showOpenErrorNotification(S.current.fileNotExistError);
+      bool isFile = await FileSystemEntity.isFile(filePath);
+      if (isFile && !await File(filePath).exists()) {
+        return showOpenErrorNotification(S.current.notExistError, 5);
+      }
+      if (!isFile && !await Directory(filePath).exists()) {
+        return showOpenErrorNotification(S.current.notExistError, 5);
       }
       // Windows 使用 explorer 选中文件
       await Process.run('explorer.exe', ['/select,', filePath]);
