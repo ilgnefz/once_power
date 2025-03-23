@@ -1,21 +1,34 @@
+import 'package:image_size_getter/image_size_getter.dart';
+
 import 'file_enum.dart';
 
 class FileInfo {
   String id;
+
+  /// a
   String name;
   String phonetic;
   String newName;
+
+  /// C:\Photos
   String parent;
+
+  /// C:\Photos\a.jpg
   String filePath;
   String tempPath;
+
+  /// jpg
   String extension;
   String newExtension;
+
+  /// C:\Photos\a.jpg
   String beforePath;
   DateTime createdDate;
   DateTime modifiedDate;
   DateTime? exifDate;
   FileClassify type;
   int size;
+  Size? dimensions;
   bool checked;
 
   FileInfo({
@@ -34,6 +47,7 @@ class FileInfo {
     this.exifDate,
     required this.type,
     required this.size,
+    required this.dimensions,
     required this.checked,
   });
 
@@ -55,6 +69,7 @@ class FileInfo {
         'exifDate: $exifDate, '
         'type: $type, '
         'size: $size, '
+        'dimensions: $dimensions, '
         'checked: $checked}';
   }
 
@@ -75,6 +90,7 @@ class FileInfo {
       'exifDate': exifDate?.millisecondsSinceEpoch,
       'type': type.index,
       'size': size,
+      'dimensions': dimensions,
       'checked': checked,
     };
   }

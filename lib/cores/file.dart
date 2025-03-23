@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_size_getter/image_size_getter.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
@@ -156,11 +157,11 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   DateTime createdDate = stat.changed;
   DateTime modifyDate = stat.modified;
   String extension = getExtension(filePath);
-  if (image.contains(extension.toLowerCase())) {
-    exifDate = await getExifDate(filePath);
-  }
+  bool isImage = image.contains(extension.toLowerCase());
+  if (isImage) exifDate = await getExifDate(filePath);
   FileClassify type = getFileClassify(extension);
   int size = await calculateSize(filePath);
+  Size? dimensions = isImage ? await getImageDimensions(filePath) : null;
   return FileInfo(
     id: id,
     name: name,
@@ -177,6 +178,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     exifDate: exifDate,
     type: type,
     size: size,
+    dimensions: dimensions,
     checked: true,
   );
 }

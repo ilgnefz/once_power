@@ -1969,6 +1969,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Dimensions`
+  String get dimensions {
+    return Intl.message('Dimensions', name: 'dimensions', desc: '', args: []);
+  }
+
+  /// `Size`
+  String get size {
+    return Intl.message('Size', name: 'size', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

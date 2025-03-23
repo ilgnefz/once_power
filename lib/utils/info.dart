@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -5,6 +6,8 @@ import 'dart:typed_data';
 import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_size_getter/file_input.dart';
+import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/extension.dart';
@@ -341,4 +344,23 @@ Future<int> calculateSize(String path) async {
     }
   }
   return totalSize;
+}
+
+// String getDimensions(String filePath) async{
+//   String dimensions = '';
+//   if (image.contains(getExtension(filePath))) {
+//     dimensions = getImageDimensions(filePath);
+//   }
+//   return dimensions;
+// }
+
+Future<Size> getImageDimensions(String assetPath) async {
+  try {
+    final file = File(assetPath);
+    final result = ImageSizeGetter.getSizeResult(FileInput(file));
+    return result.size;
+  } catch (e) {
+    debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
+    return Size.zero;
+  }
 }

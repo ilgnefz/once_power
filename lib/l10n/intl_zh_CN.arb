@@ -249,5 +249,7 @@
   "fileNotExistError": "文件位置已更改或文件已被删除",
   "emptyFolderErrorTitle": "读取文件失败",
   "emptyFolderError": "所选文件夹为空",
-  "matchParent": "匹配路径"
+  "matchParent": "匹配路径",
+  "dimensions": "尺寸",
+  "size": "大小"
 }

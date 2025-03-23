@@ -44,13 +44,9 @@ const doc = [
   'xlsx',
 ];
 const image = [
-  'ai',
   'apng',
   'bmp',
-  'cdr',
   'dib',
-  'dxf',
-  'eps',
   'exif',
   'fpx',
   'gif',
@@ -63,14 +59,12 @@ const image = [
   'pcd',
   'pcx',
   'png',
-  'psd',
   'pvr',
   'svg',
   'tga',
   'tif',
   'tiff',
   'raw',
-  'ufo',
   'webp',
 ];
 const video = [

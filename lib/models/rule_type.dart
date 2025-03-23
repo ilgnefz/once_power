@@ -19,7 +19,14 @@ class RuleTypeValue {
 
   @override
   String toString() {
-    return 'RuleTypeValue{image: $image, video: $video, doc: $doc, audio: $audio, folder: $folder, zip: $zip, other: $other}';
+    return 'RuleTypeValue{'
+        'image: $image, '
+        'video: $video, '
+        'doc: $doc, '
+        'audio: $audio, '
+        'folder: $folder, '
+        'zip: $zip, '
+        'other: $other}';
   }
 
   bool isEmpty() {
