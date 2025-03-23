@@ -57,7 +57,6 @@ class _ContentBarState extends ConsumerState<ContentBar> {
                     List<XFile> paths = details.files;
                     if (paths.isNotEmpty) {
                       final files = paths.map((e) => e.path).toList();
-                      print('进来了');
                       await formatPath(ref, files);
                     }
                   },

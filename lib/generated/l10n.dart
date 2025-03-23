@@ -1939,6 +1939,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Fail to read file`
+  String get emptyFolderErrorTitle {
+    return Intl.message(
+      'Fail to read file',
+      name: 'emptyFolderErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected folder is empty`
+  String get emptyFolderError {
+    return Intl.message(
+      'The selected folder is empty',
+      name: 'emptyFolderError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

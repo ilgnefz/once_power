@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "document": MessageLookupByLibrary.simpleMessage("文档"),
     "download": MessageLookupByLibrary.simpleMessage("下载"),
     "earliestDate": MessageLookupByLibrary.simpleMessage("最早日期"),
+    "emptyFolderError": MessageLookupByLibrary.simpleMessage("所选文件夹为空"),
+    "emptyFolderErrorTitle": MessageLookupByLibrary.simpleMessage("读取文件失败"),
     "end": MessageLookupByLibrary.simpleMessage("结束"),
     "errorImage": MessageLookupByLibrary.simpleMessage("加载失败 "),
     "exifDate": MessageLookupByLibrary.simpleMessage("拍摄日期"),

@@ -112,3 +112,12 @@ InfoDetail moveErrorInfo(
   if (sameDisk) message = '${S.current.moveError}: $e';
   return InfoDetail(file: oldPath, message: message);
 }
+
+void showEmptyNotification() {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: S.current.emptyFolderErrorTitle,
+    message: S.current.emptyFolderError,
+    time: 2,
+  ).show();
+}

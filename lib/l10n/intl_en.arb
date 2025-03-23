@@ -245,5 +245,7 @@
   "dateClassificationDesc": "Create a folder named after the date of file creation in the target folder and move it to that folder",
   "topParentFolderDesc": "Move the file to a top-level parent folder other than the disk root directory",
   "removeFolder": "Remove folder",
-  "fileNotExistError": "The file location has been changed or the file has been deleted"
+  "fileNotExistError": "The file location has been changed or the file has been deleted",
+  "emptyFolderErrorTitle": "Fail to read file",
+  "emptyFolderError": "The selected folder is empty"
 }

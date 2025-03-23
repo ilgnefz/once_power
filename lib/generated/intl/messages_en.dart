@@ -173,6 +173,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "document": MessageLookupByLibrary.simpleMessage("Document"),
     "download": MessageLookupByLibrary.simpleMessage("Download"),
     "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
+    "emptyFolderError": MessageLookupByLibrary.simpleMessage(
+      "The selected folder is empty",
+    ),
+    "emptyFolderErrorTitle": MessageLookupByLibrary.simpleMessage(
+      "Fail to read file",
+    ),
     "end": MessageLookupByLibrary.simpleMessage("end"),
     "errorImage": MessageLookupByLibrary.simpleMessage("Load Fail "),
     "exifDate": MessageLookupByLibrary.simpleMessage("Exif Date"),

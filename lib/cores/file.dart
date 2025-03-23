@@ -30,6 +30,7 @@ Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
 // 处理传入来的文件夹，如果是添加文件夹就直接格式文件夹，不是就获取文件夹中的子文件
 Future<void> formatFolder(WidgetRef ref, List<String?> folders) async {
   List<String> paths = await handleFolder(ref, folders);
+  if (paths.isEmpty) return showEmptyNotification();
   await addFileInfo(ref, paths);
 }
 
@@ -46,7 +47,11 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
     List<String> result = await handleFolder(ref, folders);
     files.addAll(result);
   }
-  await addFileInfo(ref, files);
+  if (files.isNotEmpty) {
+    await addFileInfo(ref, files);
+  } else {
+    showEmptyNotification();
+  }
 }
 
 Future<List<String>> handleFolder(WidgetRef ref, List<String?> folders) async {

@@ -27,6 +27,7 @@ class NotificationInfo {
   void show() {
     Duration? duration = Duration(seconds: 5);
     if (type.isError() && time == null) duration = null;
+    if (time != null) duration = Duration(seconds: time!);
     BotToast.showCustomNotification(
       toastBuilder: (cf) => NotificationContent(
         cf: cf,
