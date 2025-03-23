@@ -105,7 +105,7 @@ class SelectSortCard extends ConsumerWidget {
 
     return RenameTileTooltip(
       file: file,
-      waitDuration: const Duration(seconds: 2),
+      waitDuration: const Duration(seconds: 1),
       child: Listener(
         onPointerDown: onPointerDown,
         child: Material(

@@ -52,7 +52,10 @@ class ContentListItem extends ConsumerWidget {
                     alignment: Alignment.center,
                     child: Text(
                       file.newExtension,
-                      style: TextStyle(fontSize: 13),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13, height: 1),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

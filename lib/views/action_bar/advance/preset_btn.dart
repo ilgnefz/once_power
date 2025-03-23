@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:once_power/cores/advance.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -38,10 +39,21 @@ class PresetBtn extends ConsumerWidget {
                       ref.read(advanceMenuListProvider.notifier).setList(menus);
                       advanceUpdateName(ref);
                     },
+                    onAppend: () {
+                      AdvancePreset p = list[index];
+                      final menus = p.menus.map((e) => e.copyWith(
+                        id: nanoid(10)
+                      )).toList();
+                      ref
+                          .read(advanceMenuListProvider.notifier)
+                          .addAll(menus);
+                      advanceUpdateName(ref);
+                      ctrl.close();
+                    },
                     onRemove: () {
                       AdvancePreset p = list[index];
-                      ctrl.close();
                       ref.read(advancePresetListProvider.notifier).remove(p);
+                      ctrl.close();
                     },
                   );
                 },

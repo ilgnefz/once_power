@@ -8,11 +8,13 @@ class PresetItem extends StatelessWidget {
     this.label, {
     super.key,
     required this.onTap,
+    required this.onAppend,
     required this.onRemove,
   });
 
   final String label;
   final void Function() onTap;
+  final void Function() onAppend;
   final void Function() onRemove;
 
   @override
@@ -33,10 +35,18 @@ class PresetItem extends StatelessWidget {
               ClickIcon(
                 size: 16,
                 iconSize: 14,
+                icon: Icons.add_rounded,
+                color: Colors.grey[400],
+                onTap: onAppend,
+              ),
+              SizedBox(width: AppNum.smallG),
+              ClickIcon(
+                size: 16,
+                iconSize: 14,
                 icon: Icons.close_rounded,
                 color: Colors.grey[400],
                 onTap: onRemove,
-              )
+              ),
             ],
           ),
         ),
