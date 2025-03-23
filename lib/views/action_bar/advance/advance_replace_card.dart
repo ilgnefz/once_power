@@ -19,28 +19,48 @@ class AdvanceReplaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isFormat = menu.replaceMode.isFormat;
-    bool noFormatNoCon = !isFormat && menu.caseType.isNoConversion;
-    return AdvanceRichText(
-      text: TextSpan(
-        text: isFormat
-            ? S.of(context).formatDesc1
-            : menu.caseType.isNoConversion
-                ? menu.matchLocation.label
-                : S.of(context).letters,
-        style: defaultStyle,
-        children: [
-          if (isFormat) ...[
+    bool isNoCon = menu.caseType.isNoConversion;
+    bool noFmtNoCon = !isFormat && isNoCon;
+
+    if (isFormat) {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).formatDesc1,
+          style: defaultStyle,
+          children: [
             TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).formatDesc2),
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
             TextSpan(text: S.of(context).formatDesc3, style: highlightStyle),
           ],
-          if (noFormatNoCon && !menu.matchLocation.isPosition) ...[
-            TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
-            TextSpan(text: S.of(context).withT),
-            TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
+        ),
+      );
+    }
+
+    if (!isNoCon) {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).letters,
+          style: defaultStyle,
+          children: [
+            TextSpan(text: ' "${menu.caseType.label}"', style: highlightStyle),
+            if (menu.wordSpacing != '') ...[
+              TextSpan(
+                  text: ' ${S.of(context).formatDesc2} ', style: defaultStyle),
+              TextSpan(text: '"${menu.wordSpacing}" ', style: highlightStyle),
+              TextSpan(text: S.of(context).separate, style: defaultStyle),
+            ]
           ],
-          if (noFormatNoCon && menu.matchLocation.isPosition) ...[
+        ),
+      );
+    }
+
+    if (noFmtNoCon && menu.matchLocation.isPosition) {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).position,
+          style: defaultStyle,
+          children: [
             TextSpan(
               text: '${S.of(context).position} ${menu.start} ',
               style: highlightStyle,
@@ -50,15 +70,40 @@ class AdvanceReplaceCard extends StatelessWidget {
             TextSpan(text: S.of(context).withT, style: defaultStyle),
             TextSpan(text: ' ${menu.value[1]}', style: highlightStyle),
           ],
-          if (!isFormat && !menu.caseType.isNoConversion) ...[
-            TextSpan(text: ' "${menu.caseType.label}"', style: highlightStyle),
-            if (menu.wordSpacing != '') ...[
-              TextSpan(
-                  text: ' ${S.of(context).formatDesc2} ', style: defaultStyle),
-              TextSpan(text: '"${menu.wordSpacing}" ', style: highlightStyle),
-              TextSpan(text: S.of(context).separate, style: defaultStyle),
-            ]
-          ]
+        ),
+      );
+    }
+
+    if (noFmtNoCon &&
+        (menu.matchLocation.isFront || menu.matchLocation.isBack)) {
+      int label = menu.matchLocation.isFront ? menu.front : menu.back;
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).first,
+          style: defaultStyle,
+          children: [
+            TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
+            TextSpan(
+              text: menu.matchLocation.label.substring(0, 1),
+              style: defaultStyle,
+            ),
+            TextSpan(text: ' "$label" ', style: highlightStyle),
+            TextSpan(text: S.of(context).place, style: defaultStyle),
+            TextSpan(text: S.of(context).withT),
+            TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
+          ],
+        ),
+      );
+    }
+
+    return AdvanceRichText(
+      text: TextSpan(
+        text: menu.matchLocation.label,
+        style: defaultStyle,
+        children: [
+          TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
+          TextSpan(text: S.of(context).withT),
+          TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),
         ],
       ),
     );

@@ -20,41 +20,77 @@ class AdvanceDeleteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDeleteType = menu.deleteTypes.isNotEmpty;
     bool isDeleteExt = menu.deleteExt;
+
+    late List<TextSpan> children;
+
+    if (isDeleteExt) {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).extension,
+          style: highlightStyle,
+        ),
+      );
+    }
+
+    if (isDeleteType) {
+      return AdvanceRichText(
+        text: TextSpan(
+          children: List.generate(menu.deleteTypes.length, (index) {
+            String delimiter = index == menu.deleteTypes.length - 1
+                ? ''
+                : S.of(context).delimiter;
+            return TextSpan(
+              text: '${menu.deleteTypes[index].label}$delimiter',
+              style: highlightStyle,
+            );
+          }),
+        ),
+      );
+    }
+
+    if (menu.matchLocation.isPosition) {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: menu.matchLocation.label,
+          style: defaultStyle,
+          children: [
+            TextSpan(
+              text: '${S.of(context).position} ${menu.start} ',
+              children: [
+                TextSpan(text: S.of(context).to, style: defaultStyle),
+                TextSpan(text: ' ${menu.end}', style: highlightStyle),
+              ],
+              style: highlightStyle,
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (menu.matchLocation.isFront || menu.matchLocation.isBack) {
+      int label = menu.matchLocation.isFront ? menu.front : menu.back;
+      return AdvanceRichText(
+        text: TextSpan(
+          text: S.of(context).first,
+          style: defaultStyle,
+          children: [
+            TextSpan(text: ' "${menu.value}" ', style: highlightStyle),
+            TextSpan(
+              text: menu.matchLocation.label.substring(0, 1),
+              style: defaultStyle,
+            ),
+            TextSpan(text: ' "$label" ', style: highlightStyle),
+            TextSpan(text: S.of(context).place, style: defaultStyle),
+          ],
+        ),
+      );
+    }
+
     return AdvanceRichText(
       text: TextSpan(
-        text: (isDeleteType || isDeleteExt) ? '' : menu.matchLocation.label,
+        text: menu.matchLocation.label,
         style: defaultStyle,
-        children: [
-          if (isDeleteExt)
-            TextSpan(text: S.of(context).extension, style: highlightStyle),
-          if (isDeleteType)
-            ...List.generate(menu.deleteTypes.length, (index) {
-              String delimiter = index == menu.deleteTypes.length - 1
-                  ? ''
-                  : S.of(context).delimiter;
-              return TextSpan(
-                text: '${menu.deleteTypes[index].label}$delimiter',
-                style: highlightStyle,
-              );
-            }),
-          if (!isDeleteType && !isDeleteExt)
-            menu.matchLocation.isPosition
-                ? TextSpan(
-                    text: '${S.of(context).position} ${menu.start} ',
-                    children: [
-                      TextSpan(
-                        text: S.of(context).to,
-                        style: defaultStyle,
-                      ),
-                      TextSpan(
-                        text: ' ${menu.end}',
-                        style: highlightStyle,
-                      ),
-                    ],
-                    style: highlightStyle,
-                  )
-                : TextSpan(text: ' "${menu.value}"', style: highlightStyle),
-        ],
+        children: [TextSpan(text: ' "${menu.value}"', style: highlightStyle)],
       ),
     );
   }

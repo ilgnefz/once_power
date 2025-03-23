@@ -47,6 +47,7 @@ class AddTypeRadio extends StatelessWidget {
                   value: e,
                   groupValue: type,
                   onChanged: (value) => typeChanged(value!),
+                  space: 0,
                   trailing: e.isRandom
                       ? Container(
                           width: 104,

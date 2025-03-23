@@ -8,6 +8,7 @@ class EasyRadio<T> extends StatelessWidget {
     required this.value,
     required this.groupValue,
     required this.onChanged,
+    this.space = 8,
     this.trailing,
   });
 
@@ -16,6 +17,7 @@ class EasyRadio<T> extends StatelessWidget {
   final T value;
   final T groupValue;
   final void Function(T?) onChanged;
+  final double space;
   final Widget? trailing;
 
   @override
@@ -26,7 +28,10 @@ class EasyRadio<T> extends StatelessWidget {
       children: [
         Radio(value: value, groupValue: groupValue, onChanged: onChanged),
         Text(label),
-        if (trailing != null) trailing!,
+        if (trailing != null) ...[
+          SizedBox(width: space),
+          trailing!,
+        ]
       ],
     );
   }

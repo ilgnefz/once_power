@@ -255,5 +255,7 @@
   "imageH": "ImageHeight",
   "wordSpacing": "Word Spacing",
   "wordSpacingHint": "Separate words starting with capital letters",
-  "separate": "Separate"
+  "separate": "Separate",
+  "front": "Front",
+  "back": "Back"
 }

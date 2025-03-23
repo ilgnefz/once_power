@@ -41,12 +41,10 @@ class PresetBtn extends ConsumerWidget {
                     },
                     onAppend: () {
                       AdvancePreset p = list[index];
-                      final menus = p.menus.map((e) => e.copyWith(
-                        id: nanoid(10)
-                      )).toList();
-                      ref
-                          .read(advanceMenuListProvider.notifier)
-                          .addAll(menus);
+                      final menus = p.menus
+                          .map((e) => e.copyWith(id: nanoid(10)))
+                          .toList();
+                      ref.read(advanceMenuListProvider.notifier).addAll(menus);
                       advanceUpdateName(ref);
                       ctrl.close();
                     },

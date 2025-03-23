@@ -2009,6 +2009,16 @@ class S {
   String get separate {
     return Intl.message('Separate', name: 'separate', desc: '', args: []);
   }
+
+  /// `Front`
+  String get front {
+    return Intl.message('Front', name: 'front', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -26,7 +26,7 @@ class DeleteView extends ConsumerStatefulWidget {
 class _DeleteViewState extends ConsumerState<DeleteView> {
   String value = '';
   MatchLocation location = MatchLocation.first;
-  int start = 1, end = 1;
+  int start = 1, end = 1, front = 1, back = 1;
   List<DeleteType> deleteTypes = [];
   bool deleteExt = false;
 
@@ -36,6 +36,8 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
     if (widget.menu != null) {
       value = widget.menu!.value;
       location = widget.menu!.matchLocation;
+      front = widget.menu!.front;
+      back = widget.menu!.back;
       start = widget.menu!.start;
       end = widget.menu!.end;
       deleteTypes = widget.menu!.deleteTypes;
@@ -63,6 +65,16 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
             location: location,
             onChanged: (value) {
               location = value;
+              setState(() {});
+            },
+            front: front,
+            back: back,
+            onFrontChanged: (value) {
+              front = value;
+              setState(() {});
+            },
+            onBackChanged: (value) {
+              back = value;
               setState(() {});
             },
             start: start,
@@ -103,6 +115,8 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           checked: true,
           value: value,
           matchLocation: location,
+          front: front,
+          back: back,
           start: start,
           end: end,
           deleteTypes: deleteTypes,

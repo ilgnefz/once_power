@@ -31,7 +31,7 @@ extension AdvanceTypeExtension on AdvanceType {
   bool get isReplace => this == AdvanceType.replace;
 }
 
-enum MatchLocation { first, last, all, position }
+enum MatchLocation { first, last, all, front, back, position }
 
 extension MatchLocationExtension on MatchLocation {
   String get label {
@@ -44,6 +44,10 @@ extension MatchLocationExtension on MatchLocation {
         return S.current.all;
       case MatchLocation.position:
         return '';
+      case MatchLocation.front:
+        return S.current.front;
+      case MatchLocation.back:
+        return S.current.back;
     }
   }
 
@@ -51,6 +55,8 @@ extension MatchLocationExtension on MatchLocation {
   bool get isLast => this == MatchLocation.last;
   bool get isAll => this == MatchLocation.all;
   bool get isPosition => this == MatchLocation.position;
+  bool get isFront => this == MatchLocation.front;
+  bool get isBack => this == MatchLocation.back;
 }
 
 enum AddType {

@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "autoRun": MessageLookupByLibrary.simpleMessage(
       "Run OncePower when the computer starts up",
     ),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
     "before": MessageLookupByLibrary.simpleMessage("Before"),
     "between": MessageLookupByLibrary.simpleMessage("Between"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -222,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "formatDigit": MessageLookupByLibrary.simpleMessage(
       "Please enter the length of the name",
     ),
+    "front": MessageLookupByLibrary.simpleMessage("Front"),
     "image": MessageLookupByLibrary.simpleMessage("Image"),
     "imageH": MessageLookupByLibrary.simpleMessage("ImageHeight"),
     "imageW": MessageLookupByLibrary.simpleMessage("ImageWidth"),

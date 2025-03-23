@@ -31,7 +31,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   ReplaceMode mode = ReplaceMode.normal;
   FillPosition position = FillPosition.front;
   MatchLocation location = MatchLocation.first;
-  int start = 1, end = 1;
+  int start = 1, end = 1, front = 1, back = 1;
   CaseType type = CaseType.noConversion;
   String wordSpacing = '';
 
@@ -44,6 +44,8 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
       mode = widget.menu!.replaceMode;
       position = widget.menu!.fillPosition;
       location = widget.menu!.matchLocation;
+      front = widget.menu!.front;
+      back = widget.menu!.back;
       start = widget.menu!.start;
       end = widget.menu!.end;
       type = widget.menu!.caseType;
@@ -111,6 +113,16 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                     location = value;
                     setState(() {});
                   },
+                  front: front,
+                  back: back,
+                  onFrontChanged: (value) {
+                    front = value;
+                    setState(() {});
+                  },
+                  onBackChanged: (value) {
+                    back = value;
+                    setState(() {});
+                  },
                   start: start,
                   end: end,
                   onStartChanged: (value) {
@@ -151,6 +163,8 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
           replaceMode: mode,
           fillPosition: position,
           matchLocation: location,
+          front: front,
+          back: back,
           start: start,
           end: end,
           caseType: type,

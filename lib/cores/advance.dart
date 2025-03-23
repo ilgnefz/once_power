@@ -101,6 +101,19 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
       return name;
     case MatchLocation.position:
       return matchPosition(name, '', menu.start, menu.end);
+    case MatchLocation.front:
+      int index = name.indexOf(value);
+      if (index == -1 || index == 0) return name;
+      int start = index - menu.front;
+      start = start < 0 ? 0 : start;
+      return matchPosition(name, '', start + 1, index);
+    case MatchLocation.back:
+      int index = name.indexOf(value);
+      if (index == -1 || index == name.length - 1) return name;
+      int start = index + value.length + 1;
+      int end = start + menu.back;
+      end = end > name.length ? name.length : end - 1;
+      return matchPosition(name, '', start, end);
   }
 }
 
@@ -196,6 +209,19 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
         return name;
       case MatchLocation.position:
         return matchPosition(name, newValue, menu.start, menu.end);
+      case MatchLocation.front:
+        int index = name.indexOf(oldValue);
+        if (index == -1 || index == 0) return name;
+        int start = index - menu.front;
+        start = start < 0 ? 0 : start;
+        return matchPosition(name, newValue, start + 1, index);
+      case MatchLocation.back:
+        int index = name.indexOf(oldValue);
+        if (index == -1 || index == name.length - 1) return name;
+        int start = index + oldValue.length + 1;
+        int end = start + menu.back;
+        end = end > name.length ? name.length : end - 1;
+        return matchPosition(name, newValue, start, end);
     }
   } else {
     String wordSpacing = menu.wordSpacing;

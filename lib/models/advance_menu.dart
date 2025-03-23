@@ -67,6 +67,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
   final MatchLocation matchLocation;
   final int start;
   final int end;
+  final int front;
+  final int back;
   final List<DeleteType> deleteTypes;
   final bool deleteExt;
 
@@ -75,6 +77,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     required super.checked,
     required String super.value,
     required this.matchLocation,
+    required this.front,
+    required this.back,
     required this.start,
     required this.end,
     required this.deleteTypes,
@@ -91,10 +95,12 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
       checked: checked,
       value: value,
       matchLocation: matchLocation,
+      front: front,
+      back: back,
       start: start,
       end: end,
       deleteTypes: deleteTypes != null
-          ? List<DeleteType>.from(deleteTypes) // 创建新数组
+          ? List<DeleteType>.from(deleteTypes)
           : List<DeleteType>.from(this.deleteTypes),
       deleteExt: deleteExt,
     );
@@ -106,6 +112,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         checked: json["checked"] ?? true,
         value: json["value"],
         matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        front: json["front"] ?? 1,
+        back: json["back"] ?? 1,
         start: json["start"] ?? 1,
         end: json["end"] ?? 1,
         deleteTypes: json["deleteTypes"] == null
@@ -122,6 +130,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         "checked": checked,
         "value": value,
         "matchLocation": matchLocation.index,
+        "front": front,
+        "back": back,
         "start": start,
         "end": end,
         "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
@@ -135,6 +145,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         'checked: $checked, '
         'value: $value, '
         'matchLocation: $matchLocation, '
+        'front: $front, '
+        'back: $back, '
         'start: $start, '
         'end: $end, '
         'deleteTypes: $deleteTypes, '
@@ -247,6 +259,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final ReplaceMode replaceMode;
   final FillPosition fillPosition;
   final MatchLocation matchLocation;
+  final int front;
+  final int back;
   final int start;
   final int end;
   final CaseType caseType;
@@ -258,6 +272,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.replaceMode,
     required this.fillPosition,
     required this.matchLocation,
+    required this.front,
+    required this.back,
     required this.start,
     required this.end,
     required this.caseType,
@@ -273,6 +289,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       replaceMode: replaceMode,
       fillPosition: fillPosition,
       matchLocation: matchLocation,
+      front: front,
+      back: back,
       start: start,
       end: end,
       caseType: caseType,
@@ -290,6 +308,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         replaceMode: ReplaceMode.values[json["replaceMode"] ?? 0],
         fillPosition: FillPosition.values[json["fillPosition"] ?? 0],
         matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        front: json["front"] ?? 1,
+        back: json["back"] ?? 1,
         start: json["start"] ?? 1,
         end: json["end"] ?? 1,
         caseType: CaseType.values[json["caseType"] ?? 0],
@@ -305,6 +325,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "replaceMode": replaceMode.index,
         "fillPosition": fillPosition.index,
         "matchLocation": matchLocation.index,
+        "front": front,
+        "back": back,
         "start": start,
         "end": end,
         "caseType": caseType.index,
@@ -320,6 +342,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'replaceMode: $replaceMode, '
         'fillPosition: $fillPosition, '
         'matchLocation: $matchLocation, '
+        'front: $front, '
+        'back: $back, '
         'start: $start, '
         'end: $end, '
         'caseType: $caseType, '
