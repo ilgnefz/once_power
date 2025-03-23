@@ -53,7 +53,16 @@ extension MatchLocationExtension on MatchLocation {
   bool get isPosition => this == MatchLocation.position;
 }
 
-enum AddType { text, serialNumber, parentsName, extension, random, date }
+enum AddType {
+  text,
+  serialNumber,
+  parentsName,
+  width,
+  height,
+  extension,
+  random,
+  date
+}
 
 extension AddTypeExtension on AddType {
   String get label {
@@ -61,7 +70,7 @@ extension AddTypeExtension on AddType {
       case AddType.text:
         return S.current.text;
       case AddType.serialNumber:
-        return S.current.serialNumber;
+        return S.current.serial;
       case AddType.parentsName:
         return S.current.parentsName;
       case AddType.extension:
@@ -70,6 +79,10 @@ extension AddTypeExtension on AddType {
         return '';
       case AddType.random:
         return S.current.random;
+      case AddType.width:
+        return S.current.imageW;
+      case AddType.height:
+        return S.current.imageH;
     }
   }
 
@@ -79,6 +92,8 @@ extension AddTypeExtension on AddType {
   bool get isExtension => this == AddType.extension;
   bool get isDate => this == AddType.date;
   bool get isRandom => this == AddType.random;
+  bool get isWidth => this == AddType.width;
+  bool get isHeight => this == AddType.height;
 }
 
 enum AddPosition { before, after }
@@ -165,7 +180,7 @@ extension DeleteTypeExtension on DeleteType {
 
 enum MovePosition { first, center, last, idle }
 
-enum DistinguishType { none,folder, file, extension  }
+enum DistinguishType { none, folder, file, extension }
 
 extension DistinguishTypeExtension on DistinguishType {
   String get label {

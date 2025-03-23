@@ -226,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter the length of the name",
     ),
     "image": MessageLookupByLibrary.simpleMessage("Image"),
+    "imageH": MessageLookupByLibrary.simpleMessage("ImageHeight"),
+    "imageW": MessageLookupByLibrary.simpleMessage("ImageWidth"),
     "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
     "last": MessageLookupByLibrary.simpleMessage("Last"),
     "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
@@ -347,7 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serialDistinguish": MessageLookupByLibrary.simpleMessage(
       "Serial Distinguish",
     ),
-    "serialNumber": MessageLookupByLibrary.simpleMessage("Serial Num"),
+    "serialNumber": MessageLookupByLibrary.simpleMessage("SerialNum"),
     "shortcutTip1": MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
     "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
     "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),

@@ -36,7 +36,7 @@ class FormatGroup extends StatelessWidget {
           onChanged: (value) => onChanged(value!),
         ),
         Text(S.of(context).format),
-        SizedBox(width: AppNum.smallG),
+        SizedBox(width: AppNum.mediumG),
         EasyTextDropdown(
           items: FillPosition.values
               .map((item) => DropdownMenuItem(

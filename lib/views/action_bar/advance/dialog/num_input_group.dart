@@ -23,7 +23,8 @@ class NumInputGroup extends StatelessWidget {
       children: [
         Text('${S.of(context).serialNumber}: '),
         const SizedBox(width: AppNum.smallG),
-        Expanded(
+        SizedBox(
+          width: 120,
           child: DigitInput(
             value: digits,
             label: S.of(context).digits,
@@ -31,7 +32,8 @@ class NumInputGroup extends StatelessWidget {
           ),
         ),
         const SizedBox(width: AppNum.largeG),
-        Expanded(
+        SizedBox(
+          width: 120,
           child: DigitInput(
             value: start,
             label: S.of(context).start,

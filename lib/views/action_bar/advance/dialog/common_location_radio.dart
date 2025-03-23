@@ -66,7 +66,8 @@ class CommonLocationRadio extends StatelessWidget {
                     value: MatchLocation.position,
                     onChanged: (value) => onChanged(value!),
                   ),
-                  Expanded(
+                  SizedBox(
+                    width: 120,
                     child: DigitInput(
                       value: start,
                       label: S.of(context).start,
@@ -75,7 +76,8 @@ class CommonLocationRadio extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: AppNum.largeG),
-                  Expanded(
+                  SizedBox(
+                    width: 120,
                     child: DigitInput(
                       value: end,
                       label: S.of(context).end,

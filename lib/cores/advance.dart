@@ -125,6 +125,12 @@ String advanceAddName(
       value = getRandomValue(menu.randomValue, menu.randomLen);
     }
     if (addType.isDate) value = getDateName(dateType, 8, file);
+    if (addType.isWidth) {
+      value = file.dimensions == null ? '' : file.dimensions!.width.toString();
+    }
+    if (addType.isHeight) {
+      value = file.dimensions == null ? '' : file.dimensions!.height.toString();
+    }
     switch (addPosition) {
       case AddPosition.before:
         if (posIndex > name.length) {

@@ -174,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "formatDesc3": MessageLookupByLibrary.simpleMessage("补全"),
     "formatDigit": MessageLookupByLibrary.simpleMessage("请输入名称长度"),
     "image": MessageLookupByLibrary.simpleMessage("图片"),
+    "imageH": MessageLookupByLibrary.simpleMessage("图片高"),
+    "imageW": MessageLookupByLibrary.simpleMessage("图片宽"),
     "inputDisable": MessageLookupByLibrary.simpleMessage("输入已禁用"),
     "last": MessageLookupByLibrary.simpleMessage("最后一个"),
     "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),

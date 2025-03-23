@@ -59,6 +59,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       title: S.of(context).addTitle,
       child: Column(
         spacing: AppNum.mediumG,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DialogBaseInput(
               value: value,

@@ -1360,9 +1360,9 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `Serial Num`
+  /// `SerialNum`
   String get serialNumber {
-    return Intl.message('Serial Num', name: 'serialNumber', desc: '', args: []);
+    return Intl.message('SerialNum', name: 'serialNumber', desc: '', args: []);
   }
 
   /// `Before`
@@ -1978,6 +1978,16 @@ class S {
   /// `Size`
   String get size {
     return Intl.message('Size', name: 'size', desc: '', args: []);
+  }
+
+  /// `ImageWidth`
+  String get imageW {
+    return Intl.message('ImageWidth', name: 'imageW', desc: '', args: []);
+  }
+
+  /// `ImageHeight`
+  String get imageH {
+    return Intl.message('ImageHeight', name: 'imageH', desc: '', args: []);
   }
 }
 

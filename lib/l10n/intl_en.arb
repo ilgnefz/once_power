@@ -168,7 +168,7 @@
   "first": "First",
   "last": "Last",
   "all": "All",
-  "serialNumber": "Serial Num",
+  "serialNumber": "SerialNum",
   "addBefore": "Before",
   "addAfter": "After",
   "ok": "OK",
@@ -250,5 +250,7 @@
   "emptyFolderError": "The selected folder is empty",
   "matchParent": "Match folder",
   "dimensions": "Dimensions",
-  "size": "Size"
+  "size": "Size",
+  "imageW": "ImageWidth",
+  "imageH": "ImageHeight"
 }

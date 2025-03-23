@@ -251,5 +251,7 @@
   "emptyFolderError": "所选文件夹为空",
   "matchParent": "匹配路径",
   "dimensions": "尺寸",
-  "size": "大小"
+  "size": "大小",
+  "imageW": "图片宽",
+  "imageH": "图片高"
 }
