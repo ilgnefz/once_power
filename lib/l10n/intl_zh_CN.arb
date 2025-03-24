@@ -256,7 +256,9 @@
   "imageH": "图片高",
   "wordSpacing": "单词间隔",
   "wordSpacingHint": "请输入单词间隔(大写字母开头识别为一个单词)",
-  "separate": "分隔",
+  "separate": "分隔单词",
   "front": "前面",
-  "back": "后面"
+  "back": "后面",
+  "frontLabel": "前",
+  "backLabel": "后"
 }

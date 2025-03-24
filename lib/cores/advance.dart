@@ -190,56 +190,60 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
     }
     return name;
   }
-  if (type.isNoConversion) {
-    MatchLocation location = menu.matchLocation;
-    switch (location) {
-      case MatchLocation.first:
-        name = name.replaceFirst(oldValue, newValue);
-        return name;
-      case MatchLocation.last:
-        int index = name.lastIndexOf(oldValue);
-        if (index != -1) {
-          name = name.substring(0, index) +
-              name.substring(index + oldValue.length) +
-              newValue;
+
+  if (!mode.isFormat && menu.wordSpacing != '') {
+    return splitWords(name).join(menu.wordSpacing);
+  }
+
+  switch (type) {
+    case CaseType.uppercase:
+      return name.toUpperCase();
+    case CaseType.lowercase:
+      return name.toLowerCase();
+    case CaseType.toggleCase:
+      String result = '';
+      for (int i = 0; i < name.length; i++) {
+        String char = name[i];
+        if (char == char.toUpperCase()) {
+          result += char.toLowerCase();
+        } else {
+          result += char.toUpperCase();
         }
-        return name;
-      case MatchLocation.all:
-        name = name.replaceAll(oldValue, newValue);
-        return name;
-      case MatchLocation.position:
-        return matchPosition(name, newValue, menu.start, menu.end);
-      case MatchLocation.front:
-        int index = name.indexOf(oldValue);
-        if (index == -1 || index == 0) return name;
-        int start = index - menu.front;
-        start = start < 0 ? 0 : start;
-        return matchPosition(name, newValue, start + 1, index);
-      case MatchLocation.back:
-        int index = name.indexOf(oldValue);
-        if (index == -1 || index == name.length - 1) return name;
-        int start = index + oldValue.length + 1;
-        int end = start + menu.back;
-        end = end > name.length ? name.length : end - 1;
-        return matchPosition(name, newValue, start, end);
-    }
-  } else {
-    String wordSpacing = menu.wordSpacing;
-    switch (type) {
-      case CaseType.uppercase:
-        return splitWords(name).join(wordSpacing).toUpperCase();
-      case CaseType.lowercase:
-        return splitWords(name).join(wordSpacing).toLowerCase();
-      case CaseType.toggleCase:
-        return splitWords(name).map((word) {
-          if (word.isEmpty) return word;
-          String first = word[0];
-          String rest = word.substring(1).toLowerCase();
-          return '${first.toUpperCase() == first ? first.toLowerCase() : first.toUpperCase()}$rest';
-        }).join(wordSpacing);
-      case CaseType.noConversion:
-        return splitWords(name).join(wordSpacing);
-    }
+      }
+      return result;
+    case CaseType.noConversion:
+      MatchLocation location = menu.matchLocation;
+      switch (location) {
+        case MatchLocation.first:
+          name = name.replaceFirst(oldValue, newValue);
+          return name;
+        case MatchLocation.last:
+          int index = name.lastIndexOf(oldValue);
+          if (index != -1) {
+            name = name.substring(0, index) +
+                name.substring(index + oldValue.length) +
+                newValue;
+          }
+          return name;
+        case MatchLocation.all:
+          name = name.replaceAll(oldValue, newValue);
+          return name;
+        case MatchLocation.position:
+          return matchPosition(name, newValue, menu.start, menu.end);
+        case MatchLocation.front:
+          int index = name.indexOf(oldValue);
+          if (index == -1 || index == 0) return name;
+          int start = index - menu.front;
+          start = start < 0 ? 0 : start;
+          return matchPosition(name, newValue, start + 1, index);
+        case MatchLocation.back:
+          int index = name.indexOf(oldValue);
+          if (index == -1 || index == name.length - 1) return name;
+          int start = index + oldValue.length + 1;
+          int end = start + menu.back;
+          end = end > name.length ? name.length : end - 1;
+          return matchPosition(name, newValue, start, end);
+      }
   }
 }
 
@@ -252,10 +256,33 @@ String matchPosition(String name, String replaceStr, int start, int end) {
 }
 
 List<String> splitWords(String name) {
-  return name
-      .split(RegExp(
-          r'(?<=[a-z])(?=[A-Z])|(?=[A-Z][a-z])|(?<=[A-Z])(?=[A-Z])' // 仅处理英文单词分割
-          ))
-      .where((word) => word.isNotEmpty)
-      .toList();
+  final List<int> uppercaseIndices = [];
+  for (int i = 0; i < name.length; i++) {
+    final char = name[i];
+    // 仅识别 A-Z 的大写字母（ASCII 65-90）
+    if (char.codeUnitAt(0) >= 65 && char.codeUnitAt(0) <= 90) {
+      uppercaseIndices.add(i);
+    }
+  }
+
+  // 没有大写字母直接返回
+  if (uppercaseIndices.isEmpty) return [name];
+
+  final List<String> result = [];
+  final int firstUpperIndex = uppercaseIndices[0];
+
+  // 添加第一个大写字母前的部分（如 "a" in "aBC"）
+  if (firstUpperIndex > 0) {
+    result.add(name.substring(0, firstUpperIndex));
+  }
+
+  // 按大写字母位置分段（如 "B", "Caa22", "Hg好"）
+  for (int i = 0; i < uppercaseIndices.length; i++) {
+    final start = uppercaseIndices[i];
+    final end = (i < uppercaseIndices.length - 1)
+        ? uppercaseIndices[i + 1]
+        : name.length;
+    result.add(name.substring(start, end));
+  }
+  return result;
 }

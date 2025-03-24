@@ -1490,9 +1490,9 @@ class S {
     return Intl.message('to', name: 'to', desc: '', args: []);
   }
 
-  /// `start`
+  /// `Start`
   String get startSequence {
-    return Intl.message('start', name: 'startSequence', desc: '', args: []);
+    return Intl.message('Start', name: 'startSequence', desc: '', args: []);
   }
 
   /// `Preset Name`
@@ -1650,19 +1650,14 @@ class S {
     return Intl.message('Format', name: 'format', desc: '', args: []);
   }
 
-  /// `Name length`
+  /// `Length`
   String get formatDesc1 {
-    return Intl.message('Name length', name: 'formatDesc1', desc: '', args: []);
+    return Intl.message('Length', name: 'formatDesc1', desc: '', args: []);
   }
 
-  /// `is filled with`
+  /// `filled with`
   String get formatDesc2 {
-    return Intl.message(
-      'is filled with',
-      name: 'formatDesc2',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('filled with', name: 'formatDesc2', desc: '', args: []);
   }
 
   /// ``
@@ -1720,9 +1715,9 @@ class S {
     return Intl.message(', ', name: 'delimiter', desc: '', args: []);
   }
 
-  /// `position`
+  /// `Position`
   String get position {
-    return Intl.message('position', name: 'position', desc: '', args: []);
+    return Intl.message('Position', name: 'position', desc: '', args: []);
   }
 
   /// `end`
@@ -2005,9 +2000,9 @@ class S {
     );
   }
 
-  /// `Separate`
+  /// `Separate Words`
   String get separate {
-    return Intl.message('Separate', name: 'separate', desc: '', args: []);
+    return Intl.message('Separate Words', name: 'separate', desc: '', args: []);
   }
 
   /// `Front`
@@ -2018,6 +2013,16 @@ class S {
   /// `Back`
   String get back {
     return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `Front`
+  String get frontLabel {
+    return Intl.message('Front', name: 'frontLabel', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get backLabel {
+    return Intl.message('Back', name: 'backLabel', desc: '', args: []);
   }
 }
 

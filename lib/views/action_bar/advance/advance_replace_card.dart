@@ -37,6 +37,18 @@ class AdvanceReplaceCard extends StatelessWidget {
       );
     }
 
+    if (!isFormat && menu.wordSpacing != '') {
+      return AdvanceRichText(
+        text: TextSpan(
+          text: '"${menu.wordSpacing}" ',
+          style: highlightStyle,
+          children: [
+            TextSpan(text: S.of(context).separate, style: defaultStyle),
+          ],
+        ),
+      );
+    }
+
     if (!isNoCon) {
       return AdvanceRichText(
         text: TextSpan(
@@ -44,12 +56,6 @@ class AdvanceReplaceCard extends StatelessWidget {
           style: defaultStyle,
           children: [
             TextSpan(text: ' "${menu.caseType.label}"', style: highlightStyle),
-            if (menu.wordSpacing != '') ...[
-              TextSpan(
-                  text: ' ${S.of(context).formatDesc2} ', style: defaultStyle),
-              TextSpan(text: '"${menu.wordSpacing}" ', style: highlightStyle),
-              TextSpan(text: S.of(context).separate, style: defaultStyle),
-            ]
           ],
         ),
       );
@@ -61,14 +67,11 @@ class AdvanceReplaceCard extends StatelessWidget {
           text: S.of(context).position,
           style: defaultStyle,
           children: [
-            TextSpan(
-              text: '${S.of(context).position} ${menu.start} ',
-              style: highlightStyle,
-            ),
+            TextSpan(text: ' ${menu.start} ', style: highlightStyle),
             TextSpan(text: S.of(context).to, style: defaultStyle),
             TextSpan(text: ' ${menu.end} ', style: highlightStyle),
             TextSpan(text: S.of(context).withT, style: defaultStyle),
-            TextSpan(text: ' ${menu.value[1]}', style: highlightStyle),
+            TextSpan(text: ' "${menu.value[1]}"', style: highlightStyle),
           ],
         ),
       );
@@ -76,18 +79,18 @@ class AdvanceReplaceCard extends StatelessWidget {
 
     if (noFmtNoCon &&
         (menu.matchLocation.isFront || menu.matchLocation.isBack)) {
-      int label = menu.matchLocation.isFront ? menu.front : menu.back;
+      String label = menu.matchLocation.isFront
+          ? S.current.frontLabel
+          : S.current.backLabel;
+      int num = menu.matchLocation.isFront ? menu.front : menu.back;
       return AdvanceRichText(
         text: TextSpan(
           text: S.of(context).first,
           style: defaultStyle,
           children: [
             TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
-            TextSpan(
-              text: menu.matchLocation.label.substring(0, 1),
-              style: defaultStyle,
-            ),
-            TextSpan(text: ' "$label" ', style: highlightStyle),
+            TextSpan(text: label, style: defaultStyle),
+            TextSpan(text: ' "$num" ', style: highlightStyle),
             TextSpan(text: S.of(context).place, style: defaultStyle),
             TextSpan(text: S.of(context).withT),
             TextSpan(text: ' "${menu.value[1]}" ', style: highlightStyle),

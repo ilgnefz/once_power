@@ -265,6 +265,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final int end;
   final CaseType caseType;
   final String wordSpacing;
+
   AdvanceMenuReplace({
     required super.id,
     required super.checked,

@@ -7,12 +7,10 @@ class WordSpacing extends StatelessWidget {
   const WordSpacing({
     super.key,
     required this.value,
-    required this.enable,
     required this.onChanged,
   });
 
   final String value;
-  final bool enable;
   final ValueChanged<String> onChanged;
 
   @override
@@ -24,7 +22,7 @@ class WordSpacing extends StatelessWidget {
         Expanded(
           child: DialogBaseInput(
             value: value,
-            enable: enable,
+            enable: true,
             hintText: S.of(context).wordSpacingHint,
             onChanged: onChanged,
           ),

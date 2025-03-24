@@ -9,13 +9,13 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/select.dart';
-import 'package:once_power/views/action_bar/advance/dialog/word_spacing.dart';
 
 import 'case_conversion_group.dart';
 import 'common_dialog.dart';
 import 'common_location_radio.dart';
 import 'dialog_base_input.dart';
 import 'format_group.dart';
+import 'word_spacing.dart';
 
 class ReplaceView extends ConsumerStatefulWidget {
   const ReplaceView({super.key, this.menu});
@@ -143,7 +143,6 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                 ),
                 WordSpacing(
                   value: wordSpacing,
-                  enable: !type.isNoConversion,
                   onChanged: (value) {
                     wordSpacing = value;
                     setState(() {});

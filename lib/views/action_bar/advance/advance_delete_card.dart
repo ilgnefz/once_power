@@ -46,11 +46,11 @@ class AdvanceDeleteCard extends StatelessWidget {
     if (menu.matchLocation.isPosition) {
       return AdvanceRichText(
         text: TextSpan(
-          text: menu.matchLocation.label,
+          text: S.of(context).position,
           style: defaultStyle,
           children: [
             TextSpan(
-              text: '${S.of(context).position} ${menu.start} ',
+              text: ' ${menu.start} ',
               children: [
                 TextSpan(text: S.of(context).to, style: defaultStyle),
                 TextSpan(text: ' ${menu.end}', style: highlightStyle),
@@ -63,18 +63,18 @@ class AdvanceDeleteCard extends StatelessWidget {
     }
 
     if (menu.matchLocation.isFront || menu.matchLocation.isBack) {
-      int label = menu.matchLocation.isFront ? menu.front : menu.back;
+      String label = menu.matchLocation.isFront
+          ? S.current.frontLabel
+          : S.current.backLabel;
+      int num = menu.matchLocation.isFront ? menu.front : menu.back;
       return AdvanceRichText(
         text: TextSpan(
           text: S.of(context).first,
           style: defaultStyle,
           children: [
             TextSpan(text: ' "${menu.value}" ', style: highlightStyle),
-            TextSpan(
-              text: menu.matchLocation.label.substring(0, 1),
-              style: defaultStyle,
-            ),
-            TextSpan(text: ' "$label" ', style: highlightStyle),
+            TextSpan(text: label, style: defaultStyle),
+            TextSpan(text: ' "$num" ', style: highlightStyle),
             TextSpan(text: S.of(context).place, style: defaultStyle),
           ],
         ),
