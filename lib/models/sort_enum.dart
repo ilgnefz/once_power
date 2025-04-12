@@ -11,6 +11,10 @@ enum SortType {
   typeDescending,
   checkAscending,
   checkDescending,
+  sizeAscending,
+  sizeDescending,
+  groupAscending,
+  groupDescending,
   folderAscending,
   folderDescending
 }
@@ -36,6 +40,14 @@ extension SortTypeExtension on SortType {
         return AppIcons.checkAscending;
       case SortType.checkDescending:
         return AppIcons.checkDescending;
+      case SortType.sizeAscending:
+        return AppIcons.sizeAscending;
+      case SortType.sizeDescending:
+        return AppIcons.sizeDescending;
+      case SortType.groupAscending:
+        return AppIcons.groupAscending;
+      case SortType.groupDescending:
+        return AppIcons.groupDescending;
       case SortType.folderAscending:
         return AppIcons.folderAscending;
       case SortType.folderDescending:
@@ -63,6 +75,14 @@ extension SortTypeExtension on SortType {
         return S.current.checkDescending;
       case SortType.checkAscending:
         return S.current.checkAscending;
+      case SortType.sizeDescending:
+        return S.current.sizeDescending;
+      case SortType.sizeAscending:
+        return S.current.sizeAscending;
+      case SortType.groupDescending:
+        return S.current.groupDescending;
+      case SortType.groupAscending:
+        return S.current.groupAscending;
       case SortType.folderDescending:
         return S.current.folderDescending;
       case SortType.folderAscending:

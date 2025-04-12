@@ -266,5 +266,9 @@
   "group": "组名",
   "applyGroup": "应用组",
   "presetAddErrorTitle": "添加预设失败",
-  "presetAddError": "指令列表不能为空!"
+  "presetAddError": "指令列表不能为空!",
+  "sizeAscending": "大小升序",
+  "sizeDescending": "大小降序",
+  "groupAscending": "组升序",
+  "groupDescending": "组降序"
 }

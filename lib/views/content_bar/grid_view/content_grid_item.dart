@@ -18,6 +18,8 @@ class ContentGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String newName = getNameWithExt(file.newName, file.newExtension);
+    String oldName = getNameWithExt(file.name, file.extension);
     return SelectSortCard(
       index: files.indexOf(file),
       file: file,
@@ -37,10 +39,14 @@ class ContentGridItem extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                getNameWithExt(file.newName, file.newExtension),
+                newName,
                 style: TextStyle(
                   fontSize: AppNum.tileFontSize,
-                  color: file.checked ? Colors.black : Colors.grey,
+                  color: file.checked
+                      ? newName == oldName
+                          ? Colors.black
+                          : Theme.of(context).primaryColor
+                      : Colors.grey,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

@@ -2069,6 +2069,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Size ascending`
+  String get sizeAscending {
+    return Intl.message(
+      'Size ascending',
+      name: 'sizeAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size descending`
+  String get sizeDescending {
+    return Intl.message(
+      'Size descending',
+      name: 'sizeDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group ascending`
+  String get groupAscending {
+    return Intl.message(
+      'Group ascending',
+      name: 'groupAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group descending`
+  String get groupDescending {
+    return Intl.message(
+      'Group descending',
+      name: 'groupDescending',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

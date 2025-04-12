@@ -56,6 +56,30 @@ List<FileInfo> sortList(Ref ref) {
           return b.checked ? -1 : 1;
         });
       break;
+    case SortType.sizeAscending:
+      sortedList = [...list]..sort((a, b) {
+          if (a.size == b.size) return 0;
+          return a.size.compareTo(b.size);
+        });
+      break;
+    case SortType.sizeDescending:
+      sortedList = [...list]..sort((a, b) {
+          if (a.size == b.size) return 0;
+          return b.size.compareTo(a.size);
+        });
+      break;
+    case SortType.groupAscending:
+      sortedList = [...list]..sort((a, b) {
+          if (a.group == b.group) return 0;
+          return a.group.compareTo(b.group);
+        });
+      break;
+    case SortType.groupDescending:
+      sortedList = [...list]..sort((a, b) {
+          if (a.group == b.group) return 0;
+          return b.group.compareTo(a.group);
+        });
+      break;
     case SortType.folderAscending:
       sortedList = [...list]..sort((a, b) {
           if (a.parent == b.parent) return 0;

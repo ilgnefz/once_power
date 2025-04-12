@@ -265,5 +265,9 @@
   "group": "Group",
   "applyGroup": "Apply Group",
   "presetAddErrorTitle": "Add preset failed",
-  "presetAddError": "The instruction list cannot be empty!"
+  "presetAddError": "The instruction list cannot be empty!",
+  "sizeAscending": "Size ascending",
+  "sizeDescending": "Size descending",
+  "groupAscending": "Group ascending",
+  "groupDescending": "Group descending"
 }

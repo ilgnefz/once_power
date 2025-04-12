@@ -1,4 +1,5 @@
 class AppIcons {
+  static const String autoRun = '${basePath}auto-run.svg';
   static const String basePath = 'assets/icons/';
   static const String cases = '${basePath}case.svg';
   static const String checkbox = '${basePath}checkbox.svg';
@@ -16,16 +17,19 @@ class AppIcons {
   static const String folderDescending = '${basePath}folder-descending.svg';
   static const String gitee = '${basePath}gitee.svg';
   static const String github = '${basePath}github.svg';
+  static const String groupAscending = '${basePath}group-ascending.svg';
+  static const String groupDescending = '${basePath}group-descending.svg';
   static const String image = '${basePath}image.svg';
   static const String log = '${basePath}log.svg';
   static const String maximize = '${basePath}maximize.svg';
   static const String minimize = '${basePath}minimize.svg';
   static const String nameAscending = '${basePath}name-ascending.svg';
   static const String nameDescending = '${basePath}name-descending.svg';
-  static const String autoRun = '${basePath}auto-run.svg';
   static const String ruler = '${basePath}ruler.svg';
   static const String save = '${basePath}save.svg';
   static const String shortcutMenu = '${basePath}shortcut-menu.svg';
+  static const String sizeAscending = '${basePath}size-ascending.svg';
+  static const String sizeDescending = '${basePath}size-descending.svg';
   static const String sort = '${basePath}sort.svg';
   static const String success = '${basePath}success.svg';
   static const String swap = '${basePath}swap.svg';
