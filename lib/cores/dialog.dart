@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/models/notification.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_preset.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete.dart';
@@ -71,7 +74,14 @@ void replaceText(BuildContext context, [AdvanceMenuReplace? menu]) {
 
 void addPreset(
     BuildContext context, WidgetRef ref, List<AdvanceMenuModel> menus) {
-  if (menus.isEmpty) return;
+  if (menus.isEmpty) {
+    return NotificationInfo(
+      type: NotificationType.error,
+      title: S.of(context).presetAddErrorTitle,
+      message: S.of(context).presetAddError,
+      time: 3,
+    ).show();
+  }
   showCustomDialog(
     context: context,
     builder: (context) => AddPreset(),

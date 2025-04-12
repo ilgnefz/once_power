@@ -21,13 +21,33 @@ void toggleCheck(WidgetRef ref, String id) {
   updateName(ref);
 }
 
+void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
+  for (FileInfo e in files) {
+    ref.read(fileListProvider.notifier).check(e.id);
+  }
+  updateName(ref);
+}
+
 void removeOne(WidgetRef ref, String id) {
   ref.read(fileListProvider.notifier).remove(id);
   updateName(ref);
 }
 
-void removeFolder(WidgetRef ref, String folder) {
-  ref.read(fileListProvider.notifier).removeFolder(folder);
+void removeMultiple(WidgetRef ref, List<FileInfo> files) {
+  for (FileInfo e in files) {
+    ref.read(fileListProvider.notifier).remove(e.id);
+  }
+  updateName(ref);
+}
+
+void removeFolder(WidgetRef ref, List<FileInfo> files) {
+  Set<String> folders = {};
+  for (FileInfo e in files) {
+    folders.add(e.parent);
+  }
+  for (String e in folders) {
+    ref.read(fileListProvider.notifier).removeFolder(e);
+  }
   updateName(ref);
 }
 

@@ -19,8 +19,8 @@ class ContentListItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String subtitle =
-        ref.watch(currentModeProvider).isOrganize ? file.parent : file.newName;
+    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+    String subtitle = isOrganize ? file.parent : file.newName;
     return SelectSortCard(
       index: index,
       file: file,
@@ -46,14 +46,26 @@ class ContentListItem extends ConsumerWidget {
             Expanded(
               child: Row(
                 children: [
-                  OneLineText(subtitle, fontSize: AppNum.tileFontSize),
+                  OneLineText(
+                    subtitle,
+                    fontSize: AppNum.tileFontSize,
+                    color: isOrganize || file.name == file.newName
+                        ? Colors.black
+                        : Theme.of(context).primaryColor,
+                  ),
                   Container(
                     width: AppNum.extensionW,
                     alignment: Alignment.center,
                     child: Text(
                       file.newExtension,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13, height: 1),
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 1,
+                        color: isOrganize || file.extension == file.newExtension
+                            ? Colors.black
+                            : Theme.of(context).primaryColor,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

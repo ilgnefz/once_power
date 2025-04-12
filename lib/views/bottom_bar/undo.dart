@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/file.dart';
 import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/rename.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -34,6 +35,7 @@ class UndoBtn extends ConsumerWidget {
         showUndoNotification(errors, total);
       });
       ref.read(openUndoProvider.notifier).update(false);
+      updateName(ref);
     }
 
     if (!ref.watch(openUndoProvider) ||

@@ -238,6 +238,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "prefix": MessageLookupByLibrary.simpleMessage("前缀"),
     "prefixContent": MessageLookupByLibrary.simpleMessage("添加前缀内容"),
     "preset": MessageLookupByLibrary.simpleMessage("预设"),
+    "presetAddError": MessageLookupByLibrary.simpleMessage("指令列表不能为空!"),
+    "presetAddErrorTitle": MessageLookupByLibrary.simpleMessage("添加预设失败"),
     "presetName": MessageLookupByLibrary.simpleMessage("预设名称"),
     "presetNameError": MessageLookupByLibrary.simpleMessage("预设名称不能为空"),
     "presetNameErrorTitle": MessageLookupByLibrary.simpleMessage("预设名称错误"),

@@ -6,6 +6,7 @@ import 'package:once_power/cores/sort.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/utils/storage.dart';
@@ -29,6 +30,7 @@ Future<void> showRightMenu(
   // int count = show ? 9 : 7;
   // if (mode.isOrganize) count = 8;
   // double width = loe?.languageCode != 'zh' ? 120 : 80;
+  List<FileInfo> sortSelectList = ref.watch(sortSelectListProvider);
   await showContextMenu(
     context,
     contextMenu: ContextMenu(
@@ -60,15 +62,15 @@ Future<void> showRightMenu(
           ),
         RightMenuItem(
           label: S.of(context).moveToFirst,
-          onSelected: () => toTheFirst(ref),
+          onSelected: () => toTheFirst(ref, sortSelectList),
         ),
         RightMenuItem(
           label: S.of(context).moveToCenter,
-          onSelected: () => toTheCenter(ref),
+          onSelected: () => toTheCenter(ref, sortSelectList),
         ),
         RightMenuItem(
           label: S.of(context).moveToLast,
-          onSelected: () => toTheLast(ref),
+          onSelected: () => toTheLast(ref, sortSelectList),
         ),
         if (ref.watch(currentModeProvider).isOrganize)
           RightMenuItem(
@@ -93,17 +95,17 @@ Future<void> showRightMenu(
         RightMenuItem(
           label: file.checked ? S.of(context).unselect : S.of(context).select,
           color: file.checked ? Colors.grey : Colors.black,
-          onSelected: () => toggleCheck(ref, file.id),
+          onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),
         RightMenuItem(
           label: S.of(context).removeFolder,
           color: Colors.red,
-          onSelected: () => removeFolder(ref, file.parent),
+          onSelected: () => removeFolder(ref, sortSelectList),
         ),
         RightMenuItem(
           label: S.of(context).remove,
           color: Colors.red,
-          onSelected: () => removeOne(ref, file.id),
+          onSelected: () => removeMultiple(ref, sortSelectList),
         ),
       ],
       padding: EdgeInsets.zero,

@@ -302,6 +302,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "prefix": MessageLookupByLibrary.simpleMessage("Prefix"),
     "prefixContent": MessageLookupByLibrary.simpleMessage("Add prefix content"),
     "preset": MessageLookupByLibrary.simpleMessage("Preset"),
+    "presetAddError": MessageLookupByLibrary.simpleMessage(
+      "The instruction list cannot be empty!",
+    ),
+    "presetAddErrorTitle": MessageLookupByLibrary.simpleMessage(
+      "Add preset failed",
+    ),
     "presetName": MessageLookupByLibrary.simpleMessage("Preset Name"),
     "presetNameError": MessageLookupByLibrary.simpleMessage(
       "The preset name cannot be empty",

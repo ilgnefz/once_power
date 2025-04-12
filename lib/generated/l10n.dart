@@ -2049,6 +2049,26 @@ class S {
   String get applyGroup {
     return Intl.message('Apply Group', name: 'applyGroup', desc: '', args: []);
   }
+
+  /// `Add preset failed`
+  String get presetAddErrorTitle {
+    return Intl.message(
+      'Add preset failed',
+      name: 'presetAddErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The instruction list cannot be empty!`
+  String get presetAddError {
+    return Intl.message(
+      'The instruction list cannot be empty!',
+      name: 'presetAddError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

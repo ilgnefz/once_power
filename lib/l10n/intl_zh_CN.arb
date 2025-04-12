@@ -264,5 +264,7 @@
   "settingGroup": "设置组",
   "editGroup": "编辑组",
   "group": "组名",
-  "applyGroup": "应用组"
+  "applyGroup": "应用组",
+  "presetAddErrorTitle": "添加预设失败",
+  "presetAddError": "指令列表不能为空!"
 }

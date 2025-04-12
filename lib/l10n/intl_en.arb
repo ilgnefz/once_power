@@ -263,5 +263,7 @@
   "settingGroup": "Setting Group",
   "editGroup": "Edit Group",
   "group": "Group",
-  "applyGroup": "Apply Group"
+  "applyGroup": "Apply Group",
+  "presetAddErrorTitle": "Add preset failed",
+  "presetAddError": "The instruction list cannot be empty!"
 }

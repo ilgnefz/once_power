@@ -21,43 +21,48 @@ MovePosition tempMP = MovePosition.idle;
 
 void toThePosition(
   WidgetRef ref,
+  List<FileInfo> selectList,
   Function(List<FileInfo> list) insertFunction,
   int targetIndex,
   MovePosition mp,
 ) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  List<FileInfo> sortSelectList = ref.watch(sortSelectListProvider);
-  if (listEquals(tempSortSelectList, sortSelectList) && tempMP == mp) {
+  if (listEquals(tempSortSelectList, selectList) && tempMP == mp) {
     return;
   }
   tempMP = mp;
   tempSortSelectList.clear();
-  tempSortSelectList.addAll(sortSelectList);
-  if (sortSelectList.length == 1) {
-    int index = files.indexWhere((e) => e == sortSelectList.single);
+  tempSortSelectList.addAll(selectList);
+  if (selectList.length == 1) {
+    int index = files.indexWhere((e) => e == selectList.single);
     if (index == targetIndex) return;
   }
-  for (FileInfo file in sortSelectList) {
+  for (FileInfo file in selectList) {
     removeOne(ref, file.id);
   }
-  insertFunction(sortSelectList);
+  insertFunction(selectList);
   ref.read(fileSortTypeProvider.notifier).update(SortType.defaultSort);
 }
 
-void toTheFirst(WidgetRef ref) {
-  toThePosition(ref, (list) => insertFirst(ref, list), 0, MovePosition.first);
+void toTheFirst(WidgetRef ref, List<FileInfo> selectList) {
+  toThePosition(
+      ref, selectList, (list) => insertFirst(ref, list), 0, MovePosition.first);
 }
 
-void toTheCenter(WidgetRef ref) {
+void toTheCenter(WidgetRef ref, List<FileInfo> selectList) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  toThePosition(ref, (list) => insertCenter(ref, list), files.length ~/ 2,
-      MovePosition.center);
+  toThePosition(ref, selectList, (list) => insertCenter(ref, list),
+      files.length ~/ 2, MovePosition.center);
 }
 
-void toTheLast(WidgetRef ref) {
+void toTheLast(WidgetRef ref, List<FileInfo> selectList) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  toThePosition(ref, (list) => insertLast(ref, list.reversed.toList()),
-      files.length - 1, MovePosition.last);
+  toThePosition(
+      ref,
+      selectList,
+      (list) => insertLast(ref, list.reversed.toList()),
+      files.length - 1,
+      MovePosition.last);
 }
 
 void reorderList(
