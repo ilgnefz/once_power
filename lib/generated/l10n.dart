@@ -2025,19 +2025,19 @@ class S {
     return Intl.message('Back', name: 'backLabel', desc: '', args: []);
   }
 
-  /// `Setting Group`
+  /// `Setting group`
   String get settingGroup {
     return Intl.message(
-      'Setting Group',
+      'Setting group',
       name: 'settingGroup',
       desc: '',
       args: [],
     );
   }
 
-  /// `Edit Group`
+  /// `Edit group`
   String get editGroup {
-    return Intl.message('Edit Group', name: 'editGroup', desc: '', args: []);
+    return Intl.message('Edit group', name: 'editGroup', desc: '', args: []);
   }
 
   /// `Group`

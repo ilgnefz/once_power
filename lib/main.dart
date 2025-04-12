@@ -7,6 +7,8 @@ import 'constants/constants.dart';
 import 'providers/toggle.dart';
 import 'views/home.dart';
 
+// 上传文件和重命名文件时添加进度条界面
+
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(const ProviderScope(child: MyApp()));

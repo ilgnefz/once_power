@@ -177,7 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "document": MessageLookupByLibrary.simpleMessage("Document"),
     "download": MessageLookupByLibrary.simpleMessage("Download"),
     "earliestDate": MessageLookupByLibrary.simpleMessage("Earliest"),
-    "editGroup": MessageLookupByLibrary.simpleMessage("Edit Group"),
+    "editGroup": MessageLookupByLibrary.simpleMessage("Edit group"),
     "emptyFolderError": MessageLookupByLibrary.simpleMessage(
       "The selected folder is empty",
     ),
@@ -364,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Serial Distinguish",
     ),
     "serialNumber": MessageLookupByLibrary.simpleMessage("SerialNum"),
-    "settingGroup": MessageLookupByLibrary.simpleMessage("Setting Group"),
+    "settingGroup": MessageLookupByLibrary.simpleMessage("Setting group"),
     "shortcutTip1": MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
     "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
     "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),
