@@ -40,8 +40,9 @@ class AppNum {
   // static const double dropdownMenuP = 6;
   static const double dropdownMenuW = 156;
   static const double dropdownMenuWC = 112;
-  static const double dropdownMenuWE = 168;
-  static const double dropdownMenuItemH = 36;
+  // static const double dropdownMenuWE = 152;
+  // static const double dropdownMenuItemH = 36;
+  static const double dropdownMenuH = 32;
 
   // BottomBar
   static const double bottomBarH = 32;

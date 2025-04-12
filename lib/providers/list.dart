@@ -126,3 +126,13 @@ bool selectedPath(Ref ref, String folder) {
     return true;
   });
 }
+
+// @riverpod
+// class GroupList extends _$GroupList {
+//   @override
+//   List<String> build() => [];
+//   void add(String group) {
+//     state = [...state, group];
+//     print(state);
+//   }
+// }

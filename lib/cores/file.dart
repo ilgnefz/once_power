@@ -179,6 +179,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     type: type,
     size: size,
     dimensions: dimensions,
+    group: '',
     checked: true,
   );
 }

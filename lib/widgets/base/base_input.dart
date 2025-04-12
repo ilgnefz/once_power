@@ -9,6 +9,7 @@ class BaseInput extends StatelessWidget {
     this.controller,
     this.padding,
     this.enable = true,
+    this.autofocus = false,
     this.hintText = '',
     this.textAlign = TextAlign.start,
     this.inputFormatters,
@@ -25,6 +26,7 @@ class BaseInput extends StatelessWidget {
   final TextEditingController? controller;
   final EdgeInsets? padding;
   final bool enable;
+  final bool autofocus;
   final String hintText;
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
@@ -64,6 +66,7 @@ class BaseInput extends StatelessWidget {
                   child: TextField(
                     controller: controller,
                     enabled: enable,
+                    autofocus: autofocus,
                     // style: textStyle,
                     // // focusNode: focusNode,
                     decoration: InputDecoration(

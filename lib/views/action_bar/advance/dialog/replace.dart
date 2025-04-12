@@ -15,6 +15,7 @@ import 'common_dialog.dart';
 import 'common_location_radio.dart';
 import 'dialog_base_input.dart';
 import 'format_group.dart';
+import 'group_dropdown.dart';
 import 'word_spacing.dart';
 
 class ReplaceView extends ConsumerStatefulWidget {
@@ -34,6 +35,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   int start = 1, end = 1, front = 1, back = 1;
   CaseType type = CaseType.noConversion;
   String wordSpacing = '';
+  String group = S.current.all;
 
   @override
   void initState() {
@@ -50,6 +52,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
       end = widget.menu!.end;
       type = widget.menu!.caseType;
       wordSpacing = widget.menu!.wordSpacing;
+      group = widget.menu!.group;
     }
   }
 
@@ -57,6 +60,13 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   Widget build(BuildContext context) {
     return CommonDialog(
       title: S.of(context).replaceTitle,
+      extraButton: GroupDropdown(
+        value: group,
+        onChanged: (value) {
+          group = value!;
+          setState(() {});
+        },
+      ),
       child: StatefulBuilder(
         builder: (context, setState) {
           bool isFormat = ref.watch(currentReplaceModeProvider).isFormat;
@@ -168,6 +178,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
           end: end,
           caseType: type,
           wordSpacing: wordSpacing,
+          group: group,
         );
         if (widget.menu != null) {
           ref.read(advanceMenuListProvider.notifier).update(id, replace);

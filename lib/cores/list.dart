@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/progress.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
 
 import '../models/file_enum.dart';
@@ -59,4 +61,27 @@ void filterFile(BuildContext context, WidgetRef ref) {
     final int after = ref.watch(fileListProvider).length;
     showFilterNotification(before - after);
   }
+}
+
+void setGroup(BuildContext context, WidgetRef ref, String group) {
+  List<FileInfo> files = ref.watch(sortSelectListProvider);
+  for (FileInfo e in files) {
+    group = e.group == group ? '' : group;
+    ref.read(fileListProvider.notifier).updateGroup(e.id, group);
+  }
+  updateName(ref);
+  if (context.mounted) Navigator.of(context).pop();
+}
+
+Future<void> removeGroup(WidgetRef ref, String group) async {
+  List<String> list = StorageUtil.getStringList(AppKeys.groupList);
+  list.remove(group);
+  await StorageUtil.setStringList(AppKeys.groupList, list);
+  List<FileInfo> files = ref.watch(fileListProvider);
+  for (FileInfo e in files) {
+    if (e.group == group) {
+      ref.read(fileListProvider.notifier).updateGroup(e.id, '');
+    }
+  }
+  updateName(ref);
 }

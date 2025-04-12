@@ -443,6 +443,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_context_menu:
+    dependency: "direct main"
+    description:
+      name: flutter_context_menu
+      sha256: "9a80f3ab623086f6ec89483c24a1129e6b9f30914fdc1219f4af622164a2fb74"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   flutter_launcher_icons:
     dependency: "direct main"
     description:

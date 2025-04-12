@@ -13,6 +13,7 @@ import 'common_dialog.dart';
 import 'common_location_radio.dart';
 import 'delete_type_group.dart';
 import 'dialog_base_input.dart';
+import 'group_dropdown.dart';
 
 class DeleteView extends ConsumerStatefulWidget {
   const DeleteView({super.key, this.menu});
@@ -29,6 +30,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
   int start = 1, end = 1, front = 1, back = 1;
   List<DeleteType> deleteTypes = [];
   bool deleteExt = false;
+  String group = S.current.all;
 
   @override
   void initState() {
@@ -42,6 +44,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
       end = widget.menu!.end;
       deleteTypes = widget.menu!.deleteTypes;
       deleteExt = widget.menu!.deleteExt;
+      group = widget.menu!.group;
     }
   }
 
@@ -49,6 +52,13 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
   Widget build(BuildContext context) {
     return CommonDialog(
       title: S.of(context).deleteTitle,
+      extraButton: GroupDropdown(
+        value: group,
+        onChanged: (value) {
+          group = value!;
+          setState(() {});
+        },
+      ),
       child: Column(
         spacing: AppNum.mediumG,
         children: [
@@ -121,6 +131,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           end: end,
           deleteTypes: deleteTypes,
           deleteExt: deleteExt,
+          group: group,
         );
         if (widget.menu != null) {
           ref.read(advanceMenuListProvider.notifier).update(id, delete);

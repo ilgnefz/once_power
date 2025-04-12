@@ -31,7 +31,16 @@ class FilterBtn extends ConsumerWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Text(label, style: TextStyle(color: color)),
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      color: color,
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: ref.watch(currentLanguageProvider).isEnglish()
+                          ? 13
+                          : 14,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -72,6 +81,7 @@ class FilterBtn extends ConsumerWidget {
 
     return EasyIconDropdown(
       icon: Icons.filter_alt_rounded,
+      isExpanded: true,
       items: [
         easyDropdownItem(
           S.of(context).removeUnselected,
@@ -107,9 +117,10 @@ class FilterBtn extends ConsumerWidget {
         ),
       ],
       padding: 0,
-      // offset: Offset(-36, -4),
+      offset: Offset(
+          ref.watch(currentLanguageProvider).isEnglish() ? -72 : -36, -4),
       width: ref.watch(currentLanguageProvider).isEnglish()
-          ? AppNum.dropdownMenuWE
+          ? 148
           : AppNum.dropdownMenuWC,
     );
   }

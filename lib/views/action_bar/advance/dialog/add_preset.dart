@@ -40,15 +40,14 @@ class _AddPresetState extends ConsumerState<AddPreset> {
         ref.read(advancePresetListProvider.notifier).add(preset);
         Navigator.of(context).pop();
       },
-      child: StatefulBuilder(
-        builder: (context, setState) => DialogBaseInput(
-          value: name,
-          hintText: S.of(context).presetNameHint,
-          onChanged: (value) {
-            name = value;
-            setState(() {});
-          },
-        ),
+      child: DialogBaseInput(
+        value: name,
+        autofocus: true,
+        hintText: S.of(context).presetNameHint,
+        onChanged: (value) {
+          name = value;
+          setState(() {});
+        },
       ),
     );
   }

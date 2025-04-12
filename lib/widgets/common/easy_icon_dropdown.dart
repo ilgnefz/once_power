@@ -12,6 +12,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
     required this.width,
     this.offset,
     this.padding,
+    this.isExpanded = false,
   }) : assert(svg != null || icon != null);
 
   final List<DropdownMenuItem<T>>? items;
@@ -20,6 +21,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
   final double width;
   final Offset? offset;
   final double? padding;
+  final bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
           color: AppColors.icon,
         ),
         items: items,
+        isExpanded: isExpanded,
         onChanged: (v) {},
         dropdownStyleData: DropdownStyleData(
           width: width,
@@ -47,7 +50,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
           elevation: 2,
         ),
         menuItemStyleData: MenuItemStyleData(
-          height: AppNum.dropdownMenuItemH,
+          height: AppNum.dropdownMenuH,
           padding:
               EdgeInsets.symmetric(horizontal: padding ?? AppNum.fileCardP),
         ),

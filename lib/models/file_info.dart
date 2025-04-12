@@ -29,6 +29,7 @@ class FileInfo {
   FileClassify type;
   int size;
   Size? dimensions;
+  String group;
   bool checked;
 
   FileInfo({
@@ -48,6 +49,7 @@ class FileInfo {
     required this.type,
     required this.size,
     required this.dimensions,
+    required this.group,
     required this.checked,
   });
 
@@ -70,6 +72,7 @@ class FileInfo {
         'type: $type, '
         'size: $size, '
         'dimensions: $dimensions, '
+        'group: $group, '
         'checked: $checked}';
   }
 
@@ -91,6 +94,7 @@ class FileInfo {
       'type': type.index,
       'size': size,
       'dimensions': dimensions,
+      'group': group,
       'checked': checked,
     };
   }

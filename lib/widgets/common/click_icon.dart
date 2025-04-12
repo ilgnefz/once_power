@@ -9,6 +9,7 @@ class ClickIcon extends StatelessWidget {
     this.size = 24,
     this.iconSize = 20,
     this.color,
+    this.shadows,
     this.onTap,
   });
 
@@ -17,6 +18,7 @@ class ClickIcon extends StatelessWidget {
   final String? svg;
   final double? iconSize;
   final Color? color;
+  final List<Shadow>? shadows;
   final void Function()? onTap;
 
   @override
@@ -37,6 +39,7 @@ class ClickIcon extends StatelessWidget {
               icon: icon,
               svg: svg,
               color: color,
+              shadows: shadows,
             ),
           ),
         ),

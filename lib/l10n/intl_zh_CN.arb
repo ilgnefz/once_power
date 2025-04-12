@@ -260,5 +260,9 @@
   "front": "前面",
   "back": "后面",
   "frontLabel": "前",
-  "backLabel": "后"
+  "backLabel": "后",
+  "settingGroup": "设置组",
+  "editGroup": "编辑组",
+  "group": "组名",
+  "applyGroup": "应用组"
 }

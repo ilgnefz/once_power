@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/constants.dart';
 
 class EasyTextDropdown<T> extends StatelessWidget {
   const EasyTextDropdown({
@@ -7,6 +8,9 @@ class EasyTextDropdown<T> extends StatelessWidget {
     this.items,
     this.value,
     this.width,
+    this.offset,
+    this.maxHeight,
+    this.isExpanded = false,
     this.onChanged,
     this.color,
   });
@@ -15,6 +19,9 @@ class EasyTextDropdown<T> extends StatelessWidget {
   final T? value;
   final double? width;
   final Color? color;
+  final double? maxHeight;
+  final bool isExpanded;
+  final Offset? offset;
   final void Function(T?)? onChanged;
 
   @override
@@ -24,9 +31,10 @@ class EasyTextDropdown<T> extends StatelessWidget {
       child: DropdownButton2(
         items: items,
         value: value,
+        isExpanded: isExpanded,
         onChanged: onChanged,
         buttonStyleData: ButtonStyleData(
-          height: 32,
+          height: AppNum.dropdownMenuH,
           width: width ?? 96,
           padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(borderRadius: borderRadius, color: color),
@@ -34,7 +42,8 @@ class EasyTextDropdown<T> extends StatelessWidget {
         dropdownStyleData: DropdownStyleData(
           width: width ?? 100,
           elevation: 2,
-          offset: Offset(0, -4),
+          maxHeight: maxHeight,
+          offset: offset ?? Offset(0, -4),
           padding: const EdgeInsets.symmetric(vertical: 0),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -47,7 +56,7 @@ class EasyTextDropdown<T> extends StatelessWidget {
           ),
         ),
         menuItemStyleData: const MenuItemStyleData(
-          height: 36,
+          height: AppNum.dropdownMenuH,
           padding: EdgeInsets.symmetric(horizontal: 8),
         ),
       ),

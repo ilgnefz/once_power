@@ -14,6 +14,7 @@ import 'add_serial_distinguish.dart';
 import 'add_type_radio.dart';
 import 'common_dialog.dart';
 import 'dialog_base_input.dart';
+import 'group_dropdown.dart';
 import 'num_input_group.dart';
 import 'random_checkbox.dart';
 
@@ -35,6 +36,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   int randomLen = 1;
   DateType dateType = DateType.createdDate;
   AddPosition position = AddPosition.after;
+  String group = S.current.all;
 
   @override
   void initState() {
@@ -50,6 +52,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       randomLen = widget.menu!.randomLen;
       dateType = widget.menu!.dateType;
       position = widget.menu!.addPosition;
+      group = widget.menu!.group;
     }
   }
 
@@ -57,6 +60,13 @@ class _DeleteViewState extends ConsumerState<AddView> {
   Widget build(BuildContext context) {
     return CommonDialog(
       title: S.of(context).addTitle,
+      extraButton: GroupDropdown(
+        value: group,
+        onChanged: (value) {
+          group = value!;
+          setState(() {});
+        },
+      ),
       child: Column(
         spacing: AppNum.mediumG,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,6 +151,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           addPosition: position,
           dateType: dateType,
           posIndex: posIndex,
+          group: group,
         );
         if (widget.menu != null) {
           ref.read(advanceMenuListProvider.notifier).update(id, add);

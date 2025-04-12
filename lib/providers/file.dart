@@ -117,6 +117,11 @@ class FileList extends _$FileList {
         if (e.id == id) e.tempPath = path;
         return e;
       }).toList();
+
+  void updateGroup(String id, String group) => state = state.map((e) {
+        if (e.id == id) e.group = group;
+        return e;
+      }).toList();
 }
 
 @riverpod

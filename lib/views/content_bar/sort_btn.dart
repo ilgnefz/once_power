@@ -30,7 +30,17 @@ class SortBtn extends ConsumerWidget {
                 size: AppNum.dropdownIconS,
                 color: AppColors.icon,
               ),
-              Text(e.label),
+              Expanded(
+                child: Text(
+                  e.label,
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: ref.watch(currentLanguageProvider).isEnglish()
+                        ? 13
+                        : 14,
+                  ),
+                ),
+              ),
             ],
           ),
         );
@@ -39,9 +49,10 @@ class SortBtn extends ConsumerWidget {
 
     return EasyIconDropdown(
       svg: ref.watch(fileSortTypeProvider).icon,
+      isExpanded: true,
       items: items,
       width: ref.watch(currentLanguageProvider).isEnglish()
-          ? AppNum.dropdownMenuWE
+          ? 158
           : AppNum.dropdownMenuWC,
     );
   }

@@ -8,17 +8,21 @@ class EasyIcon extends StatelessWidget {
     this.svg,
     this.iconSize,
     this.color,
+    this.shadows,
   }) : assert(icon != null || svg != null);
 
   final IconData? icon;
   final String? svg;
   final double? iconSize;
   final Color? color;
+  final List<Shadow>? shadows;
 
   @override
   Widget build(BuildContext context) {
     return icon != null
-        ? FittedBox(child: Icon(icon, size: iconSize, color: color))
+        ? FittedBox(
+            child: Icon(icon, size: iconSize, color: color, shadows: shadows),
+          )
         : SvgIcon(svg!, size: iconSize, color: color);
   }
 }

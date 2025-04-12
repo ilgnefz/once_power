@@ -1,3 +1,5 @@
+import 'package:once_power/generated/l10n.dart';
+
 import 'advance_menu_enum.dart';
 import 'two_re_enum.dart';
 
@@ -38,11 +40,13 @@ abstract class AdvanceMenuModel {
   AdvanceType type;
   dynamic value;
   bool checked;
+  String group;
   AdvanceMenuModel({
     required this.id,
     required this.type,
     required this.value,
     required this.checked,
+    required this.group,
   });
 
   factory AdvanceMenuModel.fromJson(Map<String, dynamic> json) {
@@ -83,6 +87,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     required this.end,
     required this.deleteTypes,
     required this.deleteExt,
+    required super.group,
   }) : super(type: AdvanceType.delete);
 
   @override
@@ -103,6 +108,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
           ? List<DeleteType>.from(deleteTypes)
           : List<DeleteType>.from(this.deleteTypes),
       deleteExt: deleteExt,
+      group: group,
     );
   }
 
@@ -121,6 +127,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
             : List<DeleteType>.from(
                 json["deleteTypes"].map((x) => DeleteType.values[x])),
         deleteExt: json["deleteExt"] ?? false,
+        group: json["group"] ?? S.current.all,
       );
 
   @override
@@ -136,6 +143,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         "end": end,
         "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
         "deleteExt": deleteExt,
+        "group": group,
       };
 
   @override
@@ -150,7 +158,8 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         'start: $start, '
         'end: $end, '
         'deleteTypes: $deleteTypes, '
-        'deleteExt: $deleteExt}';
+        'deleteExt: $deleteExt, '
+        'group: $group}';
   }
 }
 
@@ -178,6 +187,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.dateType,
     required this.addPosition,
     required this.posIndex,
+    required super.group,
   }) : super(type: AdvanceType.add);
 
   @override
@@ -192,7 +202,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       digits: digits,
       start: start,
       randomValue: randomValue != null
-          ? List<String>.from(randomValue) // 创建新数组
+          ? List<String>.from(randomValue)
           : List<String>.from(this.randomValue),
       distinguishType: distinguishType,
       addType: addType,
@@ -200,6 +210,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       dateType: dateType,
       addPosition: addPosition,
       posIndex: posIndex,
+      group: group,
     );
   }
 
@@ -218,6 +229,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         dateType: DateType.values[json["dateType"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         posIndex: json["posIndex"] ?? 1,
+        group: json["group"] ?? S.current.all,
       );
 
   @override
@@ -235,6 +247,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "dateType": dateType.index,
         "addPosition": addPosition.index,
         "posIndex": posIndex,
+        "group": group,
       };
 
   @override
@@ -251,7 +264,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'randomLen: $randomLen, '
         'dateType: $dateType, '
         'addPosition: $addPosition, '
-        'posIndex: $posIndex}';
+        'posIndex: $posIndex, '
+        'group: $group}';
   }
 }
 
@@ -279,6 +293,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.end,
     required this.caseType,
     required this.wordSpacing,
+    required super.group,
   }) : super(type: AdvanceType.replace);
 
   @override
@@ -296,6 +311,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       end: end,
       caseType: caseType,
       wordSpacing: wordSpacing,
+      group: group,
     );
   }
 
@@ -315,6 +331,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         end: json["end"] ?? 1,
         caseType: CaseType.values[json["caseType"] ?? 0],
         wordSpacing: json["wordSpacing"] ?? "",
+        group: json["group"] ?? S.current.all,
       );
 
   @override
@@ -332,6 +349,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "end": end,
         "caseType": caseType.index,
         "wordSpacing": wordSpacing,
+        "group": group,
       };
 
   @override
@@ -348,6 +366,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'start: $start, '
         'end: $end, '
         'caseType: $caseType, '
-        'wordSpacing: $wordSpacing}';
+        'wordSpacing: $wordSpacing, '
+        'group: $group}';
   }
 }

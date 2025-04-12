@@ -9,12 +9,14 @@ class CommonDialog extends StatelessWidget {
     this.autoPop = true,
     required this.title,
     required this.child,
+    this.extraButton,
     required this.onOk,
   });
 
   final bool autoPop;
   final String title;
   final Widget child;
+  final Widget? extraButton;
   final void Function() onOk;
 
   @override
@@ -24,6 +26,7 @@ class CommonDialog extends StatelessWidget {
       extraContent: child,
       okText: S.of(context).ok,
       cancelText: S.of(context).cancel,
+      extraButton: extraButton,
       onOk: () {
         if (autoPop) Navigator.of(context).pop();
         onOk();

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/file_enum.dart';
@@ -23,6 +24,7 @@ void advanceUpdateName(WidgetRef ref) {
     String name = file.name;
     String extension = file.extension;
     for (AdvanceMenuModel menu in menus) {
+      if (menu.group != S.current.all && menu.group != file.group) continue;
       if (menu.type.isDelete) {
         menu as AdvanceMenuDelete;
         if (menu.deleteExt) extension = '';

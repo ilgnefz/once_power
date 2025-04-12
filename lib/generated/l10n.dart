@@ -375,20 +375,20 @@ class S {
     );
   }
 
-  /// `Remove Unselected`
+  /// `Remove unchecked`
   String get removeUnselected {
     return Intl.message(
-      'Remove Unselected',
+      'Remove unchecked',
       name: 'removeUnselected',
       desc: '',
       args: [],
     );
   }
 
-  /// `Remove Selected`
+  /// `Remove checked`
   String get removeSelected {
     return Intl.message(
-      'Remove Selected',
+      'Remove checked',
       name: 'removeSelected',
       desc: '',
       args: [],
@@ -855,14 +855,14 @@ class S {
     );
   }
 
-  /// `Select`
+  /// `Check`
   String get select {
-    return Intl.message('Select', name: 'select', desc: '', args: []);
+    return Intl.message('Check', name: 'select', desc: '', args: []);
   }
 
-  /// `Unselect`
+  /// `Uncheck`
   String get unselect {
-    return Intl.message('Unselect', name: 'unselect', desc: '', args: []);
+    return Intl.message('Uncheck', name: 'unselect', desc: '', args: []);
   }
 
   /// `Remove`
@@ -1000,10 +1000,10 @@ class S {
     );
   }
 
-  /// `All Extension`
+  /// `All extension`
   String get allExtension {
     return Intl.message(
-      'All Extension',
+      'All extension',
       name: 'allExtension',
       desc: '',
       args: [],
@@ -1020,20 +1020,20 @@ class S {
     );
   }
 
-  /// `Reverse Selection`
+  /// `Invert selection`
   String get selectReserve {
     return Intl.message(
-      'Reverse Selection',
+      'Invert selection',
       name: 'selectReserve',
       desc: '',
       args: [],
     );
   }
 
-  /// `Select Switch`
+  /// `All switch`
   String get selectAllSwitch {
     return Intl.message(
-      'Select Switch',
+      'All switch',
       name: 'selectAllSwitch',
       desc: '',
       args: [],
@@ -1175,110 +1175,110 @@ class S {
     return Intl.message('Case ext.', name: 'caseExtension', desc: '', args: []);
   }
 
-  /// `Default Sort`
+  /// `Default sort`
   String get defaultSort {
     return Intl.message(
-      'Default Sort',
+      'Default sort',
       name: 'defaultSort',
       desc: '',
       args: [],
     );
   }
 
-  /// `Name Descending`
+  /// `Name descending`
   String get nameDescending {
     return Intl.message(
-      'Name Descending',
+      'Name descending',
       name: 'nameDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Name Ascending`
+  /// `Name ascending`
   String get nameAscending {
     return Intl.message(
-      'Name Ascending',
+      'Name ascending',
       name: 'nameAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Date Descending`
+  /// `Date descending`
   String get dateDescending {
     return Intl.message(
-      'Date Descending',
+      'Date descending',
       name: 'dateDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Date Ascending`
+  /// `Date ascending`
   String get dateAscending {
     return Intl.message(
-      'Date Ascending',
+      'Date ascending',
       name: 'dateAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Type Descending`
+  /// `Type descending`
   String get typeDescending {
     return Intl.message(
-      'Type Descending',
+      'Type descending',
       name: 'typeDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Type Ascending`
+  /// `Type ascending`
   String get typeAscending {
     return Intl.message(
-      'Type Ascending',
+      'Type ascending',
       name: 'typeAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Check Descending`
+  /// `Check descending`
   String get checkDescending {
     return Intl.message(
-      'Check Descending',
+      'Check descending',
       name: 'checkDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Check Ascending`
+  /// `Check ascending`
   String get checkAscending {
     return Intl.message(
-      'Check Ascending',
+      'Check ascending',
       name: 'checkAscending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Folder Descending`
+  /// `Folder descending`
   String get folderDescending {
     return Intl.message(
-      'Folder Descending',
+      'Folder descending',
       name: 'folderDescending',
       desc: '',
       args: [],
     );
   }
 
-  /// `Folder Ascending`
+  /// `Folder ascending`
   String get folderAscending {
     return Intl.message(
-      'Folder Ascending',
+      'Folder ascending',
       name: 'folderAscending',
       desc: '',
       args: [],
@@ -1755,15 +1755,15 @@ class S {
     return Intl.message('distinguish', name: 'distinguish', desc: '', args: []);
   }
 
-  /// `All Folder`
+  /// `All folder`
   String get allFolder {
-    return Intl.message('All Folder', name: 'allFolder', desc: '', args: []);
+    return Intl.message('All folder', name: 'allFolder', desc: '', args: []);
   }
 
-  /// `All Folder Path`
+  /// `All folder path`
   String get allFolderTitle {
     return Intl.message(
-      'All Folder Path',
+      'All folder path',
       name: 'allFolderTitle',
       desc: '',
       args: [],
@@ -2023,6 +2023,31 @@ class S {
   /// `Back`
   String get backLabel {
     return Intl.message('Back', name: 'backLabel', desc: '', args: []);
+  }
+
+  /// `Setting Group`
+  String get settingGroup {
+    return Intl.message(
+      'Setting Group',
+      name: 'settingGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Group`
+  String get editGroup {
+    return Intl.message('Edit Group', name: 'editGroup', desc: '', args: []);
+  }
+
+  /// `Group`
+  String get group {
+    return Intl.message('Group', name: 'group', desc: '', args: []);
+  }
+
+  /// `Apply Group`
+  String get applyGroup {
+    return Intl.message('Apply Group', name: 'applyGroup', desc: '', args: []);
   }
 }
 
