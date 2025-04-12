@@ -22,21 +22,6 @@ void updateName(WidgetRef ref) {
   if (hasCSV) cSVDataRename(ref);
   if (mode.isAdvance && !hasCSV) advanceUpdateName(ref);
   if ((mode.isReplace || mode.isReserve) && !hasCSV) normalUpdateName(ref);
-  updateExtension(ref);
-}
-
-void updateExtension(WidgetRef ref) {
-  FunctionMode mode = ref.watch(currentModeProvider);
-  bool hasCSV = ref.watch(cSVDataProvider).isNotEmpty;
-  bool modify = ref.watch(isModifyExtensionProvider);
-  bool needUpdate = (mode.isReplace || mode.isReserve) && !hasCSV && modify;
-  for (FileInfo file in ref.watch(fileListProvider)) {
-    String extension = file.extension;
-    if (needUpdate && file.checked) {
-      extension = ref.watch(extensionControllerProvider).text;
-    }
-    ref.read(fileListProvider.notifier).updateExtension(file.id, extension);
-  }
 }
 
 void normalUpdateName(WidgetRef ref) {
@@ -74,7 +59,11 @@ void normalUpdateName(WidgetRef ref) {
       name = isDate ? dateName(ref, file) : reserveModeName(ref, file.name);
     }
     name = prefix + name + suffix;
+    String extension = ref.watch(isModifyExtensionProvider)
+        ? ref.watch(extensionControllerProvider).text
+        : file.extension;
     ref.read(fileListProvider.notifier).updateName(file.id, name);
+    ref.read(fileListProvider.notifier).updateExtension(file.id, extension);
     index++;
   }
 }

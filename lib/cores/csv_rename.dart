@@ -26,21 +26,25 @@ void cSVDataRename(WidgetRef ref) {
       continue;
     }
     bool isDeleteExtension = ref.watch(isDeleteExtensionProvider);
+    String extension = isDeleteExtension ? '' : file.extension;
     bool isMatchExtension = ref.watch(isMatchExtensionProvider);
-    if (isDeleteExtension) {
-      ref.read(fileListProvider.notifier).updateExtension(file.id, '');
-    }
     String name = file.name;
-    if (isMatchExtension) name = getNameWithExt(name, file.extension);
-    final (key, value) =
-        isA ? (name, (CsvRenameInfo e) => e.nameB) : (name, (e) => e.nameA);
+    if (isMatchExtension) name = getNameWithExt(name, extension);
+    final (key, value) = isA
+        ? (name, (CsvRenameInfo e) => e.nameB)
+        : (name, (CsvRenameInfo e) => e.nameA);
 
-    final matching = csvList.firstWhere((e) => (isA ? e.nameA : e.nameB) == key,
+    CsvRenameInfo matching = csvList.firstWhere(
+        (CsvRenameInfo e) => (isA ? e.nameA : e.nameB) == key,
         orElse: () => badInfo);
 
-    ref
-        .read(fileListProvider.notifier)
-        .updateName(file.id, matching != badInfo ? value(matching) : file.name);
+    if (matching != badInfo) name = value(matching);
+    if (isMatchExtension) {
+      extension = name.contains('.') ? name.split('.').last : '';
+      name = name.split('.').first;
+    }
+    ref.read(fileListProvider.notifier).updateName(file.id, name);
+    ref.read(fileListProvider.notifier).updateExtension(file.id, extension);
   }
 }
 
