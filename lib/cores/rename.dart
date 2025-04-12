@@ -8,6 +8,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/value.dart';
@@ -27,7 +28,7 @@ Future<void> runRename(
   Future<InfoDetail?> Function(WidgetRef, List<FileInfo>, FileInfo) callback,
   Function(List<InfoDetail>, int) onEnd,
 ) async {
-  List<FileInfo> list = ref.watch(fileListProvider);
+  List<FileInfo> list = ref.watch(sortListProvider);
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   int total = checkList.length;
   if (checkList.isEmpty) return;
@@ -36,22 +37,11 @@ Future<void> runRename(
   List<InfoDetail> errors = [];
   ref.read(countProvider.notifier).clear();
   final stopwatch = Stopwatch()..start();
-
-  const batchSize = 50;
-  for (int i = 0; i < checkList.length; i += batchSize) {
-    final batch = checkList.sublist(
-        i, i + batchSize > checkList.length ? checkList.length : i + batchSize);
-
-    await Future.wait(
-      batch.map((file) async {
-        final info = await callback(ref, list, file);
-        if (info != null) errors.add(info);
-        ref.read(countProvider.notifier).update();
-      }),
-      eagerError: true,
-    );
+  for (final file in checkList) {
+    final info = await callback(ref, list, file);
+    if (info != null) errors.add(info);
+    ref.read(countProvider.notifier).update();
   }
-
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
@@ -125,7 +115,7 @@ Future<bool> tempRenameFile(WidgetRef ref, List<FileInfo> list, FileInfo file,
     ref.read(fileListProvider.notifier).updateTempPath(file.id, tempPath);
   } catch (e) {
     //   如果文件不存在，直接删除
-    debugPrint('临时修改文件出错:${e.toString()}');
+    debugPrint('临时修改文件出错: ${e.toString()}');
   }
   return false;
 }
