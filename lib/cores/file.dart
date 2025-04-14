@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 
 import 'package:cross_file/cross_file.dart';
@@ -95,37 +96,30 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   final stopwatch = Stopwatch()..start();
-  const batchSize = AppNum.batchSize;
-  // 处理前 batchSize 个文件（原始逐个处理方式）
-  for (int i = 0; i < batchSize && i < paths.length; i++) {
-    String p = paths[i];
+
+  const maxConcurrent = 10;
+  final processingQueue = Queue<Future<void>>();
+
+  for (final p in paths) {
     if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
     if (isExist(ref, p)) continue;
-    FileInfo fileInfo = await generateFileInfo(ref, p);
-    ref.read(fileListProvider.notifier).add(fileInfo);
-    ref.read(countProvider.notifier).update();
+
+    if (processingQueue.length >= maxConcurrent) {
+      await processingQueue.removeFirst();
+    }
+
+    final future = _processSingleFile(ref, p).then((fileInfo) {
+      if (fileInfo != null) {
+        ref.read(fileListProvider.notifier).add(fileInfo);
+        ref.read(countProvider.notifier).update();
+      }
+    });
+
+    processingQueue.add(future);
     // await Future.delayed(const Duration(microseconds: 1));
   }
 
-  // 剩余文件使用 Future.wait 批量处理
-  for (int i = batchSize; i < paths.length; i += batchSize) {
-    final batch = paths.sublist(
-        i, i + batchSize > paths.length ? paths.length : i + batchSize);
-
-    await Future.wait(
-      batch.map((p) async {
-        if (isViewNoOrganize(ref) && !isImgVideo(p)) return;
-        if (isExist(ref, p)) return;
-
-        final result = await _processSingleFile(ref, p);
-        if (result != null) {
-          ref.read(fileListProvider.notifier).add(result);
-          ref.read(countProvider.notifier).update();
-        }
-      }),
-      eagerError: true,
-    );
-  }
+  await Future.wait(processingQueue);
 
   if (isViewNoOrganize(ref)) {
     showFilterNotification(paths.length - ref.watch(countProvider));

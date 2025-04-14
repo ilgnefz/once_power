@@ -99,6 +99,7 @@ Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Releas
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\d3dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\desktop_drop_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libGLESv2.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -107,6 +108,7 @@ Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Releas
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\media_kit_libs_windows_video_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\media_kit_native_event_loop.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\media_kit_video_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\msvcp140_1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\msvcp140_2.dll"; DestDir: "{app}"; Flags: ignoreversion
