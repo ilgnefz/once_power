@@ -467,6 +467,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_media_info:
+    dependency: "direct main"
+    description:
+      name: flutter_media_info
+      sha256: a4aa17c2e209aa3f09b7fbe70126a85d9a93cb314d392d39ea29d3266dbdd26f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -753,10 +761,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
+      sha256: "801fd0b26f14a4a58ccb09d5892c3fbdeff209594300a542492cf13fba9d247a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "1.0.6"
   nanoid:
     dependency: "direct main"
     description:

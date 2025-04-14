@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_media_info/flutter_media_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
 import 'package:image_size_getter/image_size_getter.dart';
@@ -19,7 +20,6 @@ import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';
 import 'package:path/path.dart' as path;
-import 'package:video_player/video_player.dart';
 import 'package:xml/xml.dart';
 
 import 'format.dart';
@@ -405,18 +405,20 @@ Future<Size> getSvgDimensions(String svgFilePath) async {
 }
 
 Future<Size> getVideoDimensions(String videoPath) async {
-  final controller = VideoPlayerController.file(File(videoPath));
+  Mediainfo mi = Mediainfo();
   try {
-    // 初始化视频控制器
-    await controller.initialize();
-    // 获取视频尺寸
-    final size = controller.value.size;
-    return Size(size.width.toInt(), size.height.toInt());
+    mi.quickLoad(videoPath);
+    final width =
+        mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Width");
+    final height =
+        mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Height");
+    // String inform = mi.inform();
+    // print('视频信息: $inform');
+    return Size(int.parse(width), int.parse(height));
   } catch (e) {
     debugPrint('获取视频尺寸失败: $e');
     return Size.zero;
   } finally {
-    // 释放控制器资源
-    controller.dispose();
+    mi.close();
   }
 }
