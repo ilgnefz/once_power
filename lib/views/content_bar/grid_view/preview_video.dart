@@ -59,12 +59,9 @@ class _PreviewVideoState extends State<PreviewVideo> {
         return Column(
           children: [
             Expanded(
-              child: InkWell(
-                onTap: () => Navigator.pop(context),
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                ),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
               ),
             ),
             Row(

@@ -20,8 +20,9 @@ Future<void> showRightMenu(
   BuildContext context,
   WidgetRef ref,
   TapDownDetails details,
-  FileInfo file,
-) async {
+  FileInfo file, [
+  bool isPreview = false,
+]) async {
   // const double safeW = 16, safeH = 32;
   // Locale? loe = StorageUtil.getLocale(AppKeys.locale);
   FunctionMode mode = ref.watch(currentModeProvider);
@@ -30,7 +31,8 @@ Future<void> showRightMenu(
   // int count = show ? 9 : 7;
   // if (mode.isOrganize) count = 8;
   // double width = loe?.languageCode != 'zh' ? 120 : 80;
-  List<FileInfo> sortSelectList = ref.watch(sortSelectListProvider);
+  List<FileInfo> sortSelectList = [];
+  sortSelectList = isPreview ? [file] : ref.watch(sortSelectListProvider);
   await showContextMenu(
     context,
     contextMenu: ContextMenu(
@@ -97,12 +99,12 @@ Future<void> showRightMenu(
           color: file.checked ? Colors.grey : Colors.black,
           onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),
-        RightMenuItem(
+        if (!isPreview) RightMenuItem(
           label: S.of(context).removeFolder,
           color: Colors.red,
           onSelected: () => removeFolder(ref, sortSelectList),
         ),
-        RightMenuItem(
+        if (!isPreview) RightMenuItem(
           label: S.of(context).remove,
           color: Colors.red,
           onSelected: () => removeMultiple(ref, sortSelectList),

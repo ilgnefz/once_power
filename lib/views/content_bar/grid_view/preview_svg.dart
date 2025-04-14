@@ -16,17 +16,13 @@ class PreviewSvg extends StatelessWidget {
   Widget build(BuildContext context) {
     return InteractiveViewer(
       maxScale: 8,
-      child: InkWell(
-        onTap: () => Navigator.pop(context),
-        child: SvgPicture.file(
-          File(file),
-          key: ValueKey(file),
-          fit: BoxFit.scaleDown,
-          // cacheHeight: MediaQuery.of(context).size.height.toInt(),
-          errorBuilder: (context, exception, stackTrace) =>
-              ErrorImage(isPreview: true, file: file),
-          placeholderBuilder: (context) => const LoadingImage(isPreview: true),
-        ),
+      child: SvgPicture.file(
+        File(file),
+        key: ValueKey(file),
+        fit: BoxFit.scaleDown,
+        errorBuilder: (context, exception, stackTrace) =>
+            ErrorImage(isPreview: true, file: file),
+        placeholderBuilder: (context) => const LoadingImage(isPreview: true),
       ),
     );
   }

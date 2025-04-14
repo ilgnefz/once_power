@@ -12,11 +12,18 @@ import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/base/base_input.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 
-class TargetFolderInput extends ConsumerWidget {
+class TargetFolderInput extends ConsumerStatefulWidget {
   const TargetFolderInput({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TargetFolderInput> createState() => _TargetFolderInputState();
+}
+
+class _TargetFolderInputState extends ConsumerState<TargetFolderInput>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     TextEditingController controller = ref.watch(folderControllerProvider);
 
     void onChanged(String folder) {
@@ -93,4 +100,7 @@ class TargetFolderInput extends ConsumerWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

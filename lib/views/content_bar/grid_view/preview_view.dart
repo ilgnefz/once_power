@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/cores/context_menu.dart';
 import 'package:once_power/cores/list.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/toggle.dart';
@@ -101,72 +102,61 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
               borderRadius: BorderRadius.circular(isMax ? 0.0 : 8.0),
               color: Colors.black.withValues(alpha: .4),
             ),
+            clipBehavior: Clip.antiAlias,
             child: child,
           ),
         );
       },
-      child: KeyboardListener(
-        focusNode: focusNode,
-        autofocus: true,
-        onKeyEvent: onKeyEvent,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            previewList[index].type == FileClassify.video
-                ? PreviewVideo(
-                    file: previewList[index].filePath,
-                    key: ValueKey(previewList[index].id),
-                  )
-                : previewList[index].extension == 'svg'
-                    ? PreviewSvg(
-                        id: previewList[index].id,
-                        file: previewList[index].filePath,
-                      )
-                    : PreviewImage(
-                        id: previewList[index].id,
-                        file: previewList[index].filePath),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          onSecondaryTapDown: (details) =>
+              showRightMenu(context, ref, details, previewList[index], true),
+          child: KeyboardListener(
+            focusNode: focusNode,
+            autofocus: true,
+            onKeyEvent: onKeyEvent,
+            child: Stack(
+              fit: StackFit.expand,
               children: [
-                ClickIcon(
-                  icon: Icons.keyboard_arrow_left_rounded,
-                  onTap: previous,
-                  color: Colors.white,
-                  size: 48,
-                  iconSize: 40,
-                  shadows: shadows,
+                previewList[index].type == FileClassify.video
+                    ? PreviewVideo(
+                        file: previewList[index].filePath,
+                        key: ValueKey(previewList[index].id),
+                      )
+                    : previewList[index].extension == 'svg'
+                        ? PreviewSvg(
+                            id: previewList[index].id,
+                            file: previewList[index].filePath,
+                          )
+                        : PreviewImage(
+                            id: previewList[index].id,
+                            file: previewList[index].filePath),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ClickIcon(
+                      icon: Icons.keyboard_arrow_left_rounded,
+                      onTap: previous,
+                      color: Colors.white,
+                      size: 48,
+                      iconSize: 40,
+                      shadows: shadows,
+                    ),
+                    ClickIcon(
+                      icon: Icons.keyboard_arrow_right_rounded,
+                      onTap: next,
+                      color: Colors.white,
+                      size: 48,
+                      iconSize: 40,
+                      shadows: shadows,
+                    ),
+                  ],
                 ),
-                ClickIcon(
-                  icon: Icons.keyboard_arrow_right_rounded,
-                  onTap: next,
-                  color: Colors.white,
-                  size: 48,
-                  iconSize: 40,
-                  shadows: shadows,
-                ),
-                // IconButton(
-                //   onPressed: previous,
-                //   iconSize: 40,
-                //   icon: Icon(
-                //     Icons.keyboard_arrow_left_rounded,
-                //     size: 40,
-                //     shadows: shadow,
-                //   ),
-                //   color: Colors.white,
-                // ),
-                // IconButton(
-                //   onPressed: next,
-                //   iconSize: 40,
-                //   icon: Icon(
-                //     Icons.keyboard_arrow_right_rounded,
-                //     size: 40,
-                //     shadows: shadow,
-                //   ),
-                //   color: Colors.white,
-                // ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
