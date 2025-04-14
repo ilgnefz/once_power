@@ -15,6 +15,7 @@ class PreviewSvg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
+      key: ValueKey(id),
       maxScale: 8,
       child: SvgPicture.file(
         File(file),

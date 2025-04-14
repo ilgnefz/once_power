@@ -13,6 +13,7 @@ class PreviewImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
+      key: ValueKey(id),
       maxScale: 8,
       boundaryMargin: EdgeInsets.all(double.infinity),
       child: Image.file(

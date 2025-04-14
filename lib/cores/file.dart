@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
