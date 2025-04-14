@@ -21,6 +21,16 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Grouping Function
+
+File settings group (only in AdvanceMode)
+
+![27](doc/27.gif)
+
+Instruction setting group
+
+![28](doc/28.gif)
+
 ## Multiple Choice Function
 
 You can sort files by numbering them with a single click using the Ctrl key

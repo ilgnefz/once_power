@@ -25,7 +25,7 @@ class RenameTileTooltip extends StatelessWidget {
     final String createTime = S.of(context).createdTime;
     final String modifyDate = S.of(context).modifiedTime;
     final String exifDate = S.of(context).exifDate;
-    final String dimensions = S.of(context).dimensions;
+    final String resolution = S.of(context).resolution;
     final String size = S.of(context).size;
     final String group = S.of(context).group;
 
@@ -48,9 +48,9 @@ class RenameTileTooltip extends StatelessWidget {
           richTextTooltip(context, modifyDate, '${file.modifiedDate}'),
           if (file.exifDate != null)
             richTextTooltip(context, exifDate, '${file.exifDate}'),
-          if (file.dimensions != null)
+          if (file.resolution != null)
             richTextTooltip(
-                context, dimensions, formatDimensions(file.dimensions!)),
+                context, resolution, formatDimensions(file.resolution!)),
           if (file.group != '') richTextTooltip(context, group, file.group),
           richTextTooltip(context, size, formatFileSize(file.size), true),
         ],

@@ -132,7 +132,8 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
                           )
                         : PreviewImage(
                             id: previewList[index].id,
-                            file: previewList[index].filePath),
+                            file: previewList[index].filePath,
+                          ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

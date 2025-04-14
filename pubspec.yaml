@@ -74,6 +74,7 @@ dependencies:
   tray_manager: ^0.4.0
   image_size_getter: ^2.4.0
   flutter_context_menu: ^0.2.2
+  xml: ^6.5.0
 
 dev_dependencies:
   flutter_test:

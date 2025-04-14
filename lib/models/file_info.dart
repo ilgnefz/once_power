@@ -28,7 +28,7 @@ class FileInfo {
   DateTime? exifDate;
   FileClassify type;
   int size;
-  Size? dimensions;
+  Size? resolution;
   String group;
   bool checked;
 
@@ -48,7 +48,7 @@ class FileInfo {
     this.exifDate,
     required this.type,
     required this.size,
-    required this.dimensions,
+    required this.resolution,
     required this.group,
     required this.checked,
   });
@@ -71,7 +71,7 @@ class FileInfo {
         'exifDate: $exifDate, '
         'type: $type, '
         'size: $size, '
-        'dimensions: $dimensions, '
+        'resolution: $resolution, '
         'group: $group, '
         'checked: $checked}';
   }
@@ -93,7 +93,7 @@ class FileInfo {
       'exifDate': exifDate?.millisecondsSinceEpoch,
       'type': type.index,
       'size': size,
-      'dimensions': dimensions,
+      'resolution': resolution,
       'group': group,
       'checked': checked,
     };

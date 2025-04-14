@@ -141,10 +141,10 @@ String advanceAddName(
     }
     if (addType.isDate) value = getDateName(dateType, 8, file);
     if (addType.isWidth) {
-      value = file.dimensions == null ? '' : file.dimensions!.width.toString();
+      value = file.resolution == null ? '' : file.resolution!.width.toString();
     }
     if (addType.isHeight) {
-      value = file.dimensions == null ? '' : file.dimensions!.height.toString();
+      value = file.resolution == null ? '' : file.resolution!.height.toString();
     }
     switch (addPosition) {
       case AddPosition.before:

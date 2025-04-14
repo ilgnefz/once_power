@@ -19,6 +19,8 @@ import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';
 import 'package:path/path.dart' as path;
+import 'package:video_player/video_player.dart';
+import 'package:xml/xml.dart';
 
 import 'format.dart';
 
@@ -347,6 +349,7 @@ Future<int> calculateSize(String path) async {
 }
 
 Future<Size> getImageDimensions(String assetPath) async {
+  if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
   try {
     final file = File(assetPath);
     final result = ImageSizeGetter.getSizeResult(FileInput(file));
@@ -354,5 +357,66 @@ Future<Size> getImageDimensions(String assetPath) async {
   } catch (e) {
     debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
     return Size.zero;
+  }
+}
+
+Future<Size> getSvgDimensions(String svgFilePath) async {
+  try {
+    // 读取 SVG 文件内容
+    final file = File(svgFilePath);
+    final svgString = await file.readAsString();
+    // 解析 SVG 内容为 XML 文档
+    final document = XmlDocument.parse(svgString);
+    // 查找根 <svg> 元素
+    final svgElement = document.rootElement;
+    // 尝试从 width 和 height 属性获取尺寸
+    String? widthStr = svgElement.getAttribute('width');
+    String? heightStr = svgElement.getAttribute('height');
+    double? width;
+    double? height;
+    if (widthStr != null && heightStr != null) {
+      // 去除可能的单位（如 px）
+      width = double.tryParse(widthStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+      height = double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+    }
+
+    // 如果 width 和 height 属性不存在，尝试从 viewBox 属性获取尺寸
+    if (width == null || height == null) {
+      final viewBoxStr = svgElement.getAttribute('viewBox');
+      if (viewBoxStr != null) {
+        final viewBoxValues = viewBoxStr.split(' ');
+        if (viewBoxValues.length == 4) {
+          width = double.tryParse(viewBoxValues[2]);
+          height = double.tryParse(viewBoxValues[3]);
+        }
+      }
+    }
+
+    if (width != null && height != null) {
+      return Size(width.toInt(), height.toInt());
+    } else {
+      debugPrint('无法获取 SVG 尺寸');
+      return Size.zero;
+    }
+  } catch (e) {
+    debugPrint('获取 SVG 尺寸失败: $e');
+    return Size.zero;
+  }
+}
+
+Future<Size> getVideoDimensions(String videoPath) async {
+  final controller = VideoPlayerController.file(File(videoPath));
+  try {
+    // 初始化视频控制器
+    await controller.initialize();
+    // 获取视频尺寸
+    final size = controller.value.size;
+    return Size(size.width.toInt(), size.height.toInt());
+  } catch (e) {
+    debugPrint('获取视频尺寸失败: $e');
+    return Size.zero;
+  } finally {
+    // 释放控制器资源
+    controller.dispose();
   }
 }

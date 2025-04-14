@@ -86,9 +86,9 @@ extension AddTypeExtension on AddType {
       case AddType.random:
         return S.current.random;
       case AddType.width:
-        return S.current.imageW;
+        return S.current.width;
       case AddType.height:
-        return S.current.imageH;
+        return S.current.height;
     }
   }
 

@@ -1960,9 +1960,9 @@ class S {
     );
   }
 
-  /// `Dimensions`
-  String get dimensions {
-    return Intl.message('Dimensions', name: 'dimensions', desc: '', args: []);
+  /// `Resolution`
+  String get resolution {
+    return Intl.message('Resolution', name: 'resolution', desc: '', args: []);
   }
 
   /// `Size`
@@ -1970,14 +1970,14 @@ class S {
     return Intl.message('Size', name: 'size', desc: '', args: []);
   }
 
-  /// `ImageWidth`
-  String get imageW {
-    return Intl.message('ImageWidth', name: 'imageW', desc: '', args: []);
+  /// `ResolutionWidth`
+  String get width {
+    return Intl.message('ResolutionWidth', name: 'width', desc: '', args: []);
   }
 
-  /// `ImageHeight`
-  String get imageH {
-    return Intl.message('ImageHeight', name: 'imageH', desc: '', args: []);
+  /// `ResolutionHeight`
+  String get height {
+    return Intl.message('ResolutionHeight', name: 'height', desc: '', args: []);
   }
 
   /// `Word Spacing`

@@ -157,11 +157,14 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   DateTime createdDate = stat.changed;
   DateTime modifyDate = stat.modified;
   String extension = getExtension(filePath);
-  bool isImage = image.contains(extension.toLowerCase());
-  if (isImage) exifDate = await getExifDate(filePath);
   FileClassify type = getFileClassify(extension);
+  if (type.isImage) exifDate = await getExifDate(filePath);
   int size = await calculateSize(filePath);
-  Size? dimensions = isImage ? await getImageDimensions(filePath) : null;
+  Size? dimensions = switch (type) {
+    FileClassify.image => await getImageDimensions(filePath),
+    FileClassify.video => await getVideoDimensions(filePath),
+    _ => null,
+  };
   return FileInfo(
     id: id,
     name: name,
@@ -178,7 +181,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     exifDate: exifDate,
     type: type,
     size: size,
-    dimensions: dimensions,
+    resolution: dimensions,
     group: '',
     checked: true,
   );
