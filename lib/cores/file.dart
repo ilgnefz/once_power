@@ -1,11 +1,12 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cross_file/cross_file.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -94,12 +95,26 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
+  ref.read(isApplyingProvider.notifier).start();
   final stopwatch = Stopwatch()..start();
+  // 先处理前50个文件（顺序处理）
+  int initialBatchSize = min(AppNum.batchSize, paths.length);
+  for (int i = 0; i < initialBatchSize; i++) {
+    String p = paths[i];
+    if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
+    if (isExist(ref, p)) continue;
+    FileInfo fileInfo = await generateFileInfo(ref, p);
+    ref.read(fileListProvider.notifier).add(fileInfo);
+    ref.read(countProvider.notifier).update();
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
 
+  // 剩余文件使用并发处理
   const maxConcurrent = 10;
   final processingQueue = Queue<Future<void>>();
 
-  for (final p in paths) {
+  for (int i = initialBatchSize; i < paths.length; i++) {
+    final p = paths[i];
     if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
     if (isExist(ref, p)) continue;
 
@@ -113,9 +128,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
         ref.read(countProvider.notifier).update();
       }
     });
-
     processingQueue.add(future);
-    // await Future.delayed(const Duration(microseconds: 1));
   }
 
   await Future.wait(processingQueue);
@@ -126,18 +139,14 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  ref.read(isApplyingProvider.notifier).finish();
   updateName(ref);
 }
 
 Future<FileInfo?> _processSingleFile(WidgetRef ref, String p) async {
-  try {
-    if (isViewNoOrganize(ref) && !isImgVideo(p)) return null;
-    if (isExist(ref, p)) return null;
-    return await generateFileInfo(ref, p);
-  } catch (e) {
-    debugPrint('文件处理失败: $p, 错误: $e');
-    return null;
-  }
+  if (isViewNoOrganize(ref) && !isImgVideo(p)) return null;
+  if (isExist(ref, p)) return null;
+  return await generateFileInfo(ref, p);
 }
 
 Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {

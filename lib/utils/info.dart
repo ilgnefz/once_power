@@ -404,7 +404,7 @@ Future<Size> getSvgDimensions(String svgFilePath) async {
   }
 }
 
-Future<Size> getVideoDimensions(String videoPath) async {
+Size getVideoDimensions(String videoPath) {
   Mediainfo mi = Mediainfo();
   try {
     mi.quickLoad(videoPath);
