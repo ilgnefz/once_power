@@ -106,7 +106,6 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
     FileInfo fileInfo = await generateFileInfo(ref, p);
     ref.read(fileListProvider.notifier).add(fileInfo);
     ref.read(countProvider.notifier).update();
-    await Future.delayed(const Duration(milliseconds: 500));
   }
 
   // 剩余文件使用并发处理
