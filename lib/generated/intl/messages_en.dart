@@ -271,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Currently in the latest version",
     ),
     "nonLetter": MessageLookupByLibrary.simpleMessage("NonLetter"),
+    "none": MessageLookupByLibrary.simpleMessage("None"),
     "normal": MessageLookupByLibrary.simpleMessage("Normal"),
     "notExist": MessageLookupByLibrary.simpleMessage("not exist"),
     "notExistError": MessageLookupByLibrary.simpleMessage(

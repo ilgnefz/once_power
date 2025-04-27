@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/two_re_enum.dart';
+import 'package:once_power/views/action_bar/advance/dialog/add_date_group.dart';
 import 'package:once_power/widgets/action_bar/digit_input.dart';
 import 'package:once_power/widgets/action_bar/easy_radio.dart';
-import 'package:once_power/widgets/common/easy_text_dropdown.dart';
 
 class AddTypeRadio extends StatelessWidget {
   const AddTypeRadio({
@@ -17,12 +16,16 @@ class AddTypeRadio extends StatelessWidget {
     required this.typeChanged,
     required this.randomLenChange,
     required this.dateChange,
+    required this.dateSplit,
+    required this.dateSplitChange,
   });
 
   final AddType type;
   final int len;
   final DateType date;
+  final DateSplitType dateSplit;
   final void Function(AddType) typeChanged;
+  final void Function(DateSplitType?) dateSplitChange;
   final void Function(int) randomLenChange;
   final void Function(DateType?) dateChange;
 
@@ -37,6 +40,7 @@ class AddTypeRadio extends StatelessWidget {
         ),
         Expanded(
           child: Wrap(
+            spacing: AppNum.mediumG,
             runSpacing: AppNum.smallG,
             alignment: WrapAlignment.spaceBetween,
             crossAxisAlignment: WrapCrossAlignment.start,
@@ -60,20 +64,11 @@ class AddTypeRadio extends StatelessWidget {
                           ),
                         )
                       : e.isDate
-                          ? Consumer(
-                              builder: (_, ref, __) => EasyTextDropdown(
-                                items: DateType.values
-                                    .map((item) => DropdownMenuItem(
-                                          key: ValueKey(item),
-                                          value: item,
-                                          child: Text(item.label),
-                                        ))
-                                    .toList(),
-                                width: 102,
-                                color: Colors.grey[100],
-                                value: date,
-                                onChanged: dateChange,
-                              ),
+                          ? AddDateGroup(
+                              date: date,
+                              dateSplit: dateSplit,
+                              dateChange: dateChange,
+                              dateSplitChange: dateSplitChange,
                             )
                           : null,
                 );

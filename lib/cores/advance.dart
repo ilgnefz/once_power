@@ -139,7 +139,10 @@ String advanceAddName(
     if (addType.isRandom) {
       value = getRandomValue(menu.randomValue, menu.randomLen);
     }
-    if (addType.isDate) value = getDateName(dateType, 8, file);
+    if (addType.isDate) {
+      value = getDateName(dateType, 8, file);
+      value = formatDateShow(value, menu.dateSplit);
+    }
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();
     }

@@ -269,5 +269,6 @@
   "sizeAscending": "Size ascending",
   "sizeDescending": "Size descending",
   "groupAscending": "Group ascending",
-  "groupDescending": "Group descending"
+  "groupDescending": "Group descending",
+  "none": "None"
 }

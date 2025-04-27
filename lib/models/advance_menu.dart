@@ -171,6 +171,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final AddType addType;
   final int randomLen;
   final DateType dateType;
+  final DateSplitType dateSplit;
   final AddPosition addPosition;
   final int posIndex;
 
@@ -185,6 +186,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.addType,
     required this.randomLen,
     required this.dateType,
+    required this.dateSplit,
     required this.addPosition,
     required this.posIndex,
     required super.group,
@@ -208,6 +210,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       addType: addType,
       randomLen: randomLen,
       dateType: dateType,
+      dateSplit: dateSplit,
       addPosition: addPosition,
       posIndex: posIndex,
       group: group,
@@ -227,6 +230,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         addType: AddType.values[json["addType"] ?? 0],
         randomLen: json["randomLen"] ?? 1,
         dateType: DateType.values[json["dateType"] ?? 0],
+        dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         posIndex: json["posIndex"] ?? 1,
         group: json["group"] ?? S.current.all,
@@ -245,6 +249,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "addType": addType.index,
         "randomLen": randomLen,
         "dateType": dateType.index,
+        "dateSplit": dateSplit.index,
         "addPosition": addPosition.index,
         "posIndex": posIndex,
         "group": group,
@@ -263,6 +268,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'addType: $addType, '
         'randomLen: $randomLen, '
         'dateType: $dateType, '
+        'dateSplit: $dateSplit, '
         'addPosition: $addPosition, '
         'posIndex: $posIndex, '
         'group: $group}';

@@ -67,7 +67,7 @@ enum AddType {
   height,
   extension,
   random,
-  date
+  date,
 }
 
 extension AddTypeExtension on AddType {
@@ -222,4 +222,25 @@ extension CompletePositionExtension on FillPosition {
 
   bool get isFront => this == FillPosition.front;
   bool get isBack => this == FillPosition.back;
+}
+
+enum DateSplitType { none, chinese, space, dash, dot, underscore }
+
+extension DateSplitTypeExtension on DateSplitType {
+  String get label {
+    switch (this) {
+      case DateSplitType.none:
+        return S.current.none;
+      case DateSplitType.chinese:
+        return '年月日';
+      case DateSplitType.space:
+        return S.current.space;
+      case DateSplitType.dash:
+        return '-';
+      case DateSplitType.dot:
+        return '.';
+      case DateSplitType.underscore:
+        return '_';
+    }
+  }
 }

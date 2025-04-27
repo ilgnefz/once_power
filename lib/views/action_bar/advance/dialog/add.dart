@@ -35,6 +35,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   AddType type = AddType.text;
   int randomLen = 1;
   DateType dateType = DateType.createdDate;
+  DateSplitType dateSplit = DateSplitType.none;
   AddPosition position = AddPosition.after;
   String group = S.current.all;
 
@@ -51,6 +52,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       type = widget.menu!.addType;
       randomLen = widget.menu!.randomLen;
       dateType = widget.menu!.dateType;
+      dateSplit = widget.menu!.dateSplit;
       position = widget.menu!.addPosition;
       group = widget.menu!.group;
     }
@@ -83,6 +85,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
             type: type,
             len: randomLen,
             date: dateType,
+            dateSplit: dateSplit,
             typeChanged: (value) {
               type = value;
               setState(() {});
@@ -93,6 +96,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
             },
             dateChange: (value) {
               dateType = value!;
+              setState(() {});
+            },
+            dateSplitChange: (value) {
+              dateSplit = value!;
               setState(() {});
             },
           ),
@@ -150,6 +157,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           randomLen: randomLen,
           addPosition: position,
           dateType: dateType,
+          dateSplit: dateSplit,
           posIndex: posIndex,
           group: group,
         );

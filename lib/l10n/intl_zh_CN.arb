@@ -270,5 +270,6 @@
   "sizeAscending": "大小升序",
   "sizeDescending": "大小降序",
   "groupAscending": "组升序",
-  "groupDescending": "组降序"
+  "groupDescending": "组降序",
+  "none": "无"
 }

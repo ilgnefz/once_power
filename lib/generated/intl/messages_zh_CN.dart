@@ -215,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noConversion": MessageLookupByLibrary.simpleMessage("不转换"),
     "noNewVersionInfo": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
     "nonLetter": MessageLookupByLibrary.simpleMessage("非字母"),
+    "none": MessageLookupByLibrary.simpleMessage("无"),
     "normal": MessageLookupByLibrary.simpleMessage("普通"),
     "notExist": MessageLookupByLibrary.simpleMessage("不存在"),
     "notExistError": MessageLookupByLibrary.simpleMessage("目标位置已更改或已被删除"),

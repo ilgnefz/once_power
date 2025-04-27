@@ -20,6 +20,7 @@ class PreviewImage extends StatelessWidget {
         File(file),
         key: ValueKey(file),
         fit: BoxFit.scaleDown,
+        cacheHeight: MediaQuery.of(context).size.height.toInt(),
         errorBuilder: (context, exception, stackTrace) =>
             ErrorImage(isPreview: true, file: file),
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
