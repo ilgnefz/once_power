@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/generated/l10n.dart';
-import 'package:once_power/views/action_bar/organize/rule_list.dart';
 import 'package:once_power/widgets/action_bar/easy_btn.dart';
 import 'package:once_power/widgets/action_bar/folder_input.dart';
 
-class RuleSettingBtn extends ConsumerWidget {
+class RuleSettingBtn extends StatelessWidget {
   const RuleSettingBtn({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    void showAllRule() {
-      showDialog(context: context, builder: (context) => RuleList());
-    }
-
+  Widget build(BuildContext context) {
     return EasyBtn(
       S.of(context).classifyType,
       height: 30,
-      onTap: showAllRule,
+      onTap: () => showAllRule(context),
     );
   }
 }
