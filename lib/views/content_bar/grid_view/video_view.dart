@@ -1,21 +1,27 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/cores/update_name.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
+import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/select.dart';
 import 'package:video_player/video_player.dart';
 
 import 'loading_image.dart';
 
-class VideoView extends StatefulWidget {
+class VideoView extends ConsumerStatefulWidget {
   const VideoView({super.key, required this.file});
 
   final FileInfo file;
 
   @override
-  State<VideoView> createState() => _VideoViewState();
+  ConsumerState<VideoView> createState() => _VideoViewState();
 }
 
-class _VideoViewState extends State<VideoView> {
+class _VideoViewState extends ConsumerState<VideoView>
+    with AutomaticKeepAliveClientMixin {
   late VideoPlayerController _controller;
 
   @override
@@ -23,6 +29,14 @@ class _VideoViewState extends State<VideoView> {
     super.initState();
     _controller = VideoPlayerController.file(File(widget.file.filePath))
       ..initialize().then((_) {
+        final size = _controller.value.size;
+        Resolution resolution =
+            Resolution(size.width.toInt(), size.height.toInt());
+        ref
+            .read(fileListProvider.notifier)
+            .updateResolution(widget.file.id, resolution);
+
+        if (ref.watch(currentModeProvider).isAdvance) updateName(ref);
         setState(() {});
       })
       ..addListener(() {
@@ -41,6 +55,7 @@ class _VideoViewState extends State<VideoView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return _controller.value.isInitialized
         ? AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
@@ -80,4 +95,7 @@ class _VideoViewState extends State<VideoView> {
           )
         : const Center(child: LoadingImage(isPreview: false));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

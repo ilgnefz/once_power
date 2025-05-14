@@ -22,7 +22,7 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$fileListHash() => r'a9f8181371a7096db586855ce5ada22305e1aa89';
+String _$fileListHash() => r'4d25c511d95d4c230b252101ce4d880dfd610baa';
 
 /// See also [FileList].
 @ProviderFor(FileList)

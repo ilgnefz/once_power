@@ -5,10 +5,9 @@ import 'dart:typed_data';
 
 import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_media_info/flutter_media_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
-import 'package:image_size_getter/image_size_getter.dart';
+import 'package:image_size_getter/image_size_getter.dart' hide Size;
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/extension.dart';
@@ -348,19 +347,19 @@ Future<int> calculateSize(String path) async {
   return totalSize;
 }
 
-Future<Size> getImageDimensions(String assetPath) async {
+Future<Resolution> getImageDimensions(String assetPath) async {
   if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
   try {
     final file = File(assetPath);
     final result = ImageSizeGetter.getSizeResult(FileInput(file));
-    return result.size;
+    return Resolution(result.size.width, result.size.height);
   } catch (e) {
     debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
-    return Size.zero;
+    return Resolution.zero;
   }
 }
 
-Future<Size> getSvgDimensions(String svgFilePath) async {
+Future<Resolution> getSvgDimensions(String svgFilePath) async {
   try {
     // 读取 SVG 文件内容
     final file = File(svgFilePath);
@@ -393,32 +392,32 @@ Future<Size> getSvgDimensions(String svgFilePath) async {
     }
 
     if (width != null && height != null) {
-      return Size(width.toInt(), height.toInt());
+      return Resolution(width.toInt(), height.toInt());
     } else {
       debugPrint('无法获取 SVG 尺寸');
-      return Size.zero;
+      return Resolution.zero;
     }
   } catch (e) {
     debugPrint('获取 SVG 尺寸失败: $e');
-    return Size.zero;
+    return Resolution.zero;
   }
 }
 
-Size getVideoDimensions(String videoPath) {
-  Mediainfo mi = Mediainfo();
-  try {
-    mi.quickLoad(videoPath);
-    final width =
-        mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Width");
-    final height =
-        mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Height");
-    // String inform = mi.inform();
-    // print('视频信息: $inform');
-    return Size(int.parse(width), int.parse(height));
-  } catch (e) {
-    debugPrint('获取视频尺寸失败: $e');
-    return Size.zero;
-  } finally {
-    mi.close();
-  }
-}
+// Size getVideoDimensions(String videoPath) {
+//   Mediainfo mi = Mediainfo();
+//   try {
+//     mi.quickLoad(videoPath);
+//     final width =
+//         mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Width");
+//     final height =
+//         mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Height");
+//     // String inform = mi.inform();
+//     // print('视频信息: $inform');
+//     return Size(int.parse(width), int.parse(height));
+//   } catch (e) {
+//     debugPrint('获取视频尺寸失败: $e');
+//     return Size.zero;
+//   } finally {
+//     mi.close();
+//   }
+// }

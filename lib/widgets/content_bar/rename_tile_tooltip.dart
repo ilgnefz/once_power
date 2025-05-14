@@ -50,7 +50,7 @@ class RenameTileTooltip extends StatelessWidget {
             richTextTooltip(context, exifDate, '${file.exifDate}'),
           if (file.resolution != null)
             richTextTooltip(
-                context, resolution, formatDimensions(file.resolution!)),
+                context, resolution, formatResolution(file.resolution!)),
           if (file.group != '') richTextTooltip(context, group, file.group),
           richTextTooltip(context, size, formatFileSize(file.size), true),
         ],

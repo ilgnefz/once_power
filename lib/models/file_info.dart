@@ -1,5 +1,3 @@
-import 'package:image_size_getter/image_size_getter.dart';
-
 import 'file_enum.dart';
 
 class FileInfo {
@@ -28,7 +26,7 @@ class FileInfo {
   DateTime? exifDate;
   FileClassify type;
   int size;
-  Size? resolution;
+  Resolution? resolution;
   String group;
   bool checked;
 
@@ -130,4 +128,13 @@ class UploadMarkInfo {
   String toString() {
     return 'UploadMarkInfo{name: $name, content: $content, isPrefix: $isPrefix}';
   }
+}
+
+class Resolution {
+  final int width;
+  final int height;
+
+  Resolution(this.width, this.height);
+
+  static Resolution zero = Resolution(0, 0);
 }

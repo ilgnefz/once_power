@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/extension.dart';
 import 'package:once_power/models/file_enum.dart';
@@ -99,5 +98,5 @@ bool disabledBtn(WidgetRef ref) {
   return isApplying || isEmpty;
 }
 
-String formatDimensions(Size dimensions) =>
-    '${dimensions.width} x ${dimensions.height}';
+String formatResolution(Resolution resolution) =>
+    '${resolution.width} x ${resolution.height}';

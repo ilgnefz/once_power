@@ -122,6 +122,12 @@ class FileList extends _$FileList {
         if (e.id == id) e.group = group;
         return e;
       }).toList();
+
+  void updateResolution(String id, Resolution? resolution) =>
+      state = state.map((e) {
+        if (e.id == id) e.resolution = resolution;
+        return e;
+      }).toList();
 }
 
 @riverpod

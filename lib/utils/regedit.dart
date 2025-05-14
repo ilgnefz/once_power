@@ -19,19 +19,16 @@ void createGlobalRegedit() {
       r'Software\Classes\Directory\Background\shell\' + appName;
   String cmdRegKey = 'command';
 
-  RegistryValue labelRegValue = RegistryValue(
+  RegistryValue labelRegValue = RegistryValue.string(
     '',
-    RegistryValueType.string,
     '${S.current.shortcutTip1} $appName',
   );
-  RegistryValue iconRegValue = RegistryValue(
+  RegistryValue iconRegValue = RegistryValue.string(
     'Icon',
-    RegistryValueType.string,
     appPath,
   );
-  RegistryValue cmdRegValue = RegistryValue(
+  RegistryValue cmdRegValue = RegistryValue.unexpandedString(
     '',
-    RegistryValueType.unexpandedString,
     '"$appPath" "%V"',
   );
 
@@ -81,19 +78,16 @@ void createLocalRegedit() async {
   String folderRegKey = r'Software\Classes\Directory\shell\' + appName;
   String cmdRegKey = 'command';
 
-  RegistryValue labelRegValue = RegistryValue(
+  RegistryValue labelRegValue = RegistryValue.string(
     '',
-    RegistryValueType.string,
     '${S.current.shortcutTip2} $appName',
   );
-  RegistryValue iconRegValue = RegistryValue(
+  RegistryValue iconRegValue = RegistryValue.string(
     'Icon',
-    RegistryValueType.string,
     appPath,
   );
-  RegistryValue cmdRegValue = RegistryValue(
+  RegistryValue cmdRegValue = RegistryValue.unexpandedString(
     '',
-    RegistryValueType.unexpandedString,
     '$appPath shortcut_menu_extender --key $appName --path "%V"',
   );
 

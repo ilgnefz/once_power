@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_size_getter/image_size_getter.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
@@ -161,9 +160,9 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   FileClassify type = getFileClassify(extension);
   if (type.isImage) exifDate = await getExifDate(filePath);
   int size = await calculateSize(filePath);
-  Size? dimensions = switch (type) {
+  Resolution? resolution = switch (type) {
     FileClassify.image => await getImageDimensions(filePath),
-    FileClassify.video => await getVideoDimensions(filePath),
+    // FileClassify.video => await getVideoDimensions(filePath),
     _ => null,
   };
   return FileInfo(
@@ -182,7 +181,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     exifDate: exifDate,
     type: type,
     size: size,
-    resolution: dimensions,
+    resolution: resolution,
     group: '',
     checked: true,
   );
