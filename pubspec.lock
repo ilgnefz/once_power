@@ -442,10 +442,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_context_menu
-      sha256: "9a80f3ab623086f6ec89483c24a1129e6b9f30914fdc1219f4af622164a2fb74"
+      sha256: "5e9c62a5937aba135e3787711b04c73b78729a9751c6c71c2bece4ed9a480d76"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.2"
+    version: "0.2.4"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -1246,10 +1246,10 @@ packages:
     dependency: "direct main"
     description:
       name: tolyui_feedback
-      sha256: "4549ea17aa453b931b0859c6f840228222a0637186b3e9bfcb63218b879c7132"
+      sha256: b6d67fd448a8d39762fd14266c706fc8da7671eaaaeb81f42a12e467ff4dfbf7
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.6+3"
+    version: "0.3.6+6"
   tolyui_message:
     dependency: transitive
     description:
@@ -1398,10 +1398,10 @@ packages:
     dependency: "direct main"
     description:
       name: video_player
-      sha256: "7d78f0cfaddc8c19d4cb2d3bebe1bfef11f2103b0a03e5398b303a1bf65eeb14"
+      sha256: "0d55b1f1a31e5ad4c4967bfaa8ade0240b07d20ee4af1dfef5f531056512961a"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.9.5"
+    version: "2.10.0"
   video_player_android:
     dependency: transitive
     description:
@@ -1534,10 +1534,10 @@ packages:
     dependency: "direct main"
     description:
       name: window_manager
-      sha256: "732896e1416297c63c9e3fb95aea72d0355f61390263982a47fd519169dc5059"
+      sha256: "51d50168ab267d344b975b15390426b1243600d436770d3f13de67e55b05ec16"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.3"
+    version: "0.5.0"
   xdg_directories:
     dependency: transitive
     description:

@@ -68,7 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "advanceEmpty4": MessageLookupByLibrary.simpleMessage("按钮来添加"),
     "advanceMenu": MessageLookupByLibrary.simpleMessage("高级菜单"),
     "after": MessageLookupByLibrary.simpleMessage("之后的"),
-    "all": MessageLookupByLibrary.simpleMessage("所有"),
+    "all": MessageLookupByLibrary.simpleMessage("全部"),
     "allExtension": MessageLookupByLibrary.simpleMessage("所有扩展"),
     "allFolder": MessageLookupByLibrary.simpleMessage("所有路径"),
     "allFolderTitle": MessageLookupByLibrary.simpleMessage("所有文件夹路径"),

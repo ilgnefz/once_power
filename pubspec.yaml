@@ -39,7 +39,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   path: any
-  window_manager: ^0.4.3
+  window_manager: ^0.5.0
   file_selector: ^1.0.3
   nanoid: ^1.0.0
   chinese_font_library: ^1.2.0
@@ -58,7 +58,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   logger: ^2.5.0
   animations: ^2.0.11
-  tolyui_feedback: ^0.3.6+3
+  tolyui_feedback: ^0.3.6+6
   vs_scrollbar: ^1.0.0
   reorderable_grid: ^1.0.10
   charset: ^2.0.1
@@ -69,11 +69,11 @@ dependencies:
   media_kit_libs_macos_video: any
   media_kit_libs_windows_video: any
   media_kit_libs_linux: any
-  video_player: ^2.9.5
+  video_player: ^2.10.0
   launch_at_startup: ^0.5.1
   tray_manager: ^0.5.0
   image_size_getter: ^2.4.0
-  flutter_context_menu: ^0.2.2
+  flutter_context_menu: ^0.2.4
   xml: ^6.5.0
 #  flutter_media_info: ^0.0.3
 #  media_kit: ^1.2.0
