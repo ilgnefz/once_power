@@ -64,7 +64,7 @@ class _RandomCheckboxState extends State<RandomCheckbox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 4.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Text('${S.of(context).random}:'),
         ),
         Expanded(

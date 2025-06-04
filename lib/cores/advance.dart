@@ -43,6 +43,12 @@ void advanceUpdateName(WidgetRef ref) {
         if (menu.distinguishType.isFile) {
           (_, index) = calculateIndex(classifyMap, [type], file);
         }
+        if (menu.distinguishType.isGroup) {
+          (_, index) = calculateIndex(classifyMap, [file.group], file);
+        }
+        if (menu.group != S.current.all && menu.distinguishType.isNone) {
+          (_, index) = calculateIndex(classifyMap, [menu.group], file);
+        }
         name = advanceAddName(menu, file, name, index, folder);
       }
       if (menu.type.isReplace) {

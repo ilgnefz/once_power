@@ -28,10 +28,9 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name =
-        (locale.countryCode?.isEmpty ?? false)
-            ? locale.languageCode
-            : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1165,9 +1164,9 @@ class S {
     );
   }
 
-  /// `Case file`
+  /// `Case type`
   String get caseFile {
-    return Intl.message('Case file', name: 'caseFile', desc: '', args: []);
+    return Intl.message('Case type', name: 'caseFile', desc: '', args: []);
   }
 
   /// `Case ext.`
@@ -1745,9 +1744,9 @@ class S {
     );
   }
 
-  /// `File`
+  /// `Type`
   String get fileType {
-    return Intl.message('File', name: 'fileType', desc: '', args: []);
+    return Intl.message('Type', name: 'fileType', desc: '', args: []);
   }
 
   /// `distinguish`

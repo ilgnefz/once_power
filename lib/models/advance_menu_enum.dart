@@ -186,7 +186,7 @@ extension DeleteTypeExtension on DeleteType {
 
 enum MovePosition { first, center, last, idle }
 
-enum DistinguishType { none, folder, file, extension }
+enum DistinguishType { none, folder, file, extension, group }
 
 extension DistinguishTypeExtension on DistinguishType {
   String get label {
@@ -199,12 +199,15 @@ extension DistinguishTypeExtension on DistinguishType {
         return S.current.extension;
       case DistinguishType.none:
         return S.current.disable;
+      case DistinguishType.group:
+        return S.current.group;
     }
   }
 
   bool get isFolder => this == DistinguishType.folder;
   bool get isFile => this == DistinguishType.file;
   bool get isExtension => this == DistinguishType.extension;
+  bool get isGroup => this == DistinguishType.group;
   bool get isNone => this == DistinguishType.none;
 }
 
