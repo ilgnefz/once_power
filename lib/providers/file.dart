@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -126,6 +128,12 @@ class FileList extends _$FileList {
   void updateResolution(String id, Resolution? resolution) =>
       state = state.map((e) {
         if (e.id == id) e.resolution = resolution;
+        return e;
+      }).toList();
+
+  void updateThumbnail(String id, Uint8List? thumbnail) =>
+      state = state.map((e) {
+        if (e.id == id) e.thumbnail = thumbnail;
         return e;
       }).toList();
 }

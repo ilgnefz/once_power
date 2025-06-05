@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'file_enum.dart';
 
 class FileInfo {
@@ -27,6 +29,7 @@ class FileInfo {
   FileClassify type;
   int size;
   Resolution? resolution;
+  Uint8List? thumbnail;
   String group;
   bool checked;
 
@@ -47,6 +50,7 @@ class FileInfo {
     required this.type,
     required this.size,
     required this.resolution,
+    this.thumbnail,
     required this.group,
     required this.checked,
   });
@@ -70,6 +74,7 @@ class FileInfo {
         'type: $type, '
         'size: $size, '
         'resolution: $resolution, '
+        'thumbnail: $thumbnail, '
         'group: $group, '
         'checked: $checked}';
   }
@@ -92,6 +97,7 @@ class FileInfo {
       'type': type.index,
       'size': size,
       'resolution': resolution,
+      'thumbnail': thumbnail,
       'group': group,
       'checked': checked,
     };

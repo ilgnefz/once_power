@@ -10,6 +10,7 @@ import 'package:once_power/widgets/common/click_icon.dart';
 
 import '../../../models/file_enum.dart';
 import 'preview_image.dart';
+import 'preview_psd.dart';
 import 'preview_video.dart';
 
 class PreviewView extends ConsumerStatefulWidget {
@@ -120,20 +121,36 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                previewList[index].type == FileClassify.video
-                    ? PreviewVideo(
+                Builder(
+                  builder: (BuildContext context) {
+                    if (previewList[index].type == FileClassify.video) {
+                      return PreviewVideo(
                         file: previewList[index].filePath,
                         key: ValueKey(previewList[index].id),
-                      )
-                    : previewList[index].extension == 'svg'
-                        ? PreviewSvg(
-                            id: previewList[index].id,
-                            file: previewList[index].filePath,
-                          )
-                        : PreviewImage(
-                            id: previewList[index].id,
-                            file: previewList[index].filePath,
-                          ),
+                      );
+                    }
+
+                    if (previewList[index].extension == 'svg') {
+                      return PreviewSvg(
+                        id: previewList[index].id,
+                        file: previewList[index].filePath,
+                      );
+                    }
+
+                    if (previewList[index].extension == 'psd') {
+                      return PreviewPsd(
+                        id: previewList[index].id,
+                        file: previewList[index].filePath,
+                        data: previewList[index].thumbnail!,
+                      );
+                    }
+
+                    return PreviewImage(
+                      id: previewList[index].id,
+                      file: previewList[index].filePath,
+                    );
+                  },
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

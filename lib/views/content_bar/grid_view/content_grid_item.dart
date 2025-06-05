@@ -7,6 +7,7 @@ import 'package:once_power/widgets/content_bar/select_sort_card.dart';
 
 import '../../../models/file_enum.dart';
 import 'image_view.dart';
+import 'psd_view.dart';
 import 'svg_view.dart';
 import 'video_view.dart';
 
@@ -35,7 +36,9 @@ class ContentGridItem extends StatelessWidget {
                     ? VideoView(file: file, key: ValueKey(file.id))
                     : file.extension == 'svg'
                         ? SvgView(file: file, key: ValueKey(file.id))
-                        : ImageView(file: file, key: ValueKey(file.id)),
+                        : file.extension == 'psd'
+                            ? PsdView(file: file, key: ValueKey(file.id))
+                            : ImageView(file: file, key: ValueKey(file.id)),
               ),
               const SizedBox(height: 4),
               Text(

@@ -1,20 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/models/file_info.dart';
 
 import 'err_image.dart';
 import 'loading_image.dart';
 
-class ImageView extends ConsumerWidget {
+class ImageView extends StatelessWidget {
   const ImageView({super.key, required this.file});
 
   final FileInfo file;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     Widget image = Image.file(
       File(file.filePath),
       fit: BoxFit.contain,

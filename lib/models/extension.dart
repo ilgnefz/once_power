@@ -59,6 +59,7 @@ const image = [
   'pcd',
   'pcx',
   'png',
+  'psd',
   'pvr',
   'svg',
   'tga',

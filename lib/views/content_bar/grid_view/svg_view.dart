@@ -1,20 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:once_power/models/file_info.dart';
 
 import 'err_image.dart';
 import 'loading_image.dart';
 
-class SvgView extends ConsumerWidget {
+class SvgView extends StatelessWidget {
   const SvgView({super.key, required this.file});
 
   final FileInfo file;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     Widget svg = SvgPicture.file(
       File(file.filePath),
       fit: BoxFit.contain,
