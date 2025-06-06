@@ -12,6 +12,7 @@ import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/utils/verify.dart';
 import 'package:path/path.dart' as path;
+import 'package:string_util_xx/StringUtilxx.dart';
 
 import 'list.dart';
 import 'notification.dart';
@@ -115,11 +116,11 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
     }
   }
   if (reverse) {
-    chineseList.sort((a, b) => b.phonetic.compareTo(a.phonetic));
+    chineseList.sort((a, b) => StringUtilxx_c.compareExtend(b.name, a.name));
     otherList.sort((a, b) => b.name.compareTo(a.name));
     return [...chineseList, ...otherList];
   }
-  chineseList.sort((a, b) => a.phonetic.compareTo(b.phonetic));
+  chineseList.sort((a, b) => StringUtilxx_c.compareExtend(a.name, b.name));
   otherList.sort((a, b) => a.name.compareTo(b.name));
   return [...otherList, ...chineseList];
 }

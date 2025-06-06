@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 
-import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
@@ -18,6 +16,7 @@ import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/providers/value.dart';
+import 'package:once_power/src/rust/api/simple.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
@@ -41,13 +40,8 @@ String getPathName(String filePath) {
 }
 
 Future<DateTime?> getExifDate(String filePath) async {
-  final Uint8List fileBytes = File(filePath).readAsBytesSync();
-  final data = await readExifFromBytes(fileBytes);
-  if (!data.containsKey('Image DateTime')) return null;
-  String? dateTime = data['Image DateTime'].toString();
-  if (dateTime == '') return null;
-  debugPrint('$filePath 拍摄日期: ${formatExifDate(dateTime)}');
-  return formatExifDate(dateTime);
+  final String? captureDate = await getImageCaptureDate(imagePath: filePath);
+  return captureDate != null ? formatExifDate(captureDate) : null;
 }
 
 FileClassify getFileClassify(String extension) {
@@ -334,20 +328,33 @@ int getAllSize(WidgetRef ref) {
   return totalSize;
 }
 
-// 新增文件夹大小计算方法
-Future<int> calculateSize(String path) async {
-  if (FileSystemEntity.isFileSync(path)) return await File(path).length();
-  int totalSize = 0;
-  final dir = Directory(path);
-  await for (final entity in dir.list(recursive: true)) {
-    if (entity is File) {
-      totalSize += await entity.length();
-    }
+final _folderSizeCache = <String, int>{};
+
+Future<int> calculateSize(String folderPath) async {
+  if (_folderSizeCache.containsKey(folderPath)) {
+    return _folderSizeCache[folderPath]!;
   }
+  final dir = Directory(folderPath);
+  final entities = <FileSystemEntity>[];
+  await for (final entity in dir.list(recursive: true)) {
+    entities.add(entity);
+  }
+  final sizes = await Future.wait(entities.map((entity) async {
+    if (entity is File) {
+      final stat = await entity.stat();
+      return stat.size;
+    }
+    return 0;
+  }));
+  final totalSize = sizes.fold(0, (sum, size) => sum + size);
+  _folderSizeCache[folderPath] = totalSize;
   return totalSize;
 }
 
 Future<Resolution> getImageDimensions(String assetPath) async {
+  // 调试计算图片尺寸耗时
+  final stopwatch = Stopwatch()..start();
+  if (assetPath.endsWith('.psd')) return Resolution.zero;
   if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
   try {
     final file = File(assetPath);
@@ -356,6 +363,9 @@ Future<Resolution> getImageDimensions(String assetPath) async {
   } catch (e) {
     debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
     return Resolution.zero;
+  } finally {
+    final cost = stopwatch.elapsedMicroseconds / 1000000;
+    debugPrint('获取图片尺寸耗时: $cost');
   }
 }
 

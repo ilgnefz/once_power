@@ -7,7 +7,6 @@ class FileInfo {
 
   /// a
   String name;
-  String phonetic;
   String newName;
 
   /// C:\Photos
@@ -36,7 +35,6 @@ class FileInfo {
   FileInfo({
     required this.id,
     required this.name,
-    required this.phonetic,
     required this.newName,
     required this.parent,
     required this.filePath,
@@ -60,7 +58,6 @@ class FileInfo {
     return 'FileInfo{'
         'id: $id, '
         'name: $name, '
-        'phonetic: $phonetic, '
         'newName: $newName, '
         'parent: $parent, '
         'filePath: $filePath, '
@@ -83,7 +80,6 @@ class FileInfo {
     return {
       'id': id,
       'name': name,
-      'phonetic': phonetic,
       'newName': newName,
       'parent': parent,
       'filePath': filePath,

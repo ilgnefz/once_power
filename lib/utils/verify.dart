@@ -16,7 +16,7 @@ import 'package:path/path.dart' as path;
 bool isViewNoOrganize(WidgetRef ref) =>
     ref.watch(isViewModeProvider) && !ref.watch(currentModeProvider).isOrganize;
 
-bool isChinese(String text) => RegExp(r'[\u4e00-\u9fff]').hasMatch(text);
+bool isChinese(String text) => RegExp(r'[\u4e00-\u9fa5]').hasMatch(text);
 
 bool isImgVideo(String file) {
   String extension = getExtension(file).toLowerCase();

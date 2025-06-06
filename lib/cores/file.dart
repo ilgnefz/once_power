@@ -1,11 +1,8 @@
-import 'dart:collection';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -18,7 +15,6 @@ import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:path/path.dart' as path;
-import 'package:pinyin/pinyin.dart';
 
 import 'notification.dart';
 
@@ -91,46 +87,33 @@ Future<List<String>> getAllPath(String folder,
 }
 
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
+  final stopwatch = Stopwatch()..start();
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(isApplyingProvider.notifier).start();
-  final stopwatch = Stopwatch()..start();
-  // 先处理前50个文件（顺序处理）
-  int initialBatchSize = min(AppNum.batchSize, paths.length);
-  for (int i = 0; i < initialBatchSize; i++) {
-    String p = paths[i];
-    if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
-    if (isExist(ref, p)) continue;
-    FileInfo fileInfo = await generateFileInfo(ref, p);
-    ref.read(fileListProvider.notifier).add(fileInfo);
-    ref.read(countProvider.notifier).update();
-  }
 
-  // 剩余文件使用并发处理
-  const maxConcurrent = 10;
-  final processingQueue = Queue<Future<void>>();
+  // 过滤需要处理的文件路径（跳过不需要的文件）
+  final validPaths = paths.where((p) {
+    if (isViewNoOrganize(ref) && !isImgVideo(p)) return false;
+    if (isExist(ref, p)) return false;
+    return true;
+  }).toList();
 
-  for (int i = initialBatchSize; i < paths.length; i++) {
-    final p = paths[i];
-    if (isViewNoOrganize(ref) && !isImgVideo(p)) continue;
-    if (isExist(ref, p)) continue;
-
-    if (processingQueue.length >= maxConcurrent) {
-      await processingQueue.removeFirst();
+  // 分批次并行处理（每批处理10个文件，可根据实际调整）
+  const batchSize = 10;
+  for (int i = 0; i < validPaths.length; i += batchSize) {
+    final batchEnd = (i + batchSize).clamp(0, validPaths.length);
+    final batchPaths = validPaths.sublist(i, batchEnd);
+    // 并行处理当前批次的文件（关键优化）
+    final futures = batchPaths.map((p) => generateFileInfo(ref, p));
+    final fileInfos = await Future.wait(futures);
+    // 批量更新当前批次的文件到列表（实时显示）
+    for (final fileInfo in fileInfos) {
+      ref.read(fileListProvider.notifier).add(fileInfo);
+      ref.read(countProvider.notifier).update();
     }
-
-    final future = _processSingleFile(ref, p).then((fileInfo) {
-      if (fileInfo != null) {
-        ref.read(fileListProvider.notifier).add(fileInfo);
-        ref.read(countProvider.notifier).update();
-      }
-    });
-    processingQueue.add(future);
   }
-
-  await Future.wait(processingQueue);
-
   if (isViewNoOrganize(ref)) {
     showFilterNotification(paths.length - ref.watch(countProvider));
   }
@@ -141,43 +124,32 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   updateName(ref);
 }
 
-Future<FileInfo?> _processSingleFile(WidgetRef ref, String p) async {
-  if (isViewNoOrganize(ref) && !isImgVideo(p)) return null;
-  if (isExist(ref, p)) return null;
-  return await generateFileInfo(ref, p);
-}
-
 Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
-  String id = nanoid(10);
   String name = getPathName(filePath);
-  String phonetic = isChinese(name) ? PinyinHelper.getPinyinE(name) : name;
-  String parent = path.dirname(filePath);
-  DateTime? exifDate;
   final stat = await File(filePath).stat();
-  DateTime createdDate = stat.changed;
-  DateTime modifyDate = stat.modified;
   String extension = getExtension(filePath);
   FileClassify type = getFileClassify(extension);
-  if (type.isImage) exifDate = await getExifDate(filePath);
-  int size = await calculateSize(filePath);
-  Resolution? resolution = switch (type) {
-    FileClassify.image => await getImageDimensions(filePath),
-    // FileClassify.video => await getVideoDimensions(filePath),
-    _ => null,
-  };
+  int size = type.isFolder ? await calculateSize(filePath) : stat.size;
+  DateTime? exifDate;
+  Resolution? resolution;
+  if (type.isImage) {
+    final results = await Future.wait(
+        [getExifDate(filePath), getImageDimensions(filePath)]);
+    exifDate = results[0] as DateTime?;
+    resolution = results[1] as Resolution?;
+  }
   return FileInfo(
-    id: id,
+    id: nanoid(10),
     name: name,
-    phonetic: phonetic,
     newName: name,
-    parent: parent,
+    parent: path.dirname(filePath),
     filePath: filePath,
     tempPath: '',
     extension: extension,
     newExtension: extension,
     beforePath: filePath,
-    createdDate: createdDate,
-    modifiedDate: modifyDate,
+    createdDate: stat.changed,
+    modifiedDate: stat.modified,
     exifDate: exifDate,
     type: type,
     size: size,
