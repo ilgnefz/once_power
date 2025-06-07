@@ -9,6 +9,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/progress.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/progress.dart';
+import 'package:once_power/utils/hot_key.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
@@ -30,6 +31,9 @@ class _ContentBarState extends ConsumerState<ContentBar> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () async {
+      await AppHotKey.init(ref);
+    });
     List<String> fPath = StorageUtil.getStringList(AppKeys.rightMenuFolderPath);
     if (fPath.isNotEmpty) {
       Future.delayed(Duration.zero, () async {

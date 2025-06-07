@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/tray_menu.dart';
@@ -15,7 +16,7 @@ class AppConfig {
     WidgetsFlutterBinding.ensureInitialized();
 
     if (shortcutMenuExtenderCommand.runIfNeeded(args)) exit(0);
-    
+
     await RustLib.init();
 
     await PackInfo.init();
@@ -31,7 +32,6 @@ class AppConfig {
       linux: true,
     );
 
-    await PackInfo.init();
     launchAtStartup.setup(
       appName: PackInfo.appName,
       appPath: Platform.resolvedExecutable,
@@ -39,6 +39,8 @@ class AppConfig {
     );
 
     bool powerBoot = await launchAtStartup.isEnabled();
+
+    await hotKeyManager.unregisterAll();
 
     await windowManager.ensureInitialized();
 
