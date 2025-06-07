@@ -157,39 +157,30 @@ Future<InfoDetail?> organize(
   String newPath = path.join(folder, path.basename(oldPath));
   newPath = await renameExistFile(newPath);
   bool isSame = isSameDisk(oldPath, newPath);
-  int totalSize = await calculateSize(oldPath);
+  int totalSize = file.size;
   ProgressFileInfo info = ProgressFileInfo(
     name: path.basename(oldPath),
     size: totalSize,
     transferred: 0,
   );
   InfoDetail? infoDetail;
+
   try {
-    final parentDir = Directory(path.dirname(newPath));
-    if (!await parentDir.exists()) await parentDir.create(recursive: true);
+    // 提取目录创建逻辑为辅助函数（减少重复代码）
+    await ensureParentDirExists(newPath);
+    // 更新进度状态（公共操作）
     ref.read(currentProgressFileProvider.notifier).update(info);
+    // 分情况处理文件/文件夹移动（逻辑清晰化）
     if (file.type.isFolder) {
-      if (isSame) {
-        await Directory(oldPath).rename(newPath);
-        ref
-            .read(currentProgressFileProvider.notifier)
-            .update(info.copyWith(transferred: totalSize));
-      } else {
-        await moveDirectory(ref, oldPath, newPath, info);
-      }
+      await handleFolderMove(ref, oldPath, newPath, isSame, info);
     } else {
-      if (isSame) {
-        await File(oldPath).rename(newPath);
-      } else {
-        await moveFileWithProgress(oldPath, newPath, ref);
-        await File(oldPath).delete();
-      }
+      await handleFileMove(ref, oldPath, newPath, isSame);
     }
+    // 记录日志、更新文件信息（公共操作）
     if (ref.watch(isSaveLogProvider)) await tempSaveLog(ref, oldPath, newPath);
-    String parent = path.dirname(newPath);
-    ref.read(fileListProvider.notifier).updateFileParent(file.id, parent);
-    ref.read(fileListProvider.notifier).updateFilePath(file.id, newPath);
+    updateFileInfoAfterMove(ref, file, newPath);
   } catch (e) {
+    // 统一错误处理
     ref
         .read(currentProgressFileProvider.notifier)
         .update(info.copyWith(transferred: info.size));
@@ -197,6 +188,52 @@ Future<InfoDetail?> organize(
   }
   ref.read(countProvider.notifier).update();
   return infoDetail;
+}
+
+// 辅助函数：确保父目录存在
+Future<void> ensureParentDirExists(String newPath) async {
+  final parentDir = Directory(path.dirname(newPath));
+  if (!await parentDir.exists()) await parentDir.create(recursive: true);
+}
+
+// 辅助函数：处理文件夹移动
+Future<void> handleFolderMove(
+  WidgetRef ref,
+  String oldPath,
+  String newPath,
+  bool isSame,
+  ProgressFileInfo info,
+) async {
+  if (isSame) {
+    await Directory(oldPath).rename(newPath);
+    ref
+        .read(currentProgressFileProvider.notifier)
+        .update(info.copyWith(transferred: info.size));
+  } else {
+    await moveDirectory(ref, oldPath, newPath, info);
+  }
+}
+
+// 辅助函数：处理文件移动
+Future<void> handleFileMove(
+  WidgetRef ref,
+  String oldPath,
+  String newPath,
+  bool isSame,
+) async {
+  if (isSame) {
+    await File(oldPath).rename(newPath);
+  } else {
+    await moveFileWithProgress(oldPath, newPath, ref);
+    await File(oldPath).delete();
+  }
+}
+
+// 辅助函数：更新文件信息
+void updateFileInfoAfterMove(WidgetRef ref, FileInfo file, String newPath) {
+  String parent = path.dirname(newPath);
+  ref.read(fileListProvider.notifier).updateFileParent(file.id, parent);
+  ref.read(fileListProvider.notifier).updateFilePath(file.id, newPath);
 }
 
 // 查看文件夹下是否有文件，有就移动自身及所有文件到新文件夹
@@ -218,7 +255,6 @@ Future<void> moveDirectory(WidgetRef ref, String oldFolder, String newFolder,
   for (var file in entities.whereType<File>()) {
     final fileRelative = path.relative(file.path, from: oldFolder);
     final newFilePath = path.join(newFolder, fileRelative);
-
     final verifiedPath = await renameExistFile(newFilePath);
     await moveFileWithProgress(file.path, verifiedPath, ref, size);
     await file.delete();

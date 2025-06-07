@@ -70,7 +70,7 @@ class FileInfo {
         'exifDate: $exifDate, '
         'type: $type, '
         'size: $size, '
-        'resolution: $resolution, '
+        'resolution: ${resolution.toString()}, '
         'thumbnail: $thumbnail, '
         'group: $group, '
         'checked: $checked}';
@@ -139,4 +139,9 @@ class Resolution {
   Resolution(this.width, this.height);
 
   static Resolution zero = Resolution(0, 0);
+
+  @override
+  String toString() {
+    return 'Resolution(width: $width, height: $height)';
+  }
 }
