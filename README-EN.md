@@ -21,6 +21,10 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Added PSD file preview
+
+![29](doc/29.gif)
+
 ## Grouping Function
 
 File settings group (only in AdvanceMode)
