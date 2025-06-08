@@ -23,7 +23,7 @@ class RuleCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: AppNum.inputP, vertical: AppNum.smallG),
       child: Row(
-        // spacing: AppNum.smallG,
+        spacing: AppNum.mediumG,
         children: [
           Text('$title:'),
           Expanded(

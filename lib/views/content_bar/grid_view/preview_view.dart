@@ -101,7 +101,7 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
             margin: EdgeInsets.all(isMax ? 0.0 : 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isMax ? 0.0 : 8.0),
-              color: Colors.black.withValues(alpha: .4),
+              color: Colors.black.withValues(alpha: .5),
             ),
             clipBehavior: Clip.antiAlias,
             child: child,

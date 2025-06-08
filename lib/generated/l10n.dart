@@ -1124,6 +1124,16 @@ class S {
     );
   }
 
+  /// `Select folder`
+  String get selectPath {
+    return Intl.message(
+      'Select folder',
+      name: 'selectPath',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tip`
   String get tipTitle {
     return Intl.message('Tip', name: 'tipTitle', desc: '', args: []);

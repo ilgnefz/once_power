@@ -126,26 +126,23 @@ class _FolderInputState extends State<FolderInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: AppNum.largeG, right: AppNum.mediumG),
-      child: BaseInput(
-        focusNode: focusNode,
-        enable: widget.enable ?? true,
-        hintText: widget.hintText ?? S.of(context).targetFolder,
-        controller: controller,
-        padding: EdgeInsets.only(left: AppNum.inputP, right: AppNum.smallG),
-        showClear: widget.showClear ?? showClear,
-        onClear: onClear,
-        onChanged: widget.onChanged,
-        onKeyEvent: widget.onKeyEvent ?? onKeyEvent,
-        trailing: TooltipIcon(
-          tip: S.of(context).targetFolder,
-          icon: Icons.folder_open_rounded,
-          // color: Theme.of(context).primaryColor,
-          // size: 32,
-          // iconSize: 24,
-          onTap: widget.onTap ?? selectTargetFolder,
-        ),
+    return BaseInput(
+      focusNode: focusNode,
+      enable: widget.enable ?? true,
+      hintText: widget.hintText ?? S.of(context).targetFolder,
+      controller: controller,
+      padding: EdgeInsets.only(left: AppNum.inputP, right: AppNum.smallG),
+      showClear: widget.showClear ?? showClear,
+      onClear: onClear,
+      onChanged: widget.onChanged,
+      onKeyEvent: widget.onKeyEvent ?? onKeyEvent,
+      trailing: TooltipIcon(
+        tip: S.of(context).targetFolder,
+        icon: Icons.folder_open_rounded,
+        // color: Theme.of(context).primaryColor,
+        // size: 32,
+        // iconSize: 24,
+        onTap: widget.onTap ?? selectTargetFolder,
       ),
     );
   }

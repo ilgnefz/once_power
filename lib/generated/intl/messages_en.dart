@@ -356,6 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select": MessageLookupByLibrary.simpleMessage("Check"),
     "selectAllSwitch": MessageLookupByLibrary.simpleMessage("All switch"),
     "selectFolder": MessageLookupByLibrary.simpleMessage("Select folder"),
+    "selectPath": MessageLookupByLibrary.simpleMessage("Select folder"),
     "selectReserve": MessageLookupByLibrary.simpleMessage("Invert selection"),
     "selectTargetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
     "separate": MessageLookupByLibrary.simpleMessage("Separate Words"),

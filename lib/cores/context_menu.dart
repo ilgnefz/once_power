@@ -99,6 +99,11 @@ Future<void> showRightMenu(
           color: file.checked ? Colors.grey : Colors.black,
           onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),
+        RightMenuItem(
+          label: S.of(context).selectPath,
+          color: Colors.black,
+          onSelected: () => selectPath(ref, file.parent),
+        ),
         if (!isPreview)
           RightMenuItem(
             label: S.of(context).removeFolder,

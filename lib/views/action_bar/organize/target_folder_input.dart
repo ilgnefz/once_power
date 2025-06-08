@@ -26,15 +26,18 @@ class _TargetFolderInputState extends ConsumerState<TargetFolderInput>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FolderInput(
-      cacheKey: AppKeys.targetFolder,
-      cacheListKey: AppKeys.targetFolderList,
-      enable: !ref.watch(useRuleOrganizeProvider) &&
-          !ref.watch(useTopParentsProvider),
-      hintText: S.of(context).targetFolder,
-      controller: controller,
-      showClear: ref.watch(folderClearProvider),
-      cache: ref.watch(isSaveConfigProvider),
+    return Padding(
+      padding: EdgeInsets.only(left: AppNum.largeG, right: AppNum.mediumG),
+      child: FolderInput(
+        cacheKey: AppKeys.targetFolder,
+        cacheListKey: AppKeys.targetFolderList,
+        enable: !ref.watch(useRuleOrganizeProvider) &&
+            !ref.watch(useTopParentsProvider),
+        hintText: S.of(context).targetFolder,
+        controller: controller,
+        showClear: ref.watch(folderClearProvider),
+        cache: ref.watch(isSaveConfigProvider),
+      ),
     );
   }
 

@@ -19,6 +19,7 @@ class EasyDialog extends StatelessWidget {
     this.extraButton,
     this.actionsSpacing = 0,
     this.actionsAxisAlignment = MainAxisAlignment.spaceBetween,
+    this.onModelTap,
   });
 
   final String title;
@@ -34,6 +35,7 @@ class EasyDialog extends StatelessWidget {
   final Widget? extraButton;
   final double actionsSpacing;
   final MainAxisAlignment actionsAxisAlignment;
+  final void Function()? onModelTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,15 @@ class EasyDialog extends StatelessWidget {
               return MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    onModelTap?.call();
+                  },
                   child: Container(
                     margin: EdgeInsets.all(isMax ? 0.0 : 8.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(isMax ? 0 : 8),
-                      color: Colors.black.withValues(alpha: .4),
+                      color: Colors.black.withValues(alpha: .5),
                     ),
                   ),
                 ),

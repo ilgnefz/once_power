@@ -137,6 +137,7 @@
   "moveToCenter": "移至中间",
   "moveToLast": "移至末尾",
   "deleteChecked": "删除选中文件",
+  "selectPath": "选中路径",
   "tipTitle": "提示",
   "deleteTipMessage": "该操作会将文件从系统中删除，且无法恢复。取消操纵请点击弹窗外面的区域。",
   "deleteTipButton1": "我已知晓，不再提醒",

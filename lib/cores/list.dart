@@ -5,6 +5,7 @@ import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/progress.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
@@ -24,6 +25,16 @@ void toggleCheck(WidgetRef ref, String id) {
 void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
   for (FileInfo e in files) {
     ref.read(fileListProvider.notifier).check(e.id);
+  }
+  updateName(ref);
+}
+
+void selectPath(WidgetRef ref, String folder) {
+  ref.read(sortSelectListProvider.notifier).clear();
+  List<FileInfo> list = ref.watch(sortListProvider);
+  for (FileInfo e in list) {
+    if (e.parent != folder) continue;
+    ref.read(sortSelectListProvider.notifier).add(e);
   }
   updateName(ref);
 }

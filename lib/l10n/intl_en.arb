@@ -137,6 +137,7 @@
   "moveToCenter": "To the center",
   "moveToLast": "To the last",
   "deleteChecked": "Delete checked",
+  "selectPath": "Select folder",
   "tipTitle": "Tip",
   "deleteTipMessage": "This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.",
   "deleteTipButton1": "I know. No more reminders",

@@ -48,6 +48,7 @@ class AppKeys {
   static String isCaseFile = 'isCaseFile';
   static String isCaseExtension = 'isCaseExtension';
   static String isMatchExtension = 'isMatchExtension';
+  static String isAdvanceOrganize = 'isAdvanceOrganize';
 
   // List
   static String targetFolderList = 'targetFolderList';

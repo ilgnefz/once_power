@@ -69,10 +69,34 @@ class _RuleListState extends State<RuleList> {
     setState(() {});
   }
 
+  void cancel() {
+    for (var i = 0; i < list.length; i++) {
+      StorageUtil.setString(list[i].key, origin[i]);
+      StorageUtil.setStringList(list[i].listKey, originList[i]);
+    }
+    setState(() {});
+  }
+
+  void ok() async {
+    RuleTypeValue ruleTypeValue = RuleTypeValue(
+      image: StorageUtil.getString(AppKeys.imageFolder) ?? '',
+      video: StorageUtil.getString(AppKeys.videoFolder) ?? '',
+      doc: StorageUtil.getString(AppKeys.docFolder) ?? '',
+      audio: StorageUtil.getString(AppKeys.audioFolder) ?? '',
+      folder: StorageUtil.getString(AppKeys.folderFolder) ?? '',
+      zip: StorageUtil.getString(AppKeys.zipFolder) ?? '',
+      other: StorageUtil.getString(AppKeys.otherFolder) ?? '',
+    );
+    await StorageUtil.setRuleTypeValue(AppKeys.ruleTypeValue, ruleTypeValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CommonDialog(
       title: S.of(context).classifyType,
+      onModelTap: cancel,
+      onCancel: cancel,
+      onOk: ok,
       child: Column(
         children: List.generate(
           list.length,
@@ -83,26 +107,6 @@ class _RuleListState extends State<RuleList> {
           ),
         ),
       ),
-      onCancel: () {
-        for (var i = 0; i < list.length; i++) {
-          StorageUtil.setString(list[i].key, origin[i]);
-          StorageUtil.setStringList(list[i].listKey, originList[i]);
-        }
-        setState(() {});
-      },
-      onOk: () async {
-        RuleTypeValue ruleTypeValue = RuleTypeValue(
-          image: StorageUtil.getString(AppKeys.imageFolder) ?? '',
-          video: StorageUtil.getString(AppKeys.videoFolder) ?? '',
-          doc: StorageUtil.getString(AppKeys.docFolder) ?? '',
-          audio: StorageUtil.getString(AppKeys.audioFolder) ?? '',
-          folder: StorageUtil.getString(AppKeys.folderFolder) ?? '',
-          zip: StorageUtil.getString(AppKeys.zipFolder) ?? '',
-          other: StorageUtil.getString(AppKeys.otherFolder) ?? '',
-        );
-        await StorageUtil.setRuleTypeValue(
-            AppKeys.ruleTypeValue, ruleTypeValue);
-      },
     );
   }
 }
