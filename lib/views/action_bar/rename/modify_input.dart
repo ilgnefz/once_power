@@ -38,6 +38,8 @@ class ModifyInput extends ConsumerWidget {
               .updateText((num -= 1).toString());
           updateName(ref);
         }
+        controller.selection =
+            TextSelection.collapsed(offset: controller.text.length);
       }
     }
 

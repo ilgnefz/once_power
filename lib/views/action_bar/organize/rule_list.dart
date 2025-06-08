@@ -16,102 +16,89 @@ class RuleList extends StatefulWidget {
 }
 
 class _RuleListState extends State<RuleList> {
-  String imageValue = '';
-  String videoValue = '';
-  String docValue = '';
-  String audioValue = '';
-  String folderValue = '';
-  String zipValue = '';
-  String otherValue = '';
+  List<RuleType> list = [
+    RuleType(
+      name: FileClassify.image.label,
+      key: AppKeys.imageFolder,
+      listKey: AppKeys.imageFolderList,
+    ),
+    RuleType(
+      name: FileClassify.video.label,
+      key: AppKeys.videoFolder,
+      listKey: AppKeys.videoFolderList,
+    ),
+    RuleType(
+      name: FileClassify.doc.label,
+      key: AppKeys.docFolder,
+      listKey: AppKeys.docFolderList,
+    ),
+    RuleType(
+      name: FileClassify.audio.label,
+      key: AppKeys.audioFolder,
+      listKey: AppKeys.audioFolderList,
+    ),
+    RuleType(
+      name: FileClassify.folder.label,
+      key: AppKeys.folderFolder,
+      listKey: AppKeys.folderFolderList,
+    ),
+    RuleType(
+      name: FileClassify.zip.label,
+      key: AppKeys.zipFolder,
+      listKey: AppKeys.zipFolderList,
+    ),
+    RuleType(
+      name: FileClassify.other.label,
+      key: AppKeys.otherFolder,
+      listKey: AppKeys.otherFolderList,
+    )
+  ];
+
+  List<String> origin = [];
+  List<List<String>> originList = [];
 
   @override
   void initState() {
     super.initState();
-    RuleTypeValue? ruleTypeValue =
-        StorageUtil.getRuleTypeValue(AppKeys.ruleTypeValue);
-    if (ruleTypeValue != null) {
-      imageValue = ruleTypeValue.image;
-      videoValue = ruleTypeValue.video;
-      docValue = ruleTypeValue.doc;
-      audioValue = ruleTypeValue.audio;
-      folderValue = ruleTypeValue.folder;
-      zipValue = ruleTypeValue.zip;
-      otherValue = ruleTypeValue.other;
-      setState(() {});
+    for (RuleType type in list) {
+      String cache = StorageUtil.getString(type.key) ?? '';
+      List<String> caches = StorageUtil.getStringList(type.listKey);
+      origin.add(cache);
+      originList.add(caches);
     }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return CommonDialog(
       title: S.of(context).classifyType,
-      child: Column(children: [
-        RuleCard(
-          title: FileClassify.image.label,
-          value: imageValue,
-          onChanged: (value) {
-            imageValue = value;
-            setState(() {});
-          },
+      child: Column(
+        children: List.generate(
+          list.length,
+          (int index) => RuleCard(
+            title: list[index].name,
+            cacheKey: list[index].key,
+            cacheListKey: list[index].listKey,
+          ),
         ),
-        RuleCard(
-          title: FileClassify.video.label,
-          value: videoValue,
-          onChanged: (value) {
-            videoValue = value;
-            setState(() {});
-          },
-        ),
-        RuleCard(
-          title: FileClassify.doc.label,
-          value: docValue,
-          onChanged: (value) {
-            docValue = value;
-            setState(() {});
-          },
-        ),
-        RuleCard(
-          title: FileClassify.audio.label,
-          value: audioValue,
-          onChanged: (value) {
-            audioValue = value;
-            setState(() {});
-          },
-        ),
-        RuleCard(
-          title: FileClassify.folder.label,
-          value: folderValue,
-          onChanged: (value) {
-            folderValue = value;
-            setState(() {});
-          },
-        ),
-        RuleCard(
-          title: FileClassify.zip.label,
-          value: zipValue,
-          onChanged: (value) {
-            zipValue = value;
-            setState(() {});
-          },
-        ),
-        RuleCard(
-          title: FileClassify.other.label,
-          value: otherValue,
-          onChanged: (value) {
-            otherValue = value;
-            setState(() {});
-          },
-        ),
-      ]),
+      ),
+      onCancel: () {
+        for (var i = 0; i < list.length; i++) {
+          StorageUtil.setString(list[i].key, origin[i]);
+          StorageUtil.setStringList(list[i].listKey, originList[i]);
+        }
+        setState(() {});
+      },
       onOk: () async {
         RuleTypeValue ruleTypeValue = RuleTypeValue(
-          image: imageValue,
-          video: videoValue,
-          doc: docValue,
-          audio: audioValue,
-          folder: folderValue,
-          zip: zipValue,
-          other: otherValue,
+          image: StorageUtil.getString(AppKeys.imageFolder) ?? '',
+          video: StorageUtil.getString(AppKeys.videoFolder) ?? '',
+          doc: StorageUtil.getString(AppKeys.docFolder) ?? '',
+          audio: StorageUtil.getString(AppKeys.audioFolder) ?? '',
+          folder: StorageUtil.getString(AppKeys.folderFolder) ?? '',
+          zip: StorageUtil.getString(AppKeys.zipFolder) ?? '',
+          other: StorageUtil.getString(AppKeys.otherFolder) ?? '',
         );
         await StorageUtil.setRuleTypeValue(
             AppKeys.ruleTypeValue, ruleTypeValue);

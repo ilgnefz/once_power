@@ -6,6 +6,7 @@ import 'package:once_power/widgets/common/click_icon.dart';
 class BaseInput extends StatelessWidget {
   const BaseInput({
     super.key,
+    this.focusNode,
     this.controller,
     this.padding,
     this.enable = true,
@@ -20,9 +21,11 @@ class BaseInput extends StatelessWidget {
     this.showClear = false,
     this.onKeyEvent,
     this.onChanged,
+    this.onEditingComplete,
     this.onClear,
   });
 
+  final FocusNode? focusNode;
   final TextEditingController? controller;
   final EdgeInsets? padding;
   final bool enable;
@@ -37,6 +40,7 @@ class BaseInput extends StatelessWidget {
   final bool showClear;
   final void Function(KeyEvent)? onKeyEvent;
   final void Function(String)? onChanged;
+  final void Function()? onEditingComplete;
   final void Function()? onClear;
 
   @override
@@ -61,7 +65,7 @@ class BaseInput extends StatelessWidget {
           Expanded(
             child: child ??
                 KeyboardListener(
-                  focusNode: FocusNode(),
+                  focusNode: focusNode ?? FocusNode(),
                   onKeyEvent: onKeyEvent,
                   child: TextField(
                     controller: controller,
@@ -79,7 +83,7 @@ class BaseInput extends StatelessWidget {
                     inputFormatters: inputFormatters,
                     onChanged: onChanged,
                     maxLines: maxLines,
-                    // onEditingComplete: onEditingComplete,
+                    onEditingComplete: onEditingComplete,
                     // onSubmitted: onSubmitted,
                   ),
                 ),

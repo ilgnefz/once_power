@@ -173,6 +173,6 @@ class FolderController extends _$FolderController {
 @riverpod
 class FolderClear extends _$FolderClear {
   @override
-  bool build() => StorageUtil.getString(AppKeys.targetFolder) != null;
+  bool build() => ref.watch(folderControllerProvider).text != '';
   void update(bool value) => state = value;
 }

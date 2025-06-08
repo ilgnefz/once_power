@@ -18,14 +18,12 @@ import 'package:path/path.dart' as path;
 
 import 'notification.dart';
 
-Future<void> targetFolderCache(WidgetRef ref, String folder) async {
-  if (ref.watch(isSaveConfigProvider)) {
-    await StorageUtil.setString(AppKeys.targetFolder, folder);
-    List<String> list = StorageUtil.getStringList(AppKeys.targetFolderList);
-    if (list.contains(folder)) list.remove(folder);
-    list.add(folder);
-    await StorageUtil.setStringList(AppKeys.targetFolderList, list);
-  }
+Future<void> targetFolderCache(String folder, String key) async {
+  // await StorageUtil.setString(AppKeys.targetFolder, folder);
+  List<String> list = StorageUtil.getStringList(key);
+  if (list.contains(folder)) list.remove(folder);
+  list.add(folder);
+  await StorageUtil.setStringList(key, list);
 }
 
 void organizeFolder(WidgetRef ref) async {

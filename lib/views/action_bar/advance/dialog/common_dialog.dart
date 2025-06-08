@@ -10,14 +10,16 @@ class CommonDialog extends StatelessWidget {
     required this.title,
     required this.child,
     this.extraButton,
-    required this.onOk,
+    this.onOk,
+    this.onCancel,
   });
 
   final bool autoPop;
   final String title;
   final Widget child;
   final Widget? extraButton;
-  final void Function() onOk;
+  final void Function()? onOk;
+  final void Function()? onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,11 @@ class CommonDialog extends StatelessWidget {
       extraButton: extraButton,
       onOk: () {
         if (autoPop) Navigator.of(context).pop();
-        onOk();
+        onOk?.call();
       },
       onCancel: () {
         Navigator.of(context).pop();
+        onCancel?.call();
       },
     );
   }

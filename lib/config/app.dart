@@ -101,8 +101,23 @@ void saveOrNo() {
       AppKeys.suffixSerialLength,
       AppKeys.suffixSerialStart,
       AppKeys.sortType,
+      // organize keys
       AppKeys.targetFolder,
       AppKeys.targetFolderList,
+      AppKeys.imageFolder,
+      AppKeys.imageFolderList,
+      AppKeys.videoFolder,
+      AppKeys.videoFolderList,
+      AppKeys.audioFolder,
+      AppKeys.audioFolderList,
+      AppKeys.docFolder,
+      AppKeys.docFolderList,
+      AppKeys.folderFolder,
+      AppKeys.folderFolderList,
+      AppKeys.zipFolder,
+      AppKeys.zipFolderList,
+      AppKeys.otherFolder,
+      AppKeys.otherFolderList,
       // AppKeys.isUseExtraFunction,
     ];
     for (String appKey in appKeyList) {

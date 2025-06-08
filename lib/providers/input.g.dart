@@ -163,7 +163,7 @@ final extensionClearProvider =
 );
 
 typedef _$ExtensionClear = AutoDisposeNotifier<bool>;
-String _$folderControllerHash() => r'e854f90d52eae5d300b7058674f8e0034b448bad';
+String _$folderControllerHash() => r'bec37e33b36705a1c35dfc4a905a2dcd24465874';
 
 /// See also [FolderController].
 @ProviderFor(FolderController)
@@ -179,7 +179,7 @@ final folderControllerProvider = AutoDisposeNotifierProvider<FolderController,
 );
 
 typedef _$FolderController = AutoDisposeNotifier<TextEditingController>;
-String _$folderClearHash() => r'c2642f5aaac4babe9be504ee128a5a0c6ee54a7a';
+String _$folderClearHash() => r'f5e8b8534355c18a4996a65e846f67edf6b63f09';
 
 /// See also [FolderClear].
 @ProviderFor(FolderClear)

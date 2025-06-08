@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/providers/input.dart';
@@ -50,6 +51,9 @@ class ActionBar extends ConsumerWidget {
                   }
                 }
                 ref.read(currentModeProvider.notifier).update(modes[index]);
+                if (ref.watch(isViewModeProvider) && index < 3) {
+                  filterFile(context, ref);
+                }
                 updateName(ref);
               },
               labelPadding: EdgeInsets.zero,

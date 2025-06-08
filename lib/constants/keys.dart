@@ -7,6 +7,13 @@ class AppKeys {
   // static String extensionText = 'extensionText';
   static String apiKey = 'apiKey';
   static String targetFolder = 'targetFolder';
+  static String imageFolder = 'imageFolder';
+  static String videoFolder = 'videoFolder';
+  static String docFolder = 'docFolder';
+  static String audioFolder = 'audioFolder';
+  static String folderFolder = 'folderFolder';
+  static String zipFolder = 'zipFolder';
+  static String otherFolder = 'otherFolder';
 
   // int
   static String dateLength = 'dateLength';
@@ -44,6 +51,13 @@ class AppKeys {
 
   // List
   static String targetFolderList = 'targetFolderList';
+  static String imageFolderList = 'imageFolderList';
+  static String videoFolderList = 'videoFolderList';
+  static String docFolderList = 'docFolderList';
+  static String audioFolderList = 'audioFolderList';
+  static String folderFolderList = 'folderFolderList';
+  static String zipFolderList = 'zipFolderList';
+  static String otherFolderList = 'otherFolderList';
   static String advanceMenuList = 'advanceMenuList';
   static String advancePresetList = 'advancePresetList';
   static String operateLogList = 'operateLogList';
