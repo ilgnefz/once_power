@@ -126,9 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "currentTask": MessageLookupByLibrary.simpleMessage("Task"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateAscending": MessageLookupByLibrary.simpleMessage("Date ascending"),
-    "dateClassification": MessageLookupByLibrary.simpleMessage(
-      "Date classification",
-    ),
+    "dateClassification": MessageLookupByLibrary.simpleMessage("Date category"),
     "dateClassificationDesc": MessageLookupByLibrary.simpleMessage(
       "Create a folder named after the date of file creation in the target folder and move it to that folder",
     ),
@@ -230,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "group": MessageLookupByLibrary.simpleMessage("Group"),
     "groupAscending": MessageLookupByLibrary.simpleMessage("Group ascending"),
     "groupDescending": MessageLookupByLibrary.simpleMessage("Group descending"),
+    "groupFolderError": MessageLookupByLibrary.simpleMessage(
+      "The group folder is empty!",
+    ),
+    "groupType": MessageLookupByLibrary.simpleMessage("Set group folder"),
     "height": MessageLookupByLibrary.simpleMessage("ResolutionHeight"),
     "image": MessageLookupByLibrary.simpleMessage("Image"),
     "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
@@ -428,7 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "uppercase": MessageLookupByLibrary.simpleMessage("Uppercase"),
     "useDesc": MessageLookupByLibrary.simpleMessage("Instructions for use"),
-    "useRule": MessageLookupByLibrary.simpleMessage("Type classification"),
+    "useGroup": MessageLookupByLibrary.simpleMessage("Group category"),
+    "useRule": MessageLookupByLibrary.simpleMessage("Type category"),
     "useRuleDesc": MessageLookupByLibrary.simpleMessage(
       "Move files of different types to different folders",
     ),

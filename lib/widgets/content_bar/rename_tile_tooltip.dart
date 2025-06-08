@@ -31,6 +31,7 @@ class RenameTileTooltip extends StatelessWidget {
 
     String dot = file.extension == '' ? '' : '.';
     String newDot = file.newExtension == '' ? '' : '.';
+    bool hasGroup = file.group != '';
 
     return EasyTooltip(
       placement: Placement.bottom,
@@ -51,8 +52,8 @@ class RenameTileTooltip extends StatelessWidget {
           if (file.resolution != null)
             richTextTooltip(
                 context, resolution, formatResolution(file.resolution!)),
-          if (file.group != '') richTextTooltip(context, group, file.group),
-          richTextTooltip(context, size, formatFileSize(file.size), true),
+          richTextTooltip(context, size, formatFileSize(file.size), !hasGroup),
+          if (hasGroup) richTextTooltip(context, group, file.group, hasGroup),
         ],
       ),
       child: child,

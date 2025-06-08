@@ -11,8 +11,8 @@ import 'package:once_power/widgets/common/tooltip_icon.dart';
 class FolderInput extends StatefulWidget {
   const FolderInput({
     super.key,
-    this.cacheKey = "",
-    required this.cacheListKey,
+    this.cacheKey,
+    this.cacheListKey,
     this.value = '',
     this.hintText,
     this.controller,
@@ -25,8 +25,8 @@ class FolderInput extends StatefulWidget {
     this.onTap,
   });
 
-  final String cacheKey;
-  final String cacheListKey;
+  final String? cacheKey;
+  final String? cacheListKey;
   final String? value;
   final String? hintText;
   final TextEditingController? controller;
@@ -54,7 +54,9 @@ class _FolderInputState extends State<FolderInput> {
     controller = widget.controller ?? TextEditingController(text: widget.value);
     controller.addListener(() {
       showClear = controller.text != '';
-      StorageUtil.setString(widget.cacheKey, controller.text);
+      if (widget.cacheKey != null) {
+        StorageUtil.setString(widget.cacheKey!, controller.text);
+      }
       setState(() {});
     });
     focusNode.addListener(() {
@@ -74,14 +76,16 @@ class _FolderInputState extends State<FolderInput> {
     if (!widget.cache) return;
     String currentFolder = controller.text;
     if (currentFolder == '') return;
-    targetFolderCache(currentFolder, widget.cacheListKey);
+    if (widget.cacheListKey == null) return;
+    targetFolderCache(currentFolder, widget.cacheListKey!);
   }
 
   void onKeyEvent(KeyEvent event) {
+    if (widget.cacheListKey == null || widget.cacheKey == null) return;
     if (event is! KeyUpEvent) return;
     if (!widget.cache) return;
     String currentFolder = controller.text;
-    List<String> list = StorageUtil.getStringList(widget.cacheListKey);
+    List<String> list = StorageUtil.getStringList(widget.cacheListKey!);
     if (list.isEmpty) return;
     int index = list.indexOf(currentFolder);
     if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
@@ -100,10 +104,10 @@ class _FolderInputState extends State<FolderInput> {
         controller.text = list[index + 1];
       }
     }
-    StorageUtil.setString(widget.cacheKey, controller.text);
+    StorageUtil.setString(widget.cacheKey!, controller.text);
     List<String> res1 = list.sublist(0, index + 1);
     List<String> res2 = list.sublist(index + 1);
-    StorageUtil.setStringList(widget.cacheListKey, [...res1, ...res2]);
+    StorageUtil.setStringList(widget.cacheListKey!, [...res1, ...res2]);
     controller.selection =
         TextSelection.collapsed(offset: controller.text.length);
   }
@@ -112,16 +116,20 @@ class _FolderInputState extends State<FolderInput> {
     final String? folder = await getDirectoryPath();
     if (folder != null) {
       controller.text = folder;
-      if (widget.cache) targetFolderCache(folder, widget.cacheListKey);
+      widget.onChanged?.call(folder);
+      if (widget.cacheListKey == null) return;
+      if (widget.cache) targetFolderCache(folder, widget.cacheListKey!);
     }
   }
 
   void onClear() async {
     String? folder = controller.text;
-    List<String> list = StorageUtil.getStringList(widget.cacheListKey);
-    if (list.contains(folder)) list.remove(folder);
-    await StorageUtil.setStringList(widget.cacheListKey, list);
     controller.clear();
+    widget.onChanged?.call('');
+    if (widget.cacheListKey == null) return;
+    List<String> list = StorageUtil.getStringList(widget.cacheListKey!);
+    if (list.contains(folder)) list.remove(folder);
+    await StorageUtil.setStringList(widget.cacheListKey!, list);
   }
 
   @override

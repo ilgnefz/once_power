@@ -14,6 +14,7 @@ class TopParentsCheckbox extends ConsumerWidget {
       checked: ref.watch(useTopParentsProvider),
       onChanged: (value) {
         ref.read(useTopParentsProvider.notifier).toggle();
+        ref.read(useGroupOrganizeProvider.notifier).update(false);
         ref.read(useDateClassifyProvider.notifier).update(false);
         ref.read(useRuleOrganizeProvider.notifier).update(false);
       },

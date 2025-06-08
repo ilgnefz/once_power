@@ -65,11 +65,11 @@ void showOrganizeEmptyNotification() {
   ).show();
 }
 
-void showOrganizeNullNotification() {
+void showOrganizeNullNotification(String message) {
   NotificationInfo(
     type: NotificationType.error,
     title: S.current.organizingFailed,
-    message: S.current.classifyFolderError,
+    message: message,
   ).show();
 }
 

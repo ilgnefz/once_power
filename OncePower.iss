@@ -55,6 +55,7 @@ Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Releas
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\desktop_drop_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\hotkey_manager_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libGLESv2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libmpv-2.dll"; DestDir: "{app}"; Flags: ignoreversion

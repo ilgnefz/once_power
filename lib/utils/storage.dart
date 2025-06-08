@@ -43,6 +43,27 @@ class StorageUtil {
     return value ?? [];
   }
 
+  // 存储 Map<String, String>
+  static Future<bool> setStringMap(String key, Map<String, String> value) {
+    String jsonString = jsonEncode(value); // 将 Map 转换为 JSON 字符串
+    return _prefs.setString(key, jsonString);
+  }
+
+  // 获取 Map<String, String>
+  static Map<String, String>? getStringMap(String key) {
+    String? jsonString = _prefs.getString(key);
+    if (jsonString != null) {
+      try {
+        // 解析 JSON 并转换为 Map<String, String>
+        return Map<String, String>.from(jsonDecode(jsonString));
+      } catch (e) {
+        // 解析失败时返回空 Map 避免崩溃
+        return {};
+      }
+    }
+    return null; // 无存储值时返回空 Map
+  }
+
   static Future<bool> remove(String key) => _prefs.remove(key);
 
   // 存储Locale

@@ -37,20 +37,29 @@ void organizeFolder(WidgetRef ref) async {
   List<InfoDetail> errors = [];
   DateTime startTime = DateTime.now();
 
+  bool isGroup = ref.watch(useGroupOrganizeProvider);
   bool isRule = ref.watch(useRuleOrganizeProvider);
   bool isTop = ref.watch(useTopParentsProvider);
-  if (!isRule && !isTop) {
+  if (!isRule && !isTop && !isGroup) {
     String inputFolder = ref.watch(folderControllerProvider).text;
     if (inputFolder == '' || inputFolder.isEmpty) {
       return showOrganizeEmptyNotification();
     }
   }
 
-  if (isRule) {
+  if (isGroup) {
+    Map<String, String>? folders =
+        StorageUtil.getStringMap(AppKeys.groupFolder);
+    if (folders == null || folders.isEmpty) {
+      clearOrganize(ref);
+      return showOrganizeNullNotification(S.current.groupFolderError);
+    }
+    errors.addAll(await groupOrganize(ref, checkList, folders));
+  } else if (isRule) {
     RuleTypeValue? rule = StorageUtil.getRuleTypeValue(AppKeys.ruleTypeValue);
     if (rule == null || rule.isEmpty()) {
       clearOrganize(ref);
-      return showOrganizeNullNotification();
+      return showOrganizeNullNotification(S.current.classifyFolderError);
     }
     errors.addAll(await ruleOrganize(ref, checkList, rule));
   } else if (isTop) {
@@ -82,6 +91,21 @@ Future<List<InfoDetail>> normalOrganize(
   String targetFolder = ref.watch(folderControllerProvider).text;
   for (FileInfo file in list) {
     InfoDetail? info = await organize(ref, file, targetFolder);
+    if (info != null) errorList.add(info);
+  }
+  return errorList;
+}
+
+Future<List<InfoDetail>> groupOrganize(
+    WidgetRef ref, List<FileInfo> list, Map<String, String> folders) async {
+  List<InfoDetail> errorList = [];
+  for (FileInfo file in list) {
+    String folder = file.parent;
+    if (folders.containsKey(file.group)) {
+      if (folders[file.group] == '') continue;
+      folder = folders[file.group]!;
+    }
+    InfoDetail? info = await organize(ref, file, folder);
     if (info != null) errorList.add(info);
   }
   return errorList;

@@ -329,6 +329,21 @@ class OpenUndo extends _$OpenUndo {
 }
 
 @riverpod
+class UseGroupOrganize extends _$UseGroupOrganize {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseGroupOrganize);
+  Future<void> update(bool value) async {
+    state = value;
+    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
+  }
+
+  Future<void> toggle() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
+  }
+}
+
+@riverpod
 class UseRuleOrganize extends _$UseRuleOrganize {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isUseRuleOrganize);

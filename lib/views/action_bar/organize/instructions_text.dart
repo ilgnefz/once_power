@@ -8,14 +8,14 @@ class InstructionsText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> labels = [
-      S.of(context).useRule,
+      // S.of(context).useRule,
       S.of(context).dateClassification,
       S.of(context).topParentFolder,
       S.of(context).deleteEmptyFolder,
     ];
 
     List<String> desc = [
-      S.of(context).useRuleDesc,
+      // S.of(context).useRuleDesc,
       S.of(context).dateClassificationDesc,
       S.of(context).topParentFolderDesc,
       S.of(context).deleteEmptyFolderDesc,

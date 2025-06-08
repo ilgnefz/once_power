@@ -80,6 +80,7 @@ void saveOrNo() {
       AppKeys.dateType,
       AppKeys.functionMode,
       AppKeys.groupList,
+      AppKeys.groupFolder,
       AppKeys.isAddFolder,
       AppKeys.isAppend,
       AppKeys.isCase,

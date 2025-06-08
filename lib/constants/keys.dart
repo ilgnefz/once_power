@@ -41,6 +41,7 @@ class AppKeys {
   static String isAutoRun = 'isAutoRun';
   static String isClassifyFile = 'isClassifyFile';
   static String isUseDateClassify = 'isUseDateClassify';
+  static String isUseGroupOrganize = 'isUseGroupOrganize';
   static String isUseRuleOrganize = 'isUseRuleOrganize';
   static String isUseTopFolder = 'isUseTopFolder';
   static String isAddSubfolder = 'isAddSubfolder';
@@ -90,4 +91,7 @@ class AppKeys {
   static String showWindow = 'show_window';
   static String autoRun = 'auto_run';
   static String exitApp = 'exit_app';
+
+  /// Map
+  static String groupFolder = 'groupFolder';
 }

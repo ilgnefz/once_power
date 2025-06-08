@@ -14,6 +14,7 @@ class DateClassifyCheckbox extends ConsumerWidget {
       checked: ref.watch(useDateClassifyProvider),
       onChanged: (value) {
         ref.read(useDateClassifyProvider.notifier).toggle();
+        ref.read(useGroupOrganizeProvider.notifier).update(false);
         ref.read(useRuleOrganizeProvider.notifier).update(false);
         ref.read(useTopParentsProvider.notifier).update(false);
       },

@@ -3,6 +3,8 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/views/action_bar/organize/instructions_text.dart';
 import 'package:once_power/views/action_bar/organize/target_folder_input.dart';
 import 'package:once_power/views/action_bar/organize/top_parents_checkbox.dart';
+import 'package:once_power/views/action_bar/organize/use_group_group.dart';
+import 'package:once_power/views/action_bar/organize/use_rule_group.dart';
 import 'package:once_power/views/action_bar/rename/add_folder_checkbox.dart';
 import 'package:once_power/views/action_bar/rename/append_checkbox.dart';
 import 'package:once_power/widgets/action_bar/add_file_group.dart';
@@ -12,8 +14,6 @@ import 'apply_organize_btn.dart';
 import 'date_classify_checkbox.dart';
 import 'delete_empty_btn.dart';
 import 'delete_selected_btn.dart';
-import 'open_rule_checkbox.dart';
-import 'rule_setting_btn.dart';
 
 class OrganizeMenu extends StatelessWidget {
   const OrganizeMenu({super.key});
@@ -21,15 +21,14 @@ class OrganizeMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: AppNum.smallG,
+      // spacing: AppNum.smallG,
       children: [
         Expanded(child: SingleChildScrollView(child: InstructionsText())),
-        SizedBox(height: AppNum.smallG / 2),
+        SizedBox(height: AppNum.smallG),
         TargetFolderInput(),
-        TwoCheckboxGroup(
-          left: AppNum.defaultP,
-          children: [RuleSettingBtn(), OpenRuleCheckbox()],
-        ),
+        SizedBox(height: AppNum.smallG),
+        UseGroupGroup(),
+        UseRuleGroup(),
         TwoCheckboxGroup(
           children: [TopParentsCheckbox(), DateClassifyCheckbox()],
         ),

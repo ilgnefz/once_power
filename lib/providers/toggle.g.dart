@@ -513,6 +513,22 @@ final openUndoProvider = AutoDisposeNotifierProvider<OpenUndo, bool>.internal(
 );
 
 typedef _$OpenUndo = AutoDisposeNotifier<bool>;
+String _$useGroupOrganizeHash() => r'adc3b59fb67f4a72685a687d3bbf7958c1f44b1c';
+
+/// See also [UseGroupOrganize].
+@ProviderFor(UseGroupOrganize)
+final useGroupOrganizeProvider =
+    AutoDisposeNotifierProvider<UseGroupOrganize, bool>.internal(
+  UseGroupOrganize.new,
+  name: r'useGroupOrganizeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$useGroupOrganizeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseGroupOrganize = AutoDisposeNotifier<bool>;
 String _$useRuleOrganizeHash() => r'bafce4ede285f795f1b8a77ef0a325e02426eae8';
 
 /// See also [UseRuleOrganize].

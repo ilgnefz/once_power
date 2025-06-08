@@ -1079,10 +1079,10 @@ class S {
     return Intl.message('Add to', name: 'shortcutTip2', desc: '', args: []);
   }
 
-  /// `Date classification`
+  /// `Date category`
   String get dateClassification {
     return Intl.message(
-      'Date classification',
+      'Date category',
       name: 'dateClassification',
       desc: '',
       args: [],
@@ -1844,14 +1844,24 @@ class S {
     );
   }
 
-  /// `Type classification`
-  String get useRule {
+  /// `Set group folder`
+  String get groupType {
     return Intl.message(
-      'Type classification',
-      name: 'useRule',
+      'Set group folder',
+      name: 'groupType',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Type category`
+  String get useRule {
+    return Intl.message('Type category', name: 'useRule', desc: '', args: []);
+  }
+
+  /// `Group category`
+  String get useGroup {
+    return Intl.message('Group category', name: 'useGroup', desc: '', args: []);
   }
 
   /// `The type folder is empty!`
@@ -1859,6 +1869,16 @@ class S {
     return Intl.message(
       'The type folder is empty!',
       name: 'classifyFolderError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The group folder is empty!`
+  String get groupFolderError {
+    return Intl.message(
+      'The group folder is empty!',
+      name: 'groupFolderError',
       desc: '',
       args: [],
     );

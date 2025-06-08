@@ -81,7 +81,7 @@ Future<void> showRightMenu(
                 .read(folderControllerProvider.notifier)
                 .updateText(file.parent),
           ),
-        if (mode.isAdvance)
+        if (mode.isAdvance || mode.isOrganize)
           RightMenuItem.submenu(
             label: S.of(context).settingGroup,
             items: [

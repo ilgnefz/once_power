@@ -9,6 +9,7 @@ import 'package:once_power/views/action_bar/advance/dialog/add.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_preset.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete.dart';
 import 'package:once_power/views/action_bar/advance/dialog/replace.dart';
+import 'package:once_power/views/action_bar/organize/group_list.dart';
 import 'package:once_power/views/action_bar/organize/rule_list.dart';
 import 'package:once_power/views/action_bar/rename/show_upload_text.dart';
 import 'package:once_power/views/content_bar/edit_group.dart';
@@ -95,4 +96,8 @@ void editGroup(BuildContext context) {
 
 void showAllRule(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => RuleList());
+}
+
+void showAllGroup(BuildContext context) {
+  showCustomDialog(context: context, builder: (context) => GroupList());
 }
