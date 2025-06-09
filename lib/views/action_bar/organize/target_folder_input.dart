@@ -32,7 +32,8 @@ class _TargetFolderInputState extends ConsumerState<TargetFolderInput>
         cacheKey: AppKeys.targetFolder,
         cacheListKey: AppKeys.targetFolderList,
         enable: !ref.watch(useRuleOrganizeProvider) &&
-            !ref.watch(useTopParentsProvider),
+            !ref.watch(useTopParentsProvider) &&
+            !ref.watch(useGroupOrganizeProvider),
         hintText: S.of(context).targetFolder,
         controller: controller,
         showClear: ref.watch(folderClearProvider),
