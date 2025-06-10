@@ -23,6 +23,7 @@ class AppKeys {
   static String suffixSerialStart = 'suffixSerialStart';
 
   // bool
+  static String hadPressedCtrl = 'hadPressedCtrl';
   static String isLength = 'isLength';
   static String isCase = 'isCase';
   static String isDate = 'isDate';
