@@ -126,8 +126,12 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
 
 Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   String name = getPathName(filePath);
-  final stat = await File(filePath).stat();
   String extension = getExtension(filePath);
+  if (name.startsWith('.') && extension.isEmpty) {
+    extension = name.substring(1);
+    name = '';
+  }
+  final stat = await File(filePath).stat();
   FileClassify type = getFileClassify(extension);
   int size = type.isFolder ? await calculateSize(filePath) : stat.size;
   DateTime? exifDate;
