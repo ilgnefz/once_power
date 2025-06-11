@@ -577,20 +577,5 @@ final useDateClassifyProvider =
 );
 
 typedef _$UseDateClassify = AutoDisposeNotifier<bool>;
-String _$isUseRegexHash() => r'53c58e809a47fe4c2b37003f343ed79d32dea2f7';
-
-/// See also [IsUseRegex].
-@ProviderFor(IsUseRegex)
-final isUseRegexProvider =
-    AutoDisposeNotifierProvider<IsUseRegex, bool>.internal(
-  IsUseRegex.new,
-  name: r'isUseRegexProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$isUseRegexHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$IsUseRegex = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

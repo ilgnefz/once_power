@@ -281,5 +281,6 @@
   "takeOut": "取出文件",
   "toFront": "至前面",
   "toBehind": "至后面",
-  "regexDesc": "使用正则"
+  "regexDesc": "使用正则",
+  "matchExtDesc": "匹配扩展"
 }

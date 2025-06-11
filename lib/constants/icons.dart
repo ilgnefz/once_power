@@ -2,7 +2,7 @@ class AppIcons {
   static const String autoRun = '${basePath}auto-run.svg';
   static const String basePath = 'assets/icons/';
   static const String cases = '${basePath}case.svg';
-  static const String checkbox = '${basePath}checkbox.svg';
+  // static const String checkbox = '${basePath}checkbox.svg';
   static const String checkAscending = '${basePath}check-ascending.svg';
   static const String checkDescending = '${basePath}check-descending.svg';
   static const String close = '${basePath}close.svg';
@@ -12,6 +12,7 @@ class AppIcons {
   static const String dateAscending = '${basePath}date-ascending.svg';
   static const String dateDescending = '${basePath}date-descending.svg';
   static const String error = '${basePath}error.svg';
+  static const String extension = '${basePath}extension.svg';
   static const String file = '${basePath}file.svg';
   static const String folderAscending = '${basePath}folder-ascending.svg';
   static const String folderDescending = '${basePath}folder-descending.svg';

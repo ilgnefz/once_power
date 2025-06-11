@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "LowercaseLetters",
     ),
     "match": MessageLookupByLibrary.simpleMessage("Matching"),
+    "matchExtDesc": MessageLookupByLibrary.simpleMessage("Match extension"),
     "matchExtension": MessageLookupByLibrary.simpleMessage("Match ext."),
     "matchHint": MessageLookupByLibrary.simpleMessage("Matching content"),
     "matchLength": MessageLookupByLibrary.simpleMessage(

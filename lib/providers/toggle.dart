@@ -387,13 +387,3 @@ class UseDateClassify extends _$UseDateClassify {
     await StorageUtil.setBool(AppKeys.isUseDateClassify, state);
   }
 }
-
-@riverpod
-class IsUseRegex extends _$IsUseRegex {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseRegex);
-  Future<void> update() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseRegex, state);
-  }
-}

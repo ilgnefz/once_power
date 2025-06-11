@@ -8,7 +8,6 @@ import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
-import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/utils.dart';
 
 void advanceUpdateName(WidgetRef ref) {
@@ -24,13 +23,12 @@ void advanceUpdateName(WidgetRef ref) {
     }
     String name = file.name;
     String extension = file.extension;
-    bool isUseRegex = ref.watch(isUseRegexProvider);
     for (AdvanceMenuModel menu in menus) {
       if (menu.group != S.current.all && menu.group != file.group) continue;
       if (menu.type.isDelete) {
         menu as AdvanceMenuDelete;
         if (menu.deleteExt) extension = '';
-        name = advanceDeleteName(menu, name, isUseRegex);
+        name = advanceDeleteName(menu, name, menu.useRegex);
       }
       if (menu.type.isAdd) {
         menu as AdvanceMenuAdd;
@@ -54,7 +52,14 @@ void advanceUpdateName(WidgetRef ref) {
         name = advanceAddName(menu, file, name, index, folder);
       }
       if (menu.type.isReplace) {
-        name = advanceReplaceName(menu as AdvanceMenuReplace, name, isUseRegex);
+        menu as AdvanceMenuReplace;
+        if (menu.matchExt) name = getNameWithExt(name, extension);
+        name = advanceReplaceName(menu, name, menu.useRegex);
+        if (menu.matchExt) {
+          final (newName, newExtension) = getNameAndExt(name, file.type);
+          name = newName;
+          extension = newExtension;
+        }
       }
     }
     ref.read(fileListProvider.notifier).updateName(file.id, name);

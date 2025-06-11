@@ -22,6 +22,16 @@ import 'package:xml/xml.dart';
 
 import 'format.dart';
 
+(String, String) getNameAndExt(String name, FileClassify classify) {
+  if (!name.contains('.')) {
+    return (name, classify.isFolder ? 'dir' : '');
+  }
+  int index = name.lastIndexOf('.');
+  String extension = name.substring(index + 1);
+  String nameWithoutExtension = name.substring(0, index);
+  return (nameWithoutExtension, extension);
+}
+
 String getExtension(String filePath) {
   bool isFile = FileSystemEntity.isFileSync(filePath);
   String extension = 'dir';

@@ -14,9 +14,9 @@ import 'package:once_power/views/action_bar/advance/dialog/replace_match_input.d
 import 'case_conversion_group.dart';
 import 'common_dialog.dart';
 import 'common_location_radio.dart';
-import 'dialog_base_input.dart';
 import 'format_group.dart';
 import 'group_dropdown.dart';
+import 'replace_modify_input.dart';
 import 'word_spacing.dart';
 
 class ReplaceView extends ConsumerStatefulWidget {
@@ -36,6 +36,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   int start = 1, end = 1, front = 1, back = 1;
   CaseType type = CaseType.noConversion;
   String wordSpacing = '';
+  bool useRegex = false, matchExt = false;
   String group = S.current.all;
 
   @override
@@ -53,6 +54,8 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
       end = widget.menu!.end;
       type = widget.menu!.caseType;
       wordSpacing = widget.menu!.wordSpacing;
+      useRegex = widget.menu!.useRegex;
+      matchExt = widget.menu!.matchExt;
       group = widget.menu!.group;
     }
   }
@@ -83,19 +86,29 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                       : S.of(context).replaceInputHint,
                   inputFormatters:
                       isFormat ? [FilteringTextInputFormatter.digitsOnly] : [],
+                  useRegex: useRegex,
                   onChanged: (value) {
                     oldValue = value;
                     setState(() {});
                   },
+                  onTap: () {
+                    useRegex = !useRegex;
+                    setState(() {});
+                  },
                 ),
-                DialogBaseInput(
+                ReplaceModifyInput(
                   value: newValue,
                   enable: type.isNoConversion,
                   hintText: isFormat
                       ? S.of(context).completeContent
                       : S.of(context).replaceInputHint2,
+                  matchExt: matchExt,
                   onChanged: (value) {
                     newValue = value;
+                    setState(() {});
+                  },
+                  onTap: () {
+                    matchExt = !matchExt;
                     setState(() {});
                   },
                 ),
@@ -179,6 +192,8 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
           end: end,
           caseType: type,
           wordSpacing: wordSpacing,
+          useRegex: useRegex,
+          matchExt: matchExt,
           group: group,
         );
         if (widget.menu != null) {

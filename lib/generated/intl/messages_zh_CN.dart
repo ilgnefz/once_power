@@ -195,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lowercase": MessageLookupByLibrary.simpleMessage("小写"),
     "lowercaseLetters": MessageLookupByLibrary.simpleMessage("小写字母"),
     "match": MessageLookupByLibrary.simpleMessage("匹配的"),
+    "matchExtDesc": MessageLookupByLibrary.simpleMessage("匹配扩展"),
     "matchExtension": MessageLookupByLibrary.simpleMessage("匹配扩展"),
     "matchHint": MessageLookupByLibrary.simpleMessage("匹配内容"),
     "matchLength": MessageLookupByLibrary.simpleMessage("输入数字或指定长度字符串"),

@@ -280,5 +280,6 @@
   "takeOut": "Take out",
   "toFront": "To the front",
   "toBehind": "To the behind",
-  "regexDesc": "Use Regex"
+  "regexDesc": "Use Regex",
+  "matchExtDesc": "Match extension"
 }

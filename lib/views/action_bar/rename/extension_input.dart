@@ -16,7 +16,7 @@ class ExtensionInput extends ConsumerWidget {
     bool selected = ref.watch(isModifyExtensionProvider);
     return OperateItem(
       label: S.of(context).fileExtension,
-      icon: AppIcons.checkbox,
+      icon: AppIcons.extension,
       tip: S.of(context).extensionDesc,
       selected: selected,
       onToggle: () {

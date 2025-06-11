@@ -75,6 +75,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
   final int back;
   final List<DeleteType> deleteTypes;
   final bool deleteExt;
+  final bool useRegex;
 
   AdvanceMenuDelete({
     required super.id,
@@ -87,6 +88,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     required this.end,
     required this.deleteTypes,
     required this.deleteExt,
+    required this.useRegex,
     required super.group,
   }) : super(type: AdvanceType.delete);
 
@@ -108,6 +110,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
           ? List<DeleteType>.from(deleteTypes)
           : List<DeleteType>.from(this.deleteTypes),
       deleteExt: deleteExt,
+      useRegex: useRegex,
       group: group,
     );
   }
@@ -127,6 +130,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
             : List<DeleteType>.from(
                 json["deleteTypes"].map((x) => DeleteType.values[x])),
         deleteExt: json["deleteExt"] ?? false,
+        useRegex: json["useRegex"] ?? false,
         group: json["group"] ?? S.current.all,
       );
 
@@ -143,6 +147,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         "end": end,
         "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
         "deleteExt": deleteExt,
+        "useRegex": useRegex,
         "group": group,
       };
 
@@ -159,6 +164,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         'end: $end, '
         'deleteTypes: $deleteTypes, '
         'deleteExt: $deleteExt, '
+        'useRegex: $useRegex, '
         'group: $group}';
   }
 }
@@ -285,6 +291,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final int end;
   final CaseType caseType;
   final String wordSpacing;
+  final bool useRegex;
+  final bool matchExt;
 
   AdvanceMenuReplace({
     required super.id,
@@ -299,6 +307,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.end,
     required this.caseType,
     required this.wordSpacing,
+    required this.useRegex,
+    required this.matchExt,
     required super.group,
   }) : super(type: AdvanceType.replace);
 
@@ -317,6 +327,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       end: end,
       caseType: caseType,
       wordSpacing: wordSpacing,
+      useRegex: useRegex,
+      matchExt: matchExt,
       group: group,
     );
   }
@@ -337,6 +349,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         end: json["end"] ?? 1,
         caseType: CaseType.values[json["caseType"] ?? 0],
         wordSpacing: json["wordSpacing"] ?? "",
+        useRegex: json["useRegex"] ?? false,
+        matchExt: json["matchExt"] ?? false,
         group: json["group"] ?? S.current.all,
       );
 
@@ -355,6 +369,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         "end": end,
         "caseType": caseType.index,
         "wordSpacing": wordSpacing,
+        "useRegex": useRegex,
+        "matchExt": matchExt,
         "group": group,
       };
 
@@ -373,6 +389,8 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'end: $end, '
         'caseType: $caseType, '
         'wordSpacing: $wordSpacing, '
+        'useRegex: $useRegex, '
+        'matchExt: $matchExt, '
         'group: $group}';
   }
 }

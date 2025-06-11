@@ -2178,6 +2178,16 @@ class S {
   String get regexDesc {
     return Intl.message('Use Regex', name: 'regexDesc', desc: '', args: []);
   }
+
+  /// `Match extension`
+  String get matchExtDesc {
+    return Intl.message(
+      'Match extension',
+      name: 'matchExtDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

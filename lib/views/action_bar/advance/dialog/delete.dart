@@ -29,7 +29,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
   MatchLocation location = MatchLocation.first;
   int start = 1, end = 1, front = 1, back = 1;
   List<DeleteType> deleteTypes = [];
-  bool deleteExt = false;
+  bool deleteExt = false, useRegex = false;
   String group = S.current.all;
 
   @override
@@ -44,6 +44,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
       end = widget.menu!.end;
       deleteTypes = widget.menu!.deleteTypes;
       deleteExt = widget.menu!.deleteExt;
+      useRegex = widget.menu!.useRegex;
       group = widget.menu!.group;
     }
   }
@@ -65,8 +66,13 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           DeleteMatchInput(
             value: value,
             enable: !location.isPosition && deleteTypes.isEmpty && !deleteExt,
+            useRegex: useRegex,
             onChanged: (newValue) {
               value = newValue;
+              setState(() {});
+            },
+            onTap: () {
+              useRegex = !useRegex;
               setState(() {});
             },
           ),
@@ -130,6 +136,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           end: end,
           deleteTypes: deleteTypes,
           deleteExt: deleteExt,
+          useRegex: useRegex,
           group: group,
         );
         if (widget.menu != null) {
