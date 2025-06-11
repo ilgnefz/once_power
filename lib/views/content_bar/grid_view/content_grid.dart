@@ -27,7 +27,7 @@ class ContentGrid extends ConsumerWidget {
           padding: const EdgeInsets.only(right: AppNum.defaultP),
           onReorder: (oldIndex, newIndex) =>
               reorderList(ref, files, oldIndex, newIndex),
-          maxCrossAxisExtent: AppNum.imageW,
+          maxCrossAxisExtent: ref.watch(viewImageWidthProvider),
           childAspectRatio: 5 / 6,
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,

@@ -20,6 +20,7 @@ class AppIcons {
   static const String groupAscending = '${basePath}group-ascending.svg';
   static const String groupDescending = '${basePath}group-descending.svg';
   static const String image = '${basePath}image.svg';
+  static const String imageSize = '${basePath}image-size.svg';
   static const String log = '${basePath}log.svg';
   static const String maximize = '${basePath}maximize.svg';
   static const String minimize = '${basePath}minimize.svg';

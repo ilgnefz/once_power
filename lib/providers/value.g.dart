@@ -23,7 +23,7 @@ final dateLengthValueProvider =
 
 typedef _$DateLengthValue = AutoDisposeNotifier<int>;
 String _$prefixSerialLengthHash() =>
-    r'7249de43f221c3027ad9a8b647e9f81adf0dcf47';
+    r'2b69c4b962f9ab57770c80395d7dda93f9f909ad';
 
 /// See also [PrefixSerialLength].
 @ProviderFor(PrefixSerialLength)
@@ -121,5 +121,21 @@ final cSVNameColumnProvider =
 );
 
 typedef _$CSVNameColumn = AutoDisposeNotifier<String>;
+String _$viewImageWidthHash() => r'ad080075f8e452f22b39856dd431afe61011f8db';
+
+/// See also [ViewImageWidth].
+@ProviderFor(ViewImageWidth)
+final viewImageWidthProvider =
+    AutoDisposeNotifierProvider<ViewImageWidth, double>.internal(
+  ViewImageWidth.new,
+  name: r'viewImageWidthProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$viewImageWidthHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ViewImageWidth = AutoDisposeNotifier<double>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

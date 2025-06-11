@@ -102,6 +102,7 @@ void saveOrNo() {
       AppKeys.suffixSerialLength,
       AppKeys.suffixSerialStart,
       AppKeys.sortType,
+      // AppKeys.viewImageW,
       // organize keys
       AppKeys.targetFolder,
       AppKeys.targetFolderList,

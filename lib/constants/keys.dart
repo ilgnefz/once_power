@@ -22,6 +22,9 @@ class AppKeys {
   static String suffixSerialLength = 'suffixSerialLength';
   static String suffixSerialStart = 'suffixSerialStart';
 
+  // double
+  static String viewImageW = 'viewImageW';
+
   // bool
   static String hadPressedCtrl = 'hadPressedCtrl';
   static String isLength = 'isLength';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/constants.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -18,7 +18,7 @@ class PrefixSerialLength extends _$PrefixSerialLength {
   int build() => StorageUtil.getInt(AppKeys.prefixSerialLength) ?? 0;
   Future<void> update(int value) async {
     state = value;
-    StorageUtil.setInt(AppKeys.prefixSerialLength, value);
+    await StorageUtil.setInt(AppKeys.prefixSerialLength, value);
   }
 }
 
@@ -69,4 +69,17 @@ class CSVNameColumn extends _$CSVNameColumn {
   @override
   String build() => 'A';
   void update(String value) => state = value;
+}
+
+@riverpod
+class ViewImageWidth extends _$ViewImageWidth {
+  @override
+  double build() => StorageUtil.getDouble(AppKeys.viewImageW) ?? AppNum.imageW;
+  Future<void> update(bool left) async {
+    List<double> list = [136, 171, 229, 346, 696];
+    int index = list.indexOf(state);
+    if (!left) state = index > 0 ? list[index - 1] : state;
+    if (left) state = index < list.length - 1 ? list[index + 1] : state;
+    await StorageUtil.setDouble(AppKeys.viewImageW, state);
+  }
 }

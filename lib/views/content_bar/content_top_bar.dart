@@ -6,6 +6,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
+import 'package:once_power/views/content_bar/adjust_image.dart';
 import 'package:once_power/views/content_bar/count_checkbox.dart';
 import 'package:once_power/views/content_bar/filter_btn.dart';
 import 'package:once_power/views/content_bar/remove_btn.dart';
@@ -23,8 +24,12 @@ class ContentTopBar extends ConsumerWidget {
       child: Row(
         children: [
           Expanded(child: CountCheckbox()),
+          if (ref.watch(isViewModeProvider) &&
+              !ref.watch(currentModeProvider).isOrganize)
+            AdjustImage(),
+          SizedBox(width: AppNum.largeG),
           SortBtn(),
-          SizedBox(width: AppNum.mediumG),
+          SizedBox(width: AppNum.smallG),
           Consumer(
             builder: (context, ref, child) {
               bool isViewMode = ref.watch(isViewModeProvider);

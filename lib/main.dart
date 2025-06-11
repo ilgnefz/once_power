@@ -7,6 +7,8 @@ import 'constants/constants.dart';
 import 'providers/toggle.dart';
 import 'views/home.dart';
 
+// 将文件剪切到软件暂存区，在某个图片前或后将图片复制出来 ctrl ctrl v 粘贴到软件中
+
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(const ProviderScope(child: MyApp()));
