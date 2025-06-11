@@ -121,7 +121,7 @@ final cSVNameColumnProvider =
 );
 
 typedef _$CSVNameColumn = AutoDisposeNotifier<String>;
-String _$viewImageWidthHash() => r'ad080075f8e452f22b39856dd431afe61011f8db';
+String _$viewImageWidthHash() => r'67ee1d8782abb71e07db4ee159f2f60fd572e38c';
 
 /// See also [ViewImageWidth].
 @ProviderFor(ViewImageWidth)

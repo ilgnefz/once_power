@@ -20,6 +20,10 @@ bool isChinese(String text) => RegExp(r'[\u4e00-\u9fa5]').hasMatch(text);
 
 bool isImgVideo(String file) {
   String extension = getExtension(file).toLowerCase();
+  if (extension.isEmpty) {
+    String name = getPathName(file);
+    if (name.startsWith('.')) extension = name.substring(1);
+  }
   return image.contains(extension) || video.contains(extension);
 }
 
