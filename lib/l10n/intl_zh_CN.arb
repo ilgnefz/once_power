@@ -192,12 +192,12 @@
   "presetNameHint": "请输入预设名称",
   "presetNameError": "预设名称不能为空",
   "presetNameErrorTitle": "预设名称错误",
-  "convertLetters": "转换字母",
+  "convertLetters": "转换文本",
   "uppercase": "大写",
   "lowercase": "小写",
   "toggleCase": "大小写切换",
   "noConversion": "不转换",
-  "letters": "字母",
+  "letters": "文本",
   "advanceEmpty1": "还没添加任何指令",
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
@@ -282,5 +282,7 @@
   "toFront": "至前面",
   "toBehind": "至后面",
   "regexDesc": "使用正则",
-  "matchExtDesc": "匹配扩展"
+  "matchExtDesc": "匹配扩展",
+  "traditional": "繁体",
+  "simplified": "简体"
 }

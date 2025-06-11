@@ -1,4 +1,5 @@
-use rexif::{parse_file, ExifTag};
+use rexif::{ExifTag};
+use zhconv::{zhconv};
 
 #[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
 pub fn greet(name: String) -> String {
@@ -19,7 +20,15 @@ pub fn get_image_capture_date(image_path: String) -> Option<String> {
     None
 }
 
+#[flutter_rust_bridge::frb(sync)] 
+pub fn simplified_to_traditional(text: String) -> String {
+    zhconv(&text, "zh-Hant".parse().unwrap())
+}
 
+#[flutter_rust_bridge::frb(sync)] 
+pub fn traditional_to_simplified(text: String) -> String {
+    zhconv(&text, "zh-Hans".parse().unwrap())
+}
 
 #[flutter_rust_bridge::frb(init)]
 pub fn init_app() {

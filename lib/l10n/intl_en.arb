@@ -192,12 +192,12 @@
   "presetNameHint": "Please enter the preset name",
   "presetNameError": "The preset name cannot be empty",
   "presetNameErrorTitle": "Preset name error",
-  "convertLetters": "Convert Letters",
+  "convertLetters": "Convert Text",
   "uppercase": "Uppercase",
   "lowercase": "Lowercase",
   "toggleCase": "Toggle",
   "noConversion": "No",
-  "letters": "Letters",
+  "letters": "Text",
   "advanceEmpty1": "No instructions have been added yet",
   "advanceEmpty2": "Click the",
   "advanceEmpty3": "\"Delete\", \"Add\", or \"Replace\"",
@@ -281,5 +281,7 @@
   "toFront": "To the front",
   "toBehind": "To the behind",
   "regexDesc": "Use Regex",
-  "matchExtDesc": "Match extension"
+  "matchExtDesc": "Match extension",
+  "traditional": "TraditionalCN",
+  "simplified": "SimplifiedCN"
 }

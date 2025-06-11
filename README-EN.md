@@ -21,6 +21,20 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Added the function of zooming in and out of images
+
+Click the left mouse button to enlarge the image and right-click to shrink the image
+
+![32](doc/32.gif)
+
+## Added the function of temporarily storing files
+
+![31](doc/31.gif)
+
+## Simplification conversion
+
+![30](doc/30.gif)
+
 ## Added PSD file preview
 
 ![29](doc/29.gif)

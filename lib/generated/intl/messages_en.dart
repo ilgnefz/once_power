@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "completeContent": MessageLookupByLibrary.simpleMessage(
       "Please input the completed content",
     ),
-    "convertLetters": MessageLookupByLibrary.simpleMessage("Convert Letters"),
+    "convertLetters": MessageLookupByLibrary.simpleMessage("Convert Text"),
     "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
     "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
     "currentTask": MessageLookupByLibrary.simpleMessage("Task"),
@@ -240,7 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lengthDesc": MessageLookupByLibrary.simpleMessage(
       "Input length truncation (adding a space between two numbers to truncate the middle part)",
     ),
-    "letters": MessageLookupByLibrary.simpleMessage("Letters"),
+    "letters": MessageLookupByLibrary.simpleMessage("Text"),
     "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
     "lowercase": MessageLookupByLibrary.simpleMessage("Lowercase"),
     "lowercaseLetters": MessageLookupByLibrary.simpleMessage(
@@ -374,6 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shortcutTip1": MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
     "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
     "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),
+    "simplified": MessageLookupByLibrary.simpleMessage("SimplifiedCN"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "sizeAscending": MessageLookupByLibrary.simpleMessage("Size ascending"),
     "sizeDescending": MessageLookupByLibrary.simpleMessage("Size descending"),
@@ -420,6 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Move the file to a top-level parent folder other than the disk root directory",
     ),
     "totalInstructions": m10,
+    "traditional": MessageLookupByLibrary.simpleMessage("TraditionalCN"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("Get episode info"),
     "typeAscending": MessageLookupByLibrary.simpleMessage("Type ascending"),
     "typeDescending": MessageLookupByLibrary.simpleMessage("Type descending"),

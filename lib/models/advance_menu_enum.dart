@@ -118,7 +118,14 @@ extension AddPositionExtension on AddPosition {
   bool get isAfter => this == AddPosition.after;
 }
 
-enum CaseType { noConversion, uppercase, lowercase, toggleCase }
+enum CaseType {
+  noConversion,
+  uppercase,
+  lowercase,
+  toggleCase,
+  traditional,
+  simplified
+}
 
 extension CaseTypeExtension on CaseType {
   String get label {
@@ -131,6 +138,10 @@ extension CaseTypeExtension on CaseType {
         return S.current.toggleCase;
       case CaseType.noConversion:
         return S.current.noConversion;
+      case CaseType.traditional:
+        return S.current.traditional;
+      case CaseType.simplified:
+        return S.current.simplified;
     }
   }
 
@@ -138,6 +149,8 @@ extension CaseTypeExtension on CaseType {
   bool get isUppercase => this == CaseType.uppercase;
   bool get isLowercase => this == CaseType.lowercase;
   bool get isToggleCase => this == CaseType.toggleCase;
+  bool get isTraditional => this == CaseType.traditional;
+  bool get isSimplified => this == CaseType.simplified;
 }
 
 enum ReplaceMode { normal, format }

@@ -1539,10 +1539,10 @@ class S {
     );
   }
 
-  /// `Convert Letters`
+  /// `Convert Text`
   String get convertLetters {
     return Intl.message(
-      'Convert Letters',
+      'Convert Text',
       name: 'convertLetters',
       desc: '',
       args: [],
@@ -1569,9 +1569,9 @@ class S {
     return Intl.message('No', name: 'noConversion', desc: '', args: []);
   }
 
-  /// `Letters`
+  /// `Text`
   String get letters {
-    return Intl.message('Letters', name: 'letters', desc: '', args: []);
+    return Intl.message('Text', name: 'letters', desc: '', args: []);
   }
 
   /// `No instructions have been added yet`
@@ -2187,6 +2187,21 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `TraditionalCN`
+  String get traditional {
+    return Intl.message(
+      'TraditionalCN',
+      name: 'traditional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SimplifiedCN`
+  String get simplified {
+    return Intl.message('SimplifiedCN', name: 'simplified', desc: '', args: []);
   }
 }
 

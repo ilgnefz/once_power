@@ -8,6 +8,7 @@ import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
+import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/utils/utils.dart';
 
 void advanceUpdateName(WidgetRef ref) {
@@ -238,6 +239,10 @@ String advanceReplaceName(
         }
       }
       return result;
+    case CaseType.traditional:
+      return simplifiedToTraditional(text: name);
+    case CaseType.simplified:
+      return traditionalToSimplified(text: name);
     case CaseType.noConversion:
       MatchLocation location = menu.matchLocation;
       switch (location) {
