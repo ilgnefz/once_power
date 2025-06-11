@@ -274,5 +274,10 @@
   "sizeDescending": "Size descending",
   "groupAscending": "Group ascending",
   "groupDescending": "Group descending",
-  "none": "None"
+  "none": "None",
+  "move": "Move",
+  "suspenseFile": "Suspense file",
+  "takeOut": "Take out",
+  "toFront": "To the front",
+  "toBehind": "To the behind"
 }

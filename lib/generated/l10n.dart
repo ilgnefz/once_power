@@ -2143,6 +2143,36 @@ class S {
   String get none {
     return Intl.message('None', name: 'none', desc: '', args: []);
   }
+
+  /// `Move`
+  String get move {
+    return Intl.message('Move', name: 'move', desc: '', args: []);
+  }
+
+  /// `Suspense file`
+  String get suspenseFile {
+    return Intl.message(
+      'Suspense file',
+      name: 'suspenseFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take out`
+  String get takeOut {
+    return Intl.message('Take out', name: 'takeOut', desc: '', args: []);
+  }
+
+  /// `To the front`
+  String get toFront {
+    return Intl.message('To the front', name: 'toFront', desc: '', args: []);
+  }
+
+  /// `To the behind`
+  String get toBehind {
+    return Intl.message('To the behind', name: 'toBehind', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

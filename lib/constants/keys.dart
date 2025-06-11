@@ -68,6 +68,7 @@ class AppKeys {
   static String advancePresetList = 'advancePresetList';
   static String operateLogList = 'operateLogList';
   static String groupList = 'groupList';
+  static String suspenseFileList = 'suspenseFileList';
 
   // enum
   static String functionMode = 'functionMode';

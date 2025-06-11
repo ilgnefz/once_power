@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
 
@@ -50,6 +51,37 @@ class AppHotKey {
           }
         },
       ),
+      HotKeyModel(
+        hotkey: HotKey(
+          key: LogicalKeyboardKey.keyZ,
+          modifiers: [],
+          scope: HotKeyScope.inapp,
+        ),
+        keyDownHandler: () =>
+            suspenseFileList(ref, ref.watch(sortSelectListProvider)),
+      ),
+      // HotKeyModel(
+      //   hotkey: HotKey(
+      //     key: LogicalKeyboardKey.keyX,
+      //     modifiers: [],
+      //     scope: HotKeyScope.inapp,
+      //   ),
+      //   keyDownHandler: () {
+      //     FileInfo? file = ref.watch(hoverFileProvider);
+      //     if (file != null) toTheFront(ref, file);
+      //   },
+      // ),
+      // HotKeyModel(
+      //   hotkey: HotKey(
+      //     key: LogicalKeyboardKey.keyC,
+      //     modifiers: [],
+      //     scope: HotKeyScope.inapp,
+      //   ),
+      //   keyDownHandler: () {
+      //     FileInfo? file = ref.watch(hoverFileProvider);
+      //     if (file != null) toTheBehind(ref, file);
+      //   },
+      // ),
     ];
 
     for (var hotkey in hotKeys) {

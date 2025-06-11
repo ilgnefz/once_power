@@ -76,28 +76,51 @@ class FileInfo {
         'checked: $checked}';
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'newName': newName,
-      'parent': parent,
-      'filePath': filePath,
-      'tempPath': tempPath,
-      'extension': extension,
-      'newExtension': newExtension,
-      'beforePath': beforePath,
-      'createdDate': createdDate.millisecondsSinceEpoch,
-      'modifiedDate': modifiedDate.millisecondsSinceEpoch,
-      'exifDate': exifDate?.millisecondsSinceEpoch,
-      'type': type.index,
-      'size': size,
-      'resolution': resolution,
-      'thumbnail': thumbnail,
-      'group': group,
-      'checked': checked,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'newName': newName,
+        'parent': parent,
+        'filePath': filePath,
+        'tempPath': tempPath,
+        'extension': extension,
+        'newExtension': newExtension,
+        'beforePath': beforePath,
+        'createdDate': createdDate.millisecondsSinceEpoch,
+        'modifiedDate': modifiedDate.millisecondsSinceEpoch,
+        'exifDate': exifDate?.millisecondsSinceEpoch,
+        'type': type.index,
+        'size': size,
+        'resolution': resolution?.toJson(),
+        'thumbnail': thumbnail,
+        'group': group,
+        'checked': checked,
+      };
+
+  factory FileInfo.fromJson(Map<String, dynamic> json) => FileInfo(
+        id: json['id'],
+        name: json['name'],
+        newName: json['newName'],
+        parent: json['parent'],
+        filePath: json['filePath'],
+        tempPath: json['tempPath'],
+        extension: json['extension'],
+        newExtension: json['newExtension'],
+        beforePath: json['beforePath'],
+        createdDate: DateTime.fromMillisecondsSinceEpoch(json['createdDate']),
+        modifiedDate: DateTime.fromMillisecondsSinceEpoch(json['modifiedDate']),
+        exifDate: json['exifDate'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(json['exifDate'])
+            : null,
+        type: FileClassify.values[json['type']],
+        size: json['size'],
+        resolution: json['resolution'] != null
+            ? Resolution.fromJson(json['resolution'])
+            : null,
+        thumbnail: json['thumbnail'],
+        group: json['group'],
+        checked: json['checked'],
+      );
 }
 
 class CsvRenameInfo {
@@ -139,6 +162,16 @@ class Resolution {
   Resolution(this.width, this.height);
 
   static Resolution zero = Resolution(0, 0);
+
+  Map<String, dynamic> toJson() => {
+        'width': width,
+        'height': height,
+      };
+
+  factory Resolution.fromJson(Map<String, dynamic> json) => Resolution(
+        json['width'],
+        json['height'],
+      );
 
   @override
   String toString() {

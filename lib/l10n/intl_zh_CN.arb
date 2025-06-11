@@ -275,5 +275,10 @@
   "sizeDescending": "大小降序",
   "groupAscending": "组升序",
   "groupDescending": "组降序",
-  "none": "无"
+  "none": "无",
+  "move": "移动",
+  "suspenseFile": "暂存文件",
+  "takeOut": "取出文件",
+  "toFront": "至前面",
+  "toBehind": "至后面"
 }

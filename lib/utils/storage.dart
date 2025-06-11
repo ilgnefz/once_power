@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:once_power/models/advance_menu.dart';
+import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/rule_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -134,5 +135,21 @@ class StorageUtil {
       return RuleTypeValue.fromJson(jsonDecode(value));
     }
     return null;
+  }
+
+  static Future<bool> setFileList(String key, List<FileInfo> value) {
+    List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  static List<FileInfo> getFileList(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    List<FileInfo> result = [];
+    if (list!= null) {
+      result = list.map((e) {
+        return FileInfo.fromJson(jsonDecode(e));
+      }).toList();
+    }
+    return result;
   }
 }

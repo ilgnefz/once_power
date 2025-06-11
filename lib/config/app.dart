@@ -72,6 +72,7 @@ class AppConfig {
 void saveOrNo() {
   bool save = StorageUtil.getBool(AppKeys.isSave);
   StorageUtil.remove(AppKeys.operateLogList);
+  StorageUtil.remove(AppKeys.suspenseFileList);
   if (!save) {
     List<String> appKeyList = [
       AppKeys.advanceMenuList,

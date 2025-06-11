@@ -62,18 +62,43 @@ Future<void> showRightMenu(
             label: S.of(context).modifyName,
             onSelected: () => autoModifyInput(ref, file.name),
           ),
-        RightMenuItem(
-          label: S.of(context).moveToFirst,
-          onSelected: () => toTheFirst(ref, sortSelectList),
+        RightMenuItem.submenu(
+          label: S.of(context).move,
+          items: [
+            RightMenuItem(
+              label: S.of(context).moveToFirst,
+              onSelected: () => toTheFirst(ref, sortSelectList),
+            ),
+            RightMenuItem(
+              label: S.of(context).moveToCenter,
+              onSelected: () => toTheCenter(ref, sortSelectList),
+            ),
+            RightMenuItem(
+              label: S.of(context).moveToLast,
+              onSelected: () => toTheLast(ref, sortSelectList),
+            ),
+          ],
         ),
-        RightMenuItem(
-          label: S.of(context).moveToCenter,
-          onSelected: () => toTheCenter(ref, sortSelectList),
-        ),
-        RightMenuItem(
-          label: S.of(context).moveToLast,
-          onSelected: () => toTheLast(ref, sortSelectList),
-        ),
+        if (StorageUtil.getFileList(AppKeys.suspenseFileList).isEmpty)
+          RightMenuItem(
+            label: S.of(context).suspenseFile,
+            onSelected: () => suspenseFileList(ref, sortSelectList),
+          ),
+        if (StorageUtil.getFileList(AppKeys.suspenseFileList).isNotEmpty)
+          RightMenuItem.submenu(
+            label: S.of(context).takeOut,
+            color: Theme.of(context).primaryColor,
+            items: [
+              RightMenuItem(
+                label: S.of(context).toFront,
+                onSelected: () => toTheFront(ref, file),
+              ),
+              RightMenuItem(
+                label: S.of(context).toBehind,
+                onSelected: () => toTheBehind(ref, file),
+              ),
+            ],
+          ),
         if (ref.watch(currentModeProvider).isOrganize)
           RightMenuItem(
             label: S.of(context).matchParent,

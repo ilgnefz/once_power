@@ -45,6 +45,10 @@ class FileList extends _$FileList {
 
   void insertLast(List<FileInfo> files) => state = [...state, ...files];
 
+  void insertPosition(int index, List<FileInfo> files) {
+    state = [...state.take(index), ...files, ...state.skip(index)];
+  }
+
   void check(String id) => state = state.map((e) {
         if (e.id == id) e.checked = !e.checked;
         return e;

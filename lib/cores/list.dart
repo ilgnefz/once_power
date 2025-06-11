@@ -84,6 +84,11 @@ void insertLast(WidgetRef ref, List<FileInfo> files) {
   updateName(ref);
 }
 
+void insertPosition(WidgetRef ref, int index, List<FileInfo> files) {
+  ref.read(fileListProvider.notifier).insertPosition(index, files);
+  updateName(ref);
+}
+
 void filterFile(BuildContext context, WidgetRef ref) {
   if (isViewNoOrganize(ref)) {
     final FileList provider = ref.read(fileListProvider.notifier);

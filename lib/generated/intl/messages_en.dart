@@ -259,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
     "modifyName": MessageLookupByLibrary.simpleMessage("Modify name"),
     "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
+    "move": MessageLookupByLibrary.simpleMessage("Move"),
     "moveError": MessageLookupByLibrary.simpleMessage("Moving error"),
     "moveFailed": MessageLookupByLibrary.simpleMessage("Move failed"),
     "moveToCenter": MessageLookupByLibrary.simpleMessage("To the center"),
@@ -387,6 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfulNum": m9,
     "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
     "suffixContent": MessageLookupByLibrary.simpleMessage("Add suffix content"),
+    "suspenseFile": MessageLookupByLibrary.simpleMessage("Suspense file"),
     "swapPrefixDesc": MessageLookupByLibrary.simpleMessage(
       "Swap prefixes and incremental number positions",
     ),
@@ -394,6 +396,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Swap suffixes and incremental number positions",
     ),
     "tableInfo": MessageLookupByLibrary.simpleMessage("Original name column: "),
+    "takeOut": MessageLookupByLibrary.simpleMessage("Take out"),
     "takeTime": MessageLookupByLibrary.simpleMessage("Time"),
     "targetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
     "targetFolderError": MessageLookupByLibrary.simpleMessage(
@@ -406,6 +409,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tipTitle": MessageLookupByLibrary.simpleMessage("Tip"),
     "to": MessageLookupByLibrary.simpleMessage("to"),
+    "toBehind": MessageLookupByLibrary.simpleMessage("To the behind"),
+    "toFront": MessageLookupByLibrary.simpleMessage("To the front"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
     "toggleCase": MessageLookupByLibrary.simpleMessage("Toggle"),
     "topParentFolder": MessageLookupByLibrary.simpleMessage("Top folder"),
