@@ -279,5 +279,6 @@
   "suspenseFile": "Suspense file",
   "takeOut": "Take out",
   "toFront": "To the front",
-  "toBehind": "To the behind"
+  "toBehind": "To the behind",
+  "regexDesc": "Use Regex"
 }

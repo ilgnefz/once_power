@@ -9,6 +9,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/views/action_bar/advance/dialog/replace_match_input.dart';
 
 import 'case_conversion_group.dart';
 import 'common_dialog.dart';
@@ -74,7 +75,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
             child: Column(
               spacing: AppNum.mediumG,
               children: [
-                DialogBaseInput(
+                ReplaceMatchInput(
                   value: oldValue,
                   enable: !location.isPosition && type.isNoConversion,
                   hintText: isFormat

@@ -2173,6 +2173,11 @@ class S {
   String get toBehind {
     return Intl.message('To the behind', name: 'toBehind', desc: '', args: []);
   }
+
+  /// `Use Regex`
+  String get regexDesc {
+    return Intl.message('Use Regex', name: 'regexDesc', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

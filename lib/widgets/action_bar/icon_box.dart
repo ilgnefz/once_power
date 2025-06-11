@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/widgets/base/easy_tooltip.dart';
 import 'package:once_power/widgets/base/svg_icon.dart';
+import 'package:tolyui_feedback/tolyui_feedback.dart';
 
 class IconBox extends StatelessWidget {
   const IconBox(
     this.icon, {
     super.key,
     required this.tip,
+    this.placement = Placement.right,
     this.iconSize = 20,
     required this.selected,
     required this.onTap,
   });
 
   final String tip;
+  final Placement placement;
   final String icon;
   final double iconSize;
   final bool selected;
@@ -24,6 +27,7 @@ class IconBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return EasyTooltip(
       tip: tip,
+      placement: placement,
       textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
           .useSystemChineseFont(),
       child: Ink(

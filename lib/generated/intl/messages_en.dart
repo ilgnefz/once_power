@@ -330,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "regeditTip": MessageLookupByLibrary.simpleMessage(
       "Open right-click shortcut menu (When the software is not running, the Windows system only allows one file path to be passed in at a time, so when the software is not running, only one folder path is allowed to be passed in. You can place all files in one folder. If multiple files are passed in at once, please place the shortcut of the software in the \"Send To\" folder (open File Explorer, enter \"shell: sendto\" in the address bar and press enter), and use \"Send to\" to pass in)",
     ),
+    "regexDesc": MessageLookupByLibrary.simpleMessage("Use Regex"),
     "remove": MessageLookupByLibrary.simpleMessage("Remove"),
     "removeFolder": MessageLookupByLibrary.simpleMessage("Remove folder"),
     "removeNonImage": m8,

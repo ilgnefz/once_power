@@ -8,11 +8,11 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete_extension_switch.dart';
+import 'package:once_power/views/action_bar/advance/dialog/delete_match_input.dart';
 
 import 'common_dialog.dart';
 import 'common_location_radio.dart';
 import 'delete_type_group.dart';
-import 'dialog_base_input.dart';
 import 'group_dropdown.dart';
 
 class DeleteView extends ConsumerStatefulWidget {
@@ -62,10 +62,9 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
       child: Column(
         spacing: AppNum.mediumG,
         children: [
-          DialogBaseInput(
+          DeleteMatchInput(
             value: value,
             enable: !location.isPosition && deleteTypes.isEmpty && !deleteExt,
-            hintText: S.of(context).deleteInputHint,
             onChanged: (newValue) {
               value = newValue;
               setState(() {});

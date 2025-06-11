@@ -26,6 +26,7 @@ class AppIcons {
   static const String minimize = '${basePath}minimize.svg';
   static const String nameAscending = '${basePath}name-ascending.svg';
   static const String nameDescending = '${basePath}name-descending.svg';
+  static const String regex = '${basePath}regex.svg';
   static const String ruler = '${basePath}ruler.svg';
   static const String save = '${basePath}save.svg';
   static const String shortcutMenu = '${basePath}shortcut-menu.svg';

@@ -94,6 +94,7 @@ void saveOrNo() {
       AppKeys.isUseRuleOrganize,
       AppKeys.isSuffixCycle,
       AppKeys.isSuffixSwap,
+      AppKeys.isUseRegex,
       AppKeys.isUseTopFolder,
       AppKeys.isViewMode,
       AppKeys.locale,

@@ -254,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "regeditTip": MessageLookupByLibrary.simpleMessage(
       "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\"发送到\"传入）",
     ),
+    "regexDesc": MessageLookupByLibrary.simpleMessage("使用正则"),
     "remove": MessageLookupByLibrary.simpleMessage("移除"),
     "removeFolder": MessageLookupByLibrary.simpleMessage("移除路径"),
     "removeNonImage": m8,

@@ -46,6 +46,7 @@ class AppKeys {
   static String isClassifyFile = 'isClassifyFile';
   static String isUseDateClassify = 'isUseDateClassify';
   static String isUseGroupOrganize = 'isUseGroupOrganize';
+  static String isUseRegex = 'isUseRegex';
   static String isUseRuleOrganize = 'isUseRuleOrganize';
   static String isUseTopFolder = 'isUseTopFolder';
   static String isAddSubfolder = 'isAddSubfolder';

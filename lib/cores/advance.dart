@@ -8,6 +8,7 @@ import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/utils.dart';
 
 void advanceUpdateName(WidgetRef ref) {
@@ -23,12 +24,13 @@ void advanceUpdateName(WidgetRef ref) {
     }
     String name = file.name;
     String extension = file.extension;
+    bool isUseRegex = ref.watch(isUseRegexProvider);
     for (AdvanceMenuModel menu in menus) {
       if (menu.group != S.current.all && menu.group != file.group) continue;
       if (menu.type.isDelete) {
         menu as AdvanceMenuDelete;
         if (menu.deleteExt) extension = '';
-        name = advanceDeleteName(menu, name);
+        name = advanceDeleteName(menu, name, isUseRegex);
       }
       if (menu.type.isAdd) {
         menu as AdvanceMenuAdd;
@@ -52,7 +54,7 @@ void advanceUpdateName(WidgetRef ref) {
         name = advanceAddName(menu, file, name, index, folder);
       }
       if (menu.type.isReplace) {
-        name = advanceReplaceName(menu as AdvanceMenuReplace, name);
+        name = advanceReplaceName(menu as AdvanceMenuReplace, name, isUseRegex);
       }
     }
     ref.read(fileListProvider.notifier).updateName(file.id, name);
@@ -61,7 +63,7 @@ void advanceUpdateName(WidgetRef ref) {
   }
 }
 
-String advanceDeleteName(AdvanceMenuDelete menu, String name) {
+String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
   String value = menu.value;
   MatchLocation location = menu.matchLocation;
   List<DeleteType> deleteTypes = menu.deleteTypes;
@@ -96,17 +98,25 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
   }
   switch (location) {
     case MatchLocation.first:
-      name = name.replaceFirst(value, '');
-      return name;
+      return isUseRegex
+          ? name.replaceFirst(RegExp(value), '')
+          : name.replaceFirst(value, '');
     case MatchLocation.last:
-      int index = name.lastIndexOf(value);
-      if (index != -1) {
-        name = name.substring(0, index) + name.substring(index + value.length);
+      if (isUseRegex) {
+        final match = RegExp(value).allMatches(name).lastOrNull;
+        return match != null
+            ? name.substring(0, match.start) + name.substring(match.end)
+            : name;
+      } else {
+        int index = name.lastIndexOf(value);
+        return index != -1
+            ? name.substring(0, index) + name.substring(index + value.length)
+            : name;
       }
-      return name;
     case MatchLocation.all:
-      name = name.replaceAll(value, '');
-      return name;
+      return isUseRegex
+          ? name.replaceAll(RegExp(value), '')
+          : name.replaceAll(value, '');
     case MatchLocation.position:
       return matchPosition(name, '', menu.start, menu.end);
     case MatchLocation.front:
@@ -186,7 +196,8 @@ String advanceAddName(
   return name;
 }
 
-String advanceReplaceName(AdvanceMenuReplace menu, String name) {
+String advanceReplaceName(
+    AdvanceMenuReplace menu, String name, bool isUseRegex) {
   String oldValue = menu.value[0];
   String newValue = menu.value[1];
   CaseType type = menu.caseType;
@@ -226,18 +237,32 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
       MatchLocation location = menu.matchLocation;
       switch (location) {
         case MatchLocation.first:
-          name = name.replaceFirst(oldValue, newValue);
+          name = isUseRegex
+              ? name.replaceFirst(RegExp(oldValue), newValue)
+              : name.replaceFirst(oldValue, newValue);
           return name;
         case MatchLocation.last:
-          int index = name.lastIndexOf(oldValue);
-          if (index != -1) {
-            name = name.substring(0, index) +
-                name.substring(index + oldValue.length) +
-                newValue;
+          if (isUseRegex) {
+            final matches = RegExp(oldValue).allMatches(name);
+            if (matches.isNotEmpty) {
+              final lastMatch = matches.last;
+              name = name.substring(0, lastMatch.start) +
+                  newValue +
+                  name.substring(lastMatch.end);
+            }
+          } else {
+            int index = name.lastIndexOf(oldValue);
+            if (index != -1) {
+              name = name.substring(0, index) +
+                  newValue +
+                  name.substring(index + oldValue.length);
+            }
           }
           return name;
         case MatchLocation.all:
-          name = name.replaceAll(oldValue, newValue);
+          name = isUseRegex
+              ? name.replaceAll(RegExp(oldValue), newValue)
+              : name.replaceAll(oldValue, newValue);
           return name;
         case MatchLocation.position:
           return matchPosition(name, newValue, menu.start, menu.end);
