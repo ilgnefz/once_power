@@ -43,6 +43,7 @@ void organizeFolder(WidgetRef ref) async {
   if (!isRule && !isTop && !isGroup) {
     String inputFolder = ref.watch(folderControllerProvider).text;
     if (inputFolder == '' || inputFolder.isEmpty) {
+      clearOrganize(ref);
       return showOrganizeEmptyNotification();
     }
   }
