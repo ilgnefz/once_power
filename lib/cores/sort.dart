@@ -10,6 +10,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/sort_enum.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
+import 'package:once_power/providers/progress.dart';
 import 'package:once_power/providers/select.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
@@ -88,12 +89,16 @@ void toTheLast(WidgetRef ref, List<FileInfo> selectList) {
 }
 
 void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
-  List<FileInfo> cache = [];
-  for (FileInfo file in selectList) {
-    cache.add(file);
-    removeOne(ref, file.id);
+  if (selectList.length < ref.watch(totalProvider)) {
+    List<FileInfo> cache = [];
+    for (FileInfo file in selectList) {
+      cache.add(file);
+      removeOne(ref, file.id);
+    }
+    await StorageUtil.setFileList(AppKeys.suspenseFileList, cache);
+  } else {
+    showSuspenseErrorInfo();
   }
-  await StorageUtil.setFileList(AppKeys.suspenseFileList, cache);
 }
 
 void toTheFront(WidgetRef ref, FileInfo file) {

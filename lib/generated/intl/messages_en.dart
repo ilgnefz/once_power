@@ -360,6 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectPath": MessageLookupByLibrary.simpleMessage("Select folder"),
     "selectReserve": MessageLookupByLibrary.simpleMessage("Invert selection"),
     "selectTargetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
+    "selectedAll": MessageLookupByLibrary.simpleMessage("Selected all"),
     "separate": MessageLookupByLibrary.simpleMessage("Separate Words"),
     "serial": MessageLookupByLibrary.simpleMessage("Serial"),
     "serialDistinguish": MessageLookupByLibrary.simpleMessage(
@@ -387,6 +388,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfulNum": m9,
     "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
     "suffixContent": MessageLookupByLibrary.simpleMessage("Add suffix content"),
+    "suspenseError": MessageLookupByLibrary.simpleMessage(
+      "Suspense file failed",
+    ),
+    "suspenseErrorDesc": MessageLookupByLibrary.simpleMessage(
+      "No bulk suspense of all files",
+    ),
     "suspenseFile": MessageLookupByLibrary.simpleMessage("Suspense file"),
     "swapPrefixDesc": MessageLookupByLibrary.simpleMessage(
       "Swap prefixes and incremental number positions",

@@ -24,6 +24,7 @@ class ContentListItem extends ConsumerWidget {
     return SelectSortCard(
       index: index,
       file: file,
+      onDoubleTap: () {},
       child: Container(
         height: 40,
         padding: EdgeInsets.only(left: 4),

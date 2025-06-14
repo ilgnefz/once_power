@@ -281,7 +281,10 @@
   "traditional": "TraditionalCN",
   "simplified": "SimplifiedCN",
   "shortcutKey": "Shortcut key",
+  "selectedAll": "Selected all",
   "toggleSelected": "Toggle selected state",
   "takeOutFront": "Take it out to the front",
-  "takeOutBehind": "Take it out to the back"
+  "takeOutBehind": "Take it out to the back",
+  "suspenseError": "Suspense file failed",
+  "suspenseErrorDesc": "No bulk suspense of all files"
 }

@@ -122,3 +122,12 @@ void showEmptyNotification() {
     time: 2,
   ).show();
 }
+
+void showSuspenseErrorInfo() {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: S.current.suspenseError,
+    message: S.current.suspenseErrorDesc,
+    time: 3,
+  ).show();
+}

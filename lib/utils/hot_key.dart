@@ -5,6 +5,7 @@ import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/list.dart';
 
 class AppHotKey {
   static Future<void> registerHotkeys(
@@ -49,6 +50,20 @@ class AppHotKey {
               ref.read(fileListProvider.notifier).remove(file.id);
             }
             ref.read(sortSelectListProvider.notifier).clear();
+          }
+        },
+      ),
+      HotKeyModel(
+        hotkey: HotKey(
+          key: LogicalKeyboardKey.keyA,
+          modifiers: [HotKeyModifier.control],
+          scope: HotKeyScope.inapp,
+        ),
+        keyDownHandler: () {
+          List<FileInfo> list = ref.read(sortListProvider);
+          if (list.isNotEmpty) {
+            ref.read(sortSelectListProvider.notifier).clear();
+            ref.read(sortSelectListProvider.notifier).addAll(list);
           }
         },
       ),

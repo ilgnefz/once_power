@@ -282,7 +282,10 @@
   "traditional": "繁体",
   "simplified": "简体",
   "shortcutKey": "快捷键",
+  "selectedAll": "全选",
   "toggleSelected": "切换选中",
   "takeOutFront": "取出至前面",
-  "takeOutBehind": "取出至后面"
+  "takeOutBehind": "取出至后面",
+  "suspenseError": "暂存文件失败",
+  "suspenseErrorDesc": "禁止一次性暂存全部文件"
 }

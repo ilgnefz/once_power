@@ -2189,6 +2189,16 @@ class S {
     );
   }
 
+  /// `Selected all`
+  String get selectedAll {
+    return Intl.message(
+      'Selected all',
+      name: 'selectedAll',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Toggle selected state`
   String get toggleSelected {
     return Intl.message(
@@ -2214,6 +2224,26 @@ class S {
     return Intl.message(
       'Take it out to the back',
       name: 'takeOutBehind',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suspense file failed`
+  String get suspenseError {
+    return Intl.message(
+      'Suspense file failed',
+      name: 'suspenseError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No bulk suspense of all files`
+  String get suspenseErrorDesc {
+    return Intl.message(
+      'No bulk suspense of all files',
+      name: 'suspenseErrorDesc',
       desc: '',
       args: [],
     );
