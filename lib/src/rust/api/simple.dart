@@ -19,5 +19,8 @@ String simplifiedToTraditional({required String text}) =>
 String traditionalToSimplified({required String text}) =>
     RustLib.instance.api.crateApiSimpleTraditionalToSimplified(text: text);
 
-String? deleteToTrash({required String filePath}) =>
+Future<String?> deleteToTrash({required String filePath}) =>
     RustLib.instance.api.crateApiSimpleDeleteToTrash(filePath: filePath);
+
+Future<String?> deleteAllToTrash({required List<String> filePaths}) =>
+    RustLib.instance.api.crateApiSimpleDeleteAllToTrash(filePaths: filePaths);

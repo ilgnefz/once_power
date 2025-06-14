@@ -16,7 +16,7 @@ class TipBtn extends ConsumerWidget {
     String tip6 = S.of(context).takeOutBehind;
     return TooltipIcon(
       tip:
-          '$tip1:\nCtrl+A  $tip2\nCtrl+S  $tip3\nCtrl+z  $tip4\nCtrl+x  $tip5\nCtrl+c  $tip6',
+          '$tip1:\nCtrl+A  $tip2\nCtrl+S  $tip3\nCtrl+Z  $tip4\nCtrl+X  $tip5\nCtrl+C  $tip6',
       icon: Icons.tips_and_updates_rounded,
       selected: false,
       onTap: () {},

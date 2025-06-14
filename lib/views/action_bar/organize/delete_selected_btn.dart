@@ -21,19 +21,31 @@ class DeleteSelectedBtn extends ConsumerWidget {
     bool saveLog = ref.watch(isSaveLogProvider);
 
     void deleteSelected() async {
+      List<String> deletePaths = [];
       List<FileInfo> files = ref.read(fileListProvider);
-      for (var file in files) {
+      for (FileInfo file in files) {
         if (!file.checked) continue;
-        final result = deleteToTrash(filePath: file.filePath);
-        if (result == null) {
-          removeOne(ref, file.id);
-          if (saveLog) await tempSaveDeleteLog(ref, file.filePath);
-        } else {
-          errorList.add(InfoDetail(
-            file: file.filePath,
-            message: '${S.current.deleteFailed}: $result',
-          ));
-        }
+        removeOne(ref, file.id);
+        deletePaths.add(file.filePath);
+        if (saveLog) await tempSaveDeleteLog(ref, file.filePath);
+        // try {
+        //   await deleteToTrash(filePath: file.filePath);
+        //   removeOne(ref, file.id);
+        //   if (saveLog) await tempSaveDeleteLog(ref, file.filePath);
+        // } catch (e) {
+        //   errorList.add(InfoDetail(
+        //     file: file.filePath,
+        //     message: '${S.current.deleteFailed}: $e',
+        //   ));
+        // }
+      }
+      try {
+        await deleteAllToTrash(filePaths: deletePaths);
+      } catch (e) {
+        errorList.add(InfoDetail(
+          file: S.current.deleteFailed,
+          message: '${S.current.deleteFailed}: $e',
+        ));
       }
       showDeleteNotification(errorList);
       if (ref.watch(isSaveLogProvider)) {

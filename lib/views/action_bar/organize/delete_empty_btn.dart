@@ -24,7 +24,7 @@ class DeleteEmptyBtn extends ConsumerWidget {
 
     Future<void> delete(Directory directory) async {
       try {
-        deleteToTrash(filePath: directory.path);
+        await deleteToTrash(filePath: directory.path);
         // if (saveLog) saveLogContent(directory.path);
         if (saveLog) await tempSaveDeleteLog(ref, directory.path);
       } catch (e) {
