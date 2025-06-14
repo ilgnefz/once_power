@@ -10,6 +10,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/toggle.dart';
+import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/widgets/common/easy_elevated_btn.dart';
 
@@ -23,7 +24,7 @@ class DeleteEmptyBtn extends ConsumerWidget {
 
     Future<void> delete(Directory directory) async {
       try {
-        directory.deleteSync();
+        deleteToTrash(filePath: directory.path);
         // if (saveLog) saveLogContent(directory.path);
         if (saveLog) await tempSaveDeleteLog(ref, directory.path);
       } catch (e) {

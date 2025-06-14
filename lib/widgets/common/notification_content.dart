@@ -56,7 +56,7 @@ class NotificationContent extends StatelessWidget {
                       style: fileStyle,
                       children: [
                         TextSpan(
-                          text: info.detailList[index].message,
+                          text: ' ${info.detailList[index].message}',
                           style: infoStyle,
                         )
                       ],

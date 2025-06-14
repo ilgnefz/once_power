@@ -1,5 +1,12 @@
 use rexif::{ExifTag};
 use zhconv::{zhconv};
+use trash;
+
+#[flutter_rust_bridge::frb(init)]
+pub fn init_app() {
+    // Default utilities - feel free to customize
+    flutter_rust_bridge::setup_default_user_utils();
+}
 
 #[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
 pub fn greet(name: String) -> String {
@@ -30,8 +37,15 @@ pub fn traditional_to_simplified(text: String) -> String {
     zhconv(&text, "zh-Hans".parse().unwrap())
 }
 
-#[flutter_rust_bridge::frb(init)]
-pub fn init_app() {
-    // Default utilities - feel free to customize
-    flutter_rust_bridge::setup_default_user_utils();
+#[flutter_rust_bridge::frb(sync)]
+pub fn delete_to_trash(file_path: String) -> Option<String> {
+    match std::fs::metadata(&file_path) {
+        Ok(_) => {},
+        Err(e) => return Some(format!("{}", e)),
+    };
+    
+    match trash::delete(file_path) {
+        Ok(_) => None,
+        Err(e) => Some(e.to_string()),
+    }
 }

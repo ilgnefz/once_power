@@ -71,7 +71,7 @@ void advanceUpdateName(WidgetRef ref) {
 
 String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
   String value = menu.value;
-  MatchLocation location = menu.matchLocation;
+  MatchContent location = menu.matchLocation;
   List<DeleteType> deleteTypes = menu.deleteTypes;
   if (deleteTypes.isNotEmpty) {
     for (DeleteType type in deleteTypes) {
@@ -103,11 +103,11 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
     return name;
   }
   switch (location) {
-    case MatchLocation.first:
+    case MatchContent.first:
       return isUseRegex
           ? name.replaceFirst(RegExp(value), '')
           : name.replaceFirst(value, '');
-    case MatchLocation.last:
+    case MatchContent.last:
       if (isUseRegex) {
         final match = RegExp(value).allMatches(name).lastOrNull;
         return match != null
@@ -119,19 +119,19 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
             ? name.substring(0, index) + name.substring(index + value.length)
             : name;
       }
-    case MatchLocation.all:
+    case MatchContent.all:
       return isUseRegex
           ? name.replaceAll(RegExp(value), '')
           : name.replaceAll(value, '');
-    case MatchLocation.position:
+    case MatchContent.position:
       return matchPosition(name, '', menu.start, menu.end);
-    case MatchLocation.front:
+    case MatchContent.front:
       int index = name.indexOf(value);
       if (index == -1 || index == 0) return name;
       int start = index - menu.front;
       start = start < 0 ? 0 : start;
       return matchPosition(name, '', start + 1, index);
-    case MatchLocation.back:
+    case MatchContent.back:
       int index = name.indexOf(value);
       if (index == -1 || index == name.length - 1) return name;
       int start = index + value.length + 1;
@@ -244,14 +244,14 @@ String advanceReplaceName(
     case CaseType.simplified:
       return traditionalToSimplified(text: name);
     case CaseType.noConversion:
-      MatchLocation location = menu.matchLocation;
+      MatchContent location = menu.matchLocation;
       switch (location) {
-        case MatchLocation.first:
+        case MatchContent.first:
           name = isUseRegex
               ? name.replaceFirst(RegExp(oldValue), newValue)
               : name.replaceFirst(oldValue, newValue);
           return name;
-        case MatchLocation.last:
+        case MatchContent.last:
           if (isUseRegex) {
             final matches = RegExp(oldValue).allMatches(name);
             if (matches.isNotEmpty) {
@@ -269,20 +269,20 @@ String advanceReplaceName(
             }
           }
           return name;
-        case MatchLocation.all:
+        case MatchContent.all:
           name = isUseRegex
               ? name.replaceAll(RegExp(oldValue), newValue)
               : name.replaceAll(oldValue, newValue);
           return name;
-        case MatchLocation.position:
+        case MatchContent.position:
           return matchPosition(name, newValue, menu.start, menu.end);
-        case MatchLocation.front:
+        case MatchContent.front:
           int index = name.indexOf(oldValue);
           if (index == -1 || index == 0) return name;
           int start = index - menu.front;
           start = start < 0 ? 0 : start;
           return matchPosition(name, newValue, start + 1, index);
-        case MatchLocation.back:
+        case MatchContent.back:
           int index = name.indexOf(oldValue);
           if (index == -1 || index == name.length - 1) return name;
           int start = index + oldValue.length + 1;

@@ -68,7 +68,7 @@ abstract class AdvanceMenuModel {
 }
 
 class AdvanceMenuDelete extends AdvanceMenuModel {
-  final MatchLocation matchLocation;
+  final MatchContent matchLocation;
   final int start;
   final int end;
   final int front;
@@ -120,7 +120,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         id: json["id"],
         checked: json["checked"] ?? true,
         value: json["value"],
-        matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        matchLocation: MatchContent.values[json["matchLocation"] ?? 0],
         front: json["front"] ?? 1,
         back: json["back"] ?? 1,
         start: json["start"] ?? 1,
@@ -284,7 +284,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 class AdvanceMenuReplace extends AdvanceMenuModel {
   final ReplaceMode replaceMode;
   final FillPosition fillPosition;
-  final MatchLocation matchLocation;
+  final MatchContent matchLocation;
   final int front;
   final int back;
   final int start;
@@ -342,7 +342,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
             : List<String>.from(json["value"].map((x) => x)),
         replaceMode: ReplaceMode.values[json["replaceMode"] ?? 0],
         fillPosition: FillPosition.values[json["fillPosition"] ?? 0],
-        matchLocation: MatchLocation.values[json["matchLocation"] ?? 0],
+        matchLocation: MatchContent.values[json["matchLocation"] ?? 0],
         front: json["front"] ?? 1,
         back: json["back"] ?? 1,
         start: json["start"] ?? 1,

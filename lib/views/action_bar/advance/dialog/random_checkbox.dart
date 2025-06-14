@@ -19,12 +19,7 @@ class RandomCheckbox extends StatefulWidget {
 class _RandomCheckboxState extends State<RandomCheckbox> {
   TextEditingController controller = TextEditingController();
 
-  final List<String> all = [
-    '1234567890',
-    r'!@#\$%^&*()_+',
-    'abcdefghijklmnopqrstuvwxyz',
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  ];
+  final List<String> all = ['1234567890', r'!@#\$%^&*()_+', 'a-z', 'A-Z'];
 
   bool show = false;
 
@@ -78,7 +73,8 @@ class _RandomCheckboxState extends State<RandomCheckbox> {
           mainAxisSize: MainAxisSize.min,
           checked: show,
           onChanged: show ? (value) {} : null,
-          child: Expanded(
+          child: SizedBox(
+            width: 258,
             child: BaseInput(
               controller: controller,
               hintText: S.of(context).randomInputHint,

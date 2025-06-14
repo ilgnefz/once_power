@@ -13,7 +13,7 @@ import 'package:once_power/views/action_bar/advance/dialog/replace_match_input.d
 
 import 'case_conversion_group.dart';
 import 'common_dialog.dart';
-import 'common_location_radio.dart';
+import 'common_position_radio.dart';
 import 'format_group.dart';
 import 'group_dropdown.dart';
 import 'replace_modify_input.dart';
@@ -32,7 +32,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   String oldValue = '', newValue = '';
   ReplaceMode mode = ReplaceMode.normal;
   FillPosition position = FillPosition.front;
-  MatchLocation location = MatchLocation.first;
+  MatchContent location = MatchContent.first;
   int start = 1, end = 1, front = 1, back = 1;
   CaseType type = CaseType.noConversion;
   String wordSpacing = '';
@@ -131,7 +131,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                     setState(() {});
                   },
                 ),
-                CommonLocationRadio(
+                CommonPositionRadio(
                   location: location,
                   onChanged: (value) {
                     location = value;

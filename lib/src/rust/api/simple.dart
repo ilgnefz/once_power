@@ -18,3 +18,6 @@ String simplifiedToTraditional({required String text}) =>
 
 String traditionalToSimplified({required String text}) =>
     RustLib.instance.api.crateApiSimpleTraditionalToSimplified(text: text);
+
+String? deleteToTrash({required String filePath}) =>
+    RustLib.instance.api.crateApiSimpleDeleteToTrash(filePath: filePath);

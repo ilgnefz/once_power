@@ -50,7 +50,6 @@ class AppKeys {
   static String isUseRuleOrganize = 'isUseRuleOrganize';
   static String isUseTopFolder = 'isUseTopFolder';
   static String isAddSubfolder = 'isAddSubfolder';
-  static String isKnow = 'isKnow';
   static String isCaseFile = 'isCaseFile';
   static String isCaseExtension = 'isCaseExtension';
   static String isMatchExtension = 'isMatchExtension';

@@ -56,7 +56,7 @@ class _VideoViewState extends ConsumerState<VideoView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return _controller.value.isInitialized
+    Widget child = _controller.value.isInitialized
         ? AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: ColoredBox(
@@ -94,6 +94,8 @@ class _VideoViewState extends ConsumerState<VideoView>
             ),
           )
         : const Center(child: LoadingImage(isPreview: false));
+    if (!widget.file.checked) return Opacity(opacity: .5, child: child);
+    return child;
   }
 
   @override

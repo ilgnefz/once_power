@@ -11,6 +11,7 @@ class InstructionsText extends StatelessWidget {
       // S.of(context).useRule,
       S.of(context).dateClassification,
       S.of(context).topParentFolder,
+      S.of(context).deleteChecked,
       S.of(context).deleteEmptyFolder,
     ];
 
@@ -18,6 +19,7 @@ class InstructionsText extends StatelessWidget {
       // S.of(context).useRuleDesc,
       S.of(context).dateClassificationDesc,
       S.of(context).topParentFolderDesc,
+      S.of(context).deleteFileDesc,
       S.of(context).deleteEmptyFolderDesc,
     ];
 

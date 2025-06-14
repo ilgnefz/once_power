@@ -21,7 +21,7 @@ class NumInputGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('${S.of(context).serialNumber}: '),
+        Text('${S.of(context).serial}: '),
         const SizedBox(width: AppNum.smallG),
         SizedBox(
           width: 120,

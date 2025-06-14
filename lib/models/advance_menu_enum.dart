@@ -31,32 +31,32 @@ extension AdvanceTypeExtension on AdvanceType {
   bool get isReplace => this == AdvanceType.replace;
 }
 
-enum MatchLocation { first, last, all, front, back, position }
+enum MatchContent { first, last, all, front, back, position }
 
-extension MatchLocationExtension on MatchLocation {
+extension MatchLocationExtension on MatchContent {
   String get label {
     switch (this) {
-      case MatchLocation.first:
+      case MatchContent.first:
         return S.current.first;
-      case MatchLocation.last:
+      case MatchContent.last:
         return S.current.last;
-      case MatchLocation.all:
+      case MatchContent.all:
         return S.current.all;
-      case MatchLocation.position:
+      case MatchContent.position:
         return '';
-      case MatchLocation.front:
+      case MatchContent.front:
         return S.current.front;
-      case MatchLocation.back:
+      case MatchContent.back:
         return S.current.back;
     }
   }
 
-  bool get isFirst => this == MatchLocation.first;
-  bool get isLast => this == MatchLocation.last;
-  bool get isAll => this == MatchLocation.all;
-  bool get isPosition => this == MatchLocation.position;
-  bool get isFront => this == MatchLocation.front;
-  bool get isBack => this == MatchLocation.back;
+  bool get isFirst => this == MatchContent.first;
+  bool get isLast => this == MatchContent.last;
+  bool get isAll => this == MatchContent.all;
+  bool get isPosition => this == MatchContent.position;
+  bool get isFront => this == MatchContent.front;
+  bool get isBack => this == MatchContent.back;
 }
 
 enum AddType {

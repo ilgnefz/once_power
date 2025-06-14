@@ -484,6 +484,16 @@ class S {
     );
   }
 
+  /// `Files will be deleted to the Recycle Bin`
+  String get deleteFileDesc {
+    return Intl.message(
+      'Files will be deleted to the Recycle Bin',
+      name: 'deleteFileDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `OrganizeMenu`
   String get organizeMenu {
     return Intl.message(
@@ -1134,36 +1144,6 @@ class S {
     );
   }
 
-  /// `Tip`
-  String get tipTitle {
-    return Intl.message('Tip', name: 'tipTitle', desc: '', args: []);
-  }
-
-  /// `This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.`
-  String get deleteTipMessage {
-    return Intl.message(
-      'This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.',
-      name: 'deleteTipMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `I know. No more reminders`
-  String get deleteTipButton1 {
-    return Intl.message(
-      'I know. No more reminders',
-      name: 'deleteTipButton1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `I know`
-  String get deleteTipButton2 {
-    return Intl.message('I know', name: 'deleteTipButton2', desc: '', args: []);
-  }
-
   /// `Top folder`
   String get topParentFolder {
     return Intl.message(
@@ -1369,11 +1349,6 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `SerialNum`
-  String get serialNumber {
-    return Intl.message('SerialNum', name: 'serialNumber', desc: '', args: []);
-  }
-
   /// `Before`
   String get addBefore {
     return Intl.message('Before', name: 'addBefore', desc: '', args: []);
@@ -1424,11 +1399,11 @@ class S {
     );
   }
 
-  /// `Match Location`
-  String get matchLocation {
+  /// `Match Position`
+  String get matchPosition {
     return Intl.message(
-      'Match Location',
-      name: 'matchLocation',
+      'Match Position',
+      name: 'matchPosition',
       desc: '',
       args: [],
     );
@@ -1744,10 +1719,10 @@ class S {
     return Intl.message('Disable', name: 'disable', desc: '', args: []);
   }
 
-  /// `Serial Distinguish`
+  /// `Serial Classify`
   String get serialDistinguish {
     return Intl.message(
-      'Serial Distinguish',
+      'Serial Classify',
       name: 'serialDistinguish',
       desc: '',
       args: [],
@@ -1824,10 +1799,10 @@ class S {
     );
   }
 
-  /// `Delete ext.`
+  /// `Delete Ext.`
   String get deleteExtension {
     return Intl.message(
-      'Delete ext.',
+      'Delete Ext.',
       name: 'deleteExtension',
       desc: '',
       args: [],

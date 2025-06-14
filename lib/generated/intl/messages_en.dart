@@ -145,8 +145,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteEmptyFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Delete all empty folders under the selected folder",
     ),
-    "deleteExtension": MessageLookupByLibrary.simpleMessage("Delete ext."),
+    "deleteExtension": MessageLookupByLibrary.simpleMessage("Delete Ext."),
     "deleteFailed": MessageLookupByLibrary.simpleMessage("Delete failed"),
+    "deleteFileDesc": MessageLookupByLibrary.simpleMessage(
+      "Files will be deleted to the Recycle Bin",
+    ),
     "deleteInfo": m0,
     "deleteInputHint": MessageLookupByLibrary.simpleMessage(
       "Please enter the deleted content",
@@ -154,13 +157,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
     "deleteSuccessful": MessageLookupByLibrary.simpleMessage(
       "Delete successful",
-    ),
-    "deleteTipButton1": MessageLookupByLibrary.simpleMessage(
-      "I know. No more reminders",
-    ),
-    "deleteTipButton2": MessageLookupByLibrary.simpleMessage("I know"),
-    "deleteTipMessage": MessageLookupByLibrary.simpleMessage(
-      "This operation will delete the file from the system and cannot be restored. To cancel operate please click on the area above the popup window.",
     ),
     "deleteTitle": MessageLookupByLibrary.simpleMessage("Delete Content"),
     "deleteType": MessageLookupByLibrary.simpleMessage("Delete Type"),
@@ -253,9 +249,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "matchLength": MessageLookupByLibrary.simpleMessage(
       "Number or length string",
     ),
-    "matchLocation": MessageLookupByLibrary.simpleMessage("Match Location"),
     "matchName": MessageLookupByLibrary.simpleMessage("Match name"),
     "matchParent": MessageLookupByLibrary.simpleMessage("Match folder"),
+    "matchPosition": MessageLookupByLibrary.simpleMessage("Match Position"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
     "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
     "modifyName": MessageLookupByLibrary.simpleMessage("Modify name"),
@@ -367,9 +363,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "separate": MessageLookupByLibrary.simpleMessage("Separate Words"),
     "serial": MessageLookupByLibrary.simpleMessage("Serial"),
     "serialDistinguish": MessageLookupByLibrary.simpleMessage(
-      "Serial Distinguish",
+      "Serial Classify",
     ),
-    "serialNumber": MessageLookupByLibrary.simpleMessage("SerialNum"),
     "settingGroup": MessageLookupByLibrary.simpleMessage("Setting group"),
     "shortcutTip1": MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
     "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
@@ -410,7 +405,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "tipImage": MessageLookupByLibrary.simpleMessage(
       "Drag the Picture File/Folder here",
     ),
-    "tipTitle": MessageLookupByLibrary.simpleMessage("Tip"),
     "to": MessageLookupByLibrary.simpleMessage("to"),
     "toBehind": MessageLookupByLibrary.simpleMessage("To the behind"),
     "toFront": MessageLookupByLibrary.simpleMessage("To the front"),

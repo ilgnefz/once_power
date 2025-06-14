@@ -32,13 +32,17 @@ class ContentGridItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: file.type == FileClassify.video
-                    ? VideoView(file: file, key: ValueKey(file.id))
-                    : file.extension == 'svg'
-                        ? SvgView(file: file, key: ValueKey(file.id))
-                        : file.extension == 'psd'
-                            ? PsdView(file: file, key: ValueKey(file.id))
-                            : ImageView(file: file, key: ValueKey(file.id)),
+                child: Builder(builder: (context) {
+                  if (file.type.isVideo) {
+                    return VideoView(file: file, key: ValueKey(file.id));
+                  }
+                  if (file.extension == 'svg') {
+                    return SvgView(file: file, key: ValueKey(file.id));
+                  } else if (file.extension == 'psd') {
+                    return PsdView(file: file, key: ValueKey(file.id));
+                  }
+                  return ImageView(file: file, key: ValueKey(file.id));
+                }),
               ),
               const SizedBox(height: 4),
               Text(

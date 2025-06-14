@@ -68,7 +68,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.10.0';
 
   @override
-  int get rustContentHash => -1373406855;
+  int get rustContentHash => -1987417053;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -79,6 +79,8 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
+  String? crateApiSimpleDeleteToTrash({required String filePath});
+
   Future<String?> crateApiSimpleGetImageCaptureDate(
       {required String imagePath});
 
@@ -100,6 +102,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
+  String? crateApiSimpleDeleteToTrash({required String filePath}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(filePath, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiSimpleDeleteToTrashConstMeta,
+      argValues: [filePath],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSimpleDeleteToTrashConstMeta =>
+      const TaskConstMeta(
+        debugName: "delete_to_trash",
+        argNames: ["filePath"],
+      );
+
+  @override
   Future<String?> crateApiSimpleGetImageCaptureDate(
       {required String imagePath}) {
     return handler.executeNormal(NormalTask(
@@ -107,7 +133,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(imagePath, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 1, port: port_);
+            funcId: 2, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_opt_String,
@@ -131,7 +157,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(name, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_String,
@@ -154,7 +180,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 3, port: port_);
+            funcId: 4, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_unit,
@@ -177,7 +203,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(text, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_String,
@@ -201,7 +227,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(text, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_String,

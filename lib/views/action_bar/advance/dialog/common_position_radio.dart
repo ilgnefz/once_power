@@ -6,8 +6,8 @@ import 'package:once_power/widgets/action_bar/dialog_option.dart';
 import 'package:once_power/widgets/action_bar/digit_input.dart';
 import 'package:once_power/widgets/action_bar/easy_radio.dart';
 
-class CommonLocationRadio extends StatelessWidget {
-  const CommonLocationRadio({
+class CommonPositionRadio extends StatelessWidget {
+  const CommonPositionRadio({
     super.key,
     required this.location,
     required this.onChanged,
@@ -21,8 +21,8 @@ class CommonLocationRadio extends StatelessWidget {
     required this.onBackChanged,
   });
 
-  final MatchLocation location;
-  final Function(MatchLocation) onChanged;
+  final MatchContent location;
+  final Function(MatchContent) onChanged;
   final int front;
   final int back;
   final Function(int) onFrontChanged;
@@ -35,11 +35,11 @@ class CommonLocationRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DialogOption(
-      title: '${S.of(context).matchLocation}: ',
+      title: '${S.of(context).matchPosition}: ',
       padding: const EdgeInsets.only(top: 4.0),
       runSpacing: AppNum.mediumG,
       alignment: WrapAlignment.spaceBetween,
-      children: MatchLocation.values.map((e) {
+      children: MatchContent.values.map((e) {
         if (e.isPosition) {
           return EasyRadio(
             label: '',

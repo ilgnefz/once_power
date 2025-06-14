@@ -11,7 +11,7 @@ import 'package:once_power/views/action_bar/advance/dialog/delete_extension_swit
 import 'package:once_power/views/action_bar/advance/dialog/delete_match_input.dart';
 
 import 'common_dialog.dart';
-import 'common_location_radio.dart';
+import 'common_position_radio.dart';
 import 'delete_type_group.dart';
 import 'group_dropdown.dart';
 
@@ -26,7 +26,7 @@ class DeleteView extends ConsumerStatefulWidget {
 
 class _DeleteViewState extends ConsumerState<DeleteView> {
   String value = '';
-  MatchLocation location = MatchLocation.first;
+  MatchContent location = MatchContent.first;
   int start = 1, end = 1, front = 1, back = 1;
   List<DeleteType> deleteTypes = [];
   bool deleteExt = false, useRegex = false;
@@ -76,7 +76,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
               setState(() {});
             },
           ),
-          CommonLocationRadio(
+          CommonPositionRadio(
             location: location,
             onChanged: (value) {
               location = value;

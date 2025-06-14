@@ -103,6 +103,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
               setState(() {});
             },
           ),
+          SizedBox(height: 4.0),
           NumInputGroup(
             digits: digits,
             start: start,
@@ -115,17 +116,17 @@ class _DeleteViewState extends ConsumerState<AddView> {
               setState(() {});
             },
           ),
-          RandomCheckbox(
-            randoms: randoms,
-            onChange: (values) {
-              randoms = values;
-              setState(() {});
-            },
-          ),
           AddSerialDistinguish(
             type: distinguishType,
             typeChanged: (value) {
               distinguishType = value;
+              setState(() {});
+            },
+          ),
+          RandomCheckbox(
+            randoms: randoms,
+            onChange: (values) {
+              randoms = values;
               setState(() {});
             },
           ),

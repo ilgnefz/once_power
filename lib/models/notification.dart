@@ -32,7 +32,11 @@ class NotificationInfo {
       toastBuilder: (cf) => NotificationContent(
         cf: cf,
         info: NotificationInfo(
-            type: type, title: title, message: message, detailList: detailList),
+          type: type,
+          title: title,
+          message: message,
+          detailList: detailList,
+        ),
       ),
       align: Alignment.bottomRight,
       duration: duration,
