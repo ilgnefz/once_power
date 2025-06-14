@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/utils/pack_info.dart';
 import 'package:once_power/views/bottom_bar/check_version.dart';
+import 'package:once_power/views/bottom_bar/tip.dart';
 
 import 'auto_run.dart';
-import 'extra_function.dart';
 import 'language_toggle.dart';
 import 'log.dart';
 import 'regedit.dart';
@@ -43,7 +43,8 @@ class BottomBar extends StatelessWidget {
           LogBtn(),
           ViewModeBtn(),
           UploadCSVBtn(),
-          ExtraFunctionBtn(),
+          TipBtn(),
+          // ExtraFunctionBtn(),
           LanguageToggleBtn(),
           UndoBtn(),
           Spacer(),

@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/file.dart';
@@ -54,34 +55,45 @@ class AppHotKey {
       HotKeyModel(
         hotkey: HotKey(
           key: LogicalKeyboardKey.keyZ,
-          modifiers: [],
+          modifiers: [HotKeyModifier.control],
           scope: HotKeyScope.inapp,
         ),
         keyDownHandler: () =>
             suspenseFileList(ref, ref.watch(sortSelectListProvider)),
       ),
-      // HotKeyModel(
-      //   hotkey: HotKey(
-      //     key: LogicalKeyboardKey.keyX,
-      //     modifiers: [],
-      //     scope: HotKeyScope.inapp,
-      //   ),
-      //   keyDownHandler: () {
-      //     FileInfo? file = ref.watch(hoverFileProvider);
-      //     if (file != null) toTheFront(ref, file);
-      //   },
-      // ),
-      // HotKeyModel(
-      //   hotkey: HotKey(
-      //     key: LogicalKeyboardKey.keyC,
-      //     modifiers: [],
-      //     scope: HotKeyScope.inapp,
-      //   ),
-      //   keyDownHandler: () {
-      //     FileInfo? file = ref.watch(hoverFileProvider);
-      //     if (file != null) toTheBehind(ref, file);
-      //   },
-      // ),
+      HotKeyModel(
+        hotkey: HotKey(
+          key: LogicalKeyboardKey.keyX,
+          modifiers: [HotKeyModifier.control],
+          scope: HotKeyScope.inapp,
+        ),
+        keyDownHandler: () {
+          List<FileInfo> files = ref.watch(sortSelectListProvider);
+          if (files.isNotEmpty) toTheFront(ref, files.last);
+        },
+      ),
+      HotKeyModel(
+        hotkey: HotKey(
+          key: LogicalKeyboardKey.keyC,
+          modifiers: [HotKeyModifier.control],
+          scope: HotKeyScope.inapp,
+        ),
+        keyDownHandler: () {
+          List<FileInfo> files = ref.watch(sortSelectListProvider);
+          if (files.isNotEmpty) toTheBehind(ref, files.last);
+        },
+      ),
+      HotKeyModel(
+        hotkey: HotKey(
+          key: LogicalKeyboardKey.keyS,
+          modifiers: [HotKeyModifier.control],
+          scope: HotKeyScope.inapp,
+        ),
+        keyDownHandler: () {
+          List<FileInfo> files = ref.watch(sortSelectListProvider);
+          toggleMultipleCheck(ref, files);
+        },
+      ),
     ];
 
     for (var hotkey in hotKeys) {

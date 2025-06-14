@@ -280,5 +280,9 @@
   "regexDesc": "使用正则",
   "matchExtDesc": "匹配扩展",
   "traditional": "繁体",
-  "simplified": "简体"
+  "simplified": "简体",
+  "shortcutKey": "快捷键",
+  "toggleSelected": "切换选中",
+  "takeOutFront": "取出至前面",
+  "takeOutBehind": "取出至后面"
 }

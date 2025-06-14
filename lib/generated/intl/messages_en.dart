@@ -366,6 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Serial Classify",
     ),
     "settingGroup": MessageLookupByLibrary.simpleMessage("Setting group"),
+    "shortcutKey": MessageLookupByLibrary.simpleMessage("Shortcut key"),
     "shortcutTip1": MessageLookupByLibrary.simpleMessage("Add all subfiles to"),
     "shortcutTip2": MessageLookupByLibrary.simpleMessage("Add to"),
     "showWindow": MessageLookupByLibrary.simpleMessage("Show Window"),
@@ -395,6 +396,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tableInfo": MessageLookupByLibrary.simpleMessage("Original name column: "),
     "takeOut": MessageLookupByLibrary.simpleMessage("Take out"),
+    "takeOutBehind": MessageLookupByLibrary.simpleMessage(
+      "Take it out to the back",
+    ),
+    "takeOutFront": MessageLookupByLibrary.simpleMessage(
+      "Take it out to the front",
+    ),
     "takeTime": MessageLookupByLibrary.simpleMessage("Time"),
     "targetFolder": MessageLookupByLibrary.simpleMessage("Target folder"),
     "targetFolderError": MessageLookupByLibrary.simpleMessage(
@@ -410,6 +417,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "toFront": MessageLookupByLibrary.simpleMessage("To the front"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
     "toggleCase": MessageLookupByLibrary.simpleMessage("Toggle"),
+    "toggleSelected": MessageLookupByLibrary.simpleMessage(
+      "Toggle selected state",
+    ),
     "topParentFolder": MessageLookupByLibrary.simpleMessage("Top folder"),
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Move the file to a top-level parent folder other than the disk root directory",

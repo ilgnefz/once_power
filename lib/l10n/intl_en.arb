@@ -279,5 +279,9 @@
   "regexDesc": "Use Regex",
   "matchExtDesc": "Match extension",
   "traditional": "TraditionalCN",
-  "simplified": "SimplifiedCN"
+  "simplified": "SimplifiedCN",
+  "shortcutKey": "Shortcut key",
+  "toggleSelected": "Toggle selected state",
+  "takeOutFront": "Take it out to the front",
+  "takeOutBehind": "Take it out to the back"
 }

@@ -7,11 +7,6 @@ import 'constants/constants.dart';
 import 'providers/toggle.dart';
 import 'views/home.dart';
 
-// 修改视图模式下顶部名称
-// 视图模式下视频为选中没有效果
-// 全屏预览时点击空白处关闭
-// 按下 s 键切换选中状态
-
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(const ProviderScope(child: MyApp()));

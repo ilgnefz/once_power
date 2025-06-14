@@ -2178,6 +2178,46 @@ class S {
   String get simplified {
     return Intl.message('SimplifiedCN', name: 'simplified', desc: '', args: []);
   }
+
+  /// `Shortcut key`
+  String get shortcutKey {
+    return Intl.message(
+      'Shortcut key',
+      name: 'shortcutKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toggle selected state`
+  String get toggleSelected {
+    return Intl.message(
+      'Toggle selected state',
+      name: 'toggleSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take it out to the front`
+  String get takeOutFront {
+    return Intl.message(
+      'Take it out to the front',
+      name: 'takeOutFront',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take it out to the back`
+  String get takeOutBehind {
+    return Intl.message(
+      'Take it out to the back',
+      name: 'takeOutBehind',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

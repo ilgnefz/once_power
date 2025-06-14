@@ -159,7 +159,21 @@ String advanceAddName(
     if (addType.isParentsName) value = folder;
     if (addType.isExtension) value = getDotWithExt(file.extension);
     if (addType.isRandom) {
-      value = getRandomValue(menu.randomValue, menu.randomLen);
+      List<String> randoms = [];
+      randoms.addAll(menu.randomValue);
+      if (randoms.contains('a-z')) {
+        randoms.remove('a-z');
+        randoms.add('abcdefghijklmnopqrstuvwxyz');
+      }
+      if (randoms.contains('A-Z')) {
+        randoms.remove('A-Z');
+        randoms.add('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      }
+      if (randoms.contains('0-9')) {
+        randoms.remove('0-9');
+        randoms.add('0123456789');
+      }
+      value = getRandomValue(randoms, menu.randomLen);
     }
     if (addType.isDate) {
       value = getDateName(dateType, 8, file);

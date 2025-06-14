@@ -5,6 +5,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 
 class CountCheckbox extends ConsumerWidget {
@@ -15,7 +16,8 @@ class CountCheckbox extends ConsumerWidget {
     int selected = ref.watch(selectFileProvider);
     int total = ref.watch(fileListProvider).length;
 
-    String label = ref.watch(currentModeProvider).isOrganize
+    String label = ref.watch(currentModeProvider).isOrganize ||
+            ref.watch(isViewModeProvider)
         ? S.of(context).fileName
         : S.of(context).originalName;
 
