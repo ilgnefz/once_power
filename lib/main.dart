@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'config/config.dart';
 import 'constants/constants.dart';
 import 'providers/toggle.dart';
+import 'utils/hot_key.dart';
 import 'views/home.dart';
 
 void main(List<String> args) async {
@@ -12,8 +13,21 @@ void main(List<String> args) async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
+
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      await AppHotKey.init(ref);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
