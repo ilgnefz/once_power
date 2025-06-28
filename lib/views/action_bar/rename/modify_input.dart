@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -66,7 +65,7 @@ class ModifyInput extends ConsumerWidget {
         trailing: TooltipIcon(
           tip: S.of(context).today,
           svg: AppIcons.date,
-          color: AppColors.unselectIcon,
+          color: Theme.of(context).inputDecorationTheme.iconColor,
           onTap: () {
             if (ref.watch(currentModeProvider).isReserve) {
               ref.read(matchControllerProvider.notifier).clear();

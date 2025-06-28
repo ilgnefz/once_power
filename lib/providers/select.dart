@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -126,4 +125,16 @@ class CurrentReplaceMode extends _$CurrentReplaceMode {
   @override
   ReplaceMode build() => ReplaceMode.normal;
   void update(ReplaceMode value) => state = value;
+}
+
+@riverpod
+class CurrentThemeMode extends _$CurrentThemeMode {
+  @override
+  ThemeMode build() => ThemeMode.values[StorageUtil.getInt(AppKeys.theme) ?? 1];
+  void update() {
+    int index = StorageUtil.getInt(AppKeys.theme) ?? 1;
+    index = index == 2 ? 0 : index + 1;
+    state = ThemeMode.values[index];
+    StorageUtil.setInt(AppKeys.theme, index);
+  }
 }

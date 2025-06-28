@@ -18,7 +18,7 @@ class PathClassifyList extends ConsumerWidget {
       itemBuilder: (context, index) {
         String folder = pathList[index];
         return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Checkbox(
               value: ref.watch(selectedPathProvider(folder)),
@@ -28,13 +28,10 @@ class PathClassifyList extends ConsumerWidget {
               },
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 6.0),
-                child: SelectableText(
-                  folder,
-                  maxLines: null,
-                  style: TextStyle().useSystemChineseFont(),
-                ),
+              child: SelectableText(
+                folder,
+                maxLines: null,
+                style: TextStyle().useSystemChineseFont(),
               ),
             ),
           ],

@@ -10,7 +10,7 @@ class EasyCheckbox extends StatelessWidget {
     this.child,
     required this.checked,
     this.fillColor,
-    this.borderColor = Colors.black,
+    this.borderColor,
     this.style,
     this.sideWidth = 1,
     this.onChanged,
@@ -23,7 +23,7 @@ class EasyCheckbox extends StatelessWidget {
   final Widget? child;
   final bool checked;
   final WidgetStateProperty<Color?>? fillColor;
-  final Color borderColor;
+  final Color? borderColor;
   final TextStyle? style;
   final double? sideWidth;
   final void Function(bool?)? onChanged;
@@ -45,7 +45,9 @@ class EasyCheckbox extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              side: BorderSide(width: sideWidth!, color: borderColor),
+              side: BorderSide(
+                  width: sideWidth!,
+                  color: borderColor ?? Theme.of(context).colorScheme.outline),
             ),
           ),
         ),

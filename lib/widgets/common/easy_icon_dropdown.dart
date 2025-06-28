@@ -34,7 +34,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
           svg: svg,
           icon: icon,
           iconSize: icon != null ? AppNum.defaultIconS : AppNum.dropdownIconS,
-          color: AppColors.icon,
+          color: Theme.of(context).iconTheme.color,
         ),
         items: items,
         isExpanded: isExpanded,
@@ -44,7 +44,7 @@ class EasyIconDropdown<T> extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           offset: offset ?? const Offset(-8, -4),
           elevation: 2,

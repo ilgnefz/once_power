@@ -99,4 +99,7 @@ class AppKeys {
 
   /// Map
   static String groupFolder = 'groupFolder';
+
+  // int
+  static String theme = 'theme';
 }

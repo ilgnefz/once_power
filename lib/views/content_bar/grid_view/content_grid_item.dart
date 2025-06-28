@@ -19,6 +19,7 @@ class ContentGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     String newName = getNameWithExt(file.newName, file.newExtension);
     String oldName = getNameWithExt(file.name, file.extension);
     return SelectSortCard(
@@ -51,8 +52,8 @@ class ContentGridItem extends StatelessWidget {
                   fontSize: AppNum.tileFontSize,
                   color: file.checked
                       ? newName == oldName
-                          ? Colors.black
-                          : Theme.of(context).primaryColor
+                          ? theme.textTheme.labelMedium?.color
+                          : theme.primaryColor
                       : Colors.grey,
                 ),
                 maxLines: 2,

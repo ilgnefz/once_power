@@ -27,10 +27,10 @@ class EasyTooltip extends StatelessWidget {
       message: tip,
       textStyle: textStyle,
       richMessage: richMessage,
-      decorationConfig: const DecorationConfig(
+      decorationConfig: DecorationConfig(
         style: PaintingStyle.stroke,
-        textColor: Colors.black,
-        backgroundColor: Colors.white,
+        textColor: Theme.of(context).textTheme.labelMedium?.color,
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
       ),
       gap: AppNum.largeG,
       placement: placement,
@@ -43,16 +43,18 @@ class EasyTooltip extends StatelessWidget {
 TextSpan richTextTooltip(BuildContext context, String label, String desc,
     [bool isLast = false]) {
   desc = Characters(desc).join('\u{200B}');
+  final theme = Theme.of(context);
   return TextSpan(
     text: '$label: ',
     style: TextStyle(
       fontSize: 13,
-      color: Theme.of(context).primaryColor.withValues(alpha: .8),
+      color: theme.primaryColor.withValues(alpha: .8),
     ).useSystemChineseFont(),
     children: [
       TextSpan(
         text: isLast ? desc : '$desc\n',
-        style: const TextStyle(fontSize: 13, color: Color(0xFF666666))
+        style: TextStyle(
+                fontSize: 13, color: theme.colorScheme.surfaceContainerLow)
             .useSystemChineseFont(),
       ),
     ],

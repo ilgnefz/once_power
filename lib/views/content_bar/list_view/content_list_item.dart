@@ -19,6 +19,7 @@ class ContentListItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     String subtitle = isOrganize ? file.parent : file.newName;
     return SelectSortCard(
@@ -51,8 +52,8 @@ class ContentListItem extends ConsumerWidget {
                     subtitle,
                     fontSize: AppNum.tileFontSize,
                     color: isOrganize || file.name == file.newName
-                        ? Colors.black
-                        : Theme.of(context).primaryColor,
+                        ? theme.textTheme.bodyMedium?.color
+                        : theme.primaryColor,
                   ),
                   Container(
                     width: AppNum.extensionW,
@@ -64,8 +65,8 @@ class ContentListItem extends ConsumerWidget {
                         fontSize: 13,
                         height: 1,
                         color: isOrganize || file.extension == file.newExtension
-                            ? Colors.black
-                            : Theme.of(context).primaryColor,
+                            ? theme.textTheme.bodyMedium?.color
+                            : theme.primaryColor,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -75,7 +76,7 @@ class ContentListItem extends ConsumerWidget {
               ),
             ),
             RemoveBtn(
-              color: Colors.black26,
+              color: theme.unselectedWidgetColor,
               onTap: () => removeOne(ref, file.id),
             ),
           ],

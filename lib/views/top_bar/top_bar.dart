@@ -11,7 +11,7 @@ class TopBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color color = Colors.black54;
+    final Color color = Theme.of(context).iconTheme.color!;
     const double iconS = AppNum.iconSmallS;
     const double iconG = AppNum.largeG;
 
@@ -39,7 +39,7 @@ class TopBar extends ConsumerWidget {
       child: Container(
         height: AppNum.topBarH,
         padding: const EdgeInsets.symmetric(horizontal: AppNum.defaultP),
-        color: Colors.white,
+        // color: Colors.white,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

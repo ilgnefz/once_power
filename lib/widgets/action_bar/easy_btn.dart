@@ -21,9 +21,11 @@ class EasyBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(8.0);
+    final theme = Theme.of(context);
 
     return Material(
       borderRadius: borderRadius,
+      color: theme.colorScheme.surface,
       child: Ink(
         height: height ?? AppNum.inputH,
         decoration: BoxDecoration(borderRadius: borderRadius),
@@ -37,7 +39,7 @@ class EasyBtn extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               label,
-              style: TextStyle(color: AppColors.primary, fontSize: fontSize)
+              style: TextStyle(color: theme.primaryColor, fontSize: fontSize)
                   .useSystemChineseFont(),
             ),
           ),

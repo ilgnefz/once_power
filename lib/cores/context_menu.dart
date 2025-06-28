@@ -33,12 +33,13 @@ Future<void> showRightMenu(
   // double width = loe?.languageCode != 'zh' ? 120 : 80;
   List<FileInfo> sortSelectList = [];
   sortSelectList = isPreview ? [file] : ref.watch(sortSelectListProvider);
+  final theme = Theme.of(context);
   await showContextMenu(
     context,
     contextMenu: ContextMenu(
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.onSurface,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -121,12 +122,11 @@ Future<void> showRightMenu(
           ),
         RightMenuItem(
           label: file.checked ? S.of(context).unselect : S.of(context).select,
-          color: file.checked ? Colors.grey : Colors.black,
+          color: file.checked ? Colors.grey : theme.colorScheme.surfaceDim,
           onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),
         RightMenuItem(
           label: S.of(context).selectPath,
-          color: Colors.black,
           onSelected: () => selectPath(ref, file.parent),
         ),
         if (!isPreview)
@@ -159,7 +159,9 @@ List<ContextMenuEntry> buildGroupList(
   return list
       .map((e) => RightMenuItem.submenu(
             label: e,
-            color: file.group == e ? Colors.black : Colors.grey,
+            color: file.group == e
+                ? Theme.of(context).colorScheme.surfaceDim
+                : Colors.grey,
             onSelected: () => setGroup(context, ref, e),
             items: [
               RightMenuItem(

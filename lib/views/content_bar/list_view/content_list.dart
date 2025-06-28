@@ -31,7 +31,7 @@ class ContentList extends ConsumerWidget {
           },
           proxyDecorator: (proxy, original, information) {
             return Material(
-              color: Colors.white,
+              color: Theme.of(context).scaffoldBackgroundColor,
               elevation: 2,
               borderRadius: BorderRadius.circular(4),
               shadowColor: Colors.black,

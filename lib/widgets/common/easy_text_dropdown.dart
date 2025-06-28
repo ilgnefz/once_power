@@ -46,7 +46,7 @@ class EasyTextDropdown<T> extends StatelessWidget {
           offset: offset ?? Offset(0, -4),
           padding: const EdgeInsets.symmetric(vertical: 0),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onSurface,
             borderRadius: borderRadius,
           ),
           scrollbarTheme: ScrollbarThemeData(

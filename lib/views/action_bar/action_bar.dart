@@ -43,6 +43,14 @@ class ActionBar extends ConsumerWidget {
               //   borderRadius: BorderRadius.circular(8),
               // ),
               // indicatorWeight: 4,
+              indicatorColor: Theme.of(context).primaryColor,
+              labelPadding: EdgeInsets.zero,
+              labelColor: Theme.of(context).primaryColor,
+              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              unselectedLabelColor: AppColors.unselectText,
+              unselectedLabelStyle: const TextStyle(),
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              tabs: modes.map((e) => Tab(text: e.label)).toList(),
               onTap: (index) {
                 if (ref.watch(currentModeProvider).isReplace && index == 1) {
                   if (ref.watch(matchClearProvider) &&
@@ -56,13 +64,6 @@ class ActionBar extends ConsumerWidget {
                 }
                 updateName(ref);
               },
-              labelPadding: EdgeInsets.zero,
-              labelColor: AppColors.primary,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-              unselectedLabelColor: AppColors.unselectText,
-              unselectedLabelStyle: const TextStyle(),
-              overlayColor: WidgetStatePropertyAll(Colors.transparent),
-              tabs: modes.map((e) => Tab(text: e.label)).toList(),
             ),
           ),
           Expanded(

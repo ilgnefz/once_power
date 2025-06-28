@@ -34,7 +34,7 @@ class DetailExtensionArea extends ConsumerWidget {
           children: [
             Divider(height: 1, color: dividerColor),
             ColoredBox(
-              color: Colors.white,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(

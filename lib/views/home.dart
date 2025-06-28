@@ -94,7 +94,7 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: DragToResizeArea(
         child: Column(
           children: [

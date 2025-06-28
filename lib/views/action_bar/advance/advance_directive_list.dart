@@ -35,7 +35,7 @@ class AdvanceDirectiveList extends ConsumerWidget {
           onReorder: reorderList,
           proxyDecorator: (child, index, animation) {
             return Material(
-              color: Colors.white,
+              color: Theme.of(context).scaffoldBackgroundColor,
               elevation: 2,
               borderRadius: BorderRadius.circular(AppNum.smallG),
               child: child,

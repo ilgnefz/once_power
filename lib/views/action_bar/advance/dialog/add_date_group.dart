@@ -20,6 +20,7 @@ class AddDateGroup extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     return Row(
       spacing: 4,
       mainAxisSize: MainAxisSize.min,
@@ -33,7 +34,7 @@ class AddDateGroup extends ConsumerWidget {
                   ))
               .toList(),
           width: 102,
-          color: Colors.grey[100],
+          color: theme.popupMenuTheme.surfaceTintColor,
           value: date,
           onChanged: dateChange,
         ),
@@ -46,7 +47,7 @@ class AddDateGroup extends ConsumerWidget {
                   ))
               .toList(),
           width: 102,
-          color: Colors.grey[100],
+          color: theme.popupMenuTheme.surfaceTintColor,
           value: dateSplit,
           onChanged: dateSplitChange,
         ),

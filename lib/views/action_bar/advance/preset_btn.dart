@@ -21,48 +21,51 @@ class PresetBtn extends ConsumerWidget {
 
     return PopoverBtn(
       placement: Placement.top,
-      builder: (ctrl) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ...List.generate(
-            list.length,
-            (index) {
-              return PresetItem(
-                '${index + 1}. ${list[index].name}',
-                key: ValueKey(list[index].id),
-                onTap: () {
-                  ctrl.close();
-                  List<AdvanceMenuModel> menus = [];
-                  menus.addAll(list[index].menus.map((e) => e.copyWith()));
-                  ref.read(advanceMenuListProvider.notifier).setList(menus);
-                  advanceUpdateName(ref);
-                },
-                onAppend: () {
-                  AdvancePreset p = list[index];
-                  final menus =
-                      p.menus.map((e) => e.copyWith(id: nanoid(10))).toList();
-                  ref.read(advanceMenuListProvider.notifier).addAll(menus);
-                  advanceUpdateName(ref);
-                  ctrl.close();
-                },
-                onRemove: () {
-                  AdvancePreset p = list[index];
-                  ref.read(advancePresetListProvider.notifier).remove(p);
-                  ctrl.close();
-                },
-              );
-            },
-          ),
-          EasyTextBtn(
-            S.of(context).addPreset,
-            onTap: () {
-              ctrl.close();
-              final current = ref.read(advanceMenuListProvider);
-              final copies = current.map((e) => e.copyWith()).toList();
-              addPreset(context, ref, copies);
-            },
-          ),
-        ],
+      builder: (ctrl) => ColoredBox(
+        color: Theme.of(context).colorScheme.onSurface,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...List.generate(
+              list.length,
+              (index) {
+                return PresetItem(
+                  '${index + 1}. ${list[index].name}',
+                  key: ValueKey(list[index].id),
+                  onTap: () {
+                    ctrl.close();
+                    List<AdvanceMenuModel> menus = [];
+                    menus.addAll(list[index].menus.map((e) => e.copyWith()));
+                    ref.read(advanceMenuListProvider.notifier).setList(menus);
+                    advanceUpdateName(ref);
+                  },
+                  onAppend: () {
+                    AdvancePreset p = list[index];
+                    final menus =
+                        p.menus.map((e) => e.copyWith(id: nanoid(10))).toList();
+                    ref.read(advanceMenuListProvider.notifier).addAll(menus);
+                    advanceUpdateName(ref);
+                    ctrl.close();
+                  },
+                  onRemove: () {
+                    AdvancePreset p = list[index];
+                    ref.read(advancePresetListProvider.notifier).remove(p);
+                    ctrl.close();
+                  },
+                );
+              },
+            ),
+            EasyTextBtn(
+              S.of(context).addPreset,
+              onTap: () {
+                ctrl.close();
+                final current = ref.read(advanceMenuListProvider);
+                final copies = current.map((e) => e.copyWith()).toList();
+                addPreset(context, ref, copies);
+              },
+            ),
+          ],
+        ),
       ),
       child: Text(
         S.of(context).preset,

@@ -25,6 +25,7 @@ class OperatorBtn extends StatelessWidget {
           );
 
     return Material(
+      borderRadius: radius,
       child: Ink(
         decoration: BoxDecoration(borderRadius: radius),
         child: InkWell(

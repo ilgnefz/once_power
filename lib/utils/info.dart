@@ -8,6 +8,7 @@ import 'package:image_size_getter/file_input.dart';
 import 'package:image_size_getter/image_size_getter.dart' hide Size;
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
+import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/extension.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
@@ -441,3 +442,25 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
 //     mi.close();
 //   }
 // }
+
+String getThemeModeName(ThemeMode mode) {
+  switch (mode) {
+    case ThemeMode.light:
+      return S.current.lightTheme;
+    case ThemeMode.dark:
+      return S.current.darkTheme;
+    case ThemeMode.system:
+      return S.current.system;
+  }
+}
+
+IconData getThemeModeIcon(ThemeMode mode) {
+  switch (mode) {
+    case ThemeMode.light:
+      return Icons.light_mode_rounded;
+    case ThemeMode.dark:
+      return Icons.dark_mode_rounded;
+    case ThemeMode.system:
+      return Icons.brightness_4_rounded;
+  }
+}

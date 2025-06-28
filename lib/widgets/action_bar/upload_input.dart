@@ -70,7 +70,7 @@ class UploadInput extends ConsumerWidget {
           tip: S.of(context).uploadDesc,
           placement: Placement.right,
           icon: Icons.upload_file_rounded,
-          color: AppColors.unselectIcon,
+          color: Theme.of(context).inputDecorationTheme.iconColor,
           onTap: uploadFile,
         ),
         leading: info != null ? UploadNameCard(info: info!) : null,

@@ -286,5 +286,8 @@
   "takeOutFront": "Take it out to the front",
   "takeOutBehind": "Take it out to the back",
   "suspenseError": "Suspense file failed",
-  "suspenseErrorDesc": "No bulk suspense of all files"
+  "suspenseErrorDesc": "No bulk suspense of all files",
+  "lightTheme": "Light theme",
+  "darkTheme": "Dark theme",
+  "system": "System"
 }

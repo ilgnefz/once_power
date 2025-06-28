@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/app_enum.dart';
@@ -34,7 +33,7 @@ class SortBtn extends ConsumerWidget {
               SvgIcon(
                 e.icon,
                 size: AppNum.dropdownIconS,
-                color: AppColors.icon,
+                color: Theme.of(context).iconTheme.color,
               ),
               Expanded(
                 child: Text(

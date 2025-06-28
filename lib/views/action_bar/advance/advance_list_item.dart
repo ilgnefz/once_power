@@ -41,12 +41,14 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
 
   @override
   Widget build(BuildContext context) {
-    final Color highlightColor = Theme.of(context).primaryColor;
+    final theme = Theme.of(context);
     final TextStyle highlightStyle = TextStyle(
-      color: widget.menu.checked ? highlightColor : AppColors.unselectText,
+      color: widget.menu.checked ? theme.primaryColor : theme.iconTheme.color,
     ).useSystemChineseFont();
     final TextStyle defaultStyle = TextStyle(
-      color: widget.menu.checked ? Colors.black : AppColors.unselectText,
+      color: widget.menu.checked
+          ? theme.textTheme.bodyMedium?.color
+          : theme.iconTheme.color,
     ).useSystemChineseFont();
 
     Widget buildInfo(AdvanceMenuModel menu) {
@@ -80,7 +82,7 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
         height: 32,
         padding: EdgeInsets.only(left: AppNum.mediumG, right: AppNum.smallG),
         decoration: BoxDecoration(
-          color: isHover ? Colors.grey.shade100 : Colors.white,
+          color: isHover ? Colors.grey.withValues(alpha: .2) : null,
           borderRadius: BorderRadius.circular(AppNum.smallG),
         ),
         child: Row(
@@ -88,8 +90,9 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
             Text(
               widget.menu.type.label,
               style: TextStyle(
-                color:
-                    widget.menu.checked ? widget.menu.type.color : Colors.grey,
+                color: widget.menu.checked
+                    ? widget.menu.type.color
+                    : theme.iconTheme.color,
               ),
             ),
             SizedBox(width: AppNum.mediumG),

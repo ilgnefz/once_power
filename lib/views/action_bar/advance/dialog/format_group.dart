@@ -46,7 +46,7 @@ class FormatGroup extends StatelessWidget {
                   ))
               .toList(),
           width: 98,
-          color: Colors.grey[100],
+          color: Theme.of(context).popupMenuTheme.surfaceTintColor,
           value: position,
           onChanged: (value) => onPositionChanged(value!),
         ),

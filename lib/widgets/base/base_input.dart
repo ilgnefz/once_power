@@ -45,13 +45,14 @@ class BaseInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       height: AppNum.inputH,
       padding: padding ??
           const EdgeInsets.only(left: AppNum.inputP, right: AppNum.smallG),
       // margin: margin ?? const EdgeInsets.symmetric(horizontal: AppNum.inputP),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.inputDecorationTheme.fillColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2)
@@ -75,6 +76,7 @@ class BaseInput extends StatelessWidget {
                     // // focusNode: focusNode,
                     decoration: InputDecoration(
                       hintText: hintText,
+                      hintStyle: theme.inputDecorationTheme.hintStyle,
                       isDense: true,
                       contentPadding: EdgeInsets.zero,
                       border: InputBorder.none,
@@ -91,7 +93,8 @@ class BaseInput extends StatelessWidget {
           if (showClear)
             ClickIcon(
               icon: Icons.close_rounded,
-              color: Colors.black54,
+              // color: Colors.black54,
+              color: theme.iconTheme.color,
               onTap: onClear,
             ),
           if (trailing != null) trailing!,

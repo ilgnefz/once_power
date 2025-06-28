@@ -44,14 +44,12 @@ class ReplaceMatchInput extends ConsumerWidget {
             onChanged: onChanged,
           ),
         ),
-        Material(
-          child: IconBox(
-            AppIcons.regex,
-            tip: S.of(context).regexDesc,
-            placement: Placement.right,
-            selected: useRegex,
-            onTap: onTap,
-          ),
+        IconBox(
+          AppIcons.regex,
+          tip: S.of(context).regexDesc,
+          placement: Placement.right,
+          selected: useRegex,
+          onTap: onTap,
         ),
       ],
     );

@@ -25,28 +25,33 @@ class IconBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    const borderRadius = BorderRadius.all(Radius.circular(8));
     return EasyTooltip(
       tip: tip,
       placement: placement,
       textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
           .useSystemChineseFont(),
-      child: Ink(
-        height: AppNum.inputH,
-        width: AppNum.inputH,
-        decoration: BoxDecoration(
-          color: selected
-              ? Theme.of(context).primaryColor
-              : AppColors.unselectBoxIcon,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(8),
-          child: Align(
-            child: SvgIcon(
-              icon,
-              color: selected ? Colors.white : null,
-              size: iconSize,
+      child: Material(
+        borderRadius: borderRadius,
+        child: Ink(
+          height: AppNum.inputH,
+          width: AppNum.inputH,
+          decoration: BoxDecoration(
+            color: selected ? theme.primaryColor : theme.dividerColor,
+            borderRadius: borderRadius,
+          ),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: borderRadius,
+            child: Align(
+              child: SvgIcon(
+                icon,
+                color: selected
+                    ? Colors.white
+                    : theme.inputDecorationTheme.iconColor,
+                size: iconSize,
+              ),
             ),
           ),
         ),

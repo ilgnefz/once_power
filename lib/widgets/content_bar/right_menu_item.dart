@@ -7,7 +7,7 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
 
   const RightMenuItem({
     required this.label,
-    this.color = Colors.black,
+    this.color,
     super.value,
     super.onSelected,
     super.enabled,
@@ -15,7 +15,7 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
 
   const RightMenuItem.submenu({
     required this.label,
-    this.color = Colors.black,
+    this.color,
     required List<ContextMenuEntry> items,
     super.onSelected,
     super.enabled,
@@ -24,10 +24,15 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
   @override
   Widget builder(BuildContext context, ContextMenuState menuState,
       [FocusNode? focusNode]) {
+    final theme = Theme.of(context);
     bool isFocused = menuState.focusedEntry == this;
-    final background = Colors.white;
+    final background = theme.colorScheme.onSurface;
     final focusedBackground = Colors.grey.withValues(alpha: 0.2);
-    final textStyle = TextStyle(color: color, height: 1.0, fontSize: 14.0);
+    final textStyle = TextStyle(
+      color: color ?? theme.textTheme.labelMedium?.color,
+      height: 1.0,
+      fontSize: 14.0,
+    );
 
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 32.0, minWidth: 100.0),

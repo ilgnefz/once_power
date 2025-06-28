@@ -46,7 +46,10 @@ class _ContentBarState extends ConsumerState<ContentBar> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ColoredBox(
-        color: Colors.white,
+        color: Colors.transparent,
+        // color: ref.watch(currentThemeModeProvider) == ThemeMode.light
+        //     ? Colors.white
+        //     : Color(0xFF121212),
         child: Builder(builder: (context) {
           ProgressFileInfo? info = ref.watch(currentProgressFileProvider);
           bool than = getAllSize(ref) > AppNum.maxFileSize;

@@ -40,14 +40,12 @@ class ReplaceModifyInput extends ConsumerWidget {
             onChanged: onChanged,
           ),
         ),
-        Material(
-          child: IconBox(
-            AppIcons.extension,
-            tip: S.of(context).matchExtDesc,
-            placement: Placement.right,
-            selected: matchExt,
-            onTap: onTap,
-          ),
+        IconBox(
+          AppIcons.extension,
+          tip: S.of(context).matchExtDesc,
+          placement: Placement.right,
+          selected: matchExt,
+          onTap: onTap,
         ),
       ],
     );

@@ -124,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
     "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
     "currentTask": MessageLookupByLibrary.simpleMessage("Task"),
+    "darkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateAscending": MessageLookupByLibrary.simpleMessage("Date ascending"),
     "dateClassification": MessageLookupByLibrary.simpleMessage("Date category"),
@@ -237,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Input length truncation (adding a space between two numbers to truncate the middle part)",
     ),
     "letters": MessageLookupByLibrary.simpleMessage("Text"),
+    "lightTheme": MessageLookupByLibrary.simpleMessage("Light theme"),
     "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
     "lowercase": MessageLookupByLibrary.simpleMessage("Lowercase"),
     "lowercaseLetters": MessageLookupByLibrary.simpleMessage(
@@ -401,6 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "swapSuffixDesc": MessageLookupByLibrary.simpleMessage(
       "Swap suffixes and incremental number positions",
     ),
+    "system": MessageLookupByLibrary.simpleMessage("System"),
     "tableInfo": MessageLookupByLibrary.simpleMessage("Original name column: "),
     "takeOut": MessageLookupByLibrary.simpleMessage("Take out"),
     "takeOutBehind": MessageLookupByLibrary.simpleMessage(

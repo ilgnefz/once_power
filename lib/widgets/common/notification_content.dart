@@ -20,7 +20,7 @@ class NotificationContent extends StatelessWidget {
       margin: const EdgeInsets.only(
           top: 12, bottom: AppNum.bottomBarH + 12, right: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.onSurface,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: [
           BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 8)
@@ -49,7 +49,9 @@ class NotificationContent extends StatelessWidget {
                 itemCount: info.detailList.length,
                 itemBuilder: (BuildContext context, int index) {
                   TextStyle fileStyle = const TextStyle(color: Colors.blue),
-                      infoStyle = const TextStyle(color: Color(0xFF454545));
+                      infoStyle = TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onErrorContainer);
                   return RichText(
                     text: TextSpan(
                       text: info.detailList[index].file,

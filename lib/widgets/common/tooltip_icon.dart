@@ -31,6 +31,7 @@ class TooltipIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return EasyTooltip(
       tip: tip,
       textStyle: const TextStyle(fontSize: 13, color: Color(0xFF666666))
@@ -41,8 +42,7 @@ class TooltipIcon extends StatelessWidget {
         iconSize: AppNum.iconMediumS,
         svg: svg,
         icon: icon,
-        color:
-            color ?? (selected ? Theme.of(context).primaryColor : Colors.grey),
+        color: color ?? (selected ? theme.primaryColor : theme.iconTheme.color),
         onTap: onTap,
       ),
     );

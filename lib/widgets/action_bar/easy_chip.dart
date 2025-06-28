@@ -20,29 +20,32 @@ class EasyChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     const borderRadius = BorderRadius.all(Radius.circular(8));
     Color bgColor = enable
         ? (selected
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).primaryColor.withValues(alpha: .2))
-        : Colors.black12;
-    Color textColor = enable
-        ? (selected ? Colors.white : Theme.of(context).primaryColor)
-        : Colors.grey;
+            ? theme.primaryColor
+            : theme.primaryColor.withValues(alpha: .2))
+        : theme.disabledColor;
+    Color textColor =
+        enable ? (selected ? Colors.white : theme.primaryColor) : Colors.grey;
 
-    return Ink(
-      decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
-      child: InkWell(
-        onTap: enable ? onTap : null,
-        borderRadius: borderRadius,
-        child: Container(
-          height: AppNum.inputH,
-          padding: const EdgeInsets.symmetric(horizontal: AppNum.defaultP),
-          alignment: Alignment.center,
-          child: Text(
-            label,
-            style: TextStyle(fontSize: fontSize, color: textColor)
-                .useSystemChineseFont(),
+    return Material(
+      borderRadius: borderRadius,
+      child: Ink(
+        decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
+        child: InkWell(
+          onTap: enable ? onTap : null,
+          borderRadius: borderRadius,
+          child: Container(
+            height: AppNum.inputH,
+            padding: const EdgeInsets.symmetric(horizontal: AppNum.defaultP),
+            alignment: Alignment.center,
+            child: Text(
+              label,
+              style: TextStyle(fontSize: fontSize, color: textColor)
+                  .useSystemChineseFont(),
+            ),
           ),
         ),
       ),

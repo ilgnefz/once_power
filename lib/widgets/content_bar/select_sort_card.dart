@@ -153,7 +153,10 @@ class SelectSortCard extends ConsumerWidget {
                   alignment: Alignment.topRight,
                   // isLabelVisible: file.checked,
                   backgroundColor: Theme.of(context).primaryColor,
-                  label: Text(indexLabel),
+                  label: Text(
+                    indexLabel,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
             ],
           ),

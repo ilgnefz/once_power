@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/providers/toggle.dart';
@@ -13,6 +12,7 @@ class AddFolderCheckbox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     return Row(
       spacing: AppNum.smallG,
       mainAxisSize: MainAxisSize.min,
@@ -29,8 +29,8 @@ class AddFolderCheckbox extends ConsumerWidget {
           size: 18,
           icon: Icons.folder_copy_rounded,
           color: ref.watch(isAddSubfolderProvider)
-              ? Theme.of(context).primaryColor
-              : AppColors.unselectIcon,
+              ? theme.primaryColor
+              : theme.inputDecorationTheme.iconColor,
           onTap: ref.read(isAddSubfolderProvider.notifier).update,
         ),
       ],

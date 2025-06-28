@@ -13,6 +13,7 @@ import 'regedit.dart';
 import 'repo_url.dart';
 import 'save.dart';
 import 'task_info.dart';
+import 'theme.dart';
 import 'undo.dart';
 import 'upload_csv.dart';
 import 'view_mode.dart';
@@ -29,9 +30,11 @@ class BottomBar extends StatelessWidget {
       height: AppNum.bottomBarH,
       padding: const EdgeInsets.only(
           left: AppNum.defaultP - 4, right: AppNum.defaultP),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: AppColors.line, width: 1)),
+      decoration: BoxDecoration(
+        // color: Colors.white,
+        border: Border(
+          top: BorderSide(color: Theme.of(context).dividerColor, width: 1),
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -45,6 +48,7 @@ class BottomBar extends StatelessWidget {
           UploadCSVBtn(),
           TipBtn(),
           // ExtraFunctionBtn(),
+          ThemeBtn(),
           LanguageToggleBtn(),
           UndoBtn(),
           Spacer(),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
@@ -17,7 +16,7 @@ class RemoveBtn extends StatelessWidget {
         size: 32,
         iconSize: AppNum.defaultIconS,
         icon: Icons.delete_rounded,
-        color: color ?? AppColors.icon,
+        color: color ?? Theme.of(context).iconTheme.color,
         onTap: onTap,
       ),
     );

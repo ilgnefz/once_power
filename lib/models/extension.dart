@@ -83,6 +83,7 @@ const video = [
   'mp4',
   'mpeg',
   'mpg',
+  'mts',
   'webm',
   'wmv',
   'rm',

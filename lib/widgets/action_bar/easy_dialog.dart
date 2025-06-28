@@ -39,6 +39,8 @@ class EasyDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textStyle = TextStyle(color: theme.primaryColor);
     return Stack(
       children: [
         Positioned.fill(
@@ -56,7 +58,7 @@ class EasyDialog extends StatelessWidget {
                     margin: EdgeInsets.all(isMax ? 0.0 : 8.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(isMax ? 0 : 8),
-                      color: Colors.black.withValues(alpha: .5),
+                      color: theme.dialogTheme.backgroundColor,
                     ),
                   ),
                 ),
@@ -72,11 +74,12 @@ class EasyDialog extends StatelessWidget {
               ),
               child: Material(
                 borderRadius: BorderRadius.circular(12),
+                color: theme.scaffoldBackgroundColor,
                 child: Container(
                   width: width ?? AppNum.easyDialogW,
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    // color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Column(
@@ -108,11 +111,15 @@ class EasyDialog extends StatelessWidget {
                                 Spacer()
                               ],
                               TextButton(
-                                  onPressed: onCancel,
-                                  child: Text(cancelText!)),
+                                onPressed: onCancel,
+                                child: Text(cancelText!, style: textStyle),
+                              ),
                               if (extraButton != null)
                                 SizedBox(width: AppNum.largeG),
-                              TextButton(onPressed: onOk, child: Text(okText!)),
+                              TextButton(
+                                onPressed: onOk,
+                                child: Text(okText!, style: textStyle),
+                              ),
                             ],
                       )
                     ],

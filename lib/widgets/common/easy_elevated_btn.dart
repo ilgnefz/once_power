@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/constants/colors.dart';
 
 class EasyElevatedBtn extends StatelessWidget {
   const EasyElevatedBtn({super.key, this.onPressed, required this.label});
@@ -10,7 +11,14 @@ class EasyElevatedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(label, style: TextStyle(fontSize: 14)),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: onPressed == null
+              ? AppColors.btnTextDisabled
+              : Theme.of(context).primaryColor,
+        ),
+      ),
     );
   }
 }

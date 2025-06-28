@@ -32,7 +32,7 @@ class ContentGrid extends ConsumerWidget {
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,
           proxyDecorator: (child, index, animation) => Material(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(4),
             elevation: 2,
             child: child,

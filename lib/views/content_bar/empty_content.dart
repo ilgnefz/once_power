@@ -17,27 +17,24 @@ class EmptyContent extends ConsumerWidget {
     FunctionMode mode = ref.watch(currentModeProvider);
     bool showImage = isViewMode && mode != FunctionMode.organize;
     String tipLabel = showImage ? S.of(context).tipImage : S.of(context).tip;
-    return ColoredBox(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            EasyIcon(
-              svg: showImage ? AppIcons.image : null,
-              icon: showImage ? null : Icons.drive_folder_upload_rounded,
-              iconSize: 80,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          EasyIcon(
+            svg: showImage ? AppIcons.image : null,
+            icon: showImage ? null : Icons.drive_folder_upload_rounded,
+            iconSize: 80,
+            color: Theme.of(context).primaryColor,
+          ),
+          Text(
+            tipLabel,
+            style: TextStyle(
+              fontSize: 18,
               color: Theme.of(context).primaryColor,
-            ),
-            Text(
-              tipLabel,
-              style: TextStyle(
-                fontSize: 18,
-                color: Theme.of(context).colorScheme.primary,
-              ).useSystemChineseFont(),
-            ),
-          ],
-        ),
+            ).useSystemChineseFont(),
+          ),
+        ],
       ),
     );
   }
