@@ -56,4 +56,19 @@ class AppNum {
   // performance
   static const batchSize = 50;
   static const maxFileSize = 1024 * 1024 * 150;
+
+  // List
+  static const List<double> imageSizes = [
+    136,
+    141,
+    156,
+    174,
+    196,
+    225,
+    263,
+    316,
+    397,
+    530,
+    798
+  ];
 }

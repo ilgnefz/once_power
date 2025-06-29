@@ -77,10 +77,26 @@ class ViewImageWidth extends _$ViewImageWidth {
   double build() => StorageUtil.getDouble(AppKeys.viewImageW) ?? AppNum.imageW;
   Future<void> update(bool left) async {
     // List<double> list = [136, 141, 156, 171, 229, 346, 696];
-    List<double> list = [136, 141, 156, 174, 196, 225, 263, 316, 397, 530, 798];
+    List<double> list = AppNum.imageSizes;
     int index = list.indexOf(state);
+    if (index == -1) {
+      final tempList = List.from(list)
+        ..add(state)
+        ..sort();
+      index = tempList.indexOf(state);
+      if (index == 0) {
+        index = -1;
+      } else if (index != tempList.length - 1) {
+        index = left ? index - 1 : index;
+      }
+    }
     if (!left) state = index > 0 ? list[index - 1] : state;
     if (left) state = index < list.length - 1 ? list[index + 1] : state;
+    await StorageUtil.setDouble(AppKeys.viewImageW, state);
+  }
+
+  Future<void> set(double value) async {
+    state = value;
     await StorageUtil.setDouble(AppKeys.viewImageW, state);
   }
 }

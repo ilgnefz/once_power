@@ -107,3 +107,10 @@ String formatDateShow(String date, DateSplitType type) {
   }
   return date;
 }
+
+String formatDouble(double value) {
+  if (value == value.toInt().toDouble()) {
+    return value.toInt().toString();
+  }
+  return value.toString();
+}

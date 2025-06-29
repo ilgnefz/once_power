@@ -150,7 +150,7 @@ final currentReplaceModeProvider =
 );
 
 typedef _$CurrentReplaceMode = AutoDisposeNotifier<ReplaceMode>;
-String _$currentThemeModeHash() => r'1037563ff0e0f8fb140970d4da7fb10aa951a1fd';
+String _$currentThemeModeHash() => r'47621f37554cb6b1540190757b06aa62686c7b25';
 
 /// See also [CurrentThemeMode].
 @ProviderFor(CurrentThemeMode)

@@ -20,6 +20,7 @@ class FormatGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       children: [
         Text('${S.of(context).replaceMode}: '),
@@ -42,11 +43,16 @@ class FormatGroup extends StatelessWidget {
               .map((item) => DropdownMenuItem(
                     key: ValueKey(item),
                     value: item,
-                    child: Text(item.label),
+                    child: Text(
+                      item.label,
+                      style: TextStyle(
+                        color: theme.textTheme.labelMedium?.color,
+                      ),
+                    ),
                   ))
               .toList(),
           width: 98,
-          color: Theme.of(context).popupMenuTheme.surfaceTintColor,
+          color: theme.popupMenuTheme.surfaceTintColor,
           value: position,
           onChanged: (value) => onPositionChanged(value!),
         ),

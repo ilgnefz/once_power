@@ -6,17 +6,23 @@ class DialogBaseInput extends StatefulWidget {
   const DialogBaseInput({
     super.key,
     this.enable = true,
-    required this.value,
+    this.value,
     this.hintText = '',
     this.autofocus = false,
+    this.controller,
     this.inputFormatters,
     required this.onChanged,
-  });
+  }) : assert(
+          (controller == null && value != null) ||
+              (controller != null && value == null),
+          'controller and value cannot be both null or both not null',
+        );
 
   final bool enable;
-  final String value;
+  final String? value;
   final String hintText;
   final bool autofocus;
+  final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String) onChanged;
 
@@ -31,20 +37,20 @@ class _DialogBaseInputState extends State<DialogBaseInput> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: widget.value)
-      ..addListener(() {
-        if (controller.text.isNotEmpty) {
-          show = true;
-        } else {
-          show = false;
-        }
-        setState(() {});
-      });
+    controller = widget.controller ?? TextEditingController(text: widget.value);
+    controller.addListener(() {
+      if (controller.text.isNotEmpty) {
+        show = true;
+      } else {
+        show = false;
+      }
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    if (widget.controller == null) controller.dispose();
     super.dispose();
   }
 

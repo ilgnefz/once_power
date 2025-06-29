@@ -30,6 +30,7 @@ class EasyCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       mainAxisSize: mainAxisSize,
       children: [
@@ -47,11 +48,16 @@ class EasyCheckbox extends StatelessWidget {
               ),
               side: BorderSide(
                   width: sideWidth!,
-                  color: borderColor ?? Theme.of(context).colorScheme.outline),
+                  color: borderColor ?? theme.colorScheme.outline),
             ),
           ),
         ),
-        if (label != null) Text(label!, style: style),
+        if (label != null)
+          Text(
+            label!,
+            style:
+                style ?? TextStyle(color: theme.textTheme.labelMedium?.color),
+          ),
         if (child != null) child!,
       ],
     );

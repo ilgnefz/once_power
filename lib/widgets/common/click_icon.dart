@@ -12,6 +12,7 @@ class ClickIcon extends StatelessWidget {
     this.shadows,
     this.onTap,
     this.onSecondaryTap,
+    this.onLongPress,
   });
 
   final double? size;
@@ -22,6 +23,7 @@ class ClickIcon extends StatelessWidget {
   final List<Shadow>? shadows;
   final void Function()? onTap;
   final void Function()? onSecondaryTap;
+  final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class ClickIcon extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           onSecondaryTap: onSecondaryTap,
+          onLongPress: onLongPress,
           borderRadius: BorderRadius.circular(24),
           child: Container(
             height: size,

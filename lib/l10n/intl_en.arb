@@ -194,7 +194,7 @@
   "lowercase": "Lowercase",
   "toggleCase": "Toggle",
   "noConversion": "No",
-  "letters": "Text",
+  "letters": "Text with",
   "advanceEmpty1": "No instructions have been added yet",
   "advanceEmpty2": "Click the",
   "advanceEmpty3": "\"Delete\", \"Add\", or \"Replace\"",
@@ -290,5 +290,6 @@
   "suspenseErrorDesc": "No bulk suspense of all files",
   "lightTheme": "Light theme",
   "darkTheme": "Dark theme",
-  "system": "System"
+  "system": "System",
+  "customImageSize": "Custom image size"
 }

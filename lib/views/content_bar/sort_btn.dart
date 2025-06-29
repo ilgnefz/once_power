@@ -18,6 +18,7 @@ class SortBtn extends ConsumerWidget {
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     bool isViewMode = ref.watch(isViewModeProvider);
     double offsetX = isEnglish && !isOrganize && isViewMode ? -48 : -8;
+    final theme = Theme.of(context);
 
     List<DropdownMenuItem> items = SortType.values.map(
       (e) {
@@ -33,7 +34,7 @@ class SortBtn extends ConsumerWidget {
               SvgIcon(
                 e.icon,
                 size: AppNum.dropdownIconS,
-                color: Theme.of(context).iconTheme.color,
+                color: theme.iconTheme.color,
               ),
               Expanded(
                 child: Text(
@@ -43,6 +44,7 @@ class SortBtn extends ConsumerWidget {
                     fontSize: ref.watch(currentLanguageProvider).isEnglish()
                         ? 13
                         : 14,
+                    color: theme.textTheme.labelMedium?.color,
                   ),
                 ),
               ),

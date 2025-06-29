@@ -5,11 +5,13 @@
 OncePower is a file and folder batch renaming utility with additional features of batch deleting empty folders and batch moving files, allowing users to do advanced matching without learning regular expressions.
 
 The original intention of software development was to batch rename images, so the new version has updated a new feature specifically for image renaming —— **View Mode**.
+
 > [!Tip]
 >
 > Due to the difficulty of recording GIFs, only dynamic diagrams in Chinese are available. If you do not understand, you can open the software and refer to the pictures to learn and use them
 
 # Language Support
+
 - **中文**
 - **English**
 
@@ -20,6 +22,16 @@ The original intention of software development was to batch rename images, so th
 - **Linux**(You need to pack it yourself. For details, please refer to **Packaging**)
 
 # New Feature
+
+## Dark theme
+
+![34](doc/34.gif)
+
+## Customize image size
+
+Long press the image size adjustment button to customize the image size
+
+![33](doc/33.gif)
 
 ## Added the function of zooming in and out of images
 
@@ -95,7 +107,7 @@ Activate this function in the lower left corner
 
 ![03](doc/03-e.png)
 
-After opening it, we can right-click in the File Explorer to view the menu for directly adding files to the software when selecting or not selecting a folder. 
+After opening it, we can right-click in the File Explorer to view the menu for directly adding files to the software when selecting or not selecting a folder.
 
 Due to the limitation of the Windows system that only one file path can be passed in at a time, this feature can only select folders when the program is not running.
 
@@ -268,6 +280,3 @@ flutter_distributor package --platform macos --targets dmg
 # LICENSE
 
 [GPL 2.0 License](./LICENSE)
-
-
-

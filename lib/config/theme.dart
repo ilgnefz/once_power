@@ -1,5 +1,6 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/config/custom_theme.dart';
 import 'package:once_power/constants/colors.dart';
 import 'package:once_power/constants/constants.dart';
 
@@ -19,6 +20,9 @@ class ThemeConfig {
     dividerColor: AppColors.line,
     disabledColor: AppColors.btnDisabled,
     unselectedWidgetColor: Colors.black26,
+    extensions: [
+      IconBoxTheme(background: AppColors.primary, icon: Colors.white),
+    ],
     iconTheme: IconThemeData(color: AppColors.icon),
     textTheme: const TextTheme(
       titleMedium: TextStyle(fontSize: 14, color: Colors.black),
@@ -100,6 +104,9 @@ class ThemeConfig {
     dividerColor: AppColors.lineDark,
     disabledColor: AppColors.btnDisabledDark,
     unselectedWidgetColor: Color(0xFF56535B),
+    extensions: [
+      IconBoxTheme(background: AppColors.primaryDark, icon: AppColors.textDark),
+    ],
     iconTheme: IconThemeData(color: AppColors.iconDark),
     textTheme: const TextTheme(
       titleMedium: TextStyle(fontSize: 14, color: Colors.white),
@@ -108,10 +115,10 @@ class ThemeConfig {
         fontWeight: FontWeight.bold,
         color: AppColors.primaryDark,
       ),
-      bodyLarge: TextStyle(fontSize: 14, color: Colors.white),
-      bodyMedium: TextStyle(fontSize: 14, color: Colors.white),
-      labelMedium: TextStyle(fontSize: 13),
-      labelSmall: TextStyle(fontSize: 12, color: Colors.white),
+      bodyLarge: TextStyle(fontSize: 14, color: AppColors.textDark),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColors.textDark),
+      labelMedium: TextStyle(fontSize: 13, color: AppColors.textDark),
+      labelSmall: TextStyle(fontSize: 12, color: AppColors.textDark),
     ).useSystemChineseFont(Brightness.dark),
     inputDecorationTheme: InputDecorationTheme(
       iconColor: AppColors.unselectIconDark,

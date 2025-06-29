@@ -30,4 +30,5 @@ class AppColors {
   static const Color btnDisabledDark = Color(0xFF323232);
   static const Color btnTextDisabled = Color(0xFF999999);
   static const Color btnTextDisabledDark = Color(0xFF6952A5);
+  static const Color textDark = Color(0xFFE5E5E5);
 }

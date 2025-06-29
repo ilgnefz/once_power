@@ -64,7 +64,7 @@ class AdvanceAddCard extends StatelessWidget {
         children: [
           TextSpan(
             text: S.of(context).startSequence,
-            style: TextStyle(color: Colors.black),
+            style: defaultStyle,
           ),
           TextSpan(
             text: ' ${S.of(context).to} ',

@@ -1554,9 +1554,9 @@ class S {
     return Intl.message('No', name: 'noConversion', desc: '', args: []);
   }
 
-  /// `Text`
+  /// `Text with`
   String get letters {
-    return Intl.message('Text', name: 'letters', desc: '', args: []);
+    return Intl.message('Text with', name: 'letters', desc: '', args: []);
   }
 
   /// `No instructions have been added yet`
@@ -2272,6 +2272,16 @@ class S {
   /// `System`
   String get system {
     return Intl.message('System', name: 'system', desc: '', args: []);
+  }
+
+  /// `Custom image size`
+  String get customImageSize {
+    return Intl.message(
+      'Custom image size',
+      name: 'customImageSize',
+      desc: '',
+      args: [],
+    );
   }
 }
 

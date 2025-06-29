@@ -42,11 +42,12 @@ class _GroupDropdownState extends ConsumerState<GroupDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       children: [
         Text(
           '${S.of(context).applyGroup}:',
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: TextStyle(color: theme.primaryColor),
         ),
         EasyTextDropdown(
           items: groups
@@ -54,7 +55,13 @@ class _GroupDropdownState extends ConsumerState<GroupDropdown> {
                     key: ValueKey(item),
                     value: item,
                     alignment: Alignment.center,
-                    child: Text(item, overflow: TextOverflow.ellipsis),
+                    child: Text(
+                      item,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: theme.textTheme.labelMedium?.color,
+                      ),
+                    ),
                   ))
               .toList(),
           value: widget.value,

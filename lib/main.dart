@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'config/config.dart';
 import 'constants/constants.dart';
+import 'providers/select.dart';
 import 'providers/toggle.dart';
 import 'utils/hot_key.dart';
 import 'views/home.dart';
@@ -35,6 +36,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       title: AppText.name,
       debugShowCheckedModeBanner: false,
       theme: ThemeConfig.light,
+      darkTheme: ThemeConfig.dark,
+      themeMode: ref.watch(currentThemeModeProvider),
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       localizationsDelegates: LanguageConfig.localizationsDelegates,

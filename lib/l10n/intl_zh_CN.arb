@@ -194,7 +194,7 @@
   "lowercase": "小写",
   "toggleCase": "大小写切换",
   "noConversion": "不转换",
-  "letters": "文本",
+  "letters": "文本为",
   "advanceEmpty1": "还没添加任何指令",
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
@@ -291,5 +291,6 @@
   "suspenseErrorDesc": "禁止一次性暂存全部文件",
   "lightTheme": "浅色主题",
   "darkTheme": "深色主题",
-  "system": "跟随系统"
+  "system": "跟随系统",
+  "customImageSize": "自定义图片大小"
 }

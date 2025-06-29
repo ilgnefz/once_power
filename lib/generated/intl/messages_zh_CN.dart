@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createdDate": MessageLookupByLibrary.simpleMessage("创建日期"),
     "createdTime": MessageLookupByLibrary.simpleMessage("创建日期"),
     "currentTask": MessageLookupByLibrary.simpleMessage("任务"),
+    "customImageSize": MessageLookupByLibrary.simpleMessage("自定义图片大小"),
     "darkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
     "date": MessageLookupByLibrary.simpleMessage("日期"),
     "dateAscending": MessageLookupByLibrary.simpleMessage("日期升序"),
@@ -187,7 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lengthDesc": MessageLookupByLibrary.simpleMessage(
       "输入长度截取（两个数字之间加空格截取中间部分）",
     ),
-    "letters": MessageLookupByLibrary.simpleMessage("文本"),
+    "letters": MessageLookupByLibrary.simpleMessage("文本为"),
     "lightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
     "loadingImage": MessageLookupByLibrary.simpleMessage("加载中..."),
     "lowercase": MessageLookupByLibrary.simpleMessage("小写"),

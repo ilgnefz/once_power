@@ -12,6 +12,7 @@ import 'package:once_power/views/action_bar/advance/dialog/replace.dart';
 import 'package:once_power/views/action_bar/organize/group_list.dart';
 import 'package:once_power/views/action_bar/organize/rule_list.dart';
 import 'package:once_power/views/action_bar/rename/show_upload_text.dart';
+import 'package:once_power/views/content_bar/custom_image_size.dart';
 import 'package:once_power/views/content_bar/edit_group.dart';
 import 'package:once_power/views/content_bar/grid_view/preview_view.dart';
 import 'package:once_power/widgets/content_bar/type_detail_panel.dart';
@@ -100,4 +101,13 @@ void showAllRule(BuildContext context) {
 
 void showAllGroup(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => GroupList());
+}
+
+Future<void> showImageSize(BuildContext context) async {
+  await showCustomDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return CustomImageSize();
+    },
+  );
 }

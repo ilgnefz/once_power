@@ -1,5 +1,6 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/config/custom_theme.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/widgets/base/easy_tooltip.dart';
 import 'package:once_power/widgets/base/svg_icon.dart';
@@ -48,7 +49,7 @@ class IconBox extends StatelessWidget {
               child: SvgIcon(
                 icon,
                 color: selected
-                    ? Colors.white
+                    ? theme.extension<IconBoxTheme>()?.icon
                     : theme.inputDecorationTheme.iconColor,
                 size: iconSize,
               ),

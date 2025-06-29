@@ -21,6 +21,7 @@ class AddDateGroup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final textStyle = TextStyle(color: theme.textTheme.labelMedium?.color);
     return Row(
       spacing: 4,
       mainAxisSize: MainAxisSize.min,
@@ -30,7 +31,7 @@ class AddDateGroup extends ConsumerWidget {
               .map((item) => DropdownMenuItem(
                     key: ValueKey(item),
                     value: item,
-                    child: Text(item.label),
+                    child: Text(item.label, style: textStyle),
                   ))
               .toList(),
           width: 102,
@@ -43,7 +44,7 @@ class AddDateGroup extends ConsumerWidget {
               .map((item) => DropdownMenuItem(
                     key: ValueKey(item),
                     value: item,
-                    child: Text(item.label),
+                    child: Text(item.label, style: textStyle),
                   ))
               .toList(),
           width: 102,

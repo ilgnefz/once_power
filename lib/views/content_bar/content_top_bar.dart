@@ -17,6 +17,8 @@ class ContentTopBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isViewMode = ref.watch(isViewModeProvider);
+    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     return Container(
       height: 40,
       padding: const EdgeInsets.only(left: 4, right: AppNum.defaultP),
@@ -24,16 +26,12 @@ class ContentTopBar extends ConsumerWidget {
       child: Row(
         children: [
           Expanded(child: CountCheckbox()),
-          if (ref.watch(isViewModeProvider) &&
-              !ref.watch(currentModeProvider).isOrganize)
-            AdjustImage(),
+          if (isViewMode && !isOrganize) AdjustImage(),
           SizedBox(width: AppNum.largeG),
           SortBtn(),
           SizedBox(width: AppNum.smallG),
-          Consumer(
-            builder: (context, ref, child) {
-              bool isViewMode = ref.watch(isViewModeProvider);
-              bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+          Builder(
+            builder: (context) {
               if (isViewMode && !isOrganize) return SizedBox.shrink();
               String label =
                   isOrganize ? S.of(context).folder : S.of(context).renameName;

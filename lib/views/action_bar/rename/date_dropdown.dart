@@ -15,7 +15,12 @@ class DateDropdown extends ConsumerWidget {
           .map((item) => DropdownMenuItem(
                 key: ValueKey(item),
                 value: item,
-                child: Text(item.label),
+                child: Text(
+                  item.label,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.labelMedium?.color,
+                  ),
+                ),
               ))
           .toList(),
       value: ref.watch(currentDateTypeProvider),

@@ -124,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
     "createdTime": MessageLookupByLibrary.simpleMessage("Created date"),
     "currentTask": MessageLookupByLibrary.simpleMessage("Task"),
+    "customImageSize": MessageLookupByLibrary.simpleMessage(
+      "Custom image size",
+    ),
     "darkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateAscending": MessageLookupByLibrary.simpleMessage("Date ascending"),
@@ -237,7 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lengthDesc": MessageLookupByLibrary.simpleMessage(
       "Input length truncation (adding a space between two numbers to truncate the middle part)",
     ),
-    "letters": MessageLookupByLibrary.simpleMessage("Text"),
+    "letters": MessageLookupByLibrary.simpleMessage("Text with"),
     "lightTheme": MessageLookupByLibrary.simpleMessage("Light theme"),
     "loadingImage": MessageLookupByLibrary.simpleMessage("Loading..."),
     "lowercase": MessageLookupByLibrary.simpleMessage("Lowercase"),
