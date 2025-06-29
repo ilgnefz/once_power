@@ -29,6 +29,16 @@ void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
   updateName(ref);
 }
 
+void selectGroup(WidgetRef ref, String group) {
+  ref.read(sortSelectListProvider.notifier).clear();
+  List<FileInfo> list = ref.watch(sortListProvider);
+  for (FileInfo e in list) {
+    if (e.group != group) continue;
+    ref.read(sortSelectListProvider.notifier).add(e);
+  }
+  updateName(ref);
+}
+
 void selectPath(WidgetRef ref, String folder) {
   ref.read(sortSelectListProvider.notifier).clear();
   List<FileInfo> list = ref.watch(sortListProvider);

@@ -139,6 +139,7 @@
   "moveToLast": "To the last",
   "deleteChecked": "Delete checked",
   "selectPath": "Select folder",
+  "selectGroup": "Select group",
   "topParentFolder": "Top folder",
   "caseFile": "Case type",
   "caseExtension": "Case ext.",

@@ -1144,6 +1144,16 @@ class S {
     );
   }
 
+  /// `Select group`
+  String get selectGroup {
+    return Intl.message(
+      'Select group',
+      name: 'selectGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Top folder`
   String get topParentFolder {
     return Intl.message(

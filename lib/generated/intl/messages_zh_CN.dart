@@ -277,6 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select": MessageLookupByLibrary.simpleMessage("选择"),
     "selectAllSwitch": MessageLookupByLibrary.simpleMessage("全选切换"),
     "selectFolder": MessageLookupByLibrary.simpleMessage("选择文件夹"),
+    "selectGroup": MessageLookupByLibrary.simpleMessage("选中组"),
     "selectPath": MessageLookupByLibrary.simpleMessage("选中路径"),
     "selectReserve": MessageLookupByLibrary.simpleMessage("反选文件"),
     "selectTargetFolder": MessageLookupByLibrary.simpleMessage("选择目标文件夹"),

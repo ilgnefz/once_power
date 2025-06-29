@@ -100,7 +100,7 @@ Future<void> showRightMenu(
               ),
             ],
           ),
-        if (ref.watch(currentModeProvider).isOrganize)
+        if (mode.isOrganize)
           RightMenuItem(
             label: S.of(context).matchParent,
             onSelected: () => ref
@@ -125,6 +125,11 @@ Future<void> showRightMenu(
           color: file.checked ? Colors.grey : theme.colorScheme.surfaceDim,
           onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),
+        if (mode.isAdvance || mode.isOrganize)
+          RightMenuItem(
+            label: S.of(context).selectGroup,
+            onSelected: () => selectGroup(ref, file.group),
+          ),
         RightMenuItem(
           label: S.of(context).selectPath,
           onSelected: () => selectPath(ref, file.parent),

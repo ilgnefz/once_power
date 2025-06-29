@@ -139,6 +139,7 @@
   "moveToLast": "移至末尾",
   "deleteChecked": "删除选中文件",
   "selectPath": "选中路径",
+  "selectGroup": "选中组",
   "topParentFolder": "顶级文件夹",
   "caseFile": "区分类型",
   "caseExtension": "区分扩展",
