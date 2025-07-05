@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
@@ -48,7 +50,11 @@ class NotificationContent extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: info.detailList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  TextStyle fileStyle = const TextStyle(color: Colors.blue),
+                  TextStyle fileStyle = TextStyle(
+                        color: Colors.blue,
+                        fontFamily:
+                            Platform.isWindows ? 'Microsoft YaHei' : null,
+                      ),
                       infoStyle = TextStyle(
                           color:
                               Theme.of(context).colorScheme.onErrorContainer);
