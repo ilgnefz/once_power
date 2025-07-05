@@ -7,6 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/base/base_input.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
+import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
 class FolderInput extends StatefulWidget {
   const FolderInput({
@@ -147,6 +148,7 @@ class _FolderInputState extends State<FolderInput> {
       trailing: TooltipIcon(
         tip: S.of(context).targetFolder,
         icon: Icons.folder_open_rounded,
+        placement: Placement.right,
         // color: Theme.of(context).primaryColor,
         // size: 32,
         // iconSize: 24,

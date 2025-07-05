@@ -1,5 +1,10 @@
 {
   "info": [{
+    "version": "2.28.1",
+    "description": [
+      "修复了字体显示错误的问题"
+    ]
+  },{
     "version": "2.28.0",
     "description": [
       "添加了深色主题",

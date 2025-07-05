@@ -14,6 +14,7 @@ import 'package:once_power/utils/verify.dart';
 import 'package:once_power/widgets/action_bar/operate_item.dart';
 import 'package:once_power/widgets/base/base_input.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
+import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
 class ModifyInput extends ConsumerWidget {
   const ModifyInput({super.key});
@@ -65,6 +66,7 @@ class ModifyInput extends ConsumerWidget {
         trailing: TooltipIcon(
           tip: S.of(context).today,
           svg: AppIcons.date,
+          placement: Placement.right,
           color: Theme.of(context).inputDecorationTheme.iconColor,
           onTap: () {
             if (ref.watch(currentModeProvider).isReserve) {

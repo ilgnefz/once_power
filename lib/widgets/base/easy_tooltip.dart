@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
@@ -49,13 +51,16 @@ TextSpan richTextTooltip(BuildContext context, String label, String desc,
     style: TextStyle(
       fontSize: 13,
       color: theme.primaryColor.withValues(alpha: .8),
+      fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
     ).useSystemChineseFont(),
     children: [
       TextSpan(
         text: isLast ? desc : '$desc\n',
         style: TextStyle(
-                fontSize: 13, color: theme.colorScheme.surfaceContainerLow)
-            .useSystemChineseFont(),
+          fontSize: 13,
+          color: theme.colorScheme.surfaceContainerLow,
+          fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+        ).useSystemChineseFont(),
       ),
     ],
   );

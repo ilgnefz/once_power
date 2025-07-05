@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -37,11 +39,18 @@ class InstructionsText extends StatelessWidget {
           (index) => RichText(
             text: TextSpan(
               text: '${labels[index]}: ',
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+              ),
               children: [
                 TextSpan(
                   text: desc[index],
-                  style: TextStyle(color: Color(0xFF666666), height: 1.5),
+                  style: TextStyle(
+                    color: Color(0xFF666666),
+                    height: 1.5,
+                    fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+                  ),
                 )
               ],
             ),

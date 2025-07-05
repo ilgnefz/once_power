@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +46,13 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
     final theme = Theme.of(context);
     final TextStyle highlightStyle = TextStyle(
       color: widget.menu.checked ? theme.primaryColor : theme.iconTheme.color,
+      fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
     ).useSystemChineseFont();
     final TextStyle defaultStyle = TextStyle(
       color: widget.menu.checked
           ? theme.textTheme.bodyMedium?.color
           : theme.iconTheme.color,
+      fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
     ).useSystemChineseFont();
 
     Widget buildInfo(AdvanceMenuModel menu) {

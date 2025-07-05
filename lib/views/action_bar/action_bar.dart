@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/colors.dart';
@@ -46,9 +48,14 @@ class ActionBar extends ConsumerWidget {
               indicatorColor: Theme.of(context).primaryColor,
               labelPadding: EdgeInsets.zero,
               labelColor: Theme.of(context).primaryColor,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+              ),
               unselectedLabelColor: AppColors.unselectText,
-              unselectedLabelStyle: const TextStyle(),
+              unselectedLabelStyle: TextStyle(
+                fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+              ),
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabs: modes.map((e) => Tab(text: e.label)).toList(),
               onTap: (index) {
