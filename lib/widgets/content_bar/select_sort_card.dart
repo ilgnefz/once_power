@@ -155,7 +155,7 @@ class SelectSortCard extends ConsumerWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                   label: Text(
                     indexLabel,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 11),
                   ),
                 ),
             ],

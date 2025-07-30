@@ -300,7 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "organizingFailedInfo": MessageLookupByLibrary.simpleMessage(
       "The following moves failed",
     ),
-    "originalName": MessageLookupByLibrary.simpleMessage("Original name"),
+    "originalName": MessageLookupByLibrary.simpleMessage("Name"),
     "other": MessageLookupByLibrary.simpleMessage("Other"),
     "parentsName": MessageLookupByLibrary.simpleMessage("FolderName"),
     "place": MessageLookupByLibrary.simpleMessage("place"),
@@ -341,7 +341,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Remove unchecked",
     ),
     "renameLogs": MessageLookupByLibrary.simpleMessage("rename logs"),
-    "renameName": MessageLookupByLibrary.simpleMessage("Rename name"),
+    "renameName": MessageLookupByLibrary.simpleMessage("New name"),
     "replace": MessageLookupByLibrary.simpleMessage("Replace"),
     "replaceInputHint": MessageLookupByLibrary.simpleMessage(
       "Please enter the matching content",

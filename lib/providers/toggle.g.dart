@@ -577,5 +577,36 @@ final useDateClassifyProvider =
 );
 
 typedef _$UseDateClassify = AutoDisposeNotifier<bool>;
+String _$showChangeHash() => r'94391d02cd133a4083f227605e55526f5062b58d';
+
+/// See also [ShowChange].
+@ProviderFor(ShowChange)
+final showChangeProvider =
+    AutoDisposeNotifierProvider<ShowChange, bool>.internal(
+  ShowChange.new,
+  name: r'showChangeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$showChangeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ShowChange = AutoDisposeNotifier<bool>;
+String _$expandNewNameHash() => r'778a9161dd93601ad71aec2dd4460bac271d3a1a';
+
+/// See also [ExpandNewName].
+@ProviderFor(ExpandNewName)
+final expandNewNameProvider =
+    AutoDisposeNotifierProvider<ExpandNewName, bool>.internal(
+  ExpandNewName.new,
+  name: r'expandNewNameProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$expandNewNameHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ExpandNewName = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

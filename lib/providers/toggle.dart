@@ -387,3 +387,18 @@ class UseDateClassify extends _$UseDateClassify {
     await StorageUtil.setBool(AppKeys.isUseDateClassify, state);
   }
 }
+
+@riverpod
+class ShowChange extends _$ShowChange {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+  void reset() => state = false;
+}
+
+@riverpod
+class ExpandNewName extends _$ExpandNewName {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}

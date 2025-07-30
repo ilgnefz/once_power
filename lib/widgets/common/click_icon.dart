@@ -36,6 +36,9 @@ class ClickIcon extends StatelessWidget {
           onSecondaryTap: onSecondaryTap,
           onLongPress: onLongPress,
           borderRadius: BorderRadius.circular(24),
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          // hoverColor: Colors.transparent,
           child: Container(
             height: size,
             width: size,

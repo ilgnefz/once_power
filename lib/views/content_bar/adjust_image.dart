@@ -12,7 +12,7 @@ class AdjustImage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ClickIcon(
       svg: AppIcons.imageSize,
-      size: 20,
+      size: 32,
       color: Theme.of(context).iconTheme.color,
       onTap: () => ref.read(viewImageWidthProvider.notifier).update(true),
       onSecondaryTap: () =>

@@ -92,6 +92,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(isApplyingProvider.notifier).start();
+  ref.read(showChangeProvider.notifier).reset();
 
   // 过滤需要处理的文件路径（跳过不需要的文件）
   final validPaths = paths.where((p) {

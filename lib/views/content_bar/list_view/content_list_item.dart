@@ -6,6 +6,7 @@ import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/views/content_bar/remove_btn.dart';
 import 'package:once_power/widgets/common/easy_checkbox.dart';
 import 'package:once_power/widgets/common/one_line_text.dart';
@@ -22,57 +23,78 @@ class ContentListItem extends ConsumerWidget {
     final theme = Theme.of(context);
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     String subtitle = isOrganize ? file.parent : file.newName;
+    bool changeNameStyle = isOrganize || file.name == file.newName;
+    bool changeExtStyle = isOrganize || file.extension == file.newExtension;
     return SelectSortCard(
       index: index,
       file: file,
       onDoubleTap: () {},
       child: Container(
         height: 40,
-        padding: EdgeInsets.only(left: 4),
+        // padding: EdgeInsets.only(left: 4),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
+            EasyCheckbox(
+              label: '',
+              checked: file.checked,
+              onChanged: (value) {
+                toggleCheck(ref, file.id);
+                updateName(ref);
+              },
+            ),
             Expanded(
+              flex: 1,
               child: Padding(
-                padding: EdgeInsets.only(right: AppNum.mediumG),
-                child: EasyCheckbox(
-                  checked: file.checked,
-                  onChanged: (value) {
-                    toggleCheck(ref, file.id);
-                    updateName(ref);
-                  },
-                  child: OneLineText(file.name, fontSize: AppNum.tileFontSize),
+                padding: EdgeInsets.only(right: AppNum.smallG),
+                // padding: EdgeInsets.only(right: 0),
+                child: Text(
+                  file.name,
+                  style: TextStyle(fontSize: AppNum.tileFontSize),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
             Expanded(
+              flex: ref.watch(expandNewNameProvider) ? 2 : 1,
               child: Row(
                 children: [
                   OneLineText(
                     subtitle,
                     fontSize: AppNum.tileFontSize,
-                    color: isOrganize || file.name == file.newName
-                        ? theme.textTheme.bodyMedium?.color
+                    // fontWeight:
+                    //     changeNameStyle ? FontWeight.normal : FontWeight.bold,
+                    color: changeNameStyle
+                        // ? theme.textTheme.bodyMedium?.color
+                        //     ?.withValues(alpha: .5)
+                        ? Colors.grey
                         : theme.primaryColor,
                   ),
-                  Container(
-                    width: AppNum.extensionW,
-                    alignment: Alignment.center,
-                    child: Text(
-                      file.newExtension,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 13,
-                        height: 1,
-                        color: isOrganize || file.extension == file.newExtension
-                            ? theme.textTheme.bodyMedium?.color
-                            : theme.primaryColor,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            SizedBox(width: AppNum.smallG),
+            Container(
+              width: AppNum.extensionW,
+              alignment: Alignment.center,
+              child: Text(
+                file.newExtension,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1,
+                  // fontWeight: changeExtStyle
+                  //     ? FontWeight.normal
+                  //     : FontWeight.bold,
+                  color: changeExtStyle
+                      // ? theme.textTheme.bodyMedium?.color
+                      ? Colors.grey
+                      : theme.primaryColor,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             RemoveBtn(

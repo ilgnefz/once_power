@@ -11,7 +11,7 @@ class AppNum {
   static const double inputH = 32;
   static const double inputP = 8;
   static const int maxFileNum = 150;
-  static const double defaultIconS = 22;
+  static const double defaultIconS = 20;
   static const double dropdownIconS = 20;
 
   // TopBar
@@ -25,7 +25,7 @@ class AppNum {
   static const double modeCardG = 8;
   // static const double cSVDataTileH = 40;
   static const double cSVDataH = 36;
-  static const double presetMenuW = 144;
+  static const double presetMenuW = 160;
   static const double presetMenuItemH = 32;
   static const double uploadCardW = 80;
 

@@ -9,6 +9,7 @@ import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/progress.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/progress.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
@@ -68,6 +69,13 @@ class _ContentBarState extends ConsumerState<ContentBar> {
                   },
                   child: Builder(builder: (_) {
                     List<FileInfo> files = ref.watch(sortListProvider);
+                    if (ref.watch(showChangeProvider)) {
+                      files = files
+                          .where((e) =>
+                              e.name != e.newName ||
+                              e.extension != e.newExtension)
+                          .toList();
+                    }
                     if (files.isEmpty) return EmptyContent();
                     if (isViewNoOrganize(ref)) return ContentGrid(files: files);
                     return ContentList(files: files);

@@ -334,19 +334,14 @@ class S {
     );
   }
 
-  /// `Original name`
+  /// `Name`
   String get originalName {
-    return Intl.message(
-      'Original name',
-      name: 'originalName',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Name', name: 'originalName', desc: '', args: []);
   }
 
-  /// `Rename name`
+  /// `New name`
   String get renameName {
-    return Intl.message('Rename name', name: 'renameName', desc: '', args: []);
+    return Intl.message('New name', name: 'renameName', desc: '', args: []);
   }
 
   /// `New name`

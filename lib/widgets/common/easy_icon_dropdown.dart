@@ -31,10 +31,12 @@ class EasyIconDropdown<T> extends StatelessWidget {
           overlayColor: WidgetStatePropertyAll(Colors.transparent),
         ),
         customButton: EasyIcon(
+          size: 32,
           svg: svg,
           icon: icon,
           iconSize: icon != null ? AppNum.defaultIconS : AppNum.dropdownIconS,
           color: Theme.of(context).iconTheme.color,
+          showInk: true,
         ),
         items: items,
         isExpanded: isExpanded,
