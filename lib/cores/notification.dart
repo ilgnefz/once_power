@@ -96,7 +96,7 @@ void showOpenErrorNotification(String info, [int? time]) {
   ).show();
 }
 
-InfoDetail renameErrorInfo(Object e, String oldPath, String newPath) {
+InfoDetail renameErrorNotification(Object e, String oldPath, String newPath) {
   Log.e(e.runtimeType.toString());
   String message = '';
   if (e.runtimeType == PathNotFoundException) {
@@ -107,7 +107,7 @@ InfoDetail renameErrorInfo(Object e, String oldPath, String newPath) {
   return InfoDetail(file: path.basename(oldPath), message: message);
 }
 
-InfoDetail moveErrorInfo(
+InfoDetail moveErrorNotification(
     Object e, bool sameDisk, String oldPath, String newPath) {
   String message = '${S.current.moveFailed}: $e';
   if (sameDisk) message = '${S.current.moveError}: $e';
@@ -123,11 +123,47 @@ void showEmptyNotification() {
   ).show();
 }
 
-void showSuspenseErrorInfo() {
+void showSuspenseErrorNotification() {
   NotificationInfo(
     type: NotificationType.error,
     title: S.current.suspenseError,
     message: S.current.suspenseErrorDesc,
     time: 3,
   ).show();
+}
+
+void showPresetExportNotification({int? num, String? err}) {
+  if (num != null) {
+    NotificationInfo(
+      title: S.current.exportPresetSuccess,
+      message: S.current.exportPresetSuccessNum(num),
+      time: 3,
+    ).show();
+  }
+  if (err != null) {
+    NotificationInfo(
+      type: NotificationType.error,
+      title: S.current.exportPresetError,
+      message: err,
+      time: 5,
+    ).show();
+  }
+}
+
+void showPresetImportNotification({int? num, String? err}) {
+  if (num != null) {
+    NotificationInfo(
+      title: S.current.importPresetSuccess,
+      message: S.current.importPresetSuccessNum(num),
+      time: 3,
+    ).show();
+  }
+  if (err != null) {
+    NotificationInfo(
+      type: NotificationType.error,
+      title: S.current.importPresetError,
+      message: err.replaceAll('Exception:', ''),
+      time: 5,
+    ).show();
+  }
 }

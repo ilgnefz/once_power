@@ -243,7 +243,6 @@
   "openError": "打开失败",
   "targetFolderError": "目标文件夹为空！",
   "useRuleDesc": "将不同类型的文件移动到不同的文件夹中",
-  "useDateClassification": "日期分类",
   "dateClassificationDesc": "根据文件的创建日期在目标文件夹下创建以日期命名的文件夹，并移动到那个文件夹中",
   "topParentFolderDesc": "将文件移动到除磁盘根目录外的顶级父文件夹中",
   "removeFolder": "移除路径",
@@ -292,5 +291,17 @@
   "lightTheme": "浅色主题",
   "darkTheme": "深色主题",
   "system": "跟随系统",
-  "customImageSize": "自定义图片大小"
+  "customImageSize": "自定义图片大小",
+  "exportPreset": "导出预设",
+  "exportPresetTitle": "导出预设",
+  "exportPresetSuccess": "导出预设成功",
+  "exportPresetSuccessNum": "已成功导出 {num} 条预设",
+  "exportPresetError": "导出预设失败",
+  "importPreset": "导入预设",
+  "importPresetSuccess": "导入预设成功",
+  "importPresetSuccessNum": "已成功导入 {num} 条预设",
+  "importPresetError": "导入预设失败",
+  "importPresetErrorDesc1": "文件不完整，缺少头标识或IV",
+  "importPresetErrorDesc2": "无效文件格式，头标识不匹配",
+  "importPresetErrorDesc3": "解密失败: {err}"
 }

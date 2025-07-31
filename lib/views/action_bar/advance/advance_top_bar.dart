@@ -14,8 +14,7 @@ class AdvanceTopBar extends ConsumerWidget {
     List<AdvanceMenuModel> list = ref.watch(advanceMenuListProvider);
     return SubTopBar(
       title: S.current.totalInstructions(list.length),
-      icon: Icons.delete_outline_rounded,
-      onTap: () {
+      onDelete: () {
         ref.read(advanceMenuListProvider.notifier).setList([]);
         advanceUpdateName(ref);
       },

@@ -60,7 +60,7 @@ Future<InfoDetail?> rename(
     await updateShowInfo(ref, file, newPath);
     return null;
   } catch (e) {
-    return renameErrorInfo(e, oldPath, newPath);
+    return renameErrorNotification(e, oldPath, newPath);
   }
 }
 

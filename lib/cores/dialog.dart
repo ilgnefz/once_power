@@ -9,6 +9,7 @@ import 'package:once_power/views/action_bar/advance/dialog/add.dart';
 import 'package:once_power/views/action_bar/advance/dialog/add_preset.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete.dart';
 import 'package:once_power/views/action_bar/advance/dialog/replace.dart';
+import 'package:once_power/views/action_bar/advance/preset_list.dart';
 import 'package:once_power/views/action_bar/organize/group_list.dart';
 import 'package:once_power/views/action_bar/organize/rule_list.dart';
 import 'package:once_power/views/action_bar/rename/show_upload_text.dart';
@@ -91,6 +92,13 @@ void addPreset(
   );
 }
 
+void renamePreset(BuildContext context, AdvancePreset preset) {
+  showCustomDialog(
+    context: context,
+    builder: (context) => AddPreset(preset: preset),
+  );
+}
+
 void editGroup(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => EditGroup());
 }
@@ -109,5 +117,12 @@ Future<void> showImageSize(BuildContext context) async {
     builder: (BuildContext context) {
       return CustomImageSize();
     },
+  );
+}
+
+void exportPreset(BuildContext context) {
+  showCustomDialog(
+    context: context,
+    builder: (context) => PresetListView(),
   );
 }

@@ -7,13 +7,11 @@ class SubTopBar extends StatelessWidget {
   const SubTopBar({
     super.key,
     required this.title,
-    required this.icon,
-    this.onTap,
+    this.onDelete,
   });
 
   final String title;
-  final IconData icon;
-  final void Function()? onTap;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +31,9 @@ class SubTopBar extends StatelessWidget {
           ClickIcon(
             size: 20,
             iconSize: 16,
-            icon: icon,
+            icon: Icons.delete_outline_rounded,
             color: Colors.grey,
-            onTap: onTap,
+            onTap: onDelete,
           )
         ],
       ),

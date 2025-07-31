@@ -10,6 +10,18 @@ class AdvancePreset {
 
   AdvancePreset({required this.id, required this.name, required this.menus});
 
+  AdvancePreset copyWith({
+    String? id,
+    String? name,
+    List<AdvanceMenuModel>? menus,
+  }) {
+    return AdvancePreset(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      menus: menus ?? this.menus,
+    );
+  }
+
   factory AdvancePreset.fromJson(Map<String, dynamic> json) {
     List<AdvanceMenuModel> menus = [];
     for (var menu in json['menus']) {
@@ -32,6 +44,11 @@ class AdvancePreset {
       'name': name,
       'menus': menusJson,
     };
+  }
+
+  @override
+  String toString() {
+    return 'AdvancePreset{id: $id, name: $name, menus: $menus}';
   }
 }
 

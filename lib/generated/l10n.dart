@@ -2278,6 +2278,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Export`
+  String get exportPreset {
+    return Intl.message('Export', name: 'exportPreset', desc: '', args: []);
+  }
+
+  /// `Export Preset`
+  String get exportPresetTitle {
+    return Intl.message(
+      'Export Preset',
+      name: 'exportPresetTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preset export success`
+  String get exportPresetSuccess {
+    return Intl.message(
+      'Preset export success',
+      name: 'exportPresetSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully exported {num} presets`
+  String exportPresetSuccessNum(Object num) {
+    return Intl.message(
+      'Successfully exported $num presets',
+      name: 'exportPresetSuccessNum',
+      desc: '',
+      args: [num],
+    );
+  }
+
+  /// `Preset export failed`
+  String get exportPresetError {
+    return Intl.message(
+      'Preset export failed',
+      name: 'exportPresetError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import`
+  String get importPreset {
+    return Intl.message('Import', name: 'importPreset', desc: '', args: []);
+  }
+
+  /// `Preset import success`
+  String get importPresetSuccess {
+    return Intl.message(
+      'Preset import success',
+      name: 'importPresetSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully imported {num} presets`
+  String importPresetSuccessNum(Object num) {
+    return Intl.message(
+      'Successfully imported $num presets',
+      name: 'importPresetSuccessNum',
+      desc: '',
+      args: [num],
+    );
+  }
+
+  /// `Preset import failed`
+  String get importPresetError {
+    return Intl.message(
+      'Preset import failed',
+      name: 'importPresetError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The file is not complete, missing header or IV`
+  String get importPresetErrorDesc1 {
+    return Intl.message(
+      'The file is not complete, missing header or IV',
+      name: 'importPresetErrorDesc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid file format, header does not match`
+  String get importPresetErrorDesc2 {
+    return Intl.message(
+      'Invalid file format, header does not match',
+      name: 'importPresetErrorDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Decryption failed: {err}`
+  String importPresetErrorDesc3(Object err) {
+    return Intl.message(
+      'Decryption failed: $err',
+      name: 'importPresetErrorDesc3',
+      desc: '',
+      args: [err],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

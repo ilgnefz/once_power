@@ -97,7 +97,7 @@ void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
     }
     await StorageUtil.setFileList(AppKeys.suspenseFileList, cache);
   } else {
-    showSuspenseErrorInfo();
+    showSuspenseErrorNotification();
   }
 }
 

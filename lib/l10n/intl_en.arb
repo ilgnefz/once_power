@@ -291,5 +291,17 @@
   "lightTheme": "Light theme",
   "darkTheme": "Dark theme",
   "system": "System",
-  "customImageSize": "Custom image size"
+  "customImageSize": "Custom image size",
+  "exportPreset": "Export",
+  "exportPresetTitle": "Export Preset",
+  "exportPresetSuccess": "Preset export success",
+  "exportPresetSuccessNum": "Successfully exported {num} presets",
+  "exportPresetError": "Preset export failed",
+  "importPreset": "Import",
+  "importPresetSuccess": "Preset import success",
+  "importPresetSuccessNum": "Successfully imported {num} presets",
+  "importPresetError": "Preset import failed",
+  "importPresetErrorDesc1": "The file is not complete, missing header or IV",
+  "importPresetErrorDesc2": "Invalid file format, header does not match",
+  "importPresetErrorDesc3": "Decryption failed: {err}"
 }

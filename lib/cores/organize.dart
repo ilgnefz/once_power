@@ -207,7 +207,7 @@ Future<InfoDetail?> organize(
     ref
         .read(currentProgressFileProvider.notifier)
         .update(info.copyWith(transferred: info.size));
-    infoDetail = moveErrorInfo(e, isSame, oldPath, newPath);
+    infoDetail = moveErrorNotification(e, isSame, oldPath, newPath);
   }
   ref.read(countProvider.notifier).update();
   return infoDetail;
