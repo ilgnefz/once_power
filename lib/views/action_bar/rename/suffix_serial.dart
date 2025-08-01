@@ -24,7 +24,7 @@ class SuffixSerial extends ConsumerWidget {
         updateName(ref);
       },
       child: Row(
-        spacing: AppNum.mediumG,
+        spacing: AppNum.operateG,
         children: [
           Expanded(
             child: DigitInput(

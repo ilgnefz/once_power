@@ -156,9 +156,6 @@ class FolderController extends _$FolderController {
     controller.addListener(() {
       ref.read(folderClearProvider.notifier).update(controller.text.isNotEmpty);
     });
-    ref.onDispose(() {
-      controller.dispose();
-    });
     return controller;
   }
 

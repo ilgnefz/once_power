@@ -23,7 +23,7 @@ class ContentListItem extends ConsumerWidget {
     final theme = Theme.of(context);
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     String subtitle = isOrganize ? file.parent : file.newName;
-    bool changeNameStyle = isOrganize || file.name == file.newName;
+    bool changeNameStyle = file.name == file.newName;
     bool changeExtStyle = isOrganize || file.extension == file.newExtension;
     return SelectSortCard(
       index: index,
@@ -66,11 +66,11 @@ class ContentListItem extends ConsumerWidget {
                     fontSize: AppNum.tileFontSize,
                     // fontWeight:
                     //     changeNameStyle ? FontWeight.normal : FontWeight.bold,
-                    color: changeNameStyle
-                        // ? theme.textTheme.bodyMedium?.color
-                        //     ?.withValues(alpha: .5)
-                        ? Colors.grey
-                        : theme.primaryColor,
+                    color: isOrganize
+                        ? Colors.black
+                        : changeNameStyle
+                            ? Colors.grey
+                            : theme.primaryColor,
                   ),
                 ],
               ),
@@ -88,10 +88,11 @@ class ContentListItem extends ConsumerWidget {
                   // fontWeight: changeExtStyle
                   //     ? FontWeight.normal
                   //     : FontWeight.bold,
-                  color: changeExtStyle
-                      // ? theme.textTheme.bodyMedium?.color
-                      ? Colors.grey
-                      : theme.primaryColor,
+                  color: isOrganize
+                      ? Colors.black
+                      : changeExtStyle
+                          ? Colors.grey
+                          : theme.primaryColor,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

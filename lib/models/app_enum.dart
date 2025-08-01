@@ -33,13 +33,23 @@ enum LanguageType {
 }
 
 extension LanguageTypeExtension on LanguageType {
+  Locale get locale {
+    switch (this) {
+      case LanguageType.english:
+        return const Locale('en', 'US');
+      case LanguageType.chinese:
+        return const Locale('zh', 'CN');
+    }
+  }
+
   bool isEnglish() => this == LanguageType.english;
   bool isChinese() => this == LanguageType.chinese;
 }
 
 enum NotificationType {
   success(Colors.green, AppIcons.success),
-  error(Colors.red, AppIcons.error);
+  error(Colors.red, AppIcons.error),
+  warning(Colors.orange, AppIcons.warning);
 
   final Color color;
   final String icon;
@@ -49,4 +59,5 @@ enum NotificationType {
 extension NotificationTypeExtension on NotificationType {
   bool isSuccess() => this == NotificationType.success;
   bool isError() => this == NotificationType.error;
+  bool isWarning() => this == NotificationType.warning;
 }

@@ -22,7 +22,7 @@ final advanceMenuListProvider = AutoDisposeNotifierProvider<AdvanceMenuList,
 );
 
 typedef _$AdvanceMenuList = AutoDisposeNotifier<List<AdvanceMenuModel>>;
-String _$advancePresetListHash() => r'490a521cb8ac90e76999d650ab9006e39a0341e0';
+String _$advancePresetListHash() => r'c7469afb43a30b401cb242c4eb803a6653b5b688';
 
 /// See also [AdvancePresetList].
 @ProviderFor(AdvancePresetList)

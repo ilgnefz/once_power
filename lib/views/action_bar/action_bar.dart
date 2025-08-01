@@ -12,6 +12,7 @@ import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/views/action_bar/advance/advance.dart';
 import 'package:once_power/views/action_bar/csv_data/csv_data.dart';
+import 'package:once_power/views/action_bar/date_property/date_property.dart';
 import 'package:once_power/views/action_bar/organize/organize.dart';
 import 'package:once_power/views/action_bar/repalce/replace.dart';
 import 'package:once_power/views/action_bar/reserve/reserve.dart';
@@ -88,6 +89,8 @@ class ActionBar extends ConsumerWidget {
     );
 
     if (ref.watch(cSVDataProvider).isNotEmpty) child = CsvDataView();
+
+    if (ref.watch(useDateModifyProvider)) child = DatePropertyView();
 
     return SizedBox(
       width: AppNum.actionBarW,

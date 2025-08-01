@@ -155,6 +155,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     beforePath: filePath,
     createdDate: stat.changed,
     modifiedDate: stat.modified,
+    accessedDate: stat.accessed,
     exifDate: exifDate,
     type: type,
     size: size,

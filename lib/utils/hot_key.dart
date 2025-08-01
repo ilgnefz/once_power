@@ -69,7 +69,7 @@ class AppHotKey {
       ),
       HotKeyModel(
         hotkey: HotKey(
-          key: LogicalKeyboardKey.keyZ,
+          key: LogicalKeyboardKey.keyX,
           modifiers: [HotKeyModifier.control],
           scope: HotKeyScope.inapp,
         ),
@@ -78,7 +78,7 @@ class AppHotKey {
       ),
       HotKeyModel(
         hotkey: HotKey(
-          key: LogicalKeyboardKey.keyX,
+          key: LogicalKeyboardKey.keyC,
           modifiers: [HotKeyModifier.control],
           scope: HotKeyScope.inapp,
         ),
@@ -89,7 +89,7 @@ class AppHotKey {
       ),
       HotKeyModel(
         hotkey: HotKey(
-          key: LogicalKeyboardKey.keyC,
+          key: LogicalKeyboardKey.keyV,
           modifiers: [HotKeyModifier.control],
           scope: HotKeyScope.inapp,
         ),

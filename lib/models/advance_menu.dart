@@ -1,5 +1,3 @@
-import 'package:once_power/generated/l10n.dart';
-
 import 'advance_menu_enum.dart';
 import 'two_re_enum.dart';
 
@@ -148,7 +146,7 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
                 json["deleteTypes"].map((x) => DeleteType.values[x])),
         deleteExt: json["deleteExt"] ?? false,
         useRegex: json["useRegex"] ?? false,
-        group: json["group"] ?? S.current.all,
+        group: json["group"] ?? 'all',
       );
 
   @override
@@ -256,7 +254,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         posIndex: json["posIndex"] ?? 1,
-        group: json["group"] ?? S.current.all,
+        group: json["group"] ?? 'all',
       );
 
   @override
@@ -368,7 +366,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         wordSpacing: json["wordSpacing"] ?? "",
         useRegex: json["useRegex"] ?? false,
         matchExt: json["matchExt"] ?? false,
-        group: json["group"] ?? S.current.all,
+        group: json["group"] ?? 'all',
       );
 
   @override

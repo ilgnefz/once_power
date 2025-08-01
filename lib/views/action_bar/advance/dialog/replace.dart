@@ -9,6 +9,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/utils/verify.dart';
 import 'package:once_power/views/action_bar/advance/dialog/replace_match_input.dart';
 
 import 'case_conversion_group.dart';
@@ -37,7 +38,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
   CaseType type = CaseType.noConversion;
   String wordSpacing = '';
   bool useRegex = false, matchExt = false;
-  String group = S.current.all;
+  String group = 'all';
 
   @override
   void initState() {
@@ -65,9 +66,9 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
     return CommonDialog(
       title: S.of(context).replaceTitle,
       extraButton: GroupDropdown(
-        value: group,
+        value: group == 'all' ? S.current.all : group,
         onChanged: (value) {
-          group = value!;
+          group = isAll(value!) ? 'all' : value;
           setState(() {});
         },
       ),

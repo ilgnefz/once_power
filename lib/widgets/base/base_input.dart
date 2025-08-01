@@ -11,6 +11,7 @@ class BaseInput extends StatelessWidget {
     this.padding,
     this.enable = true,
     this.autofocus = false,
+    this.readOnly = false,
     this.hintText = '',
     this.textAlign = TextAlign.start,
     this.inputFormatters,
@@ -30,6 +31,7 @@ class BaseInput extends StatelessWidget {
   final EdgeInsets? padding;
   final bool enable;
   final bool autofocus;
+  final bool readOnly;
   final String hintText;
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
@@ -72,6 +74,7 @@ class BaseInput extends StatelessWidget {
                     controller: controller,
                     enabled: enable,
                     autofocus: autofocus,
+                    readOnly: readOnly,
                     // style: textStyle,
                     // // focusNode: focusNode,
                     decoration: InputDecoration(

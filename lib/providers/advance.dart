@@ -64,6 +64,12 @@ class AdvancePresetList extends _$AdvancePresetList {
     await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
   }
 
+  void insert(int index, AdvancePreset value) async {
+    state = [...state];
+    state.insert(index, value);
+    await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
+  }
+
   void update(AdvancePreset value) async {
     state = state.map((e) {
       if (e.id == value.id) return value;

@@ -10,13 +10,14 @@ class TipBtn extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String tip1 = S.of(context).shortcutKey;
     String tip2 = S.of(context).selectedAll;
-    String tip3 = S.of(context).toggleSelected;
-    String tip4 = S.of(context).suspenseFile;
-    String tip5 = S.of(context).takeOutFront;
-    String tip6 = S.of(context).takeOutBehind;
+    String tip3 = S.of(context).deleteSelected;
+    String tip4 = S.of(context).toggleSelected;
+    String tip5 = S.of(context).suspenseFile;
+    String tip6 = S.of(context).takeOutFront;
+    String tip7 = S.of(context).takeOutBehind;
     return TooltipIcon(
       tip:
-          '$tip1:\nCtrl+A  $tip2\nCtrl+S  $tip3\nCtrl+Z  $tip4\nCtrl+X  $tip5\nCtrl+C  $tip6',
+          '$tip1:\nCtrl+A  $tip2\nDelete  $tip3\nCtrl+S  $tip4\nCtrl+X  $tip5\nCtrl+C  $tip6\nCtrl+V  $tip7',
       icon: Icons.tips_and_updates_rounded,
       selected: false,
       onTap: () {},

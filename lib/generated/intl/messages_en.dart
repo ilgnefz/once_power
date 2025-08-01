@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(name) => " The file renamed to ${name} already exists";
 
-  static String m2(num) => "Successfully exported ${num} presets";
+  static String m2(count) => "Successfully exported ${count} presets";
 
   static String m3(name) => " renaming failed, Because ${name}";
 
@@ -33,31 +33,42 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(count, total) => "Selected ${count}/${total}";
 
-  static String m6(err) => "Decryption failed: ${err}";
+  static String m6(file) => "Failed to open ${file}";
 
-  static String m7(num) => "Successfully imported ${num} presets";
+  static String m7(err) => "Decryption failed: ${err}";
 
-  static String m8(version) => "New version ${version} can be updated";
+  static String m8(count) => "Successfully imported ${count} presets";
 
-  static String m9(name) => "No longer exists in ${name}";
+  static String m9(file) => "Failed to modify ${file} date";
 
-  static String m10(total) => "Successfully moved the selected ${total} files";
+  static String m10(total) =>
+      "Successfully modified the date of ${total} files";
 
-  static String m11(count) => "Removed ${count} non image or video files";
+  static String m11(version) => "New version ${version} can be updated";
 
-  static String m12(total) =>
-      "All ${total} selected items have been successfully renamed";
+  static String m12(name) => "No longer exists in ${name}";
 
-  static String m13(count) => "Total ${count}";
+  static String m13(total) => "Successfully moved the selected ${total} files";
 
-  static String m14(count, total) =>
-      "${count} out of ${total} selected undo renames failed";
+  static String m14(count) => "Removed ${count} non image or video files";
 
   static String m15(total) =>
+      "All ${total} selected items have been successfully renamed";
+
+  static String m16(count) => "Total ${count}";
+
+  static String m17(count, total) =>
+      "${count} out of ${total} selected undo renames failed";
+
+  static String m18(total) =>
       "The selected ${total} operations have all been revoked";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accessedDate": MessageLookupByLibrary.simpleMessage("Accessed"),
+    "accessedDateTip": MessageLookupByLibrary.simpleMessage(
+      "Note: Right-click to view file properties, and the accessed date will be changed to the current time",
+    ),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "addAfter": MessageLookupByLibrary.simpleMessage("After"),
     "addBefore": MessageLookupByLibrary.simpleMessage("Before"),
@@ -165,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter the deleted content",
     ),
     "deleteLog": MessageLookupByLibrary.simpleMessage("delete logs"),
+    "deleteSelected": MessageLookupByLibrary.simpleMessage("Delete selected"),
     "deleteSuccessful": MessageLookupByLibrary.simpleMessage(
       "Delete successful",
     ),
@@ -217,11 +229,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to delete empty folder",
     ),
     "fileCount": m5,
+    "fileDate": MessageLookupByLibrary.simpleMessage("File Date"),
+    "fileDateSelect": MessageLookupByLibrary.simpleMessage(
+      "Please select a date",
+    ),
     "fileExtension": MessageLookupByLibrary.simpleMessage("FileExtension"),
     "fileExtensionDesc": MessageLookupByLibrary.simpleMessage(
       "New file extension",
     ),
     "fileName": MessageLookupByLibrary.simpleMessage("File name"),
+    "fileNoExist": MessageLookupByLibrary.simpleMessage("File does not exist"),
+    "fileNoOpen": m6,
     "fileType": MessageLookupByLibrary.simpleMessage("Type"),
     "fillBack": MessageLookupByLibrary.simpleMessage("Fill back"),
     "fillFront": MessageLookupByLibrary.simpleMessage("Fill front"),
@@ -248,6 +266,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "groupType": MessageLookupByLibrary.simpleMessage("Set group folder"),
     "height": MessageLookupByLibrary.simpleMessage("ResolutionHeight"),
+    "hideAll": MessageLookupByLibrary.simpleMessage(
+      "Hidden all unchanged files",
+    ),
     "image": MessageLookupByLibrary.simpleMessage("Image"),
     "importPreset": MessageLookupByLibrary.simpleMessage("Import"),
     "importPresetError": MessageLookupByLibrary.simpleMessage(
@@ -259,11 +280,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "importPresetErrorDesc2": MessageLookupByLibrary.simpleMessage(
       "Invalid file format, header does not match",
     ),
-    "importPresetErrorDesc3": m6,
+    "importPresetErrorDesc3": m7,
     "importPresetSuccess": MessageLookupByLibrary.simpleMessage(
       "Preset import success",
     ),
-    "importPresetSuccessNum": m7,
+    "importPresetSuccessNum": m8,
     "inputDisable": MessageLookupByLibrary.simpleMessage("Input disabled"),
     "last": MessageLookupByLibrary.simpleMessage("Last"),
     "latestDate": MessageLookupByLibrary.simpleMessage("Latest"),
@@ -288,7 +309,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "matchParent": MessageLookupByLibrary.simpleMessage("Match folder"),
     "matchPosition": MessageLookupByLibrary.simpleMessage("Match Position"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
+    "modifiedFileDate": MessageLookupByLibrary.simpleMessage(
+      "Modify file date",
+    ),
     "modifiedTime": MessageLookupByLibrary.simpleMessage("Modified date"),
+    "modifyDateFailInfo": m9,
+    "modifyDateFailed": MessageLookupByLibrary.simpleMessage(
+      "Modify date failed",
+    ),
+    "modifyDateFailedInfo": MessageLookupByLibrary.simpleMessage(
+      "The following files failed to modify the date:",
+    ),
+    "modifyDateSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Modify date successfully",
+    ),
+    "modifyDateSuccessfullyInfo": m10,
     "modifyName": MessageLookupByLibrary.simpleMessage("Modify name"),
     "modifyTo": MessageLookupByLibrary.simpleMessage("Modify to"),
     "move": MessageLookupByLibrary.simpleMessage("Move"),
@@ -300,7 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameAscending": MessageLookupByLibrary.simpleMessage("Name ascending"),
     "nameDescending": MessageLookupByLibrary.simpleMessage("Name descending"),
     "newName": MessageLookupByLibrary.simpleMessage("New name"),
-    "newVersionInfo": m8,
+    "newVersionInfo": m11,
     "noConversion": MessageLookupByLibrary.simpleMessage("No"),
     "noNewVersionInfo": MessageLookupByLibrary.simpleMessage(
       "Currently in the latest version",
@@ -312,7 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notExistError": MessageLookupByLibrary.simpleMessage(
       "The target location has been changed or deleted",
     ),
-    "notExistsError": m9,
+    "notExistsError": m12,
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "openError": MessageLookupByLibrary.simpleMessage("Open failed"),
     "openPosition": MessageLookupByLibrary.simpleMessage("Open position"),
@@ -323,12 +358,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "organizedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Organized successfully",
     ),
-    "organizedSuccessfullyInfo": m10,
+    "organizedSuccessfullyInfo": m13,
     "organizingFailed": MessageLookupByLibrary.simpleMessage(
       "Organizing failed",
     ),
     "organizingFailedInfo": MessageLookupByLibrary.simpleMessage(
-      "The following moves failed",
+      "The following files failed to move:",
     ),
     "originalName": MessageLookupByLibrary.simpleMessage("Name"),
     "other": MessageLookupByLibrary.simpleMessage("Other"),
@@ -365,7 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "regexDesc": MessageLookupByLibrary.simpleMessage("Use Regex"),
     "remove": MessageLookupByLibrary.simpleMessage("Remove"),
     "removeFolder": MessageLookupByLibrary.simpleMessage("Remove folder"),
-    "removeNonImage": m11,
+    "removeNonImage": m14,
     "removeSelected": MessageLookupByLibrary.simpleMessage("Remove checked"),
     "removeUnselected": MessageLookupByLibrary.simpleMessage(
       "Remove unchecked",
@@ -421,7 +456,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Successfully deleted all empty folders under the selected folder",
     ),
     "successful": MessageLookupByLibrary.simpleMessage("Renaming successful"),
-    "successfulNum": m12,
+    "successfulNum": m15,
     "suffix": MessageLookupByLibrary.simpleMessage("Suffix"),
     "suffixContent": MessageLookupByLibrary.simpleMessage("Add suffix content"),
     "suspenseError": MessageLookupByLibrary.simpleMessage(
@@ -468,16 +503,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Move the file to a top-level parent folder other than the disk root directory",
     ),
-    "totalInstructions": m13,
+    "totalInstructions": m16,
     "traditional": MessageLookupByLibrary.simpleMessage("TraditionalCN"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("Get episode info"),
     "typeAscending": MessageLookupByLibrary.simpleMessage("Type ascending"),
     "typeDescending": MessageLookupByLibrary.simpleMessage("Type descending"),
     "undo": MessageLookupByLibrary.simpleMessage("Undo"),
     "undoFailed": MessageLookupByLibrary.simpleMessage("Undo rename failed"),
-    "undoFailedNum": m14,
+    "undoFailedNum": m17,
     "undoSuccessful": MessageLookupByLibrary.simpleMessage("Undo Successful"),
-    "undoSuccessfulNum": m15,
+    "undoSuccessfulNum": m18,
     "unselect": MessageLookupByLibrary.simpleMessage("Uncheck"),
     "uploadCSV": MessageLookupByLibrary.simpleMessage(
       "Upload CSV and TXT files with \",\" separating old and new names, or OPLOG file generated by OncePower",
@@ -494,6 +529,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "video": MessageLookupByLibrary.simpleMessage("Video"),
     "viewMode": MessageLookupByLibrary.simpleMessage("View mode"),
+    "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+    "warningCSVDesc": MessageLookupByLibrary.simpleMessage(
+      "The function to upload CSV files has been disabled in the Organize Mode and Modify file date function",
+    ),
     "width": MessageLookupByLibrary.simpleMessage("ResolutionWidth"),
     "withT": MessageLookupByLibrary.simpleMessage("with"),
     "wordSpacing": MessageLookupByLibrary.simpleMessage("Word Spacing"),

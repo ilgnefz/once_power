@@ -402,3 +402,11 @@ class ExpandNewName extends _$ExpandNewName {
   bool build() => false;
   void update() => state = !state;
 }
+
+@riverpod
+class UseDateModify extends _$UseDateModify {
+  @override
+  bool build() => false;
+  void toggle() => state = !state;
+  void update(bool value) => state = value;
+}

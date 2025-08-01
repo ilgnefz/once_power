@@ -40,4 +40,5 @@ class AppIcons {
   static const String typeAscending = '${basePath}type-ascending.svg';
   static const String typeDescending = '${basePath}type-descending.svg';
   static const String unmaximize = '${basePath}unmaximize.svg';
+  static const String warning = '${basePath}warning.svg';
 }

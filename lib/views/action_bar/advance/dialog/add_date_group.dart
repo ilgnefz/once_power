@@ -34,7 +34,7 @@ class AddDateGroup extends ConsumerWidget {
                     child: Text(item.label, style: textStyle),
                   ))
               .toList(),
-          width: 102,
+          width: 103,
           color: theme.popupMenuTheme.surfaceTintColor,
           value: date,
           onChanged: dateChange,

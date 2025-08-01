@@ -102,5 +102,16 @@ bool disabledBtn(WidgetRef ref) {
   return isApplying || isEmpty;
 }
 
-String formatResolution(Resolution resolution) =>
-    '${resolution.width} x ${resolution.height}';
+Future<bool> fileExist(FileInfo file) async {
+  bool isDir = file.type.isFolder;
+  if (isDir) {
+    return await Directory(file.filePath).exists();
+  } else {
+    return await File(file.filePath).exists();
+  }
+}
+
+bool isAll(String group) {
+  List<String> all = ['all', '全部'];
+  return all.contains(group);
+}

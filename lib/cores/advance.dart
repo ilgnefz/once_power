@@ -25,7 +25,7 @@ void advanceUpdateName(WidgetRef ref) {
     String name = file.name;
     String extension = file.extension;
     for (AdvanceMenuModel menu in menus) {
-      if (menu.group != S.current.all && menu.group != file.group) continue;
+      if (menu.group != 'all' && menu.group != file.group) continue;
       if (menu.type.isDelete) {
         menu as AdvanceMenuDelete;
         if (menu.deleteExt) extension = '';

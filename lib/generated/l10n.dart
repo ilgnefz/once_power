@@ -824,10 +824,10 @@ class S {
     );
   }
 
-  /// `The following moves failed`
+  /// `The following files failed to move:`
   String get organizingFailedInfo {
     return Intl.message(
-      'The following moves failed',
+      'The following files failed to move:',
       name: 'organizingFailedInfo',
       desc: '',
       args: [],
@@ -2204,6 +2204,16 @@ class S {
     );
   }
 
+  /// `Delete selected`
+  String get deleteSelected {
+    return Intl.message(
+      'Delete selected',
+      name: 'deleteSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Toggle selected state`
   String get toggleSelected {
     return Intl.message(
@@ -2304,13 +2314,13 @@ class S {
     );
   }
 
-  /// `Successfully exported {num} presets`
-  String exportPresetSuccessNum(Object num) {
+  /// `Successfully exported {count} presets`
+  String exportPresetSuccessNum(Object count) {
     return Intl.message(
-      'Successfully exported $num presets',
+      'Successfully exported $count presets',
       name: 'exportPresetSuccessNum',
       desc: '',
-      args: [num],
+      args: [count],
     );
   }
 
@@ -2339,13 +2349,13 @@ class S {
     );
   }
 
-  /// `Successfully imported {num} presets`
-  String importPresetSuccessNum(Object num) {
+  /// `Successfully imported {count} presets`
+  String importPresetSuccessNum(Object count) {
     return Intl.message(
-      'Successfully imported $num presets',
+      'Successfully imported $count presets',
       name: 'importPresetSuccessNum',
       desc: '',
-      args: [num],
+      args: [count],
     );
   }
 
@@ -2386,6 +2396,141 @@ class S {
       name: 'importPresetErrorDesc3',
       desc: '',
       args: [err],
+    );
+  }
+
+  /// `Hidden all unchanged files`
+  String get hideAll {
+    return Intl.message(
+      'Hidden all unchanged files',
+      name: 'hideAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File Date`
+  String get fileDate {
+    return Intl.message('File Date', name: 'fileDate', desc: '', args: []);
+  }
+
+  /// `Please select a date`
+  String get fileDateSelect {
+    return Intl.message(
+      'Please select a date',
+      name: 'fileDateSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accessed`
+  String get accessedDate {
+    return Intl.message('Accessed', name: 'accessedDate', desc: '', args: []);
+  }
+
+  /// `Modify file date`
+  String get modifiedFileDate {
+    return Intl.message(
+      'Modify file date',
+      name: 'modifiedFileDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note: Right-click to view file properties, and the accessed date will be changed to the current time`
+  String get accessedDateTip {
+    return Intl.message(
+      'Note: Right-click to view file properties, and the accessed date will be changed to the current time',
+      name: 'accessedDateTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify date successfully`
+  String get modifyDateSuccessfully {
+    return Intl.message(
+      'Modify date successfully',
+      name: 'modifyDateSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully modified the date of {total} files`
+  String modifyDateSuccessfullyInfo(Object total) {
+    return Intl.message(
+      'Successfully modified the date of $total files',
+      name: 'modifyDateSuccessfullyInfo',
+      desc: '',
+      args: [total],
+    );
+  }
+
+  /// `Modify date failed`
+  String get modifyDateFailed {
+    return Intl.message(
+      'Modify date failed',
+      name: 'modifyDateFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The following files failed to modify the date:`
+  String get modifyDateFailedInfo {
+    return Intl.message(
+      'The following files failed to modify the date:',
+      name: 'modifyDateFailedInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File does not exist`
+  String get fileNoExist {
+    return Intl.message(
+      'File does not exist',
+      name: 'fileNoExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to open {file}`
+  String fileNoOpen(Object file) {
+    return Intl.message(
+      'Failed to open $file',
+      name: 'fileNoOpen',
+      desc: '',
+      args: [file],
+    );
+  }
+
+  /// `Failed to modify {file} date`
+  String modifyDateFailInfo(Object file) {
+    return Intl.message(
+      'Failed to modify $file date',
+      name: 'modifyDateFailInfo',
+      desc: '',
+      args: [file],
+    );
+  }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message('Warning', name: 'warning', desc: '', args: []);
+  }
+
+  /// `The function to upload CSV files has been disabled in the Organize Mode and Modify file date function`
+  String get warningCSVDesc {
+    return Intl.message(
+      'The function to upload CSV files has been disabled in the Organize Mode and Modify file date function',
+      name: 'warningCSVDesc',
+      desc: '',
+      args: [],
     );
   }
 }

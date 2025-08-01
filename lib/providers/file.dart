@@ -140,6 +140,18 @@ class FileList extends _$FileList {
         if (e.id == id) e.thumbnail = thumbnail;
         return e;
       }).toList();
+
+  void updateDate(String id, DateTime? createdDate, DateTime? modifiedDate,
+      DateTime? accessedDate) {
+    state = state.map((e) {
+      if (e.id == id) {
+        e.createdDate = createdDate ?? e.createdDate;
+        e.modifiedDate = modifiedDate ?? e.modifiedDate;
+        e.accessedDate = accessedDate ?? e.accessedDate;
+      }
+      return e;
+    }).toList();
+  }
 }
 
 @riverpod

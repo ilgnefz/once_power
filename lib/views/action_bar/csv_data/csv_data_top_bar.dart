@@ -1,4 +1,3 @@
-import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
@@ -22,8 +21,7 @@ class CsvDataTopBar extends ConsumerWidget {
           RichText(
             text: TextSpan(
               text: S.of(context).tableInfo,
-              style:
-                  const TextStyle(color: Colors.black).useSystemChineseFont(),
+              style: Theme.of(context).textTheme.titleMedium,
               children: [
                 TextSpan(
                   text: ref.watch(cSVNameColumnProvider),

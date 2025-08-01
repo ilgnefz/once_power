@@ -25,6 +25,30 @@ The original intention of software development was to batch rename images, so th
 
 ## Dark theme
 
+## Modify file date
+
+![40](doc/40.gif)
+
+## Preset sorting
+
+![39](doc/39.gif)
+
+## Import presets
+
+![38](doc/38.gif)
+
+## Export presets
+
+![37](doc/37.gif)
+
+## Filter Unnamed Files
+
+![36](doc/36.gif)
+
+## Expand the display width of the new name
+
+![35](doc/35.gif)
+
 ![34](doc/34.gif)
 
 ## Customize image size

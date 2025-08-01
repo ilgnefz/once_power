@@ -5,14 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart' show AppKeys;
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/file.dart';
+import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/models/progress.dart';
 import 'package:once_power/providers/list.dart';
 import 'package:once_power/providers/progress.dart';
+import 'package:once_power/providers/select.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
+import 'package:once_power/views/content_bar/hide_content.dart';
 
 import 'content_top_bar.dart';
 import 'empty_content.dart';
@@ -68,13 +71,16 @@ class _ContentBarState extends ConsumerState<ContentBar> {
                     }
                   },
                   child: Builder(builder: (_) {
+                    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+                    bool showChange = ref.watch(showChangeProvider);
                     List<FileInfo> files = ref.watch(sortListProvider);
-                    if (ref.watch(showChangeProvider)) {
+                    if (files.isNotEmpty && showChange && !isOrganize) {
                       files = files
                           .where((e) =>
                               e.name != e.newName ||
                               e.extension != e.newExtension)
                           .toList();
+                      if (files.isEmpty) return HideContent();
                     }
                     if (files.isEmpty) return EmptyContent();
                     if (isViewNoOrganize(ref)) return ContentGrid(files: files);

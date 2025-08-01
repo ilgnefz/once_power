@@ -6,6 +6,7 @@ class AppNum {
   static const double smallG = 4;
   static const double mediumG = 8;
   static const double largeG = 12;
+  static const double operateG = 6;
   static const double iconSmallS = 12;
   static const double iconMediumS = 18;
   static const double inputH = 32;

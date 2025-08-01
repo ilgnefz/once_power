@@ -6,26 +6,12 @@ import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/action_bar/folder_input.dart';
 
-class TargetFolderInput extends ConsumerStatefulWidget {
+class TargetFolderInput extends ConsumerWidget {
   const TargetFolderInput({super.key});
 
   @override
-  ConsumerState<TargetFolderInput> createState() => _TargetFolderInputState();
-}
-
-class _TargetFolderInputState extends ConsumerState<TargetFolderInput>
-    with AutomaticKeepAliveClientMixin {
-  late TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ref.read(folderControllerProvider);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController controller = ref.read(folderControllerProvider);
     return Padding(
       padding: EdgeInsets.only(left: AppNum.largeG, right: AppNum.mediumG),
       child: FolderInput(
@@ -41,7 +27,4 @@ class _TargetFolderInputState extends ConsumerState<TargetFolderInput>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

@@ -45,6 +45,7 @@ extension ReservedTypeExtension on ReserveType {
 enum DateType {
   createdDate,
   modifiedDate,
+  accessedDate,
   exifDate,
   earliestDate,
   latestDate,
@@ -57,6 +58,8 @@ extension DateTypeExtension on DateType {
         return S.current.createdDate;
       case DateType.modifiedDate:
         return S.current.modifiedDate;
+      case DateType.accessedDate:
+        return S.current.accessedDate;
       case DateType.exifDate:
         return S.current.exifDate;
       case DateType.earliestDate:
@@ -68,6 +71,7 @@ extension DateTypeExtension on DateType {
 
   bool get isCreatedDate => this == DateType.createdDate;
   bool get isModifiedDate => this == DateType.modifiedDate;
+  bool get isAccessedDate => this == DateType.accessedDate;
   bool get isExifDate => this == DateType.exifDate;
   bool get isEarliestDate => this == DateType.earliestDate;
   bool get isLatestDate => this == DateType.latestDate;

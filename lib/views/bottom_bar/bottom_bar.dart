@@ -7,6 +7,7 @@ import 'package:once_power/views/bottom_bar/check_version.dart';
 import 'package:once_power/views/bottom_bar/tip.dart';
 
 import 'auto_run.dart';
+import 'date_modify.dart';
 import 'language_toggle.dart';
 import 'log.dart';
 import 'regedit.dart';
@@ -46,6 +47,7 @@ class BottomBar extends StatelessWidget {
           LogBtn(),
           ViewModeBtn(),
           UploadCSVBtn(),
+          if (Platform.isWindows) DateModifyBtn(),
           TipBtn(),
           // ExtraFunctionBtn(),
           ThemeBtn(),

@@ -167,3 +167,26 @@ void showPresetImportNotification({int? num, String? err}) {
     ).show();
   }
 }
+
+void showDateModifyNotification(List<InfoDetail> errors, int total) {
+  NotificationInfo info = NotificationInfo(
+    title: S.current.modifyDateSuccessfully,
+    message: S.current.modifyDateSuccessfullyInfo(total),
+  );
+  if (errors.isNotEmpty) {
+    info.type = NotificationType.error;
+    info.title = S.current.modifyDateFailed;
+    info.message = S.current.modifyDateFailedInfo;
+    info.detailList = errors;
+  }
+  info.show();
+}
+
+void showCSVWarningNotification() {
+  NotificationInfo(
+    type: NotificationType.warning,
+    title: S.current.warning,
+    message: S.current.warningCSVDesc,
+    time: 5,
+  ).show();
+}

@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(name) => "重命名为 ${name} 的文件已存在";
 
-  static String m2(num) => "已成功导出 ${num} 条预设";
+  static String m2(count) => "已成功导出 ${count} 条预设";
 
   static String m3(name) => "重命名失败,因为 ${name}";
 
@@ -32,28 +32,38 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(count, total) => "已选择 ${count}/${total}";
 
-  static String m6(err) => "解密失败: ${err}";
+  static String m6(file) => "无法打开 ${file}";
 
-  static String m7(num) => "已成功导入 ${num} 条预设";
+  static String m7(err) => "解密失败: ${err}";
 
-  static String m8(version) => "新的版本 ${version} 可以更新";
+  static String m8(count) => "已成功导入 ${count} 条预设";
 
-  static String m9(name) => "在 ${name} 中已不存在";
+  static String m9(file) => "修改 ${file} 日期失败";
 
-  static String m10(total) => "已成功移动所选中的${total}个文件";
+  static String m10(total) => "已成功修改所选中的 ${total} 个文件的日期";
 
-  static String m11(count) => "已移除${count}个非图片视频文件";
+  static String m11(version) => "新的版本 ${version} 可以更新";
 
-  static String m12(total) => "选中的 ${total} 个已全部重命名成功";
+  static String m12(name) => "在 ${name} 中已不存在";
 
-  static String m13(count) => "共 ${count} 条";
+  static String m13(total) => "已成功移动所选中的${total}个文件";
 
-  static String m14(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+  static String m14(count) => "已移除${count}个非图片视频文件";
 
-  static String m15(total) => "选中的 ${total} 个已全部撤销操作";
+  static String m15(total) => "选中的 ${total} 个已全部重命名成功";
+
+  static String m16(count) => "共 ${count} 条";
+
+  static String m17(count, total) => "选中 ${total} 个中 ${count} 个取消重命名失败";
+
+  static String m18(total) => "选中的 ${total} 个已全部撤销操作";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accessedDate": MessageLookupByLibrary.simpleMessage("访问日期"),
+    "accessedDateTip": MessageLookupByLibrary.simpleMessage(
+      "注意：右键查看文件属性时，文件的访问日期会被更改为当前时间",
+    ),
     "add": MessageLookupByLibrary.simpleMessage("添加"),
     "addAfter": MessageLookupByLibrary.simpleMessage("后面"),
     "addBefore": MessageLookupByLibrary.simpleMessage("前面"),
@@ -133,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteInfo": m0,
     "deleteInputHint": MessageLookupByLibrary.simpleMessage("请输入删除内容"),
     "deleteLog": MessageLookupByLibrary.simpleMessage("删除日志"),
+    "deleteSelected": MessageLookupByLibrary.simpleMessage("删除选中"),
     "deleteSuccessful": MessageLookupByLibrary.simpleMessage("删除成功"),
     "deleteTitle": MessageLookupByLibrary.simpleMessage("删除内容"),
     "deleteType": MessageLookupByLibrary.simpleMessage("删除类型"),
@@ -169,9 +180,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "failureDeleteInfo": MessageLookupByLibrary.simpleMessage("删除选中文件失败"),
     "failureEmptyInfo": MessageLookupByLibrary.simpleMessage("删除空文件夹失败"),
     "fileCount": m5,
+    "fileDate": MessageLookupByLibrary.simpleMessage("文件日期"),
+    "fileDateSelect": MessageLookupByLibrary.simpleMessage("请选择日期"),
     "fileExtension": MessageLookupByLibrary.simpleMessage("文件扩展名"),
     "fileExtensionDesc": MessageLookupByLibrary.simpleMessage("新扩展名"),
     "fileName": MessageLookupByLibrary.simpleMessage("文件名"),
+    "fileNoExist": MessageLookupByLibrary.simpleMessage("文件不存在"),
+    "fileNoOpen": m6,
     "fileType": MessageLookupByLibrary.simpleMessage("类型"),
     "fillBack": MessageLookupByLibrary.simpleMessage("补全后面"),
     "fillFront": MessageLookupByLibrary.simpleMessage("补全前面"),
@@ -192,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "groupFolderError": MessageLookupByLibrary.simpleMessage("组文件夹为空！"),
     "groupType": MessageLookupByLibrary.simpleMessage("设置组文件夹"),
     "height": MessageLookupByLibrary.simpleMessage("尺寸高"),
+    "hideAll": MessageLookupByLibrary.simpleMessage("已隐藏全部未更改文件"),
     "image": MessageLookupByLibrary.simpleMessage("图片"),
     "importPreset": MessageLookupByLibrary.simpleMessage("导入预设"),
     "importPresetError": MessageLookupByLibrary.simpleMessage("导入预设失败"),
@@ -201,9 +217,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "importPresetErrorDesc2": MessageLookupByLibrary.simpleMessage(
       "无效文件格式，头标识不匹配",
     ),
-    "importPresetErrorDesc3": m6,
+    "importPresetErrorDesc3": m7,
     "importPresetSuccess": MessageLookupByLibrary.simpleMessage("导入预设成功"),
-    "importPresetSuccessNum": m7,
+    "importPresetSuccessNum": m8,
     "inputDisable": MessageLookupByLibrary.simpleMessage("输入已禁用"),
     "last": MessageLookupByLibrary.simpleMessage("最后一个"),
     "latestDate": MessageLookupByLibrary.simpleMessage("最晚日期"),
@@ -224,7 +240,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "matchParent": MessageLookupByLibrary.simpleMessage("匹配路径"),
     "matchPosition": MessageLookupByLibrary.simpleMessage("匹配位置"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("修改日期"),
+    "modifiedFileDate": MessageLookupByLibrary.simpleMessage("修改文件日期"),
     "modifiedTime": MessageLookupByLibrary.simpleMessage("修改日期"),
+    "modifyDateFailInfo": m9,
+    "modifyDateFailed": MessageLookupByLibrary.simpleMessage("修改日期失败"),
+    "modifyDateFailedInfo": MessageLookupByLibrary.simpleMessage(
+      "以下几个文件修改日期失败：",
+    ),
+    "modifyDateSuccessfully": MessageLookupByLibrary.simpleMessage("修改日期成功"),
+    "modifyDateSuccessfullyInfo": m10,
     "modifyName": MessageLookupByLibrary.simpleMessage("修改名称"),
     "modifyTo": MessageLookupByLibrary.simpleMessage("修改为"),
     "move": MessageLookupByLibrary.simpleMessage("移动"),
@@ -236,7 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameAscending": MessageLookupByLibrary.simpleMessage("名称升序"),
     "nameDescending": MessageLookupByLibrary.simpleMessage("名称降序"),
     "newName": MessageLookupByLibrary.simpleMessage("新名称"),
-    "newVersionInfo": m8,
+    "newVersionInfo": m11,
     "noConversion": MessageLookupByLibrary.simpleMessage("不转换"),
     "noNewVersionInfo": MessageLookupByLibrary.simpleMessage("当前已是最新版本"),
     "nonLetter": MessageLookupByLibrary.simpleMessage("非字母"),
@@ -244,7 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "normal": MessageLookupByLibrary.simpleMessage("普通"),
     "notExist": MessageLookupByLibrary.simpleMessage("不存在"),
     "notExistError": MessageLookupByLibrary.simpleMessage("目标位置已更改或已被删除"),
-    "notExistsError": m9,
+    "notExistsError": m12,
     "ok": MessageLookupByLibrary.simpleMessage("确认"),
     "openError": MessageLookupByLibrary.simpleMessage("打开失败"),
     "openPosition": MessageLookupByLibrary.simpleMessage("打开位置"),
@@ -253,9 +277,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "organizeLogs": MessageLookupByLibrary.simpleMessage("整理日志"),
     "organizeMenu": MessageLookupByLibrary.simpleMessage("整理菜单"),
     "organizedSuccessfully": MessageLookupByLibrary.simpleMessage("整理成功"),
-    "organizedSuccessfullyInfo": m10,
+    "organizedSuccessfullyInfo": m13,
     "organizingFailed": MessageLookupByLibrary.simpleMessage("整理失败"),
-    "organizingFailedInfo": MessageLookupByLibrary.simpleMessage("以下几个移动失败"),
+    "organizingFailedInfo": MessageLookupByLibrary.simpleMessage("以下几个文件移动失败："),
     "originalName": MessageLookupByLibrary.simpleMessage("原名称"),
     "other": MessageLookupByLibrary.simpleMessage("其他"),
     "parentsName": MessageLookupByLibrary.simpleMessage("文件夹名"),
@@ -279,7 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "regexDesc": MessageLookupByLibrary.simpleMessage("使用正则"),
     "remove": MessageLookupByLibrary.simpleMessage("移除"),
     "removeFolder": MessageLookupByLibrary.simpleMessage("移除路径"),
-    "removeNonImage": m11,
+    "removeNonImage": m14,
     "removeSelected": MessageLookupByLibrary.simpleMessage("移除已选中"),
     "removeUnselected": MessageLookupByLibrary.simpleMessage("移除未选中"),
     "renameLogs": MessageLookupByLibrary.simpleMessage("重命名日志"),
@@ -325,7 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "已成功删除所有所选文件夹下的空文件夹",
     ),
     "successful": MessageLookupByLibrary.simpleMessage("重命名成功"),
-    "successfulNum": m12,
+    "successfulNum": m15,
     "suffix": MessageLookupByLibrary.simpleMessage("后缀"),
     "suffixContent": MessageLookupByLibrary.simpleMessage("添加后缀内容"),
     "suspenseError": MessageLookupByLibrary.simpleMessage("暂存文件失败"),
@@ -354,16 +378,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "将文件移动到除磁盘根目录外的顶级父文件夹中",
     ),
-    "totalInstructions": m13,
+    "totalInstructions": m16,
     "traditional": MessageLookupByLibrary.simpleMessage("繁体"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("获取剧集信息"),
     "typeAscending": MessageLookupByLibrary.simpleMessage("类型升序"),
     "typeDescending": MessageLookupByLibrary.simpleMessage("类型降序"),
     "undo": MessageLookupByLibrary.simpleMessage("撤销"),
     "undoFailed": MessageLookupByLibrary.simpleMessage("撤销重命名失败"),
-    "undoFailedNum": m14,
+    "undoFailedNum": m17,
     "undoSuccessful": MessageLookupByLibrary.simpleMessage("已成功撤销"),
-    "undoSuccessfulNum": m15,
+    "undoSuccessfulNum": m18,
     "unselect": MessageLookupByLibrary.simpleMessage("取消选择"),
     "uploadCSV": MessageLookupByLibrary.simpleMessage(
       "上传以\",\"分隔新旧名称的csv、txt文件或本软件生成的oplog文件",
@@ -378,6 +402,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "useRuleDesc": MessageLookupByLibrary.simpleMessage("将不同类型的文件移动到不同的文件夹中"),
     "video": MessageLookupByLibrary.simpleMessage("视频"),
     "viewMode": MessageLookupByLibrary.simpleMessage("视图模式"),
+    "warning": MessageLookupByLibrary.simpleMessage("警告"),
+    "warningCSVDesc": MessageLookupByLibrary.simpleMessage(
+      "整理模式和修改文件日期功能下已禁用上传 CSV 文件功能",
+    ),
     "width": MessageLookupByLibrary.simpleMessage("尺寸宽"),
     "withT": MessageLookupByLibrary.simpleMessage("为"),
     "wordSpacing": MessageLookupByLibrary.simpleMessage("单词间隔"),

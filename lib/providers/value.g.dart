@@ -137,5 +137,21 @@ final viewImageWidthProvider =
 );
 
 typedef _$ViewImageWidth = AutoDisposeNotifier<double>;
+String _$fileDatePropertyHash() => r'813fee2a23a506b17705e1cead9ae9a68aa912f0';
+
+/// See also [FileDateProperty].
+@ProviderFor(FileDateProperty)
+final fileDatePropertyProvider =
+    AutoDisposeNotifierProvider<FileDateProperty, DateProperty>.internal(
+  FileDateProperty.new,
+  name: r'fileDatePropertyProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fileDatePropertyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$FileDateProperty = AutoDisposeNotifier<DateProperty>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,6 +1,7 @@
 import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/custom_theme.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/csv_rename.dart';
 import 'package:once_power/models/file_info.dart';
@@ -22,6 +23,7 @@ class CsvDataView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context).extension<TableTheme>();
     final List<String> titles = ['A', 'B'];
 
     TextStyle textStyle = const TextStyle(
@@ -61,7 +63,7 @@ class CsvDataView extends ConsumerWidget {
             itemCount: list.length,
             itemBuilder: (context, index) => Container(
               margin: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
-              color: index % 2 == 0 ? Colors.white : Colors.grey.shade100,
+              color: index % 2 == 0 ? theme?.background1 : theme?.background2,
               child: Row(
                 children: [
                   CsvDataCard(index: index, flag: 'A', text: list[index].nameA),

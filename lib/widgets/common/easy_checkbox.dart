@@ -57,6 +57,8 @@ class EasyCheckbox extends StatelessWidget {
             label!,
             style:
                 style ?? TextStyle(color: theme.textTheme.labelMedium?.color),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         if (child != null) child!,
       ],

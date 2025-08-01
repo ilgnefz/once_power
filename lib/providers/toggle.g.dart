@@ -608,5 +608,21 @@ final expandNewNameProvider =
 );
 
 typedef _$ExpandNewName = AutoDisposeNotifier<bool>;
+String _$useDateModifyHash() => r'16b3f9170a2110c0444e1b6d738c941980408691';
+
+/// See also [UseDateModify].
+@ProviderFor(UseDateModify)
+final useDateModifyProvider =
+    AutoDisposeNotifierProvider<UseDateModify, bool>.internal(
+  UseDateModify.new,
+  name: r'useDateModifyProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$useDateModifyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UseDateModify = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

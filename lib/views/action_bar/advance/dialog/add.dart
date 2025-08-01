@@ -8,6 +8,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
+import 'package:once_power/utils/verify.dart';
 
 import 'add_position_radio.dart';
 import 'add_serial_distinguish.dart';
@@ -37,7 +38,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   DateType dateType = DateType.createdDate;
   DateSplitType dateSplit = DateSplitType.none;
   AddPosition position = AddPosition.after;
-  String group = S.current.all;
+  String group = 'all';
 
   @override
   void initState() {
@@ -63,9 +64,9 @@ class _DeleteViewState extends ConsumerState<AddView> {
     return CommonDialog(
       title: S.of(context).addTitle,
       extraButton: GroupDropdown(
-        value: group,
+        value: group == 'all' ? S.current.all : group,
         onChanged: (value) {
-          group = value!;
+          group = isAll(value!) ? 'all' : value;
           setState(() {});
         },
       ),

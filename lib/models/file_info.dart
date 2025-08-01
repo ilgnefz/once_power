@@ -24,6 +24,7 @@ class FileInfo {
   String beforePath;
   DateTime createdDate;
   DateTime modifiedDate;
+  DateTime accessedDate;
   DateTime? exifDate;
   FileClassify type;
   int size;
@@ -44,6 +45,7 @@ class FileInfo {
     required this.beforePath,
     required this.createdDate,
     required this.modifiedDate,
+    required this.accessedDate,
     this.exifDate,
     required this.type,
     required this.size,
@@ -67,6 +69,7 @@ class FileInfo {
         'beforePath: $beforePath, '
         'createdDate: $createdDate, '
         'modifiedDate: $modifiedDate, '
+        'accessedDate: $accessedDate, '
         'exifDate: $exifDate, '
         'type: $type, '
         'size: $size, '
@@ -88,6 +91,7 @@ class FileInfo {
         'beforePath': beforePath,
         'createdDate': createdDate.millisecondsSinceEpoch,
         'modifiedDate': modifiedDate.millisecondsSinceEpoch,
+        'accessedDate': accessedDate.millisecondsSinceEpoch,
         'exifDate': exifDate?.millisecondsSinceEpoch,
         'type': type.index,
         'size': size,
@@ -109,6 +113,7 @@ class FileInfo {
         beforePath: json['beforePath'],
         createdDate: DateTime.fromMillisecondsSinceEpoch(json['createdDate']),
         modifiedDate: DateTime.fromMillisecondsSinceEpoch(json['modifiedDate']),
+        accessedDate: DateTime.fromMillisecondsSinceEpoch(json['accessedDate']),
         exifDate: json['exifDate'] != null
             ? DateTime.fromMillisecondsSinceEpoch(json['exifDate'])
             : null,

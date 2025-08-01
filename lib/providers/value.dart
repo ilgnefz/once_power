@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/constants.dart';
+import 'package:once_power/models/date_preporty.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -99,4 +100,12 @@ class ViewImageWidth extends _$ViewImageWidth {
     state = value;
     await StorageUtil.setDouble(AppKeys.viewImageW, state);
   }
+}
+
+@riverpod
+class FileDateProperty extends _$FileDateProperty {
+  @override
+  DateProperty build() => DateProperty();
+
+  void update(DateProperty value) => state = value;
 }

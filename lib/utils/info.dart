@@ -464,3 +464,6 @@ IconData getThemeModeIcon(ThemeMode mode) {
       return Icons.brightness_4_rounded;
   }
 }
+
+String formatResolution(Resolution resolution) =>
+    '${resolution.width} x ${resolution.height}';

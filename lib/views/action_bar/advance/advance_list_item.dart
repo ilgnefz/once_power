@@ -130,7 +130,8 @@ class _AdvanceListItemState extends State<AdvanceListItem> {
             ),
             SizedBox(width: AppNum.smallG),
             Consumer(
-              builder: (context, ref, _) => DirectiveItemBtn(
+              builder: (context, ref, _) => DynamicShowBtn(
+                isHover: isHover,
                 icon: Icons.edit_note_rounded,
                 onTap: () {
                   if (widget.menu.type.isDelete) {

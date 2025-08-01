@@ -24,6 +24,7 @@ class ContentTopBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isViewMode = ref.watch(isViewModeProvider);
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+    bool isModifyDate = ref.watch(useDateModifyProvider);
 
     return Container(
       height: 40,
@@ -32,15 +33,13 @@ class ContentTopBar extends ConsumerWidget {
       child: Builder(builder: (context) {
         if (isViewMode && !isOrganize) return ViewModeTopBar();
 
-        String label = ref.watch(currentModeProvider).isOrganize ||
-                ref.watch(isViewModeProvider)
+        String label = isOrganize || ref.watch(isViewModeProvider)
             ? S.of(context).fileName
             : S.of(context).originalName;
         int selected = ref.watch(selectFileProvider);
         int total = ref.watch(fileListProvider).length;
-        String label2 = ref.watch(currentModeProvider).isOrganize
-            ? S.of(context).folder
-            : S.of(context).renameName;
+        String label2 =
+            isOrganize ? S.of(context).folder : S.of(context).renameName;
 
         return Row(
           children: [
@@ -55,7 +54,7 @@ class ContentTopBar extends ConsumerWidget {
                 children: [
                   OneLineText('$label ($selected/$total)'),
                   ExpandBtn(),
-                  HideBtn(),
+                  if (!isOrganize && !isModifyDate) HideBtn(),
                   SizedBox(width: AppNum.smallG),
                 ],
               ),

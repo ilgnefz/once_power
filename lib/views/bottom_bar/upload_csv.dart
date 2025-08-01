@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/csv_rename.dart';
+import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 import 'package:path/path.dart' as path;
 
@@ -17,6 +19,9 @@ class UploadCSVBtn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     void upload() async {
+      bool isOrganize = ref.watch(currentModeProvider).isOrganize;
+      bool isModifyDate = ref.watch(useDateModifyProvider);
+      if (isOrganize || isModifyDate) return showCSVWarningNotification();
       List<String> extensions = ['csv', 'txt', 'oplog'];
       final xType = XTypeGroup(label: 'CSV', extensions: extensions);
       final XFile? file = await openFile(acceptedTypeGroups: [xType]);

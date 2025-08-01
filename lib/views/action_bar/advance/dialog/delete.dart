@@ -7,6 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
+import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete_extension_switch.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete_match_input.dart';
 
@@ -30,7 +31,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
   int start = 1, end = 1, front = 1, back = 1;
   List<DeleteType> deleteTypes = [];
   bool deleteExt = false, useRegex = false;
-  String group = S.current.all;
+  String group = 'all';
 
   @override
   void initState() {
@@ -54,9 +55,9 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
     return CommonDialog(
       title: S.of(context).deleteTitle,
       extraButton: GroupDropdown(
-        value: group,
+        value: group == 'all' ? S.current.all : group,
         onChanged: (value) {
-          group = value!;
+          group = isAll(value!) ? 'all' : value;
           setState(() {});
         },
       ),

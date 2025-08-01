@@ -22,6 +22,11 @@ class ThemeConfig {
     unselectedWidgetColor: Colors.black26,
     extensions: [
       IconBoxTheme(background: AppColors.primary, icon: Colors.white),
+      TableTheme(
+        background1: Colors.white,
+        background2: Color(0xfff5f5f5),
+        textColor: Colors.black,
+      ),
     ],
     iconTheme: IconThemeData(color: AppColors.icon),
     textTheme: const TextTheme(
@@ -106,6 +111,11 @@ class ThemeConfig {
     unselectedWidgetColor: Color(0xFF56535B),
     extensions: [
       IconBoxTheme(background: AppColors.primaryDark, icon: AppColors.textDark),
+      TableTheme(
+        background1: AppColors.backgroundDark,
+        background2: Color(0xFF333333),
+        textColor: Colors.white,
+      ),
     ],
     iconTheme: IconThemeData(color: AppColors.iconDark),
     textTheme: const TextTheme(
