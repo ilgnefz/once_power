@@ -62,12 +62,13 @@ extension MatchLocationExtension on MatchContent {
 enum AddType {
   text,
   serialNumber,
+  random,
   parentsName,
   width,
   height,
   extension,
-  random,
   date,
+  metaData,
 }
 
 extension AddTypeExtension on AddType {
@@ -89,6 +90,8 @@ extension AddTypeExtension on AddType {
         return S.current.width;
       case AddType.height:
         return S.current.height;
+      case AddType.metaData:
+        return S.current.metaData;
     }
   }
 
@@ -100,6 +103,7 @@ extension AddTypeExtension on AddType {
   bool get isRandom => this == AddType.random;
   bool get isWidth => this == AddType.width;
   bool get isHeight => this == AddType.height;
+  bool get isMetaData => this == AddType.metaData;
 }
 
 enum AddPosition { before, after }
@@ -257,6 +261,23 @@ extension DateSplitTypeExtension on DateSplitType {
         return '.';
       case DateSplitType.underscore:
         return '_';
+    }
+  }
+}
+
+enum FileMetaData { title, artist, album, year }
+
+extension FileMetaDataExtension on FileMetaData {
+  String get label {
+    switch (this) {
+      case FileMetaData.title:
+        return S.current.title;
+      case FileMetaData.artist:
+        return S.current.artist;
+      case FileMetaData.album:
+        return S.current.album;
+      case FileMetaData.year:
+        return S.current.year;
     }
   }
 }

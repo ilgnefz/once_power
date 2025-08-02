@@ -9,6 +9,7 @@ import 'package:once_power/views/content_bar/grid_view/preview_svg.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
 import '../../../models/file_enum.dart';
+import 'preview_avif.dart';
 import 'preview_image.dart';
 import 'preview_psd.dart';
 import 'preview_video.dart';
@@ -137,6 +138,13 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
                           id: previewList[index].id,
                           file: previewList[index].filePath,
                           data: previewList[index].thumbnail!,
+                        );
+                      }
+
+                      if (previewList[index].extension == 'avif') {
+                        return PreviewAvif(
+                          id: previewList[index].id,
+                          file: previewList[index].filePath,
                         );
                       }
 

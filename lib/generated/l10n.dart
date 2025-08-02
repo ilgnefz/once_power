@@ -1554,10 +1554,10 @@ class S {
     return Intl.message('Text with', name: 'letters', desc: '', args: []);
   }
 
-  /// `No instructions have been added yet`
+  /// `No directive have been added yet`
   String get advanceEmpty1 {
     return Intl.message(
-      'No instructions have been added yet',
+      'No directive have been added yet',
       name: 'advanceEmpty1',
       desc: '',
       args: [],
@@ -1590,10 +1590,10 @@ class S {
   }
 
   /// `Total {count}`
-  String totalInstructions(Object count) {
+  String totalDirectives(Object count) {
     return Intl.message(
       'Total $count',
-      name: 'totalInstructions',
+      name: 'totalDirectives',
       desc: '',
       args: [count],
     );
@@ -1979,14 +1979,14 @@ class S {
     return Intl.message('Size', name: 'size', desc: '', args: []);
   }
 
-  /// `ResolutionWidth`
+  /// `Width`
   String get width {
-    return Intl.message('ResolutionWidth', name: 'width', desc: '', args: []);
+    return Intl.message('Width', name: 'width', desc: '', args: []);
   }
 
-  /// `ResolutionHeight`
+  /// `Height`
   String get height {
-    return Intl.message('ResolutionHeight', name: 'height', desc: '', args: []);
+    return Intl.message('Height', name: 'height', desc: '', args: []);
   }
 
   /// `Word Spacing`
@@ -2532,6 +2532,31 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `MetaData`
+  String get metaData {
+    return Intl.message('MetaData', name: 'metaData', desc: '', args: []);
+  }
+
+  /// `Title`
+  String get title {
+    return Intl.message('Title', name: 'title', desc: '', args: []);
+  }
+
+  /// `Artist`
+  String get artist {
+    return Intl.message('Artist', name: 'artist', desc: '', args: []);
+  }
+
+  /// `Album`
+  String get album {
+    return Intl.message('Album', name: 'album', desc: '', args: []);
+  }
+
+  /// `Year`
+  String get year {
+    return Intl.message('Year', name: 'year', desc: '', args: []);
   }
 }
 

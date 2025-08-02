@@ -38,6 +38,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   DateType dateType = DateType.createdDate;
   DateSplitType dateSplit = DateSplitType.none;
   AddPosition position = AddPosition.after;
+  FileMetaData metaData = FileMetaData.title;
   String group = 'all';
 
   @override
@@ -54,6 +55,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       randomLen = widget.menu!.randomLen;
       dateType = widget.menu!.dateType;
       dateSplit = widget.menu!.dateSplit;
+      metaData = widget.menu!.metaData;
       position = widget.menu!.addPosition;
       group = widget.menu!.group;
     }
@@ -87,6 +89,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
             len: randomLen,
             date: dateType,
             dateSplit: dateSplit,
+            metaData: metaData,
             typeChanged: (value) {
               type = value;
               setState(() {});
@@ -101,6 +104,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
             },
             dateSplitChange: (value) {
               dateSplit = value!;
+              setState(() {});
+            },
+            metaDataChange: (value) {
+              metaData = value!;
               setState(() {});
             },
           ),
@@ -160,6 +167,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           addPosition: position,
           dateType: dateType,
           dateSplit: dateSplit,
+          metaData: metaData,
           posIndex: posIndex,
           group: group,
         );

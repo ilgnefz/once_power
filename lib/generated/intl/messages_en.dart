@@ -86,7 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addType": MessageLookupByLibrary.simpleMessage("Add Type"),
     "advance": MessageLookupByLibrary.simpleMessage("Advance"),
     "advanceEmpty1": MessageLookupByLibrary.simpleMessage(
-      "No instructions have been added yet",
+      "No directive have been added yet",
     ),
     "advanceEmpty2": MessageLookupByLibrary.simpleMessage("Click the"),
     "advanceEmpty3": MessageLookupByLibrary.simpleMessage(
@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "advanceMenu": MessageLookupByLibrary.simpleMessage("AdvanceMenu"),
     "after": MessageLookupByLibrary.simpleMessage("After"),
+    "album": MessageLookupByLibrary.simpleMessage("Album"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "allExtension": MessageLookupByLibrary.simpleMessage("All extension"),
     "allFolder": MessageLookupByLibrary.simpleMessage("All folder"),
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appendMode": MessageLookupByLibrary.simpleMessage("Append"),
     "applyChange": MessageLookupByLibrary.simpleMessage("Apply"),
     "applyGroup": MessageLookupByLibrary.simpleMessage("Apply Group"),
+    "artist": MessageLookupByLibrary.simpleMessage("Artist"),
     "audio": MessageLookupByLibrary.simpleMessage("Audio"),
     "autoRun": MessageLookupByLibrary.simpleMessage(
       "Run OncePower when the computer starts up",
@@ -265,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "The group folder is empty!",
     ),
     "groupType": MessageLookupByLibrary.simpleMessage("Set group folder"),
-    "height": MessageLookupByLibrary.simpleMessage("ResolutionHeight"),
+    "height": MessageLookupByLibrary.simpleMessage("Height"),
     "hideAll": MessageLookupByLibrary.simpleMessage(
       "Hidden all unchanged files",
     ),
@@ -308,6 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "matchName": MessageLookupByLibrary.simpleMessage("Match name"),
     "matchParent": MessageLookupByLibrary.simpleMessage("Match folder"),
     "matchPosition": MessageLookupByLibrary.simpleMessage("Match Position"),
+    "metaData": MessageLookupByLibrary.simpleMessage("MetaData"),
     "modifiedDate": MessageLookupByLibrary.simpleMessage("Modified"),
     "modifiedFileDate": MessageLookupByLibrary.simpleMessage(
       "Modify file date",
@@ -491,6 +494,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tipImage": MessageLookupByLibrary.simpleMessage(
       "Drag the Picture File/Folder here",
     ),
+    "title": MessageLookupByLibrary.simpleMessage("Title"),
     "to": MessageLookupByLibrary.simpleMessage("to"),
     "toBehind": MessageLookupByLibrary.simpleMessage("To the behind"),
     "toFront": MessageLookupByLibrary.simpleMessage("To the front"),
@@ -503,7 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Move the file to a top-level parent folder other than the disk root directory",
     ),
-    "totalInstructions": m16,
+    "totalDirectives": m16,
     "traditional": MessageLookupByLibrary.simpleMessage("TraditionalCN"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("Get episode info"),
     "typeAscending": MessageLookupByLibrary.simpleMessage("Type ascending"),
@@ -533,12 +537,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "warningCSVDesc": MessageLookupByLibrary.simpleMessage(
       "The function to upload CSV files has been disabled in the Organize Mode and Modify file date function",
     ),
-    "width": MessageLookupByLibrary.simpleMessage("ResolutionWidth"),
+    "width": MessageLookupByLibrary.simpleMessage("Width"),
     "withT": MessageLookupByLibrary.simpleMessage("with"),
     "wordSpacing": MessageLookupByLibrary.simpleMessage("Word Spacing"),
     "wordSpacingHint": MessageLookupByLibrary.simpleMessage(
       "Separate words starting with capital letters",
     ),
+    "year": MessageLookupByLibrary.simpleMessage("Year"),
     "zip": MessageLookupByLibrary.simpleMessage("Zip"),
   };
 }

@@ -7,10 +7,12 @@ class SubTopBar extends StatelessWidget {
   const SubTopBar({
     super.key,
     required this.title,
+    this.onOperate,
     this.onDelete,
   });
 
   final String title;
+  final void Function()? onOperate;
   final void Function()? onDelete;
 
   @override
@@ -21,12 +23,20 @@ class SubTopBar extends StatelessWidget {
       padding:
           EdgeInsets.only(left: AppNum.detailDialogP, right: AppNum.largeG),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: TextStyle(fontSize: 13, color: Colors.grey)
                 .useSystemChineseFont(),
+          ),
+          Spacer(),
+          ClickIcon(
+            size: 20,
+            iconSize: 16,
+            icon: Icons.checklist_rtl_rounded,
+            color: Colors.grey,
+            onTap: onOperate,
           ),
           ClickIcon(
             size: 20,

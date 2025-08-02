@@ -6,6 +6,7 @@ import 'package:once_power/utils/info.dart';
 import 'package:once_power/widgets/content_bar/select_sort_card.dart';
 
 import '../../../models/file_enum.dart';
+import 'avif_view.dart';
 import 'image_view.dart';
 import 'psd_view.dart';
 import 'svg_view.dart';
@@ -36,11 +37,12 @@ class ContentGridItem extends StatelessWidget {
                 child: Builder(builder: (context) {
                   if (file.type.isVideo) {
                     return VideoView(file: file, key: ValueKey(file.id));
-                  }
-                  if (file.extension == 'svg') {
+                  } else if (file.extension == 'svg') {
                     return SvgView(file: file, key: ValueKey(file.id));
                   } else if (file.extension == 'psd') {
                     return PsdView(file: file, key: ValueKey(file.id));
+                  } else if (file.extension == 'avif') {
+                    return AvifView(file: file, key: ValueKey(file.id));
                   }
                   return ImageView(file: file, key: ValueKey(file.id));
                 }),

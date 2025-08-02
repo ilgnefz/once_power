@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:audio_metadata_reader/audio_metadata_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
@@ -467,3 +468,16 @@ IconData getThemeModeIcon(ThemeMode mode) {
 
 String formatResolution(Resolution resolution) =>
     '${resolution.width} x ${resolution.height}';
+
+FileMeteInfo? getMetaInfo(String filePath, String extension) {
+  List<String> onlyExt = ['mp3', 'mp4', 'flac', 'ogg', 'opus', 'wav'];
+  if (!onlyExt.contains(extension)) return null;
+  final track = File(filePath);
+  AudioMetadata metadata = readMetadata(track, getImage: false);
+  return FileMeteInfo(
+    title: metadata.title ?? '',
+    album: metadata.album ?? '',
+    artist: metadata.artist ?? '',
+    year: metadata.year?.toString().substring(0, 4) ?? '',
+  );
+}

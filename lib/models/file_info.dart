@@ -29,6 +29,7 @@ class FileInfo {
   FileClassify type;
   int size;
   Resolution? resolution;
+  FileMeteInfo? metaInfo;
   Uint8List? thumbnail;
   String group;
   bool checked;
@@ -39,7 +40,7 @@ class FileInfo {
     required this.newName,
     required this.parent,
     required this.filePath,
-    required this.tempPath,
+    this.tempPath = '',
     required this.extension,
     required this.newExtension,
     required this.beforePath,
@@ -50,9 +51,10 @@ class FileInfo {
     required this.type,
     required this.size,
     required this.resolution,
+    required this.metaInfo,
     this.thumbnail,
-    required this.group,
-    required this.checked,
+    this.group = '',
+    this.checked = true,
   });
 
   @override
@@ -74,6 +76,7 @@ class FileInfo {
         'type: $type, '
         'size: $size, '
         'resolution: ${resolution.toString()}, '
+        'metaInfo: ${metaInfo.toString()}, '
         'thumbnail: $thumbnail, '
         'group: $group, '
         'checked: $checked}';
@@ -96,6 +99,7 @@ class FileInfo {
         'type': type.index,
         'size': size,
         'resolution': resolution?.toJson(),
+        'metaInfo': metaInfo?.toJson(),
         'thumbnail': thumbnail,
         'group': group,
         'checked': checked,
@@ -121,6 +125,9 @@ class FileInfo {
         size: json['size'],
         resolution: json['resolution'] != null
             ? Resolution.fromJson(json['resolution'])
+            : null,
+        metaInfo: json['metaInfo'] != null
+            ? FileMeteInfo.fromJson(json['metaInfo'])
             : null,
         thumbnail: json['thumbnail'],
         group: json['group'],
@@ -181,5 +188,52 @@ class Resolution {
   @override
   String toString() {
     return 'Resolution(width: $width, height: $height)';
+  }
+}
+
+class FileMeteInfo {
+  String title;
+  String artist;
+  String album;
+  String year;
+
+  FileMeteInfo({
+    this.title = '',
+    this.artist = '',
+    this.album = '',
+    this.year = '',
+  });
+
+  FileMeteInfo copyWith({
+    String? title,
+    String? artist,
+    String? album,
+    String? year,
+  }) {
+    return FileMeteInfo(
+      title: title ?? this.title,
+      artist: artist ?? this.artist,
+      album: album ?? this.album,
+      year: year ?? this.year,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'artist': artist,
+        'album': album,
+        'year': year,
+      };
+
+  factory FileMeteInfo.fromJson(Map<String, dynamic> json) => FileMeteInfo(
+        title: json['title'],
+        artist: json['artist'],
+        album: json['album'],
+        year: json['year'],
+      );
+
+  @override
+  String toString() {
+    return 'FileMeteInfo(title: $title, artist: $artist, album: $album, year: $year)';
   }
 }

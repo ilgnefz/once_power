@@ -185,6 +185,22 @@ String advanceAddName(
     if (addType.isHeight) {
       value = file.resolution == null ? '' : file.resolution!.height.toString();
     }
+    if (addType.isMetaData) {
+      switch (menu.metaData) {
+        case FileMetaData.title:
+          value = file.metaInfo?.title ?? '';
+          break;
+        case FileMetaData.artist:
+          value = file.metaInfo?.artist ?? '';
+          break;
+        case FileMetaData.album:
+          value = file.metaInfo?.album ?? '';
+          break;
+        case FileMetaData.year:
+          value = file.metaInfo?.year ?? '';
+          break;
+      }
+    }
     switch (addPosition) {
       case AddPosition.before:
         if (posIndex > name.length) {

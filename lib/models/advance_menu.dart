@@ -193,6 +193,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final int randomLen;
   final DateType dateType;
   final DateSplitType dateSplit;
+  final FileMetaData metaData;
   final AddPosition addPosition;
   final int posIndex;
 
@@ -208,6 +209,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.randomLen,
     required this.dateType,
     required this.dateSplit,
+    required this.metaData,
     required this.addPosition,
     required this.posIndex,
     required super.group,
@@ -232,6 +234,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       randomLen: randomLen,
       dateType: dateType,
       dateSplit: dateSplit,
+      metaData: metaData,
       addPosition: addPosition,
       posIndex: posIndex,
       group: group,
@@ -252,6 +255,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         randomLen: json["randomLen"] ?? 1,
         dateType: DateType.values[json["dateType"] ?? 0],
         dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
+        metaData: FileMetaData.values[json["metaData"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         posIndex: json["posIndex"] ?? 1,
         group: json["group"] ?? 'all',
@@ -271,6 +275,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "randomLen": randomLen,
         "dateType": dateType.index,
         "dateSplit": dateSplit.index,
+        "metaData": metaData.index,
         "addPosition": addPosition.index,
         "posIndex": posIndex,
         "group": group,
@@ -290,6 +295,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'randomLen: $randomLen, '
         'dateType: $dateType, '
         'dateSplit: $dateSplit, '
+        'metaData: $metaData, '
         'addPosition: $addPosition, '
         'posIndex: $posIndex, '
         'group: $group}';

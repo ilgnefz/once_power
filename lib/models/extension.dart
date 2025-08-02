@@ -8,6 +8,7 @@ const audio = [
   'midi',
   'mp3',
   'ogg',
+  'opus',
   'ra',
   'rm',
   'rmx',
@@ -45,6 +46,7 @@ const doc = [
 ];
 const image = [
   'apng',
+  'avif',
   'bmp',
   'dib',
   'exif',

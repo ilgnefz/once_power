@@ -28,6 +28,9 @@ class AdvanceAddCard extends StatelessWidget {
         startStr =
             '${menu.addType.label} ${menu.randomLen} ${S.current.digits}';
       }
+      if (menu.addType.isMetaData) {
+        startStr = '${menu.addType.label} ${menu.metaData.label}';
+      }
       return AdvanceRichText(
         text: TextSpan(
           text: startStr,

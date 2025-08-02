@@ -65,6 +65,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.13.0"
+  audio_metadata_reader:
+    dependency: "direct main"
+    description:
+      name: audio_metadata_reader
+      sha256: b7cecf78178075c8f8281ae184ae81d137eb6e751f5d193334984eb732662ee0
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.4.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -462,6 +470,78 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_avif:
+    dependency: "direct main"
+    description:
+      name: flutter_avif
+      sha256: "2e086140fabffb760f4be32ec2726e644074f5ecac8a4c8f52cfccc0cf6e5a9c"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_android:
+    dependency: transitive
+    description:
+      name: flutter_avif_android
+      sha256: ecfc88ac7bda09308089e71c8d214650bb7861c6c68028d7b2827681466de332
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_ios:
+    dependency: transitive
+    description:
+      name: flutter_avif_ios
+      sha256: e528daf284a366e1838977005193d63f021c6727852d22afcea69b283ad02af2
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_linux:
+    dependency: transitive
+    description:
+      name: flutter_avif_linux
+      sha256: a23ae19bd62daf42d717e1ff95030e80679de16ba40fdb8c753e046629d6ae15
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_macos:
+    dependency: transitive
+    description:
+      name: flutter_avif_macos
+      sha256: "576f4991feea4fb24eb846e2fa3a5b829c2f1eae83ec312e8e99b5b09357cc84"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_avif_platform_interface
+      sha256: "4a5929c24c3a3cab8c243109be938e680af03b5802a249e964d447ed89b26f49"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_web:
+    dependency: transitive
+    description:
+      name: flutter_avif_web
+      sha256: "7acc416904f52eb8623b537574d12143ce3b9095a82f68fbfb97eeea846bb998"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_avif_windows:
+    dependency: transitive
+    description:
+      name: flutter_avif_windows
+      sha256: "08a787a5379e68844e883bfc81f2f6fb94d3d9c9a87dc6889b02cf6bab16127e"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
+  flutter_cache_manager:
+    dependency: transitive
+    description:
+      name: flutter_cache_manager
+      sha256: "400b6592f16a4409a7f2bb929a9a7e38c72cceb8ffb99ee57bbf2cb2cecf8386"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.4.1"
   flutter_context_menu:
     dependency: "direct main"
     description:
@@ -1004,6 +1084,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.0.3"
+  protobuf:
+    dependency: transitive
+    description:
+      name: protobuf
+      sha256: "68645b24e0716782e58948f8467fd42a880f255096a821f9e7d0ec625b00c84d"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
   pub_semver:
     dependency: transitive
     description:
@@ -1280,6 +1368,46 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "7.0.0"
+  sqflite:
+    dependency: transitive
+    description:
+      name: sqflite
+      sha256: e2297b1da52f127bc7a3da11439985d9b536f75070f3325e62ada69a5c585d03
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.2"
+  sqflite_android:
+    dependency: transitive
+    description:
+      name: sqflite_android
+      sha256: "2b3070c5fa881839f8b402ee4a39c1b4d561704d4ebbbcfb808a119bc2a1701b"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.1"
+  sqflite_common:
+    dependency: transitive
+    description:
+      name: sqflite_common
+      sha256: "6ef422a4525ecc601db6c0a2233ff448c731307906e92cabc9ba292afaae16a6"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.5.6"
+  sqflite_darwin:
+    dependency: transitive
+    description:
+      name: sqflite_darwin
+      sha256: "279832e5cde3fe99e8571879498c9211f3ca6391b0d818df4e17d9fff5c6ccb3"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.2"
+  sqflite_platform_interface:
+    dependency: transitive
+    description:
+      name: sqflite_platform_interface
+      sha256: "8dd4515c7bdcae0a785b0062859336de775e8c65db81ae33dd5445f35be61920"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.0"
   stack_trace:
     dependency: transitive
     description:

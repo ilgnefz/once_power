@@ -199,7 +199,7 @@
   "advanceEmpty2": "点击下方的",
   "advanceEmpty3": "\"删除\"、\"添加\"、\"替换\"",
   "advanceEmpty4": "按钮来添加",
-  "totalInstructions": "共 {count} 条",
+  "totalDirectives": "共 {count} 条",
   "replaceMode": "替换模式",
   "formatDigit": "请输入名称长度",
   "completeContent": "请输入补全内容",
@@ -252,8 +252,8 @@
   "matchParent": "匹配路径",
   "resolution": "分辨率",
   "size": "大小",
-  "width": "尺寸宽",
-  "height": "尺寸高",
+  "width": "宽度",
+  "height": "高度",
   "wordSpacing": "单词间隔",
   "wordSpacingHint": "请输入单词间隔(大写字母开头识别为一个单词)",
   "separate": "分隔单词",
@@ -319,5 +319,10 @@
   "fileNoOpen": "无法打开 {file}",
   "modifyDateFailInfo": "修改 {file} 日期失败",
   "warning": "警告",
-  "warningCSVDesc": "整理模式和修改文件日期功能下已禁用上传 CSV 文件功能"
+  "warningCSVDesc": "整理模式和修改文件日期功能下已禁用上传 CSV 文件功能",
+  "metaData": "元数据",
+  "title": "标题",
+  "artist": "艺术家",
+  "album": "专辑",
+  "year": "年份"
 }

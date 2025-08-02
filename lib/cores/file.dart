@@ -137,6 +137,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   int size = type.isFolder ? await calculateSize(filePath) : stat.size;
   DateTime? exifDate;
   Resolution? resolution;
+  FileMeteInfo? metaInfo = getMetaInfo(filePath, extension);
   if (type.isImage) {
     final results = await Future.wait(
         [getExifDate(filePath), getImageDimensions(filePath)]);
@@ -149,7 +150,6 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     newName: name,
     parent: path.dirname(filePath),
     filePath: filePath,
-    tempPath: '',
     extension: extension,
     newExtension: extension,
     beforePath: filePath,
@@ -160,8 +160,7 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
     type: type,
     size: size,
     resolution: resolution,
-    group: '',
-    checked: true,
+    metaInfo: metaInfo,
   );
 }
 
