@@ -64,3 +64,26 @@ class TableTheme extends ThemeExtension<TableTheme> {
     );
   }
 }
+
+class DirectiveTheme extends ThemeExtension<DirectiveTheme> {
+  final Color hoverBackground;
+
+  const DirectiveTheme({required this.hoverBackground});
+
+  @override
+  ThemeExtension<DirectiveTheme> copyWith({Color? hoverBackground}) {
+    return DirectiveTheme(
+        hoverBackground: hoverBackground ?? this.hoverBackground);
+  }
+
+  @override
+  ThemeExtension<DirectiveTheme> lerp(
+      covariant ThemeExtension<DirectiveTheme>? other, double t) {
+    if (other is! DirectiveTheme) {
+      return this;
+    }
+    return DirectiveTheme(
+        hoverBackground:
+            Color.lerp(hoverBackground, other.hoverBackground, t)!);
+  }
+}

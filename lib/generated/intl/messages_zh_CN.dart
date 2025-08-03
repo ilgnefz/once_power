@@ -72,6 +72,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addInputHint": MessageLookupByLibrary.simpleMessage("请输入添加内容"),
     "addPosition": MessageLookupByLibrary.simpleMessage("添加位置"),
     "addPreset": MessageLookupByLibrary.simpleMessage("添加预设"),
+    "addPresetDesc": MessageLookupByLibrary.simpleMessage(
+      "注：点击上方预设名称可自动填充至输入框，同名预设将被覆盖",
+    ),
     "addSubfolder": MessageLookupByLibrary.simpleMessage("获取文件夹的子文件夹"),
     "addTitle": MessageLookupByLibrary.simpleMessage("添加内容"),
     "addType": MessageLookupByLibrary.simpleMessage("添加类型"),

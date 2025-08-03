@@ -7,6 +7,7 @@ import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
+import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/utils.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete_extension_switch.dart';
 import 'package:once_power/views/action_bar/advance/dialog/delete_match_input.dart';
@@ -145,6 +146,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
         } else {
           ref.read(advanceMenuListProvider.notifier).add(delete);
         }
+        ref.read(currentPresetNameProvider.notifier).update('');
         advanceUpdateName(ref);
       },
     );

@@ -328,5 +328,6 @@
   "txtDecodeFailed": "File decode failed",
   "txtDecodeFailedDesc": "Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported",
   "toggleStatus": "Toggle status",
-  "cancelSelected": "Cancel"
+  "cancelSelected": "Cancel",
+  "addPresetDesc": "Note: Clicking on the preset name above will automatically fill it into the input box. Presets with the same name will be overwritten"
 }

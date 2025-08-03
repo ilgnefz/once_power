@@ -5,6 +5,7 @@ import 'package:once_power/cores/advance.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/providers/advance.dart';
+import 'package:once_power/providers/value.dart';
 
 import 'preset_item.dart';
 
@@ -28,6 +29,9 @@ class PresetList extends ConsumerWidget {
               List<AdvanceMenuModel> menus = [];
               menus.addAll(list[index].menus.map((e) => e.copyWith()));
               ref.read(advanceMenuListProvider.notifier).setList(menus);
+              ref
+                  .read(currentPresetNameProvider.notifier)
+                  .update(list[index].name);
               advanceUpdateName(ref);
             },
             onRename: () {
@@ -39,6 +43,7 @@ class PresetList extends ConsumerWidget {
               final menus =
                   p.menus.map((e) => e.copyWith(id: nanoid(10))).toList();
               ref.read(advanceMenuListProvider.notifier).addAll(menus);
+              ref.read(currentPresetNameProvider.notifier).update('');
               advanceUpdateName(ref);
               // ctrl.close();
             },

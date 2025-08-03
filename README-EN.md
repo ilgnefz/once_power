@@ -23,7 +23,19 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
-## Dark theme
+## Preset overlay with the same name
+
+![43](doc/43.gif)
+
+## Naming of media file metadata
+
+![42](doc/42.gif)
+
+## Batch operation instructions
+
+Right click to open the menu by selecting multiple directives
+
+![41](doc/41.gif)
 
 ## Modify file date
 
@@ -48,6 +60,8 @@ The original intention of software development was to batch rename images, so th
 ## Expand the display width of the new name
 
 ![35](doc/35.gif)
+
+## Dark theme
 
 ![34](doc/34.gif)
 

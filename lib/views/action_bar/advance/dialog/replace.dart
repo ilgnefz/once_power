@@ -9,6 +9,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/verify.dart';
 import 'package:once_power/views/action_bar/advance/dialog/replace_match_input.dart';
 
@@ -202,6 +203,7 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
         } else {
           ref.read(advanceMenuListProvider.notifier).add(replace);
         }
+        ref.read(currentPresetNameProvider.notifier).update('');
         advanceUpdateName(ref);
       },
     );

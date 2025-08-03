@@ -12,6 +12,7 @@ import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/input.dart';
 import 'package:once_power/providers/select.dart';
+import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/content_bar/right_menu_item.dart';
 
@@ -231,6 +232,7 @@ Future<void> showDirectiveRightMenu(
             for (var element in list) {
               ref.read(advanceMenuListProvider.notifier).remove(element);
             }
+            ref.read(currentPresetNameProvider.notifier).update('');
             updateName(ref);
           },
         ),
@@ -266,8 +268,8 @@ List<ContextMenuEntry> buildDirectiveGroupList(
                     .read(advanceMenuListProvider.notifier)
                     .setGroup(element.id, e);
               }
-              updateName(ref);
               ref.read(advanceMenuSelectedListProvider.notifier).clear();
+              updateName(ref);
             },
           ))
       .toList();

@@ -27,6 +27,7 @@ class ThemeConfig {
         background2: Color(0xfff5f5f5),
         textColor: Colors.black,
       ),
+      DirectiveTheme(hoverBackground: Color(0xFFF2F2F2)),
     ],
     iconTheme: IconThemeData(color: AppColors.icon),
     textTheme: const TextTheme(
@@ -116,6 +117,7 @@ class ThemeConfig {
         background2: Color(0xFF333333),
         textColor: Colors.white,
       ),
+      DirectiveTheme(hoverBackground: Color(0xFF2F2F32)),
     ],
     iconTheme: IconThemeData(color: AppColors.iconDark),
     textTheme: const TextTheme(

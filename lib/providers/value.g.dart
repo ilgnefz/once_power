@@ -153,5 +153,21 @@ final fileDatePropertyProvider =
 );
 
 typedef _$FileDateProperty = AutoDisposeNotifier<DateProperty>;
+String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
+
+/// See also [CurrentPresetName].
+@ProviderFor(CurrentPresetName)
+final currentPresetNameProvider =
+    AutoDisposeNotifierProvider<CurrentPresetName, String>.internal(
+  CurrentPresetName.new,
+  name: r'currentPresetNameProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentPresetNameHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CurrentPresetName = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

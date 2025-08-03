@@ -8,6 +8,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
+import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/verify.dart';
 
 import 'add_position_radio.dart';
@@ -176,6 +177,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
         } else {
           ref.read(advanceMenuListProvider.notifier).add(add);
         }
+        ref.read(currentPresetNameProvider.notifier).update('');
         advanceUpdateName(ref);
       },
     );

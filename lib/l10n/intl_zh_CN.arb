@@ -328,5 +328,6 @@
   "txtDecodeFailed": "文件解析失败",
   "txtDecodeFailedDesc": "请检查文件编码，暂只支持 utf-8 和 gbk 编码的文件",
   "toggleStatus": "切换状态",
-  "cancelSelected": "取消选中"
+  "cancelSelected": "取消选中",
+  "addPresetDesc": "注：点击上方预设名称可自动填充至输入框，同名预设将被覆盖"
 }

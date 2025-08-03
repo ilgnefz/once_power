@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
 class EasyClickText extends StatelessWidget {
-  const EasyClickText({super.key, required this.label, required this.onTap});
+  const EasyClickText({
+    super.key,
+    required this.label,
+    this.color,
+    this.fontSize,
+    required this.onTap,
+  });
 
   final String label;
+  final Color? color;
+  final double? fontSize;
   final void Function() onTap;
 
   @override
@@ -20,7 +28,8 @@ class EasyClickText extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.surfaceContainerLow,
+              color: color ?? Theme.of(context).colorScheme.surfaceContainerLow,
+              fontSize: fontSize,
             ),
           ),
         ),

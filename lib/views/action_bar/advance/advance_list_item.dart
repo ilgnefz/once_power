@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/config/custom_theme.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/advance.dart';
 import 'package:once_power/cores/context_menu.dart';
@@ -15,6 +16,7 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
+import 'package:once_power/providers/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/action_bar/directive_item_btn.dart';
 import 'package:once_power/widgets/action_bar/dynamic_show_btn.dart';
@@ -163,7 +165,9 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
                 EdgeInsets.only(left: AppNum.mediumG, right: AppNum.smallG),
             decoration: BoxDecoration(
               color: isHover || selectList.contains(widget.menu)
-                  ? Color(0xFFE4E4E4)
+                  ? Theme.of(context)
+                      .extension<DirectiveTheme>()
+                      ?.hoverBackground
                   : null,
               borderRadius: BorderRadius.circular(AppNum.smallG),
             ),
@@ -200,6 +204,7 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
                     isHover: isHover,
                     icon: Icons.copy_all_rounded,
                     onTap: () {
+                      ref.read(currentPresetNameProvider.notifier).update('');
                       AdvanceMenuModel menu =
                           widget.menu.copyWith(id: nanoid(10));
                       ref.read(advanceMenuListProvider.notifier).add(menu);
@@ -230,6 +235,7 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
                   builder: (context, ref, child) => DirectiveItemBtn(
                     icon: Icons.close_rounded,
                     onTap: () {
+                      ref.read(currentPresetNameProvider.notifier).update('');
                       ref
                           .read(advanceMenuListProvider.notifier)
                           .remove(widget.menu);

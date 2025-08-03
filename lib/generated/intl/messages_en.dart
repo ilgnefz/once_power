@@ -79,6 +79,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addPosition": MessageLookupByLibrary.simpleMessage("Add Position"),
     "addPreset": MessageLookupByLibrary.simpleMessage("Add Preset"),
+    "addPresetDesc": MessageLookupByLibrary.simpleMessage(
+      "Note: Clicking on the preset name above will automatically fill it into the input box. Presets with the same name will be overwritten",
+    ),
     "addSubfolder": MessageLookupByLibrary.simpleMessage(
       "Gets the subfolder of the folder",
     ),

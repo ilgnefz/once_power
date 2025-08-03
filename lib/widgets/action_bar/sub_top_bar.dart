@@ -23,10 +23,15 @@ class SubTopBar extends StatelessWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(fontSize: 13, color: Colors.grey)
-                .useSystemChineseFont(),
+          SizedBox(
+            width: 204,
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 13, color: Colors.grey)
+                  .useSystemChineseFont(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Spacer(),
           ClickIcon(

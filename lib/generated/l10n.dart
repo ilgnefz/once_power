@@ -2593,6 +2593,16 @@ class S {
   String get cancelSelected {
     return Intl.message('Cancel', name: 'cancelSelected', desc: '', args: []);
   }
+
+  /// `Note: Clicking on the preset name above will automatically fill it into the input box. Presets with the same name will be overwritten`
+  String get addPresetDesc {
+    return Intl.message(
+      'Note: Clicking on the preset name above will automatically fill it into the input box. Presets with the same name will be overwritten',
+      name: 'addPresetDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -29,7 +29,7 @@ class _PresetItemState extends State<PresetItem> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.onSurface,
       child: Ink(
         child: InkWell(
           onTap: widget.onTap,

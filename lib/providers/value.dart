@@ -106,6 +106,15 @@ class ViewImageWidth extends _$ViewImageWidth {
 class FileDateProperty extends _$FileDateProperty {
   @override
   DateProperty build() => DateProperty();
-
   void update(DateProperty value) => state = value;
+}
+
+@riverpod
+class CurrentPresetName extends _$CurrentPresetName {
+  @override
+  String build() => StorageUtil.getString(AppKeys.currentPresetName) ?? '';
+  Future<void> update(String value) async {
+    state = value;
+    await StorageUtil.setString(AppKeys.currentPresetName, value);
+  }
 }

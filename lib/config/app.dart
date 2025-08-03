@@ -123,6 +123,7 @@ void saveOrNo() {
       AppKeys.otherFolder,
       AppKeys.otherFolderList,
       // AppKeys.isUseExtraFunction,
+      AppKeys.currentPresetName,
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);
