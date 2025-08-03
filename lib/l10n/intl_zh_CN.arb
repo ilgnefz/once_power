@@ -324,5 +324,9 @@
   "title": "标题",
   "artist": "艺术家",
   "album": "专辑",
-  "year": "年份"
+  "year": "年份",
+  "txtDecodeFailed": "文件解析失败",
+  "txtDecodeFailedDesc": "请检查文件编码，暂只支持 utf-8 和 gbk 编码的文件",
+  "toggleStatus": "切换状态",
+  "cancelSelected": "取消选中"
 }

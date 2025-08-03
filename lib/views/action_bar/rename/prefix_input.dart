@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:charset/charset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
 import 'package:once_power/models/file_info.dart';
@@ -30,7 +32,18 @@ class PrefixInput extends ConsumerWidget {
       info: ref.watch(prefixUploadMarkProvider),
       onUpload: (File file) async {
         String fileName = path.basename(file.path);
-        String content = await file.readAsString();
+        String content = '';
+        try {
+          content = await file.readAsString();
+        } catch (e) {
+          try {
+            final bytes = await file.readAsBytes();
+            content = gbk.decode(bytes);
+          } catch (gbError) {
+            showTxtDecodeNotification(gbError.toString());
+            return;
+          }
+        }
         UploadMarkInfo info = UploadMarkInfo(name: fileName, content: content);
         ref.read(prefixUploadMarkProvider.notifier).update(info);
         updateName(ref);

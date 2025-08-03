@@ -6,7 +6,7 @@ part of 'advance.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$advanceMenuListHash() => r'8a590e965b95c0e7ebf878034029709ccc70a587';
+String _$advanceMenuListHash() => r'cc9e06d0e42bfce2753e2f7df2057eafbe6551b7';
 
 /// See also [AdvanceMenuList].
 @ProviderFor(AdvanceMenuList)
@@ -22,7 +22,7 @@ final advanceMenuListProvider = AutoDisposeNotifierProvider<AdvanceMenuList,
 );
 
 typedef _$AdvanceMenuList = AutoDisposeNotifier<List<AdvanceMenuModel>>;
-String _$advancePresetListHash() => r'c7469afb43a30b401cb242c4eb803a6653b5b688';
+String _$advancePresetListHash() => r'e38425d73b056fb876d22ce533537537d266f4e2';
 
 /// See also [AdvancePresetList].
 @ProviderFor(AdvancePresetList)

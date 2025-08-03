@@ -62,6 +62,7 @@ class CsvDataView extends ConsumerWidget {
           child: ListView.builder(
             itemCount: list.length,
             itemBuilder: (context, index) => Container(
+              key: UniqueKey(),
               margin: EdgeInsets.symmetric(horizontal: AppNum.defaultP),
               color: index % 2 == 0 ? theme?.background1 : theme?.background2,
               child: Row(

@@ -2558,6 +2558,41 @@ class S {
   String get year {
     return Intl.message('Year', name: 'year', desc: '', args: []);
   }
+
+  /// `File decode failed`
+  String get txtDecodeFailed {
+    return Intl.message(
+      'File decode failed',
+      name: 'txtDecodeFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported`
+  String get txtDecodeFailedDesc {
+    return Intl.message(
+      'Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported',
+      name: 'txtDecodeFailedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toggle status`
+  String get toggleStatus {
+    return Intl.message(
+      'Toggle status',
+      name: 'toggleStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancelSelected {
+    return Intl.message('Cancel', name: 'cancelSelected', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -26,7 +26,6 @@ class UploadCSVBtn extends ConsumerWidget {
       final xType = XTypeGroup(label: 'CSV', extensions: extensions);
       final XFile? file = await openFile(acceptedTypeGroups: [xType]);
       if (file != null && !ref.watch(currentModeProvider).isOrganize) {
-        ref.read(cSVDataProvider.notifier).update([]);
         String ext = path.extension(file.path);
         List<CsvRenameInfo> list = [];
         if (ext == '.oplog') {

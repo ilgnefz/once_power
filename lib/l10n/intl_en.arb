@@ -324,5 +324,9 @@
   "title": "Title",
   "artist": "Artist",
   "album": "Album",
-  "year": "Year"
+  "year": "Year",
+  "txtDecodeFailed": "File decode failed",
+  "txtDecodeFailedDesc": "Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported",
+  "toggleStatus": "Toggle status",
+  "cancelSelected": "Cancel"
 }

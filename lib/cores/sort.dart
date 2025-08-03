@@ -138,6 +138,7 @@ void reorderList(
   FileInfo item = files.elementAt(oldIndex);
   ref.read(fileListProvider.notifier).removeAt(oldIndex);
   ref.read(fileListProvider.notifier).insertAt(newIndex, item);
+  ref.read(sortSelectListProvider.notifier).clear();
   updateName(ref);
 }
 

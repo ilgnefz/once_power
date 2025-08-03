@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "between": MessageLookupByLibrary.simpleMessage("之间的"),
     "cancel": MessageLookupByLibrary.simpleMessage("取消"),
     "cancelOperation": MessageLookupByLibrary.simpleMessage("点错了"),
+    "cancelSelected": MessageLookupByLibrary.simpleMessage("取消选中"),
     "capitalLetter": MessageLookupByLibrary.simpleMessage("大写字母"),
     "caseDesc": MessageLookupByLibrary.simpleMessage("区分大小写"),
     "caseExtension": MessageLookupByLibrary.simpleMessage("区分扩展"),
@@ -378,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "today": MessageLookupByLibrary.simpleMessage("今天日期"),
     "toggleCase": MessageLookupByLibrary.simpleMessage("大小写切换"),
     "toggleSelected": MessageLookupByLibrary.simpleMessage("切换选中"),
+    "toggleStatus": MessageLookupByLibrary.simpleMessage("切换状态"),
     "topParentFolder": MessageLookupByLibrary.simpleMessage("顶级文件夹"),
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "将文件移动到除磁盘根目录外的顶级父文件夹中",
@@ -385,6 +387,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalDirectives": m16,
     "traditional": MessageLookupByLibrary.simpleMessage("繁体"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("获取剧集信息"),
+    "txtDecodeFailed": MessageLookupByLibrary.simpleMessage("文件解析失败"),
+    "txtDecodeFailedDesc": MessageLookupByLibrary.simpleMessage(
+      "请检查文件编码，暂只支持 utf-8 和 gbk 编码的文件",
+    ),
     "typeAscending": MessageLookupByLibrary.simpleMessage("类型升序"),
     "typeDescending": MessageLookupByLibrary.simpleMessage("类型降序"),
     "undo": MessageLookupByLibrary.simpleMessage("撤销"),

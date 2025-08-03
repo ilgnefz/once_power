@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "between": MessageLookupByLibrary.simpleMessage("Between"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelOperation": MessageLookupByLibrary.simpleMessage("Cancel Operation"),
+    "cancelSelected": MessageLookupByLibrary.simpleMessage("Cancel"),
     "capitalLetter": MessageLookupByLibrary.simpleMessage("CapitalLetter"),
     "caseDesc": MessageLookupByLibrary.simpleMessage("Case sensitive"),
     "caseExtension": MessageLookupByLibrary.simpleMessage("Case ext."),
@@ -503,6 +504,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "toggleSelected": MessageLookupByLibrary.simpleMessage(
       "Toggle selected state",
     ),
+    "toggleStatus": MessageLookupByLibrary.simpleMessage("Toggle status"),
     "topParentFolder": MessageLookupByLibrary.simpleMessage("Top folder"),
     "topParentFolderDesc": MessageLookupByLibrary.simpleMessage(
       "Move the file to a top-level parent folder other than the disk root directory",
@@ -510,6 +512,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalDirectives": m16,
     "traditional": MessageLookupByLibrary.simpleMessage("TraditionalCN"),
     "tvSeriesInfo": MessageLookupByLibrary.simpleMessage("Get episode info"),
+    "txtDecodeFailed": MessageLookupByLibrary.simpleMessage(
+      "File decode failed",
+    ),
+    "txtDecodeFailedDesc": MessageLookupByLibrary.simpleMessage(
+      "Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported",
+    ),
     "typeAscending": MessageLookupByLibrary.simpleMessage("Type ascending"),
     "typeDescending": MessageLookupByLibrary.simpleMessage("Type descending"),
     "undo": MessageLookupByLibrary.simpleMessage("Undo"),

@@ -30,7 +30,7 @@ class AddView extends ConsumerStatefulWidget {
 
 class _DeleteViewState extends ConsumerState<AddView> {
   String value = '';
-  int digits = 0, start = 1, posIndex = 1;
+  int digits = 1, start = 1, posIndex = 1;
   List<String> randoms = [];
   DistinguishType distinguishType = DistinguishType.none;
   AddType type = AddType.text;

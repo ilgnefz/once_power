@@ -106,8 +106,8 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
         child: InkWell(
           borderRadius: BorderRadius.circular(isMax ? 0.0 : 8.0),
           onTap: () => Navigator.pop(context),
-          onSecondaryTapDown: (details) =>
-              showRightMenu(context, ref, details, previewList[index], true),
+          onSecondaryTapDown: (details) => showFileRightMenu(
+              context, ref, details, previewList[index], true),
           child: KeyboardListener(
             focusNode: focusNode,
             autofocus: true,

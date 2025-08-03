@@ -124,7 +124,7 @@ class SelectSortCard extends ConsumerWidget {
       if (hoverFile != null && !sortSelectList.contains(hoverFile)) {
         ref.read(sortSelectListProvider.notifier).one(hoverFile);
       }
-      await showRightMenu(context, ref, details, file);
+      await showFileRightMenu(context, ref, details, file);
     }
 
     return RenameTileTooltip(

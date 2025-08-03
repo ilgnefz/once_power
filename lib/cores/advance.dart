@@ -4,7 +4,6 @@ import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/advance_menu_enum.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/models/two_re_enum.dart';
 import 'package:once_power/providers/advance.dart';
 import 'package:once_power/providers/file.dart';
 import 'package:once_power/providers/list.dart';
@@ -33,8 +32,12 @@ void advanceUpdateName(WidgetRef ref) {
       }
       if (menu.type.isAdd) {
         menu as AdvanceMenuAdd;
+        String date = getDateName(menu.dateType, 8, file);
         String folder = getFolderName(file.parent);
         String type = file.type.label;
+        if (menu.distinguishType.isDate) {
+          (_, index) = calculateIndex(classifyMap, [date], file);
+        }
         if (menu.distinguishType.isFolder) {
           (_, index) = calculateIndex(classifyMap, [folder], file);
         }
@@ -50,7 +53,7 @@ void advanceUpdateName(WidgetRef ref) {
         if (menu.group != S.current.all && menu.distinguishType.isNone) {
           (_, index) = calculateIndex(classifyMap, [menu.group], file);
         }
-        name = advanceAddName(menu, file, name, index, folder);
+        name = advanceAddName(menu, file, name, index, date, folder);
       }
       if (menu.type.isReplace) {
         menu as AdvanceMenuReplace;
@@ -146,13 +149,13 @@ String advanceAddName(
   FileInfo file,
   String name,
   int index,
+  String date,
   String folder,
 ) {
   String value = menu.value;
   int digits = menu.digits;
   int start = menu.start + index;
   AddType addType = menu.addType;
-  DateType dateType = menu.dateType;
   AddPosition addPosition = menu.addPosition;
   int posIndex = menu.posIndex;
   if (!addType.isSerialNumber) {
@@ -175,10 +178,7 @@ String advanceAddName(
       }
       value = getRandomValue(randoms, menu.randomLen);
     }
-    if (addType.isDate) {
-      value = getDateName(dateType, 8, file);
-      value = formatDateShow(value, menu.dateSplit);
-    }
+    if (addType.isDate) value = formatDateShow(date, menu.dateSplit);
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();
     }
@@ -201,6 +201,7 @@ String advanceAddName(
           break;
       }
     }
+    if (addType.isGroup) value = file.group;
     switch (addPosition) {
       case AddPosition.before:
         if (posIndex > name.length) {

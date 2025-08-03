@@ -68,6 +68,7 @@ enum AddType {
   height,
   extension,
   date,
+  group,
   metaData,
 }
 
@@ -92,6 +93,8 @@ extension AddTypeExtension on AddType {
         return S.current.height;
       case AddType.metaData:
         return S.current.metaData;
+      case AddType.group:
+        return S.current.group;
     }
   }
 
@@ -104,6 +107,7 @@ extension AddTypeExtension on AddType {
   bool get isWidth => this == AddType.width;
   bool get isHeight => this == AddType.height;
   bool get isMetaData => this == AddType.metaData;
+  bool get isGroup => this == AddType.group;
 }
 
 enum AddPosition { before, after }
@@ -203,11 +207,13 @@ extension DeleteTypeExtension on DeleteType {
 
 enum MovePosition { first, center, last, idle }
 
-enum DistinguishType { none, folder, file, extension, group }
+enum DistinguishType { none, date, folder, file, extension, group }
 
 extension DistinguishTypeExtension on DistinguishType {
   String get label {
     switch (this) {
+      case DistinguishType.date:
+        return S.current.date;
       case DistinguishType.folder:
         return S.current.folder;
       case DistinguishType.file:
@@ -221,6 +227,7 @@ extension DistinguishTypeExtension on DistinguishType {
     }
   }
 
+  bool get isDate => this == DistinguishType.date;
   bool get isFolder => this == DistinguishType.folder;
   bool get isFile => this == DistinguishType.file;
   bool get isExtension => this == DistinguishType.extension;

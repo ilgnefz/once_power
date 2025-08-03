@@ -190,3 +190,12 @@ void showCSVWarningNotification() {
     time: 5,
   ).show();
 }
+
+void showTxtDecodeNotification(String err) {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: S.current.txtDecodeFailed,
+    message: '${S.current.txtDecodeFailedDesc}: $err',
+    time: 5,
+  ).show();
+}

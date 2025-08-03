@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/models/advance_menu.dart';
 import 'package:once_power/models/file_enum.dart';
 import 'package:once_power/models/file_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -211,4 +212,16 @@ class SuffixUploadMark extends _$SuffixUploadMark {
   UploadMarkInfo? build() => null;
   void update(UploadMarkInfo? value) => state = value;
   void clear() => state = null;
+}
+
+@riverpod
+class AdvanceMenuSelectedList extends _$AdvanceMenuSelectedList {
+  @override
+  List<AdvanceMenuModel> build() => [];
+  void add(AdvanceMenuModel group) => state = [...state, group];
+  void addAll(List<AdvanceMenuModel> group) => state = [...state, ...group];
+  void remove(AdvanceMenuModel group) =>
+      state = state.where((e) => e != group).toList();
+  void one(AdvanceMenuModel group) => state = [group];
+  void clear() => state = [];
 }

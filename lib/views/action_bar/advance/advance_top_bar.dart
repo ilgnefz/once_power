@@ -14,7 +14,6 @@ class AdvanceTopBar extends ConsumerWidget {
     List<AdvanceMenuModel> list = ref.watch(advanceMenuListProvider);
     return SubTopBar(
       title: S.current.totalDirectives(list.length),
-      onOperate: () async {},
       onDelete: () {
         ref.read(advanceMenuListProvider.notifier).setList([]);
         advanceUpdateName(ref);

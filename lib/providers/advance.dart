@@ -42,6 +42,14 @@ class AdvanceMenuList extends _$AdvanceMenuList {
     await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);
   }
 
+  void setGroup(String id, String group) async {
+    state = state.map((e) {
+      if (e.id == id) e.group = group;
+      return e;
+    }).toList();
+    await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);
+  }
+
   void setList(List<AdvanceMenuModel> list) async {
     state = list;
     await StorageUtil.setAdvanceList(AppKeys.advanceMenuList, state);
@@ -55,7 +63,13 @@ class AdvancePresetList extends _$AdvancePresetList {
       StorageUtil.getAdvancePreset(AppKeys.advancePresetList);
 
   void add(AdvancePreset value) async {
-    state = [...state, value];
+    // 检查是否存在相同名称的预设，如果存在就将获得的 value.menus 覆盖
+    int index = state.indexWhere((e) => e.name == value.name);
+    if (index != -1) {
+      state[index] = value;
+    } else {
+      state = [...state, value];
+    }
     await StorageUtil.setAdvancePreset(AppKeys.advancePresetList, state);
   }
 

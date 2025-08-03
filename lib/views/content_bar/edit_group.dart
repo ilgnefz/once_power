@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/constants.dart';
 import 'package:once_power/cores/list.dart';
+import 'package:once_power/cores/update_name.dart';
 import 'package:once_power/generated/l10n.dart';
+import 'package:once_power/models/advance_menu.dart';
+import 'package:once_power/providers/advance.dart';
+import 'package:once_power/providers/file.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/views/action_bar/advance/dialog/common_dialog.dart';
 import 'package:once_power/views/action_bar/advance/dialog/dialog_base_input.dart';
 import 'package:once_power/views/content_bar/group_list_item.dart';
 
 class EditGroup extends ConsumerStatefulWidget {
-  const EditGroup({super.key});
+  const EditGroup({super.key, this.isDirective = false});
+  final bool isDirective;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _EditGroupState();
@@ -73,7 +78,17 @@ class _EditGroupState extends ConsumerState<EditGroup> {
           list.add(name);
           await StorageUtil.setStringList(AppKeys.groupList, list);
         }
-        if (context.mounted) setGroup(context, ref, name);
+        if (!widget.isDirective) {
+          if (context.mounted) setGroup(context, ref, name);
+        } else {
+          List<AdvanceMenuModel> selectList =
+              ref.read(advanceMenuSelectedListProvider);
+          for (var menu in selectList) {
+            ref.read(advanceMenuListProvider.notifier).setGroup(menu.id, name);
+          }
+          updateName(ref);
+          if (context.mounted) Navigator.of(context).pop();
+        }
       },
     );
   }

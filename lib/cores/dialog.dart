@@ -99,8 +99,11 @@ void renamePreset(BuildContext context, AdvancePreset preset) {
   );
 }
 
-void editGroup(BuildContext context) {
-  showCustomDialog(context: context, builder: (context) => EditGroup());
+void editGroup(BuildContext context, [bool isDirective = false]) {
+  showCustomDialog(
+    context: context,
+    builder: (context) => EditGroup(isDirective: isDirective),
+  );
 }
 
 void showAllRule(BuildContext context) {
