@@ -44,19 +44,20 @@ String _$extensionListMapHash() => r'8f0256506288891e5df036718968f6dd37856b79';
 @ProviderFor(extensionListMap)
 final extensionListMapProvider =
     AutoDisposeProvider<Map<FileClassify, List<String>>>.internal(
-  extensionListMap,
-  name: r'extensionListMapProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$extensionListMapHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      extensionListMap,
+      name: r'extensionListMapProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$extensionListMapHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ExtensionListMapRef
-    = AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
+typedef ExtensionListMapRef =
+    AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
 String _$selectedExtensionHash() => r'9099f30769bba0f9a4b258cc30a7f89cc6d6dc2d';
 
 /// Copied from Dart SDK
@@ -90,21 +91,15 @@ class SelectedExtensionFamily extends Family<bool> {
   const SelectedExtensionFamily();
 
   /// See also [selectedExtension].
-  SelectedExtensionProvider call(
-    String ext,
-  ) {
-    return SelectedExtensionProvider(
-      ext,
-    );
+  SelectedExtensionProvider call(String ext) {
+    return SelectedExtensionProvider(ext);
   }
 
   @override
   SelectedExtensionProvider getProviderOverride(
     covariant SelectedExtensionProvider provider,
   ) {
-    return call(
-      provider.ext,
-    );
+    return call(provider.ext);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -125,24 +120,20 @@ class SelectedExtensionFamily extends Family<bool> {
 /// See also [selectedExtension].
 class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
   /// See also [selectedExtension].
-  SelectedExtensionProvider(
-    String ext,
-  ) : this._internal(
-          (ref) => selectedExtension(
-            ref as SelectedExtensionRef,
-            ext,
-          ),
-          from: selectedExtensionProvider,
-          name: r'selectedExtensionProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$selectedExtensionHash,
-          dependencies: SelectedExtensionFamily._dependencies,
-          allTransitiveDependencies:
-              SelectedExtensionFamily._allTransitiveDependencies,
-          ext: ext,
-        );
+  SelectedExtensionProvider(String ext)
+    : this._internal(
+        (ref) => selectedExtension(ref as SelectedExtensionRef, ext),
+        from: selectedExtensionProvider,
+        name: r'selectedExtensionProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$selectedExtensionHash,
+        dependencies: SelectedExtensionFamily._dependencies,
+        allTransitiveDependencies:
+            SelectedExtensionFamily._allTransitiveDependencies,
+        ext: ext,
+      );
 
   SelectedExtensionProvider._internal(
     super._createNotifier, {
@@ -157,9 +148,7 @@ class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
   final String ext;
 
   @override
-  Override overrideWith(
-    bool Function(SelectedExtensionRef provider) create,
-  ) {
+  Override overrideWith(bool Function(SelectedExtensionRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: SelectedExtensionProvider._internal(
@@ -236,21 +225,15 @@ class SelectedPathFamily extends Family<bool> {
   const SelectedPathFamily();
 
   /// See also [selectedPath].
-  SelectedPathProvider call(
-    String folder,
-  ) {
-    return SelectedPathProvider(
-      folder,
-    );
+  SelectedPathProvider call(String folder) {
+    return SelectedPathProvider(folder);
   }
 
   @override
   SelectedPathProvider getProviderOverride(
     covariant SelectedPathProvider provider,
   ) {
-    return call(
-      provider.folder,
-    );
+    return call(provider.folder);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -271,24 +254,20 @@ class SelectedPathFamily extends Family<bool> {
 /// See also [selectedPath].
 class SelectedPathProvider extends AutoDisposeProvider<bool> {
   /// See also [selectedPath].
-  SelectedPathProvider(
-    String folder,
-  ) : this._internal(
-          (ref) => selectedPath(
-            ref as SelectedPathRef,
-            folder,
-          ),
-          from: selectedPathProvider,
-          name: r'selectedPathProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$selectedPathHash,
-          dependencies: SelectedPathFamily._dependencies,
-          allTransitiveDependencies:
-              SelectedPathFamily._allTransitiveDependencies,
-          folder: folder,
-        );
+  SelectedPathProvider(String folder)
+    : this._internal(
+        (ref) => selectedPath(ref as SelectedPathRef, folder),
+        from: selectedPathProvider,
+        name: r'selectedPathProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$selectedPathHash,
+        dependencies: SelectedPathFamily._dependencies,
+        allTransitiveDependencies:
+            SelectedPathFamily._allTransitiveDependencies,
+        folder: folder,
+      );
 
   SelectedPathProvider._internal(
     super._createNotifier, {
@@ -303,9 +282,7 @@ class SelectedPathProvider extends AutoDisposeProvider<bool> {
   final String folder;
 
   @override
-  Override overrideWith(
-    bool Function(SelectedPathRef provider) create,
-  ) {
+  Override overrideWith(bool Function(SelectedPathRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: SelectedPathProvider._internal(
@@ -353,5 +330,6 @@ class _SelectedPathProviderElement extends AutoDisposeProviderElement<bool>
   @override
   String get folder => (origin as SelectedPathProvider).folder;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -2,11 +2,16 @@ const filter = ['ini', 'lnk'];
 
 const audio = [
   'aac',
+  'ac3',
+  'aiff',
   'ape',
+  'au',
   'cda',
+  'dts',
   'flac',
   'midi',
   'mp3',
+  'm4a',
   'ogg',
   'opus',
   'ra',
@@ -15,7 +20,7 @@ const audio = [
   'sacd',
   'vqf',
   'wav',
-  'wma'
+  'wma',
 ];
 const doc = [
   'azw3',
@@ -76,6 +81,8 @@ const video = [
   'asf',
   'avi',
   'dat',
+  'divx',
+  'dvd',
   'f4v',
   'flv',
   'm3u8',
@@ -84,13 +91,20 @@ const video = [
   'mov',
   'mp4',
   'mpeg',
+  'mped-1',
+  'mped-2',
+  'mped-4',
   'mpg',
   'mts',
   'webm',
   'wmv',
+  'ogm',
+  'quicktime',
+  'real',
   'rm',
   'rmvb',
-  'ts'
+  'ts',
+  'vob',
 ];
 const zip = ['zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'iso', 'dmg'];
 const String folder = 'dir';

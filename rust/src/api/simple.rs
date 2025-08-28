@@ -1,6 +1,6 @@
-use rexif::{ExifTag};
-use zhconv::{zhconv};
+use rexif::ExifTag;
 use trash;
+use zhconv::zhconv;
 
 #[flutter_rust_bridge::frb(init)]
 pub fn init_app() {
@@ -27,12 +27,12 @@ pub fn get_image_capture_date(image_path: String) -> Option<String> {
     None
 }
 
-#[flutter_rust_bridge::frb(sync)] 
+#[flutter_rust_bridge::frb(sync)]
 pub fn simplified_to_traditional(text: String) -> String {
     zhconv(&text, "zh-Hant".parse().unwrap())
 }
 
-#[flutter_rust_bridge::frb(sync)] 
+#[flutter_rust_bridge::frb(sync)]
 pub fn traditional_to_simplified(text: String) -> String {
     zhconv(&text, "zh-Hans".parse().unwrap())
 }
@@ -44,5 +44,7 @@ pub async fn delete_to_trash(file_path: String) -> Option<String> {
 
 #[flutter_rust_bridge::frb]
 pub async fn delete_all_to_trash(file_paths: Vec<String>) -> Option<String> {
-    trash::delete_all(&file_paths).map_err(|e| e.to_string()).err()
+    trash::delete_all(&file_paths)
+        .map_err(|e| e.to_string())
+        .err()
 }

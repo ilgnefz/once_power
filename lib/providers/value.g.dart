@@ -12,14 +12,15 @@ String _$dateLengthValueHash() => r'78f852a9517752d1fbf67fe2716264eddb89def3';
 @ProviderFor(DateLengthValue)
 final dateLengthValueProvider =
     AutoDisposeNotifierProvider<DateLengthValue, int>.internal(
-  DateLengthValue.new,
-  name: r'dateLengthValueProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$dateLengthValueHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      DateLengthValue.new,
+      name: r'dateLengthValueProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$dateLengthValueHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DateLengthValue = AutoDisposeNotifier<int>;
 String _$prefixSerialLengthHash() =>
@@ -29,14 +30,15 @@ String _$prefixSerialLengthHash() =>
 @ProviderFor(PrefixSerialLength)
 final prefixSerialLengthProvider =
     AutoDisposeNotifierProvider<PrefixSerialLength, int>.internal(
-  PrefixSerialLength.new,
-  name: r'prefixSerialLengthProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixSerialLengthHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      PrefixSerialLength.new,
+      name: r'prefixSerialLengthProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$prefixSerialLengthHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$PrefixSerialLength = AutoDisposeNotifier<int>;
 String _$prefixSerialStartHash() => r'b04349513db263626678aa7600dfed8eb0cd6b4f';
@@ -45,14 +47,15 @@ String _$prefixSerialStartHash() => r'b04349513db263626678aa7600dfed8eb0cd6b4f';
 @ProviderFor(PrefixSerialStart)
 final prefixSerialStartProvider =
     AutoDisposeNotifierProvider<PrefixSerialStart, int>.internal(
-  PrefixSerialStart.new,
-  name: r'prefixSerialStartProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixSerialStartHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      PrefixSerialStart.new,
+      name: r'prefixSerialStartProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$prefixSerialStartHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$PrefixSerialStart = AutoDisposeNotifier<int>;
 String _$suffixSerialLengthHash() =>
@@ -62,14 +65,15 @@ String _$suffixSerialLengthHash() =>
 @ProviderFor(SuffixSerialLength)
 final suffixSerialLengthProvider =
     AutoDisposeNotifierProvider<SuffixSerialLength, int>.internal(
-  SuffixSerialLength.new,
-  name: r'suffixSerialLengthProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$suffixSerialLengthHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SuffixSerialLength.new,
+      name: r'suffixSerialLengthProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$suffixSerialLengthHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SuffixSerialLength = AutoDisposeNotifier<int>;
 String _$suffixSerialStartHash() => r'f67e27edbf1c62baf021734e9f7af1513794c1e4';
@@ -78,14 +82,15 @@ String _$suffixSerialStartHash() => r'f67e27edbf1c62baf021734e9f7af1513794c1e4';
 @ProviderFor(SuffixSerialStart)
 final suffixSerialStartProvider =
     AutoDisposeNotifierProvider<SuffixSerialStart, int>.internal(
-  SuffixSerialStart.new,
-  name: r'suffixSerialStartProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$suffixSerialStartHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SuffixSerialStart.new,
+      name: r'suffixSerialStartProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$suffixSerialStartHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SuffixSerialStart = AutoDisposeNotifier<int>;
 String _$scrollBarControllerHash() =>
@@ -95,14 +100,15 @@ String _$scrollBarControllerHash() =>
 @ProviderFor(ScrollBarController)
 final scrollBarControllerProvider =
     AutoDisposeNotifierProvider<ScrollBarController, ScrollController>.internal(
-  ScrollBarController.new,
-  name: r'scrollBarControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$scrollBarControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      ScrollBarController.new,
+      name: r'scrollBarControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$scrollBarControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$ScrollBarController = AutoDisposeNotifier<ScrollController>;
 String _$cSVNameColumnHash() => r'6c198e17bed68d7487d8a79f7c66b5d18276824c';
@@ -111,14 +117,15 @@ String _$cSVNameColumnHash() => r'6c198e17bed68d7487d8a79f7c66b5d18276824c';
 @ProviderFor(CSVNameColumn)
 final cSVNameColumnProvider =
     AutoDisposeNotifierProvider<CSVNameColumn, String>.internal(
-  CSVNameColumn.new,
-  name: r'cSVNameColumnProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$cSVNameColumnHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CSVNameColumn.new,
+      name: r'cSVNameColumnProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$cSVNameColumnHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CSVNameColumn = AutoDisposeNotifier<String>;
 String _$viewImageWidthHash() => r'e082e9f6704f1664ebc96d40d94851344848adec';
@@ -127,14 +134,15 @@ String _$viewImageWidthHash() => r'e082e9f6704f1664ebc96d40d94851344848adec';
 @ProviderFor(ViewImageWidth)
 final viewImageWidthProvider =
     AutoDisposeNotifierProvider<ViewImageWidth, double>.internal(
-  ViewImageWidth.new,
-  name: r'viewImageWidthProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$viewImageWidthHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      ViewImageWidth.new,
+      name: r'viewImageWidthProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$viewImageWidthHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$ViewImageWidth = AutoDisposeNotifier<double>;
 String _$fileDatePropertyHash() => r'813fee2a23a506b17705e1cead9ae9a68aa912f0';
@@ -143,14 +151,15 @@ String _$fileDatePropertyHash() => r'813fee2a23a506b17705e1cead9ae9a68aa912f0';
 @ProviderFor(FileDateProperty)
 final fileDatePropertyProvider =
     AutoDisposeNotifierProvider<FileDateProperty, DateProperty>.internal(
-  FileDateProperty.new,
-  name: r'fileDatePropertyProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fileDatePropertyHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FileDateProperty.new,
+      name: r'fileDatePropertyProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$fileDatePropertyHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FileDateProperty = AutoDisposeNotifier<DateProperty>;
 String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
@@ -159,14 +168,15 @@ String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
 @ProviderFor(CurrentPresetName)
 final currentPresetNameProvider =
     AutoDisposeNotifierProvider<CurrentPresetName, String>.internal(
-  CurrentPresetName.new,
-  name: r'currentPresetNameProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentPresetNameHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CurrentPresetName.new,
+      name: r'currentPresetNameProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$currentPresetNameHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CurrentPresetName = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint

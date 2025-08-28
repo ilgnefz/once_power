@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:audio_metadata_reader/audio_metadata_reader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_media_info/flutter_media_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
-import 'package:image_size_getter/image_size_getter.dart' hide Size;
+import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/generated/l10n.dart';
@@ -49,11 +49,6 @@ String getPathName(String filePath) {
   return isFile
       ? path.basenameWithoutExtension(filePath)
       : path.basename(filePath);
-}
-
-Future<DateTime?> getExifDate(String filePath) async {
-  final String? captureDate = await getImageCaptureDate(imagePath: filePath);
-  return captureDate != null ? formatExifDate(captureDate) : null;
 }
 
 FileClassify getFileClassify(String extension) {
@@ -240,9 +235,10 @@ String getRandomValue(List<String> list, int len) {
 
 FileInfo? getSameFile(List<FileInfo> list, String newPath) {
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
-  return checkList
-      .cast<FileInfo?>()
-      .firstWhere((e) => e?.filePath == newPath, orElse: () => null);
+  return checkList.cast<FileInfo?>().firstWhere(
+    (e) => e?.filePath == newPath,
+    orElse: () => null,
+  );
 }
 
 String getTempPath(String folder, String fileName) {
@@ -268,21 +264,23 @@ String getNewPath(FileInfo file) {
 
 String getTopPath(String filePath) {
   final separator = Platform.pathSeparator;
-  final pathList =
-      filePath.split(separator).where((e) => e.isNotEmpty).toList();
+  final pathList = filePath
+      .split(separator)
+      .where((e) => e.isNotEmpty)
+      .toList();
   final commonDirs = {
     'Documents',
     'Pictures',
     'Downloads',
     'Music',
     'Videos',
-    'Desktop'
+    'Desktop',
   };
 
   if (Platform.isWindows) {
     if (pathList.isEmpty) return filePath;
     final disk = pathList[0];
-// 仅C盘处理系统目录
+    // 仅C盘处理系统目录
     if (disk.toUpperCase() == 'C:') {
       // 处理根目录通用文件夹（如 C:\Pictures）
       if (pathList.length >= 2 && commonDirs.contains(pathList[1])) {
@@ -309,8 +307,10 @@ String getTopPath(String filePath) {
       final userDirs = pathList.sublist(userIndex + 2);
       final topDirIndex = userDirs.indexWhere((e) => commonDirs.contains(e));
       if (topDirIndex != -1) {
-        return path.join(separator,
-            pathList.take(userIndex + 2 + topDirIndex + 1).join(separator));
+        return path.join(
+          separator,
+          pathList.take(userIndex + 2 + topDirIndex + 1).join(separator),
+        );
       }
       return path.join(separator, pathList.take(userIndex + 2).join(separator));
     }
@@ -351,22 +351,29 @@ Future<int> calculateSize(String folderPath) async {
   await for (final entity in dir.list(recursive: true)) {
     entities.add(entity);
   }
-  final sizes = await Future.wait(entities.map((entity) async {
-    if (entity is File) {
-      final stat = await entity.stat();
-      return stat.size;
-    }
-    return 0;
-  }));
+  final sizes = await Future.wait(
+    entities.map((entity) async {
+      if (entity is File) {
+        final stat = await entity.stat();
+        return stat.size;
+      }
+      return 0;
+    }),
+  );
   final totalSize = sizes.fold(0, (sum, size) => sum + size);
   _folderSizeCache[folderPath] = totalSize;
   return totalSize;
 }
 
+Future<DateTime?> getExifDate(String filePath) async {
+  final String? captureDate = await getImageCaptureDate(imagePath: filePath);
+  return captureDate != null ? formatExifDate(captureDate) : null;
+}
+
 Future<Resolution> getImageDimensions(String assetPath) async {
   // 调试计算图片尺寸耗时
   final stopwatch = Stopwatch()..start();
-  if (assetPath.endsWith('.psd')) return Resolution.zero;
+  if (assetPath.endsWith('.psd')) return getPsdDimensions(assetPath);
   if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
   try {
     final file = File(assetPath);
@@ -379,6 +386,16 @@ Future<Resolution> getImageDimensions(String assetPath) async {
     final cost = stopwatch.elapsedMicroseconds / 1000000;
     debugPrint('获取图片尺寸耗时: $cost');
   }
+}
+
+Resolution getPsdDimensions(String assetPath) {
+  Mediainfo mi = Mediainfo()..quickLoad(assetPath);
+  String width = imageMediaInfo(mi, 'Width');
+  String height = imageMediaInfo(mi, 'Height');
+  mi.close();
+  int rWidth = width.isEmpty ? 0 : int.parse(width);
+  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  return Resolution(rWidth, rHeight);
 }
 
 Future<Resolution> getSvgDimensions(String svgFilePath) async {
@@ -425,24 +442,15 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
   }
 }
 
-// Size getVideoDimensions(String videoPath) {
-//   Mediainfo mi = Mediainfo();
-//   try {
-//     mi.quickLoad(videoPath);
-//     final width =
-//         mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Width");
-//     final height =
-//         mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, "Height");
-//     // String inform = mi.inform();
-//     // print('视频信息: $inform');
-//     return Size(int.parse(width), int.parse(height));
-//   } catch (e) {
-//     debugPrint('获取视频尺寸失败: $e');
-//     return Size.zero;
-//   } finally {
-//     mi.close();
-//   }
-// }
+Resolution getVideoDimensions(String videoPath) {
+  Mediainfo mi = Mediainfo()..quickLoad(videoPath);
+  String width = videoMediaInfo(mi, "Width");
+  String height = videoMediaInfo(mi, "Height");
+  mi.close();
+  int rWidth = width.isEmpty ? 0 : int.parse(width);
+  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  return Resolution(rWidth, rHeight);
+}
 
 String getThemeModeName(ThemeMode mode) {
   switch (mode) {
@@ -469,15 +477,21 @@ IconData getThemeModeIcon(ThemeMode mode) {
 String formatResolution(Resolution resolution) =>
     '${resolution.width} x ${resolution.height}';
 
-FileMeteInfo? getMetaInfo(String filePath, String extension) {
-  List<String> onlyExt = ['mp3', 'mp4', 'flac', 'ogg', 'opus', 'wav'];
-  if (!onlyExt.contains(extension)) return null;
-  final track = File(filePath);
-  AudioMetadata metadata = readMetadata(track, getImage: false);
-  return FileMeteInfo(
-    title: metadata.title ?? '',
-    album: metadata.album ?? '',
-    artist: metadata.artist ?? '',
-    year: metadata.year?.toString().substring(0, 4) ?? '',
-  );
+FileMeteInfo? getMusicMetaInfo(String filePath) {
+  Mediainfo mi = Mediainfo()..quickLoad(filePath);
+  String title = audioMediaInfo(mi, "Title");
+  String album = audioMediaInfo(mi, "Album");
+  String artist = audioMediaInfo(mi, "Performer");
+  String year = audioMediaInfo(mi, "Recorded_Date");
+  mi.close();
+  return FileMeteInfo(title: title, album: album, artist: artist, year: year);
 }
+
+String audioMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
+
+String videoMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
+
+String imageMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);

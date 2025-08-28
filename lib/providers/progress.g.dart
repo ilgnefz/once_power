@@ -54,12 +54,15 @@ String _$currentProgressFileHash() =>
 /// See also [CurrentProgressFile].
 @ProviderFor(CurrentProgressFile)
 final currentProgressFileProvider = AutoDisposeNotifierProvider<
-    CurrentProgressFile, ProgressFileInfo?>.internal(
+  CurrentProgressFile,
+  ProgressFileInfo?
+>.internal(
   CurrentProgressFile.new,
   name: r'currentProgressFileProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentProgressFileHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$currentProgressFileHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -71,13 +74,15 @@ String _$currentSizeHash() => r'13581a1928585471400a032ba60d195aa34a7d59';
 @ProviderFor(CurrentSize)
 final currentSizeProvider =
     AutoDisposeNotifierProvider<CurrentSize, int>.internal(
-  CurrentSize.new,
-  name: r'currentSizeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentSizeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CurrentSize.new,
+      name: r'currentSizeProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$currentSizeHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CurrentSize = AutoDisposeNotifier<int>;
 String _$isApplyingHash() => r'c3945bac7f98889d1a03c9356128c4d3f2954c08';
@@ -86,13 +91,15 @@ String _$isApplyingHash() => r'c3945bac7f98889d1a03c9356128c4d3f2954c08';
 @ProviderFor(IsApplying)
 final isApplyingProvider =
     AutoDisposeNotifierProvider<IsApplying, bool>.internal(
-  IsApplying.new,
-  name: r'isApplyingProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$isApplyingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      IsApplying.new,
+      name: r'isApplyingProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$isApplyingHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$IsApplying = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint

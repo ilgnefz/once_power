@@ -39,10 +39,10 @@ class FileList extends _$FileList {
   void insertFirst(List<FileInfo> files) => state = [...files, ...state];
 
   void insertCenter(List<FileInfo> files) => state = [
-        ...state.take(state.length ~/ 2),
-        ...files,
-        ...state.skip(state.length ~/ 2)
-      ];
+    ...state.take(state.length ~/ 2),
+    ...files,
+    ...state.skip(state.length ~/ 2),
+  ];
 
   void insertLast(List<FileInfo> files) => state = [...state, ...files];
 
@@ -51,9 +51,9 @@ class FileList extends _$FileList {
   }
 
   void check(String id) => state = state.map((e) {
-        if (e.id == id) e.checked = !e.checked;
-        return e;
-      }).toList();
+    if (e.id == id) e.checked = !e.checked;
+    return e;
+  }).toList();
 
   void removeCheck() => state = state.where((e) => !e.checked).toList();
 
@@ -64,14 +64,14 @@ class FileList extends _$FileList {
   }
 
   void checkAll(bool check) => state = state.map((e) {
-        if (e.checked != check) e.checked = check;
-        return e;
-      }).toList();
+    if (e.checked != check) e.checked = check;
+    return e;
+  }).toList();
 
   void checkReverse() => state = state.map((e) {
-        e.checked = !e.checked;
-        return e;
-      }).toList();
+    e.checked = !e.checked;
+    return e;
+  }).toList();
 
   void checkClassify(FileClassify classify, bool check) =>
       state = state.map((e) {
@@ -80,34 +80,34 @@ class FileList extends _$FileList {
       }).toList();
 
   void checkExtension(String ext) => state = state.map((e) {
-        if (e.extension == ext) e.checked = !e.checked;
-        return e;
-      }).toList();
+    if (e.extension == ext) e.checked = !e.checked;
+    return e;
+  }).toList();
 
   void checkFolder(String folder) => state = state.map((e) {
-        if (e.parent == folder) e.checked = !e.checked;
-        return e;
-      }).toList();
+    if (e.parent == folder) e.checked = !e.checked;
+    return e;
+  }).toList();
 
   void updateOriginName(String id, String name) => state = state.map((e) {
-        if (e.id == id) e.name = name;
-        return e;
-      }).toList();
+    if (e.id == id) e.name = name;
+    return e;
+  }).toList();
 
   void updateFilePath(String id, String filePath) => state = state.map((e) {
-        if (e.id == id) e.filePath = filePath;
-        return e;
-      }).toList();
+    if (e.id == id) e.filePath = filePath;
+    return e;
+  }).toList();
 
   void updateFileParent(String id, String folder) => state = state.map((e) {
-        if (e.id == id) e.parent = folder;
-        return e;
-      }).toList();
+    if (e.id == id) e.parent = folder;
+    return e;
+  }).toList();
 
   void updateName(String id, String name) => state = state.map((e) {
-        if (e.id == id) e.newName = name;
-        return e;
-      }).toList();
+    if (e.id == id) e.newName = name;
+    return e;
+  }).toList();
 
   void updateOriginExtension(String id, String extension) =>
       state = state.map((e) {
@@ -116,25 +116,25 @@ class FileList extends _$FileList {
       }).toList();
 
   void updateExtension(String id, String extension) => state = state.map((e) {
-        if (e.id == id) e.newExtension = extension;
-        return e;
-      }).toList();
+    if (e.id == id) e.newExtension = extension;
+    return e;
+  }).toList();
 
   void updateTempPath(String id, String path) => state = state.map((e) {
-        if (e.id == id) e.tempPath = path;
-        return e;
-      }).toList();
+    if (e.id == id) e.tempPath = path;
+    return e;
+  }).toList();
 
   void updateGroup(String id, String group) => state = state.map((e) {
-        if (e.id == id) e.group = group;
-        return e;
-      }).toList();
+    if (e.id == id) e.group = group;
+    return e;
+  }).toList();
 
-  void updateResolution(String id, Resolution? resolution) =>
-      state = state.map((e) {
-        if (e.id == id) e.resolution = resolution;
-        return e;
-      }).toList();
+  // void updateResolution(String id, Resolution? resolution) =>
+  //     state = state.map((e) {
+  //       if (e.id == id) e.resolution = resolution;
+  //       return e;
+  //     }).toList();
 
   void updateThumbnail(String id, Uint8List? thumbnail) =>
       state = state.map((e) {
@@ -142,8 +142,12 @@ class FileList extends _$FileList {
         return e;
       }).toList();
 
-  void updateDate(String id, DateTime? createdDate, DateTime? modifiedDate,
-      DateTime? accessedDate) {
+  void updateDate(
+    String id,
+    DateTime? createdDate,
+    DateTime? modifiedDate,
+    DateTime? accessedDate,
+  ) {
     state = state.map((e) {
       if (e.id == id) {
         e.createdDate = createdDate ?? e.createdDate;

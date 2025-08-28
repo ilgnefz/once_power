@@ -54,43 +54,53 @@ class _ContentBarState extends ConsumerState<ContentBar> {
         // color: ref.watch(currentThemeModeProvider) == ThemeMode.light
         //     ? Colors.white
         //     : Color(0xFF121212),
-        child: Builder(builder: (context) {
-          ProgressFileInfo? info = ref.watch(currentProgressFileProvider);
-          bool than = getAllSize(ref) > AppNum.maxFileSize;
-          if (info != null && than) return ProgressView(info: info);
-          return Column(
-            children: [
-              ContentTopBar(),
-              Expanded(
-                child: DropTarget(
-                  onDragDone: (details) async {
-                    List<XFile> paths = details.files;
-                    if (paths.isNotEmpty) {
-                      final files = paths.map((e) => e.path).toList();
-                      await formatPath(ref, files);
-                    }
-                  },
-                  child: Builder(builder: (_) {
-                    bool isOrganize = ref.watch(currentModeProvider).isOrganize;
-                    bool showChange = ref.watch(showChangeProvider);
-                    List<FileInfo> files = ref.watch(sortListProvider);
-                    if (files.isNotEmpty && showChange && !isOrganize) {
-                      files = files
-                          .where((e) =>
-                              e.name != e.newName ||
-                              e.extension != e.newExtension)
-                          .toList();
-                      if (files.isEmpty) return HideContent();
-                    }
-                    if (files.isEmpty) return EmptyContent();
-                    if (isViewNoOrganize(ref)) return ContentGrid(files: files);
-                    return ContentList(files: files);
-                  }),
+        child: Builder(
+          builder: (context) {
+            ProgressFileInfo? info = ref.watch(currentProgressFileProvider);
+            bool than = getAllSize(ref) > AppNum.maxFileSize;
+            if (info != null && than) return ProgressView(info: info);
+            return Column(
+              children: [
+                ContentTopBar(),
+                Expanded(
+                  child: DropTarget(
+                    onDragDone: (details) async {
+                      List<XFile> paths = details.files;
+                      if (paths.isNotEmpty) {
+                        final files = paths.map((e) => e.path).toList();
+                        await formatPath(ref, files);
+                      }
+                    },
+                    child: Builder(
+                      builder: (_) {
+                        bool isOrganize = ref
+                            .watch(currentModeProvider)
+                            .isOrganize;
+                        bool showChange = ref.watch(showChangeProvider);
+                        List<FileInfo> files = ref.watch(sortListProvider);
+                        if (files.isNotEmpty && showChange && !isOrganize) {
+                          files = files
+                              .where(
+                                (e) =>
+                                    e.name != e.newName ||
+                                    e.extension != e.newExtension,
+                              )
+                              .toList();
+                          if (files.isEmpty) return HideContent();
+                        }
+                        if (files.isEmpty) return EmptyContent();
+                        if (isViewNoOrganize(ref)) {
+                          return ContentGrid(files: files);
+                        }
+                        return ContentList(files: files);
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          );
-        }),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

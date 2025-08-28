@@ -41,7 +41,7 @@ class _PsdViewState extends ConsumerState<PsdView> {
   void updateInfo() {
     final provider = ref.read(fileListProvider.notifier);
     provider.updateThumbnail(widget.file.id, imageData);
-    provider.updateResolution(widget.file.id, resolution);
+    // provider.updateResolution(widget.file.id, resolution);
     if (ref.watch(currentModeProvider).isAdvance) updateName(ref);
   }
 

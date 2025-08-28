@@ -22,19 +22,19 @@ final selectFileProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SelectFileRef = AutoDisposeProviderRef<int>;
-String _$fileListHash() => r'622593b479c5021c56f5120b4b161ba7f39fab7f';
+String _$fileListHash() => r'daf90676f54c45c56e9c71df169d75c628598881';
 
 /// See also [FileList].
 @ProviderFor(FileList)
 final fileListProvider =
     AutoDisposeNotifierProvider<FileList, List<FileInfo>>.internal(
-  FileList.new,
-  name: r'fileListProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fileListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FileList.new,
+      name: r'fileListProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product') ? null : _$fileListHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FileList = AutoDisposeNotifier<List<FileInfo>>;
 String _$selectAllHash() => r'bb39801d68715244071f9e67dda3c91743b3204c';
@@ -57,14 +57,15 @@ String _$sortSelectListHash() => r'4f635dcbc64b08c1eeceefcce63f0f92d9d31e10';
 @ProviderFor(SortSelectList)
 final sortSelectListProvider =
     AutoDisposeNotifierProvider<SortSelectList, List<FileInfo>>.internal(
-  SortSelectList.new,
-  name: r'sortSelectListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$sortSelectListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SortSelectList.new,
+      name: r'sortSelectListProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$sortSelectListHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SortSelectList = AutoDisposeNotifier<List<FileInfo>>;
 String _$sortHoverFileHash() => r'e86ba6f0a0b120375aa4fb28f83b38f422a20f9d';
@@ -73,14 +74,15 @@ String _$sortHoverFileHash() => r'e86ba6f0a0b120375aa4fb28f83b38f422a20f9d';
 @ProviderFor(SortHoverFile)
 final sortHoverFileProvider =
     AutoDisposeNotifierProvider<SortHoverFile, FileInfo?>.internal(
-  SortHoverFile.new,
-  name: r'sortHoverFileProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$sortHoverFileHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SortHoverFile.new,
+      name: r'sortHoverFileProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$sortHoverFileHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SortHoverFile = AutoDisposeNotifier<FileInfo?>;
 String _$prefixUploadMarkHash() => r'fe2029ace5e00d4745363c573f3f6888f16e26e9';
@@ -89,14 +91,15 @@ String _$prefixUploadMarkHash() => r'fe2029ace5e00d4745363c573f3f6888f16e26e9';
 @ProviderFor(PrefixUploadMark)
 final prefixUploadMarkProvider =
     AutoDisposeNotifierProvider<PrefixUploadMark, UploadMarkInfo?>.internal(
-  PrefixUploadMark.new,
-  name: r'prefixUploadMarkProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixUploadMarkHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      PrefixUploadMark.new,
+      name: r'prefixUploadMarkProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$prefixUploadMarkHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$PrefixUploadMark = AutoDisposeNotifier<UploadMarkInfo?>;
 String _$suffixUploadMarkHash() => r'df10099259826d610543a3bb403bc91cb441b3ae';
@@ -105,14 +108,15 @@ String _$suffixUploadMarkHash() => r'df10099259826d610543a3bb403bc91cb441b3ae';
 @ProviderFor(SuffixUploadMark)
 final suffixUploadMarkProvider =
     AutoDisposeNotifierProvider<SuffixUploadMark, UploadMarkInfo?>.internal(
-  SuffixUploadMark.new,
-  name: r'suffixUploadMarkProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$suffixUploadMarkHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SuffixUploadMark.new,
+      name: r'suffixUploadMarkProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$suffixUploadMarkHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SuffixUploadMark = AutoDisposeNotifier<UploadMarkInfo?>;
 String _$advanceMenuSelectedListHash() =>
@@ -121,12 +125,15 @@ String _$advanceMenuSelectedListHash() =>
 /// See also [AdvanceMenuSelectedList].
 @ProviderFor(AdvanceMenuSelectedList)
 final advanceMenuSelectedListProvider = AutoDisposeNotifierProvider<
-    AdvanceMenuSelectedList, List<AdvanceMenuModel>>.internal(
+  AdvanceMenuSelectedList,
+  List<AdvanceMenuModel>
+>.internal(
   AdvanceMenuSelectedList.new,
   name: r'advanceMenuSelectedListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$advanceMenuSelectedListHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$advanceMenuSelectedListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

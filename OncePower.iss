@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OncePower"
-#define MyAppVersion "2.30.0"
+#define MyAppVersion "2.30.1"
 #define MyAppPublisher "ilgnefz"
 #define MyAppURL "https://github.com/ilgnefz/once_power"
 #define MyAppExeName "once_power.exe"
@@ -56,6 +56,7 @@ Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Releas
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_avif.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_avif_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\hotkey_manager_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -63,6 +64,7 @@ Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Releas
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libmpv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\media_kit_libs_windows_video_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\media_kit_video_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\rust_lib_once_power.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\screen_retriever_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\shortcut_menu_extender_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion

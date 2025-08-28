@@ -2,11 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/update_name.dart';
-import 'package:once_power/models/app_enum.dart';
 import 'package:once_power/models/file_info.dart';
-import 'package:once_power/providers/file.dart';
-import 'package:once_power/providers/select.dart';
 import 'package:video_player/video_player.dart';
 
 import 'loading_image.dart';
@@ -29,14 +25,6 @@ class _VideoViewState extends ConsumerState<VideoView>
     super.initState();
     _controller = VideoPlayerController.file(File(widget.file.filePath))
       ..initialize().then((_) {
-        final size = _controller.value.size;
-        Resolution resolution =
-            Resolution(size.width.toInt(), size.height.toInt());
-        ref
-            .read(fileListProvider.notifier)
-            .updateResolution(widget.file.id, resolution);
-
-        if (ref.watch(currentModeProvider).isAdvance) updateName(ref);
         setState(() {});
       })
       ..addListener(() {

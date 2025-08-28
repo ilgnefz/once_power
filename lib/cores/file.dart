@@ -66,8 +66,10 @@ Future<List<String>> handleFolder(WidgetRef ref, List<String?> folders) async {
 }
 
 // 将同步遍历改为异步流处理
-Future<List<String>> getAllPath(String folder,
-    [bool addSubfolder = false]) async {
+Future<List<String>> getAllPath(
+  String folder, [
+  bool addSubfolder = false,
+]) async {
   final directory = Directory(folder);
   final children = <String>[];
 
@@ -93,6 +95,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(isApplyingProvider.notifier).start();
   ref.read(showChangeProvider.notifier).reset();
+  ref.read(countProvider.notifier).clear();
 
   // 过滤需要处理的文件路径（跳过不需要的文件）
   final validPaths = paths.where((p) {
@@ -137,13 +140,17 @@ Future<FileInfo> generateFileInfo(WidgetRef ref, String filePath) async {
   int size = type.isFolder ? await calculateSize(filePath) : stat.size;
   DateTime? exifDate;
   Resolution? resolution;
-  FileMeteInfo? metaInfo = getMetaInfo(filePath, extension);
+  FileMeteInfo? metaInfo;
+  if (type.isAudio) metaInfo = getMusicMetaInfo(filePath);
   if (type.isImage) {
-    final results = await Future.wait(
-        [getExifDate(filePath), getImageDimensions(filePath)]);
+    final results = await Future.wait([
+      getExifDate(filePath),
+      getImageDimensions(filePath),
+    ]);
     exifDate = results[0] as DateTime?;
     resolution = results[1] as Resolution?;
   }
+  if (type.isVideo) resolution = getVideoDimensions(filePath);
   return FileInfo(
     id: nanoid(10),
     name: name,
@@ -175,13 +182,18 @@ List<String> uploadFileContent(File file) {
 }
 
 // 如果文件存在会返回存在的错误信息
-Future<InfoDetail?> checkFile(WidgetRef ref, List<FileInfo> list, FileInfo file,
-    [bool isUndo = false]) async {
+Future<InfoDetail?> checkFile(
+  WidgetRef ref,
+  List<FileInfo> list,
+  FileInfo file, [
+  bool isUndo = false,
+]) async {
   String newNameWithExt = isUndo
       ? path.dirname(file.beforePath)
       : getNameWithExt(file.newName, file.newExtension);
-  String newPath =
-      isUndo ? file.beforePath : path.join(file.parent, newNameWithExt);
+  String newPath = isUndo
+      ? file.beforePath
+      : path.join(file.parent, newNameWithExt);
   bool isExist = await checkExist(ref, list, newPath, isUndo: isUndo);
   if (isExist) {
     return InfoDetail(
