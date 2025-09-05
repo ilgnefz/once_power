@@ -1,0 +1,151 @@
+name: once_power
+description: "A tool developed based on Flutter for batch renaming files and batch moving and deleting files"
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 2.31.0+0
+
+environment:
+  sdk: ^3.9.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  rust_lib_once_power:
+    path: rust_builder
+  flutter_rust_bridge: 2.11.1
+  flutter_riverpod: ^3.0.0-dev.17
+  riverpod_annotation: ^3.0.0-dev.17
+  image: ^4.5.4
+  # System
+  desktop_drop: ^0.6.1
+  #  ffi: ^2.1.4
+  launch_at_startup: ^0.5.1
+  package_info_plus: ^8.3.1
+  shortcut_menu_extender: ^0.2.0
+  tray_manager: ^0.5.1
+  win32: ^5.14.0
+  win32_registry: ^2.1.0
+  window_manager: ^0.5.1
+  # UI
+  bot_toast: ^4.1.3
+  dropdown_button2: ^2.3.9
+  flutter_avif: ^3.0.0
+  flutter_context_menu: ^0.3.0
+  flutter_svg: ^2.2.0
+  reorderable_grid: ^1.0.12
+  tolyui_feedback: ^0.3.6+6
+  video_player: ^2.10.0
+  # Function
+  charset: ^2.0.1
+  cross_file: ^0.3.4+2
+  dio: ^5.9.0
+  easy_localization: ^3.0.8
+  encrypt: ^5.0.3
+  file_selector: ^1.0.3
+  flutter_media_info: ^0.0.4-dev.3
+  fvp: ^0.34.0
+  image_size_getter: ^2.4.1
+  nanoid: ^1.0.0
+  path: ^1.9.1
+  shared_preferences: ^2.5.3
+  string_util_xx: ^0.2.4
+  url_launcher: ^6.3.2
+  xml: ^6.6.1
+#  flutter_launcher_icons: ^0.14.4
+#  exif: ^3.3.0
+#  logger: ^2.6.1
+#  animations: ^2.0.11
+#  vs_scrollbar: ^1.0.0
+#  charset: ^2.0.1
+#  video_player_media_kit: ^1.0.6
+#  media_kit_libs_macos_video: any
+#  media_kit_libs_windows_video: any
+#  media_kit_libs_linux: any
+#  hotkey_manager: ^0.2.3
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^5.0.0
+  integration_test:
+    sdk: flutter
+  build_runner:
+  custom_lint:
+  riverpod_generator: ^3.0.0-dev.17
+  riverpod_lint: ^3.0.0-dev.17
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/translations/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/assetf7 rom-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:sd
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

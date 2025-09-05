@@ -1,0 +1,29 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../error.dart';
+import '../loading.dart';
+
+class PreviewSvg extends StatelessWidget {
+  const PreviewSvg({super.key, required this.id, required this.file});
+
+  final String id;
+  final String file;
+
+  @override
+  Widget build(BuildContext context) {
+    return InteractiveViewer(
+      key: ValueKey(id),
+      maxScale: 8,
+      child: SvgPicture.file(
+        File(file),
+        key: ValueKey(file),
+        fit: BoxFit.scaleDown,
+        errorBuilder: (_, _, _) => ErrorImage(isPreview: true, file: file),
+        placeholderBuilder: (_) => const LoadingImage(isPreview: true),
+      ),
+    );
+  }
+}

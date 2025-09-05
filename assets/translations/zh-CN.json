@@ -1,0 +1,277 @@
+{
+  "function": {
+    "replace": "替换",
+    "reserve": "保留",
+    "advance": "高级",
+    "organize": "整理"
+  },
+  "theme": {
+    "light": "浅色主题",
+    "dark": "深色主题",
+    "system": "跟随系统"
+  },
+  "action": {
+    "addFolder": "添加文件夹",
+    "folderTip": "获取文件夹的子文件夹",
+    "append": "追加模式",
+    "uploadFile":"选择文件",
+    "uploadFolder": "选择文件夹"
+  },
+  "rename": {
+    "match": "请输入匹配的内容",
+    "len": "输入数字或指定长度字符串",
+    "modify": "请输入修改为的内容",
+    "today": "今天的日期",
+    "case": "区分大小写",
+    "date": "日期:",
+    "dateRename": "以日期命名",
+    "prefix": "前缀:",
+    "prefixHint": "请输入前缀内容",
+    "prefixCircle": "循环前缀内容",
+    "prefixSwap": "交换前缀和递增数字位置",
+    "suffix": "后缀:",
+    "suffixHint": "请输入后缀内容",
+    "suffixCircle": "循环后缀内容",
+    "suffixSwap": "交换后缀和递增数字位置",
+    "upload": "上传以空格或换行符隔开各个名称的 .txt 文件",
+    "text": "文本",
+    "serial": "序列:",
+    "digits": "位",
+    "start": "开始",
+    "extension": "扩展:",
+    "extensionHint": "请输入新的扩展名",
+    "extensionEnable": "启用修改扩展名",
+    "disable": "输入已禁用",
+    "caseFile": "区分文件",
+    "caseExt": "区分扩展",
+    "apply": "应用更改"
+  },
+  "advance": {
+    "count": "共 {count} 条",
+    "delete": "删除",
+    "add": "添加",
+    "replace": "替换",
+    "preset": "预设",
+    "addPreset": "添加预设",
+    "import": "导入预设",
+    "export": "导出预设"
+  },
+  "organize": {
+    "date": "日期分类",
+    "dateDesc": "根据文件的创建日期在目标文件夹下创建以日期命名的文件夹，并移至那个文件夹",
+    "top": "顶级文件夹",
+    "topDesc": "将文件移动到除磁盘根目录外的顶级父文件夹中",
+    "selected": "删除选中文件",
+    "selectedDesc": "将选中的文件删除至回收站",
+    "empty": "删除空文件夹",
+    "emptyDesc": "删除所选文件夹下的所有空文件夹",
+    "target": "请选择目标文件夹",
+    "groupFolder": "设置组文件夹",
+    "group": "组名分类",
+    "typeFolder": "设置类型文件夹",
+    "type": "类型分类",
+    "apply": "应用整理",
+    "folder": "文件夹"
+  },
+  "csv": {
+    "title": "已选择原名称列为:",
+    "delete": "删除扩展",
+    "match": "匹配扩展"
+  },
+  "date": {
+    "title": "修改文件日期",
+    "hint": "请选择日期",
+    "note": "注意：右键查看文件属性时，文件的访问日期会被更改为当前时间"
+  },
+  "content": {
+    "origin": "原名称",
+    "name": "文件名",
+    "new": "新名称",
+    "empty": "拖动文件（夹）到这里",
+    "emptyImage": "拖动图片视频文件（夹）到这里",
+    "sort": {
+      "default": "默认排序",
+      "nameAscending": "名称升序",
+      "nameDescending": "名称降序",
+      "dateAscending": "日期升序",
+      "dateDescending": "日期降序",
+      "typeAscending": "类型升序",
+      "typeDescending": "类型降序",
+      "checkAscending": "选择升序",
+      "checkDescending": "选择降序",
+      "sizeAscending": "大小升序",
+      "sizeDescending": "大小降序",
+      "groupAscending": "组升序",
+      "groupDescending": "组降序",
+      "folderAscending": "文件夹升序",
+      "folderDescending": "文件夹降序"
+    },
+    "error": "加载失败",
+    "loading": "加载中...",
+    "folder": "文件夹",
+    "resolution": "分辨率",
+    "size": "大小",
+    "group": "组",
+    "filter": {
+      "unselected": "移除未选中",
+      "selected": "移除已选中",
+      "extension": "所有扩展",
+      "folder": "所有路径",
+      "reserve": "反选文件"
+    }
+  },
+  "menu": {
+    "local": "打开位置",
+    "match": "匹配名称",
+    "modify": "修改名称",
+    "move": "移动",
+    "first": "移至首尾",
+    "center": "移至中间",
+    "last": "移至末尾",
+    "suspense": "暂存文件",
+    "takeout": "取出文件",
+    "front": "至前面",
+    "behind": "至后面",
+    "path": "匹配路径",
+    "group": "设置组",
+    "edit": "编辑组",
+    "select": "选择",
+    "unselect": "取消选择",
+    "selectGroup": "选中组",
+    "selectPath": "选中路径",
+    "removeFolder": "移除路径",
+    "remove": "移除"
+  },
+  "bottom": {
+    "save": "保存配置",
+    "regedit": "开启右键快捷菜单（软件未运行时windows系统只允许一次传入一个文件路径，所以未运行本软件时只允许传入一个文件夹路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\\\"发送到\\\"文件夹下（打开文件资源管理器，在地址栏中输入 shell:sendto 并回车），使用\\\"发送到\\\"传入）",
+    "autoRun": "开机自启",
+    "log": "保存日志（默认在软件文件夹下的 logs 文件夹内）",
+    "view": "视图模式",
+    "csv": "上传以\",\"分隔新旧名称的csv、txt文件或本软件生成的oplog文件",
+    "date": "修改文件日期",
+    "hotKey": {
+      "label": "快捷键",
+      "all": "全选",
+      "delete": "删除选中",
+      "toggle": "切换选中",
+      "suspense": "暂存文件",
+      "front": "取出至前面",
+      "behind": "取出至后面"
+    },
+    "task": "任务",
+    "time": "用时",
+    "check": "检查更新",
+    "checking": "检查中",
+    "download": "下载"
+  },
+  "dialog": {
+    "ok": "确定",
+    "cancel": "取消",
+    "group": "编辑组",
+    "groupHint": "请输入组名",
+    "all": "全部",
+    "folder": "所有文件夹路径",
+    "ext": "所有文件扩展",
+    "toggle": "全选切换",
+    "exitOperate": "退出操作",
+    "save": "保存",
+    "exit": "退出",
+    "image": "自定义图片大小"
+  },
+  "enum": {
+    "date": {
+      "create": "创建日期",
+      "modify": "修改日期",
+      "access": "访问日期",
+      "exif": "拍摄日期",
+      "earliest": "最早日期",
+      "latest": "最晚日期"
+    },
+    "replace": {
+      "match": "匹配的",
+      "before": "之前的",
+      "after": "之后的",
+      "between": "之间的",
+      "normal": "普通",
+      "format": "格式化"
+    },
+    "type": {
+      "image": "图片",
+      "video": "视频",
+      "audio": "音频",
+      "doc": "文档",
+      "archive": "压缩包",
+      "folder": "文件夹",
+      "other": "其他"
+    },
+    "advance": {
+      "delete": "删除",
+      "add": "添加",
+      "replace": "替换"
+    },
+    "match": {
+      "first": "第一个",
+      "last": "最后一个",
+      "all": "所有",
+      "front": "前面",
+      "behind": "后面"
+    },
+    "delete": {
+      "digit": "数字",
+      "capital": "大写字母",
+      "lowercase": "小写字母",
+      "nonLetter": "非字母",
+      "punctuation": "标点符号",
+      "space": "空格"
+    },
+    "add": {
+      "text": "文本",
+      "serial": "序列",
+      "random": "随机值",
+      "folder": "文件夹名",
+      "width": "宽度",
+      "height": "高度",
+      "ext": "扩展",
+      "group": "组名",
+      "meta": "元数据"
+    },
+    "split": {
+      "none": "无",
+      "space": "空格"
+    },
+    "distinguish": {
+      "none": "不区分",
+      "date": "日期",
+      "folder": "文件夹",
+      "file": "类型",
+      "ext": "扩展",
+      "group": "组"
+    },
+    "convert": {
+      "no": "不转换",
+      "upper": "大写",
+      "lower": "小写",
+      "toggle": "大小写切换",
+      "tradition": "繁体",
+      "simplified": "简体"
+    },
+    "fill": {
+      "front": "补全前面",
+      "behind": "补全后面"
+    },
+    "meta": {
+      "title": "标题",
+      "artist": "艺术家",
+      "album": "专辑",
+      "year": "年份"
+    }
+  },
+  "error": {
+    "emptyTitle": "获取文件失败",
+    "empty": "所选文件夹为空"
+  },
+  "success": {
+    "copy": "复制成功"
+  }
+}
