@@ -55,6 +55,60 @@ class AppL10n {
   static const String advanceAddPreset = 'advance.addPreset';
   static const String advanceImport = 'advance.import';
   static const String advanceExport = 'advance.export';
+  static const String advanceEmpty1 = 'advance.empty1';
+  static const String advanceEmpty2 = 'advance.empty2';
+  static const String advanceEmpty3 = 'advance.empty3';
+  static const String advanceEmpty4 = 'advance.empty4';
+  static const String advanceTo = 'advance.to';
+  static const String advanceDi = 'advance.di';
+  static const String advancePlace = 'advance.place';
+  static const String advanceDigits = 'advance.digits';
+  static const String advanceStartSequence = 'advance.startSequence';
+  static const String advanceExt = 'advance.extension';
+  static const String advanceDelimiter = 'advance.delimiter';
+  static const String advancePosition = 'advance.position';
+  static const String advanceFrontLabel = 'advance.frontLabel';
+  static const String advanceBackLabel = 'advance.backLabel';
+  static const String advanceFirst = 'advance.first';
+  static const String advanceFormatDesc1 = 'advance.formatDesc1';
+  static const String advanceFormatDesc2 = 'advance.formatDesc2';
+  static const String advanceFormatDesc3 = 'advance.formatDesc3';
+  static const String advanceSeparate = 'advance.separate';
+  static const String advanceLetters = 'advance.letters';
+  static const String advanceWithT = 'advance.withT';
+  static const String advanceAddTitle = 'advance.addTitle';
+  static const String advanceAll = 'advance.all';
+  static const String advanceAddHint = 'advance.addHint';
+  static const String advanceAddPosition = 'advance.addPosition';
+  static const String advanceAddBefore = 'advance.addBefore';
+  static const String advanceAddAfter = 'advance.addAfter';
+  static const String advancePresetName = 'advance.presetName';
+  static const String advancePresetNameHint = 'advance.presetNameHint';
+  static const String advanceAddPresetDesc = 'advance.addPresetDesc';
+  static const String advanceSerialDistinguish = 'advance.serialDistinguish';
+  static const String advanceAddType = 'advance.addType';
+  static const String advanceConvertLetters = 'advance.convertLetters';
+  static const String advanceMatchPosition = 'advance.matchPosition';
+  static const String advanceStart = 'advance.start';
+  static const String advanceEnd = 'advance.end';
+  static const String advanceDeleteTitle = 'advance.deleteTitle';
+  static const String advanceDeleteExt = 'advance.deleteExtension';
+  static const String advanceDeleteHint = 'advance.deleteHint';
+  static const String advanceRegex = 'advance.regex';
+  static const String advanceDeleteType = 'advance.deleteType';
+  static const String advanceReplaceMode = 'advance.replaceMode';
+  static const String advanceSerial = 'advance.serial';
+  static const String advanceRandom = 'advance.random';
+  static const String advanceRandomHint = 'advance.randomHint';
+  static const String advanceMatchExt = 'advance.matchExt';
+  static const String advanceWord = 'advance.word';
+  static const String advanceWordHint = 'advance.wordHint';
+  static const String advanceReplaceTitle = 'advance.replaceTitle';
+  static const String advanceFormatDigit = 'advance.formatDigit';
+  static const String advanceReplaceHint1 = 'advance.replaceHint1';
+  static const String advanceCompleteContent = 'advance.completeContent';
+  static const String advanceReplaceHint2 = 'advance.replaceHint2';
+  static const String advanceSelectedAll = 'advance.selectedAll';
 
   /* ---------- organize ---------- */
 
@@ -78,11 +132,13 @@ class AppL10n {
   static const String csvTitle = 'csv.title';
   static const String csvDelete = 'csv.delete';
   static const String csvMatch = 'csv.match';
+  static const String csvExit = 'csv.exit';
 
   /* ---------- date ---------- */
   static const String dateTitle = 'date.title';
   static const String dateHint = 'date.hint';
   static const String dateNote = 'date.note';
+  static const String dateExit = 'date.exit';
 
   /* ---------- content ---------- */
 
@@ -139,6 +195,8 @@ class AppL10n {
   static const String menuSelectPath = 'menu.selectPath';
   static const String menuRemoveFolder = 'menu.removeFolder';
   static const String menuRemove = 'menu.remove';
+  static const String menuToggle = 'menu.toggle';
+  static const String menuCancel = 'menu.cancel';
 
   /* ---------- bottom ---------- */
   static const String bottomSave = 'bottom.save';
@@ -155,6 +213,7 @@ class AppL10n {
   static const String bottomHotKeySuspense = 'bottom.hotKey.suspense';
   static const String bottomHotKeyFront = 'bottom.hotKey.front';
   static const String bottomHotKeyBehind = 'bottom.hotKey.behind';
+  static const String bottomUndo = 'bottom.undo';
   static const String bottomTask = 'bottom.task';
   static const String bottomTime = 'bottom.time';
   static const String bottomCheck = 'bottom.check';
@@ -174,6 +233,13 @@ class AppL10n {
   static const String dialogSave = 'dialog.save';
   static const String dialogExit = 'dialog.exit';
   static const String dialogImage = 'dialog.image';
+  static const String dialogApplyGroup = 'dialog.applyGroup';
+
+  /* ---------- log ---------- */
+
+  static const String logRename = 'log.rename';
+  static const String logDelete = 'log.delete';
+  static const String logOrganize = 'log.organize';
 
   /* ---------- enum ---------- */
   static const String eDateCreate = 'enum.date.create';
@@ -242,7 +308,58 @@ class AppL10n {
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';
   static const String errEmpty = 'error.empty';
+  static const String errCSV1 = 'error.csv1';
+  static const String errCSV2 = 'error.csv2';
+  static const String errModifyDate = 'error.modifyDate';
+  static const String errModifyDateInfo = 'error.modifyDateInfo';
+  static const String errNoExist = 'error.noExist';
+  static const String errNoOpen = 'error.noOpen';
+  static const String errModifyDateFail = 'error.modifyDateFail';
+  static const String errPresetNameTitle = 'error.presetNameTitle';
+  static const String errPresetName = 'error.presetName';
+  static const String errPresetAddTitle = 'error.presetAddTitle';
+  static const String errPresetAdd = 'error.presetAdd';
+  static const String errImport = 'error.import';
+  static const String errImportError1 = 'error.importError1';
+  static const String errImportError2 = 'error.importError2';
+  static const String errImportError3 = 'error.importError3';
+  static const String errExport = 'error.export';
+  static const String errExists = 'error.exists';
+  static const String errNotExists = 'error.notExists';
+  static const String errRenameInfo = 'error.renameInfo';
+  static const String errRename = 'error.rename';
+  static const String errRenameNum = 'error.renameNum';
+  static const String errUndo = 'error.undo';
+  static const String errUndoNum = 'error.undoNum';
+  static const String errDelete = 'error.delete';
+  static const String errDeleteInfo = 'error.deleteInfo';
+  static const String errOrganize = 'error.organize';
+  static const String errOrganizeInfo1 = 'error.organizeInfo1';
+  static const String errOrganizeInfo2 = 'error.organizeInfo2';
+  static const String errGroupFolder = 'error.groupFolder';
+  static const String errTypeFolder = 'error.typeFolder';
+  static const String errMove = 'error.move';
 
   /* ---------- success ---------- */
   static const String successCopy = 'success.copy';
+  static const String successModifyDate = 'success.modifyDate';
+  static const String successModifyDateInfo = 'success.modifyDateInfo';
+  static const String successImport = 'success.import';
+  static const String successImportNum = 'success.importNum';
+  static const String successExport = 'success.export';
+  static const String successExportNum = 'success.exportNum';
+  static const String successDeleteFile = 'success.deleteFile';
+  static const String successRename = 'success.rename';
+  static const String successRenameNum = 'success.renameNum';
+  static const String successUndo = 'success.undo';
+  static const String successUndoNum = 'success.undoNum';
+  static const String successDelete = 'success.delete';
+  static const String successDeleteSelected = 'success.deleteSelected';
+  static const String successDeleteEmpty = 'success.deleteEmpty';
+  static const String successOrganize = 'success.organize';
+  static const String successOrganizeNum = 'success.organizeNum';
+
+  /* ---------- warning ---------- */
+  static const String warnLabel = 'warning.label';
+  static const String warnCsv = 'warning.csv';
 }

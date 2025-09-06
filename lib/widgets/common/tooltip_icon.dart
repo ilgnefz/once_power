@@ -15,7 +15,7 @@ class TooltipIcon extends StatelessWidget {
     this.iconSize,
     this.selected = false,
     this.color,
-    required this.onTap,
+    required this.onPressed,
   }) : assert(svg != null || icon != null);
 
   final String tip;
@@ -26,7 +26,7 @@ class TooltipIcon extends StatelessWidget {
   final double? iconSize;
   final bool selected;
   final Color? color;
-  final void Function() onTap;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class TooltipIcon extends StatelessWidget {
         svg: svg,
         icon: icon,
         color: color ?? (selected ? theme.primaryColor : theme.iconTheme.color),
-        onPressed: onTap,
+        onPressed: onPressed,
       ),
     );
   }

@@ -54,7 +54,61 @@
     "preset": "预设",
     "addPreset": "添加预设",
     "import": "导入预设",
-    "export": "导出预设"
+    "export": "导出预设",
+    "empty1": "还没添加任何指令",
+    "empty2": "点击下方的",
+    "empty3": "\"删除\"、\"添加\"、\"替换\"",
+    "empty4": "按钮来添加",
+    "to": "到",
+    "di": "第",
+    "place": "位",
+    "digits": "位",
+    "startSequence": "开始的序列",
+    "extension": "扩展",
+    "delimiter": "、",
+    "position": "位置",
+    "frontLabel": "前",
+    "backLabel": "后",
+    "first": "第一个",
+    "formatDesc1": "名称长",
+    "formatDesc2": "用",
+    "formatDesc3": "补全",
+    "separate": "分隔单词",
+    "letters": "文本为",
+    "withT": "为",
+    "addTitle": "添加内容",
+    "all": "全部",
+    "addHint": "请输入添加内容",
+    "addPosition": "添加位置",
+    "addBefore": "前面",
+    "addAfter": "后面",
+    "presetName": "预设名称",
+    "presetNameHint": "请输入预设名称",
+    "addPresetDesc": "注：点击上方预设名称可自动填充至输入框，同名预设将被覆盖",
+    "serialDistinguish": "序列区分",
+    "addType": "添加类型",
+    "convertLetters": "转换文本",
+    "matchPosition": "匹配位置",
+    "start": "开始",
+    "end": "结束",
+    "deleteTitle": "删除内容",
+    "deleteExtension": "删除扩展",
+    "deleteHint": "请输入删除内容",
+    "regex": "使用正则",
+    "deleteType": "删除类型",
+    "replaceMode": "替换模式",
+    "serial": "序列",
+    "random": "随机值",
+    "randomHint": "请输入自定义内容",
+    "matchExt": "匹配扩展",
+    "word": "单词间隔",
+    "wordHint": "请输入单词间隔(大写字母开头识别为一个单词)",
+    "replaceTitle": "替换内容",
+    "formatDigit": "请输入名称长度",
+    "replaceHint1": "请输入匹配内容",
+    "completeContent": "请输入补全内容",
+    "replaceHint2": "请输入替换内容",
+    "selectedAll": "全选"
   },
   "organize": {
     "date": "日期分类",
@@ -76,12 +130,14 @@
   "csv": {
     "title": "已选择原名称列为:",
     "delete": "删除扩展",
-    "match": "匹配扩展"
+    "match": "匹配扩展",
+    "exit": "退出"
   },
   "date": {
     "title": "修改文件日期",
     "hint": "请选择日期",
-    "note": "注意：右键查看文件属性时，文件的访问日期会被更改为当前时间"
+    "note": "注意：右键查看文件属性时，文件的访问日期会被更改为当前时间",
+    "exit": "退出"
   },
   "content": {
     "origin": "原名称",
@@ -140,7 +196,9 @@
     "selectGroup": "选中组",
     "selectPath": "选中路径",
     "removeFolder": "移除路径",
-    "remove": "移除"
+    "remove": "移除",
+    "toggle": "切换状态",
+    "cancel": "取消选中"
   },
   "bottom": {
     "save": "保存配置",
@@ -159,6 +217,7 @@
       "front": "取出至前面",
       "behind": "取出至后面"
     },
+    "undo": "撤销",
     "task": "任务",
     "time": "用时",
     "check": "检查更新",
@@ -177,7 +236,13 @@
     "exitOperate": "退出操作",
     "save": "保存",
     "exit": "退出",
-    "image": "自定义图片大小"
+    "image": "自定义图片大小",
+    "applyGroup": "应用组"
+  },
+  "log": {
+    "rename": "重命名日志",
+    "delete": "删除日志",
+    "organize": "整理日志"
   },
   "enum": {
     "date": {
@@ -269,9 +334,60 @@
   },
   "error": {
     "emptyTitle": "获取文件失败",
-    "empty": "所选文件夹为空"
+    "empty": "所选文件夹为空",
+    "csv1": "文件解析出错",
+    "csv2": "不是合规的 CSV 文件",
+    "modifyDate": "修改日期失败",
+    "modifyDateInfo": "以下几个文件修改日期失败：",
+    "noExist": "文件不存在",
+    "noOpen": "无法打开 {file}",
+    "modifyDateFail": "修改 {file} 日期失败",
+    "presetNameTitle": "预设名称错误",
+    "presetName": "预设名称不能为空",
+    "presetAddTitle": "添加预设失败",
+    "presetAdd": "指令列表不能为空!",
+    "import": "导入预设失败",
+    "importError1": "文件不完整，缺少头标识或IV",
+    "importError2": "无效文件格式，头标识不匹配",
+    "importError3": "解密失败: {err}",
+    "export": "导出预设失败",
+    "exists": "重命名为 {name} 的文件已存在",
+    "notExists": "在 {folder} 中已不存在",
+    "renameInfo": "重命名失败,因为 {err}",
+    "rename": "重命名失败",
+    "renameNum": "选中 {total} 个中 {count} 个重命名失败",
+    "undo": "撤销重命名失败",
+    "undoNum": "选中 {total} 个中 {count} 个取消重命名失败",
+    "delete": "删除失败",
+    "deleteInfo": "删除选中文件失败",
+    "organize": "整理失败",
+    "organizeInfo1": "以下几个文件移动失败：",
+    "organizeInfo2": "目标文件夹为空！",
+    "groupFolder": "组文件夹为空！",
+    "typeFolder": "类型文件夹为空！",
+    "move": "移动失败"
   },
   "success": {
-    "copy": "复制成功"
+    "copy": "复制成功",
+    "modifyDate": "修改日期成功",
+    "modifyDateInfo": "已成功修改所选中的 {total} 个文件的日期",
+    "import": "导入预设成功",
+    "importNum": "已成功导入 {count} 条预设",
+    "export": "导出预设成功",
+    "exportNum": "已成功导出 {count} 条预设",
+    "deleteFile": "【{file}】已被删除",
+    "rename": "重命名成功",
+    "renameNum": "选中的 {count} 个已全部重命名成功",
+    "undo": "已成功撤销",
+    "undoNum": "选中的 {count} 个已全部撤销操作",
+    "delete": "删除成功",
+    "deleteSelected": "已成功删除所有选中的文件",
+    "deleteEmpty": "已成功删除所选文件夹下的空文件夹",
+    "organize": "整理成功",
+    "organizeNum": "已成功移动所选中的 {count} 个文件"
+  },
+  "warning": {
+    "label": "警告",
+    "csv": "整理模式和修改文件日期功能下已禁用上传 CSV 文件功能"
   }
 }

@@ -15,7 +15,7 @@ class SaveBtn extends ConsumerWidget {
       tip: tr(AppL10n.bottomSave),
       svg: AppIcons.save,
       selected: ref.watch(isSaveConfigProvider),
-      onTap: ref.read(isSaveConfigProvider.notifier).update,
+      onPressed: ref.read(isSaveConfigProvider.notifier).update,
     );
   }
 }

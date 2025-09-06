@@ -15,7 +15,7 @@ class RegeditBtn extends ConsumerWidget {
       tip: tr(AppL10n.bottomRegedit),
       svg: AppIcons.shortcutMenu,
       selected: ref.watch(isUseRegeditProvider),
-      onTap: ref.read(isUseRegeditProvider.notifier).update,
+      onPressed: ref.read(isUseRegeditProvider.notifier).update,
     );
   }
 }

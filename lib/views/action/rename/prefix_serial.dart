@@ -32,7 +32,7 @@ class PrefixSerial extends ConsumerWidget {
             child: DigitInput(
               value: ref.watch(prefixSerialLenProvider),
               unit: tr(AppL10n.renameDigits),
-              onChange: (value) {
+              onChanged: (value) {
                 ref.read(prefixSerialLenProvider.notifier).update(value);
                 Debounce.run(() => updateName(ref));
               },
@@ -42,7 +42,7 @@ class PrefixSerial extends ConsumerWidget {
             child: DigitInput(
               value: ref.watch(prefixSerialStartProvider),
               unit: tr(AppL10n.renameStart),
-              onChange: (value) {
+              onChanged: (value) {
                 ref.read(prefixSerialStartProvider.notifier).update(value);
                 Debounce.run(() => updateName(ref));
               },

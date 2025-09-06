@@ -1,4 +1,5 @@
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/match.dart';
@@ -94,4 +95,11 @@ class CurrentTheme extends _$CurrentTheme {
     state = ThemeType.values[index];
     await StorageUtil.setInt(AppKeys.theme, index);
   }
+}
+
+@riverpod
+class CurrentReplaceMode extends _$CurrentReplaceMode {
+  @override
+  ReplaceMode build() => ReplaceMode.normal;
+  void update(ReplaceMode value) => state = value;
 }

@@ -81,7 +81,7 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
       tip: tr(AppL10n.bottomAutoRun),
       svg: AppIcons.autoRun,
       selected: ref.watch(isAutoRunProvider),
-      onTap: toggleView,
+      onPressed: toggleView,
     );
   }
 }

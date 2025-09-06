@@ -40,7 +40,7 @@ class ExtensionArea extends ConsumerWidget {
         return EasyCheckbox(
           label: extension,
           checked: ref.watch(selectedExtensionProvider(extension)),
-          onChanged: () {
+          onChanged: (v) {
             ref.read(fileListProvider.notifier).checkExtension(extension);
             updateName(ref);
           },

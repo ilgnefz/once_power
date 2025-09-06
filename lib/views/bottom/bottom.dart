@@ -8,6 +8,7 @@ import 'package:once_power/views/bottom/date.dart';
 import 'package:once_power/views/bottom/log.dart';
 import 'package:once_power/views/bottom/task_msg.dart';
 import 'package:once_power/views/bottom/tip.dart';
+import 'package:once_power/views/bottom/undo.dart';
 import 'package:once_power/views/bottom/version.dart';
 import 'package:once_power/views/bottom/view.dart';
 
@@ -48,6 +49,7 @@ class BottomView extends StatelessWidget {
           TipBtn(),
           ThemeSwitch(),
           LanguageSwitch(),
+          UndoBtn(),
           Spacer(),
           TaskMsg(),
           SizedBox(width: 2),

@@ -4,6 +4,7 @@ import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/l10n.dart';
+import 'package:once_power/cores/advance.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
@@ -20,7 +21,6 @@ import 'input.dart';
 import 'list.dart';
 import 'move.dart';
 import 'select.dart';
-import 'update.dart';
 
 Future<void> showFileRightMenu(
   BuildContext context,
@@ -167,7 +167,7 @@ List<ContextMenuEntry> buildGroupList(
         (e) => RightMenuItem.submenu(
           label: e,
           color: file.group == e
-              ? Theme.of(context).colorScheme.surfaceDim
+              ? Theme.of(context).textTheme.bodyMedium?.color
               : Colors.grey,
           onSelected: () => setGroup(context, ref, e),
           items: [
@@ -194,7 +194,7 @@ Future<void> showDirectiveRightMenu(
     contextMenu: ContextMenu(
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: theme.colorScheme.onSurface,
+        color: theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),
@@ -202,20 +202,20 @@ Future<void> showDirectiveRightMenu(
       ),
       entries: <ContextMenuEntry>[
         RightMenuItem(
-          label: ' S.of(context).toggleStatus',
+          label: tr(AppL10n.menuToggle),
           onSelected: () {
             for (var element in list) {
               ref.read(advanceMenuListProvider.notifier).toggle(element);
             }
             ref.read(advanceMenuSelectedListProvider.notifier).clear();
-            updateName(ref);
+            advanceUpdateName(ref);
           },
         ),
         RightMenuItem.submenu(
-          label: 'S.of(context).settingGroup',
+          label: tr(AppL10n.menuEdit),
           items: [
             RightMenuItem(
-              label: ' S.of(context).editGroup',
+              label: tr(AppL10n.menuEdit),
               color: Theme.of(context).primaryColor,
               onSelected: () => editGroup(context, true),
             ),
@@ -223,20 +223,20 @@ Future<void> showDirectiveRightMenu(
           ],
         ),
         RightMenuItem(
-          label: 'S.of(context).remove',
+          label: tr(AppL10n.menuRemove),
           onSelected: () {
             for (var element in list) {
               ref.read(advanceMenuListProvider.notifier).remove(element);
             }
             ref.read(currentPresetNameProvider.notifier).update('');
-            updateName(ref);
+            advanceUpdateName(ref);
           },
         ),
         RightMenuItem(
-          label: 'S.of(context).cancelSelected',
+          label: tr(AppL10n.menuCancel),
           onSelected: () {
             ref.read(advanceMenuSelectedListProvider.notifier).clear();
-            updateName(ref);
+            advanceUpdateName(ref);
           },
         ),
       ],
@@ -258,7 +258,7 @@ List<ContextMenuEntry> buildDirectiveGroupList(
       .map(
         (e) => RightMenuItem(
           label: e == 'all' ? tr(AppL10n.dialogAll) : e,
-          color: Theme.of(context).textTheme.labelMedium?.color,
+          color: Theme.of(context).textTheme.bodyMedium?.color,
           onSelected: () {
             for (var element in menuList) {
               ref
@@ -266,7 +266,7 @@ List<ContextMenuEntry> buildDirectiveGroupList(
                   .setGroup(element.id, e);
             }
             ref.read(advanceMenuSelectedListProvider.notifier).clear();
-            // updateName(ref);
+            advanceUpdateName(ref);
           },
         ),
       )

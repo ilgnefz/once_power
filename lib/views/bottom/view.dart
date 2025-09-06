@@ -15,7 +15,7 @@ class ViewBtn extends ConsumerWidget {
       tip: tr(AppL10n.bottomView),
       svg: AppIcons.image,
       selected: ref.watch(isViewModeProvider),
-      onTap: ref.read(isViewModeProvider.notifier).update,
+      onPressed: ref.read(isViewModeProvider.notifier).update,
     );
   }
 }

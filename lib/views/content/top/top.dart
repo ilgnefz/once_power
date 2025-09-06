@@ -50,13 +50,13 @@ class ContentTop extends ConsumerWidget {
           EasyCheckbox(
             label: '',
             checked: ref.watch(selectAllProvider),
-            onChanged: () => selectAll(ref),
+            onChanged: (v) => selectAll(ref),
           ),
           Flexible(
             flex: 1,
             child: Row(
               children: [
-                OneLineText(ref.watch(_labelRightProvider)),
+                OneLineText(ref.watch(_labelLeftProvider)),
                 ContentExpend(),
                 SizedBox(width: 4),
                 if (!ref.watch(currentModeProvider).isOrganize)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/base/easy_btn.dart';
 import 'package:once_power/widgets/base/easy_checkbox.dart';
@@ -17,11 +18,15 @@ class GroupGroup extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          EasyBtn(label: tr(AppL10n.organizeGroupFolder), onPressed: () {}),
+          EasyBtn(
+            label: tr(AppL10n.organizeGroupFolder),
+            onPressed: () => showAllGroup(context),
+          ),
           EasyCheckbox(
             checked: ref.watch(useGroupOrganizeProvider),
             label: tr(AppL10n.organizeGroup),
-            onChanged: ref.read(useGroupOrganizeProvider.notifier).toggle,
+            onChanged: (v) =>
+                ref.read(useGroupOrganizeProvider.notifier).toggle(),
           ),
         ],
       ),

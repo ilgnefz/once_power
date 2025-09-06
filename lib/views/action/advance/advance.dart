@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/views/action/add_group.dart';
-import 'package:once_power/views/action/advance/directives.dart';
+import 'package:once_power/views/action/advance/directive/directive_list.dart';
 import 'package:once_power/views/action/advance/operate.dart';
 import 'package:once_power/views/action/advance/top.dart';
 import 'package:once_power/views/action/apply.dart';
@@ -15,7 +15,7 @@ class AdvanceView extends StatelessWidget {
     return Column(
       children: const [
         AdvanceTop(),
-        DirectiveList(),
+        Expanded(child: DirectiveList()),
         SizedBox(height: AppNum.spaceMedium),
         OperateGroup(),
         SizedBox(height: AppNum.spaceMedium),

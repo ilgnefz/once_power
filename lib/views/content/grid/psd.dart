@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/value.dart';
 import 'package:once_power/utils/psd_utils.dart';
 
 import 'error.dart';
@@ -58,7 +59,7 @@ class _PsdViewState extends ConsumerState<PsdView> {
     Widget image = Image.memory(
       _imageData!,
       fit: BoxFit.contain,
-      cacheWidth: 136,
+      cacheWidth: ref.watch(viewImageWidthProvider).toInt(),
       errorBuilder: (_, _, _) => ErrorImage(file: widget.file.path),
       frameBuilder: (_, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) return child;

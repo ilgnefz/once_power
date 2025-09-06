@@ -24,7 +24,7 @@ class AddGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(isAddFolderProvider),
             label: tr(AppL10n.actionAddFolder),
-            onChanged: ref.read(isAddFolderProvider.notifier).update,
+            onChanged: (v) => ref.read(isAddFolderProvider.notifier).update(),
             child: Consumer(
               builder: (_, ref, _) => EasyTooltip(
                 tip: tr(AppL10n.actionFolderTip),
@@ -42,7 +42,7 @@ class AddGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(isAppendModeProvider),
             label: tr(AppL10n.actionAppend),
-            onChanged: ref.read(isAppendModeProvider.notifier).update,
+            onChanged: (v) => ref.read(isAppendModeProvider.notifier).update(),
           ),
         ],
       ),

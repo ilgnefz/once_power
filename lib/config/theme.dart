@@ -35,6 +35,10 @@ class ThemeConfig {
       hintStyle: TextStyle(color: Color(0xFF9E9E9E), fontSize: 14),
       iconColor: Color(0xFFCFCFCF),
     ),
+    popupMenuTheme: PopupMenuThemeData(
+      color: Colors.white,
+      surfaceTintColor: Color(0xFFF5F5F5),
+    ),
     tabBarTheme: TabBarThemeData(
       labelStyle: TextStyle(fontWeight: FontWeight.bold),
       // unselectedLabelColor: Colors.grey,
@@ -104,6 +108,11 @@ class ThemeConfig {
       fillColor: Color(0xFF2B2B2B),
       hintStyle: TextStyle(color: Color(0xFF757575), fontSize: 14),
       iconColor: Color(0xFF888787),
+    ),
+    popupMenuTheme: PopupMenuThemeData(
+      color: Color(0xFF232125),
+      surfaceTintColor: Color(0xFF262626),
+      textStyle: TextStyle(fontSize: 14, fontFamily: defaultFont),
     ),
     tabBarTheme: TabBarThemeData(
       labelStyle: TextStyle(fontWeight: FontWeight.bold),

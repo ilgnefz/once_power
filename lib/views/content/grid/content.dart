@@ -4,6 +4,7 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/value.dart';
 import 'package:reorderable_grid/reorderable_grid.dart';
 
 import 'item.dart';
@@ -21,7 +22,7 @@ class ContentGrid extends ConsumerWidget {
         padding: const EdgeInsets.only(right: AppNum.padding),
         onReorder: (oldIndex, newIndex) =>
             reorderList(ref, files, oldIndex, newIndex),
-        maxCrossAxisExtent: 136,
+        maxCrossAxisExtent: ref.watch(viewImageWidthProvider),
         childAspectRatio: 5 / 6,
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,

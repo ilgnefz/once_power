@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/context_menu.dart';
+import 'package:once_power/cores/list.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/list.dart';
@@ -61,9 +62,9 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
   }
 
   void delete() {
-    String id = previewList[index].id;
+    // String id = previewList[index].id;
     int currentIndex = index;
-    // removeOne(ref, id);
+    removeOne(ref, previewList[index]);
     previewList.remove(previewList[currentIndex]);
     if (previewList.isEmpty) return Navigator.pop(context);
     if (currentIndex == previewList.length) index = 0;

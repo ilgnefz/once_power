@@ -21,7 +21,7 @@ class TipBtn extends ConsumerWidget {
           '$tip1:\nCtrl+A  $tip2\nDelete  $tip3\nCtrl+S  $tip4\nCtrl+X  $tip5\nCtrl+C  $tip6\nCtrl+V  $tip7',
       icon: Icons.tips_and_updates_rounded,
       selected: false,
-      onTap: () {},
+      onPressed: () {},
     );
   }
 }

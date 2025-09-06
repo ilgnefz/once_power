@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
+import 'package:once_power/models/type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUtil {
@@ -124,17 +125,17 @@ class StorageUtil {
     return result;
   }
 
-  // static Future<bool> setRuleTypeValue(String key, RuleTypeValue value) {
-  //   return _prefs.setString(key, jsonEncode(value.toJson()));
-  // }
-  //
-  // static RuleTypeValue? getRuleTypeValue(String key) {
-  //   String? value = _prefs.getString(key);
-  //   if (value != null) {
-  //     return RuleTypeValue.fromJson(jsonDecode(value));
-  //   }
-  //   return null;
-  // }
+  static Future<bool> setRuleTypeValue(String key, RuleTypeValue value) {
+    return _prefs.setString(key, jsonEncode(value.toJson()));
+  }
+
+  static RuleTypeValue? getRuleTypeValue(String key) {
+    String? value = _prefs.getString(key);
+    if (value != null) {
+      return RuleTypeValue.fromJson(jsonDecode(value));
+    }
+    return null;
+  }
 
   static Future<bool> setFileList(String key, List<FileInfo> value) {
     List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();

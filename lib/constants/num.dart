@@ -12,6 +12,7 @@ class AppNum {
   static const double spaceLarge = 12;
   static const double actionTop = 40;
   static const double presetMenu = 160;
+  static const double dropdownMenu = 32;
   static const double dropdownMenuC = 112;
   static const double dropdownMenuE = 148;
   static const double input = 32;
@@ -22,6 +23,8 @@ class AppNum {
   static const double iconMedium = 18;
   static const double iconLarge = 20;
   static const double fileCard = 80;
+  static const double csvData = 36;
+  static const double operateSpace = 6;
 
   // Padding
   static const double padding = 12;

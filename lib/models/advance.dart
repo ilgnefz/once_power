@@ -297,7 +297,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final int back;
   final int start;
   final int end;
-  final ConvertType caseType;
+  final ConvertType convertType;
   final String wordSpacing;
   final bool useRegex;
   final bool matchExt;
@@ -313,7 +313,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.back,
     required this.start,
     required this.end,
-    required this.caseType,
+    required this.convertType,
     required this.wordSpacing,
     required this.useRegex,
     required this.matchExt,
@@ -333,7 +333,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       back: back,
       start: start,
       end: end,
-      caseType: caseType,
+      convertType: convertType,
       wordSpacing: wordSpacing,
       useRegex: useRegex,
       matchExt: matchExt,
@@ -355,7 +355,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         back: json["back"] ?? 1,
         start: json["start"] ?? 1,
         end: json["end"] ?? 1,
-        caseType: ConvertType.values[json["caseType"] ?? 0],
+        convertType: ConvertType.values[json["convertType"] ?? 0],
         wordSpacing: json["wordSpacing"] ?? "",
         useRegex: json["useRegex"] ?? false,
         matchExt: json["matchExt"] ?? false,
@@ -375,7 +375,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     "back": back,
     "start": start,
     "end": end,
-    "caseType": caseType.index,
+    "convertType": convertType.index,
     "wordSpacing": wordSpacing,
     "useRegex": useRegex,
     "matchExt": matchExt,
@@ -395,7 +395,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'back: $back, '
         'start: $start, '
         'end: $end, '
-        'caseType: $caseType, '
+        'convertType: $convertType, '
         'wordSpacing: $wordSpacing, '
         'useRegex: $useRegex, '
         'matchExt: $matchExt, '

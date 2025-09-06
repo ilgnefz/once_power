@@ -37,8 +37,8 @@ dependencies:
   rust_lib_once_power:
     path: rust_builder
   flutter_rust_bridge: 2.11.1
-  flutter_riverpod: ^3.0.0-dev.17
-  riverpod_annotation: ^3.0.0-dev.17
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
   image: ^4.5.4
   # System
   desktop_drop: ^0.6.1
@@ -55,7 +55,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   flutter_avif: ^3.0.0
   flutter_context_menu: ^0.3.0
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.2.1
   reorderable_grid: ^1.0.12
   tolyui_feedback: ^0.3.6+6
   video_player: ^2.10.0
@@ -104,8 +104,8 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   custom_lint:
-  riverpod_generator: ^3.0.0-dev.17
-  riverpod_lint: ^3.0.0-dev.17
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

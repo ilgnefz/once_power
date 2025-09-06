@@ -122,6 +122,7 @@ Future<void> _processSingleFile(WidgetRef ref, String filePath) async {
 
 Future<FileInfo> generateFileInfo(String filePath) async {
   String name = getFileName(filePath);
+  print('文件名: $name');
   String ext = getExtension(filePath);
   if (name.startsWith('.') && ext.isEmpty) {
     (ext, name) = (name.substring(1), '');

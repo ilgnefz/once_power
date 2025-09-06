@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/sort.dart';
 import 'package:once_power/models/advance.dart';
@@ -151,7 +152,7 @@ class CSVData extends _$CSVData {
       }).toList();
 }
 
-@Riverpod(keepAlive: false)
+@riverpod
 List<FileClassify> classifyList(Ref ref) {
   List<FileClassify> classifyList = [];
   for (FileInfo e in ref.watch(fileListProvider)) {
@@ -160,7 +161,7 @@ List<FileClassify> classifyList(Ref ref) {
   return classifyList;
 }
 
-@Riverpod(keepAlive: false)
+@riverpod
 Map<FileClassify, List<String>> extensionListMap(Ref ref) {
   Map<FileClassify, List<String>> extMap = {};
   for (var e in ref.watch(fileListProvider)) {
@@ -178,7 +179,7 @@ Map<FileClassify, List<String>> extensionListMap(Ref ref) {
   return extMap;
 }
 
-@Riverpod(keepAlive: false)
+@riverpod
 bool selectedExtension(Ref ref, String ext) {
   return ref.watch(fileListProvider).every((e) {
     if (e.ext == ext) return e.checked;
@@ -186,7 +187,7 @@ bool selectedExtension(Ref ref, String ext) {
   });
 }
 
-@Riverpod(keepAlive: false)
+@riverpod
 List<String> pathList(Ref ref) {
   List<String> list = [];
   for (FileInfo e in ref.watch(fileListProvider)) {
@@ -195,7 +196,7 @@ List<String> pathList(Ref ref) {
   return list;
 }
 
-@Riverpod(keepAlive: false)
+@riverpod
 bool selectedPath(Ref ref, String folder) {
   return ref.watch(fileListProvider).every((e) {
     if (e.parent == folder) return e.checked;

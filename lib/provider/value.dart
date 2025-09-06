@@ -1,5 +1,6 @@
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/models/date.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -96,4 +97,11 @@ class CurrentPresetName extends _$CurrentPresetName {
     state = value;
     await StorageUtil.setString(AppKeys.currentPresetName, value);
   }
+}
+
+@riverpod
+class FileDateProperty extends _$FileDateProperty {
+  @override
+  DateProperty build() => DateProperty();
+  void update(DateProperty value) => state = value;
 }

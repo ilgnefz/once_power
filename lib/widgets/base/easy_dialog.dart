@@ -64,7 +64,7 @@ class EasyDialog extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      // fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.bold,
                       fontSize: 14,
                       fontFamily: defaultFont,
                     ),

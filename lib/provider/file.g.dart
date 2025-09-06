@@ -6,269 +6,84 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$fileListHash() => r'b64b88cd62fbdc15cbb827afe6921e17783bdf56';
+
+/// See also [FileList].
 @ProviderFor(FileList)
-const fileListProvider = FileListProvider._();
-
-final class FileListProvider
-    extends $NotifierProvider<FileList, List<FileInfo>> {
-  const FileListProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'fileListProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$fileListHash();
-
-  @$internal
-  @override
-  FileList create() => FileList();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<FileInfo> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<FileInfo>>(value),
+final fileListProvider =
+    AutoDisposeNotifierProvider<FileList, List<FileInfo>>.internal(
+      FileList.new,
+      name: r'fileListProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fileListHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
     );
-  }
-}
 
-String _$fileListHash() => r'36b4c18a6ea76c8e93fee3601edbdf8860c8ef25';
-
-abstract class _$FileList extends $Notifier<List<FileInfo>> {
-  List<FileInfo> build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<List<FileInfo>, List<FileInfo>>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<List<FileInfo>, List<FileInfo>>,
-              List<FileInfo>,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-@ProviderFor(SortHoverFile)
-const sortHoverFileProvider = SortHoverFileProvider._();
-
-final class SortHoverFileProvider
-    extends $NotifierProvider<SortHoverFile, FileInfo?> {
-  const SortHoverFileProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'sortHoverFileProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$sortHoverFileHash();
-
-  @$internal
-  @override
-  SortHoverFile create() => SortHoverFile();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(FileInfo? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<FileInfo?>(value),
-    );
-  }
-}
-
+typedef _$FileList = AutoDisposeNotifier<List<FileInfo>>;
 String _$sortHoverFileHash() => r'e86ba6f0a0b120375aa4fb28f83b38f422a20f9d';
 
-abstract class _$SortHoverFile extends $Notifier<FileInfo?> {
-  FileInfo? build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<FileInfo?, FileInfo?>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<FileInfo?, FileInfo?>,
-              FileInfo?,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-@ProviderFor(SelectAll)
-const selectAllProvider = SelectAllProvider._();
-
-final class SelectAllProvider extends $NotifierProvider<SelectAll, bool> {
-  const SelectAllProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'selectAllProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$selectAllHash();
-
-  @$internal
-  @override
-  SelectAll create() => SelectAll();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(bool value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<bool>(value),
+/// See also [SortHoverFile].
+@ProviderFor(SortHoverFile)
+final sortHoverFileProvider =
+    AutoDisposeNotifierProvider<SortHoverFile, FileInfo?>.internal(
+      SortHoverFile.new,
+      name: r'sortHoverFileProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sortHoverFileHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
     );
-  }
-}
 
+typedef _$SortHoverFile = AutoDisposeNotifier<FileInfo?>;
 String _$selectAllHash() => r'bb39801d68715244071f9e67dda3c91743b3204c';
 
-abstract class _$SelectAll extends $Notifier<bool> {
-  bool build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<bool, bool>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<bool, bool>,
-              bool,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
+/// See also [SelectAll].
+@ProviderFor(SelectAll)
+final selectAllProvider = AutoDisposeNotifierProvider<SelectAll, bool>.internal(
+  SelectAll.new,
+  name: r'selectAllProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$selectAllHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-@ProviderFor(PrefixUploadMark)
-const prefixUploadMarkProvider = PrefixUploadMarkProvider._();
-
-final class PrefixUploadMarkProvider
-    extends $NotifierProvider<PrefixUploadMark, UploadMarkInfo?> {
-  const PrefixUploadMarkProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'prefixUploadMarkProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$prefixUploadMarkHash();
-
-  @$internal
-  @override
-  PrefixUploadMark create() => PrefixUploadMark();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(UploadMarkInfo? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<UploadMarkInfo?>(value),
-    );
-  }
-}
-
+typedef _$SelectAll = AutoDisposeNotifier<bool>;
 String _$prefixUploadMarkHash() => r'fe2029ace5e00d4745363c573f3f6888f16e26e9';
 
-abstract class _$PrefixUploadMark extends $Notifier<UploadMarkInfo?> {
-  UploadMarkInfo? build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<UploadMarkInfo?, UploadMarkInfo?>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<UploadMarkInfo?, UploadMarkInfo?>,
-              UploadMarkInfo?,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-@ProviderFor(SuffixUploadMark)
-const suffixUploadMarkProvider = SuffixUploadMarkProvider._();
-
-final class SuffixUploadMarkProvider
-    extends $NotifierProvider<SuffixUploadMark, UploadMarkInfo?> {
-  const SuffixUploadMarkProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'suffixUploadMarkProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$suffixUploadMarkHash();
-
-  @$internal
-  @override
-  SuffixUploadMark create() => SuffixUploadMark();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(UploadMarkInfo? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<UploadMarkInfo?>(value),
+/// See also [PrefixUploadMark].
+@ProviderFor(PrefixUploadMark)
+final prefixUploadMarkProvider =
+    AutoDisposeNotifierProvider<PrefixUploadMark, UploadMarkInfo?>.internal(
+      PrefixUploadMark.new,
+      name: r'prefixUploadMarkProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$prefixUploadMarkHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
     );
-  }
-}
 
+typedef _$PrefixUploadMark = AutoDisposeNotifier<UploadMarkInfo?>;
 String _$suffixUploadMarkHash() => r'df10099259826d610543a3bb403bc91cb441b3ae';
 
-abstract class _$SuffixUploadMark extends $Notifier<UploadMarkInfo?> {
-  UploadMarkInfo? build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<UploadMarkInfo?, UploadMarkInfo?>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<UploadMarkInfo?, UploadMarkInfo?>,
-              UploadMarkInfo?,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
+/// See also [SuffixUploadMark].
+@ProviderFor(SuffixUploadMark)
+final suffixUploadMarkProvider =
+    AutoDisposeNotifierProvider<SuffixUploadMark, UploadMarkInfo?>.internal(
+      SuffixUploadMark.new,
+      name: r'suffixUploadMarkProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$suffixUploadMarkHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
+typedef _$SuffixUploadMark = AutoDisposeNotifier<UploadMarkInfo?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

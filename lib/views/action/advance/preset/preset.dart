@@ -1,19 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/views/action/advance/preset/add.dart';
-import 'package:once_power/views/action/advance/preset/export.dart';
 import 'package:once_power/views/action/advance/preset/import.dart';
 import 'package:once_power/widgets/action/popover_btn.dart';
+import 'package:once_power/widgets/action/text_btn.dart';
 
-import 'presets.dart';
+import 'list.dart';
 
-class PresetBtn extends StatelessWidget {
+class PresetBtn extends ConsumerWidget {
   const PresetBtn({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return PopoverBtn(
       label: tr(AppL10n.advancePreset),
       builder: (ctrl) => Container(
@@ -29,11 +31,18 @@ class PresetBtn extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(child: ImportPreset(controller: ctrl)),
-                Expanded(child: ExportPreset(controller: ctrl)),
+                ImportPreset(ref),
+                EasyTextBtn(
+                  tr(AppL10n.advanceExport),
+                  width: AppNum.presetMenu / 2,
+                  onTap: () {
+                    ctrl.close();
+                    exportPreset(context);
+                  },
+                ),
               ],
             ),
-            AddPreset(controller: ctrl),
+            AddPresetBtn(controller: ctrl),
           ],
         ),
       ),

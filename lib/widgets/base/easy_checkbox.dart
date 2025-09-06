@@ -10,7 +10,7 @@ class EasyCheckbox extends StatelessWidget {
   });
 
   final bool? checked;
-  final Function() onChanged;
+  final Function(bool?)? onChanged;
   final String? label;
   final Widget? child;
 
@@ -29,7 +29,7 @@ class EasyCheckbox extends StatelessWidget {
           side: theme.checkboxTheme.side,
           checkColor: Colors.white,
           fillColor: theme.checkboxTheme.fillColor,
-          onChanged: (value) => onChanged(),
+          onChanged: onChanged,
         ),
         if (label != null)
           Text(

@@ -15,7 +15,7 @@ class LogBtn extends ConsumerWidget {
       tip: tr(AppL10n.bottomLog),
       svg: AppIcons.log,
       selected: ref.watch(isSaveLogProvider),
-      onTap: ref.read(isSaveLogProvider.notifier).update,
+      onPressed: ref.read(isSaveLogProvider.notifier).update,
     );
   }
 }

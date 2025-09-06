@@ -72,7 +72,7 @@ class FilterBtn extends ConsumerWidget {
                   // mainAxisSize: MainAxisSize.max,
                   checked: isCheck(ref, e),
                   label: e.label,
-                  onChanged: () => toggleCheck(),
+                  onChanged: (v) => toggleCheck(),
                 ),
               ),
             );
@@ -99,13 +99,13 @@ class FilterBtn extends ConsumerWidget {
         easyDropdownItem(
           tr(AppL10n.contentFilterExtension),
           Theme.of(context).primaryColor,
-          () async => await showAllType(context, false, true),
+          () async => await showAllTypeDetail(context, false, true),
           true,
         ),
         easyDropdownItem(
           tr(AppL10n.contentFilterFolder),
           Theme.of(context).primaryColor,
-          () async => await showAllType(context, true, true),
+          () async => await showAllTypeDetail(context, true, true),
           true,
         ),
         easyDropdownItem(

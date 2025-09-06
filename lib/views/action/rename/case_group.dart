@@ -24,7 +24,7 @@ class CaseGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(caseFileProvider),
             label: tr(AppL10n.renameCaseFile),
-            onChanged: () {
+            onChanged: (v) {
               ref.read(caseFileProvider.notifier).update();
               Debounce.run(() => updateName(ref));
             },
@@ -32,7 +32,7 @@ class CaseGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(caseExtProvider),
             label: tr(AppL10n.renameCaseExt),
-            onChanged: () {
+            onChanged: (v) {
               ref.read(caseExtProvider.notifier).update();
               Debounce.run(() => updateName(ref));
             },

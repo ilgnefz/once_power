@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/widgets/base/one_line_text.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
-final titleProvider = Provider<String>((ref) {
+final _titleProvider = Provider<String>((ref) {
   String presetName = ref.watch(currentPresetNameProvider);
   int len = ref.watch(advanceMenuListProvider).length;
   String title = tr(AppL10n.advanceCount, namedArgs: {"count": "$len"});
@@ -27,7 +28,7 @@ class AdvanceTop extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           OneLineText(
-            ref.watch(titleProvider),
+            ref.watch(_titleProvider),
             style: TextStyle(fontSize: 13, color: Colors.grey),
           ),
           ClickIcon(
@@ -38,7 +39,7 @@ class AdvanceTop extends ConsumerWidget {
             onPressed: () {
               ref.read(advanceMenuListProvider.notifier).setList([]);
               ref.read(currentPresetNameProvider.notifier).update('');
-              //   TODO: 更新名称
+              advanceUpdateName(ref);
             },
           ),
         ],

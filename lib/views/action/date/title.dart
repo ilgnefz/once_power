@@ -8,11 +8,13 @@ class DateTitle extends StatelessWidget {
     required this.checked,
     required this.title,
     required this.label,
+    required this.onChanged,
   });
 
   final bool checked;
   final String title;
   final String label;
+  final Function(bool?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class DateTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          EasyCheckbox(checked: checked, label: title, onChanged: () {}),
+          EasyCheckbox(checked: checked, label: title, onChanged: onChanged),
           Text(label),
         ],
       ),

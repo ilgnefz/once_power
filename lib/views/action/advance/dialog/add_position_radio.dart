@@ -1,0 +1,52 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:once_power/constants/l10n.dart';
+import 'package:once_power/enums/advance.dart';
+import 'package:once_power/widgets/common/digit_input.dart';
+
+class AddPositionRadio extends StatelessWidget {
+  const AddPositionRadio({
+    super.key,
+    required this.posIndex,
+    required this.addPosition,
+    required this.positionChanged,
+    required this.posIndexChanged,
+  });
+
+  final int posIndex;
+  final AddPosition addPosition;
+  final Function(AddPosition) positionChanged;
+  final Function(int) posIndexChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('${tr(AppL10n.advanceAddPosition)}: '),
+        Radio(
+          groupValue: addPosition,
+          value: AddPosition.before,
+          onChanged: (value) => positionChanged(value!),
+        ),
+        Text(tr(AppL10n.advanceAddBefore)),
+        Spacer(),
+        Radio(
+          groupValue: addPosition,
+          value: AddPosition.after,
+          onChanged: (value) => positionChanged(value!),
+        ),
+        Text(tr(AppL10n.advanceAddAfter)),
+        Spacer(),
+        SizedBox(
+          width: 120,
+          child: DigitInput(
+            value: posIndex,
+            unit: tr(AppL10n.advancePlace),
+            min: 1,
+            onChanged: posIndexChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}

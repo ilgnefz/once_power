@@ -58,27 +58,68 @@ class FileList extends _$FileList {
   //     state = state.map((e) => e.id == file.id ? file : e).toList();
 
   void updateCheck(String id, bool value) => state = state.map((e) {
-    if (e.id == id) return e.copyWith(checked: value);
+    if (e.id == id) e.checked = value;
+    return e;
+  }).toList();
+
+  void updateDate(
+    String id,
+    DateTime? createdDate,
+    DateTime? modifiedDate,
+    DateTime? accessedDate,
+  ) {
+    state = state.map((e) {
+      if (e.id == id) {
+        e.createdDate = createdDate ?? e.createdDate;
+        e.modifiedDate = modifiedDate ?? e.modifiedDate;
+        e.accessedDate = accessedDate ?? e.accessedDate;
+      }
+      return e;
+    }).toList();
+  }
+
+  void updateFolder(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.parent = value;
     return e;
   }).toList();
 
   void updateGroup(String id, String value) => state = state.map((e) {
-    if (e.id == id) return e.copyWith(group: value);
+    if (e.id == id) e.group = value;
     return e;
   }).toList();
 
   void updateNewExt(String id, String value) => state = state.map((e) {
-    if (e.id == id) return e.copyWith(newExt: value);
+    if (e.id == id) e.newExt = value;
     return e;
   }).toList();
 
   void updateNewName(String id, String value) => state = state.map((e) {
-    if (e.id == id) return e.copyWith(newName: value);
+    if (e.id == id) e.newName = value;
+    return e;
+  }).toList();
+
+  void updateOriginName(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.name = value;
+    return e;
+  }).toList();
+
+  void updateOriginExt(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.ext = value;
+    return e;
+  }).toList();
+
+  void updatePath(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.path = value;
+    return e;
+  }).toList();
+
+  void updateTempPath(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.tempPath = value;
     return e;
   }).toList();
 
   void updateThumbnail(String id, Uint8List value) => state = state.map((e) {
-    if (e.id == id) return e.copyWith(thumbnail: value);
+    if (e.id == id) e.thumbnail = value;
     return e;
   }).toList();
 

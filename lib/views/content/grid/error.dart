@@ -18,11 +18,7 @@ class ErrorImage extends StatelessWidget {
         isPreview
             ? Image.asset(AppImages.error, fit: BoxFit.none)
             : Expanded(
-                child: Image.asset(
-                  AppImages.error,
-                  cacheWidth: 136,
-                  fit: BoxFit.contain,
-                ),
+                child: Image.asset(AppImages.error, fit: BoxFit.contain),
               ),
         SizedBox(height: isPreview ? 12 : 4),
         if (isPreview) ...[

@@ -41,7 +41,7 @@ class PathItem extends ConsumerWidget {
 
     return EasyCheckbox(
       checked: isSelected,
-      onChanged: () => {
+      onChanged: (v) => {
         ref.read(fileListProvider.notifier).checkFolder(folder),
         updateName(ref),
       },

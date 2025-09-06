@@ -18,11 +18,7 @@ class LoadingImage extends StatelessWidget {
               ? UnconstrainedBox(
                   child: Image.asset(AppImages.loading, fit: BoxFit.contain),
                 )
-              : Image.asset(
-                  AppImages.loading,
-                  cacheWidth: 136,
-                  fit: BoxFit.contain,
-                ),
+              : Image.asset(AppImages.loading, fit: BoxFit.contain),
         ),
         Text(tr(AppL10n.contentLoading), style: const TextStyle(fontSize: 12)),
       ],

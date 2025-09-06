@@ -38,7 +38,7 @@ class ContentListItem extends ConsumerWidget {
             EasyCheckbox(
               label: '',
               checked: file.checked,
-              onChanged: () {
+              onChanged: (v) {
                 final FileList fileList = ref.read(fileListProvider.notifier);
                 fileList.updateCheck(file.id, !file.checked);
                 Debounce.run(() => updateName(ref));

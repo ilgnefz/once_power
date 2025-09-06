@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
@@ -96,6 +97,21 @@ class IsModifyExt extends _$IsModifyExt {
     state = !state;
     await StorageUtil.setBool(AppKeys.isSuffixSwap, state);
   }
+}
+
+/* ----- Action CSV ----- */
+@riverpod
+class DeleteExtension extends _$DeleteExtension {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class MatchExtension extends _$MatchExtension {
+  @override
+  bool build() => false;
+  void update() => state = !state;
 }
 
 /* ----- Action Rename Bottom ----- */
@@ -362,5 +378,12 @@ class IsDateModify extends _$IsDateModify {
   @override
   bool build() => false;
   void toggle() => state = !state;
+  void update(bool value) => state = value;
+}
+
+@riverpod
+class ShowUndo extends _$ShowUndo {
+  @override
+  bool build() => false;
   void update(bool value) => state = value;
 }

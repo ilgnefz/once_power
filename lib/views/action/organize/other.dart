@@ -22,12 +22,13 @@ class OtherGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(useTopFolderProvider),
             label: tr(AppL10n.organizeTop),
-            onChanged: ref.read(useTopFolderProvider.notifier).toggle,
+            onChanged: (v) => ref.read(useTopFolderProvider.notifier).toggle(),
           ),
           EasyCheckbox(
             checked: ref.watch(useDateClassifyProvider),
             label: tr(AppL10n.organizeDate),
-            onChanged: ref.read(useDateClassifyProvider.notifier).toggle,
+            onChanged: (v) =>
+                ref.read(useDateClassifyProvider.notifier).toggle(),
           ),
         ],
       ),

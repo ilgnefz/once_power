@@ -13,7 +13,7 @@ class ThemeSwitch extends ConsumerWidget {
     return TooltipIcon(
       tip: type.label,
       icon: type.icon,
-      onTap: ref.read(currentThemeProvider.notifier).update,
+      onPressed: ref.read(currentThemeProvider.notifier).update,
     );
   }
 }

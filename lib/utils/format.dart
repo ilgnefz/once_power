@@ -1,3 +1,4 @@
+import 'package:once_power/enums/advance.dart';
 import 'package:once_power/models/file.dart';
 
 int formatToInt(String value) {
@@ -84,4 +85,35 @@ String formatDouble(double value) {
     return value.toInt().toString();
   }
   return value.toString();
+}
+
+String formatShowDate(String date, DateSplitType type) {
+  List<String> dateParts = [];
+  dateParts.add(date.substring(0, 4));
+  dateParts.add(date.substring(4, 6));
+  dateParts.add(date.substring(6, 8));
+  // dateParts.add(date.substring(8, 10));
+  // dateParts.add(date.substring(10, 12));
+  // dateParts.add(date.substring(12, 14));
+
+  switch (type) {
+    case DateSplitType.none:
+      return date;
+    case DateSplitType.chinese:
+      date = '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
+      break;
+    case DateSplitType.space:
+      date = '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
+      break;
+    case DateSplitType.dash:
+      date = '${dateParts[0]}-${dateParts[1]}-${dateParts[2]}';
+      break;
+    case DateSplitType.dot:
+      date = '${dateParts[0]}.${dateParts[1]}.${dateParts[2]}';
+      break;
+    case DateSplitType.underscore:
+      date = '${dateParts[0]}_${dateParts[1]}_${dateParts[2]}';
+      break;
+  }
+  return date;
 }
