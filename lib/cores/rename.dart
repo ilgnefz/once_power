@@ -57,7 +57,6 @@ Future<InfoDetail?> rename(
     await updateShowInfo(ref, file, newPath);
     return null;
   } catch (e) {
-    print('rename-60: $e');
     return renameErrorNotification(e, oldPath, newPath);
   }
 }

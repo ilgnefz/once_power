@@ -23,6 +23,8 @@ The original intention of software development was to batch rename images, so th
 
 ## Custom background image
 
+Long press the theme switch button
+
 ![44](doc/44.gif)
 
 ## Preset overlay with the same name
