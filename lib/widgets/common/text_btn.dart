@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/config/theme/bottom_text.dart';
 
 class TextBtn extends StatefulWidget {
@@ -30,6 +31,7 @@ class _TextBtnState extends State<TextBtn> {
             color: isHover
                 ? theme.primaryColor
                 : theme.extension<BottomTextTheme>()?.textStyle.color,
+            fontFamily: defaultFont,
             height: 2,
           ),
           child: Text(widget.label, textAlign: TextAlign.center),

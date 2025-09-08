@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/constants/l10n.dart';
+import 'package:once_power/cores/file.dart';
+import 'package:once_power/cores/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 
@@ -15,7 +17,13 @@ class ViewBtn extends ConsumerWidget {
       tip: tr(AppL10n.bottomView),
       svg: AppIcons.image,
       selected: ref.watch(isViewModeProvider),
-      onPressed: ref.read(isViewModeProvider.notifier).update,
+      onPressed: () {
+        ref.read(isViewModeProvider.notifier).update();
+        if (ref.read(isViewModeProvider)) {
+          filterFile(ref);
+          updateName(ref);
+        }
+      },
     );
   }
 }

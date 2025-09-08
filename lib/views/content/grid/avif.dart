@@ -17,7 +17,7 @@ class AvifView extends StatelessWidget {
       File(file.path),
       cacheWidth: 136,
       fit: BoxFit.contain,
-      errorBuilder: (_, _, _) => ErrorImage(file: file.path),
+      errorBuilder: (_, __, ___) => ErrorImage(file: file.path),
       // placeholderBuilder: (context) => const LoadingImage(isPreview: true),
     );
 

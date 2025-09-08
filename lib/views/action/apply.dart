@@ -17,7 +17,7 @@ class ApplyRename extends ConsumerWidget {
   const ApplyRename({super.key});
 
   void apply(BuildContext context, WidgetRef ref) async {
-    await runRename(
+    bool complete = await runRename(
       ref,
       (WidgetRef ref, List<FileInfo> list, FileInfo file) async {
         // 获取带有扩展名的新文件名
@@ -38,6 +38,7 @@ class ApplyRename extends ConsumerWidget {
         }
       },
     );
+    if (!complete) return;
     updateName(ref);
     if (ref.watch(isModifyExtProvider)) {
       ref.read(isModifyExtProvider.notifier).update();

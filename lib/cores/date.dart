@@ -22,7 +22,7 @@ Future<void> modifyDate(WidgetRef ref) async {
   if (files.isEmpty) return;
   ref.read(totalProvider.notifier).update(total);
   ref.read(countProvider.notifier).reset();
-  // ref.read(isApplyingProvider.notifier).start();
+  ref.read(isApplyingProvider.notifier).start();
   List<InfoDetail> errors = [];
   DateTime startTime = DateTime.now();
 
@@ -62,7 +62,7 @@ Future<void> modifyDate(WidgetRef ref) async {
   Duration duration = DateTime.now().difference(startTime);
   double cost = duration.inMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
-  // ref.read(isApplyingProvider.notifier).finish();
+  ref.read(isApplyingProvider.notifier).finish();
   showDateModifyNotification(errors, total);
 }
 

@@ -35,7 +35,7 @@ class PresetBtn extends ConsumerWidget {
                 EasyTextBtn(
                   tr(AppL10n.advanceExport),
                   width: AppNum.presetMenu / 2,
-                  onTap: () {
+                  onPressed: () {
                     ctrl.close();
                     exportPreset(context);
                   },

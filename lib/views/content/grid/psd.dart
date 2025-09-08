@@ -60,7 +60,7 @@ class _PsdViewState extends ConsumerState<PsdView> {
       _imageData!,
       fit: BoxFit.contain,
       cacheWidth: ref.watch(viewImageWidthProvider).toInt(),
-      errorBuilder: (_, _, _) => ErrorImage(file: widget.file.path),
+      errorBuilder: (_, __, ___) => ErrorImage(file: widget.file.path),
       frameBuilder: (_, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) return child;
         return AnimatedSwitcher(

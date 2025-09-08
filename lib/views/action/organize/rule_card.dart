@@ -27,7 +27,7 @@ class RuleCard extends StatelessWidget {
       child: Row(
         spacing: AppNum.spaceMedium,
         children: [
-          Text('$title:'),
+          Text('$title:', style: Theme.of(context).textTheme.bodyMedium),
           Expanded(
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {

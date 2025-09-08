@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/csv.dart';
 import 'package:once_power/provider/list.dart';
@@ -66,7 +67,7 @@ class _CsvDataTileState extends ConsumerState<CsvDataCard> {
           decoration: InputDecoration(isDense: true, border: InputBorder.none),
           onTapOutside: onTapOutside,
           maxLines: null,
-          style: const TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 13, fontFamily: defaultFont),
           // readOnly: readOnly,
         ),
       ),

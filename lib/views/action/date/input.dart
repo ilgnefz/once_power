@@ -27,9 +27,6 @@ class _TimeInputState extends ConsumerState<TimeInput> {
   void initState() {
     super.initState();
     controller = TextEditingController(text: widget.date);
-    // controller.addListener(() {
-    //   widget.onChange(DateTime.tryParse(controller.text));
-    // });
     setState(() {});
   }
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,7 @@ import 'package:once_power/config/app.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/string.dart';
 import 'package:once_power/cores/file.dart';
+import 'package:once_power/provider/theme.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/regedit.dart';
 import 'package:once_power/utils/storage.dart';
@@ -71,7 +73,12 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   void onWindowClose() async {
     saveOrNo();
-    ref.watch(isAutoRunProvider) ? await minimizeWindow() : await closeWindow();
+    bool isPowerBoot = ref.watch(isAutoRunProvider);
+    if (isPowerBoot) {
+      await minimizeWindow();
+    } else {
+      await closeWindow();
+    }
   }
 
   @override
@@ -88,30 +95,27 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   @override
   Widget build(BuildContext context) {
+    final Uint8List? image = ref.watch(backgroundImageProvider);
+    final double opacity = ref.watch(backgroundOpacityProvider);
+    Color maskColor = Theme.of(context).scaffoldBackgroundColor;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: DragToResizeArea(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: FileImage(
-                File(
-                  // r'C:\Users\ilgnefz\Pictures\image_苏晓彤头像 需要自取__#明星不..._3.png',
-                  // r'C:\Users\ilgnefz\Pictures\P4\イラスト284-1.png',
-                  r'C:\Users\ilgnefz\Pictures\Camera Roll\73SjwExoSeXoo0p.jpg',
-                ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (image != null) Image.memory(image, fit: BoxFit.cover),
+            ColoredBox(
+              color: maskColor.withValues(alpha: opacity),
+              child: const Column(
+                children: [
+                  WindowTitleBar(),
+                  Expanded(child: Row(children: [ActionView(), ContentView()])),
+                  BottomView(),
+                ],
               ),
-              opacity: .2,
-              fit: BoxFit.cover,
             ),
-          ),
-          child: const Column(
-            children: [
-              WindowTitleBar(),
-              Expanded(child: Row(children: [ActionView(), ContentView()])),
-              BottomView(),
-            ],
-          ),
+          ],
         ),
       ),
     );

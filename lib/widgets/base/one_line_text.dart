@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 
 class OneLineText extends StatelessWidget {
   const OneLineText(
@@ -26,7 +27,13 @@ class OneLineText extends StatelessWidget {
         padding: padding ?? EdgeInsets.zero,
         child: Text(
           data,
-          style: style ?? TextStyle(fontSize: fontSize, color: color),
+          style:
+              style ??
+              TextStyle(
+                fontSize: fontSize ?? 14,
+                color: color,
+                fontFamily: defaultFont,
+              ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

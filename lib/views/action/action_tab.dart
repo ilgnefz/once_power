@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/file.dart';
 import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/app.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/select.dart';
 
 import 'advance/advance.dart';
@@ -30,21 +32,21 @@ class ActionTabBar extends ConsumerWidget {
               dividerHeight: 0,
               indicatorColor: theme.primaryColor,
               labelPadding: EdgeInsets.zero,
-              labelColor: theme.primaryColor,
-              unselectedLabelColor: theme.tabBarTheme.unselectedLabelColor,
+              // labelColor: theme.primaryColor,
+              labelStyle: theme.tabBarTheme.labelStyle,
+              unselectedLabelStyle: theme.tabBarTheme.unselectedLabelStyle,
+              // unselectedLabelColor: theme.tabBarTheme.unselectedLabelColor,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabs: modes.map((e) => Tab(text: e.label)).toList(),
               onTap: (index) {
-                // if (ref.watch(currentModeProvider).isReplace && index == 1) {
-                //   if (ref.watch(matchClearProvider) &&
-                //       ref.watch(modifyClearProvider)) {
-                //     ref.read(modifyControllerProvider.notifier).clear();
-                //   }
-                // }
+                if (index == 1) {
+                  if (ref.read(matchClearProvider) &&
+                      ref.read(modifyClearProvider)) {
+                    ref.read(modifyControllerProvider.notifier).clear();
+                  }
+                }
                 ref.read(currentModeProvider.notifier).update(modes[index]);
-                // if (ref.watch(isViewModeProvider) && index < 3) {
-                //   filterFile(context, ref);
-                // }
+                if (index < 3) filterFile(ref);
                 updateName(ref);
               },
             ),

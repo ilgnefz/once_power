@@ -103,5 +103,21 @@ final currentSizeProvider =
     );
 
 typedef _$CurrentSize = AutoDisposeNotifier<int>;
+String _$isApplyingHash() => r'c3945bac7f98889d1a03c9356128c4d3f2954c08';
+
+/// See also [IsApplying].
+@ProviderFor(IsApplying)
+final isApplyingProvider =
+    AutoDisposeNotifierProvider<IsApplying, bool>.internal(
+      IsApplying.new,
+      name: r'isApplyingProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$isApplyingHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$IsApplying = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

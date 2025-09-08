@@ -21,7 +21,7 @@ class PreviewSvg extends StatelessWidget {
         File(file),
         key: ValueKey(file),
         fit: BoxFit.scaleDown,
-        errorBuilder: (_, _, _) => ErrorImage(isPreview: true, file: file),
+        errorBuilder: (_, __, ___) => ErrorImage(isPreview: true, file: file),
         placeholderBuilder: (_) => const LoadingImage(isPreview: true),
       ),
     );

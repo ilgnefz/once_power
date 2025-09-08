@@ -36,10 +36,9 @@ void organizeFolder(WidgetRef ref) async {
   if (checkList.isEmpty) return;
   ref.read(totalProvider.notifier).update(total);
   ref.read(countProvider.notifier).reset();
-  // ref.read(isApplyingProvider.notifier).start();
+  ref.read(isApplyingProvider.notifier).start();
   List<InfoDetail> errors = [];
   DateTime startTime = DateTime.now();
-
   bool isGroup = ref.watch(useGroupOrganizeProvider);
   bool isRule = ref.watch(useTypeOrganizeProvider);
   bool isTop = ref.watch(useTopFolderProvider);
@@ -50,7 +49,6 @@ void organizeFolder(WidgetRef ref) async {
       return showOrganizeEmptyNotification();
     }
   }
-
   if (isGroup) {
     Map<String, String>? folders = StorageUtil.getStringMap(
       AppKeys.groupFolder,
@@ -69,7 +67,7 @@ void organizeFolder(WidgetRef ref) async {
     errors.addAll(await ruleOrganize(ref, checkList, rule));
   } else if (isTop) {
     errors.addAll(await topParentsOrganize(ref, checkList));
-  } else if (ref.watch(useDateClassifyProvider)) {
+  } else if (ref.watch(useDateOrganizeProvider)) {
     errors.addAll(await dateClassifyOrganize(ref, checkList));
   } else {
     errors.addAll(await normalOrganize(ref, checkList));
@@ -87,7 +85,7 @@ void organizeFolder(WidgetRef ref) async {
 void clearOrganize(WidgetRef ref) {
   ref.read(currentProgressFileProvider.notifier).clear();
   ref.read(currentSizeProvider.notifier).clear();
-  // ref.read(isApplyingProvider.notifier).finish();
+  ref.read(isApplyingProvider.notifier).finish();
 }
 
 Future<List<InfoDetail>> normalOrganize(
@@ -204,7 +202,6 @@ Future<InfoDetail?> organize(
     transferred: 0,
   );
   InfoDetail? infoDetail;
-
   try {
     // 提取目录创建逻辑为辅助函数（减少重复代码）
     await ensureParentDirExists(newPath);

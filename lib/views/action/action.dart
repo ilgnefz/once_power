@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/views/action/action_tab.dart';
 import 'package:once_power/views/action/csv/csv.dart';
@@ -18,9 +19,12 @@ class ActionView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      width: AppNum.action,
-      child: ref.watch(actionBarContentProvider),
+    return AbsorbPointer(
+      absorbing: ref.watch(isApplyingProvider),
+      child: SizedBox(
+        width: AppNum.action,
+        child: ref.watch(actionBarContentProvider),
+      ),
     );
   }
 }

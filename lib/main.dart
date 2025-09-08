@@ -12,17 +12,7 @@ import 'provider/select.dart';
 import 'provider/toggle.dart';
 import 'views/home.dart';
 
-// TODO: 按钮颜色
-// TODO: replace_switch 21
-// TODO: 高级模式 title 颜色
-// TODO: type 还是 file
-// TODO: 快捷键
-
 void main(List<String> args) async {
-  // if (kDebugMode) {
-  //   debugProfileBuildsEnabled = true;
-  //   debugPaintLayerBordersEnabled = true;
-  // }
   await AppConfig.init(args);
   runApp(
     ProviderScope(

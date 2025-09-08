@@ -9,6 +9,7 @@ class CommonDialog extends StatelessWidget {
     this.autoPop = true,
     required this.title,
     required this.child,
+    this.width,
     this.extraButton,
     this.onModelTap,
     this.onOk,
@@ -18,6 +19,7 @@ class CommonDialog extends StatelessWidget {
   final bool autoPop;
   final String title;
   final Widget child;
+  final double? width;
   final Widget? extraButton;
   final void Function()? onOk;
   final void Function()? onCancel;
@@ -28,6 +30,7 @@ class CommonDialog extends StatelessWidget {
     return EasyDialog(
       title: title,
       content: child,
+      width: width,
       okText: tr(AppL10n.dialogOk),
       cancelText: tr(AppL10n.dialogCancel),
       extraButton: extraButton,

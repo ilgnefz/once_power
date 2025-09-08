@@ -378,22 +378,22 @@ final useTopFolderProvider =
     );
 
 typedef _$UseTopFolder = AutoDisposeNotifier<bool>;
-String _$useDateClassifyHash() => r'5d0c2080caf95c9bd6aaa8b1ab41c2fec6c3372f';
+String _$useDateOrganizeHash() => r'bf554b6c606556c2a78417123cc6973413d6025b';
 
-/// See also [UseDateClassify].
-@ProviderFor(UseDateClassify)
-final useDateClassifyProvider =
-    AutoDisposeNotifierProvider<UseDateClassify, bool>.internal(
-      UseDateClassify.new,
-      name: r'useDateClassifyProvider',
+/// See also [UseDateOrganize].
+@ProviderFor(UseDateOrganize)
+final useDateOrganizeProvider =
+    AutoDisposeNotifierProvider<UseDateOrganize, bool>.internal(
+      UseDateOrganize.new,
+      name: r'useDateOrganizeProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$useDateClassifyHash,
+          : _$useDateOrganizeHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$UseDateClassify = AutoDisposeNotifier<bool>;
+typedef _$UseDateOrganize = AutoDisposeNotifier<bool>;
 String _$isAddFolderHash() => r'43c3d0388b786bd81e8869b4c8806fefbe6b3d13';
 
 /// See also [IsAddFolder].

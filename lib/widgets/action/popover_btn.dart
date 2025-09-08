@@ -14,6 +14,7 @@ class PopoverBtn extends StatefulWidget {
 class _PopoverBtnState extends State<PopoverBtn> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     bool isHover = false;
 
     return TolyPopover(
@@ -33,7 +34,7 @@ class _PopoverBtnState extends State<PopoverBtn> {
           child: Material(color: Colors.white, child: widget.builder(ctrl)),
         ),
       ),
-      builder: (_, ctrl, _) => MouseRegion(
+      builder: (_, ctrl, __) => MouseRegion(
         cursor: SystemMouseCursors.click,
         onHover: (e) => ctrl.open(),
         onExit: (e) {
@@ -43,7 +44,9 @@ class _PopoverBtnState extends State<PopoverBtn> {
         },
         child: Text(
           widget.label,
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.primaryColor,
+          ),
         ),
       ),
     );

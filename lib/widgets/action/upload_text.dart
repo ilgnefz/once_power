@@ -41,8 +41,12 @@ class _ShowUploadTextState extends ConsumerState<ShowUploadText> {
       content: Expanded(
         child: TextField(
           controller: controller,
-          decoration: InputDecoration(border: InputBorder.none),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
+          ),
           maxLines: null,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
       okText: tr(AppL10n.dialogSave),

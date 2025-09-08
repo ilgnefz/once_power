@@ -47,3 +47,11 @@ class CurrentSize extends _$CurrentSize {
   void update(int value) => state += value;
   void clear() => state = 0;
 }
+
+@riverpod
+class IsApplying extends _$IsApplying {
+  @override
+  bool build() => false;
+  void start() => state = true;
+  void finish() => state = false;
+}

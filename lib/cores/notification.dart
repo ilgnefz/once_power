@@ -24,9 +24,23 @@ void showEmptyNotification() {
   ).show();
 }
 
-void showSuspenseErrorNotification() {}
+void showSuspenseErrorNotification() {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: tr(AppL10n.errSuspense),
+    message: tr(AppL10n.errTxtDecodeInfo),
+    time: 3,
+  ).show();
+}
 
-showTxtDecodeNotification(String err) {}
+void showTxtDecodeNotification(String err) {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: tr(AppL10n.errTxtDecode),
+    message: tr(AppL10n.errTxtDecodeInfo),
+    time: 5,
+  ).show();
+}
 
 void showCSVWarningNotification() {
   NotificationInfo(
@@ -135,17 +149,17 @@ InfoDetail renameErrorNotification(Object e, String oldPath, String newPath) {
   return InfoDetail(file: path.basename(oldPath), message: message);
 }
 
-void showRenameNotification(List<InfoDetail> errors, int count) {
+void showRenameNotification(List<InfoDetail> errors, int total) {
   NotificationInfo info = NotificationInfo(
     title: tr(AppL10n.successRename),
-    message: tr(AppL10n.successRenameNum, namedArgs: {'count': '$count'}),
+    message: tr(AppL10n.successRenameNum, namedArgs: {'count': '$total'}),
   );
   if (errors.isNotEmpty) {
     info.type = NotificationType.error;
     info.title = tr(AppL10n.errRename);
     info.message = tr(
       AppL10n.errRenameNum,
-      namedArgs: {'total': '${errors.length}', 'count': '$count'},
+      namedArgs: {'total': '$total', 'count': '${errors.length}'},
     );
     info.detailList = errors;
   }
@@ -223,4 +237,22 @@ InfoDetail moveErrorNotification(
 ) {
   String message = '${tr(AppL10n.errMove)}: $e';
   return InfoDetail(file: oldPath, message: message);
+}
+
+void showOpenErrorNotification(String info, [int? time]) {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: tr(AppL10n.errOpen),
+    message: info,
+    time: time,
+  ).show();
+}
+
+void showFilterNotification(int count) {
+  if (count > 0) {
+    NotificationInfo(
+      title: tr(AppL10n.successViewMode),
+      message: tr(AppL10n.successRemove, namedArgs: {'count': '$count'}),
+    ).show();
+  }
 }

@@ -8,7 +8,6 @@ class DialogBaseInput extends StatefulWidget {
     this.enable = true,
     this.value,
     this.hintText = '',
-    // this.autofocus = false,
     this.controller,
     this.inputFormatters,
     required this.onChanged,
@@ -21,7 +20,6 @@ class DialogBaseInput extends StatefulWidget {
   final bool enable;
   final String? value;
   final String hintText;
-  // final bool autofocus;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String) onChanged;
@@ -64,7 +62,6 @@ class _DialogBaseInputState extends State<DialogBaseInput> {
     return BaseInput(
       enable: widget.enable,
       controller: controller,
-      // autofocus: widget.autofocus, // TODO: 删除
       show: show,
       onClear: onClear,
       hintText: widget.hintText,

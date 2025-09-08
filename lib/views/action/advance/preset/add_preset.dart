@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/notification.dart';
@@ -76,7 +77,7 @@ class _AddPresetState extends ConsumerState<AddPresetView> {
         Navigator.of(context).pop();
       },
       child: Column(
-        spacing: AppNum.spaceSmall,
+        spacing: AppNum.spaceMedium,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ConstrainedBox(
@@ -98,15 +99,17 @@ class _AddPresetState extends ConsumerState<AddPresetView> {
             ),
           ),
           DialogBaseInput(
-            // value: name,
             controller: controller,
-            // autofocus: true,
             hintText: tr(AppL10n.advancePresetNameHint),
             onChanged: (v) {},
           ),
           Text(
             tr(AppL10n.advanceAddPresetDesc),
-            style: TextStyle(fontSize: 12, color: Colors.grey),
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+              fontFamily: defaultFont,
+            ),
           ),
         ],
       ),

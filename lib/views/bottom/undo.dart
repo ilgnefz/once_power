@@ -19,7 +19,7 @@ class UndoBtn extends ConsumerWidget {
 
   Future<void> undoRename(WidgetRef ref) async {
     ref.read(showUndoProvider.notifier).update(true);
-    await runRename(
+    bool complete = await runRename(
       ref,
       (WidgetRef ref, List<FileInfo> list, FileInfo file) async {
         String oldPath = file.tempPath == '' ? file.path : file.tempPath;
@@ -34,6 +34,7 @@ class UndoBtn extends ConsumerWidget {
         showUndoNotification(errors, total);
       },
     );
+    if (!complete) return;
     ref.read(showUndoProvider.notifier).update(false);
     updateName(ref);
   }

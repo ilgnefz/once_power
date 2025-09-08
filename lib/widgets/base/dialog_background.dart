@@ -45,7 +45,7 @@ class DialogBackground extends ConsumerWidget {
           ),
         ),
         Center(child: child),
-        ?action,
+        if (action != null) action!,
       ],
     );
   }

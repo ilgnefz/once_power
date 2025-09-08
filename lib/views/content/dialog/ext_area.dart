@@ -66,7 +66,12 @@ class TypeGroupHeader extends ConsumerWidget {
           color: theme.scaffoldBackgroundColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(label, style: TextStyle(color: theme.primaryColor)),
+            child: Text(
+              label,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: theme.primaryColor),
+            ),
           ),
         ),
       ],

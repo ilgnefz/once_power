@@ -10,6 +10,7 @@ import 'package:once_power/views/action/advance/preset/add_preset.dart';
 import 'package:once_power/views/action/advance/preset/export.dart';
 import 'package:once_power/views/action/organize/group_list.dart';
 import 'package:once_power/views/action/organize/type_list.dart';
+import 'package:once_power/views/bottom/theme_view.dart';
 import 'package:once_power/views/content/grid/preview/preview.dart';
 import 'package:once_power/views/content/group.dart';
 import 'package:once_power/views/content/top/view_size.dart';
@@ -112,4 +113,8 @@ void showAllGroup(BuildContext context) {
 
 void showAllTypeRule(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => TypeList());
+}
+
+void showThemeView(BuildContext context, [AdvanceMenuAdd? menu]) {
+  showCustomDialog(context: context, builder: (context) => ThemeView());
 }

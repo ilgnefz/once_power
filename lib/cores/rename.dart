@@ -15,7 +15,7 @@ import 'package:path/path.dart' as path;
 import 'notification.dart';
 import 'update.dart';
 
-Future<void> runRename(
+Future<bool> runRename(
   WidgetRef ref,
   Future<InfoDetail?> Function(WidgetRef, List<FileInfo>, FileInfo) callback,
   Function(List<InfoDetail>, int) onEnd,
@@ -23,14 +23,14 @@ Future<void> runRename(
   List<FileInfo> list = ref.watch(sortListProvider);
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   int total = checkList.length;
-  if (checkList.isEmpty) return;
+  if (checkList.isEmpty) return false;
   ref.read(totalProvider.notifier).update(total);
-  // ref.read(isApplyingProvider.notifier).start(); // TODO: 暂时关闭
+  ref.read(isApplyingProvider.notifier).start();
   List<InfoDetail> errors = [];
   ref.read(countProvider.notifier).reset();
   final Stopwatch stopwatch = Stopwatch()..start();
-  for (final file in checkList) {
-    final info = await callback(ref, list, file);
+  for (FileInfo file in checkList) {
+    final InfoDetail? info = await callback(ref, list, file);
     if (info != null) errors.add(info);
     ref.read(countProvider.notifier).update();
   }
@@ -38,7 +38,8 @@ Future<void> runRename(
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   await onEnd(errors, total);
-  // ref.read(isApplyingProvider.notifier).finish();
+  ref.read(isApplyingProvider.notifier).finish();
+  return true;
 }
 
 Future<InfoDetail?> rename(
@@ -47,7 +48,6 @@ Future<InfoDetail?> rename(
   String oldPath,
   String newPath,
 ) async {
-  print('$oldPath -> $newPath');
   try {
     if (file.type.isFolder) {
       await Directory(oldPath).rename(newPath);
@@ -57,6 +57,7 @@ Future<InfoDetail?> rename(
     await updateShowInfo(ref, file, newPath);
     return null;
   } catch (e) {
+    print('rename-60: $e');
     return renameErrorNotification(e, oldPath, newPath);
   }
 }
@@ -98,7 +99,6 @@ Future<bool> tempRenameFile(
   FileInfo file, [
   bool isUndo = false,
 ]) async {
-  // print('收到文件了存在的文件${file.name}');
   String oldPath = file.path; // 旧文件路径
   String newFullName = isUndo
       ? path.dirname(file.beforePath)

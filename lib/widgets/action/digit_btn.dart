@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/config/theme/digit.dart';
+import 'package:once_power/provider/theme.dart';
 
 class DigitBtn extends StatelessWidget {
   const DigitBtn(
@@ -24,9 +27,17 @@ class DigitBtn extends StatelessWidget {
             topLeft: Radius.circular(8),
             bottomLeft: Radius.circular(8),
           );
-    return Material(
-      color: Theme.of(context).extension<DigitTheme>()?.backgroundColor,
-      borderRadius: borderRadius,
+    return Consumer(
+      builder: (_, ref, child) {
+        return Material(
+          color: Theme.of(context)
+              .extension<DigitTheme>()
+              ?.backgroundColor
+              .withValues(alpha: ref.watch(translucentInputProvider) ? .5 : 1),
+          borderRadius: borderRadius,
+          child: child,
+        );
+      },
       child: InkWell(
         borderRadius: borderRadius,
         onTap: onPressed,
@@ -35,7 +46,11 @@ class DigitBtn extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             label,
-            style: TextStyle(fontSize: 20, color: Color(0xFF999999)),
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xFF999999),
+              fontFamily: defaultFont,
+            ),
           ),
         ),
       ),

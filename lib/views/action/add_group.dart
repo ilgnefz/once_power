@@ -26,7 +26,7 @@ class AddGroup extends ConsumerWidget {
             label: tr(AppL10n.actionAddFolder),
             onChanged: (v) => ref.read(isAddFolderProvider.notifier).update(),
             child: Consumer(
-              builder: (_, ref, _) => EasyTooltip(
+              builder: (_, ref, __) => EasyTooltip(
                 tip: tr(AppL10n.actionFolderTip),
                 child: ClickIcon(
                   icon: Icons.folder_copy_rounded,

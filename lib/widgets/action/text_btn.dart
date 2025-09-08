@@ -7,27 +7,27 @@ class EasyTextBtn extends StatelessWidget {
     super.key,
     this.width,
     this.fontSize = 13,
-    required this.onTap,
+    required this.onPressed,
   });
 
   final String label;
   final double? width;
   final double? fontSize;
-  final void Function() onTap;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: onTap,
+        onTap: onPressed,
         child: Container(
           height: AppNum.input,
           width: width ?? AppNum.presetMenu,
           alignment: Alignment.center,
           child: Text(
             label,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: fontSize,
               color: Theme.of(context).primaryColor,
             ),

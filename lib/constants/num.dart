@@ -31,6 +31,10 @@ class AppNum {
   static const double paddingMedium = 8;
 
   static const double image = 136;
+
+  static const batchSize = 10;
+  static const maxFileSize = 1024 * 1024 * 150;
+
   // List
   static const List<double> imageSizes = [
     136,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/num.dart';
 
 import 'dialog_background.dart';
@@ -39,7 +38,9 @@ class EasyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    TextStyle textStyle = TextStyle(color: theme.primaryColor);
+    TextStyle? textStyle = theme.textTheme.bodyMedium?.copyWith(
+      color: theme.primaryColor,
+    );
     return DialogBackground(
       onModelTap: onModelTap,
       child: UnconstrainedBox(
@@ -63,10 +64,8 @@ class EasyDialog extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     title,
-                    style: TextStyle(
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      fontFamily: defaultFont,
                     ),
                   ),
                   content,

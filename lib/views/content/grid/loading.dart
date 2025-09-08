@@ -20,7 +20,10 @@ class LoadingImage extends StatelessWidget {
                 )
               : Image.asset(AppImages.loading, fit: BoxFit.contain),
         ),
-        Text(tr(AppL10n.contentLoading), style: const TextStyle(fontSize: 12)),
+        Text(
+          tr(AppL10n.contentLoading),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),
+        ),
       ],
     );
   }

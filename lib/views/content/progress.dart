@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/images.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
@@ -18,7 +19,7 @@ class ProgressView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int total = ref.watch(totalProvider);
     int count = ref.watch(countProvider);
-    TextStyle style = TextStyle(fontSize: 13);
+    TextStyle style = TextStyle(fontSize: 13, fontFamily: defaultFont);
     TextStyle lStyle = style.copyWith(color: Theme.of(context).primaryColor);
     int totalSize = getAllSize(ref);
     int currentSize = ref.watch(currentSizeProvider);
@@ -36,7 +37,6 @@ class ProgressView extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(4),
                   child: LinearProgressIndicator(
                     value: currentSize / totalSize,
-                    // value: info.transferred / info.size,
                     valueColor: AlwaysStoppedAnimation(
                       Theme.of(context).primaryColor,
                     ),

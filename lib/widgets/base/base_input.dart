@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/provider/theme.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
 class BaseInput extends StatelessWidget {
@@ -40,21 +42,30 @@ class BaseInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      height: AppNum.input,
-      padding:
-          padding ??
-          const EdgeInsets.only(
-            left: AppNum.paddingMedium,
-            right: AppNum.spaceSmall,
+    return Consumer(
+      builder: (_, ref, child) {
+        return Container(
+          height: AppNum.input,
+          padding: padding ??
+              const EdgeInsets.only(
+                left: AppNum.paddingMedium,
+                right: AppNum.spaceSmall,
+              ),
+          decoration: BoxDecoration(
+            color: theme.inputDecorationTheme.fillColor?.withValues(
+              alpha: ref.watch(translucentInputProvider) ? .5 : 1,
+            ),
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: .1),
+                blurRadius: 2,
+              ),
+            ],
           ),
-      decoration: BoxDecoration(
-        color: theme.inputDecorationTheme.fillColor,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2),
-        ],
-      ),
+          child: child!,
+        );
+      },
       child: Row(
         spacing: 4,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +92,7 @@ class BaseInput extends StatelessWidget {
                 inputFormatters: inputFormatters,
                 onChanged: onChanged,
                 maxLines: maxLines,
-                contextMenuBuilder: (_, _) => SizedBox.shrink(),
+                contextMenuBuilder: (_, __) => SizedBox.shrink(),
               ),
             ),
           ),

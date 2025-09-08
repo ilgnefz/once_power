@@ -46,9 +46,7 @@ class _DeleteTypeGroupState extends State<DeleteTypeGroup> {
         ),
         ...DeleteType.values.map((e) {
           return EasyCheckbox(
-            // mainAxisSize: MainAxisSize.min,
             label: e.label,
-            // sideWidth: 1.5,
             checked: widget.deleteTypes.contains(e),
             onChanged: (v) => widget.onChanged(e),
           );

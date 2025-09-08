@@ -15,7 +15,10 @@ class DeleteExtensionSwitch extends StatelessWidget {
       spacing: AppNum.paddingMedium,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('${tr(AppL10n.advanceDeleteExt)}:'),
+        Text(
+          '${tr(AppL10n.advanceDeleteExt)}:',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         SizedBox(
           height: 24,
           child: FittedBox(

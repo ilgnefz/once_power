@@ -54,12 +54,14 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
     final TextStyle highlightStyle = TextStyle(
       color: widget.menu.checked ? theme.primaryColor : theme.iconTheme.color,
       fontFamily: defaultFont,
+      fontSize: 14,
     );
     final TextStyle defaultStyle = TextStyle(
       color: widget.menu.checked
           ? theme.textTheme.bodyMedium?.color
           : theme.iconTheme.color,
       fontFamily: defaultFont,
+      fontSize: 14,
     );
 
     List<AdvanceMenuModel> selectList = ref.watch(
@@ -181,6 +183,8 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
                     color: widget.menu.checked
                         ? widget.menu.type.color
                         : theme.iconTheme.color,
+                    fontSize: 14,
+                    fontFamily: defaultFont,
                   ),
                 ),
                 SizedBox(width: AppNum.spaceMedium),

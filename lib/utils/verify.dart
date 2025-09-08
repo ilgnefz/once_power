@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/enums/app.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:path/path.dart' as path;
 
@@ -74,3 +76,6 @@ bool isSameNewPath(List<FileInfo> list, String newPath) {
   });
   return count > 1;
 }
+
+bool isShowView(WidgetRef ref) =>
+    ref.watch(isViewModeProvider) && !ref.watch(currentModeProvider).isOrganize;

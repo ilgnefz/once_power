@@ -16,7 +16,7 @@ class AddPresetBtn extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return EasyTextBtn(
       tr(AppL10n.advanceAddPreset),
-      onTap: () {
+      onPressed: () {
         controller.close();
         final current = ref.read(advanceMenuListProvider);
         final copies = current.map((e) => e.copyWith()).toList();

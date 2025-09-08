@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 
 class EasyClickText extends StatelessWidget {
   const EasyClickText({
@@ -26,8 +27,9 @@ class EasyClickText extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              color: color ?? Theme.of(context).colorScheme.surfaceContainerLow,
+              color: color ?? Theme.of(context).primaryColor,
               fontSize: fontSize,
+              fontFamily: defaultFont,
             ),
           ),
         ),

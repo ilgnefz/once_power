@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/cores/context_menu.dart';
 import 'package:once_power/models/file.dart';
@@ -156,7 +157,11 @@ class SelectSortItem extends ConsumerWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                   label: Text(
                     indexLabel,
-                    style: TextStyle(color: Colors.white, fontSize: 11),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontFamily: defaultFont,
+                    ),
                   ),
                 ),
             ],

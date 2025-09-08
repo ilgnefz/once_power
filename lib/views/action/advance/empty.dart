@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/l10n.dart';
 
 class DirectiveEmpty extends StatelessWidget {
@@ -8,8 +7,9 @@ class DirectiveEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle textStyle = TextStyle(fontFamily: defaultFont);
-
+    final TextStyle? textStyle = Theme.of(
+      context,
+    ).textTheme.bodyMedium?.copyWith(color: Colors.grey);
     return DefaultTextStyle(
       style: TextStyle(color: Colors.grey),
       child: Column(

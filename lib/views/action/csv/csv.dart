@@ -19,7 +19,7 @@ class CSVView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context).extension<TableTheme>();
+    final TableTheme? theme = Theme.of(context).extension<TableTheme>();
     final List<String> titles = ['A', 'B'];
 
     TextStyle textStyle = const TextStyle(

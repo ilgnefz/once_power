@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/constants/string.dart';
+import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/theme.dart';
 import 'package:once_power/views/bottom/auto_run.dart';
 import 'package:once_power/views/bottom/check.dart';
 import 'package:once_power/views/bottom/date.dart';
@@ -24,17 +27,30 @@ class BottomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppNum.bottom,
-      padding: const EdgeInsets.only(
-        left: AppNum.paddingMedium,
-        right: AppNum.padding,
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Theme.of(context).dividerColor, width: 1),
-        ),
-      ),
+    return Consumer(
+      builder: (_, ref, child) {
+        return AbsorbPointer(
+          absorbing: ref.watch(isApplyingProvider),
+          child: Container(
+            height: AppNum.bottom,
+            padding: const EdgeInsets.only(
+              left: AppNum.paddingMedium,
+              right: AppNum.padding,
+            ),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Theme.of(context).dividerColor.withValues(
+                    alpha: ref.watch(transparentDividerProvider) ? 0 : 1,
+                  ),
+                  width: 1,
+                ),
+              ),
+            ),
+            child: child,
+          ),
+        );
+      },
       child: Row(
         spacing: AppNum.spaceSmall,
         crossAxisAlignment: CrossAxisAlignment.center,

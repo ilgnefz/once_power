@@ -1,6 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:once_power/config/theme.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/widgets/base/svg_icon.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
@@ -34,7 +33,12 @@ class NotificationContent extends StatelessWidget {
             children: [
               SvgIcon(info.type.icon, color: info.type.color, size: 18),
               const SizedBox(width: 4),
-              Text(info.title, style: TextStyle(color: info.type.color)),
+              Text(
+                info.title,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: info.type.color,
+                ),
+              ),
               const Spacer(),
               ClickIcon(
                 icon: Icons.close,
@@ -51,11 +55,10 @@ class NotificationContent extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: info.detailList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  TextStyle fileStyle = TextStyle(
+                  TextStyle? fileStyle = theme.textTheme.bodyMedium?.copyWith(
                         color: Colors.blue,
-                        fontFamily: defaultFont,
                       ),
-                      infoStyle = TextStyle(
+                      infoStyle = theme.textTheme.bodyMedium?.copyWith(
                         color: theme.textTheme.labelMedium?.color,
                       );
                   return RichText(

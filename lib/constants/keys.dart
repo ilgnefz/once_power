@@ -25,6 +25,7 @@ class AppKeys {
 
   // double
   static String viewImageW = 'viewImageW';
+  static String backgroundOpacity = 'backgroundOpacity';
 
   // bool
   static String hadPressedCtrl = 'hadPressedCtrl';
@@ -45,7 +46,7 @@ class AppKeys {
   static String isViewMode = 'isViewMode';
   static String isAutoRun = 'isAutoRun';
   static String isClassifyFile = 'isClassifyFile';
-  static String isUseDateClassify = 'isUseDateClassify';
+  static String isUseDateOrganize = 'isUseDateOrganize';
   static String isUseGroupOrganize = 'isUseGroupOrganize';
   static String isUseRegex = 'isUseRegex';
   static String isUseRuleOrganize = 'isUseRuleOrganize';
@@ -55,6 +56,9 @@ class AppKeys {
   static String isCaseExtension = 'isCaseExtension';
   static String isMatchExtension = 'isMatchExtension';
   static String isAdvanceOrganize = 'isAdvanceOrganize';
+  static String isTranslucentInput = 'isTranslucentInput';
+  static String isTranslucentBtn = 'isTranslucentBtn';
+  static String isTransparentDivider = 'isTransparentDivider';
 
   // List
   static String targetFolderList = 'targetFolderList';
@@ -103,4 +107,7 @@ class AppKeys {
 
   // int
   static String theme = 'theme';
+
+  // Uint8List
+  static String backgroundImage = 'backgroundImage';
 }

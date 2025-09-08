@@ -15,13 +15,20 @@ import 'package:once_power/widgets/action/action_structure.dart';
 
 import 'case_group.dart';
 
-class RenameMenu extends StatelessWidget {
+class RenameMenu extends StatefulWidget {
   const RenameMenu({super.key, required this.slot});
 
   final Widget slot;
 
   @override
+  State<RenameMenu> createState() => _RenameMenuState();
+}
+
+class _RenameMenuState extends State<RenameMenu>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ActionStructure(
       menus: Padding(
         padding: const EdgeInsets.symmetric(
@@ -33,7 +40,7 @@ class RenameMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MatchInput(),
-            slot,
+            widget.slot,
             ModifyGroup(),
             DateInput(),
             PrefixInput(),
@@ -53,4 +60,7 @@ class RenameMenu extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

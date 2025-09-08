@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/update.dart';
+import 'package:once_power/cores/normal.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/enums/match.dart';
 import 'package:once_power/provider/input.dart';
@@ -33,7 +33,7 @@ class ReserveSwitch extends ConsumerWidget {
             enable: ref.watch(_enableProvider),
             onTap: () {
               ref.read(selectedReserveTypeProvider.notifier).update(e);
-              Debounce.run(() => updateName(ref));
+              Debounce.run(() => normalUpdateName(ref, true));
             },
           );
         }),

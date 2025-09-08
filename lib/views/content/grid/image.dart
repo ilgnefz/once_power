@@ -19,7 +19,7 @@ class ImageView extends ConsumerWidget {
       File(file.path),
       fit: BoxFit.contain,
       cacheWidth: ref.watch(viewImageWidthProvider).toInt(),
-      errorBuilder: (_, _, _) => ErrorImage(file: file.path),
+      errorBuilder: (_, __, ___) => ErrorImage(file: file.path),
       frameBuilder: (_, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) return child;
         return AnimatedSwitcher(

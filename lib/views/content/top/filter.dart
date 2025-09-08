@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/dialog.dart';
@@ -41,6 +42,7 @@ class FilterBtn extends ConsumerWidget {
                       color: color,
                       overflow: TextOverflow.ellipsis,
                       fontSize: isEn ? 13 : 14,
+                      fontFamily: defaultFont,
                     ),
                   ),
                 ),

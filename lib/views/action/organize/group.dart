@@ -25,8 +25,12 @@ class GroupGroup extends ConsumerWidget {
           EasyCheckbox(
             checked: ref.watch(useGroupOrganizeProvider),
             label: tr(AppL10n.organizeGroup),
-            onChanged: (v) =>
-                ref.read(useGroupOrganizeProvider.notifier).toggle(),
+            onChanged: (v) {
+              ref.read(useGroupOrganizeProvider.notifier).toggle();
+              ref.read(useTypeOrganizeProvider.notifier).update(false);
+              ref.read(useTopFolderProvider.notifier).update(false);
+              ref.read(useDateOrganizeProvider.notifier).update(false);
+            },
           ),
         ],
       ),

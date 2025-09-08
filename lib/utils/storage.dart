@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/type.dart';
@@ -151,5 +153,23 @@ class StorageUtil {
       }).toList();
     }
     return result;
+  }
+
+  static Future<bool> setUint8List(String key, Uint8List value) {
+    String base64String = base64Encode(value);
+    return _prefs.setString(key, base64String);
+  }
+
+  static Uint8List? getUint8List(String key) {
+    String? base64String = _prefs.getString(key);
+    if (base64String != null) {
+      try {
+        return base64Decode(base64String);
+      } catch (e) {
+        // 解码失败时返回null
+        return null;
+      }
+    }
+    return null;
   }
 }

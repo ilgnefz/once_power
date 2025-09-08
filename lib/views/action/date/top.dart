@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/update.dart';
@@ -18,10 +19,16 @@ class DateTop extends ConsumerWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(left: AppNum.padding),
-            child: Text(tr(AppL10n.dateTitle)),
+            child: Text(
+              tr(AppL10n.dateTitle),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ),
           TextButton(
-            child: Text(tr(AppL10n.dateExit)),
+            child: Text(
+              tr(AppL10n.dateExit),
+              style: TextStyle(fontFamily: defaultFont, fontSize: 14),
+            ),
             onPressed: () {
               ref.read(isDateModifyProvider.notifier).update(false);
               updateName(ref);

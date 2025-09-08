@@ -1,14 +1,17 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/keys.dart';
+import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:path/path.dart' as path;
 
+import 'notification.dart';
 import 'update.dart';
 
 void openFileLocation(String filePath) async {
@@ -17,10 +20,10 @@ void openFileLocation(String filePath) async {
     if (Platform.isWindows) {
       bool isFile = await FileSystemEntity.isFile(filePath);
       if (isFile && !await File(filePath).exists()) {
-        // return showOpenErrorNotification(S.current.notExistError, 5);
+        return showOpenErrorNotification(tr(AppL10n.errOpenInfo), 5);
       }
       if (!isFile && !await Directory(filePath).exists()) {
-        // return showOpenErrorNotification(S.current.notExistError, 5);
+        return showOpenErrorNotification(tr(AppL10n.errOpenInfo), 5);
       }
       await Process.run('explorer.exe', ['/select,', filePath]);
     } else if (Platform.isMacOS) {
@@ -30,7 +33,7 @@ void openFileLocation(String filePath) async {
     }
   } catch (e) {
     debugPrint('打开文件位置失败: $e');
-    // showOpenErrorNotification(e.toString());
+    showOpenErrorNotification(e.toString());
   }
 }
 

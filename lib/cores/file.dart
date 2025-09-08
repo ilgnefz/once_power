@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:once_power/constants/ext.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
@@ -75,21 +76,24 @@ Future<List<String>> getAllPath(String folder, bool addSubfolder) async {
 
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   Stopwatch stopwatch = Stopwatch()..start();
+  ref.read(isApplyingProvider.notifier).start();
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(countProvider.notifier).reset();
   await processFilesWithConcurrence(ref, paths);
+  if (isShowView(ref)) filterFile(ref);
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  ref.read(isApplyingProvider.notifier).finish();
 }
 
 Future<void> processFilesWithConcurrence(
   WidgetRef ref,
   List<String> paths,
 ) async {
-  const int maxConcurrent = 10; // 控制并发数量，防止资源耗尽
+  const int maxConcurrent = AppNum.batchSize; // 控制并发数量，防止资源耗尽
   final TaskTracker taskTracker = TaskTracker(); // 使用TaskTracker来跟踪任务状态
   for (String path in paths) {
     // 如果已达到最大并发数，等待一个任务完成
@@ -122,7 +126,6 @@ Future<void> _processSingleFile(WidgetRef ref, String filePath) async {
 
 Future<FileInfo> generateFileInfo(String filePath) async {
   String name = getFileName(filePath);
-  print('文件名: $name');
   String ext = getExtension(filePath);
   if (name.startsWith('.') && ext.isEmpty) {
     (ext, name) = (name.substring(1), '');
@@ -163,4 +166,14 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     metaInfo: metaInfo,
     thumbnail: thumbnail,
   );
+}
+
+void filterFile(WidgetRef ref) {
+  if (isShowView(ref)) {
+    final FileList provider = ref.read(fileListProvider.notifier);
+    final int before = ref.watch(fileListProvider).length;
+    provider.removeOtherClassify([FileClassify.image, FileClassify.video]);
+    final int after = ref.watch(fileListProvider).length;
+    showFilterNotification(before - after);
+  }
 }

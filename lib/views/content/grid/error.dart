@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/images.dart';
 import 'package:once_power/constants/l10n.dart';
 
@@ -50,8 +51,12 @@ class ErrorImage extends StatelessWidget {
         Text(
           '${tr(AppL10n.contentError)} (((;꒪ꈊ꒪;)))',
           style: isPreview
-              ? const TextStyle(fontSize: 14, color: Colors.white)
-              : const TextStyle(fontSize: 12),
+              ? TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontFamily: defaultFont,
+                )
+              : TextStyle(fontSize: 12, fontFamily: defaultFont),
         ),
       ],
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:once_power/config/theme/btn.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/dialog.dart';
@@ -21,7 +20,7 @@ class UploadFileCard extends StatelessWidget {
         width: AppNum.fileCard,
         padding: EdgeInsets.all(AppNum.spaceSmall),
         decoration: BoxDecoration(
-          color: Theme.of(context).extension<BtnTheme>()?.backgroundColor,
+          // color: Theme.of(context).extension<BtnTheme>()?.backgroundColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(

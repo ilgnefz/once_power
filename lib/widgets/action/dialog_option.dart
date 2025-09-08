@@ -25,7 +25,10 @@ class DialogOption extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(padding: padding, child: Text(title)),
+        Padding(
+          padding: padding,
+          child: Text(title, style: Theme.of(context).textTheme.bodyMedium),
+        ),
         Expanded(
           child: Wrap(
             spacing: spacing ?? 0.0,

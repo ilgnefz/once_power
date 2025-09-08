@@ -23,7 +23,7 @@ class ImportPreset extends StatelessWidget {
     return EasyTextBtn(
       tr(AppL10n.advanceImport),
       width: AppNum.presetMenu / 2,
-      onTap: () async {
+      onPressed: () async {
         List<AdvancePreset> list = ref.watch(advancePresetListProvider);
         try {
           final result = await openFile(

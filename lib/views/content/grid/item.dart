@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
@@ -53,6 +54,7 @@ class ContentGridItem extends StatelessWidget {
                           ? theme.textTheme.labelMedium?.color
                           : theme.primaryColor
                     : Colors.grey,
+                fontFamily: defaultFont,
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

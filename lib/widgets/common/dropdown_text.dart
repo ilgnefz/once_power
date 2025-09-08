@@ -26,7 +26,7 @@ class TextDropdown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = BorderRadius.circular(8);
+    final BorderRadius borderRadius = BorderRadius.circular(8);
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
         items: items,

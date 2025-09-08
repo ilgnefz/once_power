@@ -17,7 +17,7 @@ class SvgView extends StatelessWidget {
     Widget svg = SvgPicture.file(
       File(file.path),
       fit: BoxFit.contain,
-      errorBuilder: (_, _, _) => ErrorImage(file: file.path),
+      errorBuilder: (_, __, ___) => ErrorImage(file: file.path),
       placeholderBuilder: (_) => const LoadingImage(isPreview: true),
     );
 

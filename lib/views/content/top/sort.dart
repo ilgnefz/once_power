@@ -32,10 +32,8 @@ class SortBtn extends ConsumerWidget {
               Expanded(
                 child: Text(
                   e.label,
-                  style: TextStyle(
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     overflow: TextOverflow.ellipsis,
-                    fontSize: 14,
-                    color: theme.textTheme.labelMedium?.color,
                   ),
                 ),
               ),

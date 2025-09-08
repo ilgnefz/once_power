@@ -15,7 +15,10 @@ class WordSpacing extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('${tr(AppL10n.advanceWord)}: '),
+        Text(
+          '${tr(AppL10n.advanceWord)}: ',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         Expanded(
           child: DialogBaseInput(
             value: value,

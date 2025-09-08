@@ -27,7 +27,7 @@ class DateTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyCheckbox(checked: checked, label: title, onChanged: onChanged),
-          Text(label),
+          Text(label, style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
     );

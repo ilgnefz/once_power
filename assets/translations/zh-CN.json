@@ -42,7 +42,7 @@
     "extensionHint": "请输入新的扩展名",
     "extensionEnable": "启用修改扩展名",
     "disable": "输入已禁用",
-    "caseFile": "区分文件",
+    "caseFile": "区分文件类型",
     "caseExt": "区分扩展",
     "apply": "应用更改"
   },
@@ -217,6 +217,12 @@
       "front": "取出至前面",
       "behind": "取出至后面"
     },
+    "theme": "自定义主题",
+    "input": "半透明输入框",
+    "btn": "半透明按钮",
+    "divider": "透明分割线",
+    "mask": "遮罩透明度",
+    "background": "选择背景图片",
     "undo": "撤销",
     "task": "任务",
     "time": "用时",
@@ -365,7 +371,14 @@
     "organizeInfo2": "目标文件夹为空！",
     "groupFolder": "组文件夹为空！",
     "typeFolder": "类型文件夹为空！",
-    "move": "移动失败"
+    "move": "移动失败",
+    "open": "打开失败",
+    "openInfo": "目标位置已更改或已删除",
+    "suspense": "暂存文件失败",
+    "suspenseInfo": "禁止一次性暂存全部文件",
+    "txtDecode": "文件解析失败",
+    "txtDecodeInfo": "请检查文件编码，暂只支持 utf-8 和 gbk 编码的文件",
+    "check": "检查失败"
   },
   "success": {
     "copy": "复制成功",
@@ -384,7 +397,12 @@
     "deleteSelected": "已成功删除所有选中的文件",
     "deleteEmpty": "已成功删除所选文件夹下的空文件夹",
     "organize": "整理成功",
-    "organizeNum": "已成功移动所选中的 {count} 个文件"
+    "organizeNum": "已成功移动所选中的 {count} 个文件",
+    "viewMode": "视图模式",
+    "remove": "已移除 {count} 个非图片视频文件",
+    "check": "检查完成",
+    "newVersion": "新的版本 {version} 可以更新",
+    "noNewVersion": "当前已是最新版本"
   },
   "warning": {
     "label": "警告",

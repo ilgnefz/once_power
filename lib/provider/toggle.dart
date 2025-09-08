@@ -182,17 +182,17 @@ class UseTopFolder extends _$UseTopFolder {
 }
 
 @riverpod
-class UseDateClassify extends _$UseDateClassify {
+class UseDateOrganize extends _$UseDateOrganize {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseDateClassify);
+  bool build() => StorageUtil.getBool(AppKeys.isUseDateOrganize);
   Future<void> update(bool value) async {
     state = value;
-    await StorageUtil.setBool(AppKeys.isUseDateClassify, state);
+    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
   }
 
   Future<void> toggle() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isUseDateClassify, state);
+    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
   }
 }
 

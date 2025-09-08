@@ -47,7 +47,7 @@ class Instructions extends StatelessWidget {
                     text: desc[index],
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF666666),
+                      color: Colors.grey,
                       height: 1.5,
                       fontFamily: defaultFont,
                     ),

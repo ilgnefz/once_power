@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/provider/toggle.dart';
@@ -25,9 +26,16 @@ class EmptyView extends ConsumerWidget {
             icon: isView ? null : Icons.drive_folder_upload_rounded,
             svg: isView ? AppIcons.image : null,
             iconSize: 88,
-            color: Theme.of(context).primaryColor,
+            color: color,
           ),
-          Text(label, style: TextStyle(fontSize: 18, color: color)),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 18,
+              color: color,
+              fontFamily: defaultFont,
+            ),
+          ),
         ],
       ),
     );

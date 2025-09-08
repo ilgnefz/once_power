@@ -68,7 +68,7 @@ class _PreviewPsdState extends ConsumerState<PreviewPsd> {
         _imageData!,
         key: ValueKey(widget.file),
         fit: BoxFit.scaleDown,
-        errorBuilder: (_, _, _) =>
+        errorBuilder: (_, __, ___) =>
             ErrorImage(isPreview: true, file: widget.file.path),
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
           if (wasSynchronouslyLoaded) return child;

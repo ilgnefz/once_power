@@ -26,7 +26,7 @@ class PrefixSerial extends ConsumerWidget {
         Debounce.run(() => updateName(ref));
       },
       child: Row(
-        spacing: AppNum.paddingMedium,
+        spacing: AppNum.spaceSmall,
         children: [
           Expanded(
             child: DigitInput(

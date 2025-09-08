@@ -20,7 +20,7 @@ class PreviewAvif extends StatelessWidget {
         File(file),
         key: ValueKey(file),
         fit: BoxFit.scaleDown,
-        errorBuilder: (_, _, _) => ErrorImage(isPreview: true, file: file),
+        errorBuilder: (_, __, ___) => ErrorImage(isPreview: true, file: file),
         // placeholderBuilder: (context) => const LoadingImage(isPreview: true),
       ),
     );

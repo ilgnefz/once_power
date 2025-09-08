@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/models/file.dart';
@@ -51,7 +52,7 @@ class ContentListItem extends ConsumerWidget {
               flex: ref.watch(expandNewNameProvider) ? 2 : 1,
               fontSize: 13,
               color: isOrganize
-                  ? Colors.black
+                  ? theme.textTheme.bodyMedium?.color
                   : changeNameStyle
                   ? Colors.grey
                   : theme.primaryColor,
@@ -69,6 +70,7 @@ class ContentListItem extends ConsumerWidget {
                       : changeExtStyle
                       ? Colors.grey
                       : theme.primaryColor,
+                  fontFamily: defaultFont,
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,

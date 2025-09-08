@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/update.dart';
+import 'package:once_power/cores/normal.dart';
 import 'package:once_power/enums/match.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
@@ -23,7 +23,7 @@ class ReplaceSwitch extends ConsumerWidget {
           fontSize: context.locale == Locale('en', "US") ? 13 : 14,
           onTap: () {
             ref.read(selectedReplaceTypeProvider.notifier).update(e);
-            Debounce.run(() => updateName(ref));
+            Debounce.run(() => normalUpdateName(ref, false));
           },
         );
       }).toList(),

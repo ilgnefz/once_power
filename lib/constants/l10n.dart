@@ -213,6 +213,13 @@ class AppL10n {
   static const String bottomHotKeySuspense = 'bottom.hotKey.suspense';
   static const String bottomHotKeyFront = 'bottom.hotKey.front';
   static const String bottomHotKeyBehind = 'bottom.hotKey.behind';
+  static const String bottomTheme = 'bottom.theme';
+  static const String bottomInput = 'bottom.input';
+  static const String bottomBtn = 'bottom.btn';
+  static const String bottomDivider = 'bottom.divider';
+  static const String bottomMask = 'bottom.mask';
+  static const String bottomBackground = 'bottom.background';
+
   static const String bottomUndo = 'bottom.undo';
   static const String bottomTask = 'bottom.task';
   static const String bottomTime = 'bottom.time';
@@ -339,6 +346,13 @@ class AppL10n {
   static const String errGroupFolder = 'error.groupFolder';
   static const String errTypeFolder = 'error.typeFolder';
   static const String errMove = 'error.move';
+  static const String errOpen = 'error.open';
+  static const String errOpenInfo = 'error.openInfo';
+  static const String errSuspense = 'error.suspense';
+  static const String errSuspenseInfo = 'error.suspenseInfo';
+  static const String errTxtDecode = 'error.txtDecode';
+  static const String errTxtDecodeInfo = 'error.txtDecodeInfo';
+  static const String errCheck = 'error.check';
 
   /* ---------- success ---------- */
   static const String successCopy = 'success.copy';
@@ -358,6 +372,11 @@ class AppL10n {
   static const String successDeleteEmpty = 'success.deleteEmpty';
   static const String successOrganize = 'success.organize';
   static const String successOrganizeNum = 'success.organizeNum';
+  static const String successViewMode = 'success.viewMode';
+  static const String successRemove = 'success.remove';
+  static const String successCheck = 'success.check';
+  static const String successNewVersion = 'success.newVersion';
+  static const String successNoNewVersion = 'success.noNewVersion';
 
   /* ---------- warning ---------- */
   static const String warnLabel = 'warning.label';

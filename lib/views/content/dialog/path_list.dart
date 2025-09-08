@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/update.dart';
@@ -53,6 +54,7 @@ class PathItem extends ConsumerWidget {
               color: Theme.of(context).textTheme.bodyMedium?.color,
               fontSize: 14,
               height: 1.5,
+              fontFamily: defaultFont,
             ),
             children: [
               const WidgetSpan(child: SizedBox(width: AppNum.spaceSmall)),

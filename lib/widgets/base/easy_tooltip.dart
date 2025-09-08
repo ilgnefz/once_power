@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:tolyui_feedback/tolyui_feedback.dart';
 
@@ -55,7 +54,7 @@ TextSpan richTextTooltip(
     style: TextStyle(
       fontSize: 13,
       color: theme.primaryColor.withValues(alpha: .8),
-      fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+      fontFamily: defaultFont,
     ),
     children: [
       TextSpan(
@@ -63,7 +62,7 @@ TextSpan richTextTooltip(
         style: TextStyle(
           fontSize: 13,
           color: theme.textTheme.labelMedium?.color,
-          fontFamily: Platform.isWindows ? 'Microsoft YaHei' : null,
+          fontFamily: defaultFont,
         ),
       ),
     ],

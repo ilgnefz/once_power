@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
+import 'package:once_power/config/theme.dart';
 
 final class RightMenuItem<T> extends ContextMenuItem<T> {
   final String label;
@@ -29,12 +30,13 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
   ]) {
     final ThemeData theme = Theme.of(context);
     bool isFocused = menuState.focusedEntry == this;
-    final background = theme.scaffoldBackgroundColor;
+    final Color background = theme.scaffoldBackgroundColor;
     final Color focusedBackground = Colors.grey.withValues(alpha: 0.2);
-    final textStyle = TextStyle(
+    final TextStyle textStyle = TextStyle(
       color: color ?? theme.textTheme.labelMedium?.color,
       height: 1.0,
       fontSize: 14.0,
+      fontFamily: defaultFont,
     );
 
     return ConstrainedBox(
