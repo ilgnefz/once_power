@@ -51,8 +51,6 @@ class _PowerBootBtnState extends ConsumerState<AutoRunBtn> with TrayListener {
       await windowManager.setSkipTaskbar(false);
       await windowManager.show();
       await windowManager.focus();
-    } else if (menuItem.key == AppKeys.autoRun) {
-      ref.read(isAutoRunProvider.notifier).update();
     } else if (menuItem.key == AppKeys.exitApp) {
       await windowManager.destroy();
       exit(0);

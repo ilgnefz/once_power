@@ -201,6 +201,8 @@ class AppL10n {
   /* ---------- bottom ---------- */
   static const String bottomSave = 'bottom.save';
   static const String bottomRegedit = 'bottom.regedit';
+  static const String bottomRegeditTip1 = 'bottom.regeditTip1';
+  static const String bottomRegeditTip2 = 'bottom.regeditTip2';
   static const String bottomAutoRun = 'bottom.autoRun';
   static const String bottomLog = 'bottom.log';
   static const String bottomView = 'bottom.view';
@@ -381,4 +383,9 @@ class AppL10n {
   /* ---------- warning ---------- */
   static const String warnLabel = 'warning.label';
   static const String warnCsv = 'warning.csv';
+
+  /* ---------- tray ---------- */
+  static const String trayCancel = 'tray.cancel';
+  static const String trayShow = 'tray.show';
+  static const String trayExit = 'tray.exit';
 }

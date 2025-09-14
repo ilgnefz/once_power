@@ -2,7 +2,9 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/file.dart';
 import 'package:once_power/cores/list.dart';
 import 'package:once_power/cores/move.dart';
 import 'package:once_power/cores/upload.dart';
@@ -15,6 +17,7 @@ import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/views/content/empty.dart';
 import 'package:once_power/views/content/grid/content.dart';
 import 'package:once_power/views/content/top/top.dart';
@@ -45,6 +48,13 @@ class _ContentViewState extends ConsumerState<ContentView> {
   @override
   void initState() {
     super.initState();
+    List<String> fPath = StorageUtil.getStringList(AppKeys.rightMenuFolderPath);
+    if (fPath.isNotEmpty) {
+      Future.delayed(Duration.zero, () async {
+        await formatPath(ref, fPath);
+      });
+      StorageUtil.remove(AppKeys.rightMenuFolderPath);
+    }
     // 请求焦点，确保组件能够接收键盘事件
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();

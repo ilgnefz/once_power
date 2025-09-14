@@ -202,7 +202,9 @@
   },
   "bottom": {
     "save": "Save Config",
-    "regedit": "Enable right-click menu (single file/folder when app not running; use 'Send to' for multiple)",
+    "regedit": "Enable right-click menu (single file/folder when app not running; use 'Send to (Open Explorer, enter \"sendto\" in the address bar, and press Enter)' for multiple)",
+    "regeditTip1": "Add All",
+    "regeditTip2": "Add",
     "autoRun": "Auto-start",
     "log": "Save logs (in logs folder)",
     "view": "View Mode",
@@ -407,5 +409,10 @@
   "warning": {
     "label": "Warning",
     "csv": "CSV upload disabled in organize/date modes"
+  },
+  "tray": {
+    "cancel": "Cancel Operation",
+    "show": "Show Window",
+    "exit": "Exit App"
   }
 }

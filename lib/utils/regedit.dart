@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/string.dart';
 import 'package:win32_registry/win32_registry.dart';
 
@@ -21,7 +23,7 @@ class AppRegedit {
 
     RegistryValue labelRegValue = RegistryValue.string(
       '',
-      'shortcutTip1 $appName', // TODO: 翻译
+      '${tr(AppL10n.bottomRegeditTip1)} $appName',
     );
     RegistryValue iconRegValue = RegistryValue.string('Icon', appPath);
     RegistryValue cmdRegValue = RegistryValue.unexpandedString(
@@ -76,7 +78,7 @@ class AppRegedit {
 
     RegistryValue labelRegValue = RegistryValue.string(
       '',
-      'shortcutTip2 $appName', // TODO: 翻译
+      '${tr(AppL10n.bottomRegeditTip2)} $appName',
     );
     RegistryValue iconRegValue = RegistryValue.string('Icon', appPath);
     RegistryValue cmdRegValue = RegistryValue.unexpandedString(
