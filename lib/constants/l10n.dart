@@ -80,8 +80,6 @@ class AppL10n {
   static const String advanceAll = 'advance.all';
   static const String advanceAddHint = 'advance.addHint';
   static const String advanceAddPosition = 'advance.addPosition';
-  static const String advanceAddBefore = 'advance.addBefore';
-  static const String advanceAddAfter = 'advance.addAfter';
   static const String advancePresetName = 'advance.presetName';
   static const String advancePresetNameHint = 'advance.presetNameHint';
   static const String advanceAddPresetDesc = 'advance.addPresetDesc';
@@ -276,6 +274,7 @@ class AppL10n {
   static const String eMatchAll = 'enum.match.all';
   static const String eMatchFront = 'enum.match.front';
   static const String eMatchBehind = 'enum.match.behind';
+  static const String eMatchEnd = 'enum.match.end';
   static const String eDeleteDigit = 'enum.delete.digit';
   static const String eDeleteCapital = 'enum.delete.capital';
   static const String eDeleteLower = 'enum.delete.lowercase';

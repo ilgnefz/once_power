@@ -80,8 +80,6 @@
     "all": "All",
     "addHint": "Enter content to add",
     "addPosition": "Add Position",
-    "addBefore": "Before",
-    "addAfter": "After",
     "presetName": "Preset Name",
     "presetNameHint": "Enter preset name",
     "addPresetDesc": "Note: Click preset name to fill. Same name overwrites",
@@ -288,7 +286,8 @@
       "last": "Last",
       "all": "All",
       "front": "Front",
-      "behind": "Behind"
+      "behind": "Behind",
+      "end": "End"
     },
     "delete": {
       "digit": "Digits",

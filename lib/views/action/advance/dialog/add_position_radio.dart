@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/enums/advance.dart';
+import 'package:once_power/widgets/action/dialog_option.dart';
 import 'package:once_power/widgets/base/easy_radio.dart';
 import 'package:once_power/widgets/common/digit_input.dart';
 
@@ -21,23 +22,19 @@ class AddPositionRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return DialogOption(
+      title: '${tr(AppL10n.advanceAddPosition)}: ',
+      padding: EdgeInsets.only(top: 4.0),
+      alignment: WrapAlignment.spaceBetween,
       children: [
-        Text('${tr(AppL10n.advanceAddPosition)}: '),
-        EasyRadio(
-          label: tr(AppL10n.advanceAddBefore),
-          value: AddPosition.before,
-          groupValue: addPosition,
-          onChanged: (value) => positionChanged(value!),
+        ...AddPosition.values.map(
+          (e) => EasyRadio(
+            label: e.label,
+            value: e,
+            groupValue: addPosition,
+            onChanged: (value) => positionChanged(value!),
+          ),
         ),
-        Spacer(),
-        EasyRadio(
-          label: tr(AppL10n.advanceAddAfter),
-          value: AddPosition.after,
-          groupValue: addPosition,
-          onChanged: (value) => positionChanged(value!),
-        ),
-        Spacer(),
         SizedBox(
           width: 120,
           child: DigitInput(

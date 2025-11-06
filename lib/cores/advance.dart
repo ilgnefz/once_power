@@ -62,7 +62,7 @@ void advanceUpdateName(WidgetRef ref) {
             menu.distinguishType.isNone) {
           (_, index) = calculateIndex(classifyMap, [menu.group], file);
         }
-        name = advanceAddName(menu, file, name, index, date, folder);
+        (name, extension) = advanceAddName(menu, file, name, extension, index, date, folder);
       }
       if (menu.type.isReplace) {
         menu as AdvanceMenuReplace;
@@ -153,10 +153,11 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
   }
 }
 
-String advanceAddName(
+(String, String) advanceAddName(
   AdvanceMenuAdd menu,
   FileInfo file,
   String name,
+  String extension,
   int index,
   String date,
   String folder,
@@ -233,13 +234,16 @@ String advanceAddName(
           name = '$left$value$right';
         }
         break;
+      case AddPosition.end:
+        extension = '$extension$value';
+        break;
     }
   }
   if (addType.isSerial) {
     String num = formatNum(start, digits);
     name = addPosition.isBefore ? '$num$name' : '$name$num';
   }
-  return name;
+  return (name, extension);
 }
 
 String advanceReplaceName(

@@ -21,6 +21,10 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Add content to the extension name
+
+![45](doc/45.gif)
+
 ## Custom background image
 
 Long press the theme switch button

@@ -80,8 +80,6 @@
     "all": "全部",
     "addHint": "请输入添加内容",
     "addPosition": "添加位置",
-    "addBefore": "前面",
-    "addAfter": "后面",
     "presetName": "预设名称",
     "presetNameHint": "请输入预设名称",
     "addPresetDesc": "注：点击上方预设名称可自动填充至输入框，同名预设将被覆盖",
@@ -288,7 +286,8 @@
       "last": "最后一个",
       "all": "所有",
       "front": "前面",
-      "behind": "后面"
+      "behind": "后面",
+      "end": "末尾"
     },
     "delete": {
       "digit": "数字",

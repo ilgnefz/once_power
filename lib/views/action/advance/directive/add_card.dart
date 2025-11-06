@@ -39,9 +39,11 @@ class AdvanceAddCard extends StatelessWidget {
           children: [
             TextSpan(text: ' ${tr(AppL10n.advanceTo)} ', style: defaultStyle),
             TextSpan(text: menu.addPosition.label, style: highlightStyle),
-            TextSpan(text: ' ${tr(AppL10n.advanceDi)} ', style: defaultStyle),
-            TextSpan(text: '${menu.posIndex} ', style: highlightStyle),
-            TextSpan(text: tr(AppL10n.advancePlace), style: defaultStyle),
+            if (!menu.addPosition.isEnd) ...[
+              TextSpan(text: ' ${tr(AppL10n.advanceDi)} ', style: defaultStyle),
+              TextSpan(text: '${menu.posIndex} ', style: highlightStyle),
+              TextSpan(text: tr(AppL10n.advancePlace), style: defaultStyle),
+            ],
           ],
         ),
       );
