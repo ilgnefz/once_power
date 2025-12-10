@@ -21,6 +21,10 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Export filename
+
+![46](doc/46.gif)
+
 ## Add content to the extension name
 
 ![45](doc/45.gif)

@@ -16,9 +16,8 @@ class ExtInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool modify = ref.watch(isModifyExtProvider);
-    String hintText = modify
-        ? tr(AppL10n.renameExtHint)
-        : tr(AppL10n.renameDisable);
+    String hintText =
+        modify ? tr(AppL10n.renameExtHint) : tr(AppL10n.renameDisable);
     return ActionItem(
       label: tr(AppL10n.renameExt),
       tip: tr(AppL10n.renameExtEnable),

@@ -69,9 +69,9 @@ class FilterBtn extends ConsumerWidget {
               onTap: toggleCheck,
               child: Container(
                 padding: EdgeInsets.only(left: 4),
+                width: double.infinity,
                 color: Colors.transparent,
                 child: EasyCheckbox(
-                  // mainAxisSize: MainAxisSize.max,
                   checked: isCheck(ref, e),
                   label: e.label,
                   onChanged: (v) => toggleCheck(),

@@ -99,15 +99,12 @@ String? setTimeWin(
   }
 
   try {
-    final creationPtr = creationTime != null
-        ? creationTime.toFileTime()
-        : nullptr;
-    final writePtr = lastWriteTime != null
-        ? lastWriteTime.toFileTime()
-        : nullptr;
-    final accessPtr = lastAccessTime != null
-        ? lastAccessTime.toFileTime()
-        : nullptr;
+    final creationPtr =
+        creationTime != null ? creationTime.toFileTime() : nullptr;
+    final writePtr =
+        lastWriteTime != null ? lastWriteTime.toFileTime() : nullptr;
+    final accessPtr =
+        lastAccessTime != null ? lastAccessTime.toFileTime() : nullptr;
 
     if (SetFileTime(handle, creationPtr, accessPtr, writePtr) == FALSE) {
       return tr(

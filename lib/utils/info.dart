@@ -271,9 +271,9 @@ String getRandomValue(List<String> list, int len) {
 FileInfo? getSameFile(List<FileInfo> list, String newPath) {
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   return checkList.cast<FileInfo?>().firstWhere(
-    (e) => e?.path == newPath,
-    orElse: () => null,
-  );
+        (e) => e?.path == newPath,
+        orElse: () => null,
+      );
 }
 
 String getTempPath(String folder, String fileName) {
@@ -299,10 +299,8 @@ String getNewPath(FileInfo file) {
 
 String getTopPath(String filePath) {
   final separator = Platform.pathSeparator;
-  final pathList = filePath
-      .split(separator)
-      .where((e) => e.isNotEmpty)
-      .toList();
+  final pathList =
+      filePath.split(separator).where((e) => e.isNotEmpty).toList();
   final commonDirs = {
     'Documents',
     'Pictures',
@@ -363,9 +361,8 @@ Future<InfoDetail?> checkFile(
   String newNameWithExt = isUndo
       ? path.dirname(file.beforePath)
       : getFullName(file.newName, file.newExt);
-  String newPath = isUndo
-      ? file.beforePath
-      : path.join(file.parent, newNameWithExt);
+  String newPath =
+      isUndo ? file.beforePath : path.join(file.parent, newNameWithExt);
   bool isExist = await checkExist(ref, list, newPath, isUndo: isUndo);
   if (isExist) {
     return InfoDetail(

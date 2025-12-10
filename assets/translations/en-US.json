@@ -143,6 +143,13 @@
     "new": "New Name",
     "empty": "Drag files/folders here",
     "emptyImage": "Drag images/videos/folder here",
+    "export": {
+      "title": "Export Filename",
+      "hint": "Enter export filename",
+      "default": "OncePowerExportFilename",
+      "ext": "Export Extension",
+      "type": "Export Type"
+    },
     "sort": {
       "default": "Default",
       "nameAscending": "Name",

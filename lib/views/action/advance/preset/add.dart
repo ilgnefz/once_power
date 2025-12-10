@@ -20,7 +20,7 @@ class AddPresetBtn extends ConsumerWidget {
         controller.close();
         final current = ref.read(advanceMenuListProvider);
         final copies = current.map((e) => e.copyWith()).toList();
-        addPreset(context, ref, copies);
+        addPreset(context, copies);
       },
     );
   }

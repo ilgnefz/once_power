@@ -6,6 +6,7 @@ import 'package:once_power/cores/select.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/views/content/top/adjust_size.dart';
+import 'package:once_power/views/content/top/export.dart';
 import 'package:once_power/widgets/base/easy_checkbox.dart';
 import 'package:once_power/widgets/base/one_line_text.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
@@ -38,6 +39,8 @@ class ViewTop extends ConsumerWidget {
             onChanged: (v) => selectAll(ref),
           ),
           OneLineText(ref.watch(_labelProvider)),
+          ExportBtn(),
+          SizedBox(width: 4),
           ContentVisible(),
           SizedBox(width: 4),
           AdjustSize(),

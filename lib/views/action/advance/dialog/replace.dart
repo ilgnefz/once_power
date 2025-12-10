@@ -87,9 +87,8 @@ class _DeleteViewState extends ConsumerState<ReplaceView> {
                   hintText: isFormat
                       ? tr(AppL10n.advanceFormatDigit)
                       : tr(AppL10n.advanceReplaceHint1),
-                  inputFormatters: isFormat
-                      ? [FilteringTextInputFormatter.digitsOnly]
-                      : [],
+                  inputFormatters:
+                      isFormat ? [FilteringTextInputFormatter.digitsOnly] : [],
                   useRegex: useRegex,
                   onChanged: (value) => setState(() => oldValue = value),
                   onPressed: () => setState(() => useRegex = !useRegex),

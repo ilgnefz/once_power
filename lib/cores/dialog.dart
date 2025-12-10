@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/cores/notification.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
@@ -13,6 +12,7 @@ import 'package:once_power/views/action/organize/type_list.dart';
 import 'package:once_power/views/bottom/theme_view.dart';
 import 'package:once_power/views/content/grid/preview/preview.dart';
 import 'package:once_power/views/content/group.dart';
+import 'package:once_power/views/content/top/export_menu.dart';
 import 'package:once_power/views/content/top/view_size.dart';
 import 'package:once_power/widgets/action/upload_text.dart';
 import 'package:once_power/widgets/content/type_panel.dart';
@@ -89,7 +89,6 @@ void replaceText(BuildContext context, [AdvanceMenuReplace? menu]) {
 
 void addPreset(
   BuildContext context,
-  WidgetRef ref,
   List<AdvanceMenuModel> menus,
 ) {
   if (menus.isEmpty) return showPresetEmptyNotification();
@@ -117,4 +116,8 @@ void showAllTypeRule(BuildContext context) {
 
 void showThemeView(BuildContext context, [AdvanceMenuAdd? menu]) {
   showCustomDialog(context: context, builder: (context) => ThemeView());
+}
+
+void showExportMenu(BuildContext context) {
+  showCustomDialog(context: context, builder: (context) => ExportMenu());
 }

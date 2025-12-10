@@ -14,9 +14,8 @@ class EmptyView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final Color color = Theme.of(context).primaryColor;
     bool isView = ref.watch(isViewModeProvider);
-    String label = isView
-        ? tr(AppL10n.contentEmptyImage)
-        : tr(AppL10n.contentEmpty);
+    String label =
+        isView ? tr(AppL10n.contentEmptyImage) : tr(AppL10n.contentEmpty);
     return Center(
       child: Column(
         spacing: 8,

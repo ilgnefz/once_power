@@ -17,10 +17,8 @@ import 'list.dart';
 void advanceUpdateName(WidgetRef ref) {
   List<FileInfo> fileList = ref.watch(sortListProvider);
   final FileList fileListNotifier = ref.read(fileListProvider.notifier);
-  List<AdvanceMenuModel> menus = ref
-      .watch(advanceMenuListProvider)
-      .where((menu) => menu.checked)
-      .toList();
+  List<AdvanceMenuModel> menus =
+      ref.watch(advanceMenuListProvider).where((menu) => menu.checked).toList();
   int index = 0;
   Map<String, List<FileInfo>> classifyMap = {};
   for (FileInfo file in fileList) {
@@ -62,7 +60,8 @@ void advanceUpdateName(WidgetRef ref) {
             menu.distinguishType.isNone) {
           (_, index) = calculateIndex(classifyMap, [menu.group], file);
         }
-        (name, extension) = advanceAddName(menu, file, name, extension, index, date, folder);
+        (name, extension) =
+            advanceAddName(menu, file, name, extension, index, date, folder);
       }
       if (menu.type.isReplace) {
         menu as AdvanceMenuReplace;
@@ -303,16 +302,14 @@ String advanceReplaceName(
             final matches = RegExp(oldValue).allMatches(name);
             if (matches.isNotEmpty) {
               final lastMatch = matches.last;
-              name =
-                  name.substring(0, lastMatch.start) +
+              name = name.substring(0, lastMatch.start) +
                   newValue +
                   name.substring(lastMatch.end);
             }
           } else {
             int index = name.lastIndexOf(oldValue);
             if (index != -1) {
-              name =
-                  name.substring(0, index) +
+              name = name.substring(0, index) +
                   newValue +
                   name.substring(index + oldValue.length);
             }

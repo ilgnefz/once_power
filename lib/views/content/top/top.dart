@@ -8,6 +8,7 @@ import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/views/content/top/export.dart';
 import 'package:once_power/views/content/top/view_top.dart';
 import 'package:once_power/widgets/base/easy_checkbox.dart';
 import 'package:once_power/widgets/base/one_line_text.dart';
@@ -58,6 +59,8 @@ class ContentTop extends ConsumerWidget {
               children: [
                 OneLineText(ref.watch(_labelLeftProvider)),
                 ContentExpend(),
+                SizedBox(width: 4),
+                ExportBtn(),
                 SizedBox(width: 4),
                 if (!ref.watch(currentModeProvider).isOrganize)
                   ContentVisible(),

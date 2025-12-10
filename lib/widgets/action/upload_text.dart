@@ -54,18 +54,14 @@ class _ShowUploadTextState extends ConsumerState<ShowUploadText> {
       onOk: () {
         if (controller.text != widget.info.content) {
           if (widget.info.isPrefix) {
-            ref
-                .read(prefixUploadMarkProvider.notifier)
-                .update(
+            ref.read(prefixUploadMarkProvider.notifier).update(
                   UploadMarkInfo(
                     name: widget.info.name,
                     content: controller.text,
                   ),
                 );
           } else {
-            ref
-                .read(suffixUploadMarkProvider.notifier)
-                .update(
+            ref.read(suffixUploadMarkProvider.notifier).update(
                   UploadMarkInfo(
                     name: widget.info.name,
                     content: controller.text,

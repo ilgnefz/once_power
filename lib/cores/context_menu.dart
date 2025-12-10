@@ -121,9 +121,8 @@ Future<void> showFileRightMenu(
             ],
           ),
         RightMenuItem(
-          label: file.checked
-              ? tr(AppL10n.menuUnselect)
-              : tr(AppL10n.menuSelect),
+          label:
+              file.checked ? tr(AppL10n.menuUnselect) : tr(AppL10n.menuSelect),
           color: file.checked ? Colors.grey : theme.colorScheme.surfaceDim,
           onSelected: () => toggleMultipleCheck(ref, sortSelectList),
         ),

@@ -141,8 +141,9 @@ InfoDetail renameErrorNotification(Object e, String oldPath, String newPath) {
   debugPrint(e.runtimeType.toString());
   String message = '';
   if (e.runtimeType == PathNotFoundException) {
-    message =
-        ': ${tr(AppL10n.errNotExists, namedArgs: {'folder': path.dirname(newPath)})}';
+    message = ': ${tr(AppL10n.errNotExists, namedArgs: {
+          'folder': path.dirname(newPath)
+        })}';
   } else {
     message = tr(AppL10n.errRenameInfo, namedArgs: {'err': e.toString()});
   }

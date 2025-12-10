@@ -35,10 +35,8 @@ class _AddPresetState extends ConsumerState<AddPresetView> {
     if (preset != null) name = preset.name;
     controller = TextEditingController(text: name)
       ..addListener(() => setState(() {}));
-    presetNames = ref
-        .read(advancePresetListProvider)
-        .map((e) => e.name)
-        .toList();
+    presetNames =
+        ref.read(advancePresetListProvider).map((e) => e.name).toList();
     setState(() {});
   }
 

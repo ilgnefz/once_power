@@ -139,12 +139,16 @@ class AppL10n {
   static const String dateExit = 'date.exit';
 
   /* ---------- content ---------- */
-
   static const String contentOrigin = 'content.origin';
   static const String contentName = 'content.name';
   static const String contentNew = 'content.new';
   static const String contentEmpty = 'content.empty';
   static const String contentEmptyImage = 'content.emptyImage';
+  static const String contentExportTitle = 'content.export.title';
+  static const String contentExportHint = 'content.export.hint';
+  static const String contentExportDefault = 'content.export.default';
+  static const String contentExportExt = 'content.export.ext';
+  static const String contentExportType = 'content.export.type';
   static const String contentSortDefault = 'content.sort.default';
   static const String contentSortNameA = 'content.sort.nameAscending';
   static const String contentSortNameD = 'content.sort.nameDescending';

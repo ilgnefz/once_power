@@ -143,6 +143,13 @@
     "new": "新名称",
     "empty": "拖动文件（夹）到这里",
     "emptyImage": "拖动图片视频文件（夹）到这里",
+    "export": {
+      "title": "导出文件名",
+      "hint": "请输入导出文件名",
+      "default": "OncePower导出文件名",
+      "ext": "导出扩展名",
+      "type": "导出类型"
+    },
     "sort": {
       "default": "默认排序",
       "nameAscending": "名称升序",
