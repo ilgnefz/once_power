@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/cores/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
@@ -13,7 +14,10 @@ class ContentVisible extends ConsumerWidget {
     return ClickIcon(
       icon: active ? Icons.visibility_off : Icons.visibility,
       color: active ? theme.primaryColor : theme.iconTheme.color,
-      onPressed: ref.read(onlyChangeProvider.notifier).update,
+      onPressed: () {
+        ref.read(onlyChangeProvider.notifier).update();
+        updateName(ref);
+      },
     );
   }
 }

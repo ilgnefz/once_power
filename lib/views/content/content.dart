@@ -28,6 +28,10 @@ import 'progress.dart';
 final _viewProvider = Provider((ref) {
   List<FileInfo> files = ref.watch(sortListProvider);
   if (files.isEmpty) return EmptyView();
+  if (ref.watch(onlyChangeProvider)) {
+    files =
+        files.where((e) => e.name != e.newName || e.ext != e.newExt).toList();
+  }
   bool isViewMode = ref.watch(isViewModeProvider);
   FunctionMode mode = ref.watch(currentModeProvider);
   if (isViewMode && !mode.isOrganize) return ContentGrid(files: files);
@@ -76,7 +80,7 @@ class _ContentViewState extends ConsumerState<ContentView> {
 
       bool isControlPressed =
           keysPressed.contains(LogicalKeyboardKey.controlLeft) ||
-          keysPressed.contains(LogicalKeyboardKey.controlRight);
+              keysPressed.contains(LogicalKeyboardKey.controlRight);
 
       List<FileInfo> files = ref.watch(sortSelectListProvider);
 

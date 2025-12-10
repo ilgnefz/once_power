@@ -37,7 +37,7 @@ DisableProgramGroupPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=E:\
 OutputBaseFilename=OncePower
-SetupIconFile=E:\WorkSpace\Desktop\Flutter\once_power\windows\runner\resources\app_icon.ico
+SetupIconFile=E:\WorkSpace\Desktop\once_power\windows\runner\resources\app_icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -49,28 +49,28 @@ Name: "chinesesimplified"; MessagesFile: "compiler:Languages\chinesesimplified.i
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\desktop_drop_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\ffmpeg-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_avif.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_avif_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\fvp_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\libass.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\mdk.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\mdk-braw.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\mdk-nvjp2k.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\mdk-r3d.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\rust_lib_once_power.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\screen_retriever_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\shortcut_menu_extender_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\tray_manager_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\url_launcher_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\Flutter\once_power\build\windows\x64\runner\Release\window_manager_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\desktop_drop_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\ffmpeg-8.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_avif.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_avif_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\fvp_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\libass.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-braw.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-nvjp2k.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-r3d.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\rust_lib_once_power.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\screen_retriever_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\shortcut_menu_extender_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\tray_manager_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\url_launcher_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\window_manager_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

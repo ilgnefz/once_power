@@ -12,14 +12,13 @@ String _$currentModeHash() => r'b34f5ae2ee5f4a9ebda79e16b0be3e6d42dc2092';
 @ProviderFor(CurrentMode)
 final currentModeProvider =
     AutoDisposeNotifierProvider<CurrentMode, FunctionMode>.internal(
-      CurrentMode.new,
-      name: r'currentModeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentModeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentMode.new,
+  name: r'currentModeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentMode = AutoDisposeNotifier<FunctionMode>;
 String _$selectedReplaceTypeHash() =>
@@ -27,19 +26,16 @@ String _$selectedReplaceTypeHash() =>
 
 /// See also [SelectedReplaceType].
 @ProviderFor(SelectedReplaceType)
-final selectedReplaceTypeProvider =
-    AutoDisposeNotifierProvider<
-      SelectedReplaceType,
-      List<ReplaceType>
-    >.internal(
-      SelectedReplaceType.new,
-      name: r'selectedReplaceTypeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$selectedReplaceTypeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final selectedReplaceTypeProvider = AutoDisposeNotifierProvider<
+    SelectedReplaceType, List<ReplaceType>>.internal(
+  SelectedReplaceType.new,
+  name: r'selectedReplaceTypeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$selectedReplaceTypeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$SelectedReplaceType = AutoDisposeNotifier<List<ReplaceType>>;
 String _$selectedReserveTypeHash() =>
@@ -47,19 +43,16 @@ String _$selectedReserveTypeHash() =>
 
 /// See also [SelectedReserveType].
 @ProviderFor(SelectedReserveType)
-final selectedReserveTypeProvider =
-    AutoDisposeNotifierProvider<
-      SelectedReserveType,
-      List<ReserveType>
-    >.internal(
-      SelectedReserveType.new,
-      name: r'selectedReserveTypeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$selectedReserveTypeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final selectedReserveTypeProvider = AutoDisposeNotifierProvider<
+    SelectedReserveType, List<ReserveType>>.internal(
+  SelectedReserveType.new,
+  name: r'selectedReserveTypeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$selectedReserveTypeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$SelectedReserveType = AutoDisposeNotifier<List<ReserveType>>;
 String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
@@ -68,14 +61,14 @@ String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
 @ProviderFor(CurrentDateType)
 final currentDateTypeProvider =
     AutoDisposeNotifierProvider<CurrentDateType, DateType>.internal(
-      CurrentDateType.new,
-      name: r'currentDateTypeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentDateTypeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentDateType.new,
+  name: r'currentDateTypeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentDateTypeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
 String _$currentSortHash() => r'feb21384738aefca713c6326859c37a441629526';
@@ -84,14 +77,13 @@ String _$currentSortHash() => r'feb21384738aefca713c6326859c37a441629526';
 @ProviderFor(CurrentSort)
 final currentSortProvider =
     AutoDisposeNotifierProvider<CurrentSort, SortType>.internal(
-      CurrentSort.new,
-      name: r'currentSortProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentSortHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentSort.new,
+  name: r'currentSortProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentSortHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentSort = AutoDisposeNotifier<SortType>;
 String _$currentThemeHash() => r'5438070c83f89fae4291d9d062538e764faeec63';
@@ -100,14 +92,13 @@ String _$currentThemeHash() => r'5438070c83f89fae4291d9d062538e764faeec63';
 @ProviderFor(CurrentTheme)
 final currentThemeProvider =
     AutoDisposeNotifierProvider<CurrentTheme, ThemeType>.internal(
-      CurrentTheme.new,
-      name: r'currentThemeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentThemeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentTheme.new,
+  name: r'currentThemeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentThemeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentTheme = AutoDisposeNotifier<ThemeType>;
 String _$currentReplaceModeHash() =>
@@ -117,14 +108,14 @@ String _$currentReplaceModeHash() =>
 @ProviderFor(CurrentReplaceMode)
 final currentReplaceModeProvider =
     AutoDisposeNotifierProvider<CurrentReplaceMode, ReplaceMode>.internal(
-      CurrentReplaceMode.new,
-      name: r'currentReplaceModeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentReplaceModeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentReplaceMode.new,
+  name: r'currentReplaceModeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentReplaceModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentReplaceMode = AutoDisposeNotifier<ReplaceMode>;
 // ignore_for_file: type=lint

@@ -12,14 +12,14 @@ String _$translucentInputHash() => r'6118ba2aeaf1c1d68128dff415a1cc0b4958c8ed';
 @ProviderFor(TranslucentInput)
 final translucentInputProvider =
     AutoDisposeNotifierProvider<TranslucentInput, bool>.internal(
-      TranslucentInput.new,
-      name: r'translucentInputProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$translucentInputHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  TranslucentInput.new,
+  name: r'translucentInputProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$translucentInputHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$TranslucentInput = AutoDisposeNotifier<bool>;
 String _$translucentBtnHash() => r'ebc2138ca3b6d65eac086b844363a8d6ae93183e';
@@ -28,14 +28,14 @@ String _$translucentBtnHash() => r'ebc2138ca3b6d65eac086b844363a8d6ae93183e';
 @ProviderFor(TranslucentBtn)
 final translucentBtnProvider =
     AutoDisposeNotifierProvider<TranslucentBtn, bool>.internal(
-      TranslucentBtn.new,
-      name: r'translucentBtnProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$translucentBtnHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  TranslucentBtn.new,
+  name: r'translucentBtnProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$translucentBtnHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$TranslucentBtn = AutoDisposeNotifier<bool>;
 String _$transparentDividerHash() =>
@@ -45,14 +45,14 @@ String _$transparentDividerHash() =>
 @ProviderFor(TransparentDivider)
 final transparentDividerProvider =
     AutoDisposeNotifierProvider<TransparentDivider, bool>.internal(
-      TransparentDivider.new,
-      name: r'transparentDividerProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$transparentDividerHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  TransparentDivider.new,
+  name: r'transparentDividerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$transparentDividerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$TransparentDivider = AutoDisposeNotifier<bool>;
 String _$backgroundImageHash() => r'81d132c473bcf70f9697e8d42eec8d1fbee44351';
@@ -61,14 +61,14 @@ String _$backgroundImageHash() => r'81d132c473bcf70f9697e8d42eec8d1fbee44351';
 @ProviderFor(BackgroundImage)
 final backgroundImageProvider =
     AutoDisposeNotifierProvider<BackgroundImage, Uint8List?>.internal(
-      BackgroundImage.new,
-      name: r'backgroundImageProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$backgroundImageHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  BackgroundImage.new,
+  name: r'backgroundImageProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$backgroundImageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$BackgroundImage = AutoDisposeNotifier<Uint8List?>;
 String _$backgroundOpacityHash() => r'94e35bdafde88188c66f34e47cf53c3548eb6956';
@@ -77,14 +77,14 @@ String _$backgroundOpacityHash() => r'94e35bdafde88188c66f34e47cf53c3548eb6956';
 @ProviderFor(BackgroundOpacity)
 final backgroundOpacityProvider =
     AutoDisposeNotifierProvider<BackgroundOpacity, double>.internal(
-      BackgroundOpacity.new,
-      name: r'backgroundOpacityProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$backgroundOpacityHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  BackgroundOpacity.new,
+  name: r'backgroundOpacityProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$backgroundOpacityHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$BackgroundOpacity = AutoDisposeNotifier<double>;
 // ignore_for_file: type=lint

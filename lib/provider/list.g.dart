@@ -6,16 +6,15 @@ part of 'list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sortListHash() => r'954b959c1636433620a100f5179fd08a02f74e54';
+String _$sortListHash() => r'3948d3d6c95712b8e29eeaeac430dd498fbb2da2';
 
 /// See also [sortList].
 @ProviderFor(sortList)
 final sortListProvider = AutoDisposeProvider<List<FileInfo>>.internal(
   sortList,
   name: r'sortListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$sortListHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$sortListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -30,9 +29,8 @@ String _$classifyListHash() => r'ef550e40895b2ecd60c5fcc903caf2b74859c894';
 final classifyListProvider = AutoDisposeProvider<List<FileClassify>>.internal(
   classifyList,
   name: r'classifyListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$classifyListHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$classifyListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -46,19 +44,19 @@ String _$extensionListMapHash() => r'ec4d29d198bb37b5df2afe7946c8956b0c25d986';
 @ProviderFor(extensionListMap)
 final extensionListMapProvider =
     AutoDisposeProvider<Map<FileClassify, List<String>>>.internal(
-      extensionListMap,
-      name: r'extensionListMapProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$extensionListMapHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  extensionListMap,
+  name: r'extensionListMapProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$extensionListMapHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ExtensionListMapRef =
-    AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
+typedef ExtensionListMapRef
+    = AutoDisposeProviderRef<Map<FileClassify, List<String>>>;
 String _$selectedExtensionHash() => r'56fe0f08a8b23505129f7f431e6c9e4ffb093b1b';
 
 /// Copied from Dart SDK
@@ -92,15 +90,21 @@ class SelectedExtensionFamily extends Family<bool> {
   const SelectedExtensionFamily();
 
   /// See also [selectedExtension].
-  SelectedExtensionProvider call(String ext) {
-    return SelectedExtensionProvider(ext);
+  SelectedExtensionProvider call(
+    String ext,
+  ) {
+    return SelectedExtensionProvider(
+      ext,
+    );
   }
 
   @override
   SelectedExtensionProvider getProviderOverride(
     covariant SelectedExtensionProvider provider,
   ) {
-    return call(provider.ext);
+    return call(
+      provider.ext,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -121,19 +125,24 @@ class SelectedExtensionFamily extends Family<bool> {
 /// See also [selectedExtension].
 class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
   /// See also [selectedExtension].
-  SelectedExtensionProvider(String ext)
-    : this._internal(
-        (ref) => selectedExtension(ref as SelectedExtensionRef, ext),
-        from: selectedExtensionProvider,
-        name: r'selectedExtensionProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$selectedExtensionHash,
-        dependencies: SelectedExtensionFamily._dependencies,
-        allTransitiveDependencies:
-            SelectedExtensionFamily._allTransitiveDependencies,
-        ext: ext,
-      );
+  SelectedExtensionProvider(
+    String ext,
+  ) : this._internal(
+          (ref) => selectedExtension(
+            ref as SelectedExtensionRef,
+            ext,
+          ),
+          from: selectedExtensionProvider,
+          name: r'selectedExtensionProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$selectedExtensionHash,
+          dependencies: SelectedExtensionFamily._dependencies,
+          allTransitiveDependencies:
+              SelectedExtensionFamily._allTransitiveDependencies,
+          ext: ext,
+        );
 
   SelectedExtensionProvider._internal(
     super._createNotifier, {
@@ -148,7 +157,9 @@ class SelectedExtensionProvider extends AutoDisposeProvider<bool> {
   final String ext;
 
   @override
-  Override overrideWith(bool Function(SelectedExtensionRef provider) create) {
+  Override overrideWith(
+    bool Function(SelectedExtensionRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: SelectedExtensionProvider._internal(
@@ -204,9 +215,8 @@ String _$pathListHash() => r'6b063b2d123b1fda494c39b5463debc3e7f21cdc';
 final pathListProvider = AutoDisposeProvider<List<String>>.internal(
   pathList,
   name: r'pathListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$pathListHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$pathListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -226,15 +236,21 @@ class SelectedPathFamily extends Family<bool> {
   const SelectedPathFamily();
 
   /// See also [selectedPath].
-  SelectedPathProvider call(String folder) {
-    return SelectedPathProvider(folder);
+  SelectedPathProvider call(
+    String folder,
+  ) {
+    return SelectedPathProvider(
+      folder,
+    );
   }
 
   @override
   SelectedPathProvider getProviderOverride(
     covariant SelectedPathProvider provider,
   ) {
-    return call(provider.folder);
+    return call(
+      provider.folder,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -255,19 +271,24 @@ class SelectedPathFamily extends Family<bool> {
 /// See also [selectedPath].
 class SelectedPathProvider extends AutoDisposeProvider<bool> {
   /// See also [selectedPath].
-  SelectedPathProvider(String folder)
-    : this._internal(
-        (ref) => selectedPath(ref as SelectedPathRef, folder),
-        from: selectedPathProvider,
-        name: r'selectedPathProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$selectedPathHash,
-        dependencies: SelectedPathFamily._dependencies,
-        allTransitiveDependencies:
-            SelectedPathFamily._allTransitiveDependencies,
-        folder: folder,
-      );
+  SelectedPathProvider(
+    String folder,
+  ) : this._internal(
+          (ref) => selectedPath(
+            ref as SelectedPathRef,
+            folder,
+          ),
+          from: selectedPathProvider,
+          name: r'selectedPathProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$selectedPathHash,
+          dependencies: SelectedPathFamily._dependencies,
+          allTransitiveDependencies:
+              SelectedPathFamily._allTransitiveDependencies,
+          folder: folder,
+        );
 
   SelectedPathProvider._internal(
     super._createNotifier, {
@@ -282,7 +303,9 @@ class SelectedPathProvider extends AutoDisposeProvider<bool> {
   final String folder;
 
   @override
-  Override overrideWith(bool Function(SelectedPathRef provider) create) {
+  Override overrideWith(
+    bool Function(SelectedPathRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: SelectedPathProvider._internal(
@@ -337,14 +360,14 @@ String _$sortSelectListHash() => r'4f635dcbc64b08c1eeceefcce63f0f92d9d31e10';
 @ProviderFor(SortSelectList)
 final sortSelectListProvider =
     AutoDisposeNotifierProvider<SortSelectList, List<FileInfo>>.internal(
-      SortSelectList.new,
-      name: r'sortSelectListProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$sortSelectListHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  SortSelectList.new,
+  name: r'sortSelectListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sortSelectListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$SortSelectList = AutoDisposeNotifier<List<FileInfo>>;
 String _$advanceMenuSelectedListHash() =>
@@ -352,19 +375,16 @@ String _$advanceMenuSelectedListHash() =>
 
 /// See also [AdvanceMenuSelectedList].
 @ProviderFor(AdvanceMenuSelectedList)
-final advanceMenuSelectedListProvider =
-    AutoDisposeNotifierProvider<
-      AdvanceMenuSelectedList,
-      List<AdvanceMenuModel>
-    >.internal(
-      AdvanceMenuSelectedList.new,
-      name: r'advanceMenuSelectedListProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$advanceMenuSelectedListHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final advanceMenuSelectedListProvider = AutoDisposeNotifierProvider<
+    AdvanceMenuSelectedList, List<AdvanceMenuModel>>.internal(
+  AdvanceMenuSelectedList.new,
+  name: r'advanceMenuSelectedListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$advanceMenuSelectedListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$AdvanceMenuSelectedList = AutoDisposeNotifier<List<AdvanceMenuModel>>;
 String _$cSVDataHash() => r'a24606979d40a878b7d73205dfc4658ae3c3a2b9';
@@ -373,14 +393,13 @@ String _$cSVDataHash() => r'a24606979d40a878b7d73205dfc4658ae3c3a2b9';
 @ProviderFor(CSVData)
 final cSVDataProvider =
     AutoDisposeNotifierProvider<CSVData, List<CsvRenameInfo>>.internal(
-      CSVData.new,
-      name: r'cSVDataProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$cSVDataHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CSVData.new,
+  name: r'cSVDataProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cSVDataHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CSVData = AutoDisposeNotifier<List<CsvRenameInfo>>;
 // ignore_for_file: type=lint

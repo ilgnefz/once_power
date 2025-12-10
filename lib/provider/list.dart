@@ -27,15 +27,13 @@ List<FileInfo> sortList(Ref ref) {
       sortedList = splitSortList(list, true);
       break;
     case SortType.dateAscending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           int result = a.createdDate.compareTo(b.createdDate);
           return result == 0 ? a.name.compareTo(b.name) : result;
         });
       break;
     case SortType.dateDescending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           int result = b.createdDate.compareTo(a.createdDate);
           return result == 0 ? b.name.compareTo(a.name) : result;
         });
@@ -47,57 +45,49 @@ List<FileInfo> sortList(Ref ref) {
       sortedList = [...list]..sort((a, b) => b.ext.compareTo(a.ext));
       break;
     case SortType.checkAscending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.checked == b.checked) return 0;
           return a.checked ? -1 : 1;
         });
       break;
     case SortType.checkDescending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.checked == b.checked) return 0;
           return b.checked ? -1 : 1;
         });
       break;
     case SortType.sizeAscending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.size == b.size) return 0;
           return a.size.compareTo(b.size);
         });
       break;
     case SortType.sizeDescending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.size == b.size) return 0;
           return b.size.compareTo(a.size);
         });
       break;
     case SortType.groupAscending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.group == b.group) return 0;
           return a.group.compareTo(b.group);
         });
       break;
     case SortType.groupDescending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.group == b.group) return 0;
           return b.group.compareTo(a.group);
         });
       break;
     case SortType.folderAscending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.parent == b.parent) return 0;
           return a.parent.compareTo(b.parent);
         });
       break;
     case SortType.folderDescending:
-      sortedList = [...list]
-        ..sort((a, b) {
+      sortedList = [...list]..sort((a, b) {
           if (a.parent == b.parent) return 0;
           return b.parent.compareTo(a.parent);
         });
@@ -105,11 +95,6 @@ List<FileInfo> sortList(Ref ref) {
     default:
       sortedList = list;
       break;
-  }
-  if (ref.watch(onlyChangeProvider)) {
-    sortedList = sortedList
-        .where((e) => e.name != e.newName || e.ext != e.newExt)
-        .toList();
   }
   return sortedList;
 }
