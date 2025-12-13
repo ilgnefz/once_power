@@ -9,6 +9,7 @@ import 'package:once_power/views/action/advance/preset/add_preset.dart';
 import 'package:once_power/views/action/advance/preset/export.dart';
 import 'package:once_power/views/action/organize/group_list.dart';
 import 'package:once_power/views/action/organize/type_list.dart';
+import 'package:once_power/views/bottom/save_view.dart';
 import 'package:once_power/views/bottom/theme_view.dart';
 import 'package:once_power/views/content/grid/preview/preview.dart';
 import 'package:once_power/views/content/group.dart';
@@ -120,4 +121,8 @@ void showThemeView(BuildContext context, [AdvanceMenuAdd? menu]) {
 
 void showExportMenu(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => ExportMenu());
+}
+
+void showSaveView(BuildContext context) {
+  showCustomDialog(context: context, builder: (context) => SaveView());
 }

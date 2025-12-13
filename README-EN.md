@@ -21,6 +21,11 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Automatically restore the previous window size and position
+
+
+![47](doc/47.gif)
+
 ## Export filename
 
 ![46](doc/46.gif)

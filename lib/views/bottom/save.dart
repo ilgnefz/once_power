@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/icons.dart';
 import 'package:once_power/constants/l10n.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widgets/common/tooltip_icon.dart';
 
@@ -12,10 +13,11 @@ class SaveBtn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TooltipIcon(
-      tip: tr(AppL10n.bottomSave),
+      tip: '${tr(AppL10n.bottomSave)} ${tr(AppL10n.bottomSaveTip)}',
       svg: AppIcons.save,
       selected: ref.watch(isSaveConfigProvider),
       onPressed: ref.read(isSaveConfigProvider.notifier).update,
+      onLongPress: () => showSaveView(context),
     );
   }
 }

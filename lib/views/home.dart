@@ -63,6 +63,26 @@ class _HomeViewState extends ConsumerState<HomeView>
     exit(0);
   }
 
+  @override
+  void onWindowResized() async {
+    bool saveSize = StorageUtil.getBool(AppKeys.saveSize);
+    if (saveSize) {
+      Size size = await windowManager.getSize();
+      await StorageUtil.setDouble(AppKeys.windowWidth, size.width);
+      await StorageUtil.setDouble(AppKeys.windowHeight, size.height);
+    }
+  }
+
+  @override
+  void onWindowMoved() async {
+    bool savePosition = StorageUtil.getBool(AppKeys.savePosition);
+    if (savePosition) {
+      Offset position = await windowManager.getPosition();
+      await StorageUtil.setDouble(AppKeys.windowX, position.dx);
+      await StorageUtil.setDouble(AppKeys.windowY, position.dy);
+    }
+  }
+
   void toggleRegedit() {
     if (StorageUtil.getBool(AppKeys.isUseRegedit)) {
       AppRegedit.removeLocalRegedit();
@@ -72,13 +92,11 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   @override
   void onWindowClose() async {
-    saveOrNo();
+    bool isMaxed = StorageUtil.getBool(AppKeys.saveSize) &&
+        await windowManager.isMaximized();
+    await StorageUtil.setBool(AppKeys.isMaxed, isMaxed);
     bool isPowerBoot = ref.watch(isAutoRunProvider);
-    if (isPowerBoot) {
-      await minimizeWindow();
-    } else {
-      await closeWindow();
-    }
+    isPowerBoot ? await minimizeWindow() : await closeWindow();
   }
 
   @override

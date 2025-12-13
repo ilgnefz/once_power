@@ -46,13 +46,33 @@ class AppConfig {
 
     await windowManager.ensureInitialized();
 
+    double width = AppNum.width, height = AppNum.height;
+    bool isCenter = true;
+    bool isMaxed = StorageUtil.getBool(AppKeys.isMaxed);
+
+    bool saveSize = StorageUtil.getBool(AppKeys.saveSize);
+    if (saveSize && !isMaxed) {
+      width = StorageUtil.getDouble(AppKeys.windowWidth) ?? AppNum.width;
+      height = StorageUtil.getDouble(AppKeys.windowHeight) ?? AppNum.height;
+    }
+    bool savePosition = StorageUtil.getBool(AppKeys.savePosition);
+    if (savePosition) isCenter = false;
+
+    if (!isCenter) {
+      await windowManager.setPosition(Offset(
+        StorageUtil.getDouble(AppKeys.windowX) ?? 0,
+        StorageUtil.getDouble(AppKeys.windowY) ?? 0,
+      ));
+    }
+
     WindowOptions windowOptions = WindowOptions(
-      size: Size(AppNum.width, AppNum.height),
+      size: Size(width, height),
       minimumSize: Size(AppNum.width, AppNum.height),
-      center: true,
+      center: isCenter,
       title: AppString.appName,
       backgroundColor: Colors.transparent,
     );
+
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       if (powerBoot) {
         await windowManager.minimize();
@@ -60,6 +80,7 @@ class AppConfig {
         await AppTray.addTray();
       } else {
         await windowManager.show();
+        if (isMaxed) await windowManager.maximize();
         await windowManager.focus();
       }
       await windowManager.setAsFrameless();

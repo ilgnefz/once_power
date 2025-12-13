@@ -118,7 +118,7 @@ final checkVideoProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CheckVideoRef = AutoDisposeProviderRef<bool>;
-String _$isMaxHash() => r'97d30cfb9e1f1078f8738d81a7a1f3af2da55508';
+String _$isMaxHash() => r'f5dd919f5b55266668de2dbf4c20aaa69d9c80da';
 
 /// See also [IsMax].
 @ProviderFor(IsMax)

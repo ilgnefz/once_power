@@ -6,8 +6,8 @@
     "organize": "Organize"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
+    "light": "Light Theme",
+    "dark": "Dark Theme",
     "system": "Follow System"
   },
   "action": {
@@ -139,8 +139,8 @@
   },
   "content": {
     "origin": "Original",
-    "name": "Filename",
     "new": "New Name",
+    "adjustSize": "Left: Zoom in, Right: Zoom out, Long press: Custom size",
     "empty": "Drag files/folders here",
     "emptyImage": "Drag images/videos/folder here",
     "export": {
@@ -207,6 +207,9 @@
   },
   "bottom": {
     "save": "Save Config",
+    "saveTip": "(Long press to configure)",
+    "saveSize": "Save Window Size",
+    "savePosition": "Save Window Position",
     "regedit": "Enable right-click menu (single file/folder when app not running; use 'Send to (Open Explorer, enter \"sendto\" in the address bar, and press Enter)' for multiple)",
     "regeditTip1": "Add All",
     "regeditTip2": "Add",
@@ -224,6 +227,7 @@
       "front": "Take to front",
       "behind": "Take to back"
     },
+    "themeTip": "(Long press to set background image)",
     "theme": "Custom theme",
     "input": "Translucent input",
     "btn": "Translucent btn",

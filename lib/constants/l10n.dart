@@ -140,8 +140,8 @@ class AppL10n {
 
   /* ---------- content ---------- */
   static const String contentOrigin = 'content.origin';
-  static const String contentName = 'content.name';
   static const String contentNew = 'content.new';
+  static const String contentAdjustSize = 'content.adjustSize';
   static const String contentEmpty = 'content.empty';
   static const String contentEmptyImage = 'content.emptyImage';
   static const String contentExportTitle = 'content.export.title';
@@ -202,6 +202,9 @@ class AppL10n {
 
   /* ---------- bottom ---------- */
   static const String bottomSave = 'bottom.save';
+  static const String bottomSaveTip = 'bottom.saveTip';
+  static const String bottomSaveSize = 'bottom.saveSize';
+  static const String bottomSavePosition = 'bottom.savePosition';
   static const String bottomRegedit = 'bottom.regedit';
   static const String bottomRegeditTip1 = 'bottom.regeditTip1';
   static const String bottomRegeditTip2 = 'bottom.regeditTip2';
@@ -217,6 +220,7 @@ class AppL10n {
   static const String bottomHotKeySuspense = 'bottom.hotKey.suspense';
   static const String bottomHotKeyFront = 'bottom.hotKey.front';
   static const String bottomHotKeyBehind = 'bottom.hotKey.behind';
+  static const String bottomThemeTip = 'bottom.themeTip';
   static const String bottomTheme = 'bottom.theme';
   static const String bottomInput = 'bottom.input';
   static const String bottomBtn = 'bottom.btn';

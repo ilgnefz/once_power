@@ -26,6 +26,10 @@ class AppKeys {
   // double
   static String viewImageW = 'viewImageW';
   static String backgroundOpacity = 'backgroundOpacity';
+  static String windowWidth = 'windowWidth';
+  static String windowHeight = 'windowHeight';
+  static String windowX = 'windowX';
+  static String windowY = 'windowY';
 
   // bool
   static String hadPressedCtrl = 'hadPressedCtrl';
@@ -59,6 +63,9 @@ class AppKeys {
   static String isTranslucentInput = 'isTranslucentInput';
   static String isTranslucentBtn = 'isTranslucentBtn';
   static String isTransparentDivider = 'isTransparentDivider';
+  static String isMaxed = 'isMaxed';
+  static String savePosition = 'savePosition';
+  static String saveSize = 'saveSize';
 
   // List
   static String targetFolderList = 'targetFolderList';

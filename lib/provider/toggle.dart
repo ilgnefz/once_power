@@ -14,8 +14,8 @@ part 'toggle.g.dart';
 @riverpod
 class IsMax extends _$IsMax {
   @override
-  bool build() => false;
-  void update() => state = !state;
+  bool build() => StorageUtil.getBool(AppKeys.isMaxed);
+  void update() async => state = !state;
 }
 
 /* ----- Action Rename ----- */
@@ -247,70 +247,56 @@ class ExpandNewName extends _$ExpandNewName {
 
 @riverpod
 bool checkArchive(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isArchive)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isArchive).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkAudio(Ref ref) {
-  List<FileInfo> audioList = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isAudio)
-      .toList();
+  List<FileInfo> audioList =
+      ref.watch(fileListProvider).where((e) => e.type.isAudio).toList();
   int check = audioList.where((e) => e.checked == true).length;
   return check >= audioList.length;
 }
 
 @riverpod
 bool checkFolder(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isFolder)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isFolder).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkImage(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isImage)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isImage).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkOther(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isOther)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isOther).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkText(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isDoc)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isDoc).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkVideo(Ref ref) {
-  List<FileInfo> list = ref
-      .watch(fileListProvider)
-      .where((e) => e.type.isVideo)
-      .toList();
+  List<FileInfo> list =
+      ref.watch(fileListProvider).where((e) => e.type.isVideo).toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
