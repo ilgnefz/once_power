@@ -90,8 +90,8 @@ enum AddType {
   height,
   extension,
   date,
-  group,
   metaData,
+  group,
 }
 
 extension AddTypeExtension on AddType {
@@ -132,6 +132,29 @@ extension AddTypeExtension on AddType {
   bool get isGroup => this == AddType.group;
 }
 
+enum TimeSplitType { hidden, none, chinese, space, dash, dot, underscore }
+
+extension TimeSplitTypeExtension on TimeSplitType {
+  String get label {
+    switch (this) {
+      case TimeSplitType.hidden:
+        return tr(AppL10n.eSplitHidden);
+      case TimeSplitType.none:
+        return tr(AppL10n.eSplitNone);
+      case TimeSplitType.chinese:
+        return '时分秒';
+      case TimeSplitType.space:
+        return tr(AppL10n.eSplitSpace);
+      case TimeSplitType.dash:
+        return '-';
+      case TimeSplitType.dot:
+        return '.';
+      case TimeSplitType.underscore:
+        return '_';
+    }
+  }
+}
+
 enum DateSplitType { none, chinese, space, dash, dot, underscore }
 
 extension DateSplitTypeExtension on DateSplitType {
@@ -153,7 +176,7 @@ extension DateSplitTypeExtension on DateSplitType {
   }
 }
 
-enum DistinguishType { none, date, folder, file, extension, group }
+enum DistinguishType { none, folder, file, extension, group, date }
 
 extension DistinguishTypeExtension on DistinguishType {
   String get label {

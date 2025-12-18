@@ -320,8 +320,9 @@
       "meta": "元数据"
     },
     "split": {
-      "none": "无",
-      "space": "空格"
+      "none": "不分隔",
+      "space": "空格",
+      "hidden": "不显示"
     },
     "distinguish": {
       "none": "不区分",

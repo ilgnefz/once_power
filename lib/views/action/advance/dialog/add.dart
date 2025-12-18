@@ -39,8 +39,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
   int randomLen = 1;
   DateType dateType = DateType.createdDate;
   DateSplitType dateSplit = DateSplitType.none;
+  TimeSplitType timeSplit = TimeSplitType.hidden;
   AddPosition position = AddPosition.after;
   FileMetaData metaData = FileMetaData.title;
+  DateType distinguishDateType = DateType.createdDate;
   String group = 'all';
 
   @override
@@ -51,6 +53,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       digits = widget.menu!.digits;
       start = widget.menu!.start;
       posIndex = widget.menu!.posIndex;
+      timeSplit = widget.menu!.timeSplit;
       randoms = widget.menu!.randomValue;
       distinguishType = widget.menu!.distinguishType;
       type = widget.menu!.addType;
@@ -59,6 +62,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       dateSplit = widget.menu!.dateSplit;
       metaData = widget.menu!.metaData;
       position = widget.menu!.addPosition;
+      distinguishDateType = widget.menu!.distinguishDateType;
       group = widget.menu!.group;
     }
   }
@@ -89,11 +93,13 @@ class _DeleteViewState extends ConsumerState<AddView> {
             len: randomLen,
             date: dateType,
             dateSplit: dateSplit,
+            timeSplit: timeSplit,
             metaData: metaData,
             typeChanged: (value) => setState(() => type = value),
             randomLenChange: (value) => setState(() => randomLen = value),
             dateChange: (value) => setState(() => dateType = value!),
             dateSplitChange: (value) => setState(() => dateSplit = value!),
+            timeSplitChange: (value) => setState(() => timeSplit = value!),
             metaDataChange: (value) => setState(() => metaData = value!),
           ),
           SizedBox(height: 4.0),
@@ -105,7 +111,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
           ),
           AddSerialDistinguish(
             type: distinguishType,
+            dateType: distinguishDateType,
             typeChanged: (value) => setState(() => distinguishType = value),
+            dateTypeChanged: (value) =>
+                setState(() => distinguishDateType = value!),
           ),
           RandomCheckbox(
             randoms: randoms,
@@ -134,8 +143,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
           addPosition: position,
           dateType: dateType,
           dateSplit: dateSplit,
+          timeSplit: timeSplit,
           metaData: metaData,
           posIndex: posIndex,
+          distinguishDateType: distinguishDateType,
           group: group,
         );
         if (widget.menu != null) {

@@ -9,14 +9,18 @@ class AddDateGroup extends ConsumerWidget {
     super.key,
     required this.date,
     required this.dateSplit,
+    required this.timeSplit,
     required this.dateChange,
     required this.dateSplitChange,
+    required this.timeSplitChange,
   });
 
   final DateType date;
   final DateSplitType dateSplit;
+  final TimeSplitType timeSplit;
   final void Function(DateType?) dateChange;
   final void Function(DateSplitType?) dateSplitChange;
+  final void Function(TimeSplitType?) timeSplitChange;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,10 +55,23 @@ class AddDateGroup extends ConsumerWidget {
                 ),
               )
               .toList(),
-          width: 102,
           color: theme.popupMenuTheme.surfaceTintColor,
           value: dateSplit,
           onChanged: dateSplitChange,
+        ),
+        TextDropdown(
+          items: TimeSplitType.values
+              .map(
+                (item) => DropdownMenuItem(
+                  key: ValueKey(item),
+                  value: item,
+                  child: Text(item.label, style: textStyle),
+                ),
+              )
+              .toList(),
+          color: theme.popupMenuTheme.surfaceTintColor,
+          value: timeSplit,
+          onChanged: timeSplitChange,
         ),
       ],
     );

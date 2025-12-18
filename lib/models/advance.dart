@@ -141,20 +141,20 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
 
   @override
   Map<String, dynamic> toJson() => {
-    "type": type.index,
-    "id": id,
-    "checked": checked,
-    "value": value,
-    "matchLocation": matchLocation.index,
-    "front": front,
-    "back": back,
-    "start": start,
-    "end": end,
-    "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
-    "deleteExt": deleteExt,
-    "useRegex": useRegex,
-    "group": group,
-  };
+        "type": type.index,
+        "id": id,
+        "checked": checked,
+        "value": value,
+        "matchLocation": matchLocation.index,
+        "front": front,
+        "back": back,
+        "start": start,
+        "end": end,
+        "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
+        "deleteExt": deleteExt,
+        "useRegex": useRegex,
+        "group": group,
+      };
 
   @override
   String toString() {
@@ -183,8 +183,10 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final int randomLen;
   final DateType dateType;
   final DateSplitType dateSplit;
+  final TimeSplitType timeSplit;
   final FileMetaData metaData;
   final AddPosition addPosition;
+  final DateType distinguishDateType;
   final int posIndex;
 
   AdvanceMenuAdd({
@@ -199,8 +201,10 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.randomLen,
     required this.dateType,
     required this.dateSplit,
+    required this.timeSplit,
     required this.metaData,
     required this.addPosition,
+    required this.distinguishDateType,
     required this.posIndex,
     required super.group,
   }) : super(type: AdvanceType.add);
@@ -221,52 +225,58 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       randomLen: randomLen,
       dateType: dateType,
       dateSplit: dateSplit,
+      timeSplit: timeSplit,
       metaData: metaData,
       addPosition: addPosition,
+      distinguishDateType: distinguishDateType,
       posIndex: posIndex,
       group: group,
     );
   }
 
   factory AdvanceMenuAdd.fromJson(Map<String, dynamic> json) => AdvanceMenuAdd(
-    id: json["id"],
-    checked: json["checked"] ?? true,
-    value: json["value"],
-    digits: json["digits"] ?? 0,
-    start: json["start"] ?? 1,
-    randomValue: json["randomValue"] == null
-        ? <String>[]
-        : List<String>.from(json["randomValue"].map((x) => x)),
-    distinguishType: DistinguishType.values[json["distinguishType"] ?? 0],
-    addType: AddType.values[json["addType"] ?? 0],
-    randomLen: json["randomLen"] ?? 1,
-    dateType: DateType.values[json["dateType"] ?? 0],
-    dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
-    metaData: FileMetaData.values[json["metaData"] ?? 0],
-    addPosition: AddPosition.values[json["addPosition"] ?? 1],
-    posIndex: json["posIndex"] ?? 1,
-    group: json["group"] ?? 'all',
-  );
+        id: json["id"],
+        checked: json["checked"] ?? true,
+        value: json["value"],
+        digits: json["digits"] ?? 0,
+        start: json["start"] ?? 1,
+        randomValue: json["randomValue"] == null
+            ? <String>[]
+            : List<String>.from(json["randomValue"].map((x) => x)),
+        distinguishType: DistinguishType.values[json["distinguishType"] ?? 0],
+        addType: AddType.values[json["addType"] ?? 0],
+        randomLen: json["randomLen"] ?? 1,
+        dateType: DateType.values[json["dateType"] ?? 0],
+        dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
+        timeSplit: TimeSplitType.values[json["timeSplit"] ?? 0],
+        metaData: FileMetaData.values[json["metaData"] ?? 0],
+        addPosition: AddPosition.values[json["addPosition"] ?? 1],
+        distinguishDateType: DateType.values[json["distinguishDateType"] ?? 0],
+        posIndex: json["posIndex"] ?? 1,
+        group: json["group"] ?? 'all',
+      );
 
   @override
   Map<String, dynamic> toJson() => {
-    "type": type.index,
-    "id": id,
-    "checked": checked,
-    "value": value,
-    "digits": digits,
-    "start": start,
-    "randomValue": List<String>.from(randomValue.map((x) => x)),
-    "distinguishType": distinguishType.index,
-    "addType": addType.index,
-    "randomLen": randomLen,
-    "dateType": dateType.index,
-    "dateSplit": dateSplit.index,
-    "metaData": metaData.index,
-    "addPosition": addPosition.index,
-    "posIndex": posIndex,
-    "group": group,
-  };
+        "type": type.index,
+        "id": id,
+        "checked": checked,
+        "value": value,
+        "digits": digits,
+        "start": start,
+        "randomValue": List<String>.from(randomValue.map((x) => x)),
+        "distinguishType": distinguishType.index,
+        "addType": addType.index,
+        "randomLen": randomLen,
+        "dateType": dateType.index,
+        "dateSplit": dateSplit.index,
+        "timeSplit": timeSplit.index,
+        "metaData": metaData.index,
+        "addPosition": addPosition.index,
+        "distinguishDateType": distinguishDateType.index,
+        "posIndex": posIndex,
+        "group": group,
+      };
 
   @override
   String toString() {
@@ -282,8 +292,10 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'randomLen: $randomLen, '
         'dateType: $dateType, '
         'dateSplit: $dateSplit, '
+        'timeSplit: $timeSplit, '
         'metaData: $metaData, '
         'addPosition: $addPosition, '
+        'distinguishDateType: $distinguishDateType,'
         'posIndex: $posIndex, '
         'group: $group}';
   }
@@ -364,23 +376,23 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
 
   @override
   Map<String, dynamic> toJson() => {
-    "type": type.index,
-    "id": id,
-    "checked": checked,
-    "value": List<String>.from(value.map((x) => x)),
-    "replaceMode": replaceMode.index,
-    "fillPosition": fillPosition.index,
-    "matchLocation": matchLocation.index,
-    "front": front,
-    "back": back,
-    "start": start,
-    "end": end,
-    "convertType": convertType.index,
-    "wordSpacing": wordSpacing,
-    "useRegex": useRegex,
-    "matchExt": matchExt,
-    "group": group,
-  };
+        "type": type.index,
+        "id": id,
+        "checked": checked,
+        "value": List<String>.from(value.map((x) => x)),
+        "replaceMode": replaceMode.index,
+        "fillPosition": fillPosition.index,
+        "matchLocation": matchLocation.index,
+        "front": front,
+        "back": back,
+        "start": start,
+        "end": end,
+        "convertType": convertType.index,
+        "wordSpacing": wordSpacing,
+        "useRegex": useRegex,
+        "matchExt": matchExt,
+        "group": group,
+      };
 
   @override
   String toString() {

@@ -321,7 +321,8 @@
     },
     "split": {
       "none": "None",
-      "space": "Space"
+      "space": "Space",
+      "hidden": "Hidden"
     },
     "distinguish": {
       "none": "None",

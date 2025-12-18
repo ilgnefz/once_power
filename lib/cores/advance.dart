@@ -38,11 +38,13 @@ void advanceUpdateName(WidgetRef ref) {
       }
       if (menu.type.isAdd) {
         menu as AdvanceMenuAdd;
-        String date = getDateName(menu.dateType, 8, file);
+        // String date = getDateName(menu.dateType, 14, file);
         String folder = getFolderName(file.parent);
         String type = file.type.label;
         if (menu.distinguishType.isDate) {
-          (_, index) = calculateIndex(classifyMap, [date], file);
+          DateType distinguishDate = menu.distinguishDateType;
+          String indexDate = getDateName(distinguishDate, 8, file);
+          (_, index) = calculateIndex(classifyMap, [indexDate], file);
         }
         if (menu.distinguishType.isFolder) {
           (_, index) = calculateIndex(classifyMap, [folder], file);
@@ -61,7 +63,7 @@ void advanceUpdateName(WidgetRef ref) {
           (_, index) = calculateIndex(classifyMap, [menu.group], file);
         }
         (name, extension) =
-            advanceAddName(menu, file, name, extension, index, date, folder);
+            advanceAddName(menu, file, name, extension, index, folder);
       }
       if (menu.type.isReplace) {
         menu as AdvanceMenuReplace;
@@ -158,7 +160,6 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
   String name,
   String extension,
   int index,
-  String date,
   String folder,
 ) {
   String value = menu.value;
@@ -187,7 +188,12 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
       }
       value = getRandomValue(randoms, menu.randomLen);
     }
-    if (addType.isDate) value = formatShowDate(date, menu.dateSplit);
+    if (addType.isDate) {
+      String date = getDateName(menu.dateType, 14, file);
+      value = formatShowDate(date, menu.dateSplit);
+      String res = formatShowTime(date, menu.timeSplit);
+      value += res;
+    }
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();
     }

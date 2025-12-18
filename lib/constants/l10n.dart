@@ -300,6 +300,7 @@ class AppL10n {
   static const String eAddMeta = 'enum.add.meta';
   static const String eSplitNone = 'enum.split.none';
   static const String eSplitSpace = 'enum.split.space';
+  static const String eSplitHidden = 'enum.split.hidden';
   static const String eDistNone = 'enum.distinguish.none';
   static const String eDistDate = 'enum.distinguish.date';
   static const String eDistFolder = 'enum.distinguish.folder';

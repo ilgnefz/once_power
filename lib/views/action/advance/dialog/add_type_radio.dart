@@ -21,7 +21,9 @@ class AddTypeRadio extends StatelessWidget {
     required this.randomLenChange,
     required this.dateChange,
     required this.dateSplit,
+    required this.timeSplit,
     required this.dateSplitChange,
+    required this.timeSplitChange,
     required this.metaData,
     required this.metaDataChange,
   });
@@ -30,11 +32,13 @@ class AddTypeRadio extends StatelessWidget {
   final int len;
   final DateType date;
   final DateSplitType dateSplit;
+  final TimeSplitType timeSplit;
   final FileMetaData metaData;
   final void Function(AddType) typeChanged;
-  final void Function(DateSplitType?) dateSplitChange;
   final void Function(int) randomLenChange;
   final void Function(DateType?) dateChange;
+  final void Function(DateSplitType?) dateSplitChange;
+  final void Function(TimeSplitType?) timeSplitChange;
   final void Function(FileMetaData?) metaDataChange;
 
   @override
@@ -70,8 +74,10 @@ class AddTypeRadio extends StatelessWidget {
                 return AddDateGroup(
                   date: date,
                   dateSplit: dateSplit,
+                  timeSplit: timeSplit,
                   dateChange: dateChange,
                   dateSplitChange: dateSplitChange,
+                  timeSplitChange: timeSplitChange,
                 );
               }
               if (e.isMetaData) {
@@ -80,7 +86,6 @@ class AddTypeRadio extends StatelessWidget {
                   mateDataChange: metaDataChange,
                 );
               }
-              return null;
             }(),
           );
         }),

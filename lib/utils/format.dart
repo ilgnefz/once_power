@@ -95,30 +95,45 @@ String formatShowDate(String date, DateSplitType type) {
   dateParts.add(date.substring(0, 4));
   dateParts.add(date.substring(4, 6));
   dateParts.add(date.substring(6, 8));
-  // dateParts.add(date.substring(8, 10));
-  // dateParts.add(date.substring(10, 12));
-  // dateParts.add(date.substring(12, 14));
 
   switch (type) {
     case DateSplitType.none:
-      return date;
+      return date.substring(0, 8);
     case DateSplitType.chinese:
-      date = '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
-      break;
+      return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
     case DateSplitType.space:
-      date = '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
-      break;
+      return '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
     case DateSplitType.dash:
-      date = '${dateParts[0]}-${dateParts[1]}-${dateParts[2]}';
-      break;
+      return '${dateParts[0]}-${dateParts[1]}-${dateParts[2]}';
     case DateSplitType.dot:
-      date = '${dateParts[0]}.${dateParts[1]}.${dateParts[2]}';
-      break;
+      return '${dateParts[0]}.${dateParts[1]}.${dateParts[2]}';
     case DateSplitType.underscore:
-      date = '${dateParts[0]}_${dateParts[1]}_${dateParts[2]}';
-      break;
+      return '${dateParts[0]}_${dateParts[1]}_${dateParts[2]}';
   }
-  return date;
+}
+
+String formatShowTime(String date, TimeSplitType type) {
+  if (date.length < 14) return '';
+  List<String> timeParts = [];
+  timeParts.add(date.substring(8, 10));
+  timeParts.add(date.substring(10, 12));
+  timeParts.add(date.substring(12, 14));
+  switch (type) {
+    case TimeSplitType.hidden:
+      return '';
+    case TimeSplitType.none:
+      return ' ${timeParts[0]}${timeParts[1]}${timeParts[2]}';
+    case TimeSplitType.chinese:
+      return ' ${timeParts[0]}时${timeParts[1]}分${timeParts[2]}秒';
+    case TimeSplitType.dash:
+      return ' ${timeParts[0]}-${timeParts[1]}-${timeParts[2]}';
+    case TimeSplitType.dot:
+      return ' ${timeParts[0]}.${timeParts[1]}.${timeParts[2]}';
+    case TimeSplitType.underscore:
+      return ' ${timeParts[0]}_${timeParts[1]}_${timeParts[2]}';
+    case TimeSplitType.space:
+      return ' ${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
+  }
 }
 
 int formatVersionNum(String version) {
