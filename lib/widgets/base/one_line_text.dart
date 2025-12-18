@@ -25,17 +25,18 @@ class OneLineText extends StatelessWidget {
       flex: flex,
       child: Padding(
         padding: padding ?? EdgeInsets.zero,
-        child: Text(
-          data,
-          style:
-              style ??
-              TextStyle(
-                fontSize: fontSize ?? 14,
-                color: color,
-                fontFamily: defaultFont,
-              ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        child: RepaintBoundary(
+          child: Text(
+            data,
+            style: style ??
+                TextStyle(
+                  fontSize: fontSize ?? 14,
+                  color: color,
+                  fontFamily: defaultFont,
+                ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

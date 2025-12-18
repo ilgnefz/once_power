@@ -37,6 +37,7 @@ class DirectiveList extends ConsumerWidget {
             itemCount: list.length,
             buildDefaultDragHandles: false,
             onReorder: reorderList,
+            cacheExtent: AppNum.directiveListHeight,
             proxyDecorator: (child, index, animation) {
               return Material(
                 color: Theme.of(context).scaffoldBackgroundColor,

@@ -25,7 +25,7 @@ class TooltipItem extends StatelessWidget {
     final String folder = tr(AppL10n.contentFolder); // 文件夹标签
     final String createTime = tr(AppL10n.eDateCreate); // 创建时间标签
     final String modifyDate = tr(AppL10n.eDateModify); // 修改时间标签
-    final String exifDate = tr(AppL10n.eDateExif); // EXIF日期标签
+    final String captureDate = tr(AppL10n.eDateCapture); // 拍摄日期标签
     final String resolution = tr(AppL10n.contentResolution); // 分辨率标签
     final String size = tr(AppL10n.contentSize); // 文件大小标签
     final String group = tr(AppL10n.contentGroup); // 分组标签
@@ -48,8 +48,8 @@ class TooltipItem extends StatelessWidget {
           richTextTooltip(context, folder, file.parent),
           richTextTooltip(context, createTime, '${file.createdDate}'),
           richTextTooltip(context, modifyDate, '${file.modifiedDate}'),
-          if (file.exifDate != null)
-            richTextTooltip(context, exifDate, '${file.exifDate}'),
+          if (file.metaInfo?.capture != null)
+            richTextTooltip(context, captureDate, '${file.metaInfo?.capture}'),
           if (file.resolution != null)
             richTextTooltip(
               context,

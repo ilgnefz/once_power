@@ -17,27 +17,30 @@ class EasyCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Checkbox(
-          value: checked,
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          visualDensity: VisualDensity.compact,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-          side: theme.checkboxTheme.side,
-          checkColor: Colors.white,
-          fillColor: theme.checkboxTheme.fillColor,
-          onChanged: onChanged,
-        ),
-        if (label != null)
-          Text(
-            label!,
-            style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
+    return RepaintBoundary(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Checkbox(
+            value: checked,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            visualDensity: VisualDensity.compact,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            side: theme.checkboxTheme.side,
+            checkColor: Colors.white,
+            fillColor: theme.checkboxTheme.fillColor,
+            onChanged: onChanged,
           ),
-        if (child != null) child!,
-      ],
+          if (label != null)
+            Text(
+              label!,
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
+            ),
+          if (child != null) child!,
+        ],
+      ),
     );
   }
 }

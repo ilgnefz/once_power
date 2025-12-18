@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/models/file.dart';
 
@@ -24,7 +25,8 @@ String formatDateTime(DateTime dateTime) {
   return '${dateTime.year}$m$d$h$min$s';
 }
 
-DateTime formatExifDate(String date) {
+DateTime? formatExifDate(String? date) {
+  if (date == null) return null;
   List<String> list = date.split(' ');
   String ymd = list.first.replaceAll(':', '-');
   list.replaceRange(0, 1, [ymd]);
@@ -43,7 +45,7 @@ String formatResolution(Resolution resolution) =>
     '${resolution.width} x ${resolution.height}';
 
 String formatFileSize(int bytes, {int precision = 2}) {
-  const units = ['B', 'KB', 'MB', 'GB'];
+  const List<String> units = ['B', 'KB', 'MB', 'GB'];
   double size = bytes.toDouble();
   int unitIndex = 0;
 
@@ -88,6 +90,7 @@ String formatDouble(double value) {
 }
 
 String formatShowDate(String date, DateSplitType type) {
+  if (date.length < 8) return date;
   List<String> dateParts = [];
   dateParts.add(date.substring(0, 4));
   dateParts.add(date.substring(4, 6));
@@ -122,4 +125,46 @@ int formatVersionNum(String version) {
   List versionCells = version.split('.');
   versionCells = versionCells.map((i) => int.parse(i)).toList();
   return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
+}
+
+String convertToLocalTime(String utcTimeStr) {
+  try {
+    // 检查是否包含UTC前缀并移除
+    String cleanTimeStr = utcTimeStr;
+    if (utcTimeStr.startsWith('UTC ')) {
+      cleanTimeStr = utcTimeStr.substring(4);
+    }
+
+    // 解析时间字符串（格式：YYYY-MM-DD HH:mm:ss）
+    List<String> parts = cleanTimeStr.split(' ');
+    if (parts.length != 2) {
+      return utcTimeStr; // 如果格式不符合预期，返回原始字符串
+    }
+
+    List<String> dateParts = parts[0].split('-');
+    List<String> timeParts = parts[1].split(':');
+
+    if (dateParts.length != 3 || timeParts.length != 3) {
+      return utcTimeStr; // 如果格式不符合预期，返回原始字符串
+    }
+
+    // 构建DateTime对象
+    DateTime utcDateTime = DateTime.utc(
+      int.parse(dateParts[0]),
+      int.parse(dateParts[1]),
+      int.parse(dateParts[2]),
+      int.parse(timeParts[0]),
+      int.parse(timeParts[1]),
+      int.parse(timeParts[2]),
+    );
+
+    // 转换为本地时间
+    DateTime localDateTime = utcDateTime.toLocal();
+    // 格式化为标准字符串（可以根据需要调整格式）
+    return localDateTime.toString().substring(0, 19); // 格式：YYYY-MM-DD HH:mm:ss
+  } catch (e) {
+    // 如果解析失败，返回原始字符串
+    debugPrint('时间转换失败: $e');
+    return utcTimeStr;
+  }
 }

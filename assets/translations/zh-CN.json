@@ -266,7 +266,7 @@
       "create": "创建日期",
       "modify": "修改日期",
       "access": "访问日期",
-      "exif": "拍摄日期",
+      "capture": "拍摄日期",
       "earliest": "最早日期",
       "latest": "最晚日期"
     },
@@ -347,7 +347,9 @@
       "title": "标题",
       "artist": "艺术家",
       "album": "专辑",
-      "year": "年份"
+      "year": "年份",
+      "make": "制造商",
+      "model": "型号"
     }
   },
   "error": {

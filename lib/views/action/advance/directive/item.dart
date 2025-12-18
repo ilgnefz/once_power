@@ -75,11 +75,11 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
         // 判断Ctrl键是否被按下（左右Ctrl均可）
         final isCtrlPressed =
             keysPressed.contains(LogicalKeyboardKey.controlLeft) ||
-            keysPressed.contains(LogicalKeyboardKey.controlRight);
+                keysPressed.contains(LogicalKeyboardKey.controlRight);
         // 判断Shift键是否被按下（左右Shift均可）
         final isShiftPressed =
             keysPressed.contains(LogicalKeyboardKey.shiftLeft) ||
-            keysPressed.contains(LogicalKeyboardKey.shiftRight);
+                keysPressed.contains(LogicalKeyboardKey.shiftRight);
 
         if (isCtrlPressed) {
           if (selectList.contains(widget.menu)) {
@@ -95,8 +95,8 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
           if (selectList.isNotEmpty) {
             AdvanceMenuModel startFile =
                 StorageUtil.getBool(AppKeys.hadPressedCtrl)
-                ? selectList.last
-                : selectList.first;
+                    ? selectList.last
+                    : selectList.first;
             beginIndex = allMenu.indexOf(startFile);
           }
           List<AdvanceMenuModel> newSelectList = [];
@@ -164,7 +164,7 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
           onSecondaryTapDown: onSecondaryTapDown,
           child: AnimatedContainer(
             duration: Duration(milliseconds: 300),
-            height: 32,
+            height: AppNum.directiveListHeight,
             padding: EdgeInsets.only(
               left: AppNum.spaceMedium,
               right: AppNum.spaceSmall,
@@ -190,61 +190,53 @@ class _AdvanceListItemState extends ConsumerState<AdvanceListItem> {
                 SizedBox(width: AppNum.spaceMedium),
                 buildInfo(widget.menu),
                 SizedBox(width: AppNum.spaceMedium),
-                Consumer(
-                  builder: (_, ref, __) => DynamicShowBtn(
-                    isHover: isHover,
-                    icon: widget.menu.checked
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
-                    onTap: () {
-                      provider.toggle(widget.menu);
-                      advanceUpdateName(ref);
-                    },
-                  ),
+                DynamicShowBtn(
+                  isHover: isHover,
+                  icon: widget.menu.checked
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  onTap: (ref) {
+                    provider.toggle(widget.menu);
+                    advanceUpdateName(ref);
+                  },
                 ),
                 SizedBox(width: AppNum.spaceSmall),
-                Consumer(
-                  builder: (_, ref, __) => DynamicShowBtn(
-                    isHover: isHover,
-                    icon: Icons.copy_all_rounded,
-                    onTap: () {
-                      ref.read(currentPresetNameProvider.notifier).update('');
-                      AdvanceMenuModel menu = widget.menu.copyWith(
-                        id: nanoid(10),
-                      );
-                      provider.add(menu);
-                      updateName(ref);
-                    },
-                  ),
+                DynamicShowBtn(
+                  isHover: isHover,
+                  icon: Icons.copy_all_rounded,
+                  onTap: (ref) {
+                    ref.read(currentPresetNameProvider.notifier).update('');
+                    AdvanceMenuModel menu = widget.menu.copyWith(
+                      id: nanoid(10),
+                    );
+                    provider.add(menu);
+                    updateName(ref);
+                  },
                 ),
                 SizedBox(width: AppNum.spaceSmall),
-                Consumer(
-                  builder: (context, ref, _) => DynamicShowBtn(
-                    isHover: isHover,
-                    icon: Icons.edit_note_rounded,
-                    onTap: () {
-                      if (widget.menu.type.isDelete) {
-                        deleteText(context, widget.menu as AdvanceMenuDelete);
-                      }
-                      if (widget.menu.type.isAdd) {
-                        addText(context, widget.menu as AdvanceMenuAdd);
-                      }
-                      if (widget.menu.type.isReplace) {
-                        replaceText(context, widget.menu as AdvanceMenuReplace);
-                      }
-                    },
-                  ),
+                DynamicShowBtn(
+                  isHover: isHover,
+                  icon: Icons.edit_note_rounded,
+                  onTap: (ref) {
+                    if (widget.menu.type.isDelete) {
+                      deleteText(context, widget.menu as AdvanceMenuDelete);
+                    }
+                    if (widget.menu.type.isAdd) {
+                      addText(context, widget.menu as AdvanceMenuAdd);
+                    }
+                    if (widget.menu.type.isReplace) {
+                      replaceText(context, widget.menu as AdvanceMenuReplace);
+                    }
+                  },
                 ),
                 SizedBox(width: 1),
-                Consumer(
-                  builder: (context, ref, child) => DirectiveItemBtn(
-                    icon: Icons.close_rounded,
-                    onTap: () {
-                      ref.read(currentPresetNameProvider.notifier).update('');
-                      provider.remove(widget.menu);
-                      advanceUpdateName(ref);
-                    },
-                  ),
+                DirectiveItemBtn(
+                  icon: Icons.close_rounded,
+                  onTap: (ref) {
+                    ref.read(currentPresetNameProvider.notifier).update('');
+                    provider.remove(widget.menu);
+                    advanceUpdateName(ref);
+                  },
                 ),
               ],
             ),

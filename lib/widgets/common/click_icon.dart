@@ -27,27 +27,29 @@ class ClickIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-        child: InkWell(
-          onTap: onPressed,
-          onSecondaryTap: onSecondaryTap,
-          onLongPress: onLongPress,
-          borderRadius: BorderRadius.circular(24),
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          // hoverColor: Colors.transparent,
-          child: Container(
-            height: size,
-            width: size,
-            alignment: Alignment.center,
-            child: EasyIcon(
-              iconSize: iconSize,
-              icon: icon,
-              svg: svg,
-              color: color,
+    return RepaintBoundary(
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+          child: InkWell(
+            onTap: onPressed,
+            onSecondaryTap: onSecondaryTap,
+            onLongPress: onLongPress,
+            borderRadius: BorderRadius.circular(24),
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            // hoverColor: Colors.transparent,
+            child: Container(
+              height: size,
+              width: size,
+              alignment: Alignment.center,
+              child: EasyIcon(
+                iconSize: iconSize,
+                icon: icon,
+                svg: svg,
+                color: color,
+              ),
             ),
           ),
         ),

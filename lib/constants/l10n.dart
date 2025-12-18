@@ -260,7 +260,7 @@ class AppL10n {
   static const String eDateCreate = 'enum.date.create';
   static const String eDateModify = 'enum.date.modify';
   static const String eDateAccess = 'enum.date.access';
-  static const String eDateExif = 'enum.date.exif';
+  static const String eDateCapture = 'enum.date.capture';
   static const String eDateEarliest = 'enum.date.earliest';
   static const String eDateLatest = 'enum.date.latest';
   static const String eReplaceMatch = 'enum.replace.match';
@@ -320,6 +320,8 @@ class AppL10n {
   static const String eMetaArtist = 'enum.meta.artist';
   static const String eMetaAlbum = 'enum.meta.album';
   static const String eMetaYear = 'enum.meta.year';
+  static const String eMetaMake = 'enum.meta.make';
+  static const String eMetaModel = 'enum.meta.model';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';

@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/config/app.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/string.dart';
 import 'package:once_power/cores/file.dart';

@@ -26,7 +26,8 @@ void reorderList(
 
 List<DateTime> sortDateTime(FileInfo file) {
   List<DateTime> list = [file.createdDate, file.modifiedDate];
-  if (file.exifDate != null) list.add(file.exifDate!);
+  DateTime? captureDate = file.metaInfo?.capture;
+  if (captureDate != null) list.add(captureDate);
   list.sort();
   return list;
 }

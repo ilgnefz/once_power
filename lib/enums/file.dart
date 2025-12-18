@@ -51,7 +51,7 @@ extension DateTypeExtension on DateType {
       case DateType.accessedDate:
         return tr(AppL10n.eDateAccess);
       case DateType.exifDate:
-        return tr(AppL10n.eDateExif);
+        return tr(AppL10n.eDateCapture);
       case DateType.earliestDate:
         return tr(AppL10n.eDateEarliest);
       case DateType.latestDate:
@@ -67,7 +67,7 @@ extension DateTypeExtension on DateType {
   bool get isLatestDate => this == DateType.latestDate;
 }
 
-enum FileMetaData { title, artist, album, year }
+enum FileMetaData { title, artist, album, year, make, model }
 
 extension FileMetaDataExtension on FileMetaData {
   String get label {
@@ -80,6 +80,10 @@ extension FileMetaDataExtension on FileMetaData {
         return tr(AppL10n.eMetaAlbum);
       case FileMetaData.year:
         return tr(AppL10n.eMetaYear);
+      case FileMetaData.make:
+        return tr(AppL10n.eMetaMake);
+      case FileMetaData.model:
+        return tr(AppL10n.eMetaModel);
     }
   }
 }

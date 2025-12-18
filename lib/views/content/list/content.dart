@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/list.dart';
@@ -16,7 +17,7 @@ class ContentList extends ConsumerWidget {
       onTap: ref.read(sortSelectListProvider.notifier).clear,
       child: ReorderableListView.builder(
         padding: const EdgeInsets.only(right: 12.0),
-        cacheExtent: 40,
+        cacheExtent: AppNum.listHeight,
         itemCount: files.length,
         buildDefaultDragHandles: false,
         proxyDecorator: (proxy, original, information) {

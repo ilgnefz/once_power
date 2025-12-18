@@ -25,7 +25,6 @@ class FileInfo {
   DateTime createdDate;
   DateTime modifiedDate;
   DateTime accessedDate;
-  DateTime? exifDate;
   FileClassify type;
   int size;
   Resolution? resolution;
@@ -47,7 +46,6 @@ class FileInfo {
     required this.createdDate,
     required this.modifiedDate,
     required this.accessedDate,
-    required this.exifDate,
     required this.type,
     required this.size,
     required this.resolution,
@@ -69,7 +67,6 @@ class FileInfo {
     DateTime? createdDate,
     DateTime? modifiedDate,
     DateTime? accessedDate,
-    DateTime? exifDate,
     Resolution? resolution,
     FileMetaInfo? metaInfo,
     Uint8List? thumbnail,
@@ -89,7 +86,6 @@ class FileInfo {
       createdDate: createdDate ?? this.createdDate,
       modifiedDate: modifiedDate ?? this.modifiedDate,
       accessedDate: accessedDate ?? this.accessedDate,
-      exifDate: exifDate ?? this.exifDate,
       type: type,
       size: size,
       resolution: resolution ?? this.resolution,
@@ -102,60 +98,56 @@ class FileInfo {
 
   // toJson
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'newName': newName,
-    'parent': parent,
-    'path': path,
-    'tempPath': tempPath,
-    'ext': ext,
-    'newExt': newExt,
-    'beforePath': beforePath,
-    'createdDate': createdDate.millisecondsSinceEpoch,
-    'modifiedDate': modifiedDate.millisecondsSinceEpoch,
-    'accessedDate': accessedDate.millisecondsSinceEpoch,
-    'exifDate': exifDate?.millisecondsSinceEpoch,
-    'type': type.index,
-    'size': size,
-    'resolution': resolution?.toJson(),
-    'metaInfo': metaInfo?.toJson(),
-    'thumbnail': thumbnail,
-    'group': group,
-    'checked': checked,
-  };
+        'id': id,
+        'name': name,
+        'newName': newName,
+        'parent': parent,
+        'path': path,
+        'tempPath': tempPath,
+        'ext': ext,
+        'newExt': newExt,
+        'beforePath': beforePath,
+        'createdDate': createdDate.millisecondsSinceEpoch,
+        'modifiedDate': modifiedDate.millisecondsSinceEpoch,
+        'accessedDate': accessedDate.millisecondsSinceEpoch,
+        'type': type.index,
+        'size': size,
+        'resolution': resolution?.toJson(),
+        'metaInfo': metaInfo?.toJson(),
+        'thumbnail': thumbnail,
+        'group': group,
+        'checked': checked,
+      };
 
   factory FileInfo.fromJson(Map<String, dynamic> json) => FileInfo(
-    id: json['id'],
-    name: json['name'],
-    newName: json['newName'],
-    parent: json['parent'],
-    path: json['path'],
-    tempPath: json['tempPath'],
-    ext: json['ext'],
-    newExt: json['newExt'],
-    beforePath: json['beforePath'],
-    createdDate: DateTime.fromMillisecondsSinceEpoch(json['createdDate']),
-    modifiedDate: DateTime.fromMillisecondsSinceEpoch(json['modifiedDate']),
-    accessedDate: DateTime.fromMillisecondsSinceEpoch(json['accessedDate']),
-    exifDate: json['exifDate'] != null
-        ? DateTime.fromMillisecondsSinceEpoch(json['exifDate'])
-        : null,
-    type: FileClassify.values[json['type']],
-    size: json['size'],
-    resolution: json['resolution'] != null
-        ? Resolution.fromJson(json['resolution'])
-        : null,
-    metaInfo: json['metaInfo'] != null
-        ? FileMetaInfo.fromJson(json['metaInfo'])
-        : null,
-    thumbnail: json['thumbnail'],
-    group: json['group'],
-    checked: json['checked'],
-  );
+        id: json['id'],
+        name: json['name'],
+        newName: json['newName'],
+        parent: json['parent'],
+        path: json['path'],
+        tempPath: json['tempPath'],
+        ext: json['ext'],
+        newExt: json['newExt'],
+        beforePath: json['beforePath'],
+        createdDate: DateTime.fromMillisecondsSinceEpoch(json['createdDate']),
+        modifiedDate: DateTime.fromMillisecondsSinceEpoch(json['modifiedDate']),
+        accessedDate: DateTime.fromMillisecondsSinceEpoch(json['accessedDate']),
+        type: FileClassify.values[json['type']],
+        size: json['size'],
+        resolution: json['resolution'] != null
+            ? Resolution.fromJson(json['resolution'])
+            : null,
+        metaInfo: json['metaInfo'] != null
+            ? FileMetaInfo.fromJson(json['metaInfo'])
+            : null,
+        thumbnail: json['thumbnail'],
+        group: json['group'],
+        checked: json['checked'],
+      );
 
   @override
   String toString() {
-    return 'FileInfo{id: $id, name: $name, newName: $newName, parent: $parent, path: $path, tempPath: $tempPath, ext: $ext, newExt: $newExt, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, accessedDate: $accessedDate, exifDate: $exifDate, type: $type, size: $size, resolution: $resolution, metaInfo: $metaInfo, thumbnail: $thumbnail, group: $group, checked: $checked}';
+    return 'FileInfo{id: $id, name: $name, newName: $newName, parent: $parent, path: $path, tempPath: $tempPath, ext: $ext, newExt: $newExt, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, accessedDate: $accessedDate, type: $type, size: $size, resolution: $resolution, metaInfo: $metaInfo, thumbnail: $thumbnail, group: $group, checked: $checked}';
   }
 }
 
@@ -183,12 +175,18 @@ class FileMetaInfo {
   String artist;
   String album;
   String year;
+  DateTime? capture;
+  String make;
+  String model;
 
   FileMetaInfo({
     this.title = '',
     this.artist = '',
     this.album = '',
     this.year = '',
+    this.capture,
+    this.make = '',
+    this.model = '',
   });
 
   FileMetaInfo copyWith({
@@ -196,32 +194,46 @@ class FileMetaInfo {
     String? artist,
     String? album,
     String? year,
+    DateTime? capture,
+    String? make,
+    String? model,
   }) {
     return FileMetaInfo(
       title: title ?? this.title,
       artist: artist ?? this.artist,
       album: album ?? this.album,
       year: year ?? this.year,
+      capture: capture ?? this.capture,
+      make: make ?? this.make,
+      model: model ?? this.model,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'title': title,
-    'artist': artist,
-    'album': album,
-    'year': year,
-  };
+        'title': title,
+        'artist': artist,
+        'album': album,
+        'year': year,
+        'capture': capture?.millisecondsSinceEpoch,
+        'make': make,
+        'model': model,
+      };
 
   factory FileMetaInfo.fromJson(Map<String, dynamic> json) => FileMetaInfo(
-    title: json['title'],
-    artist: json['artist'],
-    album: json['album'],
-    year: json['year'],
-  );
+        title: json['title'],
+        artist: json['artist'],
+        album: json['album'],
+        year: json['year'],
+        capture: json['capture'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(json['capture'])
+            : null,
+        make: json['make'],
+        model: json['model'],
+      );
 
   @override
   String toString() {
-    return 'FileMeteInfo(title: $title, artist: $artist, album: $album, year: $year)';
+    return 'FileMeteInfo(title: $title, artist: $artist, album: $album, year: $year, capture: $capture, make: $make, model: $model)';
   }
 }
 

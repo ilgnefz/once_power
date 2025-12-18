@@ -12,6 +12,8 @@ import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/src/rust/api/simple.dart';
+import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/utils/task_tracker.dart';
 import 'package:once_power/utils/verify.dart';
@@ -133,20 +135,26 @@ Future<FileInfo> generateFileInfo(String filePath) async {
   FileStat stat = await File(filePath).stat();
   FileClassify type = getFileClassify(ext);
   int size = type.isFolder ? await calculateSize(filePath) : stat.size;
-  DateTime? exifDate;
   Resolution? resolution;
   FileMetaInfo? metaInfo;
   Uint8List? thumbnail;
   if (type.isAudio) metaInfo = getAudioInfo(filePath);
   if (type.isImage) {
-    List<Object?> results = await Future.wait([
-      getExifDate(filePath),
-      getImageDimensions(filePath),
-    ]);
-    exifDate = results[0] as DateTime?;
-    resolution = results[1] as Resolution?;
+    resolution = await getImageDimensions(filePath);
+    CameraInfo? cameraInfo = await getImageInfo(filePath);
+    if (cameraInfo != null) {
+      metaInfo = FileMetaInfo(
+        capture: formatExifDate(cameraInfo.capture),
+        make: cameraInfo.make ?? '',
+        model: cameraInfo.model ?? '',
+      );
+    }
   }
-  if (type.isVideo) resolution = getVideoDimensions(filePath);
+  if (type.isVideo) {
+    (Resolution, FileMetaInfo) result = await getVideoInfo(filePath);
+    resolution = result.$1;
+    metaInfo = result.$2;
+  }
   return FileInfo(
     id: nanoid(10),
     name: name,
@@ -159,7 +167,6 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     createdDate: stat.changed,
     modifiedDate: stat.modified,
     accessedDate: stat.accessed,
-    exifDate: exifDate,
     type: type,
     size: size,
     resolution: resolution,

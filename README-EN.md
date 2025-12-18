@@ -21,8 +21,13 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Metadata adds shooting device information recording
+
+![48](doc/48.gif)
+
 ## Automatically restore the previous window size and position
 
+Long-press the "Save Configuration" icon for settings
 
 ![47](doc/47.gif)
 

@@ -35,8 +35,12 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 
   /// Initialize flutter_rust_bridge in mock mode.
   /// No libraries for FFI are loaded.
-  static void initMock({required RustLibApi api}) {
-    instance.initMockImpl(api: api);
+  static void initMock({
+    required RustLibApi api,
+  }) {
+    instance.initMockImpl(
+      api: api,
+    );
   }
 
   /// Dispose flutter_rust_bridge
@@ -66,26 +70,24 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 385697589;
+  int get rustContentHash => 711979314;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
-        stem: 'rust_lib_once_power',
-        ioDirectory: 'rust/target/release/',
-        webPrefix: 'pkg/',
-      );
+    stem: 'rust_lib_once_power',
+    ioDirectory: 'rust/target/release/',
+    webPrefix: 'pkg/',
+  );
 }
 
 abstract class RustLibApi extends BaseApi {
-  Future<String?> crateApiSimpleDeleteAllToTrash({
-    required List<String> filePaths,
-  });
+  Future<String?> crateApiSimpleDeleteAllToTrash(
+      {required List<String> filePaths});
 
   Future<String?> crateApiSimpleDeleteToTrash({required String filePath});
 
-  Future<String?> crateApiSimpleGetImageCaptureDate({
-    required String imagePath,
-  });
+  Future<CameraInfo?> crateApiSimpleGetImageMetaInfo(
+      {required String imagePath});
 
   String crateApiSimpleGreet({required String name});
 
@@ -105,30 +107,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Future<String?> crateApiSimpleDeleteAllToTrash({
-    required List<String> filePaths,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_String(filePaths, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 1,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleDeleteAllToTrashConstMeta,
-        argValues: [filePaths],
-        apiImpl: this,
+  Future<String?> crateApiSimpleDeleteAllToTrash(
+      {required List<String> filePaths}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_list_String(filePaths, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 1, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_String,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleDeleteAllToTrashConstMeta,
+      argValues: [filePaths],
+      apiImpl: this,
+    ));
   }
 
   TaskConstMeta get kCrateApiSimpleDeleteAllToTrashConstMeta =>
@@ -139,133 +134,117 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @override
   Future<String?> crateApiSimpleDeleteToTrash({required String filePath}) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(filePath, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 2,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleDeleteToTrashConstMeta,
-        argValues: [filePath],
-        apiImpl: this,
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(filePath, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 2, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_String,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleDeleteToTrashConstMeta,
+      argValues: [filePath],
+      apiImpl: this,
+    ));
   }
 
   TaskConstMeta get kCrateApiSimpleDeleteToTrashConstMeta =>
-      const TaskConstMeta(debugName: "delete_to_trash", argNames: ["filePath"]);
+      const TaskConstMeta(
+        debugName: "delete_to_trash",
+        argNames: ["filePath"],
+      );
 
   @override
-  Future<String?> crateApiSimpleGetImageCaptureDate({
-    required String imagePath,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(imagePath, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 3,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleGetImageCaptureDateConstMeta,
-        argValues: [imagePath],
-        apiImpl: this,
+  Future<CameraInfo?> crateApiSimpleGetImageMetaInfo(
+      {required String imagePath}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(imagePath, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 3, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_box_autoadd_camera_info,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleGetImageMetaInfoConstMeta,
+      argValues: [imagePath],
+      apiImpl: this,
+    ));
   }
 
-  TaskConstMeta get kCrateApiSimpleGetImageCaptureDateConstMeta =>
+  TaskConstMeta get kCrateApiSimpleGetImageMetaInfoConstMeta =>
       const TaskConstMeta(
-        debugName: "get_image_capture_date",
+        debugName: "get_image_meta_info",
         argNames: ["imagePath"],
       );
 
   @override
   String crateApiSimpleGreet({required String name}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleGreetConstMeta,
-        argValues: [name],
-        apiImpl: this,
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(name, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_String,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleGreetConstMeta,
+      argValues: [name],
+      apiImpl: this,
+    ));
   }
 
-  TaskConstMeta get kCrateApiSimpleGreetConstMeta =>
-      const TaskConstMeta(debugName: "greet", argNames: ["name"]);
+  TaskConstMeta get kCrateApiSimpleGreetConstMeta => const TaskConstMeta(
+        debugName: "greet",
+        argNames: ["name"],
+      );
 
   @override
   Future<void> crateApiSimpleInitApp() {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 5,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleInitAppConstMeta,
-        argValues: [],
-        apiImpl: this,
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 5, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleInitAppConstMeta,
+      argValues: [],
+      apiImpl: this,
+    ));
   }
 
-  TaskConstMeta get kCrateApiSimpleInitAppConstMeta =>
-      const TaskConstMeta(debugName: "init_app", argNames: []);
+  TaskConstMeta get kCrateApiSimpleInitAppConstMeta => const TaskConstMeta(
+        debugName: "init_app",
+        argNames: [],
+      );
 
   @override
   String crateApiSimpleSimplifiedToTraditional({required String text}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleSimplifiedToTraditionalConstMeta,
-        argValues: [text],
-        apiImpl: this,
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(text, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_String,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleSimplifiedToTraditionalConstMeta,
+      argValues: [text],
+      apiImpl: this,
+    ));
   }
 
   TaskConstMeta get kCrateApiSimpleSimplifiedToTraditionalConstMeta =>
@@ -276,22 +255,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @override
   String crateApiSimpleTraditionalToSimplified({required String text}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiSimpleTraditionalToSimplifiedConstMeta,
-        argValues: [text],
-        apiImpl: this,
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(text, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_String,
+        decodeErrorData: null,
       ),
-    );
+      constMeta: kCrateApiSimpleTraditionalToSimplifiedConstMeta,
+      argValues: [text],
+      apiImpl: this,
+    ));
   }
 
   TaskConstMeta get kCrateApiSimpleTraditionalToSimplifiedConstMeta =>
@@ -304,6 +281,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
+  }
+
+  @protected
+  CameraInfo dco_decode_box_autoadd_camera_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_camera_info(raw);
+  }
+
+  @protected
+  CameraInfo dco_decode_camera_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return CameraInfo(
+      make: dco_decode_opt_String(arr[0]),
+      model: dco_decode_opt_String(arr[1]),
+      capture: dco_decode_opt_String(arr[2]),
+    );
   }
 
   @protected
@@ -325,6 +321,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  CameraInfo? dco_decode_opt_box_autoadd_camera_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_camera_info(raw);
+  }
+
+  @protected
   int dco_decode_u_8(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -341,6 +343,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
     return utf8.decoder.convert(inner);
+  }
+
+  @protected
+  CameraInfo sse_decode_box_autoadd_camera_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_camera_info(deserializer));
+  }
+
+  @protected
+  CameraInfo sse_decode_camera_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_make = sse_decode_opt_String(deserializer);
+    var var_model = sse_decode_opt_String(deserializer);
+    var var_capture = sse_decode_opt_String(deserializer);
+    return CameraInfo(make: var_make, model: var_model, capture: var_capture);
   }
 
   @protected
@@ -368,6 +385,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  CameraInfo? sse_decode_opt_box_autoadd_camera_info(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_camera_info(deserializer));
     } else {
       return null;
     }
@@ -403,6 +432,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_camera_info(
+      CameraInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_camera_info(self, serializer);
+  }
+
+  @protected
+  void sse_encode_camera_info(CameraInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_String(self.make, serializer);
+    sse_encode_opt_String(self.model, serializer);
+    sse_encode_opt_String(self.capture, serializer);
+  }
+
+  @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
@@ -413,9 +457,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void sse_encode_list_prim_u_8_strict(
-    Uint8List self,
-    SseSerializer serializer,
-  ) {
+      Uint8List self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
@@ -428,6 +470,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_camera_info(
+      CameraInfo? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_camera_info(self, serializer);
     }
   }
 

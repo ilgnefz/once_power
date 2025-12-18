@@ -82,6 +82,37 @@ FileMetaInfo? getAudioInfo(String filePath) {
   return FileMetaInfo(title: title, album: album, artist: artist, year: year);
 }
 
+Future<CameraInfo?> getImageInfo(String filePath) async {
+  try {
+    CameraInfo? cameraInfo = await getImageMetaInfo(imagePath: filePath);
+    return cameraInfo;
+  } catch (e) {
+    debugPrint('获取图片设备信息失败: $filePath, 错误: $e');
+    return null;
+  }
+}
+
+Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
+  Mediainfo mi = Mediainfo()..quickLoad(filePath);
+  String width = videoMediaInfo(mi, "Width");
+  String height = videoMediaInfo(mi, "Height");
+  String make = generalMediaInfo(mi, "com.android.manufacturer");
+  String model = generalMediaInfo(mi, "com.android.model");
+  String tagged = generalMediaInfo(mi, "Tagged_Date");
+  DateTime? capture = DateTime.tryParse(convertToLocalTime(tagged));
+  // print(mi.inform());
+  mi.close();
+  int rWidth = width.isEmpty ? 0 : int.parse(width);
+  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  return (
+    Resolution(rWidth, rHeight),
+    FileMetaInfo(capture: capture, make: make, model: model)
+  );
+}
+
+String generalMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
+
 String audioMediaInfo(Mediainfo mi, String parameter) =>
     mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
 
@@ -90,11 +121,6 @@ String videoMediaInfo(Mediainfo mi, String parameter) =>
 
 String imageMediaInfo(Mediainfo mi, String parameter) =>
     mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);
-
-Future<DateTime?> getExifDate(String filePath) async {
-  final String? captureDate = await getImageCaptureDate(imagePath: filePath);
-  return captureDate != null ? formatExifDate(captureDate) : null;
-}
 
 Future<Resolution> getImageDimensions(String assetPath) async {
   // 调试计算图片尺寸耗时
@@ -163,16 +189,6 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
   }
 }
 
-Resolution getVideoDimensions(String videoPath) {
-  Mediainfo mi = Mediainfo()..quickLoad(videoPath);
-  String width = videoMediaInfo(mi, "Width");
-  String height = videoMediaInfo(mi, "Height");
-  mi.close();
-  int rWidth = width.isEmpty ? 0 : int.parse(width);
-  int rHeight = height.isEmpty ? 0 : int.parse(height);
-  return Resolution(rWidth, rHeight);
-}
-
 String getFullName(String name, String extension) {
   if (extension == '' || extension == 'dir') return name;
   return '$name.$extension';
@@ -238,8 +254,9 @@ String getDateName(DateType type, int dateLen, FileInfo file) {
   if (type.isEarliestDate) date = formatDateTime(sortDateTime(file).first);
   if (type.isLatestDate) date = formatDateTime(sortDateTime(file).last);
   if (type.isExifDate) {
-    DateTime dateTime = file.exifDate ?? sortDateTime(file).first;
-    date = formatDateTime(dateTime);
+    DateTime? captureDate = file.metaInfo?.capture;
+    if (captureDate == null) return '';
+    date = formatDateTime(captureDate);
   }
   return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }

@@ -25,6 +25,8 @@ class AppNum {
   static const double fileCard = 80;
   static const double csvData = 36;
   static const double operateSpace = 6;
+  static const double listHeight = 40;
+  static const double directiveListHeight = 32;
 
   // Padding
   static const double padding = 12;

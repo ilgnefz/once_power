@@ -23,7 +23,7 @@ class AddMetaData extends StatelessWidget {
               value: item,
               child: Text(
                 item.label,
-                style: TextStyle(color: theme.textTheme.labelMedium?.color),
+                style: Theme.of(context).dropdownMenuTheme.textStyle,
               ),
             ),
           )

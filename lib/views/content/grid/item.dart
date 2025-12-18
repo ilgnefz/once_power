@@ -45,20 +45,22 @@ class ContentGridItem extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              newName,
-              style: TextStyle(
-                fontSize: 13,
-                color: file.checked
-                    ? newName == oldName
+            RepaintBoundary(
+              child: Text(
+                newName,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: file.checked
+                      ? newName == oldName
                           ? theme.textTheme.labelMedium?.color
                           : theme.primaryColor
-                    : Colors.grey,
-                fontFamily: defaultFont,
+                      : Colors.grey,
+                  fontFamily: defaultFont,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
             ),
           ],
         ),

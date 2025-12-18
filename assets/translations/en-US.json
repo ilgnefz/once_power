@@ -266,7 +266,7 @@
       "create": "Created",
       "modify": "Modified",
       "access": "Accessed",
-      "exif": "Exif",
+      "capture": "Capture",
       "earliest": "Earliest",
       "latest": "Latest"
     },
@@ -347,7 +347,9 @@
       "title": "Title",
       "artist": "Artist",
       "album": "Album",
-      "year": "Year"
+      "year": "Year",
+      "make": "Make",
+      "model": "Model"
     }
   },
   "error": {

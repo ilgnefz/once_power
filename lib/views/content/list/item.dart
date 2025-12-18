@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme.dart';
+import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/models/file.dart';
@@ -30,7 +31,7 @@ class ContentListItem extends ConsumerWidget {
       file: file,
       onDoubleTap: () {},
       child: Container(
-        height: 40,
+        height: AppNum.listHeight,
         padding: EdgeInsets.only(left: 4),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
         child: Row(
@@ -54,27 +55,29 @@ class ContentListItem extends ConsumerWidget {
               color: isOrganize
                   ? theme.textTheme.bodyMedium?.color
                   : changeNameStyle
-                  ? Colors.grey
-                  : theme.primaryColor,
+                      ? Colors.grey
+                      : theme.primaryColor,
             ),
             SizedBox(width: 8),
             Container(
               width: 40,
               alignment: Alignment.center,
-              child: Text(
-                file.newExt,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: isOrganize
-                      ? Colors.black
-                      : changeExtStyle
-                      ? Colors.grey
-                      : theme.primaryColor,
-                  fontFamily: defaultFont,
+              child: RepaintBoundary(
+                child: Text(
+                  file.newExt,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: isOrganize
+                        ? Colors.black
+                        : changeExtStyle
+                            ? Colors.grey
+                            : theme.primaryColor,
+                    fontFamily: defaultFont,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
             ClickIcon(
