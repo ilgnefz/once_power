@@ -298,7 +298,8 @@
       "all": "All",
       "front": "Front",
       "behind": "Behind",
-      "end": "End"
+      "end": "End",
+      "interval": "Interval"
     },
     "delete": {
       "digit": "Digits",

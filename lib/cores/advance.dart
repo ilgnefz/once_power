@@ -248,6 +248,9 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
       case AddPosition.end:
         extension = '$extension$value';
         break;
+      case AddPosition.interval:
+        name = reassembleStr(name, value, posIndex);
+        break;
     }
   }
   if (addType.isSerial) {

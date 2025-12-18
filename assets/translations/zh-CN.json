@@ -298,7 +298,8 @@
       "all": "所有",
       "front": "前面",
       "behind": "后面",
-      "end": "末尾"
+      "end": "末尾",
+      "interval": "间隔"
     },
     "delete": {
       "digit": "数字",

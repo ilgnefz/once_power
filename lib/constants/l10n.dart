@@ -283,6 +283,7 @@ class AppL10n {
   static const String eMatchFront = 'enum.match.front';
   static const String eMatchBehind = 'enum.match.behind';
   static const String eMatchEnd = 'enum.match.end';
+  static const String eMatchInterval = 'enum.match.interval';
   static const String eDeleteDigit = 'enum.delete.digit';
   static const String eDeleteCapital = 'enum.delete.capital';
   static const String eDeleteLower = 'enum.delete.lowercase';

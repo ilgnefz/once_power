@@ -183,3 +183,15 @@ String convertToLocalTime(String utcTimeStr) {
     return utcTimeStr;
   }
 }
+
+String reassembleStr(String name, String input, int length) {
+  if (name.isEmpty) return name;
+  if (length <= 0) throw ArgumentError('Length must be positive');
+
+  List<String> result = [];
+  for (int i = 0; i < name.length; i += length) {
+    int end = (i + length < name.length) ? i + length : name.length;
+    result.add(name.substring(i, end));
+  }
+  return result.join(input);
+}

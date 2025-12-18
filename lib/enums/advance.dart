@@ -204,7 +204,7 @@ extension DistinguishTypeExtension on DistinguishType {
   bool get isNone => this == DistinguishType.none;
 }
 
-enum AddPosition { before, after, end }
+enum AddPosition { before, after, end, interval }
 
 extension AddPositionExtension on AddPosition {
   String get label {
@@ -215,12 +215,15 @@ extension AddPositionExtension on AddPosition {
         return tr(AppL10n.eMatchBehind);
       case AddPosition.end:
         return tr(AppL10n.eMatchEnd);
+      case AddPosition.interval:
+        return tr(AppL10n.eMatchInterval);
     }
   }
 
   bool get isBefore => this == AddPosition.before;
   bool get isAfter => this == AddPosition.after;
   bool get isEnd => this == AddPosition.end;
+  bool get isInterval => this == AddPosition.interval;
 }
 
 enum ConvertType {

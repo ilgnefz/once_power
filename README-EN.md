@@ -21,6 +21,10 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Added the function of inserting content based on spaced repetition.
+
+![49](doc/49.gif)
+
 ## Metadata adds shooting device information recording
 
 ![48](doc/48.gif)

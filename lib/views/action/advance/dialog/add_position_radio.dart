@@ -35,6 +35,7 @@ class AddPositionRadio extends StatelessWidget {
             onChanged: (value) => positionChanged(value!),
           ),
         ),
+        SizedBox(width: 4),
         SizedBox(
           width: 120,
           child: DigitInput(
