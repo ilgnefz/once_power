@@ -15,7 +15,7 @@ import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/provider/file.dart';
-import 'package:once_power/src/rust/api/simple.dart';
+import 'package:once_power/src/rust/api/img_exif.dart';
 import 'package:path/path.dart' as path;
 import 'package:string_util_xx/StringUtilxx.dart';
 import 'package:xml/xml.dart';

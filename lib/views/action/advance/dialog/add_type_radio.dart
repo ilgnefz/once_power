@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/widgets/action/dialog_option.dart';
 import 'package:once_power/widgets/base/easy_radio.dart';
+import 'package:once_power/widgets/common/click_icon.dart';
 import 'package:once_power/widgets/common/digit_input.dart';
 
 import 'add_date_group.dart';
@@ -81,9 +83,24 @@ class AddTypeRadio extends StatelessWidget {
                 );
               }
               if (e.isMetaData) {
-                return AddMetaData(
-                  metaData: metaData,
-                  mateDataChange: metaDataChange,
+                return Row(
+                  children: [
+                    AddMetaData(
+                      metaData: metaData,
+                      mateDataChange: metaDataChange,
+                    ),
+                    const SizedBox(width: 4.0),
+                    if (metaData.isLocation)
+                      RepaintBoundary(
+                        child: Transform.rotate(
+                          angle: 45,
+                          child: ClickIcon(
+                            icon: Icons.key_rounded,
+                            onPressed: () => showKeyInput(context),
+                          ),
+                        ),
+                      ),
+                  ],
                 );
               }
             }(),

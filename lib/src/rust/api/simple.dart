@@ -20,31 +20,3 @@ Future<String?> deleteToTrash({required String filePath}) =>
 
 Future<String?> deleteAllToTrash({required List<String> filePaths}) =>
     RustLib.instance.api.crateApiSimpleDeleteAllToTrash(filePaths: filePaths);
-
-Future<CameraInfo?> getImageMetaInfo({required String imagePath}) =>
-    RustLib.instance.api.crateApiSimpleGetImageMetaInfo(imagePath: imagePath);
-
-/// 照片元信息结构体
-class CameraInfo {
-  final String? make;
-  final String? model;
-  final String? capture;
-
-  const CameraInfo({
-    this.make,
-    this.model,
-    this.capture,
-  });
-
-  @override
-  int get hashCode => make.hashCode ^ model.hashCode ^ capture.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CameraInfo &&
-          runtimeType == other.runtimeType &&
-          make == other.make &&
-          model == other.model &&
-          capture == other.capture;
-}

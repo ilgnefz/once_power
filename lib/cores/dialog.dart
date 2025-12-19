@@ -4,6 +4,7 @@ import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/views/action/advance/dialog/add.dart';
 import 'package:once_power/views/action/advance/dialog/delete.dart';
+import 'package:once_power/views/action/advance/dialog/key_input.dart';
 import 'package:once_power/views/action/advance/dialog/replace.dart';
 import 'package:once_power/views/action/advance/preset/add_preset.dart';
 import 'package:once_power/views/action/advance/preset/export.dart';
@@ -125,4 +126,8 @@ void showExportMenu(BuildContext context) {
 
 void showSaveView(BuildContext context) {
   showCustomDialog(context: context, builder: (context) => SaveView());
+}
+
+void showKeyInput(BuildContext context) {
+  showCustomDialog(context: context, builder: (context) => KeyInputView());
 }

@@ -15,6 +15,7 @@ class AppKeys {
   static String zipFolder = 'zipFolder';
   static String otherFolder = 'otherFolder';
   static String currentPresetName = 'currentPresetName';
+  static String mapKey = 'mapKey';
 
   // int
   static String dateLength = 'dateLength';

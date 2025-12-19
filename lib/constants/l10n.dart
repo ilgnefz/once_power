@@ -107,6 +107,10 @@ class AppL10n {
   static const String advanceCompleteContent = 'advance.completeContent';
   static const String advanceReplaceHint2 = 'advance.replaceHint2';
   static const String advanceSelectedAll = 'advance.selectedAll';
+  static const String advanceLocationTitle = 'advance.locationTitle';
+  static const String advanceLocationHint = 'advance.locationHint';
+  static const String advanceLocationNote = 'advance.locationNote';
+  static const String advanceLocationLink = 'advance.locationLink';
 
   /* ---------- organize ---------- */
 
@@ -324,6 +328,7 @@ class AppL10n {
   static const String eMetaYear = 'enum.meta.year';
   static const String eMetaMake = 'enum.meta.make';
   static const String eMetaModel = 'enum.meta.model';
+  static const String eMetaLocation = 'enum.meta.location';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';
@@ -366,6 +371,16 @@ class AppL10n {
   static const String errTxtDecode = 'error.txtDecode';
   static const String errTxtDecodeInfo = 'error.txtDecodeInfo';
   static const String errCheck = 'error.check';
+  static const String errLocation = 'error.location';
+  static const String errLocationInfo = 'error.locationInfo';
+  static const String errKeyError1 = 'error.keyError1';
+  static const String errKeyError2 = 'error.keyError2';
+  static const String errKeyError3 = 'error.keyError3';
+  static const String errKeyError4 = 'error.keyError4';
+  static const String errKeyError5 = 'error.keyError5';
+  static const String errKeyError6 = 'error.keyError6';
+  static const String errKeyError7 = 'error.keyError7';
+  static const String errKeyError = 'error.keyError';
 
   /* ---------- success ---------- */
   static const String successCopy = 'success.copy';

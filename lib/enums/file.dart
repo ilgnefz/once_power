@@ -67,7 +67,7 @@ extension DateTypeExtension on DateType {
   bool get isLatestDate => this == DateType.latestDate;
 }
 
-enum FileMetaData { title, artist, album, year, make, model }
+enum FileMetaData { title, artist, album, year, make, model, location }
 
 extension FileMetaDataExtension on FileMetaData {
   String get label {
@@ -84,6 +84,16 @@ extension FileMetaDataExtension on FileMetaData {
         return tr(AppL10n.eMetaMake);
       case FileMetaData.model:
         return tr(AppL10n.eMetaModel);
+      case FileMetaData.location:
+        return tr(AppL10n.eMetaLocation);
     }
   }
+
+  bool get isTitle => this == FileMetaData.title;
+  bool get isArtist => this == FileMetaData.artist;
+  bool get isAlbum => this == FileMetaData.album;
+  bool get isYear => this == FileMetaData.year;
+  bool get isMake => this == FileMetaData.make;
+  bool get isModel => this == FileMetaData.model;
+  bool get isLocation => this == FileMetaData.location;
 }

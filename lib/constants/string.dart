@@ -11,4 +11,5 @@ class AppString {
       'https://gitee.com/ilgnefz/once_power/releases';
   static const String githubDownload =
       'https://github.com/ilgnefz/once_power/releases';
+  static const String mapUrl = 'https://restapi.amap.com/v3/geocode/regeo';
 }

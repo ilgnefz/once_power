@@ -106,7 +106,11 @@
     "replaceHint1": "Enter match text",
     "completeContent": "Enter fill content",
     "replaceHint2": "Enter replace text",
-    "selectedAll": "Select All"
+    "selectedAll": "Select All",
+    "locationTitle": "Map Key",
+    "locationHint": "Enter AMap Key for location",
+    "locationNote": "Note: Files added before key input cannot get location, need to re-add. Don’t have an Amap key yet?",
+    "locationLink": " Apply Key"
   },
   "organize": {
     "date": "Date Folder",
@@ -351,7 +355,8 @@
       "album": "Album",
       "year": "Year",
       "make": "Make",
-      "model": "Model"
+      "model": "Model",
+      "location": "Location"
     }
   },
   "error": {
@@ -394,7 +399,17 @@
     "suspenseInfo": "No bulk suspense of all files",
     "txtDecode": "File decode failed",
     "txtDecodeInfo": "Please check the file encoding. Currently, only files encoded in UTF-8 and GBK are supported",
-    "check": "Check failed"
+    "check": "Check failed",
+    "location": "Location failed",
+    "locationInfo": ". To prevent further errors, the entered key has been deleted. Please re-enter it if you need to use the service",
+    "keyError1": "The key is incorrect or expired",
+    "keyError2": "No permission to use the corresponding service, or the request interface path is misspelled",
+    "keyError3": "Daily access volume limit exceeded",
+    "keyError4": "The key is accessed too frequently within a unit time",
+    "keyError5": "The requested key does not match the bound platform",
+    "keyError6": "IP access limit exceeded",
+    "keyError7": "Remote Key has been deleted",
+    "keyError": "Error code: {code}, please refer to the official website for details"
   },
   "success": {
     "copy": "Copied",

@@ -37,7 +37,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 711979314;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1145184415;
 
 // Section: executor
 
@@ -121,7 +121,7 @@ fn wire__crate__api__simple__delete_to_trash_impl(
         },
     )
 }
-fn wire__crate__api__simple__get_image_meta_info_impl(
+fn wire__crate__api__img_exif__get_image_meta_info_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -147,9 +147,9 @@ fn wire__crate__api__simple__get_image_meta_info_impl(
             deserializer.end();
             move |context| {
                 transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(crate::api::simple::get_image_meta_info(
-                        api_image_path,
-                    ))?;
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::img_exif::get_image_meta_info(api_image_path),
+                    )?;
                     Ok(output_ok)
                 })())
             }
@@ -293,17 +293,28 @@ impl SseDecode for String {
     }
 }
 
-impl SseDecode for crate::api::simple::CameraInfo {
+impl SseDecode for crate::api::img_exif::CameraInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_make = <Option<String>>::sse_decode(deserializer);
         let mut var_model = <Option<String>>::sse_decode(deserializer);
         let mut var_capture = <Option<String>>::sse_decode(deserializer);
-        return crate::api::simple::CameraInfo {
+        let mut var_latitude = <Option<f64>>::sse_decode(deserializer);
+        let mut var_longitude = <Option<f64>>::sse_decode(deserializer);
+        return crate::api::img_exif::CameraInfo {
             make: var_make,
             model: var_model,
             capture: var_capture,
+            latitude: var_latitude,
+            longitude: var_longitude,
         };
+    }
+}
+
+impl SseDecode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_f64::<NativeEndian>().unwrap()
     }
 }
 
@@ -342,11 +353,22 @@ impl SseDecode for Option<String> {
     }
 }
 
-impl SseDecode for Option<crate::api::simple::CameraInfo> {
+impl SseDecode for Option<crate::api::img_exif::CameraInfo> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::api::simple::CameraInfo>::sse_decode(deserializer));
+            return Some(<crate::api::img_exif::CameraInfo>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<f64>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -390,7 +412,9 @@ fn pde_ffi_dispatcher_primary_impl(
     match func_id {
         1 => wire__crate__api__simple__delete_all_to_trash_impl(port, ptr, rust_vec_len, data_len),
         2 => wire__crate__api__simple__delete_to_trash_impl(port, ptr, rust_vec_len, data_len),
-        3 => wire__crate__api__simple__get_image_meta_info_impl(port, ptr, rust_vec_len, data_len),
+        3 => {
+            wire__crate__api__img_exif__get_image_meta_info_impl(port, ptr, rust_vec_len, data_len)
+        }
         5 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
@@ -414,24 +438,26 @@ fn pde_ffi_dispatcher_sync_impl(
 // Section: rust2dart
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::simple::CameraInfo {
+impl flutter_rust_bridge::IntoDart for crate::api::img_exif::CameraInfo {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.make.into_into_dart().into_dart(),
             self.model.into_into_dart().into_dart(),
             self.capture.into_into_dart().into_dart(),
+            self.latitude.into_into_dart().into_dart(),
+            self.longitude.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::simple::CameraInfo
+    for crate::api::img_exif::CameraInfo
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::simple::CameraInfo>
-    for crate::api::simple::CameraInfo
+impl flutter_rust_bridge::IntoIntoDart<crate::api::img_exif::CameraInfo>
+    for crate::api::img_exif::CameraInfo
 {
-    fn into_into_dart(self) -> crate::api::simple::CameraInfo {
+    fn into_into_dart(self) -> crate::api::img_exif::CameraInfo {
         self
     }
 }
@@ -443,12 +469,21 @@ impl SseEncode for String {
     }
 }
 
-impl SseEncode for crate::api::simple::CameraInfo {
+impl SseEncode for crate::api::img_exif::CameraInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Option<String>>::sse_encode(self.make, serializer);
         <Option<String>>::sse_encode(self.model, serializer);
         <Option<String>>::sse_encode(self.capture, serializer);
+        <Option<f64>>::sse_encode(self.latitude, serializer);
+        <Option<f64>>::sse_encode(self.longitude, serializer);
+    }
+}
+
+impl SseEncode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_f64::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -482,12 +517,22 @@ impl SseEncode for Option<String> {
     }
 }
 
-impl SseEncode for Option<crate::api::simple::CameraInfo> {
+impl SseEncode for Option<crate::api::img_exif::CameraInfo> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
-            <crate::api::simple::CameraInfo>::sse_encode(value, serializer);
+            <crate::api::img_exif::CameraInfo>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <f64>::sse_encode(value, serializer);
         }
     }
 }

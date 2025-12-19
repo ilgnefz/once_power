@@ -220,6 +220,9 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
         case FileMetaData.model:
           value = file.metaInfo?.model ?? '';
           break;
+        case FileMetaData.location:
+          value = file.metaInfo?.location ?? '';
+          break;
       }
     }
     if (addType.isGroup) value = file.group;

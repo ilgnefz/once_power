@@ -11,11 +11,12 @@ class DialogBaseInput extends StatefulWidget {
     this.controller,
     this.inputFormatters,
     required this.onChanged,
+    this.onClear,
   }) : assert(
-         (controller == null && value != null) ||
-             (controller != null && value == null),
-         'controller and value cannot be both null or both not null',
-       );
+          (controller == null && value != null) ||
+              (controller != null && value == null),
+          'controller and value cannot be both null or both not null',
+        );
 
   final bool enable;
   final String? value;
@@ -23,6 +24,7 @@ class DialogBaseInput extends StatefulWidget {
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String) onChanged;
+  final void Function()? onClear;
 
   @override
   State<DialogBaseInput> createState() => _DialogBaseInputState();
@@ -54,6 +56,7 @@ class _DialogBaseInputState extends State<DialogBaseInput> {
 
   void onClear() {
     controller.clear();
+    widget.onClear?.call();
     widget.onChanged('');
   }
 

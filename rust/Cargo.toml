@@ -8,7 +8,7 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 flutter_rust_bridge = "=2.11.1"
-rexif = "0.7.5"
+kamadak-exif = "0.6.1"
 trash = "5.2.3"
 zhconv = "0.3.3"
 

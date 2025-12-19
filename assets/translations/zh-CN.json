@@ -106,7 +106,11 @@
     "replaceHint1": "请输入匹配内容",
     "completeContent": "请输入补全内容",
     "replaceHint2": "请输入替换内容",
-    "selectedAll": "全选"
+    "selectedAll": "全选",
+    "locationTitle": "地图 Key",
+    "locationHint": "请输入高德地图 Key，用于获取位置信息",
+    "locationNote": "注：填写 key 之前添加的文件无法获取地址，需要重新添加。还没有高德地图 key？",
+    "locationLink": "去申请"
   },
   "organize": {
     "date": "日期分类",
@@ -351,7 +355,8 @@
       "album": "专辑",
       "year": "年份",
       "make": "制造商",
-      "model": "型号"
+      "model": "型号",
+      "location": "位置"
     }
   },
   "error": {
@@ -394,7 +399,17 @@
     "suspenseInfo": "禁止一次性暂存全部文件",
     "txtDecode": "文件解析失败",
     "txtDecodeInfo": "请检查文件编码，暂只支持 utf-8 和 gbk 编码的文件",
-    "check": "检查失败"
+    "check": "检查失败",
+    "location": "获取地址失败",
+    "locationInfo": "。为防止继续报错，填写的 key 已被删除，如需使用请重新填写",
+    "keyError1": "key 不正确或过期",
+    "keyError2": "没有权限使用相应的服务或者请求接口的路径拼写错误",
+    "keyError3": "访问已超出日访问量",
+    "keyError4": "key 单位时间内访问过于频繁",
+    "keyError5": "请求 key 与绑定平台不符",
+    "keyError6": "IP 访问超限",
+    "keyError7": "远程 Key 被删除",
+    "keyError": "错误代码：{code}，详情请去官网查询"
   },
   "success": {
     "copy": "复制成功",

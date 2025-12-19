@@ -12,9 +12,10 @@ import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/src/rust/api/simple.dart';
+import 'package:once_power/src/rust/api/img_exif.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/location.dart';
 import 'package:once_power/utils/task_tracker.dart';
 import 'package:once_power/utils/verify.dart';
 import 'package:path/path.dart' as path;
@@ -143,10 +144,16 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     resolution = await getImageDimensions(filePath);
     CameraInfo? cameraInfo = await getImageInfo(filePath);
     if (cameraInfo != null) {
+      double? longitude = cameraInfo.longitude;
+      double? latitude = cameraInfo.latitude;
+      String location = await getTrueLocation(longitude, latitude);
       metaInfo = FileMetaInfo(
         capture: formatExifDate(cameraInfo.capture),
         make: cameraInfo.make ?? '',
         model: cameraInfo.model ?? '',
+        longitude: longitude,
+        latitude: latitude,
+        location: location,
       );
     }
   }

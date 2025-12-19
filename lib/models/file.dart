@@ -178,6 +178,9 @@ class FileMetaInfo {
   DateTime? capture;
   String make;
   String model;
+  double? longitude;
+  double? latitude;
+  String location;
 
   FileMetaInfo({
     this.title = '',
@@ -187,6 +190,9 @@ class FileMetaInfo {
     this.capture,
     this.make = '',
     this.model = '',
+    this.longitude,
+    this.latitude,
+    this.location = '',
   });
 
   FileMetaInfo copyWith({
@@ -197,6 +203,9 @@ class FileMetaInfo {
     DateTime? capture,
     String? make,
     String? model,
+    double? longitude,
+    double? latitude,
+    String? location,
   }) {
     return FileMetaInfo(
       title: title ?? this.title,
@@ -206,6 +215,9 @@ class FileMetaInfo {
       capture: capture ?? this.capture,
       make: make ?? this.make,
       model: model ?? this.model,
+      longitude: longitude ?? this.longitude,
+      latitude: latitude ?? this.latitude,
+      location: location ?? this.location,
     );
   }
 
@@ -217,6 +229,9 @@ class FileMetaInfo {
         'capture': capture?.millisecondsSinceEpoch,
         'make': make,
         'model': model,
+        'longitude': longitude,
+        'latitude': latitude,
+        'location': location,
       };
 
   factory FileMetaInfo.fromJson(Map<String, dynamic> json) => FileMetaInfo(
@@ -229,11 +244,17 @@ class FileMetaInfo {
             : null,
         make: json['make'],
         model: json['model'],
+        longitude: json['longitude'],
+        latitude: json['latitude'],
+        location: json['location'],
       );
 
   @override
   String toString() {
-    return 'FileMeteInfo(title: $title, artist: $artist, album: $album, year: $year, capture: $capture, make: $make, model: $model)';
+    return 'FileMetaInfo(title: $title, artist: $artist, '
+        'album: $album, year: $year, capture: $capture, make: $make, '
+        'model: $model, longitude: $longitude, latitude: $latitude, '
+        'location: $location)';
   }
 }
 

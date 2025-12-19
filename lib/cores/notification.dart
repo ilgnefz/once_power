@@ -257,3 +257,11 @@ void showFilterNotification(int count) {
     ).show();
   }
 }
+
+void showKeyErrorNotification(String message) {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: tr(AppL10n.errLocation),
+    message: message,
+  ).show();
+}

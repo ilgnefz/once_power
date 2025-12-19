@@ -2,14 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/advance.dart';
+import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
 
 import 'add_position_radio.dart';
@@ -155,6 +158,10 @@ class _DeleteViewState extends ConsumerState<AddView> {
           ref.read(advanceMenuListProvider.notifier).add(add);
         }
         ref.read(currentPresetNameProvider.notifier).update('');
+        if (metaData.isLocation) {
+          String? key = StorageUtil.getString(AppKeys.mapKey);
+          if (key == null || key.isEmpty) showKeyInput(context);
+        }
         advanceUpdateName(ref);
       },
     );
