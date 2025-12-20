@@ -66,7 +66,7 @@ void normalUpdateName(WidgetRef ref, bool isReserve) {
 String dateName(WidgetRef ref, FileInfo file) {
   int dateLen = ref.watch(dateLenProvider);
   DateType type = ref.watch(currentDateTypeProvider);
-  return getDateName(getDate(type, file), dateLen);
+  return getDateName(getDate(type, file)?.date, dateLen);
 }
 
 int getRealIndex(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/enums/advance.dart';
-import 'package:once_power/enums/week.dart';
 import 'package:once_power/models/file.dart';
 
 int formatToInt(String value) {
@@ -139,11 +138,6 @@ String formatShowTime(String date, TimeSplitType type) {
     case TimeSplitType.space:
       return ' ${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
   }
-}
-
-String formatShowWeekday(DateTime? date, WeekdayStyle style) {
-  if (date == null || style.isNone) return '';
-  return ' ${WeekdayFormatter.format(date, style)}';
 }
 
 int formatVersionNum(String version) {

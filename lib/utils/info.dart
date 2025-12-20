@@ -12,6 +12,7 @@ import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/week.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/provider/file.dart';
@@ -72,6 +73,12 @@ Future<int> calculateSize(String folderPath) async {
   return totalSize;
 }
 
+DateInfo? getDateInfo(DateTime? date) {
+  if (date == null) return null;
+  DateInfo dateInfo = DateInfo(date, weekdayNames[date.weekday - 1]);
+  return dateInfo;
+}
+
 FileMetaInfo? getAudioInfo(String filePath) {
   Mediainfo mi = Mediainfo()..quickLoad(filePath);
   String title = audioMediaInfo(mi, "Title");
@@ -106,7 +113,11 @@ Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
   int rHeight = height.isEmpty ? 0 : int.parse(height);
   return (
     Resolution(rWidth, rHeight),
-    FileMetaInfo(capture: capture, make: make, model: model)
+    FileMetaInfo(
+      capture: capture == null ? null : getDateInfo(capture),
+      make: make,
+      model: model,
+    )
   );
 }
 
@@ -248,7 +259,7 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   return (start < 0 ? 0 : start, end < 0 ? 0 : end);
 }
 
-DateTime? getDate(DateType type, FileInfo file) {
+DateInfo? getDate(DateType type, FileInfo file) {
   switch (type) {
     case DateType.createdDate:
       return file.createdDate;

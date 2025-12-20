@@ -24,10 +24,10 @@ void reorderList(
   updateName(ref);
 }
 
-List<DateTime> sortDateTime(FileInfo file) {
-  List<DateTime> list = [file.createdDate, file.modifiedDate];
-  DateTime? captureDate = file.metaInfo?.capture;
+List<DateInfo> sortDateTime(FileInfo file) {
+  List<DateInfo> list = [file.createdDate, file.modifiedDate];
+  DateInfo? captureDate = file.metaInfo?.capture;
   if (captureDate != null) list.add(captureDate);
-  list.sort();
+  list.sort((a, b) => a.date.compareTo(b.date));
   return list;
 }

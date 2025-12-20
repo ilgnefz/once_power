@@ -161,7 +161,7 @@ Future<List<InfoDetail>> dateClassifyOrganize(
   List<InfoDetail> errorList = [];
   String inputFolder = ref.watch(folderControllerProvider).text;
   for (FileInfo file in list) {
-    String dateDir = formatDateTime(file.createdDate).substring(0, 8);
+    String dateDir = formatDateTime(file.createdDate.date).substring(0, 8);
     String targetFolder = path.join(inputFolder, dateDir);
     InfoDetail? info = await organize(ref, file, targetFolder);
     if (info != null) errorList.add(info);

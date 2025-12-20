@@ -144,11 +144,12 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     resolution = await getImageDimensions(filePath);
     CameraInfo? cameraInfo = await getImageInfo(filePath);
     if (cameraInfo != null) {
+      DateTime? captureDate = formatExifDate(cameraInfo.capture);
       double? longitude = cameraInfo.longitude;
       double? latitude = cameraInfo.latitude;
       String location = await getTrueLocation(longitude, latitude);
       metaInfo = FileMetaInfo(
-        capture: formatExifDate(cameraInfo.capture),
+        capture: captureDate == null ? null : getDateInfo(captureDate),
         make: cameraInfo.make ?? '',
         model: cameraInfo.model ?? '',
         longitude: longitude,
@@ -171,9 +172,9 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     ext: ext,
     newExt: ext,
     beforePath: filePath,
-    createdDate: stat.changed,
-    modifiedDate: stat.modified,
-    accessedDate: stat.accessed,
+    createdDate: getDateInfo(stat.changed)!,
+    modifiedDate: getDateInfo(stat.modified)!,
+    accessedDate: getDateInfo(stat.accessed)!,
     type: type,
     size: size,
     resolution: resolution,

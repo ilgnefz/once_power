@@ -22,9 +22,9 @@ class FileInfo {
 
   /// C:\Photos\a.jpg
   String beforePath;
-  DateTime createdDate;
-  DateTime modifiedDate;
-  DateTime accessedDate;
+  DateInfo createdDate;
+  DateInfo modifiedDate;
+  DateInfo accessedDate;
   FileClassify type;
   int size;
   Resolution? resolution;
@@ -64,9 +64,9 @@ class FileInfo {
     String? ext,
     String? newExt,
     String? beforePath,
-    DateTime? createdDate,
-    DateTime? modifiedDate,
-    DateTime? accessedDate,
+    DateInfo? createdDate,
+    DateInfo? modifiedDate,
+    DateInfo? accessedDate,
     Resolution? resolution,
     FileMetaInfo? metaInfo,
     Uint8List? thumbnail,
@@ -107,9 +107,9 @@ class FileInfo {
         'ext': ext,
         'newExt': newExt,
         'beforePath': beforePath,
-        'createdDate': createdDate.millisecondsSinceEpoch,
-        'modifiedDate': modifiedDate.millisecondsSinceEpoch,
-        'accessedDate': accessedDate.millisecondsSinceEpoch,
+        'createdDate': createdDate.toJson(),
+        'modifiedDate': modifiedDate.toJson(),
+        'accessedDate': accessedDate.toJson(),
         'type': type.index,
         'size': size,
         'resolution': resolution?.toJson(),
@@ -129,9 +129,9 @@ class FileInfo {
         ext: json['ext'],
         newExt: json['newExt'],
         beforePath: json['beforePath'],
-        createdDate: DateTime.fromMillisecondsSinceEpoch(json['createdDate']),
-        modifiedDate: DateTime.fromMillisecondsSinceEpoch(json['modifiedDate']),
-        accessedDate: DateTime.fromMillisecondsSinceEpoch(json['accessedDate']),
+        createdDate: DateInfo.fromJson(json['createdDate']),
+        modifiedDate: DateInfo.fromJson(json['modifiedDate']),
+        accessedDate: DateInfo.fromJson(json['accessedDate']),
         type: FileClassify.values[json['type']],
         size: json['size'],
         resolution: json['resolution'] != null
@@ -147,7 +147,35 @@ class FileInfo {
 
   @override
   String toString() {
-    return 'FileInfo{id: $id, name: $name, newName: $newName, parent: $parent, path: $path, tempPath: $tempPath, ext: $ext, newExt: $newExt, beforePath: $beforePath, createdDate: $createdDate, modifiedDate: $modifiedDate, accessedDate: $accessedDate, type: $type, size: $size, resolution: $resolution, metaInfo: $metaInfo, thumbnail: $thumbnail, group: $group, checked: $checked}';
+    return 'FileInfo{id: $id, name: $name, newName: $newName, '
+        'parent: $parent, path: $path, tempPath: $tempPath, ext: $ext, '
+        'newExt: $newExt, beforePath: $beforePath, createdDate: $createdDate,'
+        ' modifiedDate: $modifiedDate, accessedDate: $accessedDate,'
+        ' type: $type, size: $size, resolution: $resolution,'
+        ' metaInfo: $metaInfo, thumbnail: $thumbnail, '
+        'group: $group, checked: $checked}';
+  }
+}
+
+class DateInfo {
+  DateTime date;
+  List<String> weekday;
+
+  DateInfo(this.date, this.weekday);
+
+  Map<String, dynamic> toJson() => {
+        'date': date.millisecondsSinceEpoch,
+        'weekday': weekday,
+      };
+
+  factory DateInfo.fromJson(Map<String, dynamic> json) => DateInfo(
+        DateTime.fromMillisecondsSinceEpoch(json['date']),
+        json['weekday'],
+      );
+
+  @override
+  String toString() {
+    return 'DateInfo(date: $date, weekday: $weekday)';
   }
 }
 
@@ -175,7 +203,7 @@ class FileMetaInfo {
   String artist;
   String album;
   String year;
-  DateTime? capture;
+  DateInfo? capture;
   String make;
   String model;
   double? longitude;
@@ -200,7 +228,7 @@ class FileMetaInfo {
     String? artist,
     String? album,
     String? year,
-    DateTime? capture,
+    DateInfo? capture,
     String? make,
     String? model,
     double? longitude,
@@ -226,7 +254,7 @@ class FileMetaInfo {
         'artist': artist,
         'album': album,
         'year': year,
-        'capture': capture?.millisecondsSinceEpoch,
+        'capture': capture?.toJson(),
         'make': make,
         'model': model,
         'longitude': longitude,
@@ -239,9 +267,8 @@ class FileMetaInfo {
         artist: json['artist'],
         album: json['album'],
         year: json['year'],
-        capture: json['capture'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json['capture'])
-            : null,
+        capture:
+            json['capture'] != null ? DateInfo.fromJson(json['capture']) : null,
         make: json['make'],
         model: json['model'],
         longitude: json['longitude'],

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/week.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/advance.dart';
@@ -43,7 +44,8 @@ void advanceUpdateName(WidgetRef ref) {
         String type = file.type.label;
         if (menu.distinguishType.isDate) {
           DateType distinguishDate = menu.distinguishDateType;
-          String indexDate = getDateName(getDate(distinguishDate, file), 8);
+          String indexDate =
+              getDateName(getDate(distinguishDate, file)?.date, 8);
           (_, index) = calculateIndex(classifyMap, [indexDate], file);
         }
         if (menu.distinguishType.isFolder) {
@@ -191,11 +193,13 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
       value = getRandomValue(randoms, menu.randomLen);
     }
     if (addType.isDate) {
-      DateTime? dateTime = getDate(menu.dateType, file);
-      String date = getDateName(dateTime, 14);
+      DateInfo? dateTime = getDate(menu.dateType, file);
+      String date = getDateName(dateTime?.date, 14);
       value = formatShowDate(date, menu.dateSplit);
       String time = formatShowTime(date, menu.timeSplit);
-      String weekday = formatShowWeekday(dateTime, menu.weekdayStyle);
+      String weekday = menu.weekdayStyle.isNone || dateTime == null
+          ? ''
+          : ' ${dateTime.weekday[menu.weekdayStyle.value]}';
       value = '$value$weekday$time';
     }
     if (addType.isWidth) {

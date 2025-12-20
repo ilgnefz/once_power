@@ -46,10 +46,11 @@ class TooltipItem extends StatelessWidget {
             '${file.newName}$newDot${file.newExt}',
           ),
           richTextTooltip(context, folder, file.parent),
-          richTextTooltip(context, createTime, '${file.createdDate}'),
-          richTextTooltip(context, modifyDate, '${file.modifiedDate}'),
+          richTextTooltip(context, createTime, '${file.createdDate.date}'),
+          richTextTooltip(context, modifyDate, '${file.modifiedDate.date}'),
           if (file.metaInfo?.capture != null)
-            richTextTooltip(context, captureDate, '${file.metaInfo?.capture}'),
+            richTextTooltip(
+                context, captureDate, '${file.metaInfo?.capture?.date}'),
           if (file.resolution != null)
             richTextTooltip(
               context,
