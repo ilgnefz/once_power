@@ -27,10 +27,14 @@ pub fn get_image_meta_info(image_path: String) -> Option<CameraInfo> {
 
     // 提取基础信息
     if let Some(field) = exif.get_field(Tag::Make, In::PRIMARY) {
-        make = Some(field.display_value().with_unit(&exif).to_string());
+        let value = field.display_value().with_unit(&exif).to_string();
+        // 移除双引号并转换为String类型
+        make = Some(value.trim_matches('"').to_string());
     }
     if let Some(field) = exif.get_field(Tag::Model, In::PRIMARY) {
-        model = Some(field.display_value().to_string());
+        let value = field.display_value().to_string();
+        // 移除双引号并转换为String类型
+        model = Some(value.trim_matches('"').to_string());
     }
     if let Some(field) = exif.get_field(Tag::DateTimeOriginal, In::PRIMARY) {
         capture = Some(field.display_value().to_string());
