@@ -67,13 +67,15 @@ class AdvanceDeleteCard extends StatelessWidget {
       String label = menu.matchLocation.isFront
           ? tr(AppL10n.advanceFrontLabel)
           : tr(AppL10n.advanceBackLabel);
+      String value = menu.value;
       int num = menu.matchLocation.isFront ? menu.front : menu.back;
       return AdvanceRichText(
         text: TextSpan(
-          text: tr(AppL10n.advanceFirst),
+          text: value == '' ? '' : tr(AppL10n.advanceFirst),
           style: defaultStyle,
           children: [
-            TextSpan(text: ' "${menu.value}" ', style: highlightStyle),
+            if (value != '')
+              TextSpan(text: ' "$value" ', style: highlightStyle),
             TextSpan(text: label, style: defaultStyle),
             TextSpan(text: ' "$num" ', style: highlightStyle),
             TextSpan(text: tr(AppL10n.advancePlace), style: defaultStyle),

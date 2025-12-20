@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/cores/notification.dart';
 import 'package:once_power/cores/oplog.dart';
@@ -11,6 +12,7 @@ import 'package:once_power/models/notification.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/base/easy_elevated_btn.dart';
 
 class ApplyRename extends ConsumerWidget {
@@ -27,7 +29,9 @@ class ApplyRename extends ConsumerWidget {
         // 检测文件是否存在，存在会返回一个 InfoDetail 对象
         InfoDetail? info = await checkFile(ref, list, file);
         // 存在就不会继续执行后续代码
-        if (info != null) return info;
+        if (info != null && !StorageUtil.getBool(AppKeys.autoRename)) {
+          return info;
+        }
         info = await rename(ref, file, oldPath, newPath);
         return info;
       },

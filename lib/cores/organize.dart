@@ -171,14 +171,14 @@ Future<List<InfoDetail>> dateClassifyOrganize(
 
 Future<String> renameExistFile(String newPath) async {
   int counter = 1;
-  final dir = path.dirname(newPath);
-  final ext = path.extension(newPath);
-  final baseName = path.basenameWithoutExtension(newPath);
+  final String dir = path.dirname(newPath);
+  final String ext = path.extension(newPath);
+  final String baseName = path.basenameWithoutExtension(newPath);
   while (true) {
     bool isExist = await File(newPath).exists();
     if (Platform.isWindows) isExist = isExist && await isTrueExist(newPath);
     if (!isExist) break;
-    final newFileName = '$baseName - $counter$ext';
+    final String newFileName = '${baseName}_${formatNum(counter, 2)}$ext';
     newPath = path.join(dir, newFileName);
     counter++;
     if (counter > 1000) throw Exception('无法生成可用文件名');

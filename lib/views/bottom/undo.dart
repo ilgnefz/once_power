@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/notification.dart';
@@ -12,6 +13,7 @@ import 'package:once_power/models/notification.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/common/text_btn.dart';
 
 class UndoBtn extends ConsumerWidget {
@@ -26,7 +28,9 @@ class UndoBtn extends ConsumerWidget {
         String newPath = file.beforePath;
         if (file.path == newPath) return null;
         InfoDetail? info = await checkFile(ref, list, file, true);
-        if (info != null) return info;
+        if (info != null && !StorageUtil.getBool(AppKeys.autoRename)) {
+          return info;
+        }
         info = await rename(ref, file, oldPath, newPath);
         return info;
       },

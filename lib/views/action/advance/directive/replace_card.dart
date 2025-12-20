@@ -89,13 +89,15 @@ class AdvanceReplaceCard extends StatelessWidget {
       String label = menu.matchLocation.isFront
           ? tr(AppL10n.advanceFrontLabel)
           : tr(AppL10n.advanceBackLabel);
+      String value = menu.value[0];
       int num = menu.matchLocation.isFront ? menu.front : menu.back;
       return AdvanceRichText(
         text: TextSpan(
-          text: tr(AppL10n.advanceFirst),
+          text: value == '' ? '' : tr(AppL10n.advanceFirst),
           style: defaultStyle,
           children: [
-            TextSpan(text: ' "${menu.value[0]}" ', style: highlightStyle),
+            if (value != '')
+              TextSpan(text: ' "$value" ', style: highlightStyle),
             TextSpan(text: label, style: defaultStyle),
             TextSpan(text: ' "$num" ', style: highlightStyle),
             TextSpan(text: tr(AppL10n.advancePlace), style: defaultStyle),

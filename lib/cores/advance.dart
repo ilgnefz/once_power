@@ -139,12 +139,14 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
     case MatchContent.position:
       return matchPosition(name, '', menu.start, menu.end);
     case MatchContent.front:
+      if (value == '') return name.substring(menu.front);
       int index = name.indexOf(value);
       if (index == -1 || index == 0) return name;
       int start = index - menu.front;
       start = start < 0 ? 0 : start;
       return matchPosition(name, '', start + 1, index);
     case MatchContent.behind:
+      if (value == '') return name.substring(0, name.length - menu.back);
       int index = name.indexOf(value);
       if (index == -1 || index == name.length - 1) return name;
       int start = index + value.length + 1;
@@ -343,12 +345,16 @@ String advanceReplaceName(
         case MatchContent.position:
           return matchPosition(name, newValue, menu.start, menu.end);
         case MatchContent.front:
+          if (oldValue == '') return newValue + name.substring(menu.front);
           int index = name.indexOf(oldValue);
           if (index == -1 || index == 0) return name;
           int start = index - menu.front;
           start = start < 0 ? 0 : start;
           return matchPosition(name, newValue, start + 1, index);
         case MatchContent.behind:
+          if (oldValue == '') {
+            return name.substring(0, name.length - menu.back) + newValue;
+          }
           int index = name.indexOf(oldValue);
           if (index == -1 || index == name.length - 1) return name;
           int start = index + oldValue.length + 1;

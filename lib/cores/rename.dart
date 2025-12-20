@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/cores/organize.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
@@ -52,6 +53,9 @@ Future<InfoDetail?> rename(
     if (file.type.isFolder) {
       await Directory(oldPath).rename(newPath);
     } else {
+      if (await File(newPath).exists()) {
+        newPath = await renameExistFile(newPath);
+      }
       await File(oldPath).rename(newPath);
     }
     await updateShowInfo(ref, file, newPath);
@@ -102,9 +106,8 @@ Future<bool> tempRenameFile(
   String newFullName = isUndo
       ? path.dirname(file.beforePath)
       : getFullName(file.newName, file.newExt);
-  String newPath = isUndo
-      ? file.beforePath
-      : path.join(file.parent, newFullName);
+  String newPath =
+      isUndo ? file.beforePath : path.join(file.parent, newFullName);
   // 检测需要临时修改名称的文件的新名称是否存在 系统中,在系统中就中断返回 true
   bool isExist = await checkExist(ref, list, newPath, isSecond: true);
   // 如果文件存在，就返回 true，无法修改

@@ -16,12 +16,14 @@ class SaveView extends StatefulWidget {
 class _SaveViewState extends State<SaveView> {
   bool saveSize = false;
   bool savePosition = false;
+  bool autoRename = false;
 
   @override
   void initState() {
     super.initState();
     saveSize = StorageUtil.getBool(AppKeys.saveSize);
     savePosition = StorageUtil.getBool(AppKeys.savePosition);
+    autoRename = StorageUtil.getBool(AppKeys.autoRename);
     setState(() {});
   }
 
@@ -29,24 +31,35 @@ class _SaveViewState extends State<SaveView> {
   Widget build(BuildContext context) {
     return CommonDialog(
       title: tr(AppL10n.bottomSave),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          EasyCheckbox(
-            checked: saveSize,
-            onChanged: (v) => setState(() => saveSize = v!),
-            label: tr(AppL10n.bottomSaveSize),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              EasyCheckbox(
+                checked: saveSize,
+                onChanged: (v) => setState(() => saveSize = v!),
+                label: tr(AppL10n.bottomSaveSize),
+              ),
+              EasyCheckbox(
+                checked: savePosition,
+                onChanged: (v) => setState(() => savePosition = v!),
+                label: tr(AppL10n.bottomSavePosition),
+              )
+            ],
           ),
           EasyCheckbox(
-            checked: savePosition,
-            onChanged: (v) => setState(() => savePosition = v!),
-            label: tr(AppL10n.bottomSavePosition),
-          )
+            checked: autoRename,
+            onChanged: (v) => setState(() => autoRename = v!),
+            label: tr(AppL10n.bottomAutoRename),
+          ),
         ],
       ),
       onOk: () async {
         await StorageUtil.setBool(AppKeys.saveSize, saveSize);
         await StorageUtil.setBool(AppKeys.savePosition, savePosition);
+        await StorageUtil.setBool(AppKeys.autoRename, autoRename);
       },
     );
   }

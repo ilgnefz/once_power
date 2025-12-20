@@ -21,6 +21,13 @@ The original intention of software development was to batch rename images, so th
 
 # New Feature
 
+## Add option to auto append suffix when renaming if file exists
+
+When not automatically renaming
+
+![50](doc/50.gif)
+
+
 ## Added the function of inserting content based on spaced repetition.
 
 ![49](doc/49.gif)

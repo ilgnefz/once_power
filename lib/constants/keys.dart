@@ -67,6 +67,7 @@ class AppKeys {
   static String isMaxed = 'isMaxed';
   static String savePosition = 'savePosition';
   static String saveSize = 'saveSize';
+  static String autoRename = 'autoRename';
 
   // List
   static String targetFolderList = 'targetFolderList';
