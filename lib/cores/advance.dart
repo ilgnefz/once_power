@@ -196,7 +196,7 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
       value = formatShowDate(date, menu.dateSplit);
       String time = formatShowTime(date, menu.timeSplit);
       String weekday = formatShowWeekday(dateTime, menu.weekdayStyle);
-      value = '$value$time$weekday';
+      value = '$value$weekday$time';
     }
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();

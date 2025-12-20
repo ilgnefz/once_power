@@ -144,7 +144,6 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     resolution = await getImageDimensions(filePath);
     CameraInfo? cameraInfo = await getImageInfo(filePath);
     if (cameraInfo != null) {
-      print("${cameraInfo.make} - ${cameraInfo.model}");
       double? longitude = cameraInfo.longitude;
       double? latitude = cameraInfo.latitude;
       String location = await getTrueLocation(longitude, latitude);

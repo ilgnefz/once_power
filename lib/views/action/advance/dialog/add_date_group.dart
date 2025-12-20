@@ -65,20 +65,6 @@ class AddDateGroup extends ConsumerWidget {
           onChanged: dateSplitChange,
         ),
         TextDropdown(
-          items: TimeSplitType.values
-              .map(
-                (item) => DropdownMenuItem(
-                  key: ValueKey(item),
-                  value: item,
-                  child: Text(item.label, style: textStyle),
-                ),
-              )
-              .toList(),
-          color: theme.popupMenuTheme.surfaceTintColor,
-          value: timeSplit,
-          onChanged: timeSplitChange,
-        ),
-        TextDropdown(
           items: WeekdayStyle.values
               .map(
                 (item) => DropdownMenuItem(
@@ -92,6 +78,20 @@ class AddDateGroup extends ConsumerWidget {
           width: 104,
           value: weekdayStyle,
           onChanged: weekdayStyleChange,
+        ),
+        TextDropdown(
+          items: TimeSplitType.values
+              .map(
+                (item) => DropdownMenuItem(
+                  key: ValueKey(item),
+                  value: item,
+                  child: Text(item.label, style: textStyle),
+                ),
+              )
+              .toList(),
+          color: theme.popupMenuTheme.surfaceTintColor,
+          value: timeSplit,
+          onChanged: timeSplitChange,
         ),
       ],
     );
