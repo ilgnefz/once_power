@@ -43,8 +43,8 @@ void normalUpdateName(WidgetRef ref, bool isReserve) {
     String name = isDate
         ? date
         : isReserve
-        ? reserveName(ref, file.name, match, modify, isLen, caseSen)
-        : replaceName(ref, file.name, match, modify, isLen, caseSen);
+            ? reserveName(ref, file.name, match, modify, isLen, caseSen)
+            : replaceName(ref, file.name, match, modify, isLen, caseSen);
     index = getRealIndex(
       date,
       caseFile,
@@ -66,7 +66,7 @@ void normalUpdateName(WidgetRef ref, bool isReserve) {
 String dateName(WidgetRef ref, FileInfo file) {
   int dateLen = ref.watch(dateLenProvider);
   DateType type = ref.watch(currentDateTypeProvider);
-  return getDateName(type, dateLen, file);
+  return getDateName(getDate(type, file), dateLen);
 }
 
 int getRealIndex(

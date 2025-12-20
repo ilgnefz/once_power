@@ -19,6 +19,7 @@ class BaseInput extends StatelessWidget {
     this.inputFormatters,
     this.onChanged,
     this.maxLines = 1,
+    this.obscureText = false,
     this.show = false,
     this.onClear,
     this.trailing,
@@ -35,6 +36,7 @@ class BaseInput extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
   final int maxLines;
+  final bool obscureText;
   final bool show;
   final void Function()? onClear;
   final Widget? trailing;
@@ -81,6 +83,7 @@ class BaseInput extends StatelessWidget {
                 cursorHeight: 20,
                 cursorRadius: Radius.circular(4),
                 style: theme.textTheme.bodyMedium,
+                obscureText: obscureText,
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: theme.inputDecorationTheme.hintStyle,

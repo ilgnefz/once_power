@@ -16,7 +16,7 @@ class AppNum {
   static const double dropdownMenuC = 112;
   static const double dropdownMenuE = 148;
   static const double input = 32;
-  static const double easyDialog = 480;
+  static const double easyDialog = 488;
   static const double detailDialog = 680;
   static const double icon = 26;
   static const double iconSmall = 12;
@@ -31,6 +31,7 @@ class AppNum {
   // Padding
   static const double padding = 12;
   static const double paddingMedium = 8;
+  static const double paddingDialog = 16;
 
   static const double image = 136;
 

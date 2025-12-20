@@ -5,6 +5,7 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/week.dart';
 import 'package:once_power/widgets/action/dialog_option.dart';
 import 'package:once_power/widgets/base/easy_radio.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
@@ -24,8 +25,10 @@ class AddTypeRadio extends StatelessWidget {
     required this.dateChange,
     required this.dateSplit,
     required this.timeSplit,
+    required this.weekdayStyle,
     required this.dateSplitChange,
     required this.timeSplitChange,
+    required this.weekdayStyleChange,
     required this.metaData,
     required this.metaDataChange,
   });
@@ -35,12 +38,14 @@ class AddTypeRadio extends StatelessWidget {
   final DateType date;
   final DateSplitType dateSplit;
   final TimeSplitType timeSplit;
+  final WeekdayStyle weekdayStyle;
   final FileMetaData metaData;
   final void Function(AddType) typeChanged;
   final void Function(int) randomLenChange;
   final void Function(DateType?) dateChange;
   final void Function(DateSplitType?) dateSplitChange;
   final void Function(TimeSplitType?) timeSplitChange;
+  final void Function(WeekdayStyle?) weekdayStyleChange;
   final void Function(FileMetaData?) metaDataChange;
 
   @override
@@ -77,9 +82,11 @@ class AddTypeRadio extends StatelessWidget {
                   date: date,
                   dateSplit: dateSplit,
                   timeSplit: timeSplit,
+                  weekdayStyle: weekdayStyle,
                   dateChange: dateChange,
                   dateSplitChange: dateSplitChange,
                   timeSplitChange: timeSplitChange,
+                  weekdayStyleChange: weekdayStyleChange,
                 );
               }
               if (e.isMetaData) {

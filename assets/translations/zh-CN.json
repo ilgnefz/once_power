@@ -95,7 +95,7 @@
     "regex": "使用正则",
     "deleteType": "删除类型",
     "replaceMode": "替换模式",
-    "serial": "序列",
+    "serial": "序列格式",
     "random": "随机值",
     "randomHint": "请输入自定义内容",
     "matchExt": "匹配扩展",
@@ -318,10 +318,10 @@
       "serial": "序列",
       "random": "随机值",
       "folder": "文件夹名",
-      "width": "宽度",
-      "height": "高度",
-      "ext": "扩展",
-      "group": "组名",
+      "width": "图片视频宽度",
+      "height": "图片视频高度",
+      "ext": "文件扩展",
+      "group": "文件组名",
       "meta": "元数据"
     },
     "split": {

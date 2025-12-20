@@ -9,6 +9,7 @@ import 'package:once_power/cores/advance.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/week.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
@@ -43,6 +44,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   DateType dateType = DateType.createdDate;
   DateSplitType dateSplit = DateSplitType.none;
   TimeSplitType timeSplit = TimeSplitType.hidden;
+  WeekdayStyle weekdayStyle = WeekdayStyle.none;
   AddPosition position = AddPosition.after;
   FileMetaData metaData = FileMetaData.title;
   DateType distinguishDateType = DateType.createdDate;
@@ -63,6 +65,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
       randomLen = widget.menu!.randomLen;
       dateType = widget.menu!.dateType;
       dateSplit = widget.menu!.dateSplit;
+      weekdayStyle = widget.menu!.weekdayStyle;
       metaData = widget.menu!.metaData;
       position = widget.menu!.addPosition;
       distinguishDateType = widget.menu!.distinguishDateType;
@@ -73,6 +76,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   @override
   Widget build(BuildContext context) {
     return CommonDialog(
+      width: 544,
       title: tr(AppL10n.advanceAddTitle),
       extraButton: GroupDropdown(
         value: group == 'all' ? tr(AppL10n.advanceAll) : group,
@@ -97,12 +101,15 @@ class _DeleteViewState extends ConsumerState<AddView> {
             date: dateType,
             dateSplit: dateSplit,
             timeSplit: timeSplit,
+            weekdayStyle: weekdayStyle,
             metaData: metaData,
             typeChanged: (value) => setState(() => type = value),
             randomLenChange: (value) => setState(() => randomLen = value),
             dateChange: (value) => setState(() => dateType = value!),
             dateSplitChange: (value) => setState(() => dateSplit = value!),
             timeSplitChange: (value) => setState(() => timeSplit = value!),
+            weekdayStyleChange: (value) =>
+                setState(() => weekdayStyle = value!),
             metaDataChange: (value) => setState(() => metaData = value!),
           ),
           SizedBox(height: 4.0),
@@ -147,6 +154,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
           dateType: dateType,
           dateSplit: dateSplit,
           timeSplit: timeSplit,
+          weekdayStyle: weekdayStyle,
           metaData: metaData,
           posIndex: posIndex,
           distinguishDateType: distinguishDateType,

@@ -132,7 +132,16 @@ extension AddTypeExtension on AddType {
   bool get isGroup => this == AddType.group;
 }
 
-enum TimeSplitType { hidden, none, chinese, space, dash, dot, underscore }
+enum TimeSplitType {
+  hidden,
+  none,
+  chinese,
+  english,
+  space,
+  dash,
+  dot,
+  underscore
+}
 
 extension TimeSplitTypeExtension on TimeSplitType {
   String get label {
@@ -143,6 +152,8 @@ extension TimeSplitTypeExtension on TimeSplitType {
         return tr(AppL10n.eSplitNone);
       case TimeSplitType.chinese:
         return '时分秒';
+      case TimeSplitType.english:
+        return 'hms';
       case TimeSplitType.space:
         return tr(AppL10n.eSplitSpace);
       case TimeSplitType.dash:
@@ -155,11 +166,13 @@ extension TimeSplitTypeExtension on TimeSplitType {
   }
 }
 
-enum DateSplitType { none, chinese, space, dash, dot, underscore }
+enum DateSplitType { hidden, none, chinese, space, dash, dot, underscore }
 
 extension DateSplitTypeExtension on DateSplitType {
   String get label {
     switch (this) {
+      case DateSplitType.hidden:
+        return tr(AppL10n.eSplitHidden);
       case DateSplitType.none:
         return tr(AppL10n.eSplitNone);
       case DateSplitType.chinese:

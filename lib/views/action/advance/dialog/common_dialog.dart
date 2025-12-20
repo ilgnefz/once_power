@@ -6,6 +6,7 @@ import 'package:once_power/widgets/base/easy_dialog.dart';
 class CommonDialog extends StatelessWidget {
   const CommonDialog({
     super.key,
+    this.width,
     this.autoPop = true,
     required this.title,
     required this.child,
@@ -15,6 +16,7 @@ class CommonDialog extends StatelessWidget {
     this.onCancel,
   });
 
+  final double? width;
   final bool autoPop;
   final String title;
   final Widget child;
@@ -26,6 +28,7 @@ class CommonDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
+      width: width,
       title: title,
       content: child,
       okText: tr(AppL10n.dialogOk),

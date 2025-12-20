@@ -45,6 +45,7 @@ class _KeyInputViewState extends State<KeyInputView> {
           DialogBaseInput(
             controller: _controller,
             hintText: tr(AppL10n.advanceLocationHint),
+            obscureText: true,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
             ],

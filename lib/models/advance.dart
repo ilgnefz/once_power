@@ -1,5 +1,6 @@
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/week.dart';
 
 class AdvancePreset {
   final String id;
@@ -184,6 +185,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final DateType dateType;
   final DateSplitType dateSplit;
   final TimeSplitType timeSplit;
+  final WeekdayStyle weekdayStyle;
   final FileMetaData metaData;
   final AddPosition addPosition;
   final DateType distinguishDateType;
@@ -202,6 +204,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.dateType,
     required this.dateSplit,
     required this.timeSplit,
+    required this.weekdayStyle,
     required this.metaData,
     required this.addPosition,
     required this.distinguishDateType,
@@ -226,6 +229,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       dateType: dateType,
       dateSplit: dateSplit,
       timeSplit: timeSplit,
+      weekdayStyle: weekdayStyle,
       metaData: metaData,
       addPosition: addPosition,
       distinguishDateType: distinguishDateType,
@@ -247,8 +251,9 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         addType: AddType.values[json["addType"] ?? 0],
         randomLen: json["randomLen"] ?? 1,
         dateType: DateType.values[json["dateType"] ?? 0],
-        dateSplit: DateSplitType.values[json["dateSplit"] ?? 0],
+        dateSplit: DateSplitType.values[json["dateSplit"] ?? 1],
         timeSplit: TimeSplitType.values[json["timeSplit"] ?? 0],
+        weekdayStyle: WeekdayStyle.values[json["weekdayStyle"] ?? 0],
         metaData: FileMetaData.values[json["metaData"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         distinguishDateType: DateType.values[json["distinguishDateType"] ?? 0],
@@ -271,6 +276,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "dateType": dateType.index,
         "dateSplit": dateSplit.index,
         "timeSplit": timeSplit.index,
+        "weekdayStyle": weekdayStyle.index,
         "metaData": metaData.index,
         "addPosition": addPosition.index,
         "distinguishDateType": distinguishDateType.index,
@@ -293,6 +299,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'dateType: $dateType, '
         'dateSplit: $dateSplit, '
         'timeSplit: $timeSplit, '
+        'weekdayStyle: $weekdayStyle, '
         'metaData: $metaData, '
         'addPosition: $addPosition, '
         'distinguishDateType: $distinguishDateType,'

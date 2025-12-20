@@ -248,16 +248,26 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   return (start < 0 ? 0 : start, end < 0 ? 0 : end);
 }
 
-String getDateName(DateType type, int dateLen, FileInfo file) {
-  String date = formatDateTime(file.createdDate);
-  if (type.isModifiedDate) date = formatDateTime(file.modifiedDate);
-  if (type.isEarliestDate) date = formatDateTime(sortDateTime(file).first);
-  if (type.isLatestDate) date = formatDateTime(sortDateTime(file).last);
-  if (type.isExifDate) {
-    DateTime? captureDate = file.metaInfo?.capture;
-    if (captureDate == null) return '';
-    date = formatDateTime(captureDate);
+DateTime? getDate(DateType type, FileInfo file) {
+  switch (type) {
+    case DateType.createdDate:
+      return file.createdDate;
+    case DateType.modifiedDate:
+      return file.modifiedDate;
+    case DateType.accessedDate:
+      return file.accessedDate;
+    case DateType.exifDate:
+      return file.metaInfo?.capture;
+    case DateType.earliestDate:
+      return sortDateTime(file).first;
+    case DateType.latestDate:
+      return sortDateTime(file).last;
   }
+}
+
+String getDateName(DateTime? dateTime, int dateLen) {
+  if (dateTime == null) return '';
+  String date = formatDateTime(dateTime);
   return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }
 

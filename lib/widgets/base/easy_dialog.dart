@@ -53,7 +53,7 @@ class EasyDialog extends StatelessWidget {
             color: theme.scaffoldBackgroundColor,
             child: Container(
               width: width ?? AppNum.easyDialog,
-              padding: padding ?? EdgeInsets.all(AppNum.padding),
+              padding: padding ?? EdgeInsets.all(AppNum.paddingDialog),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -72,8 +72,7 @@ class EasyDialog extends StatelessWidget {
                   Row(
                     spacing: actionsSpacing ?? AppNum.spaceLarge,
                     mainAxisAlignment: actionsAxisAlignment,
-                    children:
-                        actions ??
+                    children: actions ??
                         [
                           if (extraButton != null) ...[extraButton!, Spacer()],
                           TextButton(

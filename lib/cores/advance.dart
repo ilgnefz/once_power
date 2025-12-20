@@ -43,7 +43,7 @@ void advanceUpdateName(WidgetRef ref) {
         String type = file.type.label;
         if (menu.distinguishType.isDate) {
           DateType distinguishDate = menu.distinguishDateType;
-          String indexDate = getDateName(distinguishDate, 8, file);
+          String indexDate = getDateName(getDate(distinguishDate, file), 8);
           (_, index) = calculateIndex(classifyMap, [indexDate], file);
         }
         if (menu.distinguishType.isFolder) {
@@ -189,10 +189,12 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
       value = getRandomValue(randoms, menu.randomLen);
     }
     if (addType.isDate) {
-      String date = getDateName(menu.dateType, 14, file);
+      DateTime? dateTime = getDate(menu.dateType, file);
+      String date = getDateName(dateTime, 14);
       value = formatShowDate(date, menu.dateSplit);
-      String res = formatShowTime(date, menu.timeSplit);
-      value += res;
+      String time = formatShowTime(date, menu.timeSplit);
+      String weekday = formatShowWeekday(dateTime, menu.weekdayStyle);
+      value = '$value$time$weekday';
     }
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();
