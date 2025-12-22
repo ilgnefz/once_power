@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/widgets/action/dialog_option.dart';
 import 'package:once_power/widgets/common/digit_input.dart';
 
 class NumInputGroup extends StatelessWidget {
@@ -20,28 +21,28 @@ class NumInputGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text('${tr(AppL10n.advanceSerial)}: '),
-        const SizedBox(width: AppNum.spaceSmall),
-        SizedBox(
-          width: 120,
-          child: DigitInput(
-            value: digits,
-            unit: tr(AppL10n.advanceDigits),
-            onChanged: onDigitsChanged,
+    return DialogOption(
+        title: '${tr(AppL10n.advanceSerial)}: ',
+        padding:
+            EdgeInsets.only(top: AppNum.spaceSmall, right: AppNum.spaceSmall),
+        children: [
+          SizedBox(
+            width: 120,
+            child: DigitInput(
+              value: digits,
+              unit: tr(AppL10n.advanceDigits),
+              onChanged: onDigitsChanged,
+            ),
           ),
-        ),
-        const SizedBox(width: AppNum.spaceLarge),
-        SizedBox(
-          width: 120,
-          child: DigitInput(
-            value: start,
-            unit: tr(AppL10n.advanceStart),
-            onChanged: onStartChanged,
+          const SizedBox(width: AppNum.spaceLarge),
+          SizedBox(
+            width: 120,
+            child: DigitInput(
+              value: start,
+              unit: tr(AppL10n.advanceStart),
+              onChanged: onStartChanged,
+            ),
           ),
-        ),
-      ],
-    );
+        ]);
   }
 }

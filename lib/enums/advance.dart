@@ -132,61 +132,101 @@ extension AddTypeExtension on AddType {
   bool get isGroup => this == AddType.group;
 }
 
-enum TimeSplitType {
+enum DateShowType { hidden, none, chinese, space, dash, underscore, dot }
+
+extension DateShowTypeExtension on DateShowType {
+  String get label {
+    switch (this) {
+      case DateShowType.hidden:
+        return tr(AppL10n.eSplitHidden);
+      case DateShowType.none:
+        return tr(AppL10n.eSplitNone);
+      case DateShowType.chinese:
+        return '年月日';
+      case DateShowType.space:
+        return tr(AppL10n.eSplitSpace);
+      case DateShowType.dash:
+        return '-';
+      case DateShowType.dot:
+        return '.';
+      case DateShowType.underscore:
+        return '_';
+    }
+  }
+}
+
+enum TimeShowType {
   hidden,
   none,
   chinese,
   english,
   space,
   dash,
-  dot,
-  underscore
+  underscore,
+  dot
 }
 
-extension TimeSplitTypeExtension on TimeSplitType {
+extension TimeShowTypeExtension on TimeShowType {
   String get label {
     switch (this) {
-      case TimeSplitType.hidden:
+      case TimeShowType.hidden:
         return tr(AppL10n.eSplitHidden);
-      case TimeSplitType.none:
+      case TimeShowType.none:
         return tr(AppL10n.eSplitNone);
-      case TimeSplitType.chinese:
+      case TimeShowType.chinese:
         return '时分秒';
-      case TimeSplitType.english:
+      case TimeShowType.english:
         return 'hms';
-      case TimeSplitType.space:
+      case TimeShowType.space:
         return tr(AppL10n.eSplitSpace);
-      case TimeSplitType.dash:
+      case TimeShowType.dash:
         return '-';
-      case TimeSplitType.dot:
+      case TimeShowType.dot:
         return '.';
-      case TimeSplitType.underscore:
+      case TimeShowType.underscore:
         return '_';
     }
   }
 }
 
-enum DateSplitType { hidden, none, chinese, space, dash, dot, underscore }
+enum DateSeparateType { none, space, dash, underscore, dot, custom }
 
-extension DateSplitTypeExtension on DateSplitType {
+extension DateSeparateTypeExtension on DateSeparateType {
   String get label {
     switch (this) {
-      case DateSplitType.hidden:
-        return tr(AppL10n.eSplitHidden);
-      case DateSplitType.none:
+      case DateSeparateType.none:
         return tr(AppL10n.eSplitNone);
-      case DateSplitType.chinese:
-        return '年月日';
-      case DateSplitType.space:
+      case DateSeparateType.space:
         return tr(AppL10n.eSplitSpace);
-      case DateSplitType.dash:
+      case DateSeparateType.dash:
         return '-';
-      case DateSplitType.dot:
+      case DateSeparateType.dot:
         return '.';
-      case DateSplitType.underscore:
+      case DateSeparateType.underscore:
         return '_';
+      case DateSeparateType.custom:
+        return tr(AppL10n.eSplitCustom);
     }
   }
+
+  String get value {
+    switch (this) {
+      case DateSeparateType.none:
+        return '';
+      case DateSeparateType.space:
+        return ' ';
+      case DateSeparateType.dash:
+        return '-';
+      case DateSeparateType.dot:
+        return '.';
+      case DateSeparateType.underscore:
+        return '_';
+      case DateSeparateType.custom:
+        return tr(AppL10n.eSplitCustom);
+    }
+  }
+
+  bool get isCustom => this == DateSeparateType.custom;
 }
 
 enum DistinguishType { none, folder, file, extension, group, date }

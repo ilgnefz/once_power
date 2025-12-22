@@ -83,6 +83,7 @@ class AppL10n {
   static const String advancePresetName = 'advance.presetName';
   static const String advancePresetNameHint = 'advance.presetNameHint';
   static const String advanceAddPresetDesc = 'advance.addPresetDesc';
+  static const String advanceDateSeparate = 'advance.dateSeparate';
   static const String advanceSerialDistinguish = 'advance.serialDistinguish';
   static const String advanceAddType = 'advance.addType';
   static const String advanceConvertLetters = 'advance.convertLetters';
@@ -307,6 +308,8 @@ class AppL10n {
   static const String eSplitNone = 'enum.split.none';
   static const String eSplitSpace = 'enum.split.space';
   static const String eSplitHidden = 'enum.split.hidden';
+  static const String eSplitCustom = 'enum.split.custom';
+  static const String eSplitCustomTip = 'enum.split.customTip';
   static const String eDistNone = 'enum.distinguish.none';
   static const String eDistDate = 'enum.distinguish.date';
   static const String eDistFolder = 'enum.distinguish.folder';

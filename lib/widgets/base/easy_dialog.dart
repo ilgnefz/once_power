@@ -46,7 +46,7 @@ class EasyDialog extends StatelessWidget {
       child: UnconstrainedBox(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.9,
+            maxHeight: MediaQuery.of(context).size.height * 0.95,
           ),
           child: Material(
             borderRadius: BorderRadius.circular(12),

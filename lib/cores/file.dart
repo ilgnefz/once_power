@@ -150,8 +150,8 @@ Future<FileInfo> generateFileInfo(String filePath) async {
       String location = await getTrueLocation(longitude, latitude);
       metaInfo = FileMetaInfo(
         capture: captureDate == null ? null : getDateInfo(captureDate),
-        make: cameraInfo.make ?? '',
-        model: cameraInfo.model ?? '',
+        make: cameraInfo.make?.trim() ?? '',
+        model: cameraInfo.model?.trim() ?? '',
         longitude: longitude,
         latitude: latitude,
         location: location,

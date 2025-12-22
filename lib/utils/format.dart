@@ -89,7 +89,7 @@ String formatDouble(double value) {
   return value.toString();
 }
 
-String formatShowDate(String date, DateSplitType type) {
+String formatShowDate(String date, DateShowType type) {
   if (date.length < 8) return date;
   List<String> dateParts = [];
   dateParts.add(date.substring(0, 4));
@@ -97,46 +97,46 @@ String formatShowDate(String date, DateSplitType type) {
   dateParts.add(date.substring(6, 8));
 
   switch (type) {
-    case DateSplitType.hidden:
+    case DateShowType.hidden:
       return '';
-    case DateSplitType.none:
+    case DateShowType.none:
       return date.substring(0, 8);
-    case DateSplitType.chinese:
+    case DateShowType.chinese:
       return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
-    case DateSplitType.space:
+    case DateShowType.space:
       return '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
-    case DateSplitType.dash:
+    case DateShowType.dash:
       return '${dateParts[0]}-${dateParts[1]}-${dateParts[2]}';
-    case DateSplitType.dot:
+    case DateShowType.dot:
       return '${dateParts[0]}.${dateParts[1]}.${dateParts[2]}';
-    case DateSplitType.underscore:
+    case DateShowType.underscore:
       return '${dateParts[0]}_${dateParts[1]}_${dateParts[2]}';
   }
 }
 
-String formatShowTime(String date, TimeSplitType type) {
+String formatShowTime(String date, TimeShowType type) {
   if (date.length < 14) return '';
   List<String> timeParts = [];
   timeParts.add(date.substring(8, 10));
   timeParts.add(date.substring(10, 12));
   timeParts.add(date.substring(12, 14));
   switch (type) {
-    case TimeSplitType.hidden:
+    case TimeShowType.hidden:
       return '';
-    case TimeSplitType.none:
-      return ' ${timeParts[0]}${timeParts[1]}${timeParts[2]}';
-    case TimeSplitType.chinese:
-      return ' ${timeParts[0]}时${timeParts[1]}分${timeParts[2]}秒';
-    case TimeSplitType.english:
-      return ' ${timeParts[0]}h${timeParts[1]}m${timeParts[2]}s';
-    case TimeSplitType.dash:
-      return ' ${timeParts[0]}-${timeParts[1]}-${timeParts[2]}';
-    case TimeSplitType.dot:
-      return ' ${timeParts[0]}.${timeParts[1]}.${timeParts[2]}';
-    case TimeSplitType.underscore:
-      return ' ${timeParts[0]}_${timeParts[1]}_${timeParts[2]}';
-    case TimeSplitType.space:
-      return ' ${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
+    case TimeShowType.none:
+      return '${timeParts[0]}${timeParts[1]}${timeParts[2]}';
+    case TimeShowType.chinese:
+      return '${timeParts[0]}时${timeParts[1]}分${timeParts[2]}秒';
+    case TimeShowType.english:
+      return '${timeParts[0]}h${timeParts[1]}m${timeParts[2]}s';
+    case TimeShowType.dash:
+      return '${timeParts[0]}-${timeParts[1]}-${timeParts[2]}';
+    case TimeShowType.dot:
+      return '${timeParts[0]}.${timeParts[1]}.${timeParts[2]}';
+    case TimeShowType.underscore:
+      return '${timeParts[0]}_${timeParts[1]}_${timeParts[2]}';
+    case TimeShowType.space:
+      return '${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
   }
 }
 

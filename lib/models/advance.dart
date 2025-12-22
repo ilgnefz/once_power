@@ -183,9 +183,11 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final AddType addType;
   final int randomLen;
   final DateType dateType;
-  final DateSplitType dateSplit;
-  final TimeSplitType timeSplit;
+  final DateShowType dateSplit;
+  final TimeShowType timeSplit;
   final WeekdayStyle weekdayStyle;
+  final DateSeparateType separateType;
+  final String customSeparate;
   final FileMetaData metaData;
   final AddPosition addPosition;
   final DateType distinguishDateType;
@@ -205,6 +207,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.dateSplit,
     required this.timeSplit,
     required this.weekdayStyle,
+    required this.separateType,
+    required this.customSeparate,
     required this.metaData,
     required this.addPosition,
     required this.distinguishDateType,
@@ -230,6 +234,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       dateSplit: dateSplit,
       timeSplit: timeSplit,
       weekdayStyle: weekdayStyle,
+      separateType: separateType,
+      customSeparate: customSeparate,
       metaData: metaData,
       addPosition: addPosition,
       distinguishDateType: distinguishDateType,
@@ -251,9 +257,11 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         addType: AddType.values[json["addType"] ?? 0],
         randomLen: json["randomLen"] ?? 1,
         dateType: DateType.values[json["dateType"] ?? 0],
-        dateSplit: DateSplitType.values[json["dateSplit"] ?? 1],
-        timeSplit: TimeSplitType.values[json["timeSplit"] ?? 0],
+        dateSplit: DateShowType.values[json["dateSplit"] ?? 1],
+        timeSplit: TimeShowType.values[json["timeSplit"] ?? 0],
         weekdayStyle: WeekdayStyle.values[json["weekdayStyle"] ?? 0],
+        separateType: DateSeparateType.values[json["separateType"] ?? 0],
+        customSeparate: json["customSeparate"] ?? '',
         metaData: FileMetaData.values[json["metaData"] ?? 0],
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         distinguishDateType: DateType.values[json["distinguishDateType"] ?? 0],
@@ -277,6 +285,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "dateSplit": dateSplit.index,
         "timeSplit": timeSplit.index,
         "weekdayStyle": weekdayStyle.index,
+        "separateType": separateType.index,
+        "customSeparate": customSeparate,
         "metaData": metaData.index,
         "addPosition": addPosition.index,
         "distinguishDateType": distinguishDateType.index,
@@ -300,6 +310,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'dateSplit: $dateSplit, '
         'timeSplit: $timeSplit, '
         'weekdayStyle: $weekdayStyle, '
+        'separateType: $separateType, '
+        'customSeparate: $customSeparate, '
         'metaData: $metaData, '
         'addPosition: $addPosition, '
         'distinguishDateType: $distinguishDateType,'

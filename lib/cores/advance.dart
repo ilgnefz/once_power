@@ -195,12 +195,19 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
     if (addType.isDate) {
       DateInfo? dateTime = getDate(menu.dateType, file);
       String date = getDateName(dateTime?.date, 14);
+      List<String> finalDate = [];
       value = formatShowDate(date, menu.dateSplit);
       String time = formatShowTime(date, menu.timeSplit);
       String weekday = menu.weekdayStyle.isNone || dateTime == null
           ? ''
-          : ' ${dateTime.weekday[menu.weekdayStyle.value]}';
-      value = '$value$weekday$time';
+          : dateTime.weekday[menu.weekdayStyle.value];
+      if (value.isNotEmpty) finalDate.add(value);
+      if (weekday.isNotEmpty) finalDate.add(weekday);
+      if (time.isNotEmpty) finalDate.add(time);
+      String dateSeparate = menu.separateType.isCustom
+          ? menu.customSeparate
+          : menu.separateType.value;
+      value = finalDate.join(dateSeparate);
     }
     if (addType.isWidth) {
       value = file.resolution == null ? '' : file.resolution!.width.toString();

@@ -83,6 +83,7 @@
     "presetName": "预设名称",
     "presetNameHint": "请输入预设名称",
     "addPresetDesc": "注：点击上方预设名称可自动填充至输入框，同名预设将被覆盖",
+    "dateSeparate": "日期分隔",
     "serialDistinguish": "序列区分",
     "addType": "添加类型",
     "convertLetters": "转换文本",
@@ -328,7 +329,9 @@
     "split": {
       "none": "不分隔",
       "space": "空格",
-      "hidden": "不显示"
+      "hidden": "不显示",
+      "custom": "自定义",
+      "customTip": "请输入自定义分隔符"
     },
     "distinguish": {
       "none": "不区分",

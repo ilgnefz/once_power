@@ -83,6 +83,7 @@
     "presetName": "Preset Name",
     "presetNameHint": "Enter preset name",
     "addPresetDesc": "Note: Click preset name to fill. Same name overwrites",
+    "dateSeparate": "Date Separate",
     "serialDistinguish": "Serial Distinction",
     "addType": "Add Type",
     "convertLetters": "Convert Text",
@@ -328,7 +329,9 @@
     "split": {
       "none": "None",
       "space": "Space",
-      "hidden": "Hidden"
+      "hidden": "Hidden",
+      "custom": "Custom",
+      "customTip": "Please input custom separator"
     },
     "distinguish": {
       "none": "None",

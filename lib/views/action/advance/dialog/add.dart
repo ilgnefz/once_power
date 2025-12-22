@@ -15,6 +15,7 @@ import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
+import 'package:once_power/views/action/advance/dialog/date_separate.dart';
 
 import 'add_position_radio.dart';
 import 'add_serial_distinguish.dart';
@@ -42,9 +43,11 @@ class _DeleteViewState extends ConsumerState<AddView> {
   AddType type = AddType.text;
   int randomLen = 1;
   DateType dateType = DateType.createdDate;
-  DateSplitType dateSplit = DateSplitType.none;
-  TimeSplitType timeSplit = TimeSplitType.hidden;
+  DateShowType dateSplit = DateShowType.none;
+  TimeShowType timeSplit = TimeShowType.hidden;
   WeekdayStyle weekdayStyle = WeekdayStyle.none;
+  DateSeparateType separateType = DateSeparateType.none;
+  String customSeparate = '';
   AddPosition position = AddPosition.after;
   FileMetaData metaData = FileMetaData.title;
   DateType distinguishDateType = DateType.createdDate;
@@ -66,6 +69,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
       dateType = widget.menu!.dateType;
       dateSplit = widget.menu!.dateSplit;
       weekdayStyle = widget.menu!.weekdayStyle;
+      separateType = widget.menu!.separateType;
+      customSeparate = widget.menu!.customSeparate;
       metaData = widget.menu!.metaData;
       position = widget.menu!.addPosition;
       distinguishDateType = widget.menu!.distinguishDateType;
@@ -112,7 +117,14 @@ class _DeleteViewState extends ConsumerState<AddView> {
                 setState(() => weekdayStyle = value!),
             metaDataChange: (value) => setState(() => metaData = value!),
           ),
-          SizedBox(height: 4.0),
+          // SizedBox(height: 4.0),
+          DateSeparateView(
+            separateType: separateType,
+            custom: customSeparate,
+            separateChange: (value) => setState(() => separateType = value!),
+            customChange: (value) => setState(() => customSeparate = value),
+          ),
+          // SizedBox(height: 4.0),
           NumInputGroup(
             digits: digits,
             start: start,
@@ -155,6 +167,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
           dateSplit: dateSplit,
           timeSplit: timeSplit,
           weekdayStyle: weekdayStyle,
+          separateType: separateType,
+          customSeparate: customSeparate,
           metaData: metaData,
           posIndex: posIndex,
           distinguishDateType: distinguishDateType,

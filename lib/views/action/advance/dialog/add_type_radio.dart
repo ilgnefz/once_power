@@ -36,15 +36,15 @@ class AddTypeRadio extends StatelessWidget {
   final AddType type;
   final int len;
   final DateType date;
-  final DateSplitType dateSplit;
-  final TimeSplitType timeSplit;
+  final DateShowType dateSplit;
+  final TimeShowType timeSplit;
   final WeekdayStyle weekdayStyle;
   final FileMetaData metaData;
   final void Function(AddType) typeChanged;
   final void Function(int) randomLenChange;
   final void Function(DateType?) dateChange;
-  final void Function(DateSplitType?) dateSplitChange;
-  final void Function(TimeSplitType?) timeSplitChange;
+  final void Function(DateShowType?) dateSplitChange;
+  final void Function(TimeShowType?) timeSplitChange;
   final void Function(WeekdayStyle?) weekdayStyleChange;
   final void Function(FileMetaData?) metaDataChange;
 

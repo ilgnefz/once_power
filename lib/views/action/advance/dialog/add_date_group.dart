@@ -19,12 +19,12 @@ class AddDateGroup extends ConsumerWidget {
   });
 
   final DateType date;
-  final DateSplitType dateSplit;
-  final TimeSplitType timeSplit;
+  final DateShowType dateSplit;
+  final TimeShowType timeSplit;
   final WeekdayStyle weekdayStyle;
   final void Function(DateType?) dateChange;
-  final void Function(DateSplitType?) dateSplitChange;
-  final void Function(TimeSplitType?) timeSplitChange;
+  final void Function(DateShowType?) dateSplitChange;
+  final void Function(TimeShowType?) timeSplitChange;
   final void Function(WeekdayStyle?) weekdayStyleChange;
 
   @override
@@ -51,7 +51,7 @@ class AddDateGroup extends ConsumerWidget {
           onChanged: dateChange,
         ),
         TextDropdown(
-          items: DateSplitType.values
+          items: DateShowType.values
               .map(
                 (item) => DropdownMenuItem(
                   key: ValueKey(item),
@@ -80,7 +80,7 @@ class AddDateGroup extends ConsumerWidget {
           onChanged: weekdayStyleChange,
         ),
         TextDropdown(
-          items: TimeSplitType.values
+          items: TimeShowType.values
               .map(
                 (item) => DropdownMenuItem(
                   key: ValueKey(item),
