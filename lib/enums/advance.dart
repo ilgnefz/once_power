@@ -89,9 +89,9 @@ enum AddType {
   width,
   height,
   extension,
-  date,
-  metaData,
   group,
+  date,
+  metaData
 }
 
 extension AddTypeExtension on AddType {

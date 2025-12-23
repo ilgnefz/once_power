@@ -189,6 +189,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   final DateSeparateType separateType;
   final String customSeparate;
   final FileMetaData metaData;
+  final String metaAddPrefix;
+  final String metaAddSuffix;
   final AddPosition addPosition;
   final DateType distinguishDateType;
   final int posIndex;
@@ -210,6 +212,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     required this.separateType,
     required this.customSeparate,
     required this.metaData,
+    required this.metaAddPrefix,
+    required this.metaAddSuffix,
     required this.addPosition,
     required this.distinguishDateType,
     required this.posIndex,
@@ -237,6 +241,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
       separateType: separateType,
       customSeparate: customSeparate,
       metaData: metaData,
+      metaAddPrefix: metaAddPrefix,
+      metaAddSuffix: metaAddSuffix,
       addPosition: addPosition,
       distinguishDateType: distinguishDateType,
       posIndex: posIndex,
@@ -263,6 +269,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         separateType: DateSeparateType.values[json["separateType"] ?? 0],
         customSeparate: json["customSeparate"] ?? '',
         metaData: FileMetaData.values[json["metaData"] ?? 0],
+        metaAddPrefix: json["metaAddPrefix"] ?? '',
+        metaAddSuffix: json["metaAddSuffix"] ?? '',
         addPosition: AddPosition.values[json["addPosition"] ?? 1],
         distinguishDateType: DateType.values[json["distinguishDateType"] ?? 0],
         posIndex: json["posIndex"] ?? 1,
@@ -288,6 +296,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         "separateType": separateType.index,
         "customSeparate": customSeparate,
         "metaData": metaData.index,
+        "metaAddPrefix": metaAddPrefix,
+        "metaAddSuffix": metaAddSuffix,
         "addPosition": addPosition.index,
         "distinguishDateType": distinguishDateType.index,
         "posIndex": posIndex,
@@ -313,6 +323,8 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'separateType: $separateType, '
         'customSeparate: $customSeparate, '
         'metaData: $metaData, '
+        'metaAddPrefix: $metaAddPrefix, '
+        'metaAddSuffix: $metaAddSuffix, '
         'addPosition: $addPosition, '
         'distinguishDateType: $distinguishDateType,'
         'posIndex: $posIndex, '

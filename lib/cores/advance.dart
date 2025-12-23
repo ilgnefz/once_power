@@ -239,6 +239,9 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
           value = file.metaInfo?.location ?? '';
           break;
       }
+      if (value.isNotEmpty) {
+        value = menu.metaAddPrefix + value + menu.metaAddSuffix;
+      }
     }
     if (addType.isGroup) value = file.group;
     switch (addPosition) {

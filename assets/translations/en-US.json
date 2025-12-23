@@ -86,6 +86,8 @@
     "dateSeparate": "Date Separate",
     "serialDistinguish": "Serial Distinction",
     "addType": "Add Type",
+    "addPrefix": "Prefix",
+    "addSuffix": "Suffix",
     "convertLetters": "Convert Text",
     "matchPosition": "Match Pos",
     "start": "Start",
@@ -319,11 +321,11 @@
       "text": "Text",
       "serial": "Serial",
       "random": "Random",
-      "folder": "Folder name",
+      "folder": "Folder",
       "width": "Width",
       "height": "Height",
-      "ext": "Ext",
-      "group": "Group name",
+      "ext": "Extension",
+      "group": "Group",
       "meta": "Metadata"
     },
     "split": {
@@ -331,7 +333,7 @@
       "space": "Space",
       "hidden": "Hidden",
       "custom": "Custom",
-      "customTip": "Please input custom separator"
+      "customTip": "Please enter custom separator"
     },
     "distinguish": {
       "none": "None",

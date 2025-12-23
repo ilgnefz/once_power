@@ -86,6 +86,8 @@ class AppL10n {
   static const String advanceDateSeparate = 'advance.dateSeparate';
   static const String advanceSerialDistinguish = 'advance.serialDistinguish';
   static const String advanceAddType = 'advance.addType';
+  static const String advanceAddPrefix = 'advance.addPrefix';
+  static const String advanceAddSuffix = 'advance.addSuffix';
   static const String advanceConvertLetters = 'advance.convertLetters';
   static const String advanceMatchPosition = 'advance.matchPosition';
   static const String advanceStart = 'advance.start';

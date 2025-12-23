@@ -784,11 +784,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "caf4aa5b0f434c91fe5c7f1ecb6a5ece2130b02ad2a590589dda5146df959001"
 
 [[package]]
+name = "rexif"
+version = "0.7.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be932047c168919c8d5af065b16fa7d4bd24835ffa256bf0cf1ff463f91c15df"
+
+[[package]]
 name = "rust_lib_once_power"
 version = "0.1.0"
 dependencies = [
  "flutter_rust_bridge",
  "kamadak-exif",
+ "rexif",
  "trash",
  "zhconv",
 ]

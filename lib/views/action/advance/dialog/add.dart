@@ -50,6 +50,7 @@ class _DeleteViewState extends ConsumerState<AddView> {
   String customSeparate = '';
   AddPosition position = AddPosition.after;
   FileMetaData metaData = FileMetaData.title;
+  String metaAddPrefix = '', metaAddSuffix = '';
   DateType distinguishDateType = DateType.createdDate;
   String group = 'all';
 
@@ -72,6 +73,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
       separateType = widget.menu!.separateType;
       customSeparate = widget.menu!.customSeparate;
       metaData = widget.menu!.metaData;
+      metaAddPrefix = widget.menu!.metaAddPrefix;
+      metaAddSuffix = widget.menu!.metaAddSuffix;
       position = widget.menu!.addPosition;
       distinguishDateType = widget.menu!.distinguishDateType;
       group = widget.menu!.group;
@@ -108,6 +111,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
             timeSplit: timeSplit,
             weekdayStyle: weekdayStyle,
             metaData: metaData,
+            metaAddPrefix: metaAddPrefix,
+            metaAddSuffix: metaAddSuffix,
             typeChanged: (value) => setState(() => type = value),
             randomLenChange: (value) => setState(() => randomLen = value),
             dateChange: (value) => setState(() => dateType = value!),
@@ -116,6 +121,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
             weekdayStyleChange: (value) =>
                 setState(() => weekdayStyle = value!),
             metaDataChange: (value) => setState(() => metaData = value!),
+            addPrefixChange: (value) => setState(() => metaAddPrefix = value!),
+            addSuffixChange: (value) => setState(() => metaAddSuffix = value!),
           ),
           // SizedBox(height: 4.0),
           DateSeparateView(
@@ -170,6 +177,8 @@ class _DeleteViewState extends ConsumerState<AddView> {
           separateType: separateType,
           customSeparate: customSeparate,
           metaData: metaData,
+          metaAddPrefix: metaAddPrefix,
+          metaAddSuffix: metaAddSuffix,
           posIndex: posIndex,
           distinguishDateType: distinguishDateType,
           group: group,

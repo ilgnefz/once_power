@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `parse_gps_coord`
+// These functions are ignored because they are not marked as `pub`: `is_in_china`, `parse_gps_coordinates`, `parse_urational_coordinate`, `transform_lat`, `transform_lon`, `wgs84_to_gcj02`
 
 Future<CameraInfo?> getImageMetaInfo({required String imagePath}) =>
     RustLib.instance.api.crateApiImgExifGetImageMetaInfo(imagePath: imagePath);

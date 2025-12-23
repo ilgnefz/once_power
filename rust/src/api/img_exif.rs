@@ -1,6 +1,5 @@
-use exif::{In, Tag, Value};
-use std::fs::File;
-use std::io::BufReader;
+use rexif::{ExifTag, TagValue};
+use std::f64::consts::PI;
 
 pub struct CameraInfo {
     pub make: Option<String>,
@@ -10,49 +9,124 @@ pub struct CameraInfo {
     pub longitude: Option<f64>,
 }
 
+/// 解析GPS坐标并转换为高德地图坐标
+/// 直接处理rexif的URational数据，避免字符串转换的中间步骤
+fn parse_gps_coordinates(lat_value: &TagValue, lon_value: &TagValue) -> Result<(f64, f64), String> {
+    // 直接从URational数据解析坐标
+    let wgs_lat = parse_urational_coordinate(lat_value)?;
+    let wgs_lon = parse_urational_coordinate(lon_value)?;
+    
+    // 判断是否在中国境内
+    if is_in_china(wgs_lat, wgs_lon) {
+        // 转换为火星坐标(GCJ-02)
+        let (gcj_lat, gcj_lon) = wgs84_to_gcj02(wgs_lat, wgs_lon);
+        Ok((gcj_lat, gcj_lon))
+    } else {
+        // 境外保持WGS84坐标
+        Ok((wgs_lat, wgs_lon))
+    }
+}
+
+/// 直接从URational数据解析坐标
+fn parse_urational_coordinate(value: &TagValue) -> Result<f64, String> {
+    match value {
+        TagValue::URational(rationals) => {
+            if rationals.len() < 3 {
+                return Err("GPS坐标需要至少3个有理数".to_string());
+            }
+            
+            // 解析度分秒
+            let degrees = rationals[0].numerator as f64 / rationals[0].denominator.max(1) as f64;
+            let minutes = rationals[1].numerator as f64 / rationals[1].denominator.max(1) as f64;
+            let seconds = rationals[2].numerator as f64 / rationals[2].denominator.max(1) as f64;
+            
+            // 转换为十进制度
+            Ok(degrees + (minutes / 60.0) + (seconds / 3600.0))
+        },
+        _ => Err("GPS坐标必须是有理数数组".to_string())
+    }
+}
+
+/// 判断坐标是否在中国大陆境内
+fn is_in_china(lat: f64, lon: f64) -> bool {
+    // 中国大陆的粗略边界框
+    lat >= 18.15 && lat <= 53.55 && lon >= 73.66 && lon <= 135.05
+}
+
+/// 将WGS84坐标转换为火星坐标(GCJ-02)
+fn wgs84_to_gcj02(wgs_lat: f64, wgs_lon: f64) -> (f64, f64) {
+    let a = 6378245.0;
+    let ee = 0.00669342162296594323;
+    
+    let mut dlat = transform_lat(wgs_lon - 105.0, wgs_lat - 35.0);
+    let mut dlon = transform_lon(wgs_lon - 105.0, wgs_lat - 35.0);
+    
+    let rad_lat = wgs_lat / 180.0 * PI;
+    let magic = 1.0 - ee * rad_lat.sin() * rad_lat.sin();
+    let sqrt_magic = magic.sqrt();
+    
+    dlat = (dlat * 180.0) / ((a * (1.0 - ee)) / (magic * sqrt_magic) * PI);
+    dlon = (dlon * 180.0) / (a / sqrt_magic * rad_lat.cos() * PI);
+    
+    (wgs_lat + dlat, wgs_lon + dlon)
+}
+
+fn transform_lat(x: f64, y: f64) -> f64 {
+    let mut ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * x.abs().sqrt();
+    ret += (20.0 * (6.0 * PI * x).sin() + 20.0 * (2.0 * PI * x).sin()) * 2.0 / 3.0;
+    ret += (20.0 * (PI * y).sin() + 40.0 * (PI / 3.0 * y).sin()) * 2.0 / 3.0;
+    ret += (160.0 * (PI / 12.0 * y).sin() + 320.0 * (PI / 30.0 * y).sin()) * 2.0 / 3.0;
+    ret
+}
+
+fn transform_lon(x: f64, y: f64) -> f64 {
+    let mut ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * x.abs().sqrt();
+    ret += (20.0 * (6.0 * PI * x).sin() + 20.0 * (2.0 * PI * x).sin()) * 2.0 / 3.0;
+    ret += (20.0 * (PI * x).sin() + 40.0 * (PI / 3.0 * x).sin()) * 2.0 / 3.0;
+    ret += (150.0 * (PI / 12.0 * x).sin() + 300.0 * (PI / 30.0 * x).sin()) * 2.0 / 3.0;
+    ret
+}
+
 #[flutter_rust_bridge::frb]
 pub fn get_image_meta_info(image_path: String) -> Option<CameraInfo> {
-    let file = File::open(&image_path).ok()?;
-    let mut buf_reader = BufReader::new(file);
-    let exif_reader = exif::Reader::new();
-    
-    // 解析 EXIF 数据
-    let exif = exif_reader.read_from_container(&mut buf_reader).ok()?;
+    let exif_data = match rexif::parse_file(&image_path) {
+        Ok(data) => data,
+        Err(_) => return None,
+    };
 
     let mut make = None;
     let mut model = None;
     let mut capture = None;
     let mut latitude = None;
     let mut longitude = None;
+    let mut lat_value = None;
+    let mut lon_value = None;
 
-    // 提取基础信息
-    if let Some(field) = exif.get_field(Tag::Make, In::PRIMARY) {
-        let value = field.display_value().with_unit(&exif).to_string();
-        // 移除双引号并转换为String类型
-        make = Some(value.trim_matches('"').to_string());
+    // 收集EXIF数据
+    for entry in exif_data.entries {
+        match entry.tag {
+            ExifTag::Make => make = Some(entry.value.to_string()),
+            ExifTag::Model => model = Some(entry.value.to_string()),
+            ExifTag::DateTimeOriginal => capture = Some(entry.value.to_string()),
+            ExifTag::GPSLatitude => lat_value = Some(entry.value),
+            ExifTag::GPSLongitude => lon_value = Some(entry.value),
+            _ => {},
+        }
     }
-    if let Some(field) = exif.get_field(Tag::Model, In::PRIMARY) {
-        let value = field.display_value().to_string();
-        // 移除双引号并转换为String类型
-        model = Some(value.trim_matches('"').to_string());
+    
+    // 解析GPS坐标
+    if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {
+        match parse_gps_coordinates(&lat_val, &lon_val) {
+            Ok((lat, lon)) => {
+                latitude = Some(lat);
+                longitude = Some(lon);
+            },
+            Err(e) => {
+                eprintln!("GPS坐标解析失败: {}", e);
+            }
+        }
     }
-    if let Some(field) = exif.get_field(Tag::DateTimeOriginal, In::PRIMARY) {
-        capture = Some(field.display_value().to_string());
-    }
-
-    // 提取并转换 GPS 数据
-    let lat_field = exif.get_field(Tag::GPSLatitude, In::PRIMARY);
-    let lat_ref_field = exif.get_field(Tag::GPSLatitudeRef, In::PRIMARY);
-    if let (Some(lat), Some(lat_ref)) = (lat_field, lat_ref_field) {
-        latitude = parse_gps_coord(lat, lat_ref);
-    }
-
-    let lon_field = exif.get_field(Tag::GPSLongitude, In::PRIMARY);
-    let lon_ref_field = exif.get_field(Tag::GPSLongitudeRef, In::PRIMARY);
-    if let (Some(lon), Some(lon_ref)) = (lon_field, lon_ref_field) {
-        longitude = parse_gps_coord(lon, lon_ref);
-    }
-
+   
     Some(CameraInfo {
         make,
         model,
@@ -60,26 +134,4 @@ pub fn get_image_meta_info(image_path: String) -> Option<CameraInfo> {
         latitude,
         longitude,
     })
-}
-
-/// 解析 kamadak-exif 的 GPS 坐标字段
-fn parse_gps_coord(field: &exif::Field, ref_field: &exif::Field) -> Option<f64> {
-    // 确保值是 Rational 类型（度、分、秒）
-    if let Value::Rational(ref dms) = field.value {
-        if dms.len() >= 3 {
-            let deg = dms[0].to_f64();
-            let min = dms[1].to_f64();
-            let sec = dms[2].to_f64();
-            
-            let mut dd = deg + (min / 60.0) + (sec / 3600.0);
-            
-            // 处理方位引用 (N/S, E/W)
-            let ref_str = ref_field.display_value().to_string();
-            if ref_str.contains('S') || ref_str.contains('W') {
-                dd = -dd;
-            }
-            return Some(dd);
-        }
-    }
-    None
 }

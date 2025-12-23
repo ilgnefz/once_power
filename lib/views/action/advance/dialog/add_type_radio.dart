@@ -31,6 +31,10 @@ class AddTypeRadio extends StatelessWidget {
     required this.weekdayStyleChange,
     required this.metaData,
     required this.metaDataChange,
+    required this.metaAddPrefix,
+    required this.metaAddSuffix,
+    required this.addPrefixChange,
+    required this.addSuffixChange,
   });
 
   final AddType type;
@@ -40,6 +44,8 @@ class AddTypeRadio extends StatelessWidget {
   final TimeShowType timeSplit;
   final WeekdayStyle weekdayStyle;
   final FileMetaData metaData;
+  final String metaAddPrefix;
+  final String metaAddSuffix;
   final void Function(AddType) typeChanged;
   final void Function(int) randomLenChange;
   final void Function(DateType?) dateChange;
@@ -47,6 +53,8 @@ class AddTypeRadio extends StatelessWidget {
   final void Function(TimeShowType?) timeSplitChange;
   final void Function(WeekdayStyle?) weekdayStyleChange;
   final void Function(FileMetaData?) metaDataChange;
+  final void Function(String?) addPrefixChange;
+  final void Function(String?) addSuffixChange;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +103,10 @@ class AddTypeRadio extends StatelessWidget {
                     AddMetaData(
                       metaData: metaData,
                       mateDataChange: metaDataChange,
+                      addPrefix: metaAddPrefix,
+                      addSuffix: metaAddSuffix,
+                      addPrefixChange: addPrefixChange,
+                      addSuffixChange: addSuffixChange,
                     ),
                     const SizedBox(width: 4.0),
                     if (metaData.isLocation)

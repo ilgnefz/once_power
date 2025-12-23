@@ -86,6 +86,8 @@
     "dateSeparate": "日期分隔",
     "serialDistinguish": "序列区分",
     "addType": "添加类型",
+    "addPrefix": "前缀",
+    "addSuffix": "后缀",
     "convertLetters": "转换文本",
     "matchPosition": "匹配位置",
     "start": "开始",

@@ -9,19 +9,21 @@ class DialogBaseInput extends StatefulWidget {
     this.value,
     this.hintText = '',
     this.autofocus = false,
+    this.textAlign = TextAlign.left,
     this.controller,
     this.inputFormatters,
     required this.onChanged,
   }) : assert(
-         (controller == null && value != null) ||
-             (controller != null && value == null),
-         'controller and value cannot be both null or both not null',
-       );
+          (controller == null && value != null) ||
+              (controller != null && value == null),
+          'controller and value cannot be both null or both not null',
+        );
 
   final bool enable;
   final String? value;
   final String hintText;
   final bool autofocus;
+  final TextAlign textAlign;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String) onChanged;
@@ -68,6 +70,7 @@ class _DialogBaseInputState extends State<DialogBaseInput> {
       show: show,
       onClear: onClear,
       hintText: widget.hintText,
+      textAlign: widget.textAlign,
       inputFormatters: widget.inputFormatters,
       maxLines: 1,
       onChanged: widget.onChanged,
