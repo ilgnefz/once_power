@@ -96,23 +96,34 @@ pub fn get_image_meta_info(image_path: String) -> Option<CameraInfo> {
 
     let mut make = None;
     let mut model = None;
-    let mut capture = None;
     let mut latitude = None;
     let mut longitude = None;
     let mut lat_value = None;
     let mut lon_value = None;
+    
+    // 分别保存三个日期字段
+    let mut date_time_original = None;
+    let mut date_time_digitized = None;
+    let mut date_time = None;
 
     // 收集EXIF数据
     for entry in exif_data.entries {
         match entry.tag {
             ExifTag::Make => make = Some(entry.value.to_string()),
             ExifTag::Model => model = Some(entry.value.to_string()),
-            ExifTag::DateTimeOriginal => capture = Some(entry.value.to_string()),
+            ExifTag::DateTimeOriginal => date_time_original = Some(entry.value.to_string()),
+            ExifTag::DateTimeDigitized => date_time_digitized = Some(entry.value.to_string()),
+            ExifTag::DateTime => date_time = Some(entry.value.to_string()),
             ExifTag::GPSLatitude => lat_value = Some(entry.value),
             ExifTag::GPSLongitude => lon_value = Some(entry.value),
             _ => {},
         }
     }
+    
+    // 按照优先级顺序给capture赋值
+    let capture = date_time_original
+        .or(date_time_digitized)
+        .or(date_time);
     
     // 解析GPS坐标
     if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {
