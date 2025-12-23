@@ -29,6 +29,10 @@ Future<void> updateShowInfo(
   String id = file.id;
   String newName = path.basenameWithoutExtension(newPath);
   String newExt = getExtension(newPath);
+  if (newName == '.${file.newExt}') {
+    newName = file.newName;
+    newExt = file.newExt;
+  }
   if (ref.watch(isSaveLogProvider)) {
     String oldPath = path.basename(file.path);
     String newPath = getFullName(newName, newExt);

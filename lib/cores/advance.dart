@@ -107,7 +107,7 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name, bool isUseRegex) {
           break;
         case DeleteType.punctuation:
           String pattern =
-              r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”（）【】{}<>《》「」";
+              r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-—=+！，。？：、‘’“”（）【】{}<>《》「」·`";
           name = name.replaceAll(RegExp("[$pattern]"), '');
           break;
         case DeleteType.space:

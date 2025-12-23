@@ -213,6 +213,8 @@ class AppL10n {
   static const String bottomSaveSize = 'bottom.saveSize';
   static const String bottomSavePosition = 'bottom.savePosition';
   static const String bottomAutoRename = 'bottom.autoRename';
+  static const String bottomCancelRename = 'bottom.cancelRename';
+  static const String bottomAutoRenameFormat = 'bottom.autoRenameFormat';
   static const String bottomRegedit = 'bottom.regedit';
   static const String bottomRegeditTip1 = 'bottom.regeditTip1';
   static const String bottomRegeditTip2 = 'bottom.regeditTip2';

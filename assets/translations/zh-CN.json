@@ -213,11 +213,13 @@
     "cancel": "取消选中"
   },
   "bottom": {
-    "save": "保存配置",
+    "save": "其他配置",
     "saveTip": "(长按进行配置)",
     "saveSize": "保存窗口大小",
     "savePosition": "保存窗口位置",
-    "autoRename": "重名时自动重命名",
+    "autoRename": "同名时自动重命名",
+    "cancelRename": "名称为空不重命名",
+    "autoRenameFormat": "自动重命名序列格式",
     "regedit": "开启右键快捷菜单（软件未运行时 windows 系统只允许一次传入一个文件路径，你可以将所有文件放置到一个文件夹中。若想一次传入多个请将该软件的快捷方式放置在\"发送到\"文件夹下（打开文件资源管理器，在地址栏中输入 sendto 并回车），使用\"发送到\"传入）",
     "regeditTip1": "全添加到",
     "regeditTip2": "添加到",

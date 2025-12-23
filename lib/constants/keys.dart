@@ -68,6 +68,9 @@ class AppKeys {
   static String savePosition = 'savePosition';
   static String saveSize = 'saveSize';
   static String autoRename = 'autoRename';
+  static String cancelRename = 'cancelRename';
+  static String autoPrefix = 'autoPrefix';
+  static String autoDigits = 'autoDigits';
 
   // List
   static String targetFolderList = 'targetFolderList';

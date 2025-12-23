@@ -213,11 +213,13 @@
     "cancel": "Deselect"
   },
   "bottom": {
-    "save": "Save Config",
+    "save": "Other Config",
     "saveTip": "(Long press to configure)",
     "saveSize": "Save Window Size",
     "savePosition": "Save Window Position",
     "autoRename": "Auto Rename on Duplicate",
+    "cancelRename": "Cancel Rename on Empty",
+    "autoRenameFormat": "Auto Rename Format",
     "regedit": "Enable right-click menu (single file/folder when app not running; use 'Send to (Open Explorer, enter \"sendto\" in the address bar, and press Enter)' for multiple)",
     "regeditTip1": "Add All",
     "regeditTip2": "Add",

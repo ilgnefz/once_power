@@ -32,6 +32,9 @@ class ApplyRename extends ConsumerWidget {
         if (info != null && !StorageUtil.getBool(AppKeys.autoRename)) {
           return info;
         }
+        if (file.newName == '' && StorageUtil.getBool(AppKeys.cancelRename)) {
+          return null;
+        }
         info = await rename(ref, file, oldPath, newPath);
         return info;
       },

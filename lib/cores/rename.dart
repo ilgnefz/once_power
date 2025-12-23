@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/cores/organize.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/progress.dart';
+import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/storage.dart';
 import 'package:once_power/utils/verify.dart';
 import 'package:path/path.dart' as path;
 
@@ -21,6 +23,7 @@ Future<bool> runRename(
   Future<InfoDetail?> Function(WidgetRef, List<FileInfo>, FileInfo) callback,
   Function(List<InfoDetail>, int) onEnd,
 ) async {
+  duplicateMap.clear();
   List<FileInfo> list = ref.watch(sortListProvider);
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   int total = checkList.length;
@@ -43,6 +46,37 @@ Future<bool> runRename(
   return true;
 }
 
+Map<String, int> duplicateMap = {};
+
+String autoRenamePath(String newPath, FileInfo file) {
+  int counter = 1;
+
+  // Windows和macOS不区分大小写，使用全小写路径进行重复检测
+  // Linux区分大小写，但扩展名统一小写，使用原始路径+小写扩展名
+  String duplicateKey = Platform.isLinux
+      ? path.join(
+          path.dirname(newPath),
+          path.basenameWithoutExtension(newPath) +
+              path.extension(newPath).toLowerCase())
+      : newPath.toLowerCase();
+
+  if (duplicateMap.containsKey(duplicateKey)) {
+    counter = duplicateMap[duplicateKey]!;
+    duplicateMap[duplicateKey] = counter + 1;
+  } else {
+    duplicateMap[duplicateKey] = 2;
+  }
+
+  String prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
+  int digits = StorageUtil.getInt(AppKeys.autoDigits) ?? 2;
+
+  // 使用FileInfo中的新名称和扩展名生成新路径，确保一致性
+  return path.join(
+    path.dirname(newPath),
+    '${file.newName}$prefix${formatNum(counter, digits)}.${file.newExt}',
+  );
+}
+
 Future<InfoDetail?> rename(
   WidgetRef ref,
   FileInfo file,
@@ -53,9 +87,7 @@ Future<InfoDetail?> rename(
     if (file.type.isFolder) {
       await Directory(oldPath).rename(newPath);
     } else {
-      if (await File(newPath).exists()) {
-        newPath = await renameExistFile(newPath);
-      }
+      if (await File(newPath).exists()) newPath = autoRenamePath(newPath, file);
       await File(oldPath).rename(newPath);
     }
     await updateShowInfo(ref, file, newPath);

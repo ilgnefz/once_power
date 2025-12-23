@@ -17,19 +17,18 @@ import 'update.dart';
 void openFileLocation(String filePath) async {
   String dirPath = path.dirname(filePath);
   try {
+    // 优化文件检查：只检查一次文件系统类型
+    FileSystemEntityType entityType = await FileSystemEntity.type(filePath);
+    if (entityType == FileSystemEntityType.notFound) {
+      return showOpenErrorNotification(tr(AppL10n.errOpenInfo), 5);
+    }
+
     if (Platform.isWindows) {
-      bool isFile = await FileSystemEntity.isFile(filePath);
-      if (isFile && !await File(filePath).exists()) {
-        return showOpenErrorNotification(tr(AppL10n.errOpenInfo), 5);
-      }
-      if (!isFile && !await Directory(filePath).exists()) {
-        return showOpenErrorNotification(tr(AppL10n.errOpenInfo), 5);
-      }
       await Process.run('explorer.exe', ['/select,', filePath]);
     } else if (Platform.isMacOS) {
-      await Process.run('open', ['-R', filePath]);
+      await Process.start('open', ['-R', filePath]);
     } else {
-      await Process.run('xdg-open', [dirPath]);
+      await Process.start('xdg-open', [dirPath]);
     }
   } catch (e) {
     debugPrint('打开文件位置失败: $e');
