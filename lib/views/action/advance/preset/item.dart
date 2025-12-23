@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/widgets/base/easy_tooltip.dart';
 import 'package:once_power/widgets/base/one_line_text.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
+import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
 class PresetItem extends StatefulWidget {
   const PresetItem(
@@ -30,47 +32,52 @@ class _PresetItemState extends State<PresetItem> {
   Widget build(BuildContext context) {
     return Material(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Ink(
-        child: InkWell(
-          onTap: widget.onTap,
-          child: MouseRegion(
-            onEnter: (event) => setState(() => show = true),
-            onExit: (event) => setState(() => show = false),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              height: AppNum.input,
-              width: AppNum.presetMenu,
-              color: Colors.transparent,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OneLineText(widget.label, fontSize: 12),
-                  if (show) ...[
-                    ClickIcon(
-                      size: 16,
-                      iconSize: 12,
-                      icon: Icons.mode_edit_outline_rounded,
-                      color: Colors.grey[400],
-                      onPressed: widget.onRename,
-                    ),
-                    SizedBox(width: AppNum.spaceSmall / 2),
+      child: EasyTooltip(
+        tip: widget.label,
+        waitDuration: Duration(milliseconds: 0),
+        placement: Placement.right,
+        child: Ink(
+          child: InkWell(
+            onTap: widget.onTap,
+            child: MouseRegion(
+              onEnter: (event) => setState(() => show = true),
+              onExit: (event) => setState(() => show = false),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                height: AppNum.input,
+                width: AppNum.presetMenu,
+                color: Colors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OneLineText(widget.label, fontSize: 12),
+                    if (show) ...[
+                      ClickIcon(
+                        size: 16,
+                        iconSize: 12,
+                        icon: Icons.mode_edit_outline_rounded,
+                        color: Colors.grey[400],
+                        onPressed: widget.onRename,
+                      ),
+                      SizedBox(width: AppNum.spaceSmall / 2),
+                      ClickIcon(
+                        size: 16,
+                        iconSize: 14,
+                        icon: Icons.add_rounded,
+                        color: Colors.grey[400],
+                        onPressed: widget.onAppend,
+                      ),
+                      SizedBox(width: AppNum.spaceSmall / 2),
+                    ],
                     ClickIcon(
                       size: 16,
                       iconSize: 14,
-                      icon: Icons.add_rounded,
+                      icon: Icons.close_rounded,
                       color: Colors.grey[400],
-                      onPressed: widget.onAppend,
+                      onPressed: widget.onRemove,
                     ),
-                    SizedBox(width: AppNum.spaceSmall / 2),
                   ],
-                  ClickIcon(
-                    size: 16,
-                    iconSize: 14,
-                    icon: Icons.close_rounded,
-                    color: Colors.grey[400],
-                    onPressed: widget.onRemove,
-                  ),
-                ],
+                ),
               ),
             ),
           ),
