@@ -78,6 +78,7 @@ void advanceUpdateName(WidgetRef ref) {
         }
       }
     }
+    name = removeForbiddenCharacters(name);
     fileListNotifier.updateNewName(file.id, name);
     fileListNotifier.updateNewExt(file.id, extension);
     index++;

@@ -57,6 +57,7 @@ void normalUpdateName(WidgetRef ref, bool isReserve) {
     final String prefix = prefixValue(ref, index);
     final String suffix = suffixValue(ref, index);
     name = prefix + name + suffix;
+    name = removeForbiddenCharacters(name);
     fileListNotifier.updateNewName(file.id, name);
     fileListNotifier.updateNewExt(file.id, modifyExt ? ext : file.ext);
     index++;

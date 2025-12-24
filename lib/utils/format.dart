@@ -199,3 +199,19 @@ String reassembleStr(String name, String input, int length) {
   }
   return result.join(input);
 }
+
+/// 删除文件名中的禁止字符
+String removeForbiddenCharacters(String fileName) {
+  // Windows系统中文件名禁止的字符 < > : " / \ | ? *
+  // 注意：! @ # $ % ^ & ( ) 等字符
+  return fileName
+      .replaceAll('<', '[')
+      .replaceAll('>', ']')
+      .replaceAll(':', '-')
+      .replaceAll('"', "'")
+      .replaceAll('/', '&')
+      .replaceAll('\\', '&')
+      .replaceAll('|', '&')
+      .replaceAll('?', '')
+      .replaceAll('*', '');
+}
