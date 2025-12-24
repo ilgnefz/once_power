@@ -25,12 +25,24 @@ String formatDateTime(DateTime dateTime) {
   return '${dateTime.year}$m$d$h$min$s';
 }
 
+/// 返回DateTime对象，如果格式错误则返回占位符日期(0000-01-01 00:00:00)
 DateTime? formatExifDate(String? date) {
   if (date == null) return null;
-  List<String> list = date.split(' ');
-  String ymd = list.first.replaceAll(':', '-');
-  list.replaceRange(0, 1, [ymd]);
-  return DateTime.parse(list.join(' '));
+  try {
+    // 标准化空白字符
+    String normalizedDate = date.trim().replaceAll(RegExp(r'\s+'), ' ');
+    List<String> parts = normalizedDate.split(' ');
+    if (parts.length < 2) {
+      String datePart = parts[0].replaceAll(':', '-').replaceAll('.', '-');
+      return DateTime.parse('${datePart}T00:00:00');
+    }
+    String datePart = parts[0].replaceAll(':', '-').replaceAll('.', '-');
+    String timePart = parts[1];
+    return DateTime.parse('${datePart}T$timePart');
+  } catch (e) {
+    debugPrint('解析EXIF日期失败: $e');
+    return DateTime(0, 1, 1, 0, 0, 0); // 占位符日期
+  }
 }
 
 String formatVideoTime(Duration total, Duration current) {
