@@ -42,13 +42,15 @@ void organizeFolder(WidgetRef ref) async {
   bool isGroup = ref.watch(useGroupOrganizeProvider);
   bool isRule = ref.watch(useTypeOrganizeProvider);
   bool isTop = ref.watch(useTopFolderProvider);
-  if (!isRule && !isTop && !isGroup) {
-    String inputFolder = ref.watch(folderControllerProvider).text;
-    if (inputFolder == '' || inputFolder.isEmpty) {
-      clearOrganize(ref);
-      return showOrganizeEmptyNotification();
-    }
-  }
+  bool isDate = ref.watch(useDateOrganizeProvider);
+  print('isGroup: $isGroup, isRule: $isRule, isTop: $isTop, isDate: $isDate');
+  // if (!isRule && !isTop && !isGroup && !isDate) {
+  //   String inputFolder = ref.watch(folderControllerProvider).text;
+  //   if (inputFolder == '' || inputFolder.isEmpty) {
+  //     clearOrganize(ref);
+  //     return showOrganizeEmptyNotification();
+  //   }
+  // }
   if (isGroup) {
     Map<String, String>? folders = StorageUtil.getStringMap(
       AppKeys.groupFolder,
@@ -67,9 +69,14 @@ void organizeFolder(WidgetRef ref) async {
     errors.addAll(await ruleOrganize(ref, checkList, rule));
   } else if (isTop) {
     errors.addAll(await topParentsOrganize(ref, checkList));
-  } else if (ref.watch(useDateOrganizeProvider)) {
+  } else if (isDate) {
     errors.addAll(await dateClassifyOrganize(ref, checkList));
   } else {
+    String inputFolder = ref.watch(folderControllerProvider).text;
+    if (inputFolder == '' || inputFolder.isEmpty) {
+      clearOrganize(ref);
+      return showOrganizeEmptyNotification();
+    }
     errors.addAll(await normalOrganize(ref, checkList));
   }
   Duration duration = DateTime.now().difference(startTime);
@@ -159,10 +166,13 @@ Future<List<InfoDetail>> dateClassifyOrganize(
   List<FileInfo> list,
 ) async {
   List<InfoDetail> errorList = [];
-  String inputFolder = ref.watch(folderControllerProvider).text;
+  String fatherFolder = ref.watch(folderControllerProvider).text;
   for (FileInfo file in list) {
-    String dateDir = formatDateTime(file.createdDate.date).substring(0, 8);
-    String targetFolder = path.join(inputFolder, dateDir);
+    String dateDir = organizeDateFolder(ref, file);
+    if (fatherFolder.isEmpty) fatherFolder = file.parent;
+    String targetFolder = path.join(fatherFolder, dateDir);
+    if (targetFolder == file.parent) continue;
+    // print('目标文件夹: $targetFolder');
     InfoDetail? info = await organize(ref, file, targetFolder);
     if (info != null) errorList.add(info);
   }
@@ -178,7 +188,10 @@ Future<String> renameExistFile(String newPath) async {
     bool isExist = await File(newPath).exists();
     if (Platform.isWindows) isExist = isExist && await isTrueExist(newPath);
     if (!isExist) break;
-    final String newFileName = '${baseName}_${formatNum(counter, 2)}$ext';
+    String prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
+    int digits = StorageUtil.getInt(AppKeys.autoDigits) ?? 2;
+    final String newFileName =
+        '$baseName$prefix${formatNum(counter, digits)}$ext';
     newPath = path.join(dir, newFileName);
     counter++;
     if (counter > 1000) throw Exception('无法生成可用文件名');

@@ -10,14 +10,12 @@ class Instructions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> labels = [
-      tr(AppL10n.organizeDate),
       tr(AppL10n.organizeTop),
       tr(AppL10n.organizeSelected),
       tr(AppL10n.organizeEmpty),
     ];
 
     List<String> desc = [
-      tr(AppL10n.organizeDateDesc),
       tr(AppL10n.organizeTopDesc),
       tr(AppL10n.organizeSelectedDesc),
       tr(AppL10n.organizeEmptyDesc),

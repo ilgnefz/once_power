@@ -6,7 +6,7 @@ part of 'file.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileListHash() => r'e1ad429d66c4f3cb7bfc8f08d88b6d1fc843fbdd';
+String _$fileListHash() => r'0a1cfd2a3244269e79bcc60f29bed029f1b7263e';
 
 /// See also [FileList].
 @ProviderFor(FileList)

@@ -117,7 +117,6 @@
   },
   "organize": {
     "date": "Date Folder",
-    "dateDesc": "Organize by create date into date-named folders",
     "top": "Top Folder",
     "topDesc": "Move to top-level parent (not root)",
     "selected": "Delete Checked",
@@ -336,6 +335,11 @@
       "hidden": "Hidden",
       "custom": "Custom",
       "customTip": "Please enter custom separator"
+    },
+    "format": {
+      "ymd": "YMD",
+      "ym": "YM",
+      "y": "Y"
     },
     "distinguish": {
       "none": "None",

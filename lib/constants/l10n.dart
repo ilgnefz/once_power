@@ -118,7 +118,6 @@ class AppL10n {
   /* ---------- organize ---------- */
 
   static const String organizeDate = 'organize.date';
-  static const String organizeDateDesc = 'organize.dateDesc';
   static const String organizeTop = 'organize.top';
   static const String organizeTopDesc = 'organize.topDesc';
   static const String organizeSelected = 'organize.selected';
@@ -314,6 +313,9 @@ class AppL10n {
   static const String eSplitHidden = 'enum.split.hidden';
   static const String eSplitCustom = 'enum.split.custom';
   static const String eSplitCustomTip = 'enum.split.customTip';
+  static const String eFormatYMD = 'enum.format.ymd';
+  static const String eFormatYM = 'enum.format.ym';
+  static const String eFormatY = 'enum.format.y';
   static const String eDistNone = 'enum.distinguish.none';
   static const String eDistDate = 'enum.distinguish.date';
   static const String eDistFolder = 'enum.distinguish.folder';

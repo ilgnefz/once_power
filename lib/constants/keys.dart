@@ -94,6 +94,9 @@ class AppKeys {
   static String dateType = 'dateType';
   static String sortType = 'sortType';
   static String classifyType = 'classifyType';
+  static String organizeDate = 'organizeDate';
+  static String organizeDateFormat = 'organizeDateFormat';
+  static String organizeDateSeparate = 'organizeDateSeparate';
 
   // Locale
   static String locale = 'locale';

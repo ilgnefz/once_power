@@ -73,7 +73,7 @@ String autoRenamePath(String newPath, FileInfo file) {
   // 使用FileInfo中的新名称和扩展名生成新路径，确保一致性
   return path.join(
     path.dirname(newPath),
-    '${file.newName}$prefix${formatNum(counter, digits)}.${file.newExt}',
+    '${file.newName}$prefix${formatNum(counter, digits)}.${file.newExt}${file.newExt}',
   );
 }
 

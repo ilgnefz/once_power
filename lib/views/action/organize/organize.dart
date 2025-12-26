@@ -3,6 +3,7 @@ import 'package:once_power/constants/num.dart';
 import 'package:once_power/views/action/add_group.dart';
 import 'package:once_power/views/action/apply_group.dart';
 import 'package:once_power/views/action/organize/apply.dart';
+import 'package:once_power/views/action/organize/date_options.dart';
 import 'package:once_power/views/action/organize/delete.dart';
 import 'package:once_power/views/action/organize/group.dart';
 import 'package:once_power/views/action/organize/instructions.dart';
@@ -26,6 +27,7 @@ class OrganizeView extends StatelessWidget {
         TypeGroup(),
         SizedBox(height: AppNum.spaceMedium),
         OtherGroup(),
+        DateOptions(),
         AddGroup(),
         SizedBox(height: AppNum.spaceMedium),
         DeleteGroup(),

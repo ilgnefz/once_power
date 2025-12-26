@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enums/advance.dart';
+import 'package:once_power/enums/file.dart';
+import 'package:once_power/enums/organize.dart';
 import 'package:once_power/models/file.dart';
+import 'package:once_power/provider/select.dart';
 
 int formatToInt(String value) {
   RegExpMatch? match = RegExp(r'\d+').firstMatch(value);
@@ -226,4 +230,60 @@ String removeForbiddenCharacters(String fileName) {
       .replaceAll('|', '&')
       .replaceAll('?', '')
       .replaceAll('*', '');
+}
+
+String organizeDateFolder(WidgetRef ref, FileInfo file) {
+  DateType dateType = ref.watch(organizeDateProvider);
+  String date = organizeDate(dateType, file);
+  if (date.isEmpty) return '';
+  DateFormat dateFormat = ref.watch(organizeDateFormatProvider);
+  date = organizeDateFormat(dateFormat, date);
+  DateFormatSeparate formatSeparate = ref.watch(organizeDateSeparateProvider);
+  date = organizeDateSeparate(formatSeparate, date);
+  return date;
+}
+
+String organizeDate(DateType type, FileInfo file) {
+  String date = file.createdDate.date.toString();
+  if (type.isModifiedDate) date = file.modifiedDate.date.toString();
+  if (type.isAccessedDate) date = file.accessedDate.date.toString();
+  if (type.isExifDate) {
+    date = file.metaInfo?.capture?.date == null
+        ? ''
+        : file.metaInfo!.capture!.date.toString().substring(0, 10);
+  }
+  return date == '' ? '' : date.substring(0, 10);
+}
+
+String organizeDateFormat(DateFormat format, String date) {
+  switch (format) {
+    case DateFormat.ymd:
+      return date;
+    case DateFormat.ym:
+      return date.substring(0, 7);
+    case DateFormat.y:
+      return date.substring(0, 4);
+  }
+}
+
+String organizeDateSeparate(DateFormatSeparate format, String date) {
+  List<String> dateParts = date.split('-');
+  switch (format) {
+    case DateFormatSeparate.none:
+      return dateParts.join('');
+    case DateFormatSeparate.chinese:
+      if (dateParts.length == 3) {
+        return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
+      } else if (dateParts.length == 2) {
+        return '${dateParts[0]}年${dateParts[1]}月';
+      } else {
+        return '${dateParts[0]}年';
+      }
+    case DateFormatSeparate.space:
+      return dateParts.join(' ');
+    case DateFormatSeparate.underline:
+      return dateParts.join('_');
+    case DateFormatSeparate.dash:
+      return date;
+  }
 }
