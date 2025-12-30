@@ -16,7 +16,7 @@ extension DateFormatExtension on DateFormat {
   }
 }
 
-enum DateFormatSeparate { none, chinese, space, dash, underline }
+enum DateFormatSeparate { none, chinese, chineseSpace, space, dash, underline }
 
 extension DateFormatSeparateExtension on DateFormatSeparate {
   String get label {
@@ -25,6 +25,8 @@ extension DateFormatSeparateExtension on DateFormatSeparate {
         return tr(AppL10n.eSplitNone);
       case DateFormatSeparate.chinese:
         return '年月日';
+      case DateFormatSeparate.chineseSpace:
+        return '年 月 日';
       case DateFormatSeparate.space:
         return tr(AppL10n.eSplitSpace);
       case DateFormatSeparate.dash:

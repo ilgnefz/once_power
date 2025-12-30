@@ -279,6 +279,14 @@ String organizeDateSeparate(DateFormatSeparate format, String date) {
       } else {
         return '${dateParts[0]}年';
       }
+    case DateFormatSeparate.chineseSpace:
+      if (dateParts.length == 3) {
+        return '${dateParts[0]} 年 ${dateParts[1]} 月 ${dateParts[2]} 日';
+      } else if (dateParts.length == 2) {
+        return '${dateParts[0]} 年 ${dateParts[1]} 月';
+      } else {
+        return '${dateParts[0]} 年';
+      }
     case DateFormatSeparate.space:
       return dateParts.join(' ');
     case DateFormatSeparate.underline:
