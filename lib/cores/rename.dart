@@ -87,7 +87,10 @@ Future<InfoDetail?> rename(
     if (file.type.isFolder) {
       await Directory(oldPath).rename(newPath);
     } else {
-      if (await File(newPath).exists()) newPath = autoRenamePath(newPath, file);
+      if (await File(newPath).exists() &&
+          oldPath.toLowerCase() != newPath.toLowerCase()) {
+        newPath = autoRenamePath(newPath, file);
+      }
       await File(oldPath).rename(newPath);
     }
     await updateShowInfo(ref, file, newPath);

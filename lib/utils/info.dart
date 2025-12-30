@@ -309,7 +309,7 @@ String getRandomValue(List<String> list, int len) {
 FileInfo? getSameFile(List<FileInfo> list, String newPath) {
   List<FileInfo> checkList = list.where((e) => e.checked).toList();
   return checkList.cast<FileInfo?>().firstWhere(
-        (e) => e?.path == newPath,
+        (e) => e?.path.toLowerCase() == newPath.toLowerCase(),
         orElse: () => null,
       );
 }
