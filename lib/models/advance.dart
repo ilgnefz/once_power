@@ -1,6 +1,6 @@
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
-import 'package:once_power/enums/week.dart';
+import 'package:once_power/enums/date.dart';
 
 class AdvancePreset {
   final String id;

@@ -9,7 +9,7 @@ import 'package:once_power/cores/advance.dart';
 import 'package:once_power/cores/dialog.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
-import 'package:once_power/enums/week.dart';
+import 'package:once_power/enums/date.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';

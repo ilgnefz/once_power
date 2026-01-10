@@ -143,6 +143,8 @@ class AppL10n {
   static const String dateHint = 'date.hint';
   static const String dateNote = 'date.note';
   static const String dateExit = 'date.exit';
+  static const String dateInterval = 'date.interval';
+  static const String dateFullReplace = 'date.fullReplace';
 
   /* ---------- content ---------- */
   static const String contentOrigin = 'content.origin';
@@ -339,6 +341,14 @@ class AppL10n {
   static const String eMetaMake = 'enum.meta.make';
   static const String eMetaModel = 'enum.meta.model';
   static const String eMetaLocation = 'enum.meta.location';
+  static const String eDiffIncrement = 'enum.diff.increment';
+  static const String eDiffDecrement = 'enum.diff.decrement';
+  static const String eDateTimeYear = 'enum.dateTime.year';
+  static const String eDateTimeMonth = 'enum.dateTime.month';
+  static const String eDateTimeDay = 'enum.dateTime.day';
+  static const String eDateTimeHour = 'enum.dateTime.hour';
+  static const String eDateTimeMinute = 'enum.dateTime.minute';
+  static const String eDateTimeSecond = 'enum.dateTime.second';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';

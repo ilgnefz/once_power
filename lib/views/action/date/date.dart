@@ -11,6 +11,9 @@ import 'package:once_power/views/action/date/apply.dart';
 import 'package:once_power/views/action/date/input.dart';
 import 'package:once_power/views/action/date/title.dart';
 import 'package:once_power/views/action/date/top.dart';
+import 'package:once_power/widgets/base/easy_checkbox.dart';
+
+import 'interval.dart';
 
 class DateView extends ConsumerWidget {
   const DateView({super.key});
@@ -29,12 +32,14 @@ class DateView extends ConsumerWidget {
             title: tr(AppL10n.eDateCreate),
             label: dateProperty.createdDate,
             checked: dateProperty.createdDateChecked,
+            fullReplace: dateProperty.fullReplace,
             onChanged: (value) {
               provider.update(dateProperty.copyWith(createdDateChecked: value));
             },
           ),
           SizedBox(height: 6),
           TimeInput(
+            date: dateProperty.createdDate,
             onChange: (date) {
               String value = date == null ? '' : '$date';
               provider.update(dateProperty.copyWith(createdDate: value));
@@ -45,6 +50,7 @@ class DateView extends ConsumerWidget {
             title: tr(AppL10n.eDateModify),
             label: dateProperty.modifiedDate,
             checked: dateProperty.modifiedDateChecked,
+            fullReplace: dateProperty.fullReplace,
             onChanged: (value) {
               provider.update(
                 dateProperty.copyWith(modifiedDateChecked: value),
@@ -53,6 +59,7 @@ class DateView extends ConsumerWidget {
           ),
           SizedBox(height: 6),
           TimeInput(
+            date: dateProperty.modifiedDate,
             onChange: (date) {
               String value = date == null ? '' : '$date';
               provider.update(dateProperty.copyWith(modifiedDate: value));
@@ -63,6 +70,7 @@ class DateView extends ConsumerWidget {
             title: tr(AppL10n.eDateAccess),
             label: dateProperty.accessedDate,
             checked: dateProperty.accessedDateChecked,
+            fullReplace: dateProperty.fullReplace,
             onChanged: (value) {
               provider.update(
                 dateProperty.copyWith(accessedDateChecked: value),
@@ -71,10 +79,37 @@ class DateView extends ConsumerWidget {
           ),
           SizedBox(height: 6),
           TimeInput(
+            date: dateProperty.accessedDate,
             onChange: (date) {
               String value = date == null ? '' : '$date';
               provider.update(dateProperty.copyWith(accessedDate: value));
             },
+          ),
+          SizedBox(height: 8),
+          IntervalGroup(
+            diffType: dateProperty.diffType,
+            interval: dateProperty.interval,
+            dateType: dateProperty.dateUnit,
+            onDiffTypeChanged: (value) {
+              provider.update(dateProperty.copyWith(diffType: value));
+            },
+            onIntervalChanged: (value) {
+              provider.update(dateProperty.copyWith(interval: value));
+            },
+            onDateTypeChanged: (value) {
+              provider.update(dateProperty.copyWith(dateUnit: value));
+            },
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+            child: EasyCheckbox(
+              checked: dateProperty.fullReplace,
+              label: tr(AppL10n.dateFullReplace),
+              onChanged: (value) {
+                provider.update(dateProperty.copyWith(fullReplace: value));
+              },
+            ),
           ),
           SizedBox(height: 8),
           Padding(

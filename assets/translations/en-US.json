@@ -141,7 +141,9 @@
     "title": "Modify File Date",
     "hint": "Select date",
     "note": "Note: File access date updates on property view",
-    "exit": "Exit"
+    "exit": "Exit",
+    "interval": "Interval",
+    "fullReplace": "Replace 0 values as well"
   },
   "content": {
     "origin": "Original",
@@ -369,6 +371,18 @@
       "make": "Make",
       "model": "Model",
       "location": "Location"
+    },
+    "diff": {
+      "increment": "Add",
+      "decrement": "Sub"
+    },
+    "dateTime": {
+      "year": "Year",
+      "month": "Mon",
+      "day": "Day",
+      "hour": "Hour",
+      "minute": "Min",
+      "second": "Sec"
     }
   },
   "error": {

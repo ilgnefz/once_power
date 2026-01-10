@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
-import 'package:once_power/enums/week.dart';
+import 'package:once_power/enums/date.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/advance.dart';

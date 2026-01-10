@@ -295,3 +295,13 @@ String organizeDateSeparate(DateFormatSeparate format, String date) {
       return date;
   }
 }
+
+String modifyDate(String date, bool fullReplace) {
+  if (fullReplace && date.startsWith('0000-')) {
+    return date.replaceFirst('0000', '1970'); // 更精确的语义
+  }
+  if (date.startsWith('0000-01-01')) {
+    date = date.replaceFirst('0000-01-01', 'XXXX-XX-XX');
+  }
+  return date.replaceFirst('00:00:00.000', 'XX:XX:XX.XXX');
+}

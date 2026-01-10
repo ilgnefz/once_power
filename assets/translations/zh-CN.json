@@ -141,7 +141,9 @@
     "title": "修改文件日期",
     "hint": "请选择日期",
     "note": "注意：右键查看文件属性时，文件的访问日期会被更改为当前时间",
-    "exit": "退出"
+    "exit": "退出",
+    "interval": "间隔",
+    "fullReplace": "时间日期为 0 也替换"
   },
   "content": {
     "origin": "原名称",
@@ -369,6 +371,18 @@
       "make": "制造商",
       "model": "型号",
       "location": "位置"
+    },
+    "diff": {
+      "increment": "递增",
+      "decrement": "递减"
+    },
+    "dateTime": {
+      "year": "年",
+      "month": "月",
+      "day": "日",
+      "hour": "时",
+      "minute": "分",
+      "second": "秒"
     }
   },
   "error": {

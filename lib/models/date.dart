@@ -1,3 +1,5 @@
+import 'package:once_power/enums/date.dart';
+
 class DateProperty {
   String createdDate;
   bool createdDateChecked;
@@ -5,6 +7,10 @@ class DateProperty {
   bool modifiedDateChecked;
   String accessedDate;
   bool accessedDateChecked;
+  DateDiffType diffType;
+  int interval;
+  DateTimeUnit dateUnit;
+  bool fullReplace;
 
   DateProperty({
     this.createdDate = '',
@@ -13,6 +19,10 @@ class DateProperty {
     this.modifiedDateChecked = true,
     this.accessedDate = '',
     this.accessedDateChecked = true,
+    this.diffType = DateDiffType.add,
+    this.interval = 0,
+    this.dateUnit = DateTimeUnit.day,
+    this.fullReplace = false,
   });
 
   DateProperty copyWith({
@@ -22,6 +32,10 @@ class DateProperty {
     bool? modifiedDateChecked,
     String? accessedDate,
     bool? accessedDateChecked,
+    DateDiffType? diffType,
+    int? interval,
+    DateTimeUnit? dateUnit,
+    bool? fullReplace,
   }) {
     return DateProperty(
       createdDate: createdDate ?? this.createdDate,
@@ -30,11 +44,19 @@ class DateProperty {
       modifiedDateChecked: modifiedDateChecked ?? this.modifiedDateChecked,
       accessedDate: accessedDate ?? this.accessedDate,
       accessedDateChecked: accessedDateChecked ?? this.accessedDateChecked,
+      diffType: diffType ?? this.diffType,
+      interval: interval ?? this.interval,
+      dateUnit: dateUnit ?? this.dateUnit,
+      fullReplace: fullReplace ?? this.fullReplace,
     );
   }
 
   @override
   String toString() {
-    return 'DateProperty{createdDate: $createdDate, createdDateChecked: $createdDateChecked, modifiedDate: $modifiedDate, modifiedDateChecked: $modifiedDateChecked, accessedDate: $accessedDate, accessedDateChecked: $accessedDateChecked}';
+    return 'DateProperty{createdDate: $createdDate, '
+        'createdDateChecked: $createdDateChecked, modifiedDate: $modifiedDate,'
+        ' modifiedDateChecked: $modifiedDateChecked,'
+        ' accessedDate: $accessedDate, accessedDateChecked: $accessedDateChecked, '
+        'diffType: $diffType, interval: $interval, dateUnit: $dateUnit, fullReplace: $fullReplace}';
   }
 }

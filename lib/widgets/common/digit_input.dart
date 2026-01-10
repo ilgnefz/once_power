@@ -15,7 +15,7 @@ class DigitInput extends StatefulWidget {
   });
 
   final int value;
-  final String unit;
+  final String? unit;
   final int min;
   final int? max;
   final void Function(int) onChanged;
@@ -27,17 +27,19 @@ class DigitInput extends StatefulWidget {
 class _DigitInputState extends State<DigitInput> {
   late TextEditingController controller;
   FocusNode focusNode = FocusNode();
+  late String unit;
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: '${widget.value} ${widget.unit}');
+    unit = widget.unit == null ? '' : ' ${widget.unit}';
+    controller = TextEditingController(text: '${widget.value}$unit');
     controller.addListener(() {
       widget.onChanged(formatToInt(controller.text));
     });
     focusNode.addListener(() {
       if (!focusNode.hasFocus) {
-        controller.text = '${widget.value} ${widget.unit}';
+        controller.text = '${widget.value}$unit';
         setState(() {});
       }
     });
@@ -53,14 +55,14 @@ class _DigitInputState extends State<DigitInput> {
   void add() {
     int num = formatToInt(controller.text);
     if (widget.max != null && num >= widget.max!) return;
-    controller.text = '${num + 1} ${widget.unit}';
+    controller.text = '${num + 1}$unit';
     widget.onChanged(num + 1);
   }
 
   void minus() {
     int num = formatToInt(controller.text);
     if (num <= widget.min) return;
-    controller.text = '${num - 1} ${widget.unit}';
+    controller.text = '${num - 1}$unit';
     widget.onChanged(num - 1);
   }
 

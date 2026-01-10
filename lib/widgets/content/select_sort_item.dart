@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/cores/context_menu.dart';
+import 'package:once_power/models/date.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/provider/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/content/tooltip_item.dart';
 
@@ -31,29 +34,39 @@ class SelectSortItem extends ConsumerWidget {
     List<FileInfo> sortSelectList = ref.watch(sortSelectListProvider);
     BorderRadius borderRadius = BorderRadius.circular(4);
     Color selectedColor = Theme.of(context).primaryColor.withValues(alpha: .1);
-    Color bgColor = sortSelectList.contains(file)
-        ? selectedColor
-        : Colors.transparent;
+    Color bgColor =
+        sortSelectList.contains(file) ? selectedColor : Colors.transparent;
     String? indexLabel =
         sortSelectList.contains(file) && sortSelectList.length > 1
-        ? '${sortSelectList.indexOf(file) + 1}'
-        : null;
+            ? '${sortSelectList.indexOf(file) + 1}'
+            : null;
 
     // 处理鼠标按下事件的回调函数
     void onPointerDown(PointerDownEvent event) async {
       // 仅处理鼠标左键按下且点击位置非零点的情况
       if (event.buttons == kPrimaryButton &&
           event.localPosition != Offset.zero) {
+        // 仅在修改日期时调用
+        if (ref.read(isDateModifyProvider)) {
+          DateProperty dateProperty = ref.watch(fileDatePropertyProvider);
+          ref
+              .read(fileDatePropertyProvider.notifier)
+              .update(dateProperty.copyWith(
+                createdDate: file.createdDate.date.toString(),
+                modifiedDate: file.modifiedDate.date.toString(),
+                accessedDate: file.accessedDate.date.toString(),
+              ));
+        }
         // 获取当前按下的键盘按键集合
         Set keysPressed = HardwareKeyboard.instance.logicalKeysPressed;
         // 判断Ctrl键是否被按下（左右Ctrl均可）
         bool isCtrlPressed =
             keysPressed.contains(LogicalKeyboardKey.controlLeft) ||
-            keysPressed.contains(LogicalKeyboardKey.controlRight);
+                keysPressed.contains(LogicalKeyboardKey.controlRight);
         // 判断Shift键是否被按下（左右Shift均可）
         bool isShiftPressed =
             keysPressed.contains(LogicalKeyboardKey.shiftLeft) ||
-            keysPressed.contains(LogicalKeyboardKey.shiftRight);
+                keysPressed.contains(LogicalKeyboardKey.shiftRight);
 
         if (isCtrlPressed) {
           await StorageUtil.setBool(AppKeys.hadPressedCtrl, true);

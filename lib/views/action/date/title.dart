@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/constants/num.dart';
+import 'package:once_power/utils/format.dart';
 import 'package:once_power/widgets/base/easy_checkbox.dart';
 
 class DateTitle extends StatelessWidget {
@@ -8,12 +9,14 @@ class DateTitle extends StatelessWidget {
     required this.checked,
     required this.title,
     required this.label,
+    required this.fullReplace,
     required this.onChanged,
   });
 
   final bool checked;
   final String title;
   final String label;
+  final bool fullReplace;
   final Function(bool?)? onChanged;
 
   @override
@@ -27,7 +30,8 @@ class DateTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyCheckbox(checked: checked, label: title, onChanged: onChanged),
-          Text(label, style: Theme.of(context).textTheme.bodyMedium),
+          Text(modifyDate(label, fullReplace),
+              style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
     );

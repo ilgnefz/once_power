@@ -43,7 +43,6 @@ void organizeFolder(WidgetRef ref) async {
   bool isRule = ref.watch(useTypeOrganizeProvider);
   bool isTop = ref.watch(useTopFolderProvider);
   bool isDate = ref.watch(useDateOrganizeProvider);
-  print('isGroup: $isGroup, isRule: $isRule, isTop: $isTop, isDate: $isDate');
   // if (!isRule && !isTop && !isGroup && !isDate) {
   //   String inputFolder = ref.watch(folderControllerProvider).text;
   //   if (inputFolder == '' || inputFolder.isEmpty) {
