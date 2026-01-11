@@ -27,6 +27,7 @@ Future<void> modifyDate(WidgetRef ref) async {
   List<InfoDetail> errors = [];
   DateTime startTime = DateTime.now();
   DateProperty dateProperty = ref.watch(fileDatePropertyProvider);
+  bool selfAdjust = dateProperty.selfAdjust;
   int count = 0;
   for (FileInfo f in files) {
     if (!await fileExist(f)) {
@@ -37,23 +38,29 @@ Future<void> modifyDate(WidgetRef ref) async {
     DateDiffType diffType = dateProperty.diffType;
     int interval =
         diffType.isAdd ? dateProperty.interval : -dateProperty.interval;
-    interval *= count;
+    interval = selfAdjust ? interval : interval * count;
     DateTimeUnit dateUnit = dateProperty.dateUnit;
     bool fullReplace = dateProperty.fullReplace;
     DateTime? createdDate;
     DateTime? modifiedDate;
     DateTime? accessedDate;
     if (dateProperty.createdDateChecked) {
-      createdDate = finalDate(dateProperty.createdDate, fullReplace, interval,
-          dateUnit, f.createdDate.date);
+      createdDate = selfAdjust
+          ? f.createdDate.date.addSingleUnit(dateUnit, interval)
+          : finalDate(dateProperty.createdDate, fullReplace, interval, dateUnit,
+              f.createdDate.date);
     }
     if (dateProperty.modifiedDateChecked) {
-      modifiedDate = finalDate(dateProperty.modifiedDate, fullReplace, interval,
-          dateUnit, f.modifiedDate.date);
+      modifiedDate = selfAdjust
+          ? f.modifiedDate.date.addSingleUnit(dateUnit, interval)
+          : finalDate(dateProperty.modifiedDate, fullReplace, interval,
+              dateUnit, f.modifiedDate.date);
     }
     if (dateProperty.accessedDateChecked) {
-      accessedDate = finalDate(dateProperty.accessedDate, fullReplace, interval,
-          dateUnit, f.accessedDate.date);
+      accessedDate = selfAdjust
+          ? f.accessedDate.date.addSingleUnit(dateUnit, interval)
+          : finalDate(dateProperty.accessedDate, fullReplace, interval,
+              dateUnit, f.accessedDate.date);
     }
     String? err = setTimeWin(
       filePath,

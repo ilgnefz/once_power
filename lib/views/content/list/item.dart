@@ -23,6 +23,7 @@ class ContentListItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
+    bool isModifyDate = ref.watch(isDateModifyProvider);
     bool isOrganize = ref.watch(currentModeProvider).isOrganize;
     bool changeNameStyle = file.name == file.newName;
     bool changeExtStyle = isOrganize || file.ext == file.newExt;
@@ -48,17 +49,19 @@ class ContentListItem extends ConsumerWidget {
             ),
             OneLineText(file.name, fontSize: 13),
             SizedBox(width: 8),
-            OneLineText(
-              isOrganize ? file.parent : file.newName,
-              flex: ref.watch(expandNewNameProvider) ? 2 : 1,
-              fontSize: 13,
-              color: isOrganize
-                  ? theme.textTheme.bodyMedium?.color
-                  : changeNameStyle
-                      ? Colors.grey
-                      : theme.primaryColor,
-            ),
-            SizedBox(width: 8),
+            if (!isModifyDate) ...[
+              OneLineText(
+                isOrganize ? file.parent : file.newName,
+                flex: ref.watch(expandNewNameProvider) ? 2 : 1,
+                fontSize: 13,
+                color: isOrganize
+                    ? theme.textTheme.bodyMedium?.color
+                    : changeNameStyle
+                        ? Colors.grey
+                        : theme.primaryColor,
+              ),
+              SizedBox(width: 8),
+            ],
             Container(
               width: 40,
               alignment: Alignment.center,

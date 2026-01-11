@@ -140,13 +140,15 @@
   "date": {
     "title": "Modify File Date",
     "hint": "Select date",
-    "note": "Note: File access date updates on property view",
+    "note": "1. Default: \"0000-01-01\" and \"00:00:00.000\" leave date and time unchanged.\n2. Viewing file properties via right-click updates the access date to the current time.",
     "exit": "Exit",
     "interval": "Interval",
-    "fullReplace": "Replace 0 values as well"
+    "fullReplace": "Override All",
+    "self": "Self Date Adjust"
   },
   "content": {
     "origin": "Original",
+    "name": "Filename",
     "new": "New Name",
     "adjustSize": "Left: Zoom in, Right: Zoom out, Long press: Custom size",
     "empty": "Drag files/folders here",
@@ -193,6 +195,8 @@
     "local": "Open Location",
     "match": "Match Name",
     "modify": "Rename",
+    "date": "Match Date",
+    "all": "All Dates",
     "move": "Move",
     "first": "Move to top",
     "center": "Move to center",

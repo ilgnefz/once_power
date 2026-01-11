@@ -296,9 +296,11 @@ String organizeDateSeparate(DateFormatSeparate format, String date) {
   }
 }
 
-String modifyDate(String date, bool fullReplace) {
-  if (fullReplace && date.startsWith('0000-')) {
-    return date.replaceFirst('0000', '1970'); // 更精确的语义
+String modifyDate(String date, bool fullReplace, bool selfAdjust) {
+  if (selfAdjust) return 'XXXX-XX-XX XX:XX:XX.XXX';
+  if (fullReplace) {
+    if (date.startsWith('0000-')) date = date.replaceFirst('0000', '1970');
+    return date;
   }
   if (date.startsWith('0000-01-01')) {
     date = date.replaceFirst('0000-01-01', 'XXXX-XX-XX');

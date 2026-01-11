@@ -145,9 +145,11 @@ class AppL10n {
   static const String dateExit = 'date.exit';
   static const String dateInterval = 'date.interval';
   static const String dateFullReplace = 'date.fullReplace';
+  static const String dateSelf = 'date.self';
 
   /* ---------- content ---------- */
   static const String contentOrigin = 'content.origin';
+  static const String contentName = 'content.name';
   static const String contentNew = 'content.new';
   static const String contentAdjustSize = 'content.adjustSize';
   static const String contentEmpty = 'content.empty';
@@ -188,6 +190,8 @@ class AppL10n {
   static const String menuLocal = 'menu.local';
   static const String menuMatch = 'menu.match';
   static const String menuModify = 'menu.modify';
+  static const String menuDate = 'menu.date';
+  static const String menuAll = 'menu.all';
   static const String menuMove = 'menu.move';
   static const String menuFirst = 'menu.first';
   static const String menuCenter = 'menu.center';

@@ -11,6 +11,7 @@ class DateProperty {
   int interval;
   DateTimeUnit dateUnit;
   bool fullReplace;
+  bool selfAdjust;
 
   DateProperty({
     this.createdDate = '',
@@ -23,6 +24,7 @@ class DateProperty {
     this.interval = 0,
     this.dateUnit = DateTimeUnit.day,
     this.fullReplace = false,
+    this.selfAdjust = false,
   });
 
   DateProperty copyWith({
@@ -36,6 +38,7 @@ class DateProperty {
     int? interval,
     DateTimeUnit? dateUnit,
     bool? fullReplace,
+    bool? selfAdjust,
   }) {
     return DateProperty(
       createdDate: createdDate ?? this.createdDate,
@@ -48,6 +51,7 @@ class DateProperty {
       interval: interval ?? this.interval,
       dateUnit: dateUnit ?? this.dateUnit,
       fullReplace: fullReplace ?? this.fullReplace,
+      selfAdjust: selfAdjust ?? this.selfAdjust,
     );
   }
 
@@ -57,6 +61,7 @@ class DateProperty {
         'createdDateChecked: $createdDateChecked, modifiedDate: $modifiedDate,'
         ' modifiedDateChecked: $modifiedDateChecked,'
         ' accessedDate: $accessedDate, accessedDateChecked: $accessedDateChecked, '
-        'diffType: $diffType, interval: $interval, dateUnit: $dateUnit, fullReplace: $fullReplace}';
+        'diffType: $diffType, interval: $interval, dateUnit: $dateUnit, '
+        'fullReplace: $fullReplace, selfAdjust: $selfAdjust}';
   }
 }

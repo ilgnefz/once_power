@@ -33,6 +33,7 @@ class DateView extends ConsumerWidget {
             label: dateProperty.createdDate,
             checked: dateProperty.createdDateChecked,
             fullReplace: dateProperty.fullReplace,
+            selfAdjust: dateProperty.selfAdjust,
             onChanged: (value) {
               provider.update(dateProperty.copyWith(createdDateChecked: value));
             },
@@ -51,6 +52,7 @@ class DateView extends ConsumerWidget {
             label: dateProperty.modifiedDate,
             checked: dateProperty.modifiedDateChecked,
             fullReplace: dateProperty.fullReplace,
+            selfAdjust: dateProperty.selfAdjust,
             onChanged: (value) {
               provider.update(
                 dateProperty.copyWith(modifiedDateChecked: value),
@@ -71,6 +73,7 @@ class DateView extends ConsumerWidget {
             label: dateProperty.accessedDate,
             checked: dateProperty.accessedDateChecked,
             fullReplace: dateProperty.fullReplace,
+            selfAdjust: dateProperty.selfAdjust,
             onChanged: (value) {
               provider.update(
                 dateProperty.copyWith(accessedDateChecked: value),
@@ -102,16 +105,29 @@ class DateView extends ConsumerWidget {
           ),
           SizedBox(height: 8),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
-            child: EasyCheckbox(
-              checked: dateProperty.fullReplace,
-              label: tr(AppL10n.dateFullReplace),
-              onChanged: (value) {
-                provider.update(dateProperty.copyWith(fullReplace: value));
-              },
+            padding: const EdgeInsets.only(
+                left: AppNum.spaceMedium, right: AppNum.padding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                EasyCheckbox(
+                  checked: dateProperty.fullReplace,
+                  label: tr(AppL10n.dateFullReplace),
+                  onChanged: (value) {
+                    provider.update(dateProperty.copyWith(fullReplace: value));
+                  },
+                ),
+                EasyCheckbox(
+                  checked: dateProperty.selfAdjust,
+                  label: tr(AppL10n.dateSelf),
+                  onChanged: (value) {
+                    provider.update(dateProperty.copyWith(selfAdjust: value));
+                  },
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppNum.padding),
             child: Text(

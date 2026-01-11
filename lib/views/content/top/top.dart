@@ -14,6 +14,7 @@ import 'package:once_power/widgets/base/easy_checkbox.dart';
 import 'package:once_power/widgets/base/one_line_text.dart';
 import 'package:once_power/widgets/common/click_icon.dart';
 
+import 'date_top.dart';
 import 'expend.dart';
 import 'filter.dart';
 import 'sort.dart';
@@ -23,7 +24,10 @@ final _labelLeftProvider = Provider((ref) {
   List<FileInfo> files = ref.watch(fileListProvider);
   int total = files.length;
   int checked = files.where((e) => e.checked).toList().length;
-  return '${tr(AppL10n.contentOrigin)} ($checked/$total)';
+  String name = ref.watch(currentModeProvider).isOrganize
+      ? tr(AppL10n.contentName)
+      : tr(AppL10n.contentOrigin);
+  return '$name ($checked/$total)';
 });
 
 final _labelRightProvider = Provider((ref) {
@@ -37,6 +41,8 @@ class ContentTop extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.watch(isDateModifyProvider)) return DateTop();
+
     if (!ref.watch(currentModeProvider).isOrganize &&
         ref.watch(isViewModeProvider)) {
       return ViewTop();

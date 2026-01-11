@@ -23,7 +23,7 @@ class TargetInput extends ConsumerWidget {
         cacheKey: AppKeys.targetFolder,
         cacheListKey: AppKeys.targetFolderList,
         enable: ref.watch(_enableProvider),
-        controller: ref.read(folderControllerProvider),
+        controller: ref.watch(folderControllerProvider),
         showClear: ref.watch(folderClearProvider),
         cache: ref.watch(isSaveConfigProvider),
       ),

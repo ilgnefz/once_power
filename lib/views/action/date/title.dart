@@ -10,6 +10,7 @@ class DateTitle extends StatelessWidget {
     required this.title,
     required this.label,
     required this.fullReplace,
+    required this.selfAdjust,
     required this.onChanged,
   });
 
@@ -17,6 +18,7 @@ class DateTitle extends StatelessWidget {
   final String title;
   final String label;
   final bool fullReplace;
+  final bool selfAdjust;
   final Function(bool?)? onChanged;
 
   @override
@@ -30,7 +32,7 @@ class DateTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyCheckbox(checked: checked, label: title, onChanged: onChanged),
-          Text(modifyDate(label, fullReplace),
+          Text(checked ? modifyDate(label, fullReplace, selfAdjust) : '',
               style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),

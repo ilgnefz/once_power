@@ -10,12 +10,10 @@ class TooltipItem extends StatelessWidget {
   const TooltipItem({
     super.key,
     required this.file,
-    this.waitDuration,
     required this.child,
   });
 
   final FileInfo file;
-  final Duration? waitDuration;
   final Widget child;
 
   @override
@@ -25,6 +23,7 @@ class TooltipItem extends StatelessWidget {
     final String folder = tr(AppL10n.contentFolder); // 文件夹标签
     final String createTime = tr(AppL10n.eDateCreate); // 创建时间标签
     final String modifyDate = tr(AppL10n.eDateModify); // 修改时间标签
+    final String accessDate = tr(AppL10n.eDateAccess); // 访问时间标签
     final String captureDate = tr(AppL10n.eDateCapture); // 拍摄日期标签
     final String resolution = tr(AppL10n.contentResolution); // 分辨率标签
     final String size = tr(AppL10n.contentSize); // 文件大小标签
@@ -36,7 +35,7 @@ class TooltipItem extends StatelessWidget {
 
     return EasyTooltip(
       placement: Placement.bottom,
-      waitDuration: waitDuration,
+      waitDuration: const Duration(seconds: 1),
       richMessage: TextSpan(
         children: [
           richTextTooltip(context, name, '${file.name}$dot${file.ext}'),
@@ -48,6 +47,7 @@ class TooltipItem extends StatelessWidget {
           richTextTooltip(context, folder, file.parent),
           richTextTooltip(context, createTime, '${file.createdDate.date}'),
           richTextTooltip(context, modifyDate, '${file.modifiedDate.date}'),
+          richTextTooltip(context, accessDate, '${file.accessedDate.date}'),
           if (file.metaInfo?.capture != null)
             richTextTooltip(
                 context, captureDate, '${file.metaInfo?.capture?.date}'),

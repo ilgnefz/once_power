@@ -12,6 +12,7 @@ import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/content/right_menu_item.dart';
@@ -31,8 +32,10 @@ Future<void> showFileRightMenu(
 ]) async {
   final ThemeData theme = Theme.of(context);
   FunctionMode mode = ref.watch(currentModeProvider);
-  bool show =
-      (mode.isReplace || mode.isReserve) && ref.watch(cSVDataProvider).isEmpty;
+  bool isModifyDate = ref.watch(isDateModifyProvider);
+  bool show = (mode.isReplace || mode.isReserve) &&
+      ref.watch(cSVDataProvider).isEmpty &&
+      !isModifyDate;
   List<FileInfo> sortSelectList = [];
   sortSelectList = isPreview ? [file] : ref.watch(sortSelectListProvider);
   List<FileInfo> suspenseList = StorageUtil.getFileList(
@@ -54,15 +57,37 @@ Future<void> showFileRightMenu(
           label: tr(AppL10n.menuLocal),
           onSelected: () => openFileLocation(file.path),
         ),
-        if (show)
+        if (show) ...[
           RightMenuItem(
             label: tr(AppL10n.menuMatch),
             onSelected: () => autoMatchInput(ref, file.name),
           ),
-        if (show)
           RightMenuItem(
             label: tr(AppL10n.menuModify),
             onSelected: () => autoModifyInput(ref, file.name),
+          )
+        ],
+        if (isModifyDate)
+          RightMenuItem.submenu(
+            label: tr(AppL10n.menuDate),
+            items: [
+              RightMenuItem(
+                label: tr(AppL10n.menuAll),
+                onSelected: () => autoMatchDateInput(ref, file),
+              ),
+              RightMenuItem(
+                label: tr(AppL10n.eDateCreate),
+                onSelected: () => autoMatchCreateInput(ref, file),
+              ),
+              RightMenuItem(
+                label: tr(AppL10n.eDateModify),
+                onSelected: () => autoMatchModifyInput(ref, file),
+              ),
+              RightMenuItem(
+                label: tr(AppL10n.eDateAccess),
+                onSelected: () => autoMatchAccessInput(ref, file),
+              ),
+            ],
           ),
         RightMenuItem.submenu(
           label: tr(AppL10n.menuMove),
@@ -101,7 +126,7 @@ Future<void> showFileRightMenu(
               ),
             ],
           ),
-        if (mode.isOrganize)
+        if (mode.isOrganize && !isModifyDate)
           RightMenuItem(
             label: tr(AppL10n.menuPath),
             onSelected: () => ref

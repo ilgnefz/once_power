@@ -5,12 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme.dart';
 import 'package:once_power/constants/keys.dart';
 import 'package:once_power/cores/context_menu.dart';
-import 'package:once_power/models/date.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
-import 'package:once_power/provider/toggle.dart';
-import 'package:once_power/provider/value.dart';
 import 'package:once_power/utils/storage.dart';
 import 'package:once_power/widgets/content/tooltip_item.dart';
 
@@ -46,17 +43,6 @@ class SelectSortItem extends ConsumerWidget {
       // 仅处理鼠标左键按下且点击位置非零点的情况
       if (event.buttons == kPrimaryButton &&
           event.localPosition != Offset.zero) {
-        // 仅在修改日期时调用
-        if (ref.read(isDateModifyProvider)) {
-          DateProperty dateProperty = ref.watch(fileDatePropertyProvider);
-          ref
-              .read(fileDatePropertyProvider.notifier)
-              .update(dateProperty.copyWith(
-                createdDate: file.createdDate.date.toString(),
-                modifiedDate: file.modifiedDate.date.toString(),
-                accessedDate: file.accessedDate.date.toString(),
-              ));
-        }
         // 获取当前按下的键盘按键集合
         Set keysPressed = HardwareKeyboard.instance.logicalKeysPressed;
         // 判断Ctrl键是否被按下（左右Ctrl均可）
@@ -144,7 +130,6 @@ class SelectSortItem extends ConsumerWidget {
 
     return TooltipItem(
       file: file,
-      waitDuration: const Duration(seconds: 1),
       child: Listener(
         onPointerDown: onPointerDown,
         child: Material(

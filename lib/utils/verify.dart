@@ -78,4 +78,6 @@ bool isSameNewPath(List<FileInfo> list, String newPath) {
 }
 
 bool isShowView(WidgetRef ref) =>
-    ref.watch(isViewModeProvider) && !ref.watch(currentModeProvider).isOrganize;
+    ref.watch(isViewModeProvider) &&
+    !ref.watch(currentModeProvider).isOrganize &&
+    !ref.watch(isDateModifyProvider);

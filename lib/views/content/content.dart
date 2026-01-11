@@ -33,8 +33,11 @@ final _viewProvider = Provider((ref) {
         files.where((e) => e.name != e.newName || e.ext != e.newExt).toList();
   }
   bool isViewMode = ref.watch(isViewModeProvider);
+  bool isModifyDate = ref.watch(isDateModifyProvider);
   FunctionMode mode = ref.watch(currentModeProvider);
-  if (isViewMode && !mode.isOrganize) return ContentGrid(files: files);
+  if (isViewMode && !mode.isOrganize && !isModifyDate) {
+    return ContentGrid(files: files);
+  }
   return ContentList(files: files);
 });
 
