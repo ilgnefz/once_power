@@ -1,17 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/constants/keys.dart';
 import 'package:once_power/constants/l10n.dart';
+import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/date.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
+import 'package:once_power/models/rule.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/utils/format.dart';
 import 'package:once_power/utils/info.dart';
+import 'package:once_power/utils/storage.dart';
 
 import 'list.dart';
 
@@ -418,4 +422,30 @@ List<String> splitWords(String name) {
     result.add(name.substring(start, end));
   }
   return result;
+}
+
+Future<void> autoGroupFile(WidgetRef ref, List<GroupRule> list) async {
+  if (list.isEmpty) return;
+  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> checkedFiles = files.where((e) => e.checked).toList();
+  for (GroupRule item in list) {
+    InfoType type = item.infoType;
+    ComparisonOperator operator = item.operator;
+    String value = item.value;
+    String group = item.group;
+    for (FileInfo file in checkedFiles) {
+      String info = getRuleTypeValue(type, file);
+      if (getCompareResult(operator, value, info)) {
+        if (group != '') {
+          List<String> list = StorageUtil.getStringList(AppKeys.groupList);
+          if (!list.contains(group)) {
+            list.add(group);
+            await StorageUtil.setStringList(AppKeys.groupList, list);
+          }
+        }
+        ref.read(fileListProvider.notifier).updateGroup(file.id, group);
+      }
+    }
+  }
+  updateName(ref);
 }

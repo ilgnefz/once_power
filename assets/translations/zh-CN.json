@@ -207,6 +207,8 @@
     "behind": "至后面",
     "path": "匹配路径",
     "group": "设置组",
+    "autoGroup": "自动分组",
+    "rule": "添加条件",
     "edit": "编辑组",
     "select": "选择",
     "unselect": "取消选择",
@@ -387,6 +389,21 @@
       "hour": "时",
       "minute": "分",
       "second": "秒"
+    },
+    "rule": {
+      "name": "文件名",
+      "newName": "新文件名",
+      "folder": "文件夹",
+      "ext": "扩展名",
+      "contains": "包含",
+      "notContains": "不包含",
+      "equal": "等于",
+      "notEqual": "不等于",
+      "before": "早于",
+      "after": "晚于",
+      "beforeOrEqual": "早于等于",
+      "afterOrEqual": "晚于等于",
+      "value": "输入值"
     }
   },
   "error": {

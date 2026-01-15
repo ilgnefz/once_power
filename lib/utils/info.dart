@@ -15,6 +15,7 @@ import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/date.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
+import 'package:once_power/models/rule.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/src/rust/api/img_exif.dart';
 import 'package:path/path.dart' as path;
@@ -418,4 +419,68 @@ int getAllSize(WidgetRef ref) {
     totalSize += file.size;
   }
   return totalSize;
+}
+
+String getRuleTypeValue(InfoType type, FileInfo file) {
+  switch (type) {
+    case InfoType.name:
+      return file.name;
+    case InfoType.newName:
+      return file.newName;
+    case InfoType.folder:
+      return file.parent;
+    case InfoType.extension:
+      return file.ext;
+    case InfoType.createdDate:
+      return file.createdDate.date.toString();
+    case InfoType.modifiedDate:
+      return file.modifiedDate.date.toString();
+    case InfoType.accessedDate:
+      return file.accessedDate.date.toString();
+    case InfoType.capturedDate:
+      return file.metaInfo?.capture?.date.toString() ?? '';
+  }
+}
+
+bool getCompareResult(ComparisonOperator operator, String value, String info) {
+  switch (operator) {
+    case ComparisonOperator.contain:
+      return info.contains(value);
+    case ComparisonOperator.notContain:
+      return !info.contains(value);
+    case ComparisonOperator.equal:
+      return info == value;
+    case ComparisonOperator.notEqual:
+      return info != value;
+    case ComparisonOperator.before:
+      try {
+        return DateTime.parse(info).isBefore(DateTime.parse(value));
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.after:
+      try {
+        return DateTime.parse(info).isAfter(DateTime.parse(value));
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.beforeOrEqual:
+      try {
+        final infoDate = DateTime.parse(info);
+        final valueDate = DateTime.parse(value);
+        return infoDate.isBefore(valueDate) ||
+            infoDate.isAtSameMomentAs(valueDate);
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.afterOrEqual:
+      try {
+        final infoDate = DateTime.parse(info);
+        final valueDate = DateTime.parse(value);
+        return infoDate.isAfter(valueDate) ||
+            infoDate.isAtSameMomentAs(valueDate);
+      } catch (e) {
+        return false;
+      }
+  }
 }

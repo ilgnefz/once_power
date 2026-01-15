@@ -203,6 +203,8 @@ class AppL10n {
   static const String menuPath = 'menu.path';
   static const String menuGroup = 'menu.group';
   static const String menuEdit = 'menu.edit';
+  static const String menuAutoGroup = 'menu.autoGroup';
+  static const String menuRule = 'menu.rule';
   static const String menuSelect = 'menu.select';
   static const String menuUnselect = 'menu.unselect';
   static const String menuSelectGroup = 'menu.selectGroup';
@@ -353,6 +355,19 @@ class AppL10n {
   static const String eDateTimeHour = 'enum.dateTime.hour';
   static const String eDateTimeMinute = 'enum.dateTime.minute';
   static const String eDateTimeSecond = 'enum.dateTime.second';
+  static const String eRuleName = 'enum.rule.name';
+  static const String eRuleNewName = 'enum.rule.newName';
+  static const String eRuleFolder = 'enum.rule.folder';
+  static const String eRuleExt = 'enum.rule.ext';
+  static const String eRuleContains = 'enum.rule.contains';
+  static const String eRuleNotContains = 'enum.rule.notContains';
+  static const String eRuleEqual = 'enum.rule.equal';
+  static const String eRuleNotEqual = 'enum.rule.notEqual';
+  static const String eRuleBefore = 'enum.rule.before';
+  static const String eRuleAfter = 'enum.rule.after';
+  static const String eRuleBeforeOrEqual = 'enum.rule.beforeOrEqual';
+  static const String eRuleAfterOrEqual = 'enum.rule.afterOrEqual';
+  static const String eRuleValue = 'enum.rule.value';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';

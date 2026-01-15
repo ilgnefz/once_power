@@ -142,6 +142,11 @@ Future<void> showFileRightMenu(
                 color: Theme.of(context).primaryColor,
                 onSelected: () => editGroup(context),
               ),
+              RightMenuItem(
+                label: tr(AppL10n.menuAutoGroup),
+                color: Theme.of(context).primaryColor,
+                onSelected: () => autoGroup(context, file),
+              ),
               ...buildGroupList(context, ref, file),
             ],
           ),

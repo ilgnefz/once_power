@@ -207,6 +207,8 @@
     "behind": "To behind",
     "path": "Match Path",
     "group": "Set Group",
+    "autoGroup": "Auto Group",
+    "rule": "Add Rule",
     "edit": "Edit Group",
     "select": "Select",
     "unselect": "Unselect",
@@ -387,6 +389,21 @@
       "hour": "Hour",
       "minute": "Min",
       "second": "Sec"
+    },
+    "rule": {
+      "name": "Filename",
+      "newName": "New name",
+      "folder": "Folder",
+      "ext": "Extension",
+      "contains": "Contains",
+      "notContains": "Not contains",
+      "equal": "Equal",
+      "notEqual": "Not equal",
+      "before": "Before",
+      "after": "After",
+      "beforeOrEqual": "On or Before",
+      "afterOrEqual": "On or After",
+      "value": "Input value"
     }
   },
   "error": {

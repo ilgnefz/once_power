@@ -12,6 +12,7 @@ import 'package:once_power/views/action/organize/group_list.dart';
 import 'package:once_power/views/action/organize/type_list.dart';
 import 'package:once_power/views/bottom/save_view.dart';
 import 'package:once_power/views/bottom/theme_view.dart';
+import 'package:once_power/views/content/auto_group.dart';
 import 'package:once_power/views/content/grid/preview/preview.dart';
 import 'package:once_power/views/content/group.dart';
 import 'package:once_power/views/content/top/export_menu.dart';
@@ -39,6 +40,13 @@ void editGroup(BuildContext context, [bool isDirective = false]) {
   showCustomDialog(
     context: context,
     builder: (context) => EditGroup(isDirective: isDirective),
+  );
+}
+
+void autoGroup(BuildContext context, FileInfo file) {
+  showCustomDialog(
+    context: context,
+    builder: (context) => AutoGroup(file: file),
   );
 }
 
