@@ -188,7 +188,11 @@
       "selected": "移除已选中",
       "extension": "所有扩展",
       "folder": "所有路径",
-      "reserve": "反选文件"
+      "reserve": "反选文件",
+      "rule": "条件过滤",
+      "select": "选中",
+      "unselect": "取消选中",
+      "remove": "移除"
     }
   },
   "menu": {

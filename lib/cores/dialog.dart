@@ -15,6 +15,7 @@ import 'package:once_power/views/bottom/theme_view.dart';
 import 'package:once_power/views/content/auto_group.dart';
 import 'package:once_power/views/content/grid/preview/preview.dart';
 import 'package:once_power/views/content/group.dart';
+import 'package:once_power/views/content/rule_filter.dart';
 import 'package:once_power/views/content/top/export_menu.dart';
 import 'package:once_power/views/content/top/view_size.dart';
 import 'package:once_power/widgets/action/upload_text.dart';
@@ -59,6 +60,14 @@ Future<void> showAllTypeDetail(
   await showCustomDialog(
     context: context,
     builder: (context) => TypeDetailPanel(isPath: isPath),
+  );
+}
+
+Future<void> showRuleDetail(BuildContext context) async {
+  Navigator.of(context).pop();
+  await showCustomDialog(
+    context: context,
+    builder: (context) => RuleFilter(),
   );
 }
 

@@ -185,6 +185,10 @@ class AppL10n {
   static const String contentFilterExtension = 'content.filter.extension';
   static const String contentFilterFolder = 'content.filter.folder';
   static const String contentFilterReserve = 'content.filter.reserve';
+  static const String contentFilterRule = 'content.filter.rule';
+  static const String contentFilterSelect = 'content.filter.select';
+  static const String contentFilterUnselect = 'content.filter.unselect';
+  static const String contentFilterRemove = 'content.filter.remove';
 
   /* ---------- menu ---------- */
   static const String menuLocal = 'menu.local';

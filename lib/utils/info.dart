@@ -13,9 +13,9 @@ import 'package:once_power/cores/rename.dart';
 import 'package:once_power/cores/sort.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/date.dart';
+import 'package:once_power/enums/rule.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/notification.dart';
-import 'package:once_power/models/rule.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/src/rust/api/img_exif.dart';
 import 'package:path/path.dart' as path;
@@ -454,20 +454,29 @@ bool getCompareResult(ComparisonOperator operator, String value, String info) {
       return info != value;
     case ComparisonOperator.before:
       try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-01-01';
+        }
         return DateTime.parse(info).isBefore(DateTime.parse(value));
       } catch (e) {
         return false;
       }
     case ComparisonOperator.after:
       try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-12-31';
+        }
         return DateTime.parse(info).isAfter(DateTime.parse(value));
       } catch (e) {
         return false;
       }
     case ComparisonOperator.beforeOrEqual:
       try {
-        final infoDate = DateTime.parse(info);
-        final valueDate = DateTime.parse(value);
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-12-31';
+        }
+        DateTime infoDate = DateTime.parse(info);
+        DateTime valueDate = DateTime.parse(value);
         return infoDate.isBefore(valueDate) ||
             infoDate.isAtSameMomentAs(valueDate);
       } catch (e) {
@@ -475,8 +484,11 @@ bool getCompareResult(ComparisonOperator operator, String value, String info) {
       }
     case ComparisonOperator.afterOrEqual:
       try {
-        final infoDate = DateTime.parse(info);
-        final valueDate = DateTime.parse(value);
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-01-01';
+        }
+        DateTime infoDate = DateTime.parse(info);
+        DateTime valueDate = DateTime.parse(value);
         return infoDate.isAfter(valueDate) ||
             infoDate.isAtSameMomentAs(valueDate);
       } catch (e) {

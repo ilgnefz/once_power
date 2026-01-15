@@ -6,6 +6,7 @@ import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/advance.dart';
 import 'package:once_power/enums/file.dart';
 import 'package:once_power/enums/date.dart';
+import 'package:once_power/enums/rule.dart';
 import 'package:once_power/models/advance.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/rule.dart';

@@ -188,7 +188,11 @@
       "selected": "Remove checked",
       "extension": "All exts",
       "folder": "All paths",
-      "reserve": "Invert selection"
+      "reserve": "Invert selection",
+      "rule": "Rule filter",
+      "select": "Select",
+      "unselect": "Unselect",
+      "remove": "Remove"
     }
   },
   "menu": {

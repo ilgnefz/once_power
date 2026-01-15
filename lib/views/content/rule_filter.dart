@@ -3,60 +3,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constants/l10n.dart';
 import 'package:once_power/constants/num.dart';
-import 'package:once_power/cores/advance.dart';
+import 'package:once_power/cores/update.dart';
 import 'package:once_power/enums/app.dart';
 import 'package:once_power/enums/rule.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/models/rule.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:once_power/utils/info.dart';
 import 'package:once_power/views/action/advance/dialog/common_dialog.dart';
 import 'package:once_power/widgets/base/base_input.dart';
 import 'package:once_power/widgets/base/easy_btn.dart';
 import 'package:once_power/widgets/common/dropdown_text.dart';
 
-class AutoGroup extends ConsumerStatefulWidget {
-  const AutoGroup({super.key, required this.file});
-
-  final FileInfo file;
+class RuleFilter extends ConsumerStatefulWidget {
+  const RuleFilter({super.key});
 
   @override
-  ConsumerState<AutoGroup> createState() => _AutoGroupState();
+  ConsumerState<RuleFilter> createState() => _RuleFilterState();
 }
 
-class _AutoGroupState extends ConsumerState<AutoGroup> {
-  List<GroupRule> list = [];
+class _RuleFilterState extends ConsumerState<RuleFilter> {
+  List<FilterRule> list = [];
+
+  void onOk() async {
+    if (list.isEmpty) return;
+    List<FileInfo> files = ref.watch(fileListProvider);
+    for (FilterRule item in list) {
+      InfoType type = item.infoType;
+      ComparisonOperator operator = item.operator;
+      String value = item.value;
+      ActionType action = item.action;
+      for (FileInfo file in files) {
+        String info = getRuleTypeValue(type, file);
+        if (getCompareResult(operator, value, info)) {
+          if (action.isRemove) {
+            ref.read(fileListProvider.notifier).remove(file);
+          } else {
+            ref
+                .read(fileListProvider.notifier)
+                .updateCheck(file.id, action.isSelect);
+          }
+        }
+      }
+    }
+    updateName(ref);
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isEnglish = context.locale == LanguageType.english.locale;
     return CommonDialog(
-      title: tr(AppL10n.menuAutoGroup),
-      width: isEnglish ? 648 : 608,
+      title: tr(AppL10n.contentFilterRule),
+      width: isEnglish ? 604 : 564,
       extraButton: EasyBtn(
           label: tr(AppL10n.menuRule),
           onPressed: () {
             setState(() {
               final InfoType type = InfoType.values.first;
-              list.add(GroupRule(
+              list.add(FilterRule(
                 infoType: type,
                 operator: ComparisonOperator.contain,
-                value: getRuleTypeValue(type, widget.file),
-                group: '',
+                value: '',
+                action: ActionType.remove,
               ));
             });
           }),
+      onOk: onOk,
       child: SingleChildScrollView(
         child: Column(
           spacing: AppNum.spaceSmall,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: list.map((e) {
             InfoType type = e.infoType;
-            return GroupRuleItem(
+            return FilterRuleItem(
               isEnglish: isEnglish,
               infoType: type,
               operator: e.operator,
-              value: getRuleTypeValue(type, widget.file),
-              group: e.group,
+              value: e.value,
+              action: e.action,
               onInfoTypeChange: (v) {
                 setState(() {
                   e.infoType = v!;
@@ -72,49 +96,48 @@ class _AutoGroupState extends ConsumerState<AutoGroup> {
                   e.value = v!;
                 });
               },
-              onGroupChange: (v) {
+              onActionChange: (v) {
                 setState(() {
-                  e.group = v!;
+                  e.action = v!;
                 });
               },
             );
           }).toList(),
         ),
       ),
-      onOk: () async => await autoGroupFile(ref, list),
     );
   }
 }
 
-class GroupRuleItem extends StatefulWidget {
-  const GroupRuleItem({
+class FilterRuleItem extends StatefulWidget {
+  const FilterRuleItem({
     super.key,
     required this.isEnglish,
     required this.infoType,
     required this.operator,
     required this.value,
-    required this.group,
+    required this.action,
     required this.onInfoTypeChange,
     required this.onOperatorChange,
     required this.onValueChange,
-    required this.onGroupChange,
+    required this.onActionChange,
   });
 
   final bool isEnglish;
   final InfoType infoType;
   final ComparisonOperator operator;
   final String value;
-  final String group;
+  final ActionType action;
   final void Function(InfoType?) onInfoTypeChange;
   final void Function(ComparisonOperator?) onOperatorChange;
   final void Function(String?) onValueChange;
-  final void Function(String?) onGroupChange;
+  final void Function(ActionType?) onActionChange;
 
   @override
-  State<GroupRuleItem> createState() => _GroupRuleItemState();
+  State<FilterRuleItem> createState() => _FilterRuleItemState();
 }
 
-class _GroupRuleItemState extends State<GroupRuleItem> {
+class _FilterRuleItemState extends State<FilterRuleItem> {
   List<ComparisonOperator> get operators => widget.infoType.isDateType
       ? ComparisonOperator.values
       : [
@@ -161,12 +184,20 @@ class _GroupRuleItemState extends State<GroupRuleItem> {
           onChanged: widget.onOperatorChange,
         ),
         RuleInput(value: widget.value, onValueChange: widget.onValueChange),
-        SizedBox(
-          width: 148,
-          child: BaseInput(
-            hintText: tr(AppL10n.dialogGroupHint),
-            onChanged: widget.onGroupChange,
-          ),
+        TextDropdown(
+          items: ActionType.values
+              .map(
+                (item) => DropdownMenuItem(
+                  key: ValueKey(item),
+                  value: item,
+                  child: Text(item.label, style: textStyle),
+                ),
+              )
+              .toList(),
+          color: theme.popupMenuTheme.surfaceTintColor,
+          width: 102,
+          value: widget.action,
+          onChanged: widget.onActionChange,
         ),
       ],
     );
@@ -195,12 +226,8 @@ class _RuleInputState extends State<RuleInput> {
     super.initState();
     _controller = TextEditingController(text: widget.value);
     _controller.addListener(() {
-      // 延迟到下一帧执行，避免build阶段冲突
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          widget.onValueChange(_controller.text);
-        }
-      });
+      widget.onValueChange(_controller.text);
+      setState(() {});
     });
   }
 
@@ -208,14 +235,6 @@ class _RuleInputState extends State<RuleInput> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant RuleInput oldWidget) {
-    if (oldWidget.value != widget.value) {
-      _controller.text = widget.value;
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

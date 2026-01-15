@@ -119,6 +119,12 @@ class FilterBtn extends ConsumerWidget {
             updateName(ref);
           },
         ),
+        easyDropdownItem(
+          tr(AppL10n.contentFilterRule),
+          Theme.of(context).primaryColor,
+          () async => await showRuleDetail(context),
+          true,
+        ),
       ],
       padding: 0,
       offset: Offset(isEn ? -72 : -36, -4),
