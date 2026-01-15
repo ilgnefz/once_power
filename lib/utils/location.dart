@@ -42,6 +42,7 @@ Future<String> getTrueLocation(double? latitude, double? longitude) async {
 
   try {
     Response response = await _dio.get(uri, queryParameters: queryParameters);
+    print(response.data);
     AMapReverseGeo? data = AMapReverseGeo.fromJson(response.data);
     switch (data.status) {
       case '1':

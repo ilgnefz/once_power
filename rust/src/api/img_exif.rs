@@ -9,6 +9,24 @@ pub struct CameraInfo {
     pub longitude: Option<f64>,
 }
 
+/// 验证日期字符串是否有效
+/// 过滤掉像 ":  :     :  : " 这样的无效格式，但保留包含"上午"或"下午"的有效日期
+fn is_valid_date(date_str: &str) -> bool {
+    // 去除空格后检查是否为空或者只有冒号和空格
+    let cleaned = date_str.replace(' ', "");
+    if cleaned.is_empty() || cleaned.chars().all(|c| c == ':' || c == ' ') {
+        return false;
+    }
+    
+    // 如果包含上午或下午，认为是有效的中文格式
+    if date_str.contains("上午") || date_str.contains("下午") {
+        return true;
+    }
+    
+    // 检查是否至少包含一些数字（基本的日期验证）
+    date_str.chars().any(|c| c.is_ascii_digit())
+}
+
 /// 解析GPS坐标并转换为高德地图坐标
 /// 直接处理rexif的URational数据，避免字符串转换的中间步骤
 fn parse_gps_coordinates(lat_value: &TagValue, lon_value: &TagValue) -> Result<(f64, f64), String> {
@@ -120,10 +138,12 @@ pub fn get_image_meta_info(image_path: String) -> Option<CameraInfo> {
         }
     }
     
-    // 按照优先级顺序给capture赋值
+    // 按照优先级顺序给capture赋值，过滤无效日期
     let capture = date_time_original
-        .or(date_time_digitized)
-        .or(date_time);
+        .filter(|dt| is_valid_date(dt))
+        .or(date_time_digitized.filter(|dt| is_valid_date(dt)))
+        .or(date_time.filter(|dt| is_valid_date(dt)))
+        .map(|dt| dt.chars().take(19).collect());
     
     // 解析GPS坐标
     if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {

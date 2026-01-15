@@ -33,7 +33,6 @@ String formatDateTime(DateTime dateTime) {
 DateTime? formatExifDate(String? date) {
   if (date == null) return null;
   try {
-    // 标准化空白字符
     String normalizedDate = date.trim().replaceAll(RegExp(r'\s+'), ' ');
     List<String> parts = normalizedDate.split(' ');
     if (parts.length < 2) {
