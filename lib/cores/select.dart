@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/enums/file.dart';
 import 'package:once_power/models/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
@@ -10,6 +11,16 @@ void selectGroup(WidgetRef ref, String group) {
   List<FileInfo> list = ref.watch(sortListProvider);
   for (FileInfo e in list) {
     if (e.group != group) continue;
+    ref.read(sortSelectListProvider.notifier).add(e);
+  }
+  updateName(ref);
+}
+
+void selectType(WidgetRef ref, FileClassify type) {
+  ref.read(sortSelectListProvider.notifier).clear();
+  List<FileInfo> list = ref.watch(sortListProvider);
+  for (FileInfo e in list) {
+    if (e.type != type) continue;
     ref.read(sortSelectListProvider.notifier).add(e);
   }
   updateName(ref);

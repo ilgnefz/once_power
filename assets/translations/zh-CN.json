@@ -213,6 +213,7 @@
     "select": "选择",
     "unselect": "取消选择",
     "selectGroup": "选中组",
+    "selectType": "选中类型",
     "selectPath": "选中路径",
     "removeFolder": "移除路径",
     "remove": "移除",

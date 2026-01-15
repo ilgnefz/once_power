@@ -213,6 +213,7 @@
     "select": "Select",
     "unselect": "Unselect",
     "selectGroup": "Select Group",
+    "selectType": "Select Type",
     "selectPath": "Select Path",
     "removeFolder": "Remove Path",
     "remove": "Remove",

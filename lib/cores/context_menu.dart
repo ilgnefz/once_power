@@ -162,6 +162,10 @@ Future<void> showFileRightMenu(
             onSelected: () => selectGroup(ref, file.group),
           ),
         RightMenuItem(
+          label: tr(AppL10n.menuSelectType),
+          onSelected: () => selectType(ref, file.type),
+        ),
+        RightMenuItem(
           label: tr(AppL10n.menuSelectPath),
           onSelected: () => selectPath(ref, file.parent),
         ),

@@ -208,6 +208,7 @@ class AppL10n {
   static const String menuSelect = 'menu.select';
   static const String menuUnselect = 'menu.unselect';
   static const String menuSelectGroup = 'menu.selectGroup';
+  static const String menuSelectType = 'menu.selectType';
   static const String menuSelectPath = 'menu.selectPath';
   static const String menuRemoveFolder = 'menu.removeFolder';
   static const String menuRemove = 'menu.remove';
