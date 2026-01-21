@@ -1,0 +1,558 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "runner/once_power.exe"
+		},
+		{
+			"path" : "runner/once_power.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"install",
+			"target_link_libraries",
+			"include",
+			"add_dependencies",
+			"target_compile_options",
+			"apply_standard_settings",
+			"target_compile_definitions",
+			"add_definitions",
+			"target_include_directories",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"runner/CMakeLists.txt",
+			"CMakeLists.txt",
+			"flutter/generated_plugins.cmake",
+			"flutter/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 75,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 35,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 36,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 58,
+				"parent" : 2
+			},
+			{
+				"file" : 2,
+				"parent" : 6
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 7
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 7
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 7
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 39,
+				"parent" : 11
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 21,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 42,
+				"parent" : 14
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 43,
+				"parent" : 14
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 25,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 31,
+				"parent" : 0
+			},
+			{
+				"command" : 8,
+				"file" : 1,
+				"line" : 33,
+				"parent" : 2
+			},
+			{
+				"command" : 7,
+				"file" : 1,
+				"line" : 45,
+				"parent" : 14
+			},
+			{
+				"command" : 7,
+				"file" : 1,
+				"line" : 44,
+				"parent" : 14
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 10,
+				"file" : 1,
+				"line" : 41,
+				"parent" : 14
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17"
+				},
+				{
+					"backtrace" : 15,
+					"fragment" : "/W4"
+				},
+				{
+					"backtrace" : 15,
+					"fragment" : "/WX"
+				},
+				{
+					"backtrace" : 15,
+					"fragment" : "/wd\\\"4100\\\""
+				},
+				{
+					"backtrace" : 16,
+					"fragment" : "/EHsc"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 17,
+					"define" : "FLUTTER_VERSION=\"3.0.0+1\""
+				},
+				{
+					"backtrace" : 18,
+					"define" : "FLUTTER_VERSION_BUILD=1"
+				},
+				{
+					"backtrace" : 19,
+					"define" : "FLUTTER_VERSION_MAJOR=3"
+				},
+				{
+					"backtrace" : 20,
+					"define" : "FLUTTER_VERSION_MINOR=0"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "FLUTTER_VERSION_PATCH=0"
+				},
+				{
+					"backtrace" : 22,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "UNICODE"
+				},
+				{
+					"backtrace" : 24,
+					"define" : "_DEBUG"
+				},
+				{
+					"backtrace" : 25,
+					"define" : "_HAS_EXCEPTIONS=0"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "_UNICODE"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 26,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/cpp_client_wrapper/include"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/desktop_drop/windows/include"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/screen_retriever_windows/windows/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					27
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DWIN32 -D_DEBUG"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 17,
+					"define" : "FLUTTER_VERSION=\"3.0.0+1\""
+				},
+				{
+					"backtrace" : 18,
+					"define" : "FLUTTER_VERSION_BUILD=1"
+				},
+				{
+					"backtrace" : 19,
+					"define" : "FLUTTER_VERSION_MAJOR=3"
+				},
+				{
+					"backtrace" : 20,
+					"define" : "FLUTTER_VERSION_MINOR=0"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "FLUTTER_VERSION_PATCH=0"
+				},
+				{
+					"backtrace" : 22,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "UNICODE"
+				},
+				{
+					"backtrace" : 24,
+					"define" : "_DEBUG"
+				},
+				{
+					"backtrace" : 25,
+					"define" : "_HAS_EXCEPTIONS=0"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "_UNICODE"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 26,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/cpp_client_wrapper/include"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/desktop_drop/windows/include"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/screen_retriever_windows/windows/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "E:/WorkSpace/Desktop/once_power/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/include"
+				}
+			],
+			"language" : "RC",
+			"sourceIndexes" : 
+			[
+				5
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "flutter_wrapper_app::@2bb09fbb03a373b2cb34"
+		},
+		{
+			"backtrace" : 13,
+			"id" : "flutter_assemble::@2bb09fbb03a373b2cb34"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "desktop_drop_plugin::@953c5df2710b7092f2a0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "window_manager_plugin::@5d5a3d495045ca23c295"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "screen_retriever_windows_plugin::@6c27775a3af717e46ce9"
+		}
+	],
+	"id" : "once_power::@056c4f61b0156d1d9b06",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/subsystem:windows",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "flutter\\flutter_wrapper_app.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "dwmapi.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "plugins\\desktop_drop\\desktop_drop_plugin.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "plugins\\screen_retriever_windows\\screen_retriever_windows_plugin.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "plugins\\window_manager\\window_manager_plugin.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "E:\\WorkSpace\\Desktop\\once_power\\windows\\flutter\\ephemeral\\flutter_windows.dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "once_power",
+	"nameOnDisk" : "once_power.exe",
+	"paths" : 
+	{
+		"build" : "runner",
+		"source" : "runner"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				6
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "runner/flutter_window.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "runner/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "runner/utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "runner/win32_window.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "flutter/generated_plugin_registrant.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "runner/Runner.rc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "runner/runner.exe.manifest",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "EXECUTABLE"
+}

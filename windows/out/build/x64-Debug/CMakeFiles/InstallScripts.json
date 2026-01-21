@@ -1,0 +1,13 @@
+{
+	"InstallScripts" : 
+	[
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/flutter/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/runner/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/plugins/desktop_drop/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/plugins/screen_retriever_windows/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/plugins/window_manager/cmake_install.cmake",
+		"E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug/plugins/rust_lib_once_power/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

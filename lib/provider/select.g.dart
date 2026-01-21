@@ -6,166 +6,267 @@ part of 'select.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(CurrentMode)
+final currentModeProvider = CurrentModeProvider._();
+
+final class CurrentModeProvider
+    extends $NotifierProvider<CurrentMode, FunctionMode> {
+  CurrentModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentModeHash();
+
+  @$internal
+  @override
+  CurrentMode create() => CurrentMode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FunctionMode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FunctionMode>(value),
+    );
+  }
+}
+
 String _$currentModeHash() => r'b34f5ae2ee5f4a9ebda79e16b0be3e6d42dc2092';
 
-/// See also [CurrentMode].
-@ProviderFor(CurrentMode)
-final currentModeProvider =
-    AutoDisposeNotifierProvider<CurrentMode, FunctionMode>.internal(
-  CurrentMode.new,
-  name: r'currentModeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentModeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$CurrentMode extends $Notifier<FunctionMode> {
+  FunctionMode build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<FunctionMode, FunctionMode>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<FunctionMode, FunctionMode>,
+              FunctionMode,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$CurrentMode = AutoDisposeNotifier<FunctionMode>;
+@ProviderFor(SelectedReplaceType)
+final selectedReplaceTypeProvider = SelectedReplaceTypeProvider._();
+
+final class SelectedReplaceTypeProvider
+    extends $NotifierProvider<SelectedReplaceType, List<ReplaceType>> {
+  SelectedReplaceTypeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'selectedReplaceTypeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectedReplaceTypeHash();
+
+  @$internal
+  @override
+  SelectedReplaceType create() => SelectedReplaceType();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<ReplaceType> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<ReplaceType>>(value),
+    );
+  }
+}
+
 String _$selectedReplaceTypeHash() =>
     r'4fb71971a36d1e4a14ed988dee99414f35c6c925';
 
-/// See also [SelectedReplaceType].
-@ProviderFor(SelectedReplaceType)
-final selectedReplaceTypeProvider = AutoDisposeNotifierProvider<
-    SelectedReplaceType, List<ReplaceType>>.internal(
-  SelectedReplaceType.new,
-  name: r'selectedReplaceTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$selectedReplaceTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$SelectedReplaceType extends $Notifier<List<ReplaceType>> {
+  List<ReplaceType> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<List<ReplaceType>, List<ReplaceType>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<ReplaceType>, List<ReplaceType>>,
+              List<ReplaceType>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$SelectedReplaceType = AutoDisposeNotifier<List<ReplaceType>>;
+@ProviderFor(SelectedReserveType)
+final selectedReserveTypeProvider = SelectedReserveTypeProvider._();
+
+final class SelectedReserveTypeProvider
+    extends $NotifierProvider<SelectedReserveType, List<ReserveType>> {
+  SelectedReserveTypeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'selectedReserveTypeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectedReserveTypeHash();
+
+  @$internal
+  @override
+  SelectedReserveType create() => SelectedReserveType();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<ReserveType> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<ReserveType>>(value),
+    );
+  }
+}
+
 String _$selectedReserveTypeHash() =>
     r'cdb7522a98c8d080dde495a0d46f33b403b0a522';
 
-/// See also [SelectedReserveType].
-@ProviderFor(SelectedReserveType)
-final selectedReserveTypeProvider = AutoDisposeNotifierProvider<
-    SelectedReserveType, List<ReserveType>>.internal(
-  SelectedReserveType.new,
-  name: r'selectedReserveTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$selectedReserveTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$SelectedReserveType extends $Notifier<List<ReserveType>> {
+  List<ReserveType> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<List<ReserveType>, List<ReserveType>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<ReserveType>, List<ReserveType>>,
+              List<ReserveType>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$SelectedReserveType = AutoDisposeNotifier<List<ReserveType>>;
+@ProviderFor(CurrentDateType)
+final currentDateTypeProvider = CurrentDateTypeProvider._();
+
+final class CurrentDateTypeProvider
+    extends $NotifierProvider<CurrentDateType, DateType> {
+  CurrentDateTypeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentDateTypeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentDateTypeHash();
+
+  @$internal
+  @override
+  CurrentDateType create() => CurrentDateType();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateType value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateType>(value),
+    );
+  }
+}
+
 String _$currentDateTypeHash() => r'd734afbdd1b6a221f5888235dc506720daabbd81';
 
-/// See also [CurrentDateType].
-@ProviderFor(CurrentDateType)
-final currentDateTypeProvider =
-    AutoDisposeNotifierProvider<CurrentDateType, DateType>.internal(
-  CurrentDateType.new,
-  name: r'currentDateTypeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentDateTypeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$CurrentDateType extends $Notifier<DateType> {
+  DateType build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateType, DateType>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateType, DateType>,
+              DateType,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$CurrentDateType = AutoDisposeNotifier<DateType>;
+@ProviderFor(CurrentSort)
+final currentSortProvider = CurrentSortProvider._();
+
+final class CurrentSortProvider
+    extends $NotifierProvider<CurrentSort, SortType> {
+  CurrentSortProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentSortProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentSortHash();
+
+  @$internal
+  @override
+  CurrentSort create() => CurrentSort();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SortType value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SortType>(value),
+    );
+  }
+}
+
 String _$currentSortHash() => r'feb21384738aefca713c6326859c37a441629526';
 
-/// See also [CurrentSort].
-@ProviderFor(CurrentSort)
-final currentSortProvider =
-    AutoDisposeNotifierProvider<CurrentSort, SortType>.internal(
-  CurrentSort.new,
-  name: r'currentSortProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentSortHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentSort = AutoDisposeNotifier<SortType>;
-String _$currentThemeHash() => r'5438070c83f89fae4291d9d062538e764faeec63';
-
-/// See also [CurrentTheme].
-@ProviderFor(CurrentTheme)
-final currentThemeProvider =
-    AutoDisposeNotifierProvider<CurrentTheme, ThemeType>.internal(
-  CurrentTheme.new,
-  name: r'currentThemeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentTheme = AutoDisposeNotifier<ThemeType>;
-String _$currentReplaceModeHash() =>
-    r'078af3f49c1dd7c5c7fb8782c8fb14b7197425c9';
-
-/// See also [CurrentReplaceMode].
-@ProviderFor(CurrentReplaceMode)
-final currentReplaceModeProvider =
-    AutoDisposeNotifierProvider<CurrentReplaceMode, ReplaceMode>.internal(
-  CurrentReplaceMode.new,
-  name: r'currentReplaceModeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentReplaceModeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentReplaceMode = AutoDisposeNotifier<ReplaceMode>;
-String _$organizeDateHash() => r'e35061980eb9ba2058841b96cd33f24385e6bebf';
-
-/// See also [OrganizeDate].
-@ProviderFor(OrganizeDate)
-final organizeDateProvider =
-    AutoDisposeNotifierProvider<OrganizeDate, DateType>.internal(
-  OrganizeDate.new,
-  name: r'organizeDateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$organizeDateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$OrganizeDate = AutoDisposeNotifier<DateType>;
-String _$organizeDateFormatHash() =>
-    r'2756290d6730f96af96278a155975243039ff52f';
-
-/// See also [OrganizeDateFormat].
-@ProviderFor(OrganizeDateFormat)
-final organizeDateFormatProvider =
-    AutoDisposeNotifierProvider<OrganizeDateFormat, DateFormat>.internal(
-  OrganizeDateFormat.new,
-  name: r'organizeDateFormatProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$organizeDateFormatHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$OrganizeDateFormat = AutoDisposeNotifier<DateFormat>;
-String _$organizeDateSeparateHash() =>
-    r'c76ced84246dd72c58e02858abcedefbd04ae5f3';
-
-/// See also [OrganizeDateSeparate].
-@ProviderFor(OrganizeDateSeparate)
-final organizeDateSeparateProvider = AutoDisposeNotifierProvider<
-    OrganizeDateSeparate, DateFormatSeparate>.internal(
-  OrganizeDateSeparate.new,
-  name: r'organizeDateSeparateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$organizeDateSeparateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$OrganizeDateSeparate = AutoDisposeNotifier<DateFormatSeparate>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$CurrentSort extends $Notifier<SortType> {
+  SortType build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<SortType, SortType>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<SortType, SortType>,
+              SortType,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

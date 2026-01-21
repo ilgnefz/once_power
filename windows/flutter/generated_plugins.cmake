@@ -5,13 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   file_selector_windows
-  flutter_avif_windows
-  flutter_media_info
-  fvp
   screen_retriever_windows
-  shortcut_menu_extender_windows
-  tray_manager
-  url_launcher_windows
   window_manager
 )
 

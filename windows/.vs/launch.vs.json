@@ -1,0 +1,13 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "dll",
+      "exe": "",
+      "project": "CMakeLists.txt",
+      "projectTarget": "desktop_drop_plugin.dll (plugins\\desktop_drop\\desktop_drop_plugin.dll)",
+      "name": "desktop_drop_plugin.dll (plugins\\desktop_drop\\desktop_drop_plugin.dll)"
+    }
+  ]
+}

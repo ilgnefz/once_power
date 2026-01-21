@@ -1,24 +1,15 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/constants/keys.dart';
-import 'package:once_power/enums/file.dart';
-import 'package:once_power/models/file.dart';
-import 'package:once_power/utils/regedit.dart';
-import 'package:once_power/utils/storage.dart';
+import 'package:once_power/const/key.dart';
+import 'package:once_power/enum/file.dart';
+import 'package:once_power/model/file.dart';
+import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'file.dart';
 
 part 'toggle.g.dart';
 
-/* ----- System ----- */
-@riverpod
-class IsMax extends _$IsMax {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isMaxed);
-  void update() async => state = !state;
-}
-
 /* ----- Action Rename ----- */
+
 @riverpod
 class IsInputLen extends _$IsInputLen {
   @override
@@ -52,69 +43,55 @@ class IsDateRename extends _$IsDateRename {
 @riverpod
 class IsCyclePrefix extends _$IsCyclePrefix {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isPrefixCycle);
+  bool build() => StorageUtil.getBool(AppKeys.isCyclePrefix);
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isPrefixCycle, state);
+    await StorageUtil.setBool(AppKeys.isCyclePrefix, state);
   }
 }
 
 @riverpod
 class IsSwapPrefix extends _$IsSwapPrefix {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isPrefixSwap);
+  bool build() => StorageUtil.getBool(AppKeys.isSwapPrefix);
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isPrefixSwap, state);
+    await StorageUtil.setBool(AppKeys.isSwapPrefix, state);
   }
 }
 
 @riverpod
 class IsCycleSuffix extends _$IsCycleSuffix {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isSuffixCycle);
+  bool build() => StorageUtil.getBool(AppKeys.isCycleSuffix);
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isSuffixCycle, state);
+    await StorageUtil.setBool(AppKeys.isCycleSuffix, state);
   }
 }
 
 @riverpod
 class IsSwapSuffix extends _$IsSwapSuffix {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isSuffixSwap);
+  bool build() => StorageUtil.getBool(AppKeys.isSwapSuffix);
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isSuffixSwap, state);
+    await StorageUtil.setBool(AppKeys.isSwapSuffix, state);
   }
 }
 
 @riverpod
-class IsModifyExt extends _$IsModifyExt {
+class IsModifyExtension extends _$IsModifyExtension {
   @override
-  bool build() => StorageUtil.getBool(AppKeys.isSuffixSwap);
+  bool build() => StorageUtil.getBool(AppKeys.isMatchExtension);
   Future<void> update() async {
     state = !state;
-    await StorageUtil.setBool(AppKeys.isSuffixSwap, state);
+    await StorageUtil.setBool(AppKeys.isMatchExtension, state);
   }
-}
-
-/* ----- Action CSV ----- */
-@riverpod
-class DeleteExtension extends _$DeleteExtension {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-}
-
-@riverpod
-class MatchExtension extends _$MatchExtension {
-  @override
-  bool build() => false;
-  void update() => state = !state;
 }
 
 /* ----- Action Rename Bottom ----- */
+
 @riverpod
 class CaseFile extends _$CaseFile {
   @override
@@ -132,67 +109,6 @@ class CaseExt extends _$CaseExt {
   Future<void> update() async {
     state = !state;
     await StorageUtil.setBool(AppKeys.isCaseExtension, state);
-  }
-}
-
-/* ----- Action Organize Bottom ----- */
-@riverpod
-class UseGroupOrganize extends _$UseGroupOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseGroupOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
-  }
-}
-
-@riverpod
-class UseTypeOrganize extends _$UseTypeOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseRuleOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseRuleOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseRuleOrganize, state);
-  }
-}
-
-@riverpod
-class UseTopFolder extends _$UseTopFolder {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseTopFolder);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseTopFolder, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseTopFolder, state);
-  }
-}
-
-@riverpod
-class UseDateOrganize extends _$UseDateOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseDateOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
   }
 }
 
@@ -228,80 +144,80 @@ class IsAppendMode extends _$IsAppendMode {
   }
 }
 
-// ----- Content -----
-
-@riverpod
-class OnlyChange extends _$OnlyChange {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-  void reset() => state = false;
-}
-
-@riverpod
-class ExpandNewName extends _$ExpandNewName {
-  @override
-  bool build() => false;
-  void update() => state = !state;
-}
+/* ----- Content ----- */
 
 @riverpod
 bool checkArchive(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isArchive).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isArchive)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkAudio(Ref ref) {
-  List<FileInfo> audioList =
-      ref.watch(fileListProvider).where((e) => e.type.isAudio).toList();
+  List<FileInfo> audioList = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isAudio)
+      .toList();
   int check = audioList.where((e) => e.checked == true).length;
   return check >= audioList.length;
 }
 
 @riverpod
 bool checkFolder(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isFolder).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isFolder)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkImage(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isImage).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isImage)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkOther(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isOther).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isOther)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkText(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isDoc).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isDoc)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
 @riverpod
 bool checkVideo(Ref ref) {
-  List<FileInfo> list =
-      ref.watch(fileListProvider).where((e) => e.type.isVideo).toList();
+  List<FileInfo> list = ref
+      .watch(fileListProvider)
+      .where((e) => e.type.isVideo)
+      .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
 }
 
-// ----- Bottom -----
+/* ----- Bottom ----- */
+
 @riverpod
 class IsSaveConfig extends _$IsSaveConfig {
   @override
@@ -312,32 +228,32 @@ class IsSaveConfig extends _$IsSaveConfig {
   }
 }
 
-@riverpod
-class IsUseRegedit extends _$IsUseRegedit {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseRegedit);
-  Future<void> update() async {
-    state = !state;
-    if (state) {
-      // createGlobalRegedit();
-      AppRegedit.createLocalRegedit();
-    } else {
-      // removeGlobalRegedit();
-      AppRegedit.removeLocalRegedit();
-    }
-    await StorageUtil.setBool(AppKeys.isUseRegedit, state);
-  }
-}
-
-@riverpod
-class IsAutoRun extends _$IsAutoRun {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isAutoRun);
-  Future<void> update() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isAutoRun, state);
-  }
-}
+// @riverpod
+// class IsUseRegedit extends _$IsUseRegedit {
+//   @override
+//   bool build() => StorageUtil.getBool(AppKeys.isUseRegedit);
+//   Future<void> update() async {
+//     state = !state;
+//     if (state) {
+//       // createGlobalRegedit();
+//       AppRegedit.createLocalRegedit();
+//     } else {
+//       // removeGlobalRegedit();
+//       AppRegedit.removeLocalRegedit();
+//     }
+//     await StorageUtil.setBool(AppKeys.isUseRegedit, state);
+//   }
+// }
+//
+// @riverpod
+// class IsAutoRun extends _$IsAutoRun {
+//   @override
+//   bool build() => StorageUtil.getBool(AppKeys.isAutoRun);
+//   Future<void> update() async {
+//     state = !state;
+//     await StorageUtil.setBool(AppKeys.isAutoRun, state);
+//   }
+// }
 
 @riverpod
 class IsSaveLog extends _$IsSaveLog {

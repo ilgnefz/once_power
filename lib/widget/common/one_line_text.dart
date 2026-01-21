@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:once_power/widget/base/text.dart';
+
+class OneLineText extends StatelessWidget {
+  const OneLineText(this.data, {super.key, this.fontSize});
+
+  final String data;
+  final double? fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: BaseText(
+        data,
+        fontSize: fontSize,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}

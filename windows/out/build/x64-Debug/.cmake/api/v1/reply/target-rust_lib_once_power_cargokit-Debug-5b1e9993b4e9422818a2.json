@@ -1,0 +1,81 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"apply_cargokit"
+		],
+		"files" : 
+		[
+			"flutter/ephemeral/.plugin_symlinks/rust_lib_once_power/cargokit/cmake/cargokit.cmake",
+			"flutter/ephemeral/.plugin_symlinks/rust_lib_once_power/windows/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 93,
+				"parent" : 1
+			}
+		]
+	},
+	"id" : "rust_lib_once_power_cargokit::@d0ded4e8e38251f726ce",
+	"name" : "rust_lib_once_power_cargokit",
+	"paths" : 
+	{
+		"build" : "plugins/rust_lib_once_power",
+		"source" : "flutter/ephemeral/.plugin_symlinks/rust_lib_once_power/windows"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/plugins/rust_lib_once_power/CMakeFiles/rust_lib_once_power_cargokit",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/plugins/rust_lib_once_power/CMakeFiles/rust_lib_once_power_cargokit.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/plugins/rust_lib_once_power/rust_lib_once_power.dll.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

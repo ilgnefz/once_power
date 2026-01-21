@@ -6,147 +6,260 @@ part of 'value.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dateLenHash() => r'78a841f164419cff508223a01cd80bea573ac737';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [DateLen].
-@ProviderFor(DateLen)
-final dateLenProvider = AutoDisposeNotifierProvider<DateLen, int>.internal(
-  DateLen.new,
-  name: r'dateLenProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$dateLenHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(DateDigit)
+final dateDigitProvider = DateDigitProvider._();
 
-typedef _$DateLen = AutoDisposeNotifier<int>;
-String _$prefixSerialLenHash() => r'a1ef3eb8b18eae25b820890d0237cfce79e4a0b1';
+final class DateDigitProvider extends $NotifierProvider<DateDigit, int> {
+  DateDigitProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dateDigitProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
-/// See also [PrefixSerialLen].
-@ProviderFor(PrefixSerialLen)
-final prefixSerialLenProvider =
-    AutoDisposeNotifierProvider<PrefixSerialLen, int>.internal(
-  PrefixSerialLen.new,
-  name: r'prefixSerialLenProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixSerialLenHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  @override
+  String debugGetCreateSourceHash() => _$dateDigitHash();
 
-typedef _$PrefixSerialLen = AutoDisposeNotifier<int>;
-String _$prefixSerialStartHash() => r'b04349513db263626678aa7600dfed8eb0cd6b4f';
+  @$internal
+  @override
+  DateDigit create() => DateDigit();
 
-/// See also [PrefixSerialStart].
-@ProviderFor(PrefixSerialStart)
-final prefixSerialStartProvider =
-    AutoDisposeNotifierProvider<PrefixSerialStart, int>.internal(
-  PrefixSerialStart.new,
-  name: r'prefixSerialStartProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prefixSerialStartHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
 
-typedef _$PrefixSerialStart = AutoDisposeNotifier<int>;
-String _$suffixSerialLenHash() => r'dca24210c472dcefd44de5d081aa98105a70826a';
+String _$dateDigitHash() => r'7a5555eb94cbffd94d5e5e7aa7479ef853d220bf';
 
-/// See also [SuffixSerialLen].
-@ProviderFor(SuffixSerialLen)
-final suffixSerialLenProvider =
-    AutoDisposeNotifierProvider<SuffixSerialLen, int>.internal(
-  SuffixSerialLen.new,
-  name: r'suffixSerialLenProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$suffixSerialLenHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$DateDigit extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$SuffixSerialLen = AutoDisposeNotifier<int>;
-String _$suffixSerialStartHash() => r'f67e27edbf1c62baf021734e9f7af1513794c1e4';
+@ProviderFor(PrefixDigit)
+final prefixDigitProvider = PrefixDigitProvider._();
 
-/// See also [SuffixSerialStart].
-@ProviderFor(SuffixSerialStart)
-final suffixSerialStartProvider =
-    AutoDisposeNotifierProvider<SuffixSerialStart, int>.internal(
-  SuffixSerialStart.new,
-  name: r'suffixSerialStartProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$suffixSerialStartHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final class PrefixDigitProvider extends $NotifierProvider<PrefixDigit, int> {
+  PrefixDigitProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'prefixDigitProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
-typedef _$SuffixSerialStart = AutoDisposeNotifier<int>;
-String _$cSVNameColumnHash() => r'6c198e17bed68d7487d8a79f7c66b5d18276824c';
+  @override
+  String debugGetCreateSourceHash() => _$prefixDigitHash();
 
-/// See also [CSVNameColumn].
-@ProviderFor(CSVNameColumn)
-final cSVNameColumnProvider =
-    AutoDisposeNotifierProvider<CSVNameColumn, String>.internal(
-  CSVNameColumn.new,
-  name: r'cSVNameColumnProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$cSVNameColumnHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  @$internal
+  @override
+  PrefixDigit create() => PrefixDigit();
 
-typedef _$CSVNameColumn = AutoDisposeNotifier<String>;
-String _$viewImageWidthHash() => r'e985d2566011e187d2e7e6516c49bea17304d02a';
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
 
-/// See also [ViewImageWidth].
-@ProviderFor(ViewImageWidth)
-final viewImageWidthProvider =
-    AutoDisposeNotifierProvider<ViewImageWidth, double>.internal(
-  ViewImageWidth.new,
-  name: r'viewImageWidthProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$viewImageWidthHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+String _$prefixDigitHash() => r'9dbed8cc1da9ac077933e6f9a11abba35a19a4a9';
 
-typedef _$ViewImageWidth = AutoDisposeNotifier<double>;
-String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
+abstract class _$PrefixDigit extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
 
-/// See also [CurrentPresetName].
-@ProviderFor(CurrentPresetName)
-final currentPresetNameProvider =
-    AutoDisposeNotifierProvider<CurrentPresetName, String>.internal(
-  CurrentPresetName.new,
-  name: r'currentPresetNameProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentPresetNameHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(PrefixStart)
+final prefixStartProvider = PrefixStartProvider._();
 
-typedef _$CurrentPresetName = AutoDisposeNotifier<String>;
-String _$fileDatePropertyHash() => r'813fee2a23a506b17705e1cead9ae9a68aa912f0';
+final class PrefixStartProvider extends $NotifierProvider<PrefixStart, int> {
+  PrefixStartProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'prefixStartProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
-/// See also [FileDateProperty].
-@ProviderFor(FileDateProperty)
-final fileDatePropertyProvider =
-    AutoDisposeNotifierProvider<FileDateProperty, DateProperty>.internal(
-  FileDateProperty.new,
-  name: r'fileDatePropertyProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fileDatePropertyHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  @override
+  String debugGetCreateSourceHash() => _$prefixStartHash();
 
-typedef _$FileDateProperty = AutoDisposeNotifier<DateProperty>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+  @$internal
+  @override
+  PrefixStart create() => PrefixStart();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$prefixStartHash() => r'523d5c0046946f53124ad480e50925ad4282a80d';
+
+abstract class _$PrefixStart extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(SuffixDigit)
+final suffixDigitProvider = SuffixDigitProvider._();
+
+final class SuffixDigitProvider extends $NotifierProvider<SuffixDigit, int> {
+  SuffixDigitProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'suffixDigitProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$suffixDigitHash();
+
+  @$internal
+  @override
+  SuffixDigit create() => SuffixDigit();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$suffixDigitHash() => r'dd8d62c9fded7ae5dbadc20750a3e3f58868c4ca';
+
+abstract class _$SuffixDigit extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(SuffixStart)
+final suffixStartProvider = SuffixStartProvider._();
+
+final class SuffixStartProvider extends $NotifierProvider<SuffixStart, int> {
+  SuffixStartProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'suffixStartProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$suffixStartHash();
+
+  @$internal
+  @override
+  SuffixStart create() => SuffixStart();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$suffixStartHash() => r'e0cce490583b1cee06453189c16d2ea129c22ae7';
+
+abstract class _$SuffixStart extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

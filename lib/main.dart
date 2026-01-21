@@ -1,16 +1,16 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/provider/theme.dart';
+import 'package:once_power/view/home.dart';
 
 import 'config/app.dart';
 import 'config/language.dart';
-import 'config/theme.dart';
-import 'constants/string.dart';
-import 'enums/app.dart';
-import 'provider/select.dart';
-import 'provider/toggle.dart';
-import 'views/home.dart';
+import 'config/theme/theme.dart';
+import 'const/text.dart';
+import 'enum/app.dart';
+
+// TODO: 更改 main.cpp 软件名
 
 void main(List<String> args) async {
   await AppConfig.init(args);
@@ -32,7 +32,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: AppString.appName,
+      title: AppText.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeConfig.light,
       darkTheme: ThemeConfig.dark,
@@ -40,34 +40,7 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
-      home: BorderRadiusFrames(),
-    );
-  }
-}
-
-class BorderRadiusFrames extends StatelessWidget {
-  const BorderRadiusFrames({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final BoxDecoration decoration = const BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 6)],
-    );
-
-    return Consumer(
-      builder: (context, ref, child) {
-        final isMax = ref.watch(isMaxProvider.select((state) => state));
-        return Container(
-          margin: isMax ? EdgeInsets.zero : const EdgeInsets.all(8),
-          clipBehavior: isMax ? Clip.none : Clip.antiAliasWithSaveLayer,
-          decoration: isMax ? null : decoration,
-          child: child,
-        );
-      },
-      child: const HomeView(),
+      home: const HomeView(),
     );
   }
 }

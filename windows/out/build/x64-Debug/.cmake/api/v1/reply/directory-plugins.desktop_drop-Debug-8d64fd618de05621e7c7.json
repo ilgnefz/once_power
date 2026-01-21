@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "plugins/desktop_drop",
+		"source" : "flutter/ephemeral/.plugin_symlinks/desktop_drop/windows"
+	}
+}

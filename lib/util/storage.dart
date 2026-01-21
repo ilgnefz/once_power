@@ -1,0 +1,106 @@
+import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class StorageUtil {
+  static final StorageUtil _instance = StorageUtil._();
+  factory StorageUtil() => _instance;
+  static late SharedPreferences _prefs;
+
+  StorageUtil._();
+
+  static Future init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future<bool> setString(String key, String value) {
+    return _prefs.setString(key, value);
+  }
+
+  static String? getString(String key) => _prefs.getString(key);
+
+  static Future<bool> setBool(String key, bool value) =>
+      _prefs.setBool(key, value);
+
+  static bool getBool(String key) => _prefs.getBool(key) ?? false;
+
+  static Future<bool> setInt(String key, int value) =>
+      _prefs.setInt(key, value);
+
+  static int? getInt(String key) => _prefs.getInt(key);
+
+  static Future<bool> setDouble(String key, double value) =>
+      _prefs.setDouble(key, value);
+
+  static double? getDouble(String key) => _prefs.getDouble(key);
+
+  // 存储 List<String>
+  static Future<bool> setStringList(String key, List<String> value) =>
+      _prefs.setStringList(key, value);
+
+  static List<String> getStringList(String key) {
+    List<String>? value = _prefs.getStringList(key);
+    return value ?? [];
+  }
+
+  // 存储 Map<String, String>
+  static Future<bool> setStringMap(String key, Map<String, String> value) {
+    String jsonString = jsonEncode(value); // 将 Map 转换为 JSON 字符串
+    return _prefs.setString(key, jsonString);
+  }
+
+  // 获取 Map<String, String>
+  static Map<String, String>? getStringMap(String key) {
+    String? jsonString = _prefs.getString(key);
+    if (jsonString != null) {
+      try {
+        // 解析 JSON 并转换为 Map<String, String>
+        return Map<String, String>.from(jsonDecode(jsonString));
+      } catch (e) {
+        // 解析失败时返回空 Map 避免崩溃
+        return {};
+      }
+    }
+    return null; // 无存储值时返回空 Map
+  }
+
+  static Future<bool> remove(String key) => _prefs.remove(key);
+
+  // 存储Locale
+  static Future<void> setLocale(String key, Locale value) async {
+    String localString = '${value.languageCode}_${value.countryCode}';
+    await _prefs.setString(key, localString);
+  }
+
+  // 获取Locale
+  static Locale? getLocale(String key) {
+    Locale? locale;
+    String? value = _prefs.getString(key);
+    if (value != null) {
+      List<String> localeList = value.split('_');
+      locale = Locale(localeList[0], localeList[1]);
+    }
+    return locale;
+  }
+
+  static Future<bool> setUint8List(String key, Uint8List value) {
+    String base64String = base64Encode(value);
+    return _prefs.setString(key, base64String);
+  }
+
+  static Uint8List? getUint8List(String key) {
+    String? base64String = _prefs.getString(key);
+    if (base64String != null) {
+      try {
+        return base64Decode(base64String);
+      } catch (e) {
+        // 解码失败时返回null
+        return null;
+      }
+    }
+    return null;
+  }
+}

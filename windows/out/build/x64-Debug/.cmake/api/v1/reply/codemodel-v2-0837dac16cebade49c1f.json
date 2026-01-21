@@ -1,0 +1,278 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-0582ebdb3c334cbf715e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "flutter",
+					"jsonFile" : "directory-flutter-Debug-79e0260f2327d8493c28.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "flutter",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "runner",
+					"jsonFile" : "directory-runner-Debug-86f38b7dcb6f33eb04e4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "runner",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "plugins/desktop_drop",
+					"jsonFile" : "directory-plugins.desktop_drop-Debug-8d64fd618de05621e7c7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "flutter/ephemeral/.plugin_symlinks/desktop_drop/windows",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "plugins/screen_retriever_windows",
+					"jsonFile" : "directory-plugins.screen_retriever_windows-Debug-74f216ea94618fb07022.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "flutter/ephemeral/.plugin_symlinks/screen_retriever_windows/windows",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "plugins/window_manager",
+					"jsonFile" : "directory-plugins.window_manager-Debug-96d174f243515dd0bb1a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "flutter/ephemeral/.plugin_symlinks/window_manager/windows",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "plugins/rust_lib_once_power",
+					"jsonFile" : "directory-plugins.rust_lib_once_power-Debug-1736185e8fb6278cc8a0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "flutter/ephemeral/.plugin_symlinks/rust_lib_once_power/windows",
+					"targetIndexes" : 
+					[
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "once_power",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "runner",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "desktop_drop",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "screen_retriever_windows",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "window_manager",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "rust_lib_once_power",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "desktop_drop_plugin::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-desktop_drop_plugin-Debug-fdde07cade496261f66e.json",
+					"name" : "desktop_drop_plugin",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_assemble::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_assemble-Debug-29f9f19596fc4e2071dc.json",
+					"name" : "flutter_assemble",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_app::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_app-Debug-9ddb4426e4a358c6ad6d.json",
+					"name" : "flutter_wrapper_app",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_plugin::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_plugin-Debug-b2814c11a5f21828833c.json",
+					"name" : "flutter_wrapper_plugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "once_power::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-once_power-Debug-2399a4fab0c4fc43c21c.json",
+					"name" : "once_power",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "rust_lib_once_power_cargokit::@d0ded4e8e38251f726ce",
+					"jsonFile" : "target-rust_lib_once_power_cargokit-Debug-5b1e9993b4e9422818a2.json",
+					"name" : "rust_lib_once_power_cargokit",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "screen_retriever_windows_plugin::@6c27775a3af717e46ce9",
+					"jsonFile" : "target-screen_retriever_windows_plugin-Debug-b0e6e8c6c3d3803c9a93.json",
+					"name" : "screen_retriever_windows_plugin",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "window_manager_plugin::@5d5a3d495045ca23c295",
+					"jsonFile" : "target-window_manager_plugin-Debug-cfdb51b7b3f4ee4efe86.json",
+					"name" : "window_manager_plugin",
+					"projectIndex" : 4
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/WorkSpace/Desktop/once_power/windows/out/build/x64-Debug",
+		"source" : "E:/WorkSpace/Desktop/once_power/windows"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

@@ -1,0 +1,142 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 75,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 78,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 81,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 85,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 92,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 99,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 102,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug",
+			"paths" : 
+			[
+				"runner/once_power.exe"
+			],
+			"targetId" : "once_power::@056c4f61b0156d1d9b06",
+			"targetIndex" : 4,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug/data",
+			"paths" : 
+			[
+				"flutter/ephemeral/icudtl.dat"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug",
+			"paths" : 
+			[
+				"flutter/ephemeral/flutter_windows.dll"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug",
+			"paths" : 
+			[
+				"out/build/x64-Debug/plugins/desktop_drop/desktop_drop_plugin.dll",
+				"out/build/x64-Debug/plugins/screen_retriever_windows/screen_retriever_windows_plugin.dll",
+				"out/build/x64-Debug/plugins/window_manager/window_manager_plugin.dll",
+				"out/build/x64-Debug/plugins/rust_lib_once_power/rust_lib_once_power.dll"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug",
+			"paths" : 
+			[
+				{
+					"from" : "E:/WorkSpace/Desktop/once_power/build/native_assets/windows",
+					"to" : "."
+				}
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 6,
+			"component" : "Runtime",
+			"type" : "code"
+		},
+		{
+			"backtrace" : 7,
+			"component" : "Runtime",
+			"destination" : "E:/WorkSpace/Desktop/once_power/windows/out/install/x64-Debug/data",
+			"paths" : 
+			[
+				"E:/WorkSpace/Desktop/once_power/build//flutter_assets"
+			],
+			"type" : "directory"
+		}
+	],
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	}
+}
