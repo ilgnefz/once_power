@@ -33,6 +33,7 @@ class ClickIcon extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
         child: InkWell(
           onTap: onPressed,
+          mouseCursor: SystemMouseCursors.click,
           borderRadius: BorderRadius.circular(28),
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,

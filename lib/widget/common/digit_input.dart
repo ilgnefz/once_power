@@ -112,12 +112,20 @@ class DigitInputButton extends StatelessWidget {
       borderRadius: borderRadius,
       child: InkWell(
         onTap: onPressed,
+        mouseCursor: SystemMouseCursors.click,
         borderRadius: borderRadius,
         child: Container(
           width: 20,
           height: double.infinity,
           alignment: Alignment.center,
-          child: Text(isAdd ? '+' : '-'),
+          child: Text(
+            isAdd ? '+' : '-',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
+          ),
         ),
       ),
     );

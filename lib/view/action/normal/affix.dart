@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/l10n.dart';
-import 'package:once_power/core/update.dart';
+import 'package:once_power/core/update/normal.dart';
+import 'package:once_power/core/update/update.dart';
+import 'package:once_power/model/file.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/item.dart';
+import 'package:once_power/widget/action/upload_input.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 import 'package:once_power/widget/common/text_input.dart';
 
@@ -16,14 +19,18 @@ class AffixInput extends ConsumerWidget {
     required this.hintText,
     required this.tip,
     required this.controllerProvider,
+    required this.info,
     required this.cycleProvider,
+    required this.onUpload,
   });
 
   final String label;
   final String hintText;
   final String tip;
   final dynamic controllerProvider;
+  final dynamic info;
   final dynamic cycleProvider;
+  final void Function(WidgetRef, String) onUpload;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,14 +43,11 @@ class AffixInput extends ConsumerWidget {
         ref.read(cycleProvider.notifier).update();
         Debounce.run(() => normalUpdateName(ref));
       },
-      child: TextInput(
-        controller: ref.watch(controllerProvider),
+      child: UploadInput(
+        controller: controllerProvider,
         hintText: hintText,
-        action: ClickIcon(
-          tip: tr(AppL10n.renameUpload),
-          icon: Icons.upload_file_rounded,
-          onPressed: () {},
-        ),
+        infoProvider: info,
+        onUpload: (value) => onUpload(ref, value),
       ),
     );
   }

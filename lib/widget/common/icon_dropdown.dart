@@ -29,6 +29,7 @@ class IconDropdown<T> extends StatelessWidget {
           icon: icon,
           svg: svg,
           size: 18,
+          iconSize: 28,
           color: Theme.of(context).iconTheme.color,
         ),
         items: items,
@@ -74,7 +75,7 @@ class InkIcon extends StatefulWidget {
     this.icon,
     this.svg,
     this.size,
-    this.iconSize,
+    this.iconSize = 32,
     this.color,
   });
 
@@ -97,8 +98,8 @@ class _InkIconState extends State<InkIcon> {
       onHover: (e) => setState(() => hover = true),
       onExit: (e) => setState(() => hover = false),
       child: Container(
-        width: 32,
-        height: 32,
+        width: widget.iconSize,
+        height: widget.iconSize,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
           color: hover ? Theme.of(context).hoverColor : Colors.transparent,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
-import 'package:once_power/core/update.dart';
+import 'package:once_power/core/update/normal.dart';
+import 'package:once_power/core/update/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/common/checkbox.dart';
@@ -22,18 +23,18 @@ class CaseGroup extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyCheckbox(
-            checked: ref.watch(caseFileProvider),
+            checked: ref.watch(isCaseFileProvider),
             label: tr(AppL10n.renameCaseFile),
             onChanged: (v) {
-              ref.read(caseFileProvider.notifier).update();
+              ref.read(isCaseFileProvider.notifier).update();
               Debounce.run(() => normalUpdateName(ref));
             },
           ),
           EasyCheckbox(
-            checked: ref.watch(caseExtProvider),
+            checked: ref.watch(isCaseExtProvider),
             label: tr(AppL10n.renameCaseExt),
             onChanged: (v) {
-              ref.read(caseExtProvider.notifier).update();
+              ref.read(isCaseExtProvider.notifier).update();
               Debounce.run(() => normalUpdateName(ref));
             },
           ),

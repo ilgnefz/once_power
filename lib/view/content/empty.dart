@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/util/registry.dart';
 import 'package:once_power/widget/base/icon.dart';
 import 'package:once_power/widget/base/text.dart';
+import 'package:once_power/widget/common/button.dart';
 
 class EmptyView extends ConsumerWidget {
   const EmptyView({super.key});

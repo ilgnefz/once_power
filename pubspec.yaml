@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 3.0.0+1
 
 environment:
-  sdk: ^3.10.7
+  sdk: ">=3.10.7 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -37,21 +37,24 @@ dependencies:
   rust_lib_once_power:
     path: rust_builder
   flutter_rust_bridge: ^2.11.1
-  flutter_riverpod: ^3.1.0
-  riverpod_annotation: ^4.0.0
+  flutter_riverpod: ^3.2.1
+  riverpod_annotation: ^4.0.2
   # --- System ---
   desktop_drop: ^0.7.0
   package_info_plus: ^9.0.0
+  win32_registry: ^2.1.0
   window_manager: ^0.5.1
   # --- UI ---
-  dropdown_button2: ^3.0.0-beta.24
-  reorderable_grid: ^1.0.12
+  dropdown_button2: ^3.0.0-beta.25
+  reorderable_grid: ^1.0.13
   flutter_svg: ^2.2.3
-  tolyui_feedback: ^0.3.6+9
+  tolyui_feedback: ^0.3.6+10
   # --- Function ---
+  charset: ^2.0.1
   easy_localization: ^3.0.8
   file_selector: ^1.1.0
   shared_preferences: ^2.5.4
+  shortcut_menu_extender: ^0.2.0
   string_util_xx: ^0.2.4
 
 dev_dependencies:
@@ -66,8 +69,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   integration_test:
     sdk: flutter
-  riverpod_generator: ^4.0.0+1
-  build_runner: ^2.10.5
+  riverpod_generator: ^4.0.3
+  build_runner: ^2.11.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

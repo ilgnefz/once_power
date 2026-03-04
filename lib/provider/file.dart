@@ -167,3 +167,19 @@ class SelectAll extends _$SelectAll {
     ref.read(fileListProvider.notifier).checkAll(state);
   }
 }
+
+@riverpod
+class PrefixUploadMark extends _$PrefixUploadMark {
+  @override
+  UploadMarkInfo? build() => null;
+  void update(UploadMarkInfo? value) => state = value;
+  void clear() => state = null;
+}
+
+@riverpod
+class SuffixUploadMark extends _$SuffixUploadMark {
+  @override
+  UploadMarkInfo? build() => null;
+  void update(UploadMarkInfo? value) => state = value;
+  void clear() => state = null;
+}

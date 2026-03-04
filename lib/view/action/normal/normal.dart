@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/core/update/normal.dart';
+import 'package:once_power/model/file.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
@@ -38,6 +41,14 @@ class NormalView extends StatelessWidget {
           tip: tr(AppL10n.renamePrefixCircle),
           controllerProvider: prefixControllerProvider,
           cycleProvider: isCyclePrefixProvider,
+          info: prefixUploadMarkProvider,
+          onUpload: (ref, value) async {
+            UploadMarkInfo? info = await readUploadFile(value);
+            if (info != null) {
+              ref.read(prefixUploadMarkProvider.notifier).update(info);
+              normalUpdateName(ref);
+            }
+          },
         ),
         SerialInput(
           label: tr(AppL10n.renameSerial),
@@ -52,6 +63,15 @@ class NormalView extends StatelessWidget {
           tip: tr(AppL10n.renameSuffixCircle),
           controllerProvider: suffixControllerProvider,
           cycleProvider: isCycleSuffixProvider,
+          info: suffixUploadMarkProvider,
+          onUpload: (ref, value) async {
+            UploadMarkInfo? info = await readUploadFile(value);
+            if (info != null) {
+              info.copyWith(isPrefix: false);
+              ref.read(suffixUploadMarkProvider.notifier).update(info);
+              normalUpdateName(ref);
+            }
+          },
         ),
         SerialInput(
           label: tr(AppL10n.renameSerial),

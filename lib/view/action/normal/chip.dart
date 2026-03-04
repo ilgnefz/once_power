@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
-import 'package:once_power/core/update.dart';
+import 'package:once_power/core/update/normal.dart';
 import 'package:once_power/enum/match.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/util/debounce.dart';

@@ -30,18 +30,15 @@ class IconBox extends StatelessWidget {
         ? Colors.white
         : theme.extension<IconBoxTheme>()?.iconColor;
     final BorderRadius borderRadius = BorderRadius.circular(8);
+
     return EasyTooltip(
       tip: tip,
       placement: Placement.right,
-      child: Consumer(
-        builder: (_, ref, child) {
-          return Material(
-            color: background,
-            borderRadius: borderRadius,
-            child: child,
-          );
-        },
+      child: Material(
+        color: background,
+        borderRadius: borderRadius,
         child: InkWell(
+          mouseCursor: SystemMouseCursors.click,
           borderRadius: borderRadius,
           onTap: onPressed,
           child: Container(

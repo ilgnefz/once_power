@@ -12,6 +12,8 @@ class AppNum {
   static const double spaceMedium = 8.0;
   static const double spaceLarge = 12.0;
   static const double topHeight = 40;
+  static const double easyDialog = 488;
+  static const double detailDialog = 680;
   // Padding
   static const double padding = 12.0;
   static const double paddingMedium = 8.0;

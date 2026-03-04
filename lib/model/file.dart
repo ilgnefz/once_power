@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:once_power/enum/file.dart';
 
 class FileInfo {
-  String id;
+  final String id;
 
   /// a
   String name;
@@ -223,5 +223,30 @@ class FileMetaInfo {
         'album: $album, year: $year, capture: $capture, make: $make, '
         'model: $model, longitude: $longitude, latitude: $latitude, '
         'location: $location)';
+  }
+}
+
+class UploadMarkInfo {
+  String name;
+  String content;
+  bool isPrefix;
+
+  UploadMarkInfo({
+    required this.name,
+    required this.content,
+    this.isPrefix = true,
+  });
+
+  UploadMarkInfo copyWith({String? name, String? content, bool? isPrefix}) {
+    return UploadMarkInfo(
+      name: name ?? this.name,
+      content: content ?? this.content,
+      isPrefix: isPrefix ?? this.isPrefix,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'UploadMarkInfo{name: $name, content: $content, isPrefix: $isPrefix}';
   }
 }

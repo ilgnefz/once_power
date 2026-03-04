@@ -1,10 +1,41 @@
 import 'package:once_power/const/extension.dart';
+import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 
+import 'format.dart';
 import 'verify.dart';
+
+DateInfo? getDate(DateType type, FileInfo file) {
+  switch (type) {
+    case DateType.createdDate:
+      return file.createdDate;
+    case DateType.modifiedDate:
+      return file.modifiedDate;
+    case DateType.accessedDate:
+      return file.accessedDate;
+    case DateType.exifDate:
+      return file.metaInfo?.capture;
+    case DateType.earliestDate:
+      return sortDateTime(file).first;
+    case DateType.latestDate:
+      return sortDateTime(file).last;
+  }
+}
+
+DateInfo? getDateInfo(DateTime? date) {
+  if (date == null) return null;
+  DateInfo dateInfo = DateInfo(date, weekdayNames[date.weekday - 1]);
+  return dateInfo;
+}
+
+String getDateName(DateTime? dateTime, int dateLen) {
+  if (dateTime == null) return '';
+  String date = formatDateTime(dateTime);
+  return date.substring(0, dateLen > date.length ? date.length : dateLen);
+}
 
 FileClassify getFileClassify(String ext) {
   ext = ext.toLowerCase();
@@ -17,15 +48,38 @@ FileClassify getFileClassify(String ext) {
   return FileClassify.other;
 }
 
-DateInfo? getDateInfo(DateTime? date) {
-  if (date == null) return null;
-  DateInfo dateInfo = DateInfo(date, weekdayNames[date.weekday - 1]);
-  return dateInfo;
-}
-
 String getFullName(String name, String extension) {
   if (extension == '' || extension == 'dir') return name;
   return '$name.$extension';
+}
+
+(int, int) getLenNum(String match, int nameLen) {
+  int start = 0, end = 0;
+  List<String> matchText = match.trim().split(' ');
+  bool isDigit = matchText.every((e) => int.tryParse(e) != null);
+  if (isDigit) {
+    if (matchText.length == 1) {
+      int first = int.parse(matchText.first);
+      if (first > 0) end = first;
+      if (first < 0) {
+        start = nameLen + first;
+        end = nameLen;
+      }
+    } else if (matchText.length > 1) {
+      int first = int.parse(matchText.first);
+      int last = int.parse(matchText.last);
+      if (first > 0) start = first - 1;
+      if (last > 0) end = last;
+      if (first < 0) start = nameLen + first;
+      if (last < 0) end = nameLen + last + 1;
+    }
+    start = start > nameLen - 1 ? nameLen - 1 : start;
+    end = end > nameLen ? nameLen : end;
+    if (end < start) start = 0;
+  } else {
+    end = match.length > nameLen ? nameLen : match.length;
+  }
+  return (start < 0 ? 0 : start, end < 0 ? 0 : end);
 }
 
 List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {

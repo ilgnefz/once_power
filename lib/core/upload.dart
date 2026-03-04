@@ -3,7 +3,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'file.dart';
-import 'update.dart';
+import 'update/update.dart';
 
 Future<void> uploadFile(WidgetRef ref) async {
   final List<XFile> files = await openFiles();

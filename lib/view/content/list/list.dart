@@ -34,6 +34,9 @@ class ContentListView extends ConsumerWidget {
       },
       itemBuilder: (context, index) {
         FileInfo file = files[index];
+        final ThemeData theme = Theme.of(context);
+        final String name = file.name, newName = file.newName;
+        final String ext = file.ext, newExt = file.newExt;
         return ReorderableDragStartListener(
           index: index,
           key: ValueKey(file.id),
@@ -42,10 +45,15 @@ class ContentListView extends ConsumerWidget {
             onChanged: (bool? value) => ref
                 .read(fileListProvider.notifier)
                 .updateCheck(file.id, value!),
-            title: file.name,
-            subTitle: file.newName,
+            title: name,
+            subTitle: newName,
+            subColor: name == newName ? Colors.grey : theme.primaryColor,
             fontSize: 13,
-            action: BaseText(file.newExt, fontSize: 13),
+            action: BaseText(
+              newExt,
+              fontSize: 13,
+              color: ext == newExt ? Colors.grey : theme.primaryColor,
+            ),
             icon: Icons.delete_outline_rounded,
             onDelete: () => ref.read(fileListProvider.notifier).remove(file),
             onTap: () {},

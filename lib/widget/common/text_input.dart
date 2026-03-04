@@ -9,19 +9,23 @@ class TextInput extends StatefulWidget {
     this.controller,
     this.text,
     required this.hintText,
+    this.leading,
     this.action,
     this.obscureText = false,
     this.onChange,
     this.onComplete,
+    this.onClear,
   });
 
   final TextEditingController? controller;
   final String? text;
   final String hintText;
+  final Widget? leading;
   final Widget? action;
   final bool obscureText;
   final void Function(String)? onChange;
   final void Function(String)? onComplete;
+  final void Function()? onClear;
 
   @override
   State<TextInput> createState() => _TextInputState();
@@ -61,6 +65,7 @@ class _TextInputState extends State<TextInput> {
 
   void clear() {
     controller.clear();
+    widget.onClear?.call();
     widget.onChange?.call('');
     widget.onComplete?.call('');
     setState(() {});
@@ -80,6 +85,7 @@ class _TextInputState extends State<TextInput> {
       clearButton: isShow
           ? ClickIcon(onPressed: clear, icon: Icons.close_rounded, iconSize: 18)
           : null,
+      leading: widget.leading,
       action: widget.action,
       onChange: widget.onChange,
     );

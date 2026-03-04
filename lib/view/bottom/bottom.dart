@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/view/bottom/regedit.dart';
 import 'package:once_power/view/bottom/save.dart';
 import 'package:once_power/view/bottom/task.dart';
 import 'package:once_power/view/bottom/theme.dart';
@@ -24,6 +25,7 @@ class BottomView extends StatelessWidget {
         spacing: AppNum.spaceMedium,
         children: [
           SaveButton(),
+          RegeditButton(),
           ViewButton(),
           ThemeButton(),
           Spacer(),

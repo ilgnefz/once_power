@@ -421,27 +421,27 @@ abstract class _$IsModifyExtension extends $Notifier<bool> {
   }
 }
 
-@ProviderFor(CaseFile)
-final caseFileProvider = CaseFileProvider._();
+@ProviderFor(IsCaseFile)
+final isCaseFileProvider = IsCaseFileProvider._();
 
-final class CaseFileProvider extends $NotifierProvider<CaseFile, bool> {
-  CaseFileProvider._()
+final class IsCaseFileProvider extends $NotifierProvider<IsCaseFile, bool> {
+  IsCaseFileProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'caseFileProvider',
+        name: r'isCaseFileProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$caseFileHash();
+  String debugGetCreateSourceHash() => _$isCaseFileHash();
 
   @$internal
   @override
-  CaseFile create() => CaseFile();
+  IsCaseFile create() => IsCaseFile();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(bool value) {
@@ -452,9 +452,9 @@ final class CaseFileProvider extends $NotifierProvider<CaseFile, bool> {
   }
 }
 
-String _$caseFileHash() => r'aaf3dc4b086e907a8f2cc37b98b06162541d5286';
+String _$isCaseFileHash() => r'18ab637ae252b77f2f2810d67ecd41b8ebe36b19';
 
-abstract class _$CaseFile extends $Notifier<bool> {
+abstract class _$IsCaseFile extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
@@ -472,27 +472,27 @@ abstract class _$CaseFile extends $Notifier<bool> {
   }
 }
 
-@ProviderFor(CaseExt)
-final caseExtProvider = CaseExtProvider._();
+@ProviderFor(IsCaseExt)
+final isCaseExtProvider = IsCaseExtProvider._();
 
-final class CaseExtProvider extends $NotifierProvider<CaseExt, bool> {
-  CaseExtProvider._()
+final class IsCaseExtProvider extends $NotifierProvider<IsCaseExt, bool> {
+  IsCaseExtProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'caseExtProvider',
+        name: r'isCaseExtProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$caseExtHash();
+  String debugGetCreateSourceHash() => _$isCaseExtHash();
 
   @$internal
   @override
-  CaseExt create() => CaseExt();
+  IsCaseExt create() => IsCaseExt();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(bool value) {
@@ -503,9 +503,9 @@ final class CaseExtProvider extends $NotifierProvider<CaseExt, bool> {
   }
 }
 
-String _$caseExtHash() => r'29be6f02b9b84bf203f1c1d8201d7ed815eecef7';
+String _$isCaseExtHash() => r'38183a7a9fec5fdbfe9e8adced4af0da70fbef85';
 
-abstract class _$CaseExt extends $Notifier<bool> {
+abstract class _$IsCaseExt extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
@@ -991,6 +991,57 @@ final class IsSaveConfigProvider extends $NotifierProvider<IsSaveConfig, bool> {
 String _$isSaveConfigHash() => r'2f194497003aa24590d7dd29f50ad9dcad48dbde';
 
 abstract class _$IsSaveConfig extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsUseRegedit)
+final isUseRegeditProvider = IsUseRegeditProvider._();
+
+final class IsUseRegeditProvider extends $NotifierProvider<IsUseRegedit, bool> {
+  IsUseRegeditProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isUseRegeditProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isUseRegeditHash();
+
+  @$internal
+  @override
+  IsUseRegedit create() => IsUseRegedit();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isUseRegeditHash() => r'cdba60a6933fef8918896a8ceb4a463023bfd460';
+
+abstract class _$IsUseRegedit extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override

@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:once_power/model/file.dart';
+import 'package:once_power/view/action/normal/upload_text.dart';
+
+Future<void> showMarkText(BuildContext context, UploadMarkInfo info) async {
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) => ShowUploadText(info: info),
+  );
+}

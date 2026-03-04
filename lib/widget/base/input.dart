@@ -65,10 +65,10 @@ class BaseInput extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
               ),
               onChanged: onChange,
-              onTap: () => controller?.selection = TextSelection(
-                baseOffset: 0,
-                extentOffset: controller!.text.length,
-              ),
+              // onTap: () => controller?.selection = TextSelection(
+              //   baseOffset: 0,
+              //   extentOffset: controller!.text.length,
+              // ),
             ),
           ),
           ?clearButton,

@@ -1,6 +1,7 @@
 import 'package:once_power/const/key.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/util/registry.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -93,7 +94,7 @@ class IsModifyExtension extends _$IsModifyExtension {
 /* ----- Action Rename Bottom ----- */
 
 @riverpod
-class CaseFile extends _$CaseFile {
+class IsCaseFile extends _$IsCaseFile {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isCaseFile);
   Future<void> update() async {
@@ -103,7 +104,7 @@ class CaseFile extends _$CaseFile {
 }
 
 @riverpod
-class CaseExt extends _$CaseExt {
+class IsCaseExt extends _$IsCaseExt {
   @override
   bool build() => StorageUtil.getBool(AppKeys.isCaseExtension);
   Future<void> update() async {
@@ -228,22 +229,24 @@ class IsSaveConfig extends _$IsSaveConfig {
   }
 }
 
-// @riverpod
-// class IsUseRegedit extends _$IsUseRegedit {
-//   @override
-//   bool build() => StorageUtil.getBool(AppKeys.isUseRegedit);
-//   Future<void> update() async {
-//     state = !state;
-//     if (state) {
-//       // createGlobalRegedit();
-//       AppRegedit.createLocalRegedit();
-//     } else {
-//       // removeGlobalRegedit();
-//       AppRegedit.removeLocalRegedit();
-//     }
-//     await StorageUtil.setBool(AppKeys.isUseRegedit, state);
-//   }
-// }
+@riverpod
+class IsUseRegedit extends _$IsUseRegedit {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isUseRegedit);
+  Future<void> update() async {
+    state = !state;
+    if (state) {
+      // createGlobalRegedit();
+      // AppRegedit.createLocalRegedit();
+      AppRegistry.add();
+    } else {
+      // removeGlobalRegedit();
+      // AppRegedit.removeLocalRegedit();
+      AppRegistry.remove();
+    }
+    await StorageUtil.setBool(AppKeys.isUseRegedit, state);
+  }
+}
 //
 // @riverpod
 // class IsAutoRun extends _$IsAutoRun {

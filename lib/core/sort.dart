@@ -5,7 +5,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/select.dart';
 
-import 'update.dart';
+import 'update/update.dart';
 
 void reorderList(
   WidgetRef ref,
@@ -24,10 +24,10 @@ void reorderList(
   updateName(ref);
 }
 
-// List<DateInfo> sortDateTime(FileInfo file) {
-//   List<DateInfo> list = [file.createdDate, file.modifiedDate];
-//   DateInfo? captureDate = file.metaInfo?.capture;
-//   if (captureDate != null) list.add(captureDate);
-//   list.sort((a, b) => a.date.compareTo(b.date));
-//   return list;
-// }
+List<DateInfo> sortDateTime(FileInfo file) {
+  List<DateInfo> list = [file.createdDate, file.modifiedDate];
+  DateInfo? captureDate = file.metaInfo?.capture;
+  if (captureDate != null) list.add(captureDate);
+  list.sort((a, b) => a.date.compareTo(b.date));
+  return list;
+}

@@ -15,6 +15,7 @@ class ContentItem extends StatelessWidget {
     this.titleAction,
     required this.subTitle,
     this.subTitleAction,
+    this.subColor,
     required this.action,
     required this.icon,
     required this.onDelete,
@@ -29,6 +30,7 @@ class ContentItem extends StatelessWidget {
   final Widget? titleAction;
   final String subTitle;
   final Widget? subTitleAction;
+  final Color? subColor;
   final Widget action;
   final IconData icon;
   final void Function() onDelete;
@@ -40,7 +42,11 @@ class ContentItem extends StatelessWidget {
     Widget titleWidget = titleAction == null
         ? titleText
         : Flexible(flex: 1, child: Row(children: [titleText, titleAction!]));
-    Widget subTitleText = OneLineText(subTitle, fontSize: fontSize);
+    Widget subTitleText = OneLineText(
+      subTitle,
+      color: subColor,
+      fontSize: fontSize,
+    );
     Widget subTitleWidget = subTitleAction == null
         ? subTitleText
         : Flexible(
@@ -49,6 +55,7 @@ class ContentItem extends StatelessWidget {
           );
 
     return InkWell(
+      mouseCursor: SystemMouseCursors.click,
       borderRadius: BorderRadius.circular(AppNum.radius),
       onTap: onTap,
       child: Container(

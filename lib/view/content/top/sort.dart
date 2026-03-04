@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
-import 'package:once_power/core/update.dart';
+import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/sort.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/util/debounce.dart';

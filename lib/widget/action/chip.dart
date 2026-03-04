@@ -35,6 +35,7 @@ class EasyChip extends StatelessWidget {
         decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
         child: InkWell(
           onTap: enable ? onTap : null,
+          mouseCursor: SystemMouseCursors.click,
           borderRadius: borderRadius,
           child: Container(
             height: AppNum.widgetHeight,
