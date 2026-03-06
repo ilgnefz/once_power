@@ -79,17 +79,37 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(countProvider.notifier).reset();
-  // await processFilesWithConcurrence(ref, paths);
-  for (String p in paths) {
-    FileInfo fileInfo = await generateFileInfo(p);
-    ref.read(fileListProvider.notifier).add(fileInfo);
-  }
+  await processFilesWithConcurrence(ref, paths);
   // if (isShowView(ref)) filterFile(ref);
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   ref.read(isApplyingProvider.notifier).finish();
 }
+
+Future<void> processFilesWithConcurrence(
+  WidgetRef ref,
+  List<String> paths, {
+  int concurrency = 8,
+}) async {
+  if (paths.isEmpty) return;
+  int index = 0;
+  final total = paths.length;
+  Future<void> worker() async {
+    while (true) {
+      final current = index;
+      if (current >= total) return;
+      index++;
+      final filePath = paths[current];
+      final fileInfo = await generateFileInfo(filePath);
+      ref.read(fileListProvider.notifier).add(fileInfo);
+    }
+  }
+
+  final workers = List.generate(concurrency, (_) => worker());
+  await Future.wait(workers);
+}
+
 
 Future<FileInfo> generateFileInfo(String filePath) async {
   RFileInfo fileInfo = getFileInfo(filePath: filePath);

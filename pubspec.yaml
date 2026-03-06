@@ -53,6 +53,7 @@ dependencies:
   charset: ^2.0.1
   easy_localization: ^3.0.8
   file_selector: ^1.1.0
+  path: ^1.9.1
   shared_preferences: ^2.5.4
   shortcut_menu_extender: ^0.2.0
   string_util_xx: ^0.2.4
@@ -70,7 +71,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   riverpod_generator: ^4.0.3
-  build_runner: ^2.11.1
+  build_runner: ^2.12.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
