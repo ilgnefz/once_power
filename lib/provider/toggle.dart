@@ -113,6 +113,21 @@ class IsCaseExt extends _$IsCaseExt {
   }
 }
 
+/* ----- Action CSV ----- */
+@riverpod
+class DeleteExtension extends _$DeleteExtension {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class MatchExtension extends _$MatchExtension {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
 /* ----- Action Common Bottom ----- */
 
 @riverpod
@@ -247,16 +262,16 @@ class IsUseRegedit extends _$IsUseRegedit {
     await StorageUtil.setBool(AppKeys.isUseRegedit, state);
   }
 }
-//
-// @riverpod
-// class IsAutoRun extends _$IsAutoRun {
-//   @override
-//   bool build() => StorageUtil.getBool(AppKeys.isAutoRun);
-//   Future<void> update() async {
-//     state = !state;
-//     await StorageUtil.setBool(AppKeys.isAutoRun, state);
-//   }
-// }
+
+@riverpod
+class IsAutoRun extends _$IsAutoRun {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isAutoRun);
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isAutoRun, state);
+  }
+}
 
 @riverpod
 class IsSaveLog extends _$IsSaveLog {

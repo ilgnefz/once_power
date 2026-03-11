@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/view/content/top/filter.dart';
-import 'package:once_power/view/content/top/sort.dart';
-import 'package:once_power/widget/context/item.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/view/content/list/item.dart';
+
+import 'filter.dart';
+import 'sort.dart';
 
 final _labelLeftProvider = Provider((ref) {
   List<FileInfo> files = ref.watch(fileListProvider);
@@ -21,7 +24,8 @@ final _labelLeftProvider = Provider((ref) {
   return '$name ($checked/$total)';
 });
 
-final _labelRightProvider = Provider((ref) {
+final Provider<String> _labelRightProvider = Provider((Ref ref) {
+  if (ref.watch(isDateModifyProvider)) return '';
   return ref.watch(currentModeProvider).isOrganize
       ? tr(AppL10n.organizeFolder)
       : tr(AppL10n.contentNew);
@@ -34,7 +38,10 @@ class ContentTop extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ContentItem(
       checked: ref.watch(selectAllProvider),
-      onChanged: (bool? value) => ref.read(selectAllProvider.notifier).update(),
+      onChanged: (bool? value) {
+        ref.read(selectAllProvider.notifier).update();
+        updateName(ref);
+      },
       margin: EdgeInsets.only(right: AppNum.padding),
       title: ref.watch(_labelLeftProvider),
       subTitle: ref.watch(_labelRightProvider),

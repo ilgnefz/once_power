@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:once_power/config/theme/icon_box.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/base/input.dart';
 
@@ -10,14 +11,14 @@ class DigitInput extends StatefulWidget {
     required this.value,
     required this.unit,
     this.max,
-    required this.onChange,
+    required this.onChanged,
   });
 
   final double? width;
   final int value;
   final String unit;
   final int? max;
-  final void Function(int) onChange;
+  final void Function(int) onChanged;
 
   @override
   State<DigitInput> createState() => _DigitInputState();
@@ -26,15 +27,17 @@ class DigitInput extends StatefulWidget {
 class _DigitInputState extends State<DigitInput> {
   late TextEditingController controller;
   late FocusNode focusNode;
+  late String unit;
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: '${widget.value} ${widget.unit}');
+    unit = widget.unit.isEmpty ? '' : ' ${widget.unit}';
+    controller = TextEditingController(text: '${widget.value}$unit');
     focusNode = FocusNode()
       ..addListener(() {
         if (!focusNode.hasFocus) {
-          controller.text = '${change()} ${widget.unit}';
+          controller.text = '${change()}$unit';
           setState(() {});
         }
       });
@@ -58,18 +61,18 @@ class _DigitInputState extends State<DigitInput> {
   void increment() {
     int currentValue = extractNum(controller.text);
     if (widget.max != null && currentValue >= widget.max!) return;
-    controller.text = '${currentValue + 1} ${widget.unit}';
+    controller.text = '${currentValue + 1}$unit';
     setState(() {});
-    widget.onChange(currentValue + 1);
+    widget.onChanged(currentValue + 1);
   }
 
   void decrement() {
     int currentValue = extractNum(controller.text);
     if (currentValue > 0) {
-      final unit = controller.text.replaceAll(RegExp(r'\d+'), '').trim();
-      controller.text = '${currentValue - 1} $unit';
+      // final unit = controller.text.replaceAll(RegExp(r'\d+'), '').trim();
+      controller.text = '${currentValue - 1}$unit';
       setState(() {});
-      widget.onChange(currentValue - 1);
+      widget.onChanged(currentValue - 1);
     }
   }
 
@@ -102,6 +105,7 @@ class DigitInputButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final IconBoxTheme? theme = Theme.of(context).extension<IconBoxTheme>();
     BorderRadius borderRadius = BorderRadius.only(
       topLeft: Radius.circular(isAdd ? 0 : 8),
       topRight: Radius.circular(isAdd ? 8 : 0),
@@ -110,6 +114,7 @@ class DigitInputButton extends StatelessWidget {
     );
     return Material(
       borderRadius: borderRadius,
+      color: theme?.backgroundColor,
       child: InkWell(
         onTap: onPressed,
         mouseCursor: SystemMouseCursors.click,
@@ -123,7 +128,7 @@ class DigitInputButton extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.grey,
+              color: theme?.iconColor,
             ),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/icon_box.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/base/icon.dart';

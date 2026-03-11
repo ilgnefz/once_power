@@ -44,12 +44,12 @@ FileClassify getFileClassify(String ext) {
   if (AppExtension.doc.contains(ext)) return FileClassify.doc;
   if (AppExtension.audio.contains(ext)) return FileClassify.audio;
   if (AppExtension.archive.contains(ext)) return FileClassify.archive;
-  if (AppExtension.folder == ext) return FileClassify.folder;
+  // if (AppExtension.folder == ext) return FileClassify.folder;
   return FileClassify.other;
 }
 
 String getFullName(String name, String extension) {
-  if (extension == '' || extension == 'dir') return name;
+  if (extension == '') return name;
   return '$name.$extension';
 }
 
@@ -94,10 +94,48 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
   }
   if (reverse) {
     chineseList.sort((a, b) => StringUtilxx_c.compareExtend(b.name, a.name));
-    otherList.sort((a, b) => b.name.compareTo(a.name));
+    // otherList.sort((a, b) => b.name.compareTo(a.name));
+    otherList.sort((a, b) => naturalCompare(b.name, a.name));
     return [...chineseList, ...otherList];
   }
   chineseList.sort((a, b) => StringUtilxx_c.compareExtend(a.name, b.name));
-  otherList.sort((a, b) => a.name.compareTo(b.name));
+  // otherList.sort((a, b) => a.name.compareTo(b.name));
+  otherList.sort((a, b) => naturalCompare(a.name, b.name));
   return [...otherList, ...chineseList];
+}
+
+int naturalCompare(String a, String b) {
+  if (a.isEmpty || b.isEmpty) {
+    return a.length.compareTo(b.length);
+  }
+
+  final aFirstChar = a[0];
+  final bFirstChar = b[0];
+
+  final aIsDigit = aFirstChar.contains(RegExp(r'\d'));
+  final bIsDigit = bFirstChar.contains(RegExp(r'\d'));
+
+  if (aIsDigit && bIsDigit) {
+    final regExp = RegExp(r'^\d+');
+    final aMatch = regExp.firstMatch(a);
+    final bMatch = regExp.firstMatch(b);
+
+    if (aMatch != null && bMatch != null) {
+      final aNum = int.tryParse(aMatch.group(0)!);
+      final bNum = int.tryParse(bMatch.group(0)!);
+
+      if (aNum != null && bNum != null) {
+        final result = aNum.compareTo(bNum);
+        if (result != 0) return result;
+      }
+    }
+
+    return a.compareTo(b);
+  } else if (aIsDigit) {
+    return -1;
+  } else if (bIsDigit) {
+    return 1;
+  } else {
+    return a.compareTo(b);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/sort.dart';
+import 'package:once_power/model/csv.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,10 +18,12 @@ List<FileInfo> sortList(Ref ref) {
 
   switch (type) {
     case SortType.nameAscending:
-      sortedList = splitSortList(list, false);
+      // sortedList = splitSortList(list, false);
+      sortedList = [...list]..sort((a, b) => naturalCompare(a.name, b.name));
       break;
     case SortType.nameDescending:
-      sortedList = splitSortList(list, true);
+      // sortedList = splitSortList(list, true);
+      sortedList = [...list]..sort((a, b) => naturalCompare(b.name, a.name));
       break;
     case SortType.dateAscending:
       sortedList = [...list]
@@ -124,4 +127,18 @@ List<FileClassify> classifyList(Ref ref) {
     if (!classifyList.contains(e.type)) classifyList.add(e.type);
   }
   return classifyList;
+}
+
+@riverpod
+class CSVData extends _$CSVData {
+  @override
+  List<CSVRenameInfo> build() => [];
+  void update(List<CSVRenameInfo> value) => state = value;
+  void updateOne(int index, String flag, String value) =>
+      state = state.map((e) {
+        if (state.indexOf(e) == index) {
+          flag == 'A' ? e.nameA = value : e.nameB = value;
+        }
+        return e;
+      }).toList();
 }

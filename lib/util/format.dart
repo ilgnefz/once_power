@@ -1,3 +1,5 @@
+import 'package:once_power/model/file.dart';
+
 int extractNum(String value) {
   final match = RegExp(r'\d+').firstMatch(value);
   final currentValue = match != null ? int.parse(match.group(0)!) : 0;
@@ -39,7 +41,22 @@ String formatNum(int n, int width) {
   return n.toString().padLeft(width, '0');
 }
 
+String formatResolution(Resolution resolution) =>
+    '${resolution.width} x ${resolution.height}';
+
 String formatTimeNum(int num) => num.toString().padLeft(2, '0');
+
+String formatModifyDate(String date, bool fullReplace, bool selfAdjust) {
+  if (selfAdjust) return 'XXXX-XX-XX XX:XX:XX.XXX';
+  if (fullReplace) {
+    if (date.startsWith('0000-')) date = date.replaceFirst('0000', '1970');
+    return date;
+  }
+  if (date.startsWith('0000-01-01')) {
+    date = date.replaceFirst('0000-01-01', 'XXXX-XX-XX');
+  }
+  return date.replaceFirst('00:00:00.000', 'XX:XX:XX.XXX');
+}
 
 DateTime intToDateTime(int time) =>
     DateTime.fromMillisecondsSinceEpoch(time * 1000);

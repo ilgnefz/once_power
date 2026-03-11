@@ -125,5 +125,5 @@ class AppExtension {
     'iso',
     'dmg',
   };
-  static const String folder = 'dir';
+  // static const String folder = 'dir';
 }

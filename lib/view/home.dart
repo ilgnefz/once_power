@@ -41,6 +41,15 @@ class _HomeViewState extends ConsumerState<HomeView> with ShortcutMenuListener {
     }
   }
 
+  Widget buildContent() => _entities.isEmpty
+      ? ContentView()
+      : ListView.builder(
+          itemCount: _entities.length,
+          itemBuilder: (context, index) {
+            return ListTile(title: Text(_entities[index].path));
+          },
+        );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +57,13 @@ class _HomeViewState extends ConsumerState<HomeView> with ShortcutMenuListener {
       body: DragToResizeArea(
         child: Stack(
           children: [
-            // Image.file(
-            //   File(AppImages.stH1),
-            //   fit: BoxFit.cover,
-            //   width: double.infinity,
+            // ImageFiltered(
+            //   imageFilter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
+            //   child: Image.file(
+            //     File(AppImages.bg),
+            //     fit: BoxFit.cover,
+            //     width: double.infinity,
+            //   ),
             // ),
             // ColoredBox(
             //   color: Colors.white.withValues(alpha: .5),
@@ -64,16 +76,7 @@ class _HomeViewState extends ConsumerState<HomeView> with ShortcutMenuListener {
                   child: Row(
                     children: [
                       RepaintBoundary(child: ActionView()),
-                      _entities.isEmpty
-                          ? ContentView()
-                          : ListView.builder(
-                              itemCount: _entities.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: Text(_entities[index].path),
-                                );
-                              },
-                            ),
+                      buildContent(),
                     ],
                   ),
                 ),

@@ -64,3 +64,25 @@ extension FunctionModeExtension on FunctionMode {
   bool get isAdvance => this == FunctionMode.advance;
   bool get isReplace => this == FunctionMode.replace;
 }
+
+enum LanguageType {
+  english('English'),
+  chinese('中文');
+
+  final String label;
+  const LanguageType(this.label);
+}
+
+extension LanguageTypeExtension on LanguageType {
+  Locale get locale {
+    switch (this) {
+      case LanguageType.english:
+        return const Locale('en', 'US');
+      case LanguageType.chinese:
+        return const Locale('zh', 'CN');
+    }
+  }
+
+  bool get isEnglish => this == LanguageType.english;
+  bool get isChinese => this == LanguageType.chinese;
+}

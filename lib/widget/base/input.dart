@@ -13,6 +13,7 @@ class BaseInput extends StatelessWidget {
     this.clearButton,
     this.padding,
     this.obscureText = false,
+    this.enabled = true,
     this.textAlign = TextAlign.start,
     this.inputFormatters,
     this.onChange,
@@ -26,6 +27,7 @@ class BaseInput extends StatelessWidget {
   final Widget? clearButton;
   final EdgeInsets? padding;
   final bool obscureText;
+  final bool enabled;
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onChange;
@@ -39,9 +41,13 @@ class BaseInput extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.inputDecorationTheme.fillColor,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2),
-        ],
+        border: Border.all(
+          color: theme.inputDecorationTheme.outlineBorder!.color,
+          width: 1,
+        ),
+        // boxShadow: [
+        //   BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2),
+        // ],
       ),
       alignment: Alignment.center,
       child: Row(
@@ -52,15 +58,22 @@ class BaseInput extends StatelessWidget {
               focusNode: focusNode,
               controller: controller,
               obscureText: obscureText,
+              enabled: enabled,
               cursorHeight: 20,
               cursorRadius: Radius.circular(4),
               textAlign: textAlign,
               inputFormatters: inputFormatters,
-              style: theme.textTheme.bodyMedium,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                decoration: enabled
+                    ? null
+                    : TextDecoration.combine([TextDecoration.lineThrough]),
+              ),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hintText,
-                hintStyle: theme.inputDecorationTheme.hintStyle,
+                hintStyle: theme.inputDecorationTheme.hintStyle?.copyWith(
+                  decoration: TextDecoration.combine([TextDecoration.none]),
+                ),
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
               ),

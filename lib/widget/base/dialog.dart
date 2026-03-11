@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 
 class EasyDialog extends StatelessWidget {
@@ -45,7 +47,7 @@ class EasyDialog extends StatelessWidget {
           maxHeight: MediaQuery.of(context).size.height * 0.95,
         ),
         child: Material(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           color: theme.scaffoldBackgroundColor,
           child: Container(
             width: width ?? AppNum.easyDialog,
@@ -72,11 +74,17 @@ class EasyDialog extends StatelessWidget {
                         if (extraButton != null) ...[extraButton!, Spacer()],
                         TextButton(
                           onPressed: onCancel,
-                          child: Text(cancelText!, style: textStyle),
+                          child: Text(
+                            cancelText ?? tr(AppL10n.dialogExit),
+                            style: textStyle,
+                          ),
                         ),
                         TextButton(
                           onPressed: onOk,
-                          child: Text(okText!, style: textStyle),
+                          child: Text(
+                            okText ?? tr(AppL10n.dialogOk),
+                            style: textStyle,
+                          ),
                         ),
                       ],
                 ),

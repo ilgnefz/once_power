@@ -1,5 +1,3 @@
-import 'package:once_power/model/file.dart';
-
 class NormalInfo {
   final String match;
   final String modify;

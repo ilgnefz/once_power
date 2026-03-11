@@ -7,11 +7,13 @@ class TextDropdown<T> extends StatelessWidget {
     super.key,
     required this.items,
     required this.value,
+    this.width = 92,
     required this.onChanged,
   });
 
   final List<DropdownItem<T>> items;
   final T value;
+  final double width;
   final void Function(T) onChanged;
 
   @override
@@ -24,7 +26,7 @@ class TextDropdown<T> extends StatelessWidget {
         buttonStyleData: ButtonStyleData(
           padding: const EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
           height: AppNum.widgetHeight,
-          width: 92,
+          width: width,
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(AppNum.radius),
@@ -35,7 +37,7 @@ class TextDropdown<T> extends StatelessWidget {
           elevation: 2,
           // maxHeight: maxHeight,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).canvasColor,
             borderRadius: BorderRadius.circular(AppNum.radius),
           ),
           scrollbarTheme: ScrollbarThemeData(

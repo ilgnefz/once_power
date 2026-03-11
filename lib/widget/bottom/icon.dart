@@ -8,7 +8,7 @@ class BottomClickIcon extends StatelessWidget {
     required this.tip,
     this.icon,
     this.svg,
-    required this.selected,
+    this.selected = false,
     required this.onPressed,
   });
 
@@ -27,7 +27,7 @@ class BottomClickIcon extends StatelessWidget {
       svg: svg,
       size: 24,
       iconSize: 17,
-      color: selected ? Theme.of(context).primaryColor : null,
+      color: selected ? Theme.of(context).primaryColor : Colors.grey,
       onPressed: onPressed,
     );
   }

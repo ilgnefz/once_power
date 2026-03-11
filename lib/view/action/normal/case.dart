@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/normal.dart';
-import 'package:once_power/core/update/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/common/checkbox.dart';

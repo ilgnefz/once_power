@@ -32,7 +32,7 @@ class UploadInput extends ConsumerWidget {
       controller: ref.watch(controller),
       hintText: hintText,
       leading: info == null ? null : UploadFileCard(info: info),
-      onChange: (_) => Debounce.run(() => normalUpdateName(ref)),
+      onChanged: (_) => Debounce.run(() => normalUpdateName(ref)),
       onClear: ref.read(infoProvider.notifier).clear,
       action: ClickIcon(
         tip: tr(AppL10n.renameUpload),

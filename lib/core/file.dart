@@ -13,6 +13,7 @@ import 'package:once_power/src/rust/api/file_meta.dart';
 import 'package:once_power/src/rust/api/file_type.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
+import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
 
 Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
@@ -22,7 +23,7 @@ Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
 
 Future<void> formatFolder(WidgetRef ref, List<String> folders) async {
   List<String> paths = await handleFolder(ref, folders);
-  // if (paths.isEmpty) return showEmptyNotification();
+  if (paths.isEmpty) return showEmptyNotification();
   await addFileInfo(ref, paths);
 }
 
@@ -34,7 +35,7 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
     if (isFile) files.add(p);
     if (!isFile) folders.add(p);
   }
-  // if (folders.isEmpty && files.isEmpty) return showEmptyNotification();
+  if (folders.isEmpty && files.isEmpty) return showEmptyNotification();
   if (folders.isNotEmpty) files.addAll(await handleFolder(ref, folders));
   if (files.isNotEmpty) await addFileInfo(ref, files);
 }
@@ -42,8 +43,8 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
 Future<List<String>> handleFolder(WidgetRef ref, List<String> folders) async {
   bool addFolder = ref.watch(isAddFolderProvider);
   bool addSubfolder = ref.watch(isAddSubfolderProvider);
-  final futures = folders.map((folder) async {
-    final folderPaths = <String>[];
+  final List<Future<List<String>>> futures = folders.map((folder) async {
+    final List<String> folderPaths = <String>[];
     if (!addFolder) {
       folderPaths.addAll(await getAllPath(folder, false));
     } else {
@@ -52,7 +53,7 @@ Future<List<String>> handleFolder(WidgetRef ref, List<String> folders) async {
     }
     return folderPaths;
   }).toList();
-  final results = await Future.wait(futures);
+  final List<List<String>> results = await Future.wait(futures);
   return results.expand((paths) => paths).toList();
 }
 
@@ -60,7 +61,7 @@ Future<List<String>> getAllPath(String folder, bool addSubfolder) async {
   Directory directory = Directory(folder);
   List<String> children = <String>[];
   await for (FileSystemEntity entity in directory.list(recursive: true)) {
-    final type = await FileSystemEntity.type(entity.path);
+    final FileSystemEntityType type = await FileSystemEntity.type(entity.path);
     if (type == FileSystemEntityType.file && !addSubfolder) {
       String extension = path.extension(entity.path);
       String ext = extension.isEmpty ? extension : extension.substring(1);
@@ -80,7 +81,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(countProvider.notifier).reset();
   await processFilesWithConcurrence(ref, paths);
-  // if (isShowView(ref)) filterFile(ref);
+  if (ref.watch(isViewModeProvider)) filterFile(ref);
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
@@ -94,14 +95,19 @@ Future<void> processFilesWithConcurrence(
 }) async {
   if (paths.isEmpty) return;
   int index = 0;
-  final total = paths.length;
+  final int total = paths.length;
   Future<void> worker() async {
     while (true) {
-      final current = index;
+      final int current = index;
       if (current >= total) return;
+      final String filePath = paths[current];
       index++;
-      final filePath = paths[current];
-      final fileInfo = await generateFileInfo(filePath);
+      Set<String> filePaths = ref
+          .read(fileListProvider)
+          .map((e) => e.path)
+          .toSet();
+      if (filePaths.contains(filePath)) return;
+      final FileInfo fileInfo = await generateFileInfo(filePath);
       ref.read(fileListProvider.notifier).add(fileInfo);
     }
   }
@@ -110,12 +116,16 @@ Future<void> processFilesWithConcurrence(
   await Future.wait(workers);
 }
 
-
 Future<FileInfo> generateFileInfo(String filePath) async {
   RFileInfo fileInfo = getFileInfo(filePath: filePath);
   String name = fileInfo.name;
   String ext = fileInfo.ext;
-  FileClassify type = getFileClassify(ext);
+  if (ext.isEmpty && name.startsWith('.')) {
+    (name, ext) = ('', name.substring(1));
+  }
+  FileClassify type = fileInfo.isDir
+      ? FileClassify.folder
+      : getFileClassify(ext);
   FileMetaInfo? metaInfo;
   Resolution? resolution;
   if (type.isImage) {
@@ -153,4 +163,12 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     type: type,
     size: fileInfo.size.toInt(),
   );
+}
+
+void filterFile(WidgetRef ref) {
+  final FileList provider = ref.read(fileListProvider.notifier);
+  final int before = ref.watch(fileListProvider).length;
+  provider.removeOtherClassify([FileClassify.image, FileClassify.video]);
+  final int after = ref.watch(fileListProvider).length;
+  showFilterNotification(before - after);
 }

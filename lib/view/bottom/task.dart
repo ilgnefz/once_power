@@ -5,7 +5,7 @@ import 'package:once_power/config/theme/bottom_text.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/provider/progress.dart';
 
-final taskProvider = Provider<String>((ref) {
+final Provider<String> taskProvider = Provider((Ref ref) {
   final String currentTask = tr(AppL10n.bottomTask);
   final String takeTime = tr(AppL10n.bottomTime);
   int count = ref.watch(countProvider);
@@ -14,8 +14,8 @@ final taskProvider = Provider<String>((ref) {
   return '$currentTask: $count/$total  $takeTime: ${time}s';
 });
 
-class TaskMsg extends ConsumerWidget {
-  const TaskMsg({super.key});
+class TaskMessage extends ConsumerWidget {
+  const TaskMessage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

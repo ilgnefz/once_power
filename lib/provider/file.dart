@@ -62,6 +62,7 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
+  // TODO: 删除
   void updateDate(
     String id,
     DateTime? createdDate,
@@ -72,6 +73,31 @@ class FileList extends _$FileList {
       if (e.id == id) {
         e.createdDate = getDateInfo(createdDate) ?? e.createdDate;
         e.modifiedDate = getDateInfo(modifiedDate) ?? e.modifiedDate;
+        e.accessedDate = getDateInfo(accessedDate) ?? e.accessedDate;
+      }
+      return e;
+    }).toList();
+  }
+
+  void updateCreatedDate(String id, DateTime? createdDate) => state = state.map(
+    (e) {
+      if (e.id == id) e.createdDate = getDateInfo(createdDate) ?? e.createdDate;
+      return e;
+    },
+  ).toList();
+
+  void updateModifiedDate(String id, DateTime? modifiedDate) {
+    state = state.map((e) {
+      if (e.id == id) {
+        e.modifiedDate = getDateInfo(modifiedDate) ?? e.modifiedDate;
+      }
+      return e;
+    }).toList();
+  }
+
+  void updateAccessedDate(String id, DateTime? accessedDate) {
+    state = state.map((e) {
+      if (e.id == id) {
         e.accessedDate = getDateInfo(accessedDate) ?? e.accessedDate;
       }
       return e;
@@ -89,7 +115,7 @@ class FileList extends _$FileList {
   }).toList();
 
   void updateNewExt(String id, String value) => state = state.map((e) {
-    if (e.id == id) e.newExt = value;
+    if (e.id == id && !e.type.isFolder) e.newExt = value;
     return e;
   }).toList();
 

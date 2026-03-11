@@ -48,7 +48,7 @@ final class SortListProvider
   }
 }
 
-String _$sortListHash() => r'c303d0c8eaf11f443503fce18d7672ceca534e5a';
+String _$sortListHash() => r'caf32285d5382842105f6cd07a8960e8173c3454';
 
 @ProviderFor(SortSelectList)
 final sortSelectListProvider = SortSelectListProvider._();
@@ -148,3 +148,55 @@ final class ClassifyListProvider
 }
 
 String _$classifyListHash() => r'ef550e40895b2ecd60c5fcc903caf2b74859c894';
+
+@ProviderFor(CSVData)
+final cSVDataProvider = CSVDataProvider._();
+
+final class CSVDataProvider
+    extends $NotifierProvider<CSVData, List<CSVRenameInfo>> {
+  CSVDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'cSVDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$cSVDataHash();
+
+  @$internal
+  @override
+  CSVData create() => CSVData();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<CSVRenameInfo> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<CSVRenameInfo>>(value),
+    );
+  }
+}
+
+String _$cSVDataHash() => r'5cfa4e090f6f7a03d60d55ae04ac512d40ab6c5a';
+
+abstract class _$CSVData extends $Notifier<List<CSVRenameInfo>> {
+  List<CSVRenameInfo> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<List<CSVRenameInfo>, List<CSVRenameInfo>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<CSVRenameInfo>, List<CSVRenameInfo>>,
+              List<CSVRenameInfo>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

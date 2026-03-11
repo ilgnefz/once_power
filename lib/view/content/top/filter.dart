@@ -25,9 +25,14 @@ class FilterButton extends ConsumerWidget {
       key: UniqueKey(),
       height: AppNum.widgetHeight,
       onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
-        child: BaseText(title, color: color),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Container(
+          height: AppNum.widgetHeight,
+          padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+          alignment: Alignment.centerLeft,
+          child: BaseText(title, color: color),
+        ),
       ),
     );
   }
@@ -44,11 +49,18 @@ class FilterButton extends ConsumerWidget {
         key: UniqueKey(),
         height: AppNum.widgetHeight,
         onTap: () => checkedPressed(ref, e),
-        child: StatefulBuilder(
-          builder: (context, setState) => EasyCheckbox(
-            checked: isCheckedClassify(ref, e),
-            label: e.label,
-            onChanged: (_) => setState(() => checkedPressed(ref, e)),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: SizedBox(
+            height: AppNum.widgetHeight,
+            width: double.infinity,
+            child: StatefulBuilder(
+              builder: (context, setState) => EasyCheckbox(
+                checked: isCheckedClassify(ref, e),
+                label: e.label,
+                onChanged: (_) => setState(() => checkedPressed(ref, e)),
+              ),
+            ),
           ),
         ),
       );

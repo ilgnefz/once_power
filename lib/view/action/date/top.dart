@@ -1,0 +1,41 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme/theme.dart';
+import 'package:once_power/const/l10n.dart';
+import 'package:once_power/const/num.dart';
+import 'package:once_power/core/update/update.dart';
+import 'package:once_power/provider/toggle.dart';
+
+class DateTop extends ConsumerWidget {
+  const DateTop({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SizedBox(
+      height: AppNum.topHeight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: AppNum.padding),
+            child: Text(
+              tr(AppL10n.dateTitle),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          TextButton(
+            child: Text(
+              tr(AppL10n.dateExit),
+              style: TextStyle(fontFamily: defaultFont, fontSize: 14),
+            ),
+            onPressed: () {
+              ref.read(isDateModifyProvider.notifier).update(false);
+              updateName(ref);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

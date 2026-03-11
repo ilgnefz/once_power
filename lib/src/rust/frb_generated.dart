@@ -69,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 811831965;
+  int get rustContentHash => -1496024253;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -87,6 +87,21 @@ abstract class RustLibApi extends BaseApi {
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
+
+  void crateApiSimpleSetAtime({
+    required String filePath,
+    required PlatformInt64 time,
+  });
+
+  void crateApiSimpleSetCtime({
+    required String filePath,
+    required PlatformInt64 time,
+  });
+
+  void crateApiSimpleSetMtime({
+    required String filePath,
+    required PlatformInt64 time,
+  });
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -196,10 +211,103 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiSimpleInitAppConstMeta =>
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
+  @override
+  void crateApiSimpleSetAtime({
+    required String filePath,
+    required PlatformInt64 time,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(filePath, serializer);
+          sse_encode_i_64(time, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateApiSimpleSetAtimeConstMeta,
+        argValues: [filePath, time],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiSimpleSetAtimeConstMeta => const TaskConstMeta(
+    debugName: "set_atime",
+    argNames: ["filePath", "time"],
+  );
+
+  @override
+  void crateApiSimpleSetCtime({
+    required String filePath,
+    required PlatformInt64 time,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(filePath, serializer);
+          sse_encode_i_64(time, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateApiSimpleSetCtimeConstMeta,
+        argValues: [filePath, time],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiSimpleSetCtimeConstMeta => const TaskConstMeta(
+    debugName: "set_ctime",
+    argNames: ["filePath", "time"],
+  );
+
+  @override
+  void crateApiSimpleSetMtime({
+    required String filePath,
+    required PlatformInt64 time,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(filePath, serializer);
+          sse_encode_i_64(time, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateApiSimpleSetMtimeConstMeta,
+        argValues: [filePath, time],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiSimpleSetMtimeConstMeta => const TaskConstMeta(
+    debugName: "set_mtime",
+    argNames: ["filePath", "time"],
+  );
+
   @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
   }
 
   @protected
@@ -269,8 +377,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RFileInfo dco_decode_r_file_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 8)
-      throw Exception('unexpected arr length: expect 8 but see ${arr.length}');
+    if (arr.length != 9)
+      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
     return RFileInfo(
       id: dco_decode_String(arr[0]),
       name: dco_decode_String(arr[1]),
@@ -280,6 +388,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       modifyTime: dco_decode_i_64(arr[5]),
       accessTime: dco_decode_i_64(arr[6]),
       size: dco_decode_u_64(arr[7]),
+      isDir: dco_decode_bool(arr[8]),
     );
   }
 
@@ -306,6 +415,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
     return utf8.decoder.convert(inner);
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
   }
 
   @protected
@@ -404,6 +519,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_modifyTime = sse_decode_i_64(deserializer);
     var var_accessTime = sse_decode_i_64(deserializer);
     var var_size = sse_decode_u_64(deserializer);
+    var var_isDir = sse_decode_bool(deserializer);
     return RFileInfo(
       id: var_id,
       name: var_name,
@@ -413,6 +529,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       modifyTime: var_modifyTime,
       accessTime: var_accessTime,
       size: var_size,
+      isDir: var_isDir,
     );
   }
 
@@ -440,15 +557,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
-  }
-
-  @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
   }
 
   @protected
@@ -545,6 +662,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.modifyTime, serializer);
     sse_encode_i_64(self.accessTime, serializer);
     sse_encode_u_64(self.size, serializer);
+    sse_encode_bool(self.isDir, serializer);
   }
 
   @protected
@@ -568,11 +686,5 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_i_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putInt32(self);
-  }
-
-  @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
   }
 }

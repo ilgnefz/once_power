@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:charset/charset.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/enum/date.dart';
@@ -15,7 +12,6 @@ import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
-import 'package:path/path.dart' as path;
 
 import 'replace.dart';
 import 'reserve.dart';
@@ -28,11 +24,7 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
     isLen: ref.read(isInputLenProvider),
     caseSen: ref.read(isCaseSensitiveProvider),
   );
-  // final String match = ;
-  // final String modify = ;
   final String ext = ref.read(extensionControllerProvider).text;
-  // final bool isLen = ;
-  // final bool caseSen =;
   final bool isDate = ref.read(isDateRenameProvider);
   final bool isExt = ref.read(isModifyExtensionProvider);
   final bool caseFile = ref.read(isCaseFileProvider);
@@ -113,59 +105,37 @@ int getRealIndex(
   FileInfo file,
 ) {
   Map<String, dynamic> currentLevel = classifyMap;
-
   for (int i = 0; i < keys.length; i++) {
-    final key = keys[i];
-    final isLastKey = i == keys.length - 1;
-
+    final String key = keys[i];
+    final bool isLastKey = i == keys.length - 1;
     if (isLastKey) {
+      List<FileInfo> files;
       if (currentLevel[key] is Map<String, dynamic>) {
-        final files = currentLevel[key]['_files'] as List<FileInfo>;
-        if (!files.contains(file)) files.add(file);
+        files = currentLevel[key]['_files'] as List<FileInfo>;
       } else {
-        if (!currentLevel.containsKey(key)) currentLevel[key] = <FileInfo>[];
-        final files = currentLevel[key] as List<FileInfo>;
-        if (!files.contains(file)) files.add(file);
+        files = currentLevel[key] as List<FileInfo>? ?? <FileInfo>[];
+        currentLevel[key] = files;
       }
+      final int index = files.indexOf(file);
+      if (index == -1) {
+        files.add(file);
+        return (classifyMap, files.length - 1);
+      }
+      return (classifyMap, index);
     } else {
       if (currentLevel.containsKey(key) &&
           currentLevel[key] is List<FileInfo>) {
-        final existingFiles = currentLevel[key] as List<FileInfo>;
+        final List<FileInfo> existingFiles =
+            currentLevel[key] as List<FileInfo>;
         currentLevel[key] = {'_files': existingFiles};
       }
-
       if (!currentLevel.containsKey(key)) {
         currentLevel[key] = <String, dynamic>{};
       }
       currentLevel = currentLevel[key] as Map<String, dynamic>;
     }
   }
-
-  final lastKey = keys.last;
-  if (currentLevel[lastKey] is Map<String, dynamic>) {
-    final files = currentLevel[lastKey]['_files'] as List<FileInfo>;
-    return (classifyMap, files.indexOf(file));
-  }
-  final files = currentLevel[lastKey] as List<FileInfo>;
-  return (classifyMap, files.indexOf(file));
-}
-
-Future<UploadMarkInfo?> readUploadFile(String filePath) async {
-  String fileName = path.basename(filePath);
-  String content = '';
-  final File file = File(filePath);
-  try {
-    content = await file.readAsString();
-  } catch (e) {
-    try {
-      final bytes = await file.readAsBytes();
-      content = gbk.decode(bytes);
-    } catch (gbError) {
-      // showTxtDecodeNotification(gbError.toString());
-      return null;
-    }
-  }
-  return UploadMarkInfo(name: fileName, content: content);
+  return (classifyMap, -1);
 }
 
 String prefixValue(WidgetRef ref, int index) {

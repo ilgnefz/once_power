@@ -41,7 +41,7 @@ final class MatchControllerProvider
   }
 }
 
-String _$matchControllerHash() => r'ba28623e55eb822734ebc7a1476a61dba90ba5e5';
+String _$matchControllerHash() => r'294a7df691208bbe8e624570feb77aa55dee674f';
 
 abstract class _$MatchController extends $Notifier<TextEditingController> {
   TextEditingController build();
@@ -54,6 +54,57 @@ abstract class _$MatchController extends $Notifier<TextEditingController> {
             as $ClassProviderElement<
               AnyNotifier<TextEditingController, TextEditingController>,
               TextEditingController,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(MatchIsEmpty)
+final matchIsEmptyProvider = MatchIsEmptyProvider._();
+
+final class MatchIsEmptyProvider extends $NotifierProvider<MatchIsEmpty, bool> {
+  MatchIsEmptyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'matchIsEmptyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$matchIsEmptyHash();
+
+  @$internal
+  @override
+  MatchIsEmpty create() => MatchIsEmpty();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$matchIsEmptyHash() => r'749b4e55de147ec02069ba8da705402a7d8e695f';
+
+abstract class _$MatchIsEmpty extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
               Object?,
               Object?
             >;
@@ -93,7 +144,7 @@ final class ModifyControllerProvider
   }
 }
 
-String _$modifyControllerHash() => r'31378ac3cbf082c75e11d3a223c61d00b3c1755e';
+String _$modifyControllerHash() => r'9dd6a0bc2cccf3d4ae64a7df18c1bc236cb7bc27';
 
 abstract class _$ModifyController extends $Notifier<TextEditingController> {
   TextEditingController build();
@@ -106,6 +157,58 @@ abstract class _$ModifyController extends $Notifier<TextEditingController> {
             as $ClassProviderElement<
               AnyNotifier<TextEditingController, TextEditingController>,
               TextEditingController,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(ModifyIsEmpty)
+final modifyIsEmptyProvider = ModifyIsEmptyProvider._();
+
+final class ModifyIsEmptyProvider
+    extends $NotifierProvider<ModifyIsEmpty, bool> {
+  ModifyIsEmptyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'modifyIsEmptyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$modifyIsEmptyHash();
+
+  @$internal
+  @override
+  ModifyIsEmpty create() => ModifyIsEmpty();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$modifyIsEmptyHash() => r'b25ce7d1bf2d023159936444c5b8d273775a63ea';
+
+abstract class _$ModifyIsEmpty extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
               Object?,
               Object?
             >;

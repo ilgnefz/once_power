@@ -9,6 +9,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "92.0.0"
+  alphanum_comparator:
+    dependency: "direct main"
+    description:
+      name: alphanum_comparator
+      sha256: "5ea0ad0f73fc9bcbf0a3b19b103bd0bccbebffca840d8d3321b73e480e00cff2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.3"
   analyzer:
     dependency: transitive
     description:
@@ -49,6 +57,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.2"
+  bot_toast:
+    dependency: "direct main"
+    description:
+      name: bot_toast
+      sha256: "6b93030a99a98335b8827ecd83021e92e885ffc61d261d3825ffdecdd17f3bdf"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.3"
   build:
     dependency: transitive
     description:
@@ -342,6 +358,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_context_menu:
+    dependency: "direct main"
+    description:
+      name: flutter_context_menu
+      sha256: "7040c03fb9cb2a113282d836edadf32b6cdff67cccdf3d158e7411ecc15d7712"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.2"
   flutter_driver:
     dependency: transitive
     description: flutter
@@ -364,10 +388,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: e2026c72738a925a60db30258ff1f29974e40716749f3c9850aabf34ffc1a14c
+      sha256: "4e166be88e1dbbaa34a280bdb744aeae73b7ef25fdf8db7a3bb776760a3648e2"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.2.1"
+    version: "3.3.1"
   flutter_rust_bridge:
     dependency: "direct main"
     description:
@@ -380,10 +404,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: "87fbd7c534435b6c5d9d98b01e1fd527812b82e68ddd8bd35fc45ed0fa8f0a95"
+      sha256: "1ded017b39c8e15c8948ea855070a5ff8ff8b3d5e83f3446e02d6bb12add7ad9"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.3"
+    version: "2.2.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -484,6 +508,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.9.0"
+  launch_at_startup:
+    dependency: "direct main"
+    description:
+      name: launch_at_startup
+      sha256: "7db33398b76ec0ed9e27f9f4640553e239977437564046625e215be89c91f084"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -548,6 +580,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.13.0"
+  menu_base:
+    dependency: transitive
+    description:
+      name: menu_base
+      sha256: "820368014a171bd1241030278e6c2617354f492f5c703d7b7d4570a6b8b84405"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.1"
   meta:
     dependency: transitive
     description:
@@ -899,6 +939,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.0"
+  shortid:
+    dependency: transitive
+    description:
+      name: shortid
+      sha256: d0b40e3dbb50497dad107e19c54ca7de0d1a274eb9b4404991e443dadb9ebedb
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1040,6 +1088,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.6+1"
+  tray_manager:
+    dependency: "direct main"
+    description:
+      name: tray_manager
+      sha256: c5fd83b0ae4d80be6eaedfad87aaefab8787b333b8ebd064b0e442a81006035b
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.2"
   typed_data:
     dependency: transitive
     description:

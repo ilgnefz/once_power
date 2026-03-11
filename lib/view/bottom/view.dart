@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/core/file.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/bottom/icon.dart';
@@ -19,7 +20,7 @@ class ViewButton extends ConsumerWidget {
       onPressed: () {
         ref.read(isViewModeProvider.notifier).update();
         if (ref.read(isViewModeProvider)) {
-          // filterFile(ref);
+          filterFile(ref);
           updateName(ref);
         }
       },

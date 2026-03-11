@@ -523,6 +523,110 @@ abstract class _$IsCaseExt extends $Notifier<bool> {
   }
 }
 
+@ProviderFor(DeleteExtension)
+final deleteExtensionProvider = DeleteExtensionProvider._();
+
+final class DeleteExtensionProvider
+    extends $NotifierProvider<DeleteExtension, bool> {
+  DeleteExtensionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'deleteExtensionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$deleteExtensionHash();
+
+  @$internal
+  @override
+  DeleteExtension create() => DeleteExtension();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$deleteExtensionHash() => r'c7d3afd8980ab0d3e5a2d43fb922302549266d8b';
+
+abstract class _$DeleteExtension extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(MatchExtension)
+final matchExtensionProvider = MatchExtensionProvider._();
+
+final class MatchExtensionProvider
+    extends $NotifierProvider<MatchExtension, bool> {
+  MatchExtensionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'matchExtensionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$matchExtensionHash();
+
+  @$internal
+  @override
+  MatchExtension create() => MatchExtension();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$matchExtensionHash() => r'40d753d83afa1e8e4a99872d998e36737dc58e02';
+
+abstract class _$MatchExtension extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(IsAddFolder)
 final isAddFolderProvider = IsAddFolderProvider._();
 
@@ -1042,6 +1146,57 @@ final class IsUseRegeditProvider extends $NotifierProvider<IsUseRegedit, bool> {
 String _$isUseRegeditHash() => r'cdba60a6933fef8918896a8ceb4a463023bfd460';
 
 abstract class _$IsUseRegedit extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsAutoRun)
+final isAutoRunProvider = IsAutoRunProvider._();
+
+final class IsAutoRunProvider extends $NotifierProvider<IsAutoRun, bool> {
+  IsAutoRunProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isAutoRunProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isAutoRunHash();
+
+  @$internal
+  @override
+  IsAutoRun create() => IsAutoRun();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isAutoRunHash() => r'f529eb8560b6aeafceb74f52f1975f7bb53ef784';
+
+abstract class _$IsAutoRun extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override

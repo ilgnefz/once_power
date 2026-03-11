@@ -31,3 +31,11 @@ extension FileClassifyExtension on FileClassify {
   bool get isFolder => this == FileClassify.folder;
   bool get isOther => this == FileClassify.other;
 }
+
+enum RenameCondition { available, override, blocked }
+
+extension RenameConditionExtension on RenameCondition {
+  bool get isAvailable => this == RenameCondition.available;
+  bool get isOverride => this == RenameCondition.override;
+  bool get isBlocked => this == RenameCondition.blocked;
+}

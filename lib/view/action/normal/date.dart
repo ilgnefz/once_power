@@ -37,7 +37,7 @@ class DateInput extends ConsumerWidget {
             value: ref.watch(dateDigitProvider),
             unit: tr(AppL10n.renameDigits),
             max: 14,
-            onChange: (value) {
+            onChanged: (value) {
               ref.read(dateDigitProvider.notifier).update(value);
               Debounce.run(() => normalUpdateName(ref));
             },

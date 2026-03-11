@@ -140,7 +140,7 @@
   "date": {
     "title": "Modify File Date",
     "hint": "Select date",
-    "note": "1. Default: \"0000-01-01\" and \"00:00:00.000\" leave date and time unchanged.\n2. Viewing file properties via right-click updates the access date to the current time.",
+    "note": "1. Default: \"0000-01-01\" and \"00:00:00.000\" leave date and time unchanged\n2.Override All: When time is \"00:00:00.000\", replace the file's time segment as well\n3. Viewing file properties via right-click updates the access date to the current time",
     "exit": "Exit",
     "interval": "Interval",
     "fullReplace": "Override All",
@@ -416,6 +416,7 @@
     "empty": "Selected folder is empty",
     "csv1": "File parse error",
     "csv2": "Invalid CSV file",
+    "log": "Invalid log file",
     "modifyDate": "Date modify failed",
     "modifyDateInfo": "Failed to modify dates for:",
     "noExist": "File not exists",
@@ -461,7 +462,8 @@
     "keyError5": "The requested key does not match the bound platform",
     "keyError6": "IP access limit exceeded",
     "keyError7": "Remote Key has been deleted",
-    "keyError": "Error code: {code}, please refer to the official website for details"
+    "keyError": "Error code: {code}, please refer to the official website for details",
+    "createLog": "Log file creation failed"
   },
   "success": {
     "copy": "Copied",
@@ -489,7 +491,8 @@
   },
   "warning": {
     "label": "Warning",
-    "csv": "CSV upload disabled in organize/date modes"
+    "csv": "CSV upload disabled in organize/date modes",
+    "date": "File date modification is disabled when CSV modification is active"
   },
   "tray": {
     "cancel": "Cancel Operation",

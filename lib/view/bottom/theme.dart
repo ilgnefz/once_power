@@ -15,7 +15,6 @@ class ThemeButton extends ConsumerWidget {
     return BottomClickIcon(
       tip: '${type.label} ${tr(AppL10n.bottomThemeTip)}',
       icon: type.icon,
-      selected: false,
       onPressed: ref.read(currentThemeProvider.notifier).update,
       // onLongPress: () => showThemeView(context),
     );

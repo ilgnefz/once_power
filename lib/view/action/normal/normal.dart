@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/normal.dart';
+import 'package:once_power/core/upload.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/input.dart';
@@ -43,7 +44,7 @@ class NormalView extends StatelessWidget {
           cycleProvider: isCyclePrefixProvider,
           info: prefixUploadMarkProvider,
           onUpload: (ref, value) async {
-            UploadMarkInfo? info = await readUploadFile(value);
+            UploadMarkInfo? info = await uploadTextFile(value);
             if (info != null) {
               ref.read(prefixUploadMarkProvider.notifier).update(info);
               normalUpdateName(ref);
@@ -65,7 +66,7 @@ class NormalView extends StatelessWidget {
           cycleProvider: isCycleSuffixProvider,
           info: suffixUploadMarkProvider,
           onUpload: (ref, value) async {
-            UploadMarkInfo? info = await readUploadFile(value);
+            UploadMarkInfo? info = await uploadTextFile(value);
             if (info != null) {
               info.copyWith(isPrefix: false);
               ref.read(suffixUploadMarkProvider.notifier).update(info);

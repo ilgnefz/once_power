@@ -42,7 +42,7 @@ class SerialInput extends ConsumerWidget {
           DigitInput(
             value: ref.watch(digitProvider),
             unit: tr(AppL10n.renameDigits),
-            onChange: (value) {
+            onChanged: (value) {
               ref.read(digitProvider.notifier).update(value);
               Debounce.run(() => normalUpdateName(ref));
             },
@@ -50,7 +50,7 @@ class SerialInput extends ConsumerWidget {
           DigitInput(
             value: ref.watch(startProvider),
             unit: tr(AppL10n.renameStart),
-            onChange: (value) {
+            onChanged: (value) {
               ref.read(startProvider.notifier).update(value);
               Debounce.run(() => normalUpdateName(ref));
             },

@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/sort.dart';
+import 'package:once_power/core/update/update.dart';
+import 'package:once_power/enum/app.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/select.dart';
+import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/base/text.dart';
-import 'package:once_power/widget/context/item.dart';
+import 'package:once_power/widget/context/sort_select_item.dart';
+
+import 'item.dart';
 
 class ContentListView extends ConsumerWidget {
   const ContentListView(this.files, {super.key});
@@ -35,28 +41,44 @@ class ContentListView extends ConsumerWidget {
       itemBuilder: (context, index) {
         FileInfo file = files[index];
         final ThemeData theme = Theme.of(context);
-        final String name = file.name, newName = file.newName;
-        final String ext = file.ext, newExt = file.newExt;
+        String title = file.name, subtitle = file.newName;
+        String ext = file.ext, newExt = file.newExt;
+        Color? subColor = title == subtitle ? Colors.grey : theme.primaryColor;
+
+        if (ref.watch(currentModeProvider).isOrganize) {
+          subtitle = file.parent;
+          subColor = null;
+        }
+
+        if (ref.watch(isDateModifyProvider)) subtitle = '';
+
         return ReorderableDragStartListener(
           index: index,
           key: ValueKey(file.id),
-          child: ContentItem(
-            checked: file.checked,
-            onChanged: (bool? value) => ref
-                .read(fileListProvider.notifier)
-                .updateCheck(file.id, value!),
-            title: name,
-            subTitle: newName,
-            subColor: name == newName ? Colors.grey : theme.primaryColor,
-            fontSize: 13,
-            action: BaseText(
-              newExt,
-              fontSize: 13,
-              color: ext == newExt ? Colors.grey : theme.primaryColor,
-            ),
-            icon: Icons.delete_outline_rounded,
-            onDelete: () => ref.read(fileListProvider.notifier).remove(file),
+          child: SortSelectItem(
+            index: index,
+            file: file,
             onTap: () {},
+            child: ContentItem(
+              checked: file.checked,
+              onChanged: (bool? value) {
+                ref
+                    .read(fileListProvider.notifier)
+                    .updateCheck(file.id, value!);
+                updateName(ref);
+              },
+              title: title,
+              subTitle: subtitle,
+              subColor: subColor,
+              fontSize: 13,
+              action: BaseText(
+                newExt,
+                fontSize: 13,
+                color: ext == newExt ? Colors.grey : theme.primaryColor,
+              ),
+              icon: Icons.delete_outline_rounded,
+              onDelete: () => ref.read(fileListProvider.notifier).remove(file),
+            ),
           ),
         );
       },

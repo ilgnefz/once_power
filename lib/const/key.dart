@@ -33,7 +33,6 @@ class AppKeys {
   static String windowY = 'windowY';
 
   // bool
-  static String hadPressedCtrl = 'hadPressedCtrl';
   static String isLength = 'isLength';
   static String isCase = 'isCase';
   static String isDate = 'isDate';
@@ -83,7 +82,6 @@ class AppKeys {
   static String otherFolderList = 'otherFolderList';
   static String advanceMenuList = 'advanceMenuList';
   static String advancePresetList = 'advancePresetList';
-  static String operateLogList = 'operateLogList';
   static String groupList = 'groupList';
   static String suspenseFileList = 'suspenseFileList';
 

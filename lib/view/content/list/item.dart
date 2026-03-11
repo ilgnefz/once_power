@@ -19,7 +19,6 @@ class ContentItem extends StatelessWidget {
     required this.action,
     required this.icon,
     required this.onDelete,
-    this.onTap,
   });
 
   final bool checked;
@@ -34,7 +33,6 @@ class ContentItem extends StatelessWidget {
   final Widget action;
   final IconData icon;
   final void Function() onDelete;
-  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,29 +52,24 @@ class ContentItem extends StatelessWidget {
             child: Row(children: [subTitleText, subTitleAction!]),
           );
 
-    return InkWell(
-      mouseCursor: SystemMouseCursors.click,
-      borderRadius: BorderRadius.circular(AppNum.radius),
-      onTap: onTap,
-      child: Container(
-        height: AppNum.topHeight,
-        padding: EdgeInsets.symmetric(horizontal: AppNum.spaceSmall),
-        // margin: EdgeInsets.only(right: AppNum.paddingMedium),
-        margin: margin,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppNum.radius),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            EasyCheckbox(checked: checked, onChanged: onChanged),
-            titleWidget,
-            SizedBox(width: AppNum.spaceSmall),
-            subTitleWidget,
-            Container(width: 40, alignment: Alignment.center, child: action),
-            ClickIcon(onPressed: onDelete, icon: icon),
-          ],
-        ),
+    return Container(
+      height: AppNum.topHeight,
+      padding: EdgeInsets.symmetric(horizontal: AppNum.spaceSmall),
+      // margin: EdgeInsets.only(right: AppNum.paddingMedium),
+      margin: margin,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppNum.radius),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          EasyCheckbox(checked: checked, onChanged: onChanged),
+          titleWidget,
+          SizedBox(width: AppNum.spaceSmall),
+          subTitleWidget,
+          Container(width: 40, alignment: Alignment.center, child: action),
+          ClickIcon(onPressed: onDelete, icon: icon),
+        ],
       ),
     );
   }

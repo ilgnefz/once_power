@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/base/input.dart';
 import 'package:once_power/widget/common/click_icon.dart';
@@ -12,7 +14,8 @@ class TextInput extends StatefulWidget {
     this.leading,
     this.action,
     this.obscureText = false,
-    this.onChange,
+    this.enabled = true,
+    this.onChanged,
     this.onComplete,
     this.onClear,
   });
@@ -23,7 +26,8 @@ class TextInput extends StatefulWidget {
   final Widget? leading;
   final Widget? action;
   final bool obscureText;
-  final void Function(String)? onChange;
+  final bool enabled;
+  final void Function(String)? onChanged;
   final void Function(String)? onComplete;
   final void Function()? onClear;
 
@@ -66,7 +70,7 @@ class _TextInputState extends State<TextInput> {
   void clear() {
     controller.clear();
     widget.onClear?.call();
-    widget.onChange?.call('');
+    widget.onChanged?.call('');
     widget.onComplete?.call('');
     setState(() {});
   }
@@ -80,14 +84,15 @@ class _TextInputState extends State<TextInput> {
       ),
       focusNode: focusNode,
       controller: controller,
-      hintText: widget.hintText,
+      hintText: widget.enabled ? widget.hintText : tr(AppL10n.renameDisable),
       obscureText: widget.obscureText,
+      enabled: widget.enabled,
       clearButton: isShow
           ? ClickIcon(onPressed: clear, icon: Icons.close_rounded, iconSize: 18)
           : null,
       leading: widget.leading,
       action: widget.action,
-      onChange: widget.onChange,
+      onChange: widget.onChanged,
     );
   }
 }

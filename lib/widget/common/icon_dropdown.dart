@@ -11,6 +11,7 @@ class IconDropdown<T> extends StatelessWidget {
     required this.items,
     required this.value,
     this.padding,
+    this.width,
     required this.onChanged,
   });
 
@@ -19,6 +20,7 @@ class IconDropdown<T> extends StatelessWidget {
   final List<DropdownItem<T>> items;
   final T value;
   final EdgeInsets? padding;
+  final double? width;
   final void Function(T) onChanged;
 
   @override
@@ -39,11 +41,11 @@ class IconDropdown<T> extends StatelessWidget {
           overlayColor: WidgetStateProperty.all(Colors.transparent),
         ),
         dropdownStyleData: DropdownStyleData(
-          width: 112,
+          width: width ?? 112,
           padding: EdgeInsets.zero,
           elevation: 2,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).canvasColor,
             borderRadius: BorderRadius.circular(AppNum.radius),
           ),
           scrollbarTheme: ScrollbarThemeData(
@@ -53,9 +55,10 @@ class IconDropdown<T> extends StatelessWidget {
           ),
         ),
         menuItemStyleData: MenuItemStyleData(
-          padding:
-              padding ?? EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
-          overlayColor: WidgetStateProperty.resolveWith((states) {
+          // padding:
+          //     padding ?? EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+          padding: .zero,
+          overlayColor: .resolveWith((states) {
             if (states.contains(WidgetState.hovered)) {
               return Theme.of(context).hoverColor;
             } else if (states.contains(WidgetState.focused)) {

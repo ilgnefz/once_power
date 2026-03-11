@@ -379,6 +379,7 @@ class AppL10n {
   static const String errEmpty = 'error.empty';
   static const String errCSV1 = 'error.csv1';
   static const String errCSV2 = 'error.csv2';
+  static const String errLog = 'error.log';
   static const String errModifyDate = 'error.modifyDate';
   static const String errModifyDateInfo = 'error.modifyDateInfo';
   static const String errNoExist = 'error.noExist';
@@ -425,6 +426,7 @@ class AppL10n {
   static const String errKeyError6 = 'error.keyError6';
   static const String errKeyError7 = 'error.keyError7';
   static const String errKeyError = 'error.keyError';
+  static const String errCreateLog = 'error.createLog';
 
   /* ---------- success ---------- */
   static const String successCopy = 'success.copy';
@@ -453,6 +455,7 @@ class AppL10n {
   /* ---------- warning ---------- */
   static const String warnLabel = 'warning.label';
   static const String warnCsv = 'warning.csv';
+  static const String warnDate = 'warning.date';
 
   /* ---------- tray ---------- */
   static const String trayCancel = 'tray.cancel';

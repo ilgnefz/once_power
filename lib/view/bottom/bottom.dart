@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/view/bottom/auto_run.dart';
+import 'package:once_power/view/bottom/csv.dart';
+import 'package:once_power/view/bottom/date.dart';
+import 'package:once_power/view/bottom/language.dart';
+import 'package:once_power/view/bottom/log.dart';
 import 'package:once_power/view/bottom/regedit.dart';
 import 'package:once_power/view/bottom/save.dart';
+import 'package:once_power/view/bottom/setting.dart';
 import 'package:once_power/view/bottom/task.dart';
 import 'package:once_power/view/bottom/theme.dart';
+import 'package:once_power/view/bottom/tip.dart';
+import 'package:once_power/view/bottom/undo.dart';
+import 'package:once_power/view/bottom/version.dart';
 import 'package:once_power/view/bottom/view.dart';
 
 class BottomView extends StatelessWidget {
@@ -22,14 +31,23 @@ class BottomView extends StatelessWidget {
         border: Border(top: BorderSide(width: 1, color: theme.dividerColor)),
       ),
       child: Row(
-        spacing: AppNum.spaceMedium,
+        spacing: AppNum.spaceSmall,
         children: [
           SaveButton(),
           RegeditButton(),
+          AutoRunButton(),
+          LogButton(),
           ViewButton(),
+          CSVButton(),
+          DateButton(),
           ThemeButton(),
+          TipButton(),
+          SettingButton(),
+          LanguageButton(),
+          UndoButton(),
           Spacer(),
-          TaskMsg(),
+          TaskMessage(),
+          VersionText(),
         ],
       ),
     );

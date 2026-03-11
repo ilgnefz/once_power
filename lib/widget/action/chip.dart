@@ -9,32 +9,28 @@ class EasyChip extends StatelessWidget {
     required this.selected,
     this.fontSize = 14,
     required this.onTap,
-    this.enable = true,
   });
 
   final String label;
   final bool selected;
   final double fontSize;
   final void Function()? onTap;
-  final bool enable;
 
   @override
   Widget build(BuildContext context) {
     final EasyChipTheme? theme = Theme.of(context).extension<EasyChipTheme>();
     const BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
-    Color? bgColor = enable
-        ? (selected ? theme?.selectBackgroundColor : theme?.backgroundColor)
-        : theme?.disableBackgroundColor;
-    TextStyle? style = enable
-        ? (selected ? theme?.selectTextStyle : theme?.textStyle)
-        : theme?.diableTextStyle;
+    Color? bgColor = selected
+        ? theme?.selectBackgroundColor
+        : theme?.backgroundColor;
+    TextStyle? style = selected ? theme?.selectTextStyle : theme?.textStyle;
 
     return Material(
       borderRadius: borderRadius,
       child: Ink(
         decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
         child: InkWell(
-          onTap: enable ? onTap : null,
+          onTap: onTap,
           mouseCursor: SystemMouseCursors.click,
           borderRadius: borderRadius,
           child: Container(

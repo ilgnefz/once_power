@@ -7,6 +7,7 @@ pub struct RFileInfo {
     pub modify_time: i64,
     pub access_time: i64,
     pub size: u64,
+    pub is_dir: bool,
 }
 
 pub struct AudioMetaInfo {

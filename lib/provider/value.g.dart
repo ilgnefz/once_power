@@ -263,3 +263,107 @@ abstract class _$SuffixStart extends $Notifier<int> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(CSVNameColumn)
+final cSVNameColumnProvider = CSVNameColumnProvider._();
+
+final class CSVNameColumnProvider
+    extends $NotifierProvider<CSVNameColumn, String> {
+  CSVNameColumnProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'cSVNameColumnProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$cSVNameColumnHash();
+
+  @$internal
+  @override
+  CSVNameColumn create() => CSVNameColumn();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$cSVNameColumnHash() => r'6c198e17bed68d7487d8a79f7c66b5d18276824c';
+
+abstract class _$CSVNameColumn extends $Notifier<String> {
+  String build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(FileDateProperty)
+final fileDatePropertyProvider = FileDatePropertyProvider._();
+
+final class FileDatePropertyProvider
+    extends $NotifierProvider<FileDateProperty, DateProperty> {
+  FileDatePropertyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fileDatePropertyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fileDatePropertyHash();
+
+  @$internal
+  @override
+  FileDateProperty create() => FileDateProperty();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateProperty value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateProperty>(value),
+    );
+  }
+}
+
+String _$fileDatePropertyHash() => r'813fee2a23a506b17705e1cead9ae9a68aa912f0';
+
+abstract class _$FileDateProperty extends $Notifier<DateProperty> {
+  DateProperty build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateProperty, DateProperty>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateProperty, DateProperty>,
+              DateProperty,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
 import 'package:once_power/src/rust/frb_generated.dart';
+import 'package:once_power/util/pack.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:window_manager/window_manager.dart';
@@ -16,6 +17,8 @@ class AppConfig {
     if (shortcutMenuExtenderCommand.runIfNeeded(args)) exit(0);
 
     await RustLib.init();
+
+    await PackInfo.init();
 
     await StorageUtil.init();
 

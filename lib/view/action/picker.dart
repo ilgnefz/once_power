@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/upload.dart';
+import 'package:once_power/widget/base/tooltip.dart';
 import 'package:once_power/widget/common/button.dart';
 
 class FilePickerGroup extends ConsumerWidget {
@@ -18,9 +19,13 @@ class FilePickerGroup extends ConsumerWidget {
       child: Row(
         spacing: AppNum.spaceSmall,
         children: [
-          EasyButton(
-            label: tr(AppL10n.actionUploadFile),
-            onPressed: () => uploadFile(ref),
+          EasyTooltip(
+            message: 'Happy new year' * 4,
+            placement: Placement.top,
+            child: EasyButton(
+              label: tr(AppL10n.actionUploadFile),
+              onPressed: () => uploadFile(ref),
+            ),
           ),
           EasyButton(
             label: tr(AppL10n.actionUploadFolder),

@@ -14,17 +14,18 @@ import 'package:once_power/view/content/top/top.dart';
 
 final _viewProvider = Provider((ref) {
   List<FileInfo> files = ref.watch(sortListProvider);
-  if (files.isEmpty) return EmptyView();
+  bool isViewMode = ref.watch(isViewModeProvider);
+  bool isDateModify = ref.watch(isDateModifyProvider);
+  FunctionMode mode = ref.watch(currentModeProvider);
+
+  bool showView = isViewMode && !mode.isOrganize && !isDateModify;
+
+  if (files.isEmpty) return EmptyView(showImage: showView);
   // if (ref.watch(onlyChangeProvider)) {
   //   files =
   //       files.where((e) => e.name != e.newName || e.ext != e.newExt).toList();
   // }
-  bool isViewMode = ref.watch(isViewModeProvider);
-  bool isModifyDate = ref.watch(isDateModifyProvider);
-  FunctionMode mode = ref.watch(currentModeProvider);
-  if (isViewMode && !mode.isOrganize && !isModifyDate) {
-    return ContentGridView(files);
-  }
+  if (showView) return ContentGridView(files);
   return ContentListView(files);
 });
 

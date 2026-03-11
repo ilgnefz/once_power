@@ -17,6 +17,7 @@ class EasyButton extends StatelessWidget {
       borderRadius: borderRadius,
       child: InkWell(
         borderRadius: borderRadius,
+        mouseCursor: SystemMouseCursors.click,
         onTap: onPressed,
         child: Container(
           height: AppNum.widgetHeight,

@@ -11,17 +11,14 @@ pub fn get_file_info(file_path: &str) -> Result<RFileInfo, String> {
     let name = path.file_stem().unwrap_or_else(|| path.file_name().unwrap()).to_string_lossy().to_string();
     let parent = path.parent().unwrap().to_string_lossy().to_string();
     let metadata = fs::metadata(path.to_string_lossy().to_string().as_str()).map_err(|e| e.to_string())?;
-    let ext = if metadata.is_dir() {
-        "dir".to_string()
-    } else {
-        path.extension()
+    let is_dir = metadata.is_dir();
+    let ext = path.extension()
             .map(|e| e.to_string_lossy().to_string())
-            .unwrap_or_default()
-    };
+            .unwrap_or_default();
     let create_time = get_timestamp(metadata.created().map_err(|e| e.to_string())?)?;
     let modify_time = get_timestamp(metadata.modified().map_err(|e| e.to_string())?)?;
     let access_time = get_timestamp(metadata.accessed().map_err(|e| e.to_string())?)?;
-    let size = if metadata.is_dir() { calculate_dir_size(Path::new(file_path)) } else { metadata.len() };
+    let size = if is_dir { calculate_dir_size(Path::new(file_path)) } else { metadata.len() };
     Ok(RFileInfo {
         id,
         name,
@@ -31,6 +28,7 @@ pub fn get_file_info(file_path: &str) -> Result<RFileInfo, String> {
         modify_time,
         access_time,
         size,
+        is_dir,
     })
 }
 

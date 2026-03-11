@@ -23,7 +23,7 @@ class ClickIcon extends StatelessWidget {
   final double? size;
   final double? iconSize;
   final Color? color;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +45,15 @@ class ClickIcon extends StatelessWidget {
               icon: icon,
               svg: svg,
               size: iconSize ?? (icon == null ? 18 : 20),
-              color: color,
+              color: color ?? Color(0xFFC4C4C4),
             ),
           ),
         ),
       ),
     );
-    return tip != null
-        ? EasyTooltip(tip: tip, placement: placement, child: child)
-        : child;
+
+    return tip == null
+        ? child
+        : EasyTooltip(tip: tip, placement: placement, child: child);
   }
 }

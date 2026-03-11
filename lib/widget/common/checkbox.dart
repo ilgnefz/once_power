@@ -26,6 +26,7 @@ class EasyCheckbox extends StatelessWidget {
       side: theme.checkboxTheme.side,
       checkColor: Colors.white,
       fillColor: theme.checkboxTheme.fillColor,
+      mouseCursor: SystemMouseCursors.click,
       onChanged: onChanged,
     );
 

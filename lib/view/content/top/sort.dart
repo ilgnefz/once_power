@@ -24,17 +24,25 @@ class SortButton extends ConsumerWidget {
               value: e,
               key: ValueKey(e),
               height: AppNum.widgetHeight,
-              child: Row(
-                spacing: AppNum.spaceSmall,
-                children: [
-                  BaseIcon(svg: e.icon, size: 17),
-                  BaseText(e.label),
-                ],
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Container(
+                  height: AppNum.widgetHeight,
+                  padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+                  child: Row(
+                    spacing: AppNum.spaceSmall,
+                    children: [
+                      BaseIcon(svg: e.icon, size: 17),
+                      BaseText(e.label),
+                    ],
+                  ),
+                ),
               ),
             ),
           )
           .toList(),
       value: currentSort,
+      width: 100,
       onChanged: (value) {
         ref.read(currentSortProvider.notifier).update(value);
         Debounce.run(() => updateName(ref));

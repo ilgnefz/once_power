@@ -1,3 +1,4 @@
+import 'package:once_power/model/date.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'value.g.dart';
@@ -40,4 +41,18 @@ class SuffixStart extends _$SuffixStart {
   int build() => 0;
 
   void update(int value) => state = value;
+}
+
+@riverpod
+class CSVNameColumn extends _$CSVNameColumn {
+  @override
+  String build() => 'A';
+  void update(String value) => state = value;
+}
+
+@riverpod
+class FileDateProperty extends _$FileDateProperty {
+  @override
+  DateProperty build() => DateProperty();
+  void update(DateProperty value) => state = value;
 }

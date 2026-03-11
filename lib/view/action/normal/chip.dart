@@ -7,15 +7,6 @@ import 'package:once_power/provider/select.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/chip.dart';
 
-// final _enableProvider = Provider((ref) {
-//   if (ref.watch(currentModeProvider).isReserve) {
-//     return !ref.watch(matchClearProvider) &&
-//         !ref.watch(modifyClearProvider) &&
-//         !ref.watch(isDateRenameProvider);
-//   }
-//   return true;
-// });
-
 class MatchChip extends ConsumerWidget {
   const MatchChip(this.isReplace, {super.key});
 
@@ -23,14 +14,11 @@ class MatchChip extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool enable = true;
-
     List<Widget> chips = isReplace
         ? ReplaceType.values.map((e) {
             return EasyChip(
               label: e.label,
               selected: ref.watch(selectedReplaceTypeProvider).contains(e),
-              enable: enable,
               // fontSize: context.locale == Locale('en', "US") ? 13 : 14,
               fontSize: 14,
               onTap: () {
@@ -43,7 +31,6 @@ class MatchChip extends ConsumerWidget {
             return EasyChip(
               label: e.label,
               selected: ref.watch(selectedReserveTypeProvider).contains(e),
-              enable: enable,
               // fontSize: context.locale == Locale('en', "US") ? 13 : 14,
               fontSize: 14,
               onTap: () {

@@ -1,16 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
-import 'package:once_power/const/l10n.dart';
 import 'package:once_power/core/update/normal.dart';
-import 'package:once_power/core/update/update.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/item.dart';
 import 'package:once_power/widget/action/upload_input.dart';
-import 'package:once_power/widget/common/click_icon.dart';
-import 'package:once_power/widget/common/text_input.dart';
 
 class AffixInput extends ConsumerWidget {
   const AffixInput({

@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:once_power/enum/file.dart';
+import 'package:once_power/util/info.dart';
+import 'package:path/path.dart';
 
 class FileInfo {
   final String id;
@@ -16,12 +18,12 @@ class FileInfo {
   String path;
   String tempPath;
 
+  /// C:\Photos\a.jpg
+  String beforePath;
+
   /// jpg
   String ext;
   String newExt;
-
-  /// C:\Photos\a.jpg
-  String beforePath;
   DateInfo createdDate;
   DateInfo modifiedDate;
   DateInfo accessedDate;
@@ -40,9 +42,9 @@ class FileInfo {
     required this.parent,
     required this.path,
     required this.tempPath,
+    required this.beforePath,
     required this.ext,
     required this.newExt,
-    required this.beforePath,
     required this.createdDate,
     required this.modifiedDate,
     required this.accessedDate,
@@ -61,9 +63,9 @@ class FileInfo {
     String? parent,
     String? path,
     String? tempPath,
+    String? beforePath,
     String? ext,
     String? newExt,
-    String? beforePath,
     DateInfo? createdDate,
     DateInfo? modifiedDate,
     DateInfo? accessedDate,
@@ -95,6 +97,13 @@ class FileInfo {
       checked: checked ?? this.checked,
     );
   }
+
+  String getFullOldName() => getFullName(name, ext);
+
+  String getFullNewName() => getFullName(newName, newExt);
+
+  String getNewPath(bool isUndo) =>
+      isUndo ? beforePath : join(parent, getFullNewName());
 }
 
 class DateInfo {

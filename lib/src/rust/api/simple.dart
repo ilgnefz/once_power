@@ -8,3 +8,12 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 String greet({required String name}) =>
     RustLib.instance.api.crateApiSimpleGreet(name: name);
+
+void setCtime({required String filePath, required PlatformInt64 time}) =>
+    RustLib.instance.api.crateApiSimpleSetCtime(filePath: filePath, time: time);
+
+void setMtime({required String filePath, required PlatformInt64 time}) =>
+    RustLib.instance.api.crateApiSimpleSetMtime(filePath: filePath, time: time);
+
+void setAtime({required String filePath, required PlatformInt64 time}) =>
+    RustLib.instance.api.crateApiSimpleSetAtime(filePath: filePath, time: time);

@@ -52,6 +52,7 @@ class RFileInfo {
   final PlatformInt64 modifyTime;
   final PlatformInt64 accessTime;
   final BigInt size;
+  final bool isDir;
 
   const RFileInfo({
     required this.id,
@@ -62,6 +63,7 @@ class RFileInfo {
     required this.modifyTime,
     required this.accessTime,
     required this.size,
+    required this.isDir,
   });
 
   @override
@@ -73,7 +75,8 @@ class RFileInfo {
       createTime.hashCode ^
       modifyTime.hashCode ^
       accessTime.hashCode ^
-      size.hashCode;
+      size.hashCode ^
+      isDir.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -87,5 +90,6 @@ class RFileInfo {
           createTime == other.createTime &&
           modifyTime == other.modifyTime &&
           accessTime == other.accessTime &&
-          size == other.size;
+          size == other.size &&
+          isDir == other.isDir;
 }

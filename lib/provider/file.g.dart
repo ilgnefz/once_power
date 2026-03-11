@@ -41,7 +41,7 @@ final class FileListProvider
   }
 }
 
-String _$fileListHash() => r'e87b6e52d9f675e7dda7aa416cf7c631f31a79ba';
+String _$fileListHash() => r'2f907bab0d26c4189cba6d1d1a12fe8fb39d8f2b';
 
 abstract class _$FileList extends $Notifier<List<FileInfo>> {
   List<FileInfo> build();
