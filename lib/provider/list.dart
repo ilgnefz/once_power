@@ -1,5 +1,6 @@
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/sort.dart';
+import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/csv.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/info.dart';
@@ -141,4 +142,16 @@ class CSVData extends _$CSVData {
         }
         return e;
       }).toList();
+}
+
+@riverpod
+class AdvanceMenuSelectedList extends _$AdvanceMenuSelectedList {
+  @override
+  List<AdvanceMenuModel> build() => [];
+  void add(AdvanceMenuModel group) => state = [...state, group];
+  void addAll(List<AdvanceMenuModel> group) => state = [...state, ...group];
+  void remove(AdvanceMenuModel group) =>
+      state = state.where((e) => e != group).toList();
+  void one(AdvanceMenuModel group) => state = [group];
+  void clear() => state = [];
 }

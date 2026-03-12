@@ -627,6 +627,213 @@ abstract class _$MatchExtension extends $Notifier<bool> {
   }
 }
 
+@ProviderFor(UseGroupOrganize)
+final useGroupOrganizeProvider = UseGroupOrganizeProvider._();
+
+final class UseGroupOrganizeProvider
+    extends $NotifierProvider<UseGroupOrganize, bool> {
+  UseGroupOrganizeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'useGroupOrganizeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$useGroupOrganizeHash();
+
+  @$internal
+  @override
+  UseGroupOrganize create() => UseGroupOrganize();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$useGroupOrganizeHash() => r'adc3b59fb67f4a72685a687d3bbf7958c1f44b1c';
+
+abstract class _$UseGroupOrganize extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(UseTypeOrganize)
+final useTypeOrganizeProvider = UseTypeOrganizeProvider._();
+
+final class UseTypeOrganizeProvider
+    extends $NotifierProvider<UseTypeOrganize, bool> {
+  UseTypeOrganizeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'useTypeOrganizeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$useTypeOrganizeHash();
+
+  @$internal
+  @override
+  UseTypeOrganize create() => UseTypeOrganize();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$useTypeOrganizeHash() => r'9022e26b2938c413d19427c1f5c1e955fa80840f';
+
+abstract class _$UseTypeOrganize extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(UseTopFolder)
+final useTopFolderProvider = UseTopFolderProvider._();
+
+final class UseTopFolderProvider extends $NotifierProvider<UseTopFolder, bool> {
+  UseTopFolderProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'useTopFolderProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$useTopFolderHash();
+
+  @$internal
+  @override
+  UseTopFolder create() => UseTopFolder();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$useTopFolderHash() => r'85fabfc612fce0502f7a54815dba63efedc7cb9d';
+
+abstract class _$UseTopFolder extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(UseDateOrganize)
+final useDateOrganizeProvider = UseDateOrganizeProvider._();
+
+final class UseDateOrganizeProvider
+    extends $NotifierProvider<UseDateOrganize, bool> {
+  UseDateOrganizeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'useDateOrganizeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$useDateOrganizeHash();
+
+  @$internal
+  @override
+  UseDateOrganize create() => UseDateOrganize();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$useDateOrganizeHash() => r'bf554b6c606556c2a78417123cc6973413d6025b';
+
+abstract class _$UseDateOrganize extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(IsAddFolder)
 final isAddFolderProvider = IsAddFolderProvider._();
 

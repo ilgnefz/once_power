@@ -2,6 +2,7 @@ import 'package:once_power/const/key.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/match.dart';
+import 'package:once_power/enum/organize.dart';
 import 'package:once_power/enum/sort.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -65,6 +66,49 @@ class CurrentDateType extends _$CurrentDateType {
   Future<void> update(DateType type) async {
     state = type;
     await StorageUtil.setInt(AppKeys.dateType, type.index);
+  }
+}
+
+// ----- Organize -----
+@riverpod
+class OrganizeDate extends _$OrganizeDate {
+  @override
+  DateType build() {
+    int index = StorageUtil.getInt(AppKeys.organizeDate) ?? 0;
+    return DateType.values[index];
+  }
+
+  Future<void> update(DateType type) async {
+    state = type;
+    await StorageUtil.setInt(AppKeys.organizeDate, type.index);
+  }
+}
+
+@riverpod
+class OrganizeDateFormat extends _$OrganizeDateFormat {
+  @override
+  DateFormat build() {
+    int index = StorageUtil.getInt(AppKeys.organizeDateFormat) ?? 0;
+    return DateFormat.values[index];
+  }
+
+  Future<void> update(DateFormat value) async {
+    state = value;
+    await StorageUtil.setInt(AppKeys.organizeDateFormat, value.index);
+  }
+}
+
+@riverpod
+class OrganizeDateSeparate extends _$OrganizeDateSeparate {
+  @override
+  DateFormatSeparate build() {
+    int index = StorageUtil.getInt(AppKeys.organizeDateSeparate) ?? 0;
+    return DateFormatSeparate.values[index];
+  }
+
+  Future<void> update(DateFormatSeparate value) async {
+    state = value;
+    await StorageUtil.setInt(AppKeys.organizeDateSeparate, value.index);
   }
 }
 

@@ -89,7 +89,7 @@ class AppL10n {
   static const String advanceAddPrefix = 'advance.addPrefix';
   static const String advanceAddSuffix = 'advance.addSuffix';
   static const String advanceConvertLetters = 'advance.convertLetters';
-  static const String advanceMatchPosition = 'advance.matchPosition';
+  static const String advanceMatchContent = 'advance.matchContent';
   static const String advanceStart = 'advance.start';
   static const String advanceEnd = 'advance.end';
   static const String advanceDeleteTitle = 'advance.deleteTitle';

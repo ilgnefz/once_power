@@ -8,12 +8,14 @@ class TextDropdown<T> extends StatelessWidget {
     required this.items,
     required this.value,
     this.width = 92,
+    this.maxHeight,
     required this.onChanged,
   });
 
   final List<DropdownItem<T>> items;
   final T value;
   final double width;
+  final double? maxHeight;
   final void Function(T) onChanged;
 
   @override
@@ -35,7 +37,7 @@ class TextDropdown<T> extends StatelessWidget {
         dropdownStyleData: DropdownStyleData(
           padding: EdgeInsets.zero,
           elevation: 2,
-          // maxHeight: maxHeight,
+          maxHeight: maxHeight,
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
             borderRadius: BorderRadius.circular(AppNum.radius),

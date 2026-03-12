@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/const/key.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
 import 'package:once_power/src/rust/frb_generated.dart';
@@ -21,6 +22,8 @@ class AppConfig {
     await PackInfo.init();
 
     await StorageUtil.init();
+
+    saveOrNo();
 
     await EasyLocalization.ensureInitialized();
 
@@ -43,5 +46,68 @@ class AppConfig {
       await windowManager.setAsFrameless();
       await windowManager.setHasShadow(true);
     });
+  }
+}
+
+void saveOrNo() {
+  bool save = StorageUtil.getBool(AppKeys.isSave);
+  if (!save) {
+    List<String> appKeyList = [
+      AppKeys.advanceMenuList,
+      AppKeys.advancePresetList,
+      AppKeys.dateLength,
+      AppKeys.dateType,
+      AppKeys.functionMode,
+      AppKeys.groupList,
+      AppKeys.groupFolder,
+      AppKeys.isAddFolder,
+      AppKeys.isAppend,
+      AppKeys.isCase,
+      AppKeys.isCaseFile,
+      AppKeys.isCaseExtension,
+      AppKeys.isDate,
+      AppKeys.isLength,
+      AppKeys.isCyclePrefix,
+      AppKeys.isSwapPrefix,
+      AppKeys.isUseRuleOrganize,
+      AppKeys.isCycleSuffix,
+      AppKeys.isSwapSuffix,
+      AppKeys.isUseRegex,
+      AppKeys.isUseTopFolder,
+      AppKeys.isViewMode,
+      AppKeys.locale,
+      AppKeys.organizeDate,
+      AppKeys.organizeDateFormat,
+      AppKeys.organizeDateSeparate,
+      AppKeys.prefixSerialLen,
+      AppKeys.prefixSerialStart,
+      AppKeys.ruleTypeValue,
+      AppKeys.suffixSerialLen,
+      AppKeys.suffixSerialStart,
+      AppKeys.sortType,
+      // AppKeys.viewImageW,
+      // organize keys
+      AppKeys.targetFolder,
+      AppKeys.targetFolderList,
+      AppKeys.imageFolder,
+      AppKeys.imageFolderList,
+      AppKeys.videoFolder,
+      AppKeys.videoFolderList,
+      AppKeys.audioFolder,
+      AppKeys.audioFolderList,
+      AppKeys.docFolder,
+      AppKeys.docFolderList,
+      AppKeys.folderFolder,
+      AppKeys.folderFolderList,
+      AppKeys.zipFolder,
+      AppKeys.zipFolderList,
+      AppKeys.otherFolder,
+      AppKeys.otherFolderList,
+      // AppKeys.isUseExtraFunction,
+      AppKeys.currentPresetName,
+    ];
+    for (String appKey in appKeyList) {
+      StorageUtil.remove(appKey);
+    }
   }
 }

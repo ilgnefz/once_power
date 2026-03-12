@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/base/input.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 
-class TextInput extends StatefulWidget {
-  const TextInput({
+class InputField extends StatefulWidget {
+  const InputField({
     super.key,
     this.controller,
     this.text,
@@ -15,6 +16,7 @@ class TextInput extends StatefulWidget {
     this.action,
     this.obscureText = false,
     this.enabled = true,
+    this.inputFormatters,
     this.onChanged,
     this.onComplete,
     this.onClear,
@@ -27,15 +29,16 @@ class TextInput extends StatefulWidget {
   final Widget? action;
   final bool obscureText;
   final bool enabled;
+  final List<FilteringTextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
   final void Function(String)? onComplete;
   final void Function()? onClear;
 
   @override
-  State<TextInput> createState() => _TextInputState();
+  State<InputField> createState() => _InputFieldState();
 }
 
-class _TextInputState extends State<TextInput> {
+class _InputFieldState extends State<InputField> {
   late TextEditingController controller;
   late FocusNode focusNode;
   bool isShow = false;
@@ -68,10 +71,9 @@ class _TextInputState extends State<TextInput> {
   }
 
   void clear() {
-    controller.clear();
     widget.onClear?.call();
     widget.onChanged?.call('');
-    widget.onComplete?.call('');
+    controller.clear();
     setState(() {});
   }
 
@@ -87,6 +89,7 @@ class _TextInputState extends State<TextInput> {
       hintText: widget.enabled ? widget.hintText : tr(AppL10n.renameDisable),
       obscureText: widget.obscureText,
       enabled: widget.enabled,
+      inputFormatters: widget.inputFormatters,
       clearButton: isShow
           ? ClickIcon(onPressed: clear, icon: Icons.close_rounded, iconSize: 18)
           : null,

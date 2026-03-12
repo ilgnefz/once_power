@@ -4,6 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/provider/toggle.dart';
 
+bool isAll(String group) {
+  List<String> all = ['all', '全部'];
+  return all.contains(group);
+}
+
 bool isChinese(String text) => RegExp(r'^[\u4e00-\u9fa5]').hasMatch(text);
 
 // bool isEnglish(BuildContext context) => context.locale == Locale('en', 'US');

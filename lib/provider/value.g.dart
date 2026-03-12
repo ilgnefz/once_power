@@ -367,3 +367,55 @@ abstract class _$FileDateProperty extends $Notifier<DateProperty> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(CurrentPresetName)
+final currentPresetNameProvider = CurrentPresetNameProvider._();
+
+final class CurrentPresetNameProvider
+    extends $NotifierProvider<CurrentPresetName, String> {
+  CurrentPresetNameProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentPresetNameProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentPresetNameHash();
+
+  @$internal
+  @override
+  CurrentPresetName create() => CurrentPresetName();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
+
+abstract class _$CurrentPresetName extends $Notifier<String> {
+  String build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

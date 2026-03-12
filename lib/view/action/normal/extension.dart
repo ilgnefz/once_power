@@ -8,7 +8,7 @@ import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/item.dart';
-import 'package:once_power/widget/common/text_input.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 class ExtensionInput extends ConsumerWidget {
   const ExtensionInput({super.key});
@@ -24,7 +24,7 @@ class ExtensionInput extends ConsumerWidget {
         ref.read(isModifyExtensionProvider.notifier).update();
         Debounce.run(() => normalUpdateName(ref));
       },
-      child: TextInput(
+      child: InputField(
         controller: ref.watch(extensionControllerProvider),
         hintText: tr(AppL10n.renameExtHint),
         onChanged: (_) => Debounce.run(() => normalUpdateName(ref)),

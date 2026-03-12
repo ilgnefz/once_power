@@ -15,9 +15,13 @@ class AppNum {
   static const double easyDialog = 488.0;
   static const double detailDialog = 680.0;
   static const double csvDataHeight = 36.0;
+  static const double directiveHeight = 32.0;
+  static const double dropdownMenu = 32.0;
+  static const double presetMenu = 160.0;
   // Padding
   static const double padding = 12.0;
   static const double paddingMedium = 8.0;
   // Radius
   static const double radius = 8.0;
+  static const double radiusSmall = 4.0;
 }

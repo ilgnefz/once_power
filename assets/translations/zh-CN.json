@@ -89,7 +89,7 @@
     "addPrefix": "前缀",
     "addSuffix": "后缀",
     "convertLetters": "转换文本",
-    "matchPosition": "匹配位置",
+    "matchContent": "匹配位置",
     "start": "开始",
     "end": "结束",
     "deleteTitle": "删除菜单",

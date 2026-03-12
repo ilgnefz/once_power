@@ -41,7 +41,7 @@ final class MatchControllerProvider
   }
 }
 
-String _$matchControllerHash() => r'294a7df691208bbe8e624570feb77aa55dee674f';
+String _$matchControllerHash() => r'93538cbfaf9127d59a2f9af3611cab4c57b428ef';
 
 abstract class _$MatchController extends $Notifier<TextEditingController> {
   TextEditingController build();
@@ -356,6 +356,58 @@ String _$extensionControllerHash() =>
     r'8df1442bb9c08f9c1a2a84f782aa7e0cad1df9e5';
 
 abstract class _$ExtensionController extends $Notifier<TextEditingController> {
+  TextEditingController build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<TextEditingController, TextEditingController>,
+              TextEditingController,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(FolderController)
+final folderControllerProvider = FolderControllerProvider._();
+
+final class FolderControllerProvider
+    extends $NotifierProvider<FolderController, TextEditingController> {
+  FolderControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'folderControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$folderControllerHash();
+
+  @$internal
+  @override
+  FolderController create() => FolderController();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TextEditingController value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TextEditingController>(value),
+    );
+  }
+}
+
+String _$folderControllerHash() => r'31be0945d1273ac39690fb01786772240b390d24';
+
+abstract class _$FolderController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override

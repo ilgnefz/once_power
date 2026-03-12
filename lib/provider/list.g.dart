@@ -200,3 +200,58 @@ abstract class _$CSVData extends $Notifier<List<CSVRenameInfo>> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(AdvanceMenuSelectedList)
+final advanceMenuSelectedListProvider = AdvanceMenuSelectedListProvider._();
+
+final class AdvanceMenuSelectedListProvider
+    extends $NotifierProvider<AdvanceMenuSelectedList, List<AdvanceMenuModel>> {
+  AdvanceMenuSelectedListProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'advanceMenuSelectedListProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$advanceMenuSelectedListHash();
+
+  @$internal
+  @override
+  AdvanceMenuSelectedList create() => AdvanceMenuSelectedList();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<AdvanceMenuModel> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<AdvanceMenuModel>>(value),
+    );
+  }
+}
+
+String _$advanceMenuSelectedListHash() =>
+    r'a0be5a95592945706c46714f8c9a62a08eb2713d';
+
+abstract class _$AdvanceMenuSelectedList
+    extends $Notifier<List<AdvanceMenuModel>> {
+  List<AdvanceMenuModel> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref as $Ref<List<AdvanceMenuModel>, List<AdvanceMenuModel>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<AdvanceMenuModel>, List<AdvanceMenuModel>>,
+              List<AdvanceMenuModel>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

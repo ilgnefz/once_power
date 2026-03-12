@@ -9,5 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `calculate_dir_size`, `get_timestamp`
 
+String generateId() => RustLib.instance.api.crateApiFileInfoGenerateId();
+
 RFileInfo getFileInfo({required String filePath}) =>
     RustLib.instance.api.crateApiFileInfoGetFileInfo(filePath: filePath);

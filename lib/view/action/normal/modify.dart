@@ -13,7 +13,7 @@ import 'package:once_power/util/debounce.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/action/item.dart';
 import 'package:once_power/widget/common/click_icon.dart';
-import 'package:once_power/widget/common/text_input.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 final Provider<bool> _enableProvider = Provider<bool>((Ref ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
@@ -80,7 +80,7 @@ class ModifyInput extends ConsumerWidget {
             Debounce.run(() => normalUpdateName(ref));
           }
         },
-        child: TextInput(
+        child: InputField(
           controller: controller,
           hintText: tr(AppL10n.renameModify),
           enabled: enable,

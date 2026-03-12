@@ -1,0 +1,89 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:once_power/config/theme/directive.dart';
+import 'package:once_power/const/l10n.dart';
+import 'package:once_power/enum/advance.dart';
+import 'package:once_power/model/advance.dart';
+import 'package:once_power/widget/action/advance_rich_text.dart';
+
+class DeleteCard extends StatelessWidget {
+  const DeleteCard({super.key, required this.menu});
+
+  final AdvanceMenuDelete menu;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<DirectiveTheme>()!;
+
+    final Set<WidgetState> states = {
+      menu.checked ? WidgetState.selected : WidgetState.disabled,
+    };
+
+    final defaultColor = theme.defaultColor.resolve(states);
+    final highlightColor = theme.heightLight.resolve(states);
+
+    if (menu.deleteExtension) {
+      return AdvanceRichText(
+        text: advanceTextSpan(tr(AppL10n.advanceExt), color: highlightColor),
+      );
+    }
+
+    if (menu.deleteTypes.isNotEmpty) {
+      return AdvanceRichText(
+        text: advanceTextSpan(
+          menu.deleteTypes
+              .map((e) => e.label)
+              .toList()
+              .join(tr(AppL10n.advanceDelimiter)),
+          color: highlightColor,
+        ),
+      );
+    }
+
+    MatchContent content = menu.matchContent;
+
+    switch (content) {
+      case MatchContent.position:
+        return AdvanceRichText(
+          text: advanceTextSpan(
+            tr(AppL10n.advancePosition),
+            color: defaultColor,
+            children: [
+              advanceTextSpan(
+                ' ${menu.start} ',
+                children: [
+                  advanceTextSpan(tr(AppL10n.advanceTo), color: defaultColor),
+                  advanceTextSpan(' ${menu.end}', color: highlightColor),
+                ],
+                color: highlightColor,
+              ),
+            ],
+          ),
+        );
+      case MatchContent.front:
+      case MatchContent.behind:
+        int index = content.isFront ? menu.front : menu.behind;
+        return AdvanceRichText(
+          text: advanceTextSpan(
+            '"${menu.value}" ',
+            color: defaultColor,
+            children: [
+              advanceTextSpan(content.label, color: highlightColor),
+              advanceTextSpan(' "$index"', color: highlightColor),
+              advanceTextSpan(' "${menu.value}"', color: highlightColor),
+            ],
+          ),
+        );
+      default:
+        return AdvanceRichText(
+          text: advanceTextSpan(
+            content.label,
+            color: defaultColor,
+            children: [
+              advanceTextSpan(' "${menu.value}"', color: highlightColor),
+            ],
+          ),
+        );
+    }
+  }
+}

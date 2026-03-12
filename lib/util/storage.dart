@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUtil {
@@ -100,6 +102,54 @@ class StorageUtil {
         // 解码失败时返回null
         return null;
       }
+    }
+    return null;
+  }
+
+  // 存储高级规则
+  static Future<bool> setAdvanceList(String key, List<AdvanceMenuModel> value) {
+    List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取高级规则
+  static List<AdvanceMenuModel> getAdvanceList(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    List<AdvanceMenuModel> result = [];
+    if (list != null) {
+      result = list.map((e) {
+        return AdvanceMenuModel.fromJson(jsonDecode(e));
+      }).toList();
+    }
+    return result;
+  }
+
+  // 存储预设规则
+  static Future<bool> setAdvancePreset(String key, List<AdvancePreset> value) {
+    List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取预设规则
+  static List<AdvancePreset> getAdvancePreset(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    List<AdvancePreset> result = [];
+    if (list != null) {
+      result = list.map((e) {
+        return AdvancePreset.fromJson(jsonDecode(e));
+      }).toList();
+    }
+    return result;
+  }
+
+  static Future<bool> setRuleTypeValue(String key, RuleTypeValue value) {
+    return _prefs.setString(key, jsonEncode(value.toJson()));
+  }
+
+  static RuleTypeValue? getRuleTypeValue(String key) {
+    String? value = _prefs.getString(key);
+    if (value != null) {
+      return RuleTypeValue.fromJson(jsonDecode(value));
     }
     return null;
   }

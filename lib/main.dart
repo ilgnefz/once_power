@@ -16,6 +16,9 @@ import 'enum/app.dart';
 // TODO: 处理文件夹重命名后，如果子文件在列表里，重命名会失败的问题
 // TODO: 视图模式和日期修改冲突
 // TODO: 预览时修改了位置，应该更新当前 index
+// TODO: 添加一个获取文件夹的子文件夹时是否需要添加当前文件夹的选项
+// TODO: 右键菜单添加一个选中相同后缀的功能
+// TODO: 上传文件出现清除按钮
 
 void main(List<String> args) async {
   await AppConfig.init(args);

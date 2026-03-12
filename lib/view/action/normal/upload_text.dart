@@ -75,9 +75,7 @@ class _ShowUploadTextState extends ConsumerState<ShowUploadText> {
           }
           normalUpdateName(ref);
         }
-        Navigator.pop(context);
       },
-      onCancel: () => Navigator.pop(context),
     );
   }
 }

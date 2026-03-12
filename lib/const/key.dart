@@ -83,7 +83,6 @@ class AppKeys {
   static String advanceMenuList = 'advanceMenuList';
   static String advancePresetList = 'advancePresetList';
   static String groupList = 'groupList';
-  static String suspenseFileList = 'suspenseFileList';
 
   // enum
   static String functionMode = 'functionMode';

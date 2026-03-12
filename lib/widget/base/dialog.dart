@@ -17,6 +17,7 @@ class EasyDialog extends StatelessWidget {
     this.actions,
     this.extraButton,
     this.actionsSpacing,
+    this.autoPop = true,
     this.actionsAxisAlignment = MainAxisAlignment.spaceBetween,
     this.onModelTap,
   });
@@ -32,6 +33,7 @@ class EasyDialog extends StatelessWidget {
   final List<Widget>? actions;
   final Widget? extraButton;
   final double? actionsSpacing;
+  final bool autoPop;
   final MainAxisAlignment actionsAxisAlignment;
   final void Function()? onModelTap;
 
@@ -73,14 +75,20 @@ class EasyDialog extends StatelessWidget {
                       [
                         if (extraButton != null) ...[extraButton!, Spacer()],
                         TextButton(
-                          onPressed: onCancel,
+                          onPressed: () {
+                            onCancel?.call();
+                            Navigator.pop(context);
+                          },
                           child: Text(
                             cancelText ?? tr(AppL10n.dialogExit),
                             style: textStyle,
                           ),
                         ),
                         TextButton(
-                          onPressed: onOk,
+                          onPressed: () {
+                            onOk?.call();
+                            if (autoPop) Navigator.pop(context);
+                          },
                           child: Text(
                             okText ?? tr(AppL10n.dialogOk),
                             style: textStyle,

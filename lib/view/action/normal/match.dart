@@ -10,7 +10,7 @@ import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/item.dart';
-import 'package:once_power/widget/common/text_input.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 final Provider<bool> _enableProvider = Provider((Ref ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
@@ -38,7 +38,7 @@ class MatchInput extends ConsumerWidget {
       tip: tr(AppL10n.renameLen),
       checked: ref.watch(isInputLenProvider),
       onPressed: ref.read(isInputLenProvider.notifier).update,
-      child: TextInput(
+      child: InputField(
         controller: ref.watch(matchControllerProvider),
         hintText: tr(AppL10n.renameMatch),
         enabled: ref.watch(_enableProvider),

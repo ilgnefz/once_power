@@ -39,3 +39,34 @@ extension RenameConditionExtension on RenameCondition {
   bool get isOverride => this == RenameCondition.override;
   bool get isBlocked => this == RenameCondition.blocked;
 }
+
+enum MetaDataType { title, artist, album, year, make, model, location }
+
+extension MetaDataTypeExtension on MetaDataType {
+  String get label {
+    switch (this) {
+      case MetaDataType.title:
+        return tr(AppL10n.eMetaTitle);
+      case MetaDataType.artist:
+        return tr(AppL10n.eMetaArtist);
+      case MetaDataType.album:
+        return tr(AppL10n.eMetaAlbum);
+      case MetaDataType.year:
+        return tr(AppL10n.eMetaYear);
+      case MetaDataType.make:
+        return tr(AppL10n.eMetaMake);
+      case MetaDataType.model:
+        return tr(AppL10n.eMetaModel);
+      case MetaDataType.location:
+        return tr(AppL10n.eMetaLocation);
+    }
+  }
+
+  bool get isTitle => this == MetaDataType.title;
+  bool get isArtist => this == MetaDataType.artist;
+  bool get isAlbum => this == MetaDataType.album;
+  bool get isYear => this == MetaDataType.year;
+  bool get isMake => this == MetaDataType.make;
+  bool get isModel => this == MetaDataType.model;
+  bool get isLocation => this == MetaDataType.location;
+}

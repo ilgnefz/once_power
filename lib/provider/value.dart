@@ -1,4 +1,6 @@
+import 'package:once_power/const/key.dart';
 import 'package:once_power/model/date.dart';
+import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'value.g.dart';
@@ -55,4 +57,14 @@ class FileDateProperty extends _$FileDateProperty {
   @override
   DateProperty build() => DateProperty();
   void update(DateProperty value) => state = value;
+}
+
+@riverpod
+class CurrentPresetName extends _$CurrentPresetName {
+  @override
+  String build() => StorageUtil.getString(AppKeys.currentPresetName) ?? '';
+  Future<void> update(String value) async {
+    state = value;
+    await StorageUtil.setString(AppKeys.currentPresetName, value);
+  }
 }

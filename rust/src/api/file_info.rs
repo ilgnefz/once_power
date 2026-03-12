@@ -4,10 +4,15 @@ use uuid::Uuid;
 
 use super::file_type::RFileInfo;
 
+#[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
+pub fn generate_id() -> String {
+    Uuid::new_v4().to_string()
+}
+
 #[flutter_rust_bridge::frb(sync)]
 pub fn get_file_info(file_path: &str) -> Result<RFileInfo, String> {
     let path = Path::new(file_path);
-    let id = Uuid::new_v4().to_string();
+    let id = generate_id();
     let name = path.file_stem().unwrap_or_else(|| path.file_name().unwrap()).to_string_lossy().to_string();
     let parent = path.parent().unwrap().to_string_lossy().to_string();
     let metadata = fs::metadata(path.to_string_lossy().to_string().as_str()).map_err(|e| e.to_string())?;

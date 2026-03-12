@@ -20,6 +20,7 @@ class ContentListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final FileList provider = ref.read(fileListProvider.notifier);
     return ReorderableListView.builder(
       itemCount: files.length,
       itemExtent: AppNum.topHeight,
@@ -62,9 +63,7 @@ class ContentListView extends ConsumerWidget {
             child: ContentItem(
               checked: file.checked,
               onChanged: (bool? value) {
-                ref
-                    .read(fileListProvider.notifier)
-                    .updateCheck(file.id, value!);
+                provider.updateCheck(file.id, value!);
                 updateName(ref);
               },
               title: title,
@@ -77,7 +76,7 @@ class ContentListView extends ConsumerWidget {
                 color: ext == newExt ? Colors.grey : theme.primaryColor,
               ),
               icon: Icons.delete_outline_rounded,
-              onDelete: () => ref.read(fileListProvider.notifier).remove(file),
+              onDelete: () => provider.remove(file),
             ),
           ),
         );

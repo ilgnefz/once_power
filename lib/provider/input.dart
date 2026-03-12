@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/const/key.dart';
+import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'input.g.dart';
@@ -14,6 +16,8 @@ class MatchController extends _$MatchController {
     ref.onDispose(() => controller.dispose());
     return controller;
   }
+
+  void update(String value) => state.text = value;
 }
 
 @riverpod
@@ -75,4 +79,18 @@ class ExtensionController extends _$ExtensionController {
     ref.onDispose(() => controller.dispose());
     return controller;
   }
+}
+
+/* Organize Mode */
+@riverpod
+class FolderController extends _$FolderController {
+  @override
+  TextEditingController build() {
+    String? folder = StorageUtil.getString(AppKeys.targetFolder);
+    TextEditingController controller = TextEditingController(text: folder);
+    ref.onDispose(() => controller.dispose());
+    return controller;
+  }
+
+  void update(String text) => state.text = text;
 }

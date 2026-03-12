@@ -11,6 +11,7 @@ class DigitInput extends StatefulWidget {
     required this.value,
     required this.unit,
     this.max,
+    this.min = 0,
     required this.onChanged,
   });
 
@@ -18,6 +19,7 @@ class DigitInput extends StatefulWidget {
   final int value;
   final String unit;
   final int? max;
+  final int min;
   final void Function(int) onChanged;
 
   @override
@@ -68,7 +70,7 @@ class _DigitInputState extends State<DigitInput> {
 
   void decrement() {
     int currentValue = extractNum(controller.text);
-    if (currentValue > 0) {
+    if (currentValue > widget.min) {
       // final unit = controller.text.replaceAll(RegExp(r'\d+'), '').trim();
       controller.text = '${currentValue - 1}$unit';
       setState(() {});

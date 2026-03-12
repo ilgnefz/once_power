@@ -7,7 +7,7 @@ import 'package:once_power/core/update/normal.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/common/click_icon.dart';
-import 'package:once_power/widget/common/text_input.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 import 'file_card.dart';
 
@@ -28,7 +28,7 @@ class UploadInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UploadMarkInfo? info = ref.watch(infoProvider);
-    return TextInput(
+    return InputField(
       controller: ref.watch(controller),
       hintText: hintText,
       leading: info == null ? null : UploadFileCard(info: info),

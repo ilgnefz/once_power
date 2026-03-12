@@ -219,6 +219,164 @@ abstract class _$CurrentDateType extends $Notifier<DateType> {
   }
 }
 
+@ProviderFor(OrganizeDate)
+final organizeDateProvider = OrganizeDateProvider._();
+
+final class OrganizeDateProvider
+    extends $NotifierProvider<OrganizeDate, DateType> {
+  OrganizeDateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'organizeDateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$organizeDateHash();
+
+  @$internal
+  @override
+  OrganizeDate create() => OrganizeDate();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateType value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateType>(value),
+    );
+  }
+}
+
+String _$organizeDateHash() => r'e35061980eb9ba2058841b96cd33f24385e6bebf';
+
+abstract class _$OrganizeDate extends $Notifier<DateType> {
+  DateType build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateType, DateType>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateType, DateType>,
+              DateType,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(OrganizeDateFormat)
+final organizeDateFormatProvider = OrganizeDateFormatProvider._();
+
+final class OrganizeDateFormatProvider
+    extends $NotifierProvider<OrganizeDateFormat, DateFormat> {
+  OrganizeDateFormatProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'organizeDateFormatProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$organizeDateFormatHash();
+
+  @$internal
+  @override
+  OrganizeDateFormat create() => OrganizeDateFormat();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateFormat value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateFormat>(value),
+    );
+  }
+}
+
+String _$organizeDateFormatHash() =>
+    r'2756290d6730f96af96278a155975243039ff52f';
+
+abstract class _$OrganizeDateFormat extends $Notifier<DateFormat> {
+  DateFormat build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateFormat, DateFormat>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateFormat, DateFormat>,
+              DateFormat,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(OrganizeDateSeparate)
+final organizeDateSeparateProvider = OrganizeDateSeparateProvider._();
+
+final class OrganizeDateSeparateProvider
+    extends $NotifierProvider<OrganizeDateSeparate, DateFormatSeparate> {
+  OrganizeDateSeparateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'organizeDateSeparateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$organizeDateSeparateHash();
+
+  @$internal
+  @override
+  OrganizeDateSeparate create() => OrganizeDateSeparate();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateFormatSeparate value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateFormatSeparate>(value),
+    );
+  }
+}
+
+String _$organizeDateSeparateHash() =>
+    r'c76ced84246dd72c58e02858abcedefbd04ae5f3';
+
+abstract class _$OrganizeDateSeparate extends $Notifier<DateFormatSeparate> {
+  DateFormatSeparate build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateFormatSeparate, DateFormatSeparate>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateFormatSeparate, DateFormatSeparate>,
+              DateFormatSeparate,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(CurrentSort)
 final currentSortProvider = CurrentSortProvider._();
 

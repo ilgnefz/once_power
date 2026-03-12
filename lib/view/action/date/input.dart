@@ -9,7 +9,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/provider/theme.dart';
 import 'package:once_power/widget/common/click_icon.dart';
-import 'package:once_power/widget/common/text_input.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 class TimeInput extends ConsumerStatefulWidget {
   const TimeInput({super.key, this.date, required this.onChange});
@@ -210,7 +210,7 @@ class _TimeInputState extends ConsumerState<TimeInput> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppNum.padding),
-      child: TextInput(
+      child: InputField(
         controller: controller,
         hintText: tr(AppL10n.dateHint),
         onClear: () {

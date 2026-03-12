@@ -5,6 +5,7 @@ import 'package:once_power/config/theme/button.dart';
 
 import 'bottom_text.dart';
 import 'chip.dart';
+import 'directive.dart';
 import 'icon_box.dart';
 import 'table.dart';
 import 'title_bar.dart';
@@ -112,6 +113,18 @@ class ThemeConfig {
         backgroundColor2: Color(0xFFF5F5F5),
         textColor: Colors.black,
       ),
+      // TODO: hoverColor 没有被使用
+      DirectiveTheme(
+        hoverColor: Color(0xFF2F2F32),
+        defaultColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return Colors.black;
+          return Colors.grey;
+        }),
+        heightLight: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return Color(0xFF6952A5);
+          return Colors.grey;
+        }),
+      ),
     ],
   );
 
@@ -214,6 +227,17 @@ class ThemeConfig {
         backgroundColor1: Color(0xFF1E1F22),
         backgroundColor2: Color(0xFF333333),
         textColor: Colors.white,
+      ),
+      DirectiveTheme(
+        hoverColor: Color(0xFF2F2F32),
+        defaultColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return Colors.white;
+          return Colors.grey;
+        }),
+        heightLight: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return Color(0xFF9679E4);
+          return Colors.grey;
+        }),
       ),
     ],
   );

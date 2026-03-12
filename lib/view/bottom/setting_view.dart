@@ -19,12 +19,6 @@ class SettingView extends StatelessWidget {
           EasyCheckbox(checked: true, label: '保存窗口位置', onChanged: (v) {}),
         ],
       ),
-      onCancel: () {
-        Navigator.of(context).pop();
-      },
-      onOk: () {
-        Navigator.of(context).pop();
-      },
     );
   }
 }

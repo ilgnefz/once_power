@@ -2,11 +2,67 @@ import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
+import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/file.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 
 import 'format.dart';
 import 'verify.dart';
+
+bool getCompareResult(ComparisonOperator operator, String value, String info) {
+  switch (operator) {
+    case ComparisonOperator.contain:
+      return info.contains(value);
+    case ComparisonOperator.notContain:
+      return !info.contains(value);
+    case ComparisonOperator.equal:
+      return info == value;
+    case ComparisonOperator.notEqual:
+      return info != value;
+    case ComparisonOperator.before:
+      try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-01-01';
+        }
+        return DateTime.parse(info).isBefore(DateTime.parse(value));
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.after:
+      try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-12-31';
+        }
+        return DateTime.parse(info).isAfter(DateTime.parse(value));
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.beforeOrEqual:
+      try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-12-31';
+        }
+        DateTime infoDate = DateTime.parse(info);
+        DateTime valueDate = DateTime.parse(value);
+        return infoDate.isBefore(valueDate) ||
+            infoDate.isAtSameMomentAs(valueDate);
+      } catch (e) {
+        return false;
+      }
+    case ComparisonOperator.afterOrEqual:
+      try {
+        if (int.tryParse(value) != null && value.length == 4) {
+          value = '$value-01-01';
+        }
+        DateTime infoDate = DateTime.parse(info);
+        DateTime valueDate = DateTime.parse(value);
+        return infoDate.isAfter(valueDate) ||
+            infoDate.isAtSameMomentAs(valueDate);
+      } catch (e) {
+        return false;
+      }
+  }
+}
 
 DateInfo? getDate(DateType type, FileInfo file) {
   switch (type) {
@@ -80,6 +136,27 @@ String getFullName(String name, String extension) {
     end = match.length > nameLen ? nameLen : match.length;
   }
   return (start < 0 ? 0 : start, end < 0 ? 0 : end);
+}
+
+String getRuleTypeValue(InfoType type, FileInfo file) {
+  switch (type) {
+    case InfoType.name:
+      return file.name;
+    case InfoType.newName:
+      return file.newName;
+    case InfoType.folder:
+      return file.parent;
+    case InfoType.extension:
+      return file.ext;
+    case InfoType.createdDate:
+      return file.createdDate.date.toString();
+    case InfoType.modifiedDate:
+      return file.modifiedDate.date.toString();
+    case InfoType.accessedDate:
+      return file.accessedDate.date.toString();
+    case InfoType.capturedDate:
+      return file.metaInfo?.capture?.date.toString() ?? '';
+  }
 }
 
 List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
