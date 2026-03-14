@@ -103,7 +103,7 @@ void showDateModifyNotification(List<InfoDetail> errors, int total) {
 
 void showPresetAddErrorNotification() {
   return NotificationInfo(
-    type: NotificationType.error,
+    type: NotificationType.warning,
     title: tr(AppL10n.errPresetNameTitle),
     message: tr(AppL10n.errPresetName),
     time: 3,

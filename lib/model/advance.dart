@@ -76,28 +76,30 @@ abstract class AdvanceMenuModel {
 }
 
 class AdvanceMenuDelete extends AdvanceMenuModel {
+  final bool useRegex;
+  final DeleteMode mode;
+  final int start;
+  final int length;
   final MatchContent matchContent;
+  final MatchPosition matchPosition;
   final int number;
   final int front;
   final int behind;
-  final int start;
-  final int end;
   final List<DeleteType> deleteTypes;
-  final bool deleteExtension;
-  final bool useRegex;
 
   AdvanceMenuDelete({
     required super.id,
     required String super.value,
+    required this.mode,
+    required this.useRegex,
+    required this.start,
+    required this.length,
     required this.matchContent,
+    required this.matchPosition,
     required this.number,
     required this.front,
     required this.behind,
-    required this.start,
-    required this.end,
     required this.deleteTypes,
-    required this.deleteExtension,
-    required this.useRegex,
     required super.group,
     required super.checked,
   }) : super(type: AdvanceType.delete);
@@ -107,17 +109,18 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     return AdvanceMenuDelete(
       id: id ?? this.id,
       value: value,
+      useRegex: useRegex,
+      mode: mode,
+      start: start,
+      length: length,
       matchContent: matchContent,
+      matchPosition: matchPosition,
       number: number,
       front: front,
       behind: behind,
-      start: start,
-      end: end,
       deleteTypes: deleteTypes != null
           ? List<DeleteType>.from(deleteTypes)
           : List<DeleteType>.from(this.deleteTypes),
-      deleteExtension: deleteExtension,
-      useRegex: useRegex,
       group: group,
       checked: checked,
     );
@@ -127,19 +130,20 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
       AdvanceMenuDelete(
         id: json["id"],
         value: json["value"],
+        useRegex: json["useRegex"] ?? false,
+        mode: DeleteMode.values[json["mode"] ?? 0],
+        start: json["start"] ?? 1,
+        length: json["length"] ?? 1,
         matchContent: MatchContent.values[json["matchContent"] ?? 0],
+        matchPosition: MatchPosition.values[json["matchPosition"] ?? 0],
         number: json["number"] ?? 1,
         front: json["front"] ?? 1,
         behind: json["behind"] ?? 1,
-        start: json["start"] ?? 1,
-        end: json["end"] ?? 1,
         deleteTypes: json["deleteTypes"] == null
             ? <DeleteType>[]
             : List<DeleteType>.from(
                 json["deleteTypes"].map((x) => DeleteType.values[x]),
               ),
-        deleteExtension: json["deleteExtension"] ?? false,
-        useRegex: json["useRegex"] ?? false,
         group: json["group"] ?? 'all',
         checked: json["checked"] ?? true,
       );
@@ -149,15 +153,16 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     "type": type.index,
     "id": id,
     "value": value,
+    "useRegex": useRegex,
+    "mode": mode.index,
+    "start": start,
+    "length": length,
     "matchContent": matchContent.index,
+    "matchPositions": matchPosition.index,
     "number": number,
     "front": front,
     "behind": behind,
-    "start": start,
-    "end": end,
     "deleteTypes": List<dynamic>.from(deleteTypes.map((x) => x.index)),
-    "deleteExtension": deleteExtension,
-    "useRegex": useRegex,
     "group": group,
     "checked": checked,
   };
@@ -167,35 +172,36 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
     return 'AdvanceMenuDelete{'
         'id: $id, '
         'value: $value, '
+        'useRegex: $useRegex, '
+        'mode: $mode, '
+        'start: $start, '
+        'length: $length, '
         'matchContent: $matchContent, '
+        'matchPosition: $matchPosition, '
         'number: $number, '
         'front: $front, '
         'behind: $behind, '
-        'start: $start, '
-        'end: $end, '
         'deleteTypes: $deleteTypes, '
-        'deleteExtension: $deleteExtension, '
-        'useRegex: $useRegex, '
         'group: $group, '
         'checked: $checked}';
   }
 }
 
 class AdvanceMenuAdd extends AdvanceMenuModel {
-  final int digits;
-  final int start;
-  final DistinguishType distinguishType;
-  final AddType addType;
+  final AddMode mode;
   final int randomLen;
   final DateType dateType;
   final DateStyle dateStyle;
   final WeekdayStyle weekdayStyle;
   final TimeStyle timeStyle;
-  final DateSeparateType dateSeparate;
-  final String customSeparate;
   final MetaDataType metaData;
   final String metaPrefix;
   final String metaSuffix;
+  final DateSeparateType dateSeparate;
+  final String customSeparate;
+  final int digits;
+  final int start;
+  final DistinctionType distinguishType;
   final DateType distinguishDateType;
   final List<String> randomValue;
   final AddPosition addPosition;
@@ -204,20 +210,20 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   AdvanceMenuAdd({
     required super.id,
     required String super.value,
-    required this.digits,
-    required this.start,
-    required this.distinguishType,
-    required this.addType,
+    required this.mode,
     required this.randomLen,
     required this.dateType,
     required this.dateStyle,
     required this.weekdayStyle,
     required this.timeStyle,
-    required this.dateSeparate,
-    required this.customSeparate,
     required this.metaData,
     required this.metaPrefix,
     required this.metaSuffix,
+    required this.dateSeparate,
+    required this.customSeparate,
+    required this.digits,
+    required this.start,
+    required this.distinguishType,
     required this.distinguishDateType,
     required this.randomValue,
     required this.addPosition,
@@ -231,20 +237,20 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     return AdvanceMenuAdd(
       id: id ?? this.id,
       value: value,
-      digits: digits,
-      start: start,
-      distinguishType: distinguishType,
-      addType: addType,
+      mode: mode,
       randomLen: randomLen,
       dateType: dateType,
       dateStyle: dateStyle,
-      timeStyle: timeStyle,
       weekdayStyle: weekdayStyle,
-      dateSeparate: dateSeparate,
-      customSeparate: customSeparate,
+      timeStyle: timeStyle,
       metaData: metaData,
       metaPrefix: metaPrefix,
       metaSuffix: metaSuffix,
+      dateSeparate: dateSeparate,
+      customSeparate: customSeparate,
+      digits: digits,
+      start: start,
+      distinguishType: distinguishType,
       distinguishDateType: distinguishDateType,
       randomValue: randomValue != null
           ? List<String>.from(randomValue)
@@ -259,26 +265,25 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
   factory AdvanceMenuAdd.fromJson(Map<String, dynamic> json) => AdvanceMenuAdd(
     id: json["id"],
     value: json["value"],
-    digits: json["digits"] ?? 0,
-    start: json["start"] ?? 1,
-
-    distinguishType: DistinguishType.values[json["distinguishType"] ?? 0],
-    addType: AddType.values[json["addType"] ?? 0],
+    mode: AddMode.values[json["mode"] ?? 0],
     randomLen: json["randomLen"] ?? 1,
     dateType: DateType.values[json["dateType"] ?? 0],
     dateStyle: DateStyle.values[json["dateStyle"] ?? 1],
     weekdayStyle: WeekdayStyle.values[json["weekdayStyle"] ?? 0],
     timeStyle: TimeStyle.values[json["timeStyle"] ?? 0],
-    dateSeparate: DateSeparateType.values[json["dateSeparate"] ?? 0],
-    customSeparate: json["customSeparate"] ?? '',
     metaData: MetaDataType.values[json["metaData"] ?? 0],
     metaPrefix: json["metaPrefix"] ?? '',
     metaSuffix: json["metaSuffix"] ?? '',
+    dateSeparate: DateSeparateType.values[json["dateSeparate"] ?? 0],
+    customSeparate: json["customSeparate"] ?? '',
+    digits: json["digits"] ?? 0,
+    start: json["start"] ?? 1,
+    distinguishType: DistinctionType.values[json["distinguishType"] ?? 0],
     distinguishDateType: DateType.values[json["distinguishDateType"] ?? 0],
     randomValue: json["randomValue"] == null
         ? <String>[]
         : List<String>.from(json["randomValue"].map((x) => x)),
-    addPosition: AddPosition.values[json["addPosition"] ?? 1],
+    addPosition: AddPosition.values[json["addPosition"] ?? 0],
     positionIndex: json["positionIndex"] ?? 1,
     group: json["group"] ?? 'all',
     checked: json["checked"] ?? true,
@@ -289,20 +294,20 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     "type": type.index,
     "id": id,
     "value": value,
-    "digits": digits,
-    "start": start,
-    "distinguishType": distinguishType.index,
-    "addType": addType.index,
+    "mode": mode.index,
     "randomLen": randomLen,
     "dateType": dateType.index,
     "dateStyle": dateStyle.index,
     "weekdayStyle": weekdayStyle.index,
     "timeStyle": timeStyle.index,
-    "dateSeparate": dateSeparate.index,
-    "customSeparate": customSeparate,
     "metaData": metaData.index,
     "metaPrefix": metaPrefix,
     "metaSuffix": metaSuffix,
+    "dateSeparate": dateSeparate.index,
+    "customSeparate": customSeparate,
+    "digits": digits,
+    "start": start,
+    "distinguishType": distinguishType.index,
     "distinguishDateType": distinguishDateType.index,
     "randomValue": List<String>.from(randomValue.map((x) => x)),
     "addPosition": addPosition.index,
@@ -319,7 +324,7 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
         'digits: $digits, '
         'start: $start,  '
         'distinguishType: $distinguishType, '
-        'addType: $addType, '
+        'mode: $mode, '
         'randomLen: $randomLen, '
         'dateType: $dateType, '
         'dateStyle: $dateStyle, '
@@ -340,16 +345,17 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 }
 
 class AdvanceMenuReplace extends AdvanceMenuModel {
-  final ReplaceMode replaceMode;
+  final ReplaceMode mode;
   final bool useRegex;
   final bool matchExtension;
   final FillPosition fillPosition;
   final MatchContent matchContent;
+  final MatchPosition matchPosition;
   final int number;
   final int front;
   final int behind;
   final int start;
-  final int end;
+  final int length;
   final ConvertType convertType;
   final String wordSpacing;
 
@@ -358,14 +364,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required List<String> super.value,
     required this.useRegex,
     required this.matchExtension,
-    required this.replaceMode,
+    required this.mode,
     required this.fillPosition,
     required this.matchContent,
+    required this.matchPosition,
     required this.number,
     required this.front,
     required this.behind,
     required this.start,
-    required this.end,
+    required this.length,
     required this.convertType,
     required this.wordSpacing,
     required super.group,
@@ -379,14 +386,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       value: value,
       useRegex: useRegex,
       matchExtension: matchExtension,
-      replaceMode: replaceMode,
+      mode: mode,
       fillPosition: fillPosition,
       matchContent: matchContent,
+      matchPosition: matchPosition,
       number: number,
       front: front,
       behind: behind,
       start: start,
-      end: end,
+      length: length,
       convertType: convertType,
       wordSpacing: wordSpacing,
       group: group,
@@ -402,14 +410,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
             : List<String>.from(json["value"].map((x) => x)),
         useRegex: json["useRegex"] ?? false,
         matchExtension: json["matchExtension"] ?? false,
-        replaceMode: ReplaceMode.values[json["replaceMode"] ?? 0],
+        mode: ReplaceMode.values[json["mode"] ?? 0],
         fillPosition: FillPosition.values[json["fillPosition"] ?? 0],
         matchContent: MatchContent.values[json["matchContent"] ?? 0],
+        matchPosition: MatchPosition.values[json["matchPosition"] ?? 0],
         number: json["number"] ?? 1,
         front: json["front"] ?? 1,
         behind: json["back"] ?? 1,
         start: json["start"] ?? 1,
-        end: json["end"] ?? 1,
+        length: json["length"] ?? 1,
         convertType: ConvertType.values[json["convertType"] ?? 0],
         wordSpacing: json["wordSpacing"] ?? "",
         group: json["group"] ?? 'all',
@@ -423,14 +432,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     "value": List<String>.from(value.map((x) => x)),
     "useRegex": useRegex,
     "matchExtension": matchExtension,
-    "replaceMode": replaceMode.index,
+    "mode": mode.index,
     "fillPosition": fillPosition.index,
     "matchContent": matchContent.index,
+    "matchPosition": matchPosition.index,
     "number": number,
     "front": front,
     "back": behind,
     "start": start,
-    "end": end,
+    "length": length,
     "convertType": convertType.index,
     "wordSpacing": wordSpacing,
     "group": group,
@@ -444,14 +454,15 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'value: $value, '
         'useRegex: $useRegex, '
         'matchExtension: $matchExtension, '
-        'replaceMode: $replaceMode, '
+        'mode: $mode, '
         'fillPosition: $fillPosition, '
         'matchContent: $matchContent, '
+        'matchPosition: $matchPosition, '
         'number: $number, '
         'front: $front, '
         'back: $behind, '
         'start: $start, '
-        'end: $end, '
+        'length: $length, '
         'convertType: $convertType, '
         'wordSpacing: $wordSpacing, '
         'group: $group, '

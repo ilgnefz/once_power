@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/extension.dart';
+import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
@@ -86,6 +87,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
   ref.read(isApplyingProvider.notifier).finish();
+  updateName(ref);
 }
 
 Future<void> processFilesWithConcurrence(
@@ -148,8 +150,8 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     id: fileInfo.id,
     name: name,
     newName: name,
-    ext: ext,
-    newExt: ext,
+    extension: ext,
+    newExtension: ext,
     parent: fileInfo.parent,
     path: filePath,
     tempPath: '',

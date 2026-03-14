@@ -19,13 +19,9 @@ class FilePickerGroup extends ConsumerWidget {
       child: Row(
         spacing: AppNum.spaceSmall,
         children: [
-          EasyTooltip(
-            message: 'Happy new year' * 4,
-            placement: Placement.top,
-            child: EasyButton(
-              label: tr(AppL10n.actionUploadFile),
-              onPressed: () => uploadFile(ref),
-            ),
+          EasyButton(
+            label: tr(AppL10n.actionUploadFile),
+            onPressed: () => uploadFile(ref),
           ),
           EasyButton(
             label: tr(AppL10n.actionUploadFolder),

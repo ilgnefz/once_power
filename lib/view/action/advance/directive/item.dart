@@ -7,6 +7,7 @@ import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/file_info.dart';
 import 'package:once_power/widget/action/dynamic_button.dart';
 import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/click_icon.dart';
@@ -44,6 +45,7 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.read(advanceMenuListProvider.notifier);
+    Color color = widget.menu.checked ? widget.menu.type.color : Colors.grey;
     return MouseRegion(
       onEnter: (_) => setState(() => isHover = true),
       onExit: (_) => setState(() => isHover = false),
@@ -61,7 +63,7 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
             mainAxisSize: .max,
             crossAxisAlignment: .center,
             children: [
-              BaseText(widget.menu.type.label, color: widget.menu.type.color),
+              BaseText(widget.menu.type.label, color: color),
               _spaceM,
               buildInfo(),
               _spaceM,
@@ -72,6 +74,19 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
                     : Icons.visibility_off_outlined,
                 onPressed: () {
                   provider.toggle(widget.menu);
+                  advanceUpdateName(ref);
+                },
+              ),
+              _spaceS,
+              DynamicButton(
+                isHover: isHover,
+                icon: Icons.copy_all_rounded,
+                onPressed: () {
+                  ref.read(currentPresetNameProvider.notifier).update('');
+                  AdvanceMenuModel menu = widget.menu.copyWith(
+                    id: generateId(),
+                  );
+                  provider.add(menu);
                   advanceUpdateName(ref);
                 },
               ),

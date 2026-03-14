@@ -55,6 +55,7 @@ class NotificationContent extends StatelessWidget {
                     for (InfoDetail detail in info.detailList) {
                       content += '${detail.file} ${detail.message}';
                     }
+                    if (content.isEmpty) content = info.message;
                     await Clipboard.setData(ClipboardData(text: content));
                     cancelFunc.call();
                   },

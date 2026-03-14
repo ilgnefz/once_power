@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/util/notification.dart';
 import 'package:once_power/view/action/advance/dialog/add.dart';
 import 'package:once_power/view/action/advance/dialog/add_key_input.dart';
 import 'package:once_power/view/action/advance/dialog/delete.dart';
 import 'package:once_power/view/action/advance/dialog/replace.dart';
+import 'package:once_power/view/action/advance/preset/add.dart';
+import 'package:once_power/view/action/advance/preset/export.dart';
 import 'package:once_power/view/action/normal/upload_text.dart';
 import 'package:once_power/view/action/organize/dialog/group.dart';
 import 'package:once_power/view/action/organize/dialog/type.dart';
@@ -74,4 +77,19 @@ Future<void> replaceText(
 
 Future<void> showKeyInput(BuildContext context) async {
   await showDialog(context: context, builder: (context) => KeyInputView());
+}
+
+Future<void> showAddExport(BuildContext context) async {
+  await showDialog(context: context, builder: (context) => AddPresetView());
+}
+
+Future<void> renamePreset(BuildContext context, AdvancePreset preset) async {
+  await showDialog(
+    context: context,
+    builder: (context) => AddPresetView(preset: preset),
+  );
+}
+
+Future<void> showExportPreset(BuildContext context) async {
+  await showDialog(context: context, builder: (context) => ExportPresetView());
 }

@@ -32,35 +32,64 @@ extension AdvanceTypeExtension on AdvanceType {
   bool get isReplace => this == AdvanceType.replace;
 }
 
-enum MatchContent { first, last, all, number, front, behind, position }
+enum MatchContent { number, last, all }
 
-extension MatchLocationExtension on MatchContent {
+extension MatchContentExtension on MatchContent {
   String get label {
     switch (this) {
-      case MatchContent.first:
-        return tr(AppL10n.eMatchFirst);
+      case MatchContent.number:
+        return tr(AppL10n.advanceDi);
       case MatchContent.last:
         return tr(AppL10n.eMatchLast);
       case MatchContent.all:
         return tr(AppL10n.eMatchAll);
-      case MatchContent.number:
-        return tr(AppL10n.advanceDi);
-      case MatchContent.position:
-        return '';
-      case MatchContent.front:
-        return tr(AppL10n.eMatchFront);
-      case MatchContent.behind:
-        return tr(AppL10n.eMatchBehind);
     }
   }
 
-  bool get isFirst => this == MatchContent.first;
+  bool get isNumber => this == MatchContent.number;
   bool get isLast => this == MatchContent.last;
   bool get isAll => this == MatchContent.all;
-  bool get isNumber => this == MatchContent.number;
-  bool get isPosition => this == MatchContent.position;
-  bool get isFront => this == MatchContent.front;
-  bool get isBehind => this == MatchContent.behind;
+}
+
+enum MatchPosition { self, front, behind }
+
+extension MatchLocationExtension on MatchPosition {
+  String get label {
+    switch (this) {
+      case MatchPosition.self:
+        return tr(AppL10n.advanceSelf);
+      case MatchPosition.front:
+        return tr(AppL10n.advanceFront);
+      case MatchPosition.behind:
+        return tr(AppL10n.advanceBehind);
+    }
+  }
+
+  bool get isSelf => this == MatchPosition.self;
+  bool get isFront => this == MatchPosition.front;
+  bool get isBehind => this == MatchPosition.behind;
+}
+
+enum DeleteMode { input, type, position, extension }
+
+extension DeleteModeExtension on DeleteMode {
+  String get label {
+    switch (this) {
+      case DeleteMode.input:
+        return tr(AppL10n.eDeleteInput);
+      case DeleteMode.type:
+        return tr(AppL10n.eDeleteType);
+      case DeleteMode.extension:
+        return tr(AppL10n.eDeleteExtension);
+      case DeleteMode.position:
+        return '';
+    }
+  }
+
+  bool get isInput => this == DeleteMode.input;
+  bool get isType => this == DeleteMode.type;
+  bool get isExtension => this == DeleteMode.extension;
+  bool get isPosition => this == DeleteMode.position;
 }
 
 enum DeleteType { digit, capital, lowercase, nonLetter, punctuation, space }
@@ -84,9 +113,9 @@ extension DeleteTypeExtension on DeleteType {
   }
 }
 
-enum AddType {
+enum AddMode {
   text,
-  serial,
+  indexes,
   random,
   folder,
   width,
@@ -97,42 +126,42 @@ enum AddType {
   metaData,
 }
 
-extension AddTypeExtension on AddType {
+extension AddModeExtension on AddMode {
   String get label {
     switch (this) {
-      case AddType.text:
+      case AddMode.text:
         return tr(AppL10n.eAddText);
-      case AddType.serial:
-        return tr(AppL10n.eAddSerial);
-      case AddType.random:
+      case AddMode.indexes:
+        return tr(AppL10n.eAddIndex);
+      case AddMode.random:
         return tr(AppL10n.eAddRandom);
-      case AddType.folder:
+      case AddMode.folder:
         return tr(AppL10n.eAddFolder);
-      case AddType.width:
+      case AddMode.width:
         return tr(AppL10n.eAddWidth);
-      case AddType.height:
+      case AddMode.height:
         return tr(AppL10n.eAddHeight);
-      case AddType.extension:
+      case AddMode.extension:
         return tr(AppL10n.eAddExt);
-      case AddType.date:
+      case AddMode.date:
         return '';
-      case AddType.group:
+      case AddMode.group:
         return tr(AppL10n.eAddGroup);
-      case AddType.metaData:
+      case AddMode.metaData:
         return tr(AppL10n.eAddMeta);
     }
   }
 
-  bool get isText => this == AddType.text;
-  bool get isSerial => this == AddType.serial;
-  bool get isFolder => this == AddType.folder;
-  bool get isExtension => this == AddType.extension;
-  bool get isDate => this == AddType.date;
-  bool get isRandom => this == AddType.random;
-  bool get isWidth => this == AddType.width;
-  bool get isHeight => this == AddType.height;
-  bool get isMetaData => this == AddType.metaData;
-  bool get isGroup => this == AddType.group;
+  bool get isText => this == AddMode.text;
+  bool get isIndex => this == AddMode.indexes;
+  bool get isFolder => this == AddMode.folder;
+  bool get isExtension => this == AddMode.extension;
+  bool get isDate => this == AddMode.date;
+  bool get isRandom => this == AddMode.random;
+  bool get isWidth => this == AddMode.width;
+  bool get isHeight => this == AddMode.height;
+  bool get isMetaData => this == AddMode.metaData;
+  bool get isGroup => this == AddMode.group;
 }
 
 enum DateStyle { hidden, none, chinese, space, dash, underscore, dot }
@@ -223,35 +252,35 @@ extension DateSeparateTypeExtension on DateSeparateType {
   bool get isCustom => this == DateSeparateType.custom;
 }
 
-enum DistinguishType { none, folder, file, extension, group, date }
+enum DistinctionType { none, file, extension, date, folder, group }
 
-extension DistinguishTypeExtension on DistinguishType {
+extension DistinctionTypeExtension on DistinctionType {
   String get label {
     switch (this) {
-      case DistinguishType.none:
+      case DistinctionType.none:
         return tr(AppL10n.eDistNone);
-      case DistinguishType.date:
+      case DistinctionType.date:
         return tr(AppL10n.eDistDate);
-      case DistinguishType.folder:
+      case DistinctionType.folder:
         return tr(AppL10n.eDistFolder);
-      case DistinguishType.file:
+      case DistinctionType.file:
         return tr(AppL10n.eDistFile);
-      case DistinguishType.extension:
-        return tr(AppL10n.eDistExt);
-      case DistinguishType.group:
+      case DistinctionType.extension:
+        return tr(AppL10n.eDistExtension);
+      case DistinctionType.group:
         return tr(AppL10n.eDistGroup);
     }
   }
 
-  bool get isDate => this == DistinguishType.date;
-  bool get isFolder => this == DistinguishType.folder;
-  bool get isFile => this == DistinguishType.file;
-  bool get isExtension => this == DistinguishType.extension;
-  bool get isGroup => this == DistinguishType.group;
-  bool get isNone => this == DistinguishType.none;
+  bool get isDate => this == DistinctionType.date;
+  bool get isFolder => this == DistinctionType.folder;
+  bool get isFile => this == DistinctionType.file;
+  bool get isExtension => this == DistinctionType.extension;
+  bool get isGroup => this == DistinctionType.group;
+  bool get isNone => this == DistinctionType.none;
 }
 
-enum AddPosition { front, behind, end, interval }
+enum AddPosition { behind, front, end, interval }
 
 extension AddPositionExtension on AddPosition {
   String get label {
@@ -273,20 +302,11 @@ extension AddPositionExtension on AddPosition {
   bool get isInterval => this == AddPosition.interval;
 }
 
-enum ConvertType {
-  noConversion,
-  uppercase,
-  lowercase,
-  toggleCase,
-  traditional,
-  simplified,
-}
+enum ConvertType { uppercase, lowercase, toggleCase, traditional, simplified }
 
 extension ConvertTypeExtension on ConvertType {
   String get label {
     switch (this) {
-      case ConvertType.noConversion:
-        return tr(AppL10n.eConvertNo);
       case ConvertType.uppercase:
         return tr(AppL10n.eConvertUpper);
       case ConvertType.lowercase:
@@ -300,7 +320,6 @@ extension ConvertTypeExtension on ConvertType {
     }
   }
 
-  bool get isNoConversion => this == ConvertType.noConversion;
   bool get isUppercase => this == ConvertType.uppercase;
   bool get isLowercase => this == ConvertType.lowercase;
   bool get isToggleCase => this == ConvertType.toggleCase;
@@ -308,20 +327,29 @@ extension ConvertTypeExtension on ConvertType {
   bool get isSimplified => this == ConvertType.simplified;
 }
 
-enum ReplaceMode { normal, format }
+enum ReplaceMode { normal, convert, format, position, separator }
 
 extension ReplaceModeExtension on ReplaceMode {
   String get label {
     switch (this) {
       case ReplaceMode.normal:
         return tr(AppL10n.eReplaceNormal);
+      case ReplaceMode.convert:
+        return tr(AppL10n.eReplaceConvert);
+      case ReplaceMode.separator:
+        return tr(AppL10n.advanceWord);
       case ReplaceMode.format:
         return tr(AppL10n.eReplaceFormat);
+      case ReplaceMode.position:
+        return '';
     }
   }
 
   bool get isNormal => this == ReplaceMode.normal;
+  bool get isConvert => this == ReplaceMode.convert;
+  bool get isSeparator => this == ReplaceMode.separator;
   bool get isFormat => this == ReplaceMode.format;
+  bool get isPosition => this == ReplaceMode.position;
 }
 
 enum FillPosition { front, behind }

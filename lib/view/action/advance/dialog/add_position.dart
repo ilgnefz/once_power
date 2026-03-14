@@ -42,7 +42,7 @@ class AddPositionGroup extends StatelessWidget {
         DigitInput(
           width: 120,
           value: positionIndex,
-          unit: tr(AppL10n.advancePlace),
+          unit: tr(AppL10n.advancePCount),
           min: 1,
           onChanged: onIndexChanged,
         ),

@@ -12,7 +12,7 @@ import 'package:once_power/widget/common/one_line_text.dart';
 final Provider<String> _titleProvider = Provider((Ref ref) {
   String presetName = ref.watch(currentPresetNameProvider);
   int len = ref.watch(advanceMenuListProvider).length;
-  String title = tr(AppL10n.advanceCount, namedArgs: {"count": "$len"});
+  String title = tr(AppL10n.advanceTotal, namedArgs: {"count": "$len"});
   if (presetName.isNotEmpty) title += ' - $presetName';
   return title;
 });

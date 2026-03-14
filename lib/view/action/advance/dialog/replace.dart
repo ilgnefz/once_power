@@ -11,6 +11,7 @@ import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
 import 'package:once_power/util/verify.dart';
+import 'package:once_power/view/action/advance/dialog/match_content.dart';
 import 'package:once_power/view/action/advance/dialog/replace_conversion.dart';
 import 'package:once_power/view/action/advance/dialog/replace_mode.dart';
 import 'package:once_power/widget/action/item.dart';
@@ -19,7 +20,7 @@ import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/input_field.dart';
 
 import 'group_dropdown.dart';
-import 'match_content.dart';
+import 'match_position.dart';
 
 class ReplaceView extends ConsumerStatefulWidget {
   const ReplaceView({super.key, this.menu});
@@ -35,9 +36,10 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
   String match = '', modify = '', wordSpacing = '', group = 'all';
   ReplaceMode mode = ReplaceMode.normal;
   FillPosition position = FillPosition.front;
-  MatchContent content = MatchContent.first;
-  int number = 1, front = 1, behind = 1, start = 1, end = 1;
-  ConvertType type = ConvertType.noConversion;
+  MatchContent matchContent = MatchContent.number;
+  MatchPosition matchPosition = MatchPosition.self;
+  int number = 1, front = 1, behind = 1, start = 1, length = 1;
+  ConvertType type = ConvertType.uppercase;
 
   @override
   void initState() {
@@ -47,14 +49,15 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
     matchExtension = widget.menu!.matchExtension;
     match = widget.menu!.value[0];
     modify = widget.menu!.value[1];
-    mode = widget.menu!.replaceMode;
+    mode = widget.menu!.mode;
     position = widget.menu!.fillPosition;
-    content = widget.menu!.matchContent;
+    matchContent = widget.menu!.matchContent;
+    matchPosition = widget.menu!.matchPosition;
     number = widget.menu!.number;
     front = widget.menu!.front;
     behind = widget.menu!.behind;
     start = widget.menu!.start;
-    end = widget.menu!.end;
+    length = widget.menu!.length;
     type = widget.menu!.convertType;
     wordSpacing = widget.menu!.wordSpacing;
     group = widget.menu!.group;
@@ -73,11 +76,16 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
             icon: AppIcons.regex,
             tip: tr(AppL10n.advanceRegex),
             checked: useRegex,
-            onPressed: () => setState(() => useRegex = !useRegex),
+            onPressed: () => setState(() {
+              useRegex = !useRegex;
+              mode = ReplaceMode.normal;
+            }),
             child: InputField(
               text: match,
-              hintText: tr(AppL10n.advanceReplaceHint1),
-              onComplete: (value) => setState(() => match = value),
+              hintText: mode.isFormat
+                  ? tr(AppL10n.advanceFormatDigit)
+                  : tr(AppL10n.advanceReplaceHint1),
+              onChanged: (value) => setState(() => match = value),
             ),
           ),
           ActionItem(
@@ -85,45 +93,88 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
             icon: AppIcons.extension,
             tip: tr(AppL10n.advanceMatchExt),
             checked: matchExtension,
-            onPressed: () => setState(() => matchExtension = !matchExtension),
+            onPressed: () => setState(() {
+              matchExtension = !matchExtension;
+              mode = ReplaceMode.normal;
+            }),
             child: InputField(
               text: modify,
-              hintText: tr(AppL10n.advanceReplaceHint2),
-              onComplete: (value) => setState(() => modify = value),
+              hintText: mode.isFormat
+                  ? tr(AppL10n.advanceCompleteContent)
+                  : tr(AppL10n.advanceReplaceHint2),
+              onChanged: (value) => setState(() => modify = value),
             ),
           ),
           ReplaceModeGroup(
             mode: mode,
             onChanged: (value) => setState(() => mode = value),
             fillPosition: position,
-            onFillChanged: (value) => setState(() => position = value),
+            onFillChanged: (value) => setState(() {
+              position = value;
+              mode = ReplaceMode.format;
+            }),
+            start: start,
+            end: length,
+            onStartChanged: (value) => setState(() {
+              start = value;
+              mode = ReplaceMode.position;
+            }),
+            onEndChanged: (value) => setState(() {
+              length = value;
+              mode = ReplaceMode.position;
+            }),
           ),
           MatchContentGroup(
-            content: content,
-            onChanged: (value) => setState(() => content = value),
+            content: matchContent,
+            onChanged: (value) => setState(() {
+              matchContent = value;
+              mode = ReplaceMode.normal;
+            }),
             number: number,
-            onNumberChanged: (value) => setState(() => number = value),
+            onNumberChanged: (value) => setState(() {
+              number = value;
+              mode = ReplaceMode.normal;
+              matchContent = MatchContent.number;
+            }),
+          ),
+          MatchPositionGroup(
+            position: matchPosition,
+            onChanged: (value) => setState(() {
+              matchPosition = value;
+              mode = ReplaceMode.normal;
+            }),
             front: front,
-            onFrontChanged: (value) => setState(() => front = value),
+            onFrontChanged: (value) {
+              setState(() => front = value);
+              mode = ReplaceMode.normal;
+              matchPosition = MatchPosition.front;
+            },
             behind: behind,
-            onBehindChanged: (value) => setState(() => behind = value),
-            start: start,
-            end: end,
-            onStartChanged: (value) => setState(() => start = value),
-            onEndChanged: (value) => setState(() => end = value),
+            onBehindChanged: (value) => setState(() {
+              behind = value;
+              mode = ReplaceMode.normal;
+              matchPosition = MatchPosition.behind;
+            }),
           ),
           ReplaceConversion(
             type: type,
-            onChanged: (value) => setState(() => type = value),
+            onChanged: (value) => setState(() {
+              type = value;
+              mode = ReplaceMode.convert;
+            }),
           ),
           Row(
+            spacing: AppNum.spaceMedium,
             children: [
               BaseText('${tr(AppL10n.advanceWord)}: '),
               Expanded(
                 child: InputField(
                   text: wordSpacing,
                   hintText: tr(AppL10n.advanceWordHint),
-                  onChanged: (value) => setState(() => wordSpacing = value),
+                  onChanged: (value) => setState(() {
+                    wordSpacing = value;
+                    mode = ReplaceMode.separator;
+                  }),
                 ),
               ),
             ],
@@ -145,19 +196,19 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
           value: [match, modify],
           useRegex: useRegex,
           matchExtension: matchExtension,
-          replaceMode: mode,
+          mode: mode,
           fillPosition: position,
-          matchContent: content,
+          matchContent: matchContent,
+          matchPosition: matchPosition,
           number: number,
           front: front,
           behind: behind,
           start: start,
-          end: end,
+          length: length,
           convertType: type,
           wordSpacing: wordSpacing,
           group: group,
         );
-        print(replace);
         widget.menu == null
             ? ref.read(advanceMenuListProvider.notifier).add(replace)
             : ref.read(advanceMenuListProvider.notifier).update(id, replace);

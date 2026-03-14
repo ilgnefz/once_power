@@ -14,28 +14,12 @@ class MatchContentGroup extends StatelessWidget {
     required this.onChanged,
     required this.number,
     required this.onNumberChanged,
-    required this.front,
-    required this.onFrontChanged,
-    required this.behind,
-    required this.onBehindChanged,
-    required this.start,
-    required this.end,
-    required this.onStartChanged,
-    required this.onEndChanged,
   });
 
   final MatchContent content;
   final void Function(MatchContent) onChanged;
   final int number;
   final Function(int) onNumberChanged;
-  final int front;
-  final Function(int) onFrontChanged;
-  final int behind;
-  final Function(int) onBehindChanged;
-  final int start;
-  final int end;
-  final Function(int) onStartChanged;
-  final Function(int) onEndChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +29,7 @@ class MatchContentGroup extends StatelessWidget {
       child: DialogOption(
         title: tr(AppL10n.advanceMatchContent),
         padding: .only(top: AppNum.spaceSmall),
-        spacing: AppNum.spaceMedium,
-        runSpacing: AppNum.spaceMedium,
-        alignment: WrapAlignment.spaceBetween,
+        spacing: AppNum.spaceLarge,
         children: MatchContent.values.map((e) {
           switch (e) {
             case MatchContent.number:
@@ -55,60 +37,11 @@ class MatchContentGroup extends StatelessWidget {
                 label: e.label,
                 value: e,
                 trailing: DigitInput(
-                  width: 100,
+                  width: 120,
                   value: number,
                   min: 1,
-                  unit: tr(AppL10n.advancePlace),
+                  unit: tr(AppL10n.advanceGe),
                   onChanged: onNumberChanged,
-                ),
-              );
-            case MatchContent.front:
-              return EasyRadio(
-                label: e.label,
-                value: e,
-                trailing: DigitInput(
-                  width: 100,
-                  value: front,
-                  min: 1,
-                  unit: tr(AppL10n.advancePlace),
-                  onChanged: onFrontChanged,
-                ),
-              );
-            case MatchContent.behind:
-              return EasyRadio(
-                label: e.label,
-                value: e,
-                trailing: DigitInput(
-                  width: 100,
-                  value: behind,
-                  min: 1,
-                  unit: tr(AppL10n.advancePlace),
-                  onChanged: onBehindChanged,
-                ),
-              );
-            case MatchContent.position:
-              return EasyRadio(
-                label: e.label,
-                value: e,
-                space: 0,
-                trailing: Row(
-                  spacing: AppNum.spaceSmall,
-                  children: [
-                    DigitInput(
-                      width: 108,
-                      value: start,
-                      min: 1,
-                      unit: tr(AppL10n.advanceStart),
-                      onChanged: onStartChanged,
-                    ),
-                    DigitInput(
-                      width: 108,
-                      value: end,
-                      min: 1,
-                      unit: tr(AppL10n.advanceEnd),
-                      onChanged: onEndChanged,
-                    ),
-                  ],
                 ),
               );
             default:

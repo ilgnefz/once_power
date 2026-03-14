@@ -47,7 +47,7 @@ class _GroupDropdownState extends ConsumerState<GroupDropdown> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Row(
-      spacing: AppNum.spaceSmall,
+      spacing: AppNum.spaceMedium,
       children: [
         Text(
           '${tr(AppL10n.dialogApplyGroup)}:',

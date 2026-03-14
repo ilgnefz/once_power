@@ -22,11 +22,13 @@ void cSVUpdateName(WidgetRef ref) {
   for (FileInfo file in list) {
     if (!file.checked) {
       ref.read(fileListProvider.notifier).updateNewName(file.id, file.name);
-      ref.read(fileListProvider.notifier).updateNewExt(file.id, file.ext);
+      ref
+          .read(fileListProvider.notifier)
+          .updateNewExtension(file.id, file.extension);
       continue;
     }
     bool isDeleteExtension = ref.watch(deleteExtensionProvider);
-    String extension = isDeleteExtension ? '' : file.ext;
+    String extension = isDeleteExtension ? '' : file.extension;
     bool isMatchExtension = ref.watch(matchExtensionProvider);
     String name = file.name;
     if (isMatchExtension) name = getFullName(name, extension);
@@ -45,7 +47,7 @@ void cSVUpdateName(WidgetRef ref) {
       name = name.split('.').first;
     }
     ref.read(fileListProvider.notifier).updateNewName(file.id, name);
-    ref.read(fileListProvider.notifier).updateNewExt(file.id, extension);
+    ref.read(fileListProvider.notifier).updateNewExtension(file.id, extension);
   }
 }
 

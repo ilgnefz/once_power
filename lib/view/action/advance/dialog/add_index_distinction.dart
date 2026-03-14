@@ -10,8 +10,8 @@ import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/radio.dart';
 import 'package:once_power/widget/common/text_dropdown.dart';
 
-class AddSerialDistinguish extends StatelessWidget {
-  const AddSerialDistinguish({
+class AddIndexDistinction extends StatelessWidget {
+  const AddIndexDistinction({
     super.key,
     required this.type,
     required this.onChanged,
@@ -19,21 +19,22 @@ class AddSerialDistinguish extends StatelessWidget {
     required this.onDateTypeChange,
   });
 
-  final DistinguishType type;
-  final void Function(DistinguishType value) onChanged;
+  final DistinctionType type;
+  final void Function(DistinctionType value) onChanged;
   final DateType dateType;
   final void Function(DateType value) onDateTypeChange;
 
   @override
   Widget build(BuildContext context) {
-    return RadioGroup<DistinguishType>(
+    return RadioGroup<DistinctionType>(
       groupValue: type,
       onChanged: (value) => onChanged(value!),
       child: DialogOption(
-        title: tr(AppL10n.advanceSerialDistinguish),
+        title: tr(AppL10n.advanceIndexDistinction),
         padding: const .only(top: 4.0),
-        alignment: .spaceBetween,
-        children: DistinguishType.values
+        // alignment: .spaceBetween,
+        spacing: AppNum.spaceLarge,
+        children: DistinctionType.values
             .map(
               (e) => EasyRadio(
                 label: e.label,

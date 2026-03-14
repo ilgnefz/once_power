@@ -41,10 +41,12 @@ List<FileInfo> sortList(Ref ref) {
         });
       break;
     case SortType.typeAscending:
-      sortedList = [...list]..sort((a, b) => a.ext.compareTo(b.ext));
+      sortedList = [...list]
+        ..sort((a, b) => a.extension.compareTo(b.extension));
       break;
     case SortType.typeDescending:
-      sortedList = [...list]..sort((a, b) => b.ext.compareTo(a.ext));
+      sortedList = [...list]
+        ..sort((a, b) => b.extension.compareTo(a.extension));
       break;
     case SortType.checkAscending:
       sortedList = [...list]

@@ -18,6 +18,10 @@ class FileList extends _$FileList {
 
   void checkAll(bool check) => state = state.map((e) {
     if (e.checked != check) e.checked = check;
+    if (!check) {
+      e.newName = e.name;
+      e.newExtension = e.extension;
+    }
     return e;
   }).toList();
 
@@ -33,7 +37,7 @@ class FileList extends _$FileList {
       }).toList();
 
   void checkExtension(String ext) => state = state.map((e) {
-    if (e.ext == ext) e.checked = !e.checked;
+    if (e.extension == ext) e.checked = !e.checked;
     return e;
   }).toList();
 
@@ -114,8 +118,8 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  void updateNewExt(String id, String value) => state = state.map((e) {
-    if (e.id == id && !e.type.isFolder) e.newExt = value;
+  void updateNewExtension(String id, String value) => state = state.map((e) {
+    if (e.id == id && !e.type.isFolder) e.newExtension = value;
     return e;
   }).toList();
 
@@ -129,8 +133,8 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  void updateOriginExt(String id, String value) => state = state.map((e) {
-    if (e.id == id) e.ext = value;
+  void updateOriginExtension(String id, String value) => state = state.map((e) {
+    if (e.id == id) e.extension = value;
     return e;
   }).toList();
 

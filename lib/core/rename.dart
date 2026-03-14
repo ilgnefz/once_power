@@ -133,7 +133,7 @@ Future<RenameCondition> checkCondition(
 
 String generateTempName(FileInfo file) {
   String temp = '${file.name}.${DateTime.now().hashCode}.once-power.tmp';
-  String tempName = getFullName(temp, file.newExt);
+  String tempName = getFullName(temp, file.newExtension);
   return join(file.parent, tempName);
 }
 
@@ -161,7 +161,7 @@ void updateShowInfo(WidgetRef ref, FileInfo file, String newPath) {
   provider.updateOriginName(id, newName);
   String newExt = extension(newPath);
   newExt = newExt.isEmpty ? '' : newExt.substring(1);
-  if (file.ext != newExt) provider.updateOriginExt(id, newExt);
+  if (file.extension != newExt) provider.updateOriginExtension(id, newExt);
   provider.updatePath(id, newPath);
   if (file.tempPath.isNotEmpty) provider.updateTempPath(id, '');
 }

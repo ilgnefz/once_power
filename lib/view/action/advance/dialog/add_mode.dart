@@ -11,8 +11,8 @@ import 'package:once_power/widget/action/dialog_option.dart';
 import 'package:once_power/widget/common/digit_input.dart';
 import 'package:once_power/widget/common/radio.dart';
 
-class AddTypeGroup extends StatelessWidget {
-  const AddTypeGroup({
+class AddModeGroup extends StatelessWidget {
+  const AddModeGroup({
     super.key,
     required this.type,
     required this.onChanged,
@@ -34,8 +34,8 @@ class AddTypeGroup extends StatelessWidget {
     required this.onSuffixChanged,
   });
 
-  final AddType type;
-  final void Function(AddType) onChanged;
+  final AddMode type;
+  final void Function(AddMode) onChanged;
   final int length;
   final void Function(int) onLengthChanged;
   final DateType date;
@@ -55,7 +55,7 @@ class AddTypeGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RadioGroup<AddType>(
+    return RadioGroup<AddMode>(
       groupValue: type,
       onChanged: (value) => onChanged(value!),
       child: DialogOption(
@@ -64,21 +64,21 @@ class AddTypeGroup extends StatelessWidget {
         spacing: AppNum.spaceMedium,
         runSpacing: AppNum.spaceMedium,
         alignment: WrapAlignment.spaceBetween,
-        children: AddType.values.map((e) {
+        children: AddMode.values.map((e) {
           switch (e) {
-            case AddType.random:
+            case AddMode.random:
               return EasyRadio(
                 label: e.label,
                 value: e,
                 trailing: DigitInput(
                   width: 104,
                   value: length,
-                  unit: tr(AppL10n.advanceDigits),
+                  unit: tr(AppL10n.renameLength),
                   min: 1,
                   onChanged: onLengthChanged,
                 ),
               );
-            case AddType.date:
+            case AddMode.date:
               return EasyRadio(
                 label: e.label,
                 value: e,
@@ -94,7 +94,7 @@ class AddTypeGroup extends StatelessWidget {
                   onTimeStyleChange: onTimeStyleChange,
                 ),
               );
-            case AddType.metaData:
+            case AddMode.metaData:
               return EasyRadio(
                 label: e.label,
                 value: e,

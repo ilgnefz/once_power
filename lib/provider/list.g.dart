@@ -48,7 +48,7 @@ final class SortListProvider
   }
 }
 
-String _$sortListHash() => r'caf32285d5382842105f6cd07a8960e8173c3454';
+String _$sortListHash() => r'1e9b799ccc8a437d1a62ea22b9946b3d48c611c1';
 
 @ProviderFor(SortSelectList)
 final sortSelectListProvider = SortSelectListProvider._();

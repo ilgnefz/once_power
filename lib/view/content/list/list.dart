@@ -43,7 +43,7 @@ class ContentListView extends ConsumerWidget {
         FileInfo file = files[index];
         final ThemeData theme = Theme.of(context);
         String title = file.name, subtitle = file.newName;
-        String ext = file.ext, newExt = file.newExt;
+        String ext = file.extension, newExt = file.newExtension;
         Color? subColor = title == subtitle ? Colors.grey : theme.primaryColor;
 
         if (ref.watch(currentModeProvider).isOrganize) {
@@ -64,7 +64,10 @@ class ContentListView extends ConsumerWidget {
               checked: file.checked,
               onChanged: (bool? value) {
                 provider.updateCheck(file.id, value!);
-                updateName(ref);
+                if (value) return updateName(ref);
+                FileList fileProvider = ref.read(fileListProvider.notifier);
+                fileProvider.updateNewName(file.id, file.name);
+                fileProvider.updateNewExtension(file.id, file.extension);
               },
               title: title,
               subTitle: subtitle,
@@ -73,6 +76,9 @@ class ContentListView extends ConsumerWidget {
               action: BaseText(
                 newExt,
                 fontSize: 13,
+                maxLines: 2,
+                textAlign: .center,
+                overflow: TextOverflow.ellipsis,
                 color: ext == newExt ? Colors.grey : theme.primaryColor,
               ),
               icon: Icons.delete_outline_rounded,

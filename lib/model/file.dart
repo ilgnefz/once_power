@@ -22,8 +22,8 @@ class FileInfo {
   String beforePath;
 
   /// jpg
-  String ext;
-  String newExt;
+  String extension;
+  String newExtension;
   DateInfo createdDate;
   DateInfo modifiedDate;
   DateInfo accessedDate;
@@ -43,8 +43,8 @@ class FileInfo {
     required this.path,
     required this.tempPath,
     required this.beforePath,
-    required this.ext,
-    required this.newExt,
+    required this.extension,
+    required this.newExtension,
     required this.createdDate,
     required this.modifiedDate,
     required this.accessedDate,
@@ -64,8 +64,8 @@ class FileInfo {
     String? path,
     String? tempPath,
     String? beforePath,
-    String? ext,
-    String? newExt,
+    String? extension,
+    String? newExtension,
     DateInfo? createdDate,
     DateInfo? modifiedDate,
     DateInfo? accessedDate,
@@ -82,8 +82,8 @@ class FileInfo {
       parent: parent ?? this.parent,
       path: path ?? this.path,
       tempPath: tempPath ?? this.tempPath,
-      ext: ext ?? this.ext,
-      newExt: newExt ?? this.newExt,
+      extension: extension ?? this.extension,
+      newExtension: newExtension ?? this.newExtension,
       beforePath: beforePath ?? this.beforePath,
       createdDate: createdDate ?? this.createdDate,
       modifiedDate: modifiedDate ?? this.modifiedDate,
@@ -98,9 +98,9 @@ class FileInfo {
     );
   }
 
-  String getFullOldName() => getFullName(name, ext);
+  String getFullOldName() => getFullName(name, extension);
 
-  String getFullNewName() => getFullName(newName, newExt);
+  String getFullNewName() => getFullName(newName, newExtension);
 
   String getNewPath(bool isUndo) =>
       isUndo ? beforePath : join(parent, getFullNewName());

@@ -57,8 +57,14 @@ void insertPosition(WidgetRef ref, int index, List<FileInfo> files) {
 }
 
 void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
-  for (FileInfo e in files) {
-    ref.read(fileListProvider.notifier).updateCheck(e.id, !e.checked);
+  FileList fileProvider = ref.read(fileListProvider.notifier);
+  for (FileInfo file in files) {
+    bool check = !file.checked;
+    fileProvider.updateCheck(file.id, check);
+    if (!check) {
+      fileProvider.updateNewName(file.id, file.name);
+      fileProvider.updateNewExtension(file.id, file.extension);
+    }
   }
   updateName(ref);
 }

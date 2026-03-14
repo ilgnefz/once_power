@@ -6,12 +6,14 @@ class EasyCheckbox extends StatelessWidget {
     required this.checked,
     required this.onChanged,
     this.label,
+    this.space = 0,
     this.child,
   });
 
   final bool? checked;
   final Function(bool?)? onChanged;
   final String? label;
+  final double space;
   final Widget? child;
 
   @override
@@ -31,8 +33,9 @@ class EasyCheckbox extends StatelessWidget {
     );
 
     Widget row = Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: .min,
+      mainAxisAlignment: .start,
+      crossAxisAlignment: .center,
       children: [
         checkbox,
         if (label != null)
@@ -40,6 +43,7 @@ class EasyCheckbox extends StatelessWidget {
             label!,
             style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
           ),
+        if (space > 0) SizedBox(width: space),
         ?child,
       ],
     );

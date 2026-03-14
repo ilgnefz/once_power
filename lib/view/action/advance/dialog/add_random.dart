@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/action/dialog_option.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 import 'package:once_power/widget/common/input_field.dart';
@@ -41,7 +42,8 @@ class _AddRandomState extends State<AddRandom> {
     return DialogOption(
       title: tr(AppL10n.advanceRandom),
       padding: const .only(top: 4.0),
-      alignment: .spaceBetween,
+      // alignment: .spaceBetween,
+      spacing: AppNum.spaceLarge,
       children: [
         ...all.map(
           (e) => EasyCheckbox(

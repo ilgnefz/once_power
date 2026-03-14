@@ -24,21 +24,17 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
     isLen: ref.read(isInputLenProvider),
     caseSen: ref.read(isCaseSensitiveProvider),
   );
-  final String ext = ref.read(extensionControllerProvider).text;
+  final String extension = ref.read(extensionControllerProvider).text;
   final bool isDate = ref.read(isDateRenameProvider);
-  final bool isExt = ref.read(isModifyExtensionProvider);
+  final bool isExtension = ref.read(isModifyExtensionProvider);
   final bool caseFile = ref.read(isCaseFileProvider);
-  final bool caseExt = ref.read(isCaseExtProvider);
+  final bool caseExtension = ref.read(isCaseExtProvider);
   Map<String, dynamic> classifyMap = {};
   final List<FileInfo> files = ref.watch(sortListProvider);
   final FileList fileProvider = ref.read(fileListProvider.notifier);
   int index = 0;
   for (FileInfo file in files) {
-    if (!file.checked) {
-      fileProvider.updateNewName(file.id, file.name);
-      fileProvider.updateNewExt(file.id, file.ext);
-      continue;
-    }
+    if (!file.checked) continue;
     String date = dateName(ref, file);
     String name = isDate
         ? date
@@ -49,7 +45,7 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
     index = getRealIndex(
       date,
       caseFile,
-      caseExt,
+      caseExtension,
       isDate,
       index,
       file,
@@ -60,7 +56,10 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
     name = prefix + name + suffix;
     name = removeForbiddenCharacters(name);
     fileProvider.updateNewName(file.id, name);
-    fileProvider.updateNewExt(file.id, isExt ? ext : file.ext);
+    fileProvider.updateNewExtension(
+      file.id,
+      isExtension ? extension : file.extension,
+    );
     index++;
   }
 }
@@ -86,14 +85,14 @@ int getRealIndex(
       (_, index) = calculateIndex(classifyMap, [date, file.type.label], file);
     }
     if (caseExt) {
-      (_, index) = calculateIndex(classifyMap, [date, file.ext], file);
+      (_, index) = calculateIndex(classifyMap, [date, file.extension], file);
     }
   } else {
     if (caseFile && !caseExt) {
       (_, index) = calculateIndex(classifyMap, [file.type.label], file);
     }
     if (caseExt) {
-      (_, index) = calculateIndex(classifyMap, [file.ext], file);
+      (_, index) = calculateIndex(classifyMap, [file.extension], file);
     }
   }
   return index;

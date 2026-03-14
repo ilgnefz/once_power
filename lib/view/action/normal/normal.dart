@@ -16,7 +16,7 @@ import 'package:once_power/view/action/normal/case.dart';
 import 'package:once_power/view/action/normal/date.dart';
 import 'package:once_power/view/action/normal/extension.dart';
 import 'package:once_power/view/action/normal/modify.dart';
-import 'package:once_power/view/action/normal/serial.dart';
+import 'package:once_power/view/action/normal/index.dart';
 import 'package:once_power/view/action/picker.dart';
 import 'package:once_power/widget/action/struct.dart';
 
@@ -51,8 +51,8 @@ class NormalView extends StatelessWidget {
             }
           },
         ),
-        SerialInput(
-          label: tr(AppL10n.renameSerial),
+        IndexInput(
+          label: tr(AppL10n.renameIndex),
           tip: tr(AppL10n.renamePrefixSwap),
           swapProvider: isSwapPrefixProvider,
           digitProvider: prefixDigitProvider,
@@ -74,8 +74,8 @@ class NormalView extends StatelessWidget {
             }
           },
         ),
-        SerialInput(
-          label: tr(AppL10n.renameSerial),
+        IndexInput(
+          label: tr(AppL10n.renameIndex),
           tip: tr(AppL10n.renameSuffixSwap),
           swapProvider: isSwapSuffixProvider,
           digitProvider: suffixDigitProvider,

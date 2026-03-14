@@ -11,9 +11,10 @@ import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
 import 'package:once_power/util/verify.dart';
-import 'package:once_power/view/action/advance/dialog/delete_extension.dart';
+import 'package:once_power/view/action/advance/dialog/delete_mode.dart';
 import 'package:once_power/view/action/advance/dialog/group_dropdown.dart';
 import 'package:once_power/view/action/advance/dialog/match_content.dart';
+import 'package:once_power/view/action/advance/dialog/match_position.dart';
 import 'package:once_power/widget/action/item.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/input_field.dart';
@@ -31,24 +32,27 @@ class DeleteView extends ConsumerStatefulWidget {
 
 class _DeleteViewState extends ConsumerState<DeleteView> {
   String value = '', group = 'all';
-  MatchContent content = MatchContent.first;
-  int number = 1, front = 1, behind = 1, start = 1, end = 1;
+  bool useRegex = false;
+  DeleteMode mode = DeleteMode.input;
+  MatchContent matchContent = MatchContent.number;
+  MatchPosition matchPosition = MatchPosition.self;
+  int number = 1, front = 1, behind = 1, start = 1, length = 1;
   List<DeleteType> deleteTypes = [];
-  bool deleteExtension = false, useRegex = false;
 
   @override
   void initState() {
     super.initState();
     if (widget.menu == null) return;
     value = widget.menu!.value;
-    content = widget.menu!.matchContent;
+    mode = widget.menu!.mode;
+    matchContent = widget.menu!.matchContent;
+    matchPosition = widget.menu!.matchPosition;
     number = widget.menu!.number;
     front = widget.menu!.front;
     behind = widget.menu!.behind;
     start = widget.menu!.start;
-    end = widget.menu!.end;
+    length = widget.menu!.length;
     deleteTypes = widget.menu!.deleteTypes;
-    deleteExtension = widget.menu!.deleteExtension;
     useRegex = widget.menu!.useRegex;
     group = widget.menu!.group;
   }
@@ -66,40 +70,79 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
             icon: AppIcons.regex,
             tip: tr(AppL10n.advanceRegex),
             checked: useRegex,
-            onPressed: () => setState(() => useRegex = !useRegex),
+            onPressed: () => setState(() {
+              useRegex = !useRegex;
+              mode = DeleteMode.input;
+            }),
             child: InputField(
               text: value,
               hintText: tr(AppL10n.advanceDeleteHint),
-              onComplete: (value) => setState(() => this.value = value),
+              onChanged: (value) => setState(() {
+                this.value = value;
+                mode = DeleteMode.input;
+              }),
             ),
           ),
-          // TODO: 匹配模式：内容、位置、类型、扩展
-          // TODO: 匹配内容：第一个、最后一个、所有、第N个、前面N个、后面N个
-          MatchContentGroup(
-            content: content,
-            onChanged: (value) => setState(() => content = value),
-            number: number,
-            onNumberChanged: (value) => setState(() => number = value),
-            front: front,
-            onFrontChanged: (value) => setState(() => front = value),
-            behind: behind,
-            onBehindChanged: (value) => setState(() => behind = value),
+          DeleteModeGroup(
+            mode: mode,
+            onChanged: (value) => setState(() => mode = value),
             start: start,
-            end: end,
-            onStartChanged: (value) => setState(() => start = value),
-            onEndChanged: (value) => setState(() => end = value),
+            end: length,
+            onStartChanged: (value) => setState(() {
+              start = value;
+              mode = DeleteMode.position;
+            }),
+            onEndChanged: (value) => setState(() {
+              length = value;
+              mode = DeleteMode.position;
+            }),
+          ),
+          MatchContentGroup(
+            content: matchContent,
+            onChanged: (value) => setState(() {
+              matchContent = value;
+              mode = DeleteMode.input;
+            }),
+            number: number,
+            onNumberChanged: (value) => setState(() {
+              number = value;
+              mode = DeleteMode.input;
+              matchContent = MatchContent.number;
+            }),
+          ),
+          MatchPositionGroup(
+            position: matchPosition,
+            onChanged: (value) => setState(() {
+              matchPosition = value;
+              mode = DeleteMode.input;
+            }),
+            front: front,
+            onFrontChanged: (value) => setState(() {
+              front = value;
+              mode = DeleteMode.input;
+              matchPosition = MatchPosition.front;
+            }),
+            behind: behind,
+            onBehindChanged: (value) => setState(() {
+              behind = value;
+              mode = DeleteMode.input;
+              matchPosition = MatchPosition.behind;
+            }),
           ),
           DeleteTypeGroup(
             deleteTypes: deleteTypes,
-            onChanged: (value) => setState(
-              () => deleteTypes.contains(value)
+            onChanged: (value) => setState(() {
+              deleteTypes.contains(value)
                   ? deleteTypes.remove(value)
-                  : deleteTypes.add(value),
-            ),
-          ),
-          DeleteExtensionSwitch(
-            value: deleteExtension,
-            onChanged: (value) => setState(() => deleteExtension = value),
+                  : deleteTypes.add(value);
+              mode = DeleteMode.type;
+            }),
+            onAllChanged: (value) => setState(() {
+              deleteTypes = value
+                  ? Set<DeleteType>.from(DeleteType.values).toList()
+                  : [];
+              mode = DeleteMode.type;
+            }),
           ),
         ],
       ),
@@ -115,19 +158,19 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
         AdvanceMenuDelete delete = AdvanceMenuDelete(
           id: id,
           value: value,
-          matchContent: content,
+          useRegex: useRegex,
+          mode: mode,
+          start: start,
+          length: length,
+          matchContent: matchContent,
+          matchPosition: matchPosition,
           number: number,
           front: front,
           behind: behind,
-          start: start,
-          end: end,
           deleteTypes: deleteTypes,
-          deleteExtension: deleteExtension,
-          useRegex: useRegex,
           group: group,
           checked: true,
         );
-        print(delete);
         widget.menu == null
             ? ref.read(advanceMenuListProvider.notifier).add(delete)
             : ref.read(advanceMenuListProvider.notifier).update(id, delete);

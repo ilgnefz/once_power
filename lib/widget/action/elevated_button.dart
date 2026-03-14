@@ -11,6 +11,7 @@ class EasyElevatedButton extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return ElevatedButton(
       onPressed: onPressed,
+      style: ButtonStyle(padding: .all(.symmetric(horizontal: 23))),
       child: Text(
         label,
         style: theme.textTheme.bodyMedium?.copyWith(

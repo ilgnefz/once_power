@@ -53,6 +53,7 @@ class AddMetaGroup extends StatelessWidget {
               )
               .toList(),
           value: metaData,
+          width: 100,
           onChanged: onMetaDataChange,
         ),
         SizedBox(

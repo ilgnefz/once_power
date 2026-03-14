@@ -7,11 +7,17 @@ class DynamicButton extends StatelessWidget {
     super.key,
     required this.isHover,
     required this.icon,
+    this.size,
+    this.iconSize,
+    this.color,
     required this.onPressed,
   });
 
   final bool isHover;
   final IconData icon;
+  final double? size;
+  final double? iconSize;
+  final Color? color;
   final void Function() onPressed;
 
   @override
@@ -25,9 +31,9 @@ class DynamicButton extends StatelessWidget {
           duration: Duration(milliseconds: 300),
           child: ClickIcon(
             icon: icon,
-            size: 20,
-            iconSize: 16,
-            color: Colors.grey,
+            size: size ?? 20,
+            iconSize: iconSize ?? 16,
+            color: color ?? Colors.grey,
             onPressed: onPressed,
           ),
         ),

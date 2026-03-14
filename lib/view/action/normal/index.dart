@@ -9,8 +9,8 @@ import 'package:once_power/util/debounce.dart';
 import 'package:once_power/widget/action/item.dart';
 import 'package:once_power/widget/common/digit_input.dart';
 
-class SerialInput extends ConsumerWidget {
-  const SerialInput({
+class IndexInput extends ConsumerWidget {
+  const IndexInput({
     super.key,
     required this.label,
     required this.tip,
@@ -41,7 +41,7 @@ class SerialInput extends ConsumerWidget {
         children: [
           DigitInput(
             value: ref.watch(digitProvider),
-            unit: tr(AppL10n.renameDigits),
+            unit: tr(AppL10n.renameWidth),
             onChanged: (value) {
               ref.read(digitProvider.notifier).update(value);
               Debounce.run(() => normalUpdateName(ref));

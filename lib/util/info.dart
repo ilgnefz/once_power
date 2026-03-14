@@ -147,7 +147,7 @@ String getRuleTypeValue(InfoType type, FileInfo file) {
     case InfoType.folder:
       return file.parent;
     case InfoType.extension:
-      return file.ext;
+      return file.extension;
     case InfoType.createdDate:
       return file.createdDate.date.toString();
     case InfoType.modifiedDate:

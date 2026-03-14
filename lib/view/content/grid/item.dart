@@ -14,7 +14,7 @@ class ContentGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String newName = getFullName(file.newName, file.newExt);
+    String newName = getFullName(file.newName, file.newExtension);
     return SortSelectItem(
       index: index,
       file: file,

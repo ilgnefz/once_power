@@ -19,9 +19,9 @@ import 'package:once_power/util/verify.dart';
 import 'package:once_power/view/action/advance/dialog/add_date_separate.dart';
 import 'package:once_power/view/action/advance/dialog/add_position.dart';
 import 'package:once_power/view/action/advance/dialog/add_random.dart';
-import 'package:once_power/view/action/advance/dialog/add_serial.dart';
-import 'package:once_power/view/action/advance/dialog/add_serial_distinguish.dart';
-import 'package:once_power/view/action/advance/dialog/add_type.dart';
+import 'package:once_power/view/action/advance/dialog/add_index.dart';
+import 'package:once_power/view/action/advance/dialog/add_index_distinction.dart';
+import 'package:once_power/view/action/advance/dialog/add_mode.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/input_field.dart';
 
@@ -38,25 +38,25 @@ class AddView extends ConsumerStatefulWidget {
 
 class _AddViewState extends ConsumerState<AddView> {
   String value = '', prefix = '', suffix = '', custom = '', group = 'all';
-  AddType type = AddType.text;
+  AddMode mode = AddMode.text;
   int length = 1, digits = 1, start = 0, positionIndex = 1;
-  DateType date = DateType.createdDate, distinguishDate = DateType.createdDate;
+  DateType date = DateType.createdDate, distinctionDate = DateType.createdDate;
   DateStyle dateStyle = DateStyle.none;
   WeekdayStyle weekdayStyle = WeekdayStyle.none;
   TimeStyle timeStyle = TimeStyle.none;
   MetaDataType metaData = MetaDataType.title;
   DateSeparateType dateSeparate = DateSeparateType.none;
-  DistinguishType distinguish = DistinguishType.none;
+  DistinctionType distinction = DistinctionType.none;
   List<String> randoms = [];
   String customRandom = '';
-  AddPosition position = AddPosition.front;
+  AddPosition position = AddPosition.behind;
 
   @override
   void initState() {
     super.initState();
     if (widget.menu == null) return;
     value = widget.menu!.value;
-    type = widget.menu!.addType;
+    mode = widget.menu!.mode;
     length = widget.menu!.randomLen;
     date = widget.menu!.dateType;
     dateStyle = widget.menu!.dateStyle;
@@ -69,8 +69,8 @@ class _AddViewState extends ConsumerState<AddView> {
     custom = widget.menu!.customSeparate;
     digits = widget.menu!.digits;
     start = widget.menu!.start;
-    distinguish = widget.menu!.distinguishType;
-    distinguishDate = widget.menu!.distinguishDateType;
+    distinction = widget.menu!.distinguishType;
+    distinctionDate = widget.menu!.distinguishDateType;
     randoms = widget.menu!.randomValue;
     position = widget.menu!.addPosition;
     positionIndex = widget.menu!.positionIndex;
@@ -88,52 +88,98 @@ class _AddViewState extends ConsumerState<AddView> {
           InputField(
             text: value,
             hintText: tr(AppL10n.advanceAddHint),
-            onComplete: (value) => setState(() => value = value),
+            onChanged: (value) => setState(() {
+              this.value = value;
+              mode = AddMode.text;
+            }),
           ),
-          AddTypeGroup(
-            type: type,
-            onChanged: (value) => setState(() => type = value),
+          AddModeGroup(
+            type: mode,
+            onChanged: (value) => setState(() => mode = value),
             length: length,
-            onLengthChanged: (value) => setState(() => length = value),
+            onLengthChanged: (value) => setState(() {
+              length = value;
+              mode = AddMode.random;
+            }),
             date: date,
-            onDateChange: (value) => setState(() => date = value),
+            onDateChange: (value) => setState(() {
+              date = value;
+              mode = AddMode.date;
+            }),
             dateStyle: dateStyle,
-            onDateStyleChange: (value) => setState(() => dateStyle = value),
+            onDateStyleChange: (value) => setState(() {
+              dateStyle = value;
+              mode = AddMode.date;
+            }),
             weekdayStyle: weekdayStyle,
-            onWeekdayStyleChange: (value) =>
-                setState(() => weekdayStyle = value),
+            onWeekdayStyleChange: (value) => setState(() {
+              weekdayStyle = value;
+              mode = AddMode.date;
+            }),
             timeStyle: timeStyle,
-            onTimeStyleChange: (value) => setState(() => timeStyle = value),
+            onTimeStyleChange: (value) {
+              setState(() => timeStyle = value);
+              mode = AddMode.date;
+            },
             prefix: prefix,
-            onPrefixChanged: (value) => setState(() => prefix = value),
+            onPrefixChanged: (value) => setState(() {
+              prefix = value;
+              mode = AddMode.metaData;
+            }),
             metaData: metaData,
-            onMetaDataChange: (value) => setState(() => metaData = value),
+            onMetaDataChange: (value) => setState(() {
+              metaData = value;
+              mode = AddMode.metaData;
+            }),
             suffix: suffix,
-            onSuffixChanged: (value) => setState(() => suffix = value),
+            onSuffixChanged: (value) => setState(() {
+              suffix = value;
+              mode = AddMode.metaData;
+            }),
           ),
           AddDateSeparate(
             dateSeparate: dateSeparate,
-            onDateSeparateChange: (value) =>
-                setState(() => dateSeparate = value),
+            onDateSeparateChange: (value) => setState(() {
+              dateSeparate = value;
+              mode = AddMode.date;
+            }),
             custom: custom,
-            onCustomChange: (value) => setState(() => custom = value),
+            onCustomChange: (value) {
+              setState(() => custom = value);
+              mode = AddMode.date;
+            },
           ),
-          AddSerial(
+          AddIndex(
             digits: digits,
-            onDigitChanged: (value) => setState(() => digits = value),
+            onDigitChanged: (value) => setState(() {
+              digits = value;
+              mode = AddMode.indexes;
+            }),
             start: start,
-            onStartChanged: (value) => setState(() => start = value),
+            onStartChanged: (value) => setState(() {
+              start = value;
+              mode = AddMode.indexes;
+            }),
           ),
-          AddSerialDistinguish(
-            type: distinguish,
-            onChanged: (value) => setState(() => distinguish = value),
-            dateType: distinguishDate,
-            onDateTypeChange: (value) =>
-                setState(() => distinguishDate = value),
+          AddIndexDistinction(
+            type: distinction,
+            onChanged: (value) => setState(() {
+              distinction = value;
+              mode = AddMode.indexes;
+            }),
+            dateType: distinctionDate,
+            onDateTypeChange: (value) => setState(() {
+              distinctionDate = value;
+              mode = AddMode.indexes;
+              distinction = DistinctionType.date;
+            }),
           ),
           AddRandom(
             randoms: randoms,
-            onChanged: (value) => setState(() => randoms = value),
+            onChanged: (value) => setState(() {
+              randoms = value;
+              mode = AddMode.random;
+            }),
           ),
           AddPositionGroup(
             position: position,
@@ -158,8 +204,8 @@ class _AddViewState extends ConsumerState<AddView> {
           value: value,
           digits: digits,
           start: start,
-          distinguishType: distinguish,
-          addType: type,
+          distinguishType: distinction,
+          mode: mode,
           randomLen: length,
           dateType: date,
           dateStyle: dateStyle,
@@ -170,7 +216,7 @@ class _AddViewState extends ConsumerState<AddView> {
           metaData: metaData,
           metaPrefix: prefix,
           metaSuffix: suffix,
-          distinguishDateType: distinguishDate,
+          distinguishDateType: distinctionDate,
           randomValue: randoms,
           addPosition: position,
           positionIndex: positionIndex,
@@ -183,7 +229,7 @@ class _AddViewState extends ConsumerState<AddView> {
         ref.read(currentPresetNameProvider.notifier).update('');
         advanceUpdateName(ref);
         Navigator.pop(context);
-        if (type.isMetaData && metaData.isLocation) {
+        if (mode.isMetaData && metaData.isLocation) {
           String? key = StorageUtil.getString(AppKeys.mapKey);
           if (key == null || key.isEmpty) showKeyInput(context);
         }
