@@ -64,10 +64,7 @@ class ContentListView extends ConsumerWidget {
               checked: file.checked,
               onChanged: (bool? value) {
                 provider.updateCheck(file.id, value!);
-                if (value) return updateName(ref);
-                FileList fileProvider = ref.read(fileListProvider.notifier);
-                fileProvider.updateNewName(file.id, file.name);
-                fileProvider.updateNewExtension(file.id, file.extension);
+                updateName(ref);
               },
               title: title,
               subTitle: subtitle,

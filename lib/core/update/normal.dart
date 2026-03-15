@@ -34,7 +34,11 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
   final FileList fileProvider = ref.read(fileListProvider.notifier);
   int index = 0;
   for (FileInfo file in files) {
-    if (!file.checked) continue;
+    if (!file.checked) {
+      fileProvider.updateNewName(file.id, file.name);
+      fileProvider.updateNewExtension(file.id, file.extension);
+      continue;
+    }
     String date = dateName(ref, file);
     String name = isDate
         ? date

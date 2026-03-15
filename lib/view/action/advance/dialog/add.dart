@@ -11,6 +11,7 @@ import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
@@ -37,19 +38,16 @@ class AddView extends ConsumerStatefulWidget {
 }
 
 class _AddViewState extends ConsumerState<AddView> {
-  String value = '', prefix = '', suffix = '', custom = '', group = 'all';
+  String value = '';
   AddMode mode = AddMode.text;
-  int length = 1, digits = 1, start = 0, positionIndex = 1;
-  DateType date = DateType.createdDate, distinctionDate = DateType.createdDate;
-  DateStyle dateStyle = DateStyle.none;
-  WeekdayStyle weekdayStyle = WeekdayStyle.none;
-  TimeStyle timeStyle = TimeStyle.none;
-  MetaDataType metaData = MetaDataType.title;
-  DateSeparateType dateSeparate = DateSeparateType.none;
-  DistinctionType distinction = DistinctionType.none;
+  AdvanceDate advanceDate = AdvanceDate();
+  AdvanceMetaData metaData = AdvanceMetaData();
+  AdvanceIndex advanceIndex = AdvanceIndex();
+  int randomLength = 1;
   List<String> randoms = [];
-  String customRandom = '';
   AddPosition position = AddPosition.behind;
+  int positionIndex = 1;
+  String group = 'all';
 
   @override
   void initState() {
@@ -57,20 +55,10 @@ class _AddViewState extends ConsumerState<AddView> {
     if (widget.menu == null) return;
     value = widget.menu!.value;
     mode = widget.menu!.mode;
-    length = widget.menu!.randomLen;
-    date = widget.menu!.dateType;
-    dateStyle = widget.menu!.dateStyle;
-    weekdayStyle = widget.menu!.weekdayStyle;
-    timeStyle = widget.menu!.timeStyle;
-    prefix = widget.menu!.metaPrefix;
+    advanceDate = widget.menu!.advanceDate;
     metaData = widget.menu!.metaData;
-    suffix = widget.menu!.metaSuffix;
-    dateSeparate = widget.menu!.dateSeparate;
-    custom = widget.menu!.customSeparate;
-    digits = widget.menu!.digits;
-    start = widget.menu!.start;
-    distinction = widget.menu!.distinguishType;
-    distinctionDate = widget.menu!.distinguishDateType;
+    advanceIndex = widget.menu!.advanceIndex;
+    randomLength = widget.menu!.randomLength;
     randoms = widget.menu!.randomValue;
     position = widget.menu!.addPosition;
     positionIndex = widget.menu!.positionIndex;
@@ -94,84 +82,81 @@ class _AddViewState extends ConsumerState<AddView> {
             }),
           ),
           AddModeGroup(
-            type: mode,
-            onChanged: (value) => setState(() => mode = value),
-            length: length,
-            onLengthChanged: (value) => setState(() {
-              length = value;
+            mode: mode,
+            onModeChanged: (value) => setState(() => mode = value),
+            randomLength: randomLength,
+            onRandomLengthChanged: (value) => setState(() {
+              randomLength = value;
               mode = AddMode.random;
             }),
-            date: date,
-            onDateChange: (value) => setState(() {
-              date = value;
+            advanceDate: advanceDate,
+            onDateTypeChange: (value) => setState(() {
+              advanceDate = advanceDate.copyWith(type: value);
               mode = AddMode.date;
             }),
-            dateStyle: dateStyle,
             onDateStyleChange: (value) => setState(() {
-              dateStyle = value;
+              advanceDate = advanceDate.copyWith(dateStyle: value);
               mode = AddMode.date;
             }),
-            weekdayStyle: weekdayStyle,
             onWeekdayStyleChange: (value) => setState(() {
-              weekdayStyle = value;
+              advanceDate = advanceDate.copyWith(weekdayStyle: value);
               mode = AddMode.date;
             }),
-            timeStyle: timeStyle,
             onTimeStyleChange: (value) {
-              setState(() => timeStyle = value);
+              advanceDate = advanceDate.copyWith(timeStyle: value);
               mode = AddMode.date;
             },
-            prefix: prefix,
-            onPrefixChanged: (value) => setState(() {
-              prefix = value;
-              mode = AddMode.metaData;
-            }),
             metaData: metaData,
             onMetaDataChange: (value) => setState(() {
-              metaData = value;
+              metaData = metaData.copyWith(type: value);
               mode = AddMode.metaData;
             }),
-            suffix: suffix,
+            onPrefixChanged: (value) => setState(() {
+              metaData = metaData.copyWith(prefix: value);
+              mode = AddMode.metaData;
+            }),
             onSuffixChanged: (value) => setState(() {
-              suffix = value;
+              metaData = metaData.copyWith(suffix: value);
               mode = AddMode.metaData;
             }),
           ),
           AddDateSeparate(
-            dateSeparate: dateSeparate,
+            dateSeparate: advanceDate.dateSeparate,
             onDateSeparateChange: (value) => setState(() {
-              dateSeparate = value;
+              advanceDate = advanceDate.copyWith(dateSeparate: value);
               mode = AddMode.date;
             }),
-            custom: custom,
-            onCustomChange: (value) {
-              setState(() => custom = value);
+            custom: advanceDate.separate,
+            onCustomChange: (value) => setState(() {
+              advanceDate = advanceDate.copyWith(separate: value);
               mode = AddMode.date;
-            },
+            }),
           ),
           AddIndex(
-            digits: digits,
-            onDigitChanged: (value) => setState(() {
-              digits = value;
+            width: advanceIndex.width,
+            onWidthChanged: (value) => setState(() {
+              advanceIndex = advanceIndex.copyWith(width: value);
               mode = AddMode.indexes;
             }),
-            start: start,
+            start: advanceIndex.start,
             onStartChanged: (value) => setState(() {
-              start = value;
+              advanceIndex = advanceIndex.copyWith(start: value);
               mode = AddMode.indexes;
             }),
           ),
           AddIndexDistinction(
-            type: distinction,
+            distinction: advanceIndex.distinction,
             onChanged: (value) => setState(() {
-              distinction = value;
+              advanceIndex = advanceIndex.copyWith(distinction: value);
               mode = AddMode.indexes;
             }),
-            dateType: distinctionDate,
+            dateType: advanceIndex.dateType,
             onDateTypeChange: (value) => setState(() {
-              distinctionDate = value;
+              advanceIndex = advanceIndex.copyWith(
+                distinction: IndexDistinction.date,
+                dateType: value,
+              );
               mode = AddMode.indexes;
-              distinction = DistinctionType.date;
             }),
           ),
           AddRandom(
@@ -202,21 +187,11 @@ class _AddViewState extends ConsumerState<AddView> {
         AdvanceMenuAdd add = AdvanceMenuAdd(
           id: id,
           value: value,
-          digits: digits,
-          start: start,
-          distinguishType: distinction,
           mode: mode,
-          randomLen: length,
-          dateType: date,
-          dateStyle: dateStyle,
-          weekdayStyle: weekdayStyle,
-          timeStyle: timeStyle,
-          dateSeparate: dateSeparate,
-          customSeparate: custom,
+          advanceDate: advanceDate,
           metaData: metaData,
-          metaPrefix: prefix,
-          metaSuffix: suffix,
-          distinguishDateType: distinctionDate,
+          advanceIndex: advanceIndex,
+          randomLength: randomLength,
           randomValue: randoms,
           addPosition: position,
           positionIndex: positionIndex,
@@ -229,7 +204,7 @@ class _AddViewState extends ConsumerState<AddView> {
         ref.read(currentPresetNameProvider.notifier).update('');
         advanceUpdateName(ref);
         Navigator.pop(context);
-        if (mode.isMetaData && metaData.isLocation) {
+        if (mode.isMetaData && metaData.type.isLocation) {
           String? key = StorageUtil.getString(AppKeys.mapKey);
           if (key == null || key.isEmpty) showKeyInput(context);
         }

@@ -1,5 +1,6 @@
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_delete.dart';
 
 import 'advance.dart';
 
@@ -7,15 +8,8 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
   if (menu.useRegex) return name.replaceAll(RegExp(menu.value), '');
   switch (menu.mode) {
     case DeleteMode.input:
-      return changeMatch(
-        menu.matchContent,
-        name,
-        menu.value,
-        '',
-        menu.number,
-        menu.front,
-        menu.behind,
-      );
+      AdvanceMatch match = menu.match;
+      return changeMatch(menu.match.content, match, name, menu.value, '');
     case DeleteMode.type:
       Set<DeleteType> types = menu.deleteTypes.toSet();
       if (types.contains(DeleteType.digit)) {

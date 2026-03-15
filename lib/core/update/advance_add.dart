@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/model/file.dart';
 
 (String, String) advanceAddName(AdvanceMenuAdd menu, FileInfo file, int index) {
@@ -21,7 +22,7 @@ import 'package:once_power/model/file.dart';
       final values = menu.randomValue
           .expand((v) => [expandMap[v] ?? v])
           .toSet();
-      String value = getRandomValue(values, menu.randomLen);
+      String value = getRandomValue(values, menu.randomLength);
       return insertPosition(menu, name, value, ext);
     case AddMode.folder:
       return insertPosition(menu, name, menu.value, ext);

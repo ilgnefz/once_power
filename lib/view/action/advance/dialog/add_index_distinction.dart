@@ -13,28 +13,28 @@ import 'package:once_power/widget/common/text_dropdown.dart';
 class AddIndexDistinction extends StatelessWidget {
   const AddIndexDistinction({
     super.key,
-    required this.type,
+    required this.distinction,
     required this.onChanged,
     required this.dateType,
     required this.onDateTypeChange,
   });
 
-  final DistinctionType type;
-  final void Function(DistinctionType value) onChanged;
+  final IndexDistinction distinction;
+  final void Function(IndexDistinction value) onChanged;
   final DateType dateType;
   final void Function(DateType value) onDateTypeChange;
 
   @override
   Widget build(BuildContext context) {
-    return RadioGroup<DistinctionType>(
-      groupValue: type,
+    return RadioGroup<IndexDistinction>(
+      groupValue: distinction,
       onChanged: (value) => onChanged(value!),
       child: DialogOption(
         title: tr(AppL10n.advanceIndexDistinction),
         padding: const .only(top: 4.0),
         // alignment: .spaceBetween,
         spacing: AppNum.spaceLarge,
-        children: DistinctionType.values
+        children: IndexDistinction.values
             .map(
               (e) => EasyRadio(
                 label: e.label,

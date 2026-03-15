@@ -212,72 +212,72 @@ extension TimeStyleExtension on TimeStyle {
   }
 }
 
-enum DateSeparateType { none, space, dash, underscore, dot, custom }
+enum DateSeparate { none, space, dash, underscore, dot, custom }
 
-extension DateSeparateTypeExtension on DateSeparateType {
+extension DateSeparateTypeExtension on DateSeparate {
   String get label {
     switch (this) {
-      case DateSeparateType.none:
+      case DateSeparate.none:
         return tr(AppL10n.eSplitNone);
-      case DateSeparateType.space:
+      case DateSeparate.space:
         return tr(AppL10n.eSplitSpace);
-      case DateSeparateType.dash:
+      case DateSeparate.dash:
         return '-';
-      case DateSeparateType.dot:
+      case DateSeparate.dot:
         return '.';
-      case DateSeparateType.underscore:
+      case DateSeparate.underscore:
         return '_';
-      case DateSeparateType.custom:
+      case DateSeparate.custom:
         return tr(AppL10n.eSplitCustom);
     }
   }
 
   String get value {
     switch (this) {
-      case DateSeparateType.none:
+      case DateSeparate.none:
         return '';
-      case DateSeparateType.space:
+      case DateSeparate.space:
         return ' ';
-      case DateSeparateType.dash:
+      case DateSeparate.dash:
         return '-';
-      case DateSeparateType.dot:
+      case DateSeparate.dot:
         return '.';
-      case DateSeparateType.underscore:
+      case DateSeparate.underscore:
         return '_';
-      case DateSeparateType.custom:
+      case DateSeparate.custom:
         return tr(AppL10n.eSplitCustom);
     }
   }
 
-  bool get isCustom => this == DateSeparateType.custom;
+  bool get isCustom => this == DateSeparate.custom;
 }
 
-enum DistinctionType { none, file, extension, date, folder, group }
+enum IndexDistinction { none, file, extension, date, folder, group }
 
-extension DistinctionTypeExtension on DistinctionType {
+extension DistinctionTypeExtension on IndexDistinction {
   String get label {
     switch (this) {
-      case DistinctionType.none:
+      case IndexDistinction.none:
         return tr(AppL10n.eDistNone);
-      case DistinctionType.date:
+      case IndexDistinction.date:
         return tr(AppL10n.eDistDate);
-      case DistinctionType.folder:
+      case IndexDistinction.folder:
         return tr(AppL10n.eDistFolder);
-      case DistinctionType.file:
+      case IndexDistinction.file:
         return tr(AppL10n.eDistFile);
-      case DistinctionType.extension:
+      case IndexDistinction.extension:
         return tr(AppL10n.eDistExtension);
-      case DistinctionType.group:
+      case IndexDistinction.group:
         return tr(AppL10n.eDistGroup);
     }
   }
 
-  bool get isDate => this == DistinctionType.date;
-  bool get isFolder => this == DistinctionType.folder;
-  bool get isFile => this == DistinctionType.file;
-  bool get isExtension => this == DistinctionType.extension;
-  bool get isGroup => this == DistinctionType.group;
-  bool get isNone => this == DistinctionType.none;
+  bool get isDate => this == IndexDistinction.date;
+  bool get isFolder => this == IndexDistinction.folder;
+  bool get isFile => this == IndexDistinction.file;
+  bool get isExtension => this == IndexDistinction.extension;
+  bool get isGroup => this == IndexDistinction.group;
+  bool get isNone => this == IndexDistinction.none;
 }
 
 enum AddPosition { behind, front, end, interval }

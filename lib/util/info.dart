@@ -66,17 +66,17 @@ bool getCompareResult(ComparisonOperator operator, String value, String info) {
 
 DateInfo? getDate(DateType type, FileInfo file) {
   switch (type) {
-    case DateType.createdDate:
+    case DateType.created:
       return file.createdDate;
-    case DateType.modifiedDate:
+    case DateType.modified:
       return file.modifiedDate;
-    case DateType.accessedDate:
+    case DateType.accessed:
       return file.accessedDate;
-    case DateType.exifDate:
+    case DateType.exif:
       return file.metaInfo?.capture;
-    case DateType.earliestDate:
+    case DateType.earliest:
       return sortDateTime(file).first;
-    case DateType.latestDate:
+    case DateType.latest:
       return sortDateTime(file).last;
   }
 }

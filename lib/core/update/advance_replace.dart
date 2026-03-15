@@ -1,23 +1,17 @@
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/src/rust/api/simple.dart';
 
 import 'advance.dart';
 
 String advanceReplaceName(AdvanceMenuReplace menu, String name) {
-  String match = menu.value[0], modify = menu.value[1];
-  if (menu.useRegex) return name.replaceAll(RegExp(match), modify);
+  String oldValue = menu.value[0], newValue = menu.value[1];
+  if (menu.useRegex) return name.replaceAll(RegExp(oldValue), newValue);
   switch (menu.mode) {
     case ReplaceMode.normal:
-      return changeMatch(
-        menu.matchContent,
-        name,
-        match,
-        modify,
-        menu.number,
-        menu.front,
-        menu.behind,
-      );
+      AdvanceMatch match = menu.match;
+      return changeMatch(menu.match.content, match, name, oldValue, newValue);
     case ReplaceMode.convert:
       switch (menu.convertType) {
         case ConvertType.uppercase:
@@ -41,17 +35,17 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
           return traditionalToSimplified(text: name);
       }
     case ReplaceMode.format:
-      int? num = int.tryParse(match);
-      int length = num ?? match.length;
+      int? num = int.tryParse(oldValue);
+      int length = num ?? oldValue.length;
       if (name.length > length) return name.substring(0, num);
       return menu.fillPosition.isFront
-          ? name.padLeft(length, modify)
-          : name.padRight(length, modify);
+          ? name.padLeft(length, newValue)
+          : name.padRight(length, newValue);
     case ReplaceMode.position:
       int start = menu.start - 1, length = menu.length;
       int end = start + length;
       if (start + length > name.length) end = name.length;
-      return name.replaceRange(start, end, modify);
+      return name.replaceRange(start, end, newValue);
     case ReplaceMode.separator:
       return splitWords(name).join(menu.wordSpacing);
   }

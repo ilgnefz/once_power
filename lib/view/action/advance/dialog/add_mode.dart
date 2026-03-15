@@ -5,6 +5,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
+import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/view/action/advance/dialog/add_date_group.dart';
 import 'package:once_power/view/action/advance/dialog/add_meta.dart';
 import 'package:once_power/widget/action/dialog_option.dart';
@@ -14,50 +15,40 @@ import 'package:once_power/widget/common/radio.dart';
 class AddModeGroup extends StatelessWidget {
   const AddModeGroup({
     super.key,
-    required this.type,
-    required this.onChanged,
-    required this.length,
-    required this.onLengthChanged,
-    required this.date,
-    required this.onDateChange,
-    required this.dateStyle,
+    required this.mode,
+    required this.onModeChanged,
+    required this.randomLength,
+    required this.onRandomLengthChanged,
+    required this.advanceDate,
+    required this.onDateTypeChange,
     required this.onDateStyleChange,
-    required this.weekdayStyle,
     required this.onWeekdayStyleChange,
-    required this.timeStyle,
     required this.onTimeStyleChange,
-    required this.prefix,
-    required this.onPrefixChanged,
     required this.metaData,
+    required this.onPrefixChanged,
     required this.onMetaDataChange,
-    required this.suffix,
     required this.onSuffixChanged,
   });
 
-  final AddMode type;
-  final void Function(AddMode) onChanged;
-  final int length;
-  final void Function(int) onLengthChanged;
-  final DateType date;
-  final void Function(DateType) onDateChange;
-  final DateStyle dateStyle;
+  final AddMode mode;
+  final void Function(AddMode) onModeChanged;
+  final int randomLength;
+  final void Function(int) onRandomLengthChanged;
+  final AdvanceDate advanceDate;
+  final void Function(DateType) onDateTypeChange;
   final void Function(DateStyle) onDateStyleChange;
-  final WeekdayStyle weekdayStyle;
   final void Function(WeekdayStyle) onWeekdayStyleChange;
-  final TimeStyle timeStyle;
   final void Function(TimeStyle) onTimeStyleChange;
-  final String prefix;
+  final AdvanceMetaData metaData;
   final void Function(String) onPrefixChanged;
-  final MetaDataType metaData;
   final void Function(MetaDataType) onMetaDataChange;
-  final String suffix;
   final void Function(String) onSuffixChanged;
 
   @override
   Widget build(BuildContext context) {
     return RadioGroup<AddMode>(
-      groupValue: type,
-      onChanged: (value) => onChanged(value!),
+      groupValue: mode,
+      onChanged: (value) => onModeChanged(value!),
       child: DialogOption(
         title: tr(AppL10n.advanceAddType),
         padding: const .only(top: 4),
@@ -72,10 +63,10 @@ class AddModeGroup extends StatelessWidget {
                 value: e,
                 trailing: DigitInput(
                   width: 104,
-                  value: length,
+                  value: randomLength,
                   unit: tr(AppL10n.renameLength),
                   min: 1,
-                  onChanged: onLengthChanged,
+                  onChanged: onRandomLengthChanged,
                 ),
               );
             case AddMode.date:
@@ -84,13 +75,13 @@ class AddModeGroup extends StatelessWidget {
                 value: e,
                 space: 0,
                 trailing: AddDateGroup(
-                  date: date,
-                  onDateChange: onDateChange,
-                  dateStyle: dateStyle,
+                  date: advanceDate.type,
+                  onDateChange: onDateTypeChange,
+                  dateStyle: advanceDate.dateStyle,
                   onDateStyleChange: onDateStyleChange,
-                  weekdayStyle: weekdayStyle,
+                  weekdayStyle: advanceDate.weekdayStyle,
                   onWeekdayStyleChange: onWeekdayStyleChange,
-                  timeStyle: timeStyle,
+                  timeStyle: advanceDate.timeStyle,
                   onTimeStyleChange: onTimeStyleChange,
                 ),
               );
@@ -99,11 +90,11 @@ class AddModeGroup extends StatelessWidget {
                 label: e.label,
                 value: e,
                 trailing: AddMetaGroup(
-                  prefix: prefix,
+                  prefix: metaData.prefix,
                   onPrefixChanged: onPrefixChanged,
-                  metaData: metaData,
+                  metaData: metaData.type,
                   onMetaDataChange: onMetaDataChange,
-                  suffix: suffix,
+                  suffix: metaData.suffix,
                   onSuffixChanged: onSuffixChanged,
                 ),
               );

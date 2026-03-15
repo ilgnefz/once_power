@@ -18,10 +18,6 @@ class FileList extends _$FileList {
 
   void checkAll(bool check) => state = state.map((e) {
     if (e.checked != check) e.checked = check;
-    if (!check) {
-      e.newName = e.name;
-      e.newExtension = e.extension;
-    }
     return e;
   }).toList();
 

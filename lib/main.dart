@@ -55,6 +55,7 @@ class MyApp extends ConsumerWidget {
     //   1,
     // ).split('').reversed.join('');
     // print(r2);
+
     return MaterialApp(
       title: AppText.appName,
       debugShowCheckedModeBanner: false,

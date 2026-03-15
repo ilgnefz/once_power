@@ -7,6 +7,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/advance.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
@@ -33,12 +34,11 @@ class ReplaceView extends ConsumerStatefulWidget {
 
 class _ReplaceViewState extends ConsumerState<ReplaceView> {
   bool useRegex = false, matchExtension = false;
-  String match = '', modify = '', wordSpacing = '', group = 'all';
+  String oldValue = '', newValue = '', wordSpacing = '', group = 'all';
   ReplaceMode mode = ReplaceMode.normal;
   FillPosition position = FillPosition.front;
-  MatchContent matchContent = MatchContent.number;
-  MatchPosition matchPosition = MatchPosition.self;
-  int number = 1, front = 1, behind = 1, start = 1, length = 1;
+  int start = 1, length = 1;
+  AdvanceMatch match = AdvanceMatch();
   ConvertType type = ConvertType.uppercase;
 
   @override
@@ -47,15 +47,11 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
     if (widget.menu == null) return;
     useRegex = widget.menu!.useRegex;
     matchExtension = widget.menu!.matchExtension;
-    match = widget.menu!.value[0];
-    modify = widget.menu!.value[1];
+    oldValue = widget.menu!.value[0];
+    newValue = widget.menu!.value[1];
     mode = widget.menu!.mode;
     position = widget.menu!.fillPosition;
-    matchContent = widget.menu!.matchContent;
-    matchPosition = widget.menu!.matchPosition;
-    number = widget.menu!.number;
-    front = widget.menu!.front;
-    behind = widget.menu!.behind;
+    match = widget.menu!.match;
     start = widget.menu!.start;
     length = widget.menu!.length;
     type = widget.menu!.convertType;
@@ -81,11 +77,11 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
               mode = ReplaceMode.normal;
             }),
             child: InputField(
-              text: match,
+              text: oldValue,
               hintText: mode.isFormat
                   ? tr(AppL10n.advanceFormatDigit)
                   : tr(AppL10n.advanceReplaceHint1),
-              onChanged: (value) => setState(() => match = value),
+              onChanged: (value) => setState(() => oldValue = value),
             ),
           ),
           ActionItem(
@@ -98,11 +94,11 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
               mode = ReplaceMode.normal;
             }),
             child: InputField(
-              text: modify,
+              text: newValue,
               hintText: mode.isFormat
                   ? tr(AppL10n.advanceCompleteContent)
                   : tr(AppL10n.advanceReplaceHint2),
-              onChanged: (value) => setState(() => modify = value),
+              onChanged: (value) => setState(() => newValue = value),
             ),
           ),
           ReplaceModeGroup(
@@ -125,35 +121,41 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
             }),
           ),
           MatchContentGroup(
-            content: matchContent,
+            content: match.content,
             onChanged: (value) => setState(() {
-              matchContent = value;
+              match = match.copyWith(content: value);
               mode = ReplaceMode.normal;
             }),
-            number: number,
+            number: match.contentIndex,
             onNumberChanged: (value) => setState(() {
-              number = value;
+              match = match.copyWith(
+                content: MatchContent.number,
+                contentIndex: value,
+              );
               mode = ReplaceMode.normal;
-              matchContent = MatchContent.number;
             }),
           ),
           MatchPositionGroup(
-            position: matchPosition,
+            position: match.position,
             onChanged: (value) => setState(() {
-              matchPosition = value;
+              match = match.copyWith(position: value);
               mode = ReplaceMode.normal;
             }),
-            front: front,
-            onFrontChanged: (value) {
-              setState(() => front = value);
+            front: match.frontIndex,
+            onFrontChanged: (value) => setState(() {
+              match = match.copyWith(
+                position: MatchPosition.front,
+                frontIndex: value,
+              );
               mode = ReplaceMode.normal;
-              matchPosition = MatchPosition.front;
-            },
-            behind: behind,
+            }),
+            behind: match.behindIndex,
             onBehindChanged: (value) => setState(() {
-              behind = value;
+              match = match.copyWith(
+                position: MatchPosition.behind,
+                behindIndex: value,
+              );
               mode = ReplaceMode.normal;
-              matchPosition = MatchPosition.behind;
             }),
           ),
           ReplaceConversion(
@@ -193,18 +195,14 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
         AdvanceMenuReplace replace = AdvanceMenuReplace(
           id: id,
           checked: true,
-          value: [match, modify],
+          value: [oldValue, newValue],
           useRegex: useRegex,
           matchExtension: matchExtension,
           mode: mode,
           fillPosition: position,
-          matchContent: matchContent,
-          matchPosition: matchPosition,
-          number: number,
-          front: front,
-          behind: behind,
           start: start,
           length: length,
+          match: match,
           convertType: type,
           wordSpacing: wordSpacing,
           group: group,

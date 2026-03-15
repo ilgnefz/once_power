@@ -2,40 +2,33 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
+import 'package:once_power/model/advance.dart';
 import 'package:once_power/widget/action/advance_rich_text.dart';
 
 class MatchContentCard<T> extends StatelessWidget {
   const MatchContentCard({
     super.key,
     required this.value,
-    required this.number,
-    required this.front,
-    required this.behind,
-    required this.matchContent,
-    required this.matchPosition,
+    required this.match,
     required this.defaultColor,
     required this.highlightColor,
     this.children,
   });
 
   final String value;
-  final int number;
-  final int front;
-  final int behind;
-  final MatchContent matchContent;
-  final MatchPosition matchPosition;
+  final AdvanceMatch match;
   final Color defaultColor;
   final Color highlightColor;
   final List<InlineSpan>? children;
 
   @override
   Widget build(BuildContext context) {
-    switch (matchContent) {
+    switch (match.content) {
       case MatchContent.last:
       case MatchContent.all:
         return AdvanceRichText(
           text: advanceTextSpan(
-            '${matchContent.label} "',
+            '${match.content.label} "',
             color: defaultColor,
             children: [
               advanceTextSpan(value, color: highlightColor),
@@ -48,10 +41,10 @@ class MatchContentCard<T> extends StatelessWidget {
       case MatchContent.number:
         return AdvanceRichText(
           text: advanceTextSpan(
-            '${matchContent.label} ',
+            '${match.content.label} ',
             color: defaultColor,
             children: [
-              advanceTextSpan('$number', color: highlightColor),
+              advanceTextSpan('${match.contentIndex}', color: highlightColor),
               advanceTextSpan(
                 ' ${tr(AppL10n.advanceGe)} "',
                 color: defaultColor,
@@ -67,11 +60,11 @@ class MatchContentCard<T> extends StatelessWidget {
   }
 
   List<InlineSpan> matchPositionLabel() {
-    if (!matchPosition.isSelf) {
+    if (!match.position.isSelf) {
       return [
-        advanceTextSpan(' ${matchPosition.label} ', color: defaultColor),
+        advanceTextSpan(' ${match.position.label} ', color: defaultColor),
         advanceTextSpan(
-          '${matchPosition.isFront ? front : behind}',
+          '${match.position.isFront ? match.frontIndex : match.behindIndex}',
           color: highlightColor,
         ),
         advanceTextSpan(' ${tr(AppL10n.advanceCount)}', color: defaultColor),

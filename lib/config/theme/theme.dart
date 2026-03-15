@@ -163,7 +163,7 @@ class ThemeConfig {
     textTheme: TextTheme(
       bodyMedium: TextStyle(
         fontSize: 14,
-        color: Colors.white,
+        color: Color(0xFFF3E5F5),
         fontFamily: defaultFont,
       ),
     ),

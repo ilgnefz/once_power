@@ -61,10 +61,6 @@ void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
   for (FileInfo file in files) {
     bool check = !file.checked;
     fileProvider.updateCheck(file.id, check);
-    if (!check) {
-      fileProvider.updateNewName(file.id, file.name);
-      fileProvider.updateNewExtension(file.id, file.extension);
-    }
   }
   updateName(ref);
 }

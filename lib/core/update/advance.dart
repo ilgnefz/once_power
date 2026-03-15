@@ -5,6 +5,9 @@ import 'package:once_power/const/key.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_add.dart';
+import 'package:once_power/model/advance_delete.dart';
+import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/advance.dart';
@@ -59,49 +62,92 @@ Future<void> advanceUpdateName(WidgetRef ref) async {
 
 String changeMatch(
   MatchContent matchContent,
+  AdvanceMatch match,
   String name,
   String value,
   String replace,
-  int number,
-  int front,
-  int behind,
 ) {
+  MatchPosition position = match.position;
+  final List<String> parts = name.split(value);
+  if (parts.length == 1) return name;
   switch (matchContent) {
     case MatchContent.number:
-      final List<String> parts = name.split(value);
+      int number = match.contentIndex;
       if (number >= parts.length) return name;
-      parts[number - 1] = parts[number - 1] + replace + parts[number];
-      parts.removeAt(number);
       List<String> part1 = parts.sublist(0, number);
       List<String> part2 = parts.sublist(number);
-      print('$part1 --- $part2');
-      return parts.join(value);
+      return positionSingleValue(position, match, part1, part2, value, replace);
     case MatchContent.last:
-      int index = name.lastIndexOf(value);
-      if (index == -1) return name;
-      return name.replaceRange(index, index + value.length, replace);
+      int number = parts.length - 1;
+      List<String> part1 = parts.sublist(0, number);
+      List<String> part2 = parts.sublist(number);
+      return positionSingleValue(position, match, part1, part2, value, replace);
     case MatchContent.all:
-      return name.replaceAll(value, replace);
+      return positionAllValue(position, match, name, value, replace);
   }
 }
 
-String positionValue(
+String positionSingleValue(
   MatchPosition position,
-  String name,
+  AdvanceMatch match,
+  List<String> part1,
+  List<String> part2,
   String value,
   String replace,
-  int front,
-  int behind,
 ) {
   switch (position) {
     case MatchPosition.self:
-      return name;
+      return part1.join(value) + replace + part2.join(value);
     case MatchPosition.front:
-      name = name.split('').reversed.join('');
-      String result = insertReplace(name, value, replace, front);
-      return result.split('').reversed.join('');
+      int front = match.frontIndex;
+      String subStr = part1.last;
+      part1[part1.length - 1] = front >= subStr.length
+          ? replace
+          : subStr.substring(0, subStr.length - front) + replace;
+      part1.addAll(part2);
+      return part1.join(value);
     case MatchPosition.behind:
-      return insertReplace(name, value, replace, behind);
+      int behind = match.behindIndex;
+      String subStr = part2.first;
+      part2[0] = behind >= subStr.length
+          ? replace
+          : replace + subStr.substring(behind);
+      part1.addAll(part2);
+      return part1.join(value);
+  }
+}
+
+String positionAllValue(
+  MatchPosition position,
+  AdvanceMatch match,
+  String name,
+  String value,
+  String replace,
+) {
+  switch (position) {
+    case MatchPosition.self:
+      return name.split(value).join(replace);
+    case MatchPosition.front:
+      int front = match.frontIndex;
+      List<String> parts = name.split(value);
+      for (int i = 0; i < parts.length; i++) {
+        if (i == parts.length - 1) continue;
+        String temp = parts[i];
+        parts[i] = front >= temp.length
+            ? replace
+            : temp.substring(0, temp.length - front) + replace;
+      }
+      return parts.join(value);
+    case MatchPosition.behind:
+      int behind = match.behindIndex;
+      List<String> parts = name.split(value);
+      for (int i = 1; i < parts.length; i++) {
+        String temp = parts[i];
+        parts[i] = behind >= temp.length
+            ? replace
+            : replace + temp.substring(behind);
+      }
+      return parts.join(value);
   }
 }
 

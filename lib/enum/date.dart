@@ -1,39 +1,32 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:once_power/const/l10n.dart';
 
-enum DateType {
-  createdDate,
-  modifiedDate,
-  accessedDate,
-  exifDate,
-  earliestDate,
-  latestDate,
-}
+enum DateType { created, modified, accessed, exif, earliest, latest }
 
 extension DateTypeExtension on DateType {
   String get label {
     switch (this) {
-      case DateType.createdDate:
+      case DateType.created:
         return tr(AppL10n.eDateCreate);
-      case DateType.modifiedDate:
+      case DateType.modified:
         return tr(AppL10n.eDateModify);
-      case DateType.accessedDate:
+      case DateType.accessed:
         return tr(AppL10n.eDateAccess);
-      case DateType.exifDate:
+      case DateType.exif:
         return tr(AppL10n.eDateCapture);
-      case DateType.earliestDate:
+      case DateType.earliest:
         return tr(AppL10n.eDateEarliest);
-      case DateType.latestDate:
+      case DateType.latest:
         return tr(AppL10n.eDateLatest);
     }
   }
 
-  bool get isCreatedDate => this == DateType.createdDate;
-  bool get isModifiedDate => this == DateType.modifiedDate;
-  bool get isAccessedDate => this == DateType.accessedDate;
-  bool get isExifDate => this == DateType.exifDate;
-  bool get isEarliestDate => this == DateType.earliestDate;
-  bool get isLatestDate => this == DateType.latestDate;
+  bool get isCreated => this == DateType.created;
+  bool get isModified => this == DateType.modified;
+  bool get isAccessed => this == DateType.accessed;
+  bool get isExif => this == DateType.exif;
+  bool get isEarliest => this == DateType.earliest;
+  bool get isLatest => this == DateType.latest;
 }
 
 enum WeekdayStyle {

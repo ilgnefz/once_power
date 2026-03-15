@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_add.dart';
+import 'package:once_power/model/advance_delete.dart';
+import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:once_power/view/action/advance/dialog/add.dart';

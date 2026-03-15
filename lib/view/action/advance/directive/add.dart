@@ -6,6 +6,7 @@ import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/action/advance_rich_text.dart';
 import 'package:once_power/widget/base/text.dart';
@@ -69,7 +70,7 @@ class AddCard extends StatelessWidget {
       case AddMode.indexes:
         return AdvanceRichText(
           text: advanceTextSpan(
-            '${formatNum(menu.start, menu.digits)} ',
+            '${formatNum(menu.advanceIndex.start, menu.advanceIndex.width)} ',
             color: highlightColor,
             children: [
               advanceTextSpan(
@@ -88,7 +89,7 @@ class AddCard extends StatelessWidget {
         }
         return AdvanceRichText(
           text: advanceTextSpan(
-            '${menu.randomLen} ',
+            '${menu.randomLength} ',
             color: highlightColor,
             children: [
               advanceTextSpan(tr(AppL10n.advanceCount), color: defaultColor),
@@ -112,7 +113,7 @@ class AddCard extends StatelessWidget {
       case AddMode.date:
         return AdvanceRichText(
           text: advanceTextSpan(
-            menu.dateType.label,
+            menu.advanceIndex.dateType.label,
             color: highlightColor,
             children: buildInlineSpan(),
           ),
@@ -120,7 +121,7 @@ class AddCard extends StatelessWidget {
       case AddMode.metaData:
         return AdvanceRichText(
           text: advanceTextSpan(
-            '${menu.mode.label} ${menu.metaData.label}',
+            '${menu.mode.label} ${menu.metaData.type.label}',
             color: highlightColor,
             children: buildInlineSpan(),
           ),

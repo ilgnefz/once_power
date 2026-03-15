@@ -18,8 +18,8 @@ class AddDateSeparate extends StatelessWidget {
     required this.onCustomChange,
   });
 
-  final DateSeparateType dateSeparate;
-  final void Function(DateSeparateType) onDateSeparateChange;
+  final DateSeparate dateSeparate;
+  final void Function(DateSeparate) onDateSeparateChange;
   final String custom;
   final void Function(String) onCustomChange;
 
@@ -30,8 +30,8 @@ class AddDateSeparate extends StatelessWidget {
       padding: const .only(top: 4, right: 4),
       spacing: AppNum.spaceSmall,
       children: [
-        TextDropdown<DateSeparateType>(
-          items: DateSeparateType.values
+        TextDropdown<DateSeparate>(
+          items: DateSeparate.values
               .map(
                 (item) => DropdownItem(
                   key: ValueKey(item),

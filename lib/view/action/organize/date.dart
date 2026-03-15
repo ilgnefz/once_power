@@ -9,10 +9,10 @@ import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/text_dropdown.dart';
 
 final List<DateType> _dateTypes = [
-  DateType.createdDate,
-  DateType.modifiedDate,
-  DateType.accessedDate,
-  DateType.exifDate,
+  DateType.created,
+  DateType.modified,
+  DateType.accessed,
+  DateType.exif,
 ];
 
 class DateOptions extends ConsumerWidget {

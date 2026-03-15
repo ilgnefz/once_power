@@ -9,14 +9,12 @@ import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
 
 import 'file.dart';
-import 'update/update.dart';
 
 void dropFile(DropDoneDetails details, WidgetRef ref) async {
   List<XFile> paths = details.files;
   if (paths.isNotEmpty) {
     final List<String> files = paths.map((e) => e.path).toList();
     await formatPath(ref, files);
-    updateName(ref);
   }
 }
 
@@ -24,7 +22,6 @@ Future<void> uploadFile(WidgetRef ref) async {
   final List<XFile> files = await openFiles();
   if (files.isNotEmpty) {
     await formatXFile(ref, files);
-    updateName(ref);
   }
 }
 
@@ -36,7 +33,6 @@ Future<void> uploadFolder(WidgetRef ref) async {
       .toList();
   if (validFolders.isNotEmpty) {
     await formatFolder(ref, validFolders);
-    updateName(ref);
   }
 }
 

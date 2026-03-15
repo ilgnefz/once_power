@@ -4,6 +4,7 @@ import 'package:once_power/config/theme/directive.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_delete.dart';
 import 'package:once_power/view/action/advance/directive/match_content.dart';
 import 'package:once_power/widget/action/advance_rich_text.dart';
 
@@ -27,11 +28,7 @@ class DeleteCard extends StatelessWidget {
       case DeleteMode.input:
         return MatchContentCard(
           value: menu.value,
-          number: menu.number,
-          front: menu.front,
-          behind: menu.behind,
-          matchContent: menu.matchContent,
-          matchPosition: menu.matchPosition,
+          match: menu.match,
           defaultColor: defaultColor,
           highlightColor: highlightColor,
         );

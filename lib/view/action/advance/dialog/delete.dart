@@ -7,6 +7,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/advance.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/advance_delete.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
@@ -34,9 +35,8 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
   String value = '', group = 'all';
   bool useRegex = false;
   DeleteMode mode = DeleteMode.input;
-  MatchContent matchContent = MatchContent.number;
-  MatchPosition matchPosition = MatchPosition.self;
-  int number = 1, front = 1, behind = 1, start = 1, length = 1;
+  int start = 1, length = 1;
+  AdvanceMatch match = AdvanceMatch();
   List<DeleteType> deleteTypes = [];
 
   @override
@@ -45,13 +45,9 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
     if (widget.menu == null) return;
     value = widget.menu!.value;
     mode = widget.menu!.mode;
-    matchContent = widget.menu!.matchContent;
-    matchPosition = widget.menu!.matchPosition;
-    number = widget.menu!.number;
-    front = widget.menu!.front;
-    behind = widget.menu!.behind;
     start = widget.menu!.start;
     length = widget.menu!.length;
+    match = widget.menu!.match;
     deleteTypes = widget.menu!.deleteTypes;
     useRegex = widget.menu!.useRegex;
     group = widget.menu!.group;
@@ -98,35 +94,41 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
             }),
           ),
           MatchContentGroup(
-            content: matchContent,
+            content: match.content,
             onChanged: (value) => setState(() {
-              matchContent = value;
+              match = match.copyWith(content: value);
               mode = DeleteMode.input;
             }),
-            number: number,
+            number: match.contentIndex,
             onNumberChanged: (value) => setState(() {
-              number = value;
+              match = match.copyWith(
+                content: MatchContent.number,
+                contentIndex: value,
+              );
               mode = DeleteMode.input;
-              matchContent = MatchContent.number;
             }),
           ),
           MatchPositionGroup(
-            position: matchPosition,
+            position: match.position,
             onChanged: (value) => setState(() {
-              matchPosition = value;
+              match = match.copyWith(position: value);
               mode = DeleteMode.input;
             }),
-            front: front,
+            front: match.frontIndex,
             onFrontChanged: (value) => setState(() {
-              front = value;
+              match = match.copyWith(
+                position: MatchPosition.front,
+                frontIndex: value,
+              );
               mode = DeleteMode.input;
-              matchPosition = MatchPosition.front;
             }),
-            behind: behind,
+            behind: match.behindIndex,
             onBehindChanged: (value) => setState(() {
-              behind = value;
+              match = match.copyWith(
+                position: MatchPosition.behind,
+                behindIndex: value,
+              );
               mode = DeleteMode.input;
-              matchPosition = MatchPosition.behind;
             }),
           ),
           DeleteTypeGroup(
@@ -162,11 +164,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           mode: mode,
           start: start,
           length: length,
-          matchContent: matchContent,
-          matchPosition: matchPosition,
-          number: number,
-          front: front,
-          behind: behind,
+          match: match,
           deleteTypes: deleteTypes,
           group: group,
           checked: true,

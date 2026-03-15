@@ -8,14 +8,14 @@ import 'package:once_power/widget/common/digit_input.dart';
 class AddIndex extends StatelessWidget {
   const AddIndex({
     super.key,
-    required this.digits,
-    required this.onDigitChanged,
+    required this.width,
+    required this.onWidthChanged,
     required this.start,
     required this.onStartChanged,
   });
 
-  final int digits;
-  final void Function(int) onDigitChanged;
+  final int width;
+  final void Function(int) onWidthChanged;
   final int start;
   final void Function(int) onStartChanged;
 
@@ -28,10 +28,10 @@ class AddIndex extends StatelessWidget {
       children: [
         DigitInput(
           width: 120,
-          value: digits,
+          value: width,
           unit: tr(AppL10n.renameWidth),
           min: 1,
-          onChanged: onDigitChanged,
+          onChanged: onWidthChanged,
         ),
         DigitInput(
           width: 120,
