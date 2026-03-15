@@ -69,11 +69,9 @@ void saveOrNo() {
       AppKeys.isLength,
       AppKeys.isCyclePrefix,
       AppKeys.isSwapPrefix,
-      AppKeys.isUseRuleOrganize,
       AppKeys.isCycleSuffix,
       AppKeys.isSwapSuffix,
       AppKeys.isUseRegex,
-      AppKeys.isUseTopFolder,
       AppKeys.isViewMode,
       AppKeys.locale,
       AppKeys.organizeDate,
@@ -105,6 +103,7 @@ void saveOrNo() {
       AppKeys.otherFolderList,
       // AppKeys.isUseExtraFunction,
       AppKeys.currentPresetName,
+      AppKeys.organizeMode,
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);

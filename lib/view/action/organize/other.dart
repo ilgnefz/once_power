@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/enum/organize.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 
@@ -17,23 +19,19 @@ class OtherGroup extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyCheckbox(
-            checked: ref.watch(useTopFolderProvider),
+            checked: ref.watch(currentOrganizeModeProvider).isTop,
             label: tr(AppL10n.organizeTop),
-            onChanged: (v) {
-              ref.read(useTopFolderProvider.notifier).toggle();
-              ref.read(useGroupOrganizeProvider.notifier).update(false);
-              ref.read(useTypeOrganizeProvider.notifier).update(false);
-              ref.read(useDateOrganizeProvider.notifier).update(false);
+            onChanged: (value) {
+              final provider = ref.read(currentOrganizeModeProvider.notifier);
+              provider.update(value! ? OrganizeMode.top : OrganizeMode.normal);
             },
           ),
           EasyCheckbox(
-            checked: ref.watch(useDateOrganizeProvider),
+            checked: ref.watch(currentOrganizeModeProvider).isDate,
             label: tr(AppL10n.organizeDate),
-            onChanged: (v) {
-              ref.read(useDateOrganizeProvider.notifier).toggle();
-              ref.read(useGroupOrganizeProvider.notifier).update(false);
-              ref.read(useTypeOrganizeProvider.notifier).update(false);
-              ref.read(useTopFolderProvider.notifier).update(false);
+            onChanged: (value) {
+              final provider = ref.read(currentOrganizeModeProvider.notifier);
+              provider.update(value! ? OrganizeMode.date : OrganizeMode.normal);
             },
           ),
         ],

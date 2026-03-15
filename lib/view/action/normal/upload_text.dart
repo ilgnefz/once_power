@@ -38,16 +38,14 @@ class _ShowUploadTextState extends ConsumerState<ShowUploadText> {
     return EasyDialog(
       width: AppNum.detailDialog,
       title: widget.info.name,
-      content: Flexible(
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
-          ),
-          maxLines: null,
-          style: Theme.of(context).textTheme.bodyMedium,
+      content: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
         ),
+        maxLines: null,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       okText: tr(AppL10n.dialogSave),
       cancelText: tr(AppL10n.dialogExit),

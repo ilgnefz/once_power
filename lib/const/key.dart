@@ -50,11 +50,7 @@ class AppKeys {
   static String isViewMode = 'isViewMode';
   static String isAutoRun = 'isAutoRun';
   static String isClassifyFile = 'isClassifyFile';
-  static String isUseDateOrganize = 'isUseDateOrganize';
-  static String isUseGroupOrganize = 'isUseGroupOrganize';
   static String isUseRegex = 'isUseRegex';
-  static String isUseRuleOrganize = 'isUseRuleOrganize';
-  static String isUseTopFolder = 'isUseTopFolder';
   static String isAddSubfolder = 'isAddSubfolder';
   static String isCaseFile = 'isCaseFile';
   static String isCaseExtension = 'isCaseExtension';
@@ -69,7 +65,7 @@ class AppKeys {
   static String autoRename = 'autoRename';
   static String cancelRename = 'cancelRename';
   static String autoPrefix = 'autoPrefix';
-  static String autoDigits = 'autoDigits';
+  static String autoWidth = 'autoWidth';
 
   // List
   static String targetFolderList = 'targetFolderList';
@@ -94,6 +90,7 @@ class AppKeys {
   static String organizeDate = 'organizeDate';
   static String organizeDateFormat = 'organizeDateFormat';
   static String organizeDateSeparate = 'organizeDateSeparate';
+  static String organizeMode = 'organizeMode';
 
   // Locale
   static String locale = 'locale';

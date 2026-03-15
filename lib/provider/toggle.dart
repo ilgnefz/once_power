@@ -128,67 +128,6 @@ class MatchExtension extends _$MatchExtension {
   void update() => state = !state;
 }
 
-/* ----- Action Organize Bottom ----- */
-@riverpod
-class UseGroupOrganize extends _$UseGroupOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseGroupOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseGroupOrganize, state);
-  }
-}
-
-@riverpod
-class UseTypeOrganize extends _$UseTypeOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseRuleOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseRuleOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseRuleOrganize, state);
-  }
-}
-
-@riverpod
-class UseTopFolder extends _$UseTopFolder {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseTopFolder);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseTopFolder, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseTopFolder, state);
-  }
-}
-
-@riverpod
-class UseDateOrganize extends _$UseDateOrganize {
-  @override
-  bool build() => StorageUtil.getBool(AppKeys.isUseDateOrganize);
-  Future<void> update(bool value) async {
-    state = value;
-    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
-  }
-
-  Future<void> toggle() async {
-    state = !state;
-    await StorageUtil.setBool(AppKeys.isUseDateOrganize, state);
-  }
-}
-
 /* ----- Action Common Bottom ----- */
 
 @riverpod

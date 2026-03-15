@@ -71,6 +71,20 @@ class CurrentDateType extends _$CurrentDateType {
 
 // ----- Organize -----
 @riverpod
+class CurrentOrganizeMode extends _$CurrentOrganizeMode {
+  @override
+  OrganizeMode build() {
+    int index = StorageUtil.getInt(AppKeys.organizeMode) ?? 0;
+    return OrganizeMode.values[index];
+  }
+
+  Future<void> update(OrganizeMode mode) async {
+    state = mode;
+    await StorageUtil.setInt(AppKeys.organizeMode, mode.index);
+  }
+}
+
+@riverpod
 class OrganizeDate extends _$OrganizeDate {
   @override
   DateType build() {

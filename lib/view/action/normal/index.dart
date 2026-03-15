@@ -33,7 +33,7 @@ class IndexInput extends ConsumerWidget {
       icon: AppIcons.swap,
       checked: ref.watch(swapProvider),
       onPressed: () {
-        ref.read(swapProvider.notifier).update();
+        ref.read(swapProvider.notifier).filesUpdate();
         Debounce.run(() => normalUpdateName(ref));
       },
       child: Row(
@@ -43,7 +43,7 @@ class IndexInput extends ConsumerWidget {
             value: ref.watch(digitProvider),
             unit: tr(AppL10n.renameWidth),
             onChanged: (value) {
-              ref.read(digitProvider.notifier).update(value);
+              ref.read(digitProvider.notifier).filesUpdate(value);
               Debounce.run(() => normalUpdateName(ref));
             },
           ),
@@ -51,7 +51,7 @@ class IndexInput extends ConsumerWidget {
             value: ref.watch(startProvider),
             unit: tr(AppL10n.renameStart),
             onChanged: (value) {
-              ref.read(startProvider.notifier).update(value);
+              ref.read(startProvider.notifier).filesUpdate(value);
               Debounce.run(() => normalUpdateName(ref));
             },
           ),

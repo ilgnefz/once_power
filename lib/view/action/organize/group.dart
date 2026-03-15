@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/dialog.dart';
+import 'package:once_power/enum/organize.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/common/button.dart';
 import 'package:once_power/widget/common/checkbox.dart';
@@ -23,13 +25,13 @@ class GroupGroup extends ConsumerWidget {
             onPressed: () async => await showAllGroup(context),
           ),
           EasyCheckbox(
-            checked: ref.watch(useGroupOrganizeProvider),
+            checked: ref.watch(currentOrganizeModeProvider).isGroup,
             label: tr(AppL10n.organizeGroup),
-            onChanged: (v) {
-              ref.read(useGroupOrganizeProvider.notifier).toggle();
-              ref.read(useTypeOrganizeProvider.notifier).update(false);
-              ref.read(useTopFolderProvider.notifier).update(false);
-              ref.read(useDateOrganizeProvider.notifier).update(false);
+            onChanged: (value) {
+              final provider = ref.read(currentOrganizeModeProvider.notifier);
+              provider.update(
+                value! ? OrganizeMode.group : OrganizeMode.normal,
+              );
             },
           ),
         ],

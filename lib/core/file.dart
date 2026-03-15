@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -125,12 +126,13 @@ Future<FileInfo> generateFileInfo(String filePath) async {
   if (ext.isEmpty && name.startsWith('.')) {
     (name, ext) = ('', name.substring(1));
   }
-  FileClassify type = fileInfo.isDir
-      ? FileClassify.folder
-      : getFileClassify(ext);
+  FileType type = fileInfo.isDir ? FileType.folder : getFileType(ext);
   FileMetaInfo? metaInfo;
   Resolution? resolution;
+  Uint8List? thumbnail;
+  if (type.isAudio) metaInfo = getAudioInfo(filePath);
   if (type.isImage) {
+    resolution = await getImageDimensions(filePath);
     PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
     if (photoMetaInfo != null) {
       String? captureStr = photoMetaInfo.capture;
@@ -145,6 +147,10 @@ Future<FileInfo> generateFileInfo(String filePath) async {
         longitude: photoMetaInfo.longitude,
       );
     }
+  }
+  if (type.isVideo) {
+    (Resolution, FileMetaInfo) result = await getVideoInfo(filePath);
+    (resolution, metaInfo) = result;
   }
   return FileInfo(
     id: fileInfo.id,
@@ -161,7 +167,7 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     accessedDate: getDateInfo(intToDateTime(fileInfo.accessTime))!,
     metaInfo: metaInfo,
     resolution: resolution,
-    thumbnail: null,
+    thumbnail: thumbnail,
     type: type,
     size: fileInfo.size.toInt(),
   );
@@ -170,7 +176,7 @@ Future<FileInfo> generateFileInfo(String filePath) async {
 void filterFile(WidgetRef ref) {
   final FileList provider = ref.read(fileListProvider.notifier);
   final int before = ref.watch(fileListProvider).length;
-  provider.removeOtherClassify([FileClassify.image, FileClassify.video]);
+  provider.removeOtherClassify([FileType.image, FileType.video]);
   final int after = ref.watch(fileListProvider).length;
   showFilterNotification(before - after);
 }

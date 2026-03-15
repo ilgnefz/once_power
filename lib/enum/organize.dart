@@ -1,6 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:once_power/const/l10n.dart';
 
+enum OrganizeMode { normal, group, type, top, date }
+
+extension OrganizeModeExtension on OrganizeMode {
+  bool get isNormal => this == OrganizeMode.normal;
+  bool get isGroup => this == OrganizeMode.group;
+  bool get isType => this == OrganizeMode.type;
+  bool get isTop => this == OrganizeMode.top;
+  bool get isDate => this == OrganizeMode.date;
+}
+
 enum DateFormat { ymd, ym, y }
 
 extension DateFormatExtension on DateFormat {

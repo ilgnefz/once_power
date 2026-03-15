@@ -1,18 +1,30 @@
 import 'dart:math';
 
 import 'package:once_power/enum/advance.dart';
-import 'package:once_power/model/advance.dart';
+import 'package:once_power/enum/date.dart';
+import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/util/format.dart';
+import 'package:once_power/util/info.dart';
+import 'package:once_power/util/verify.dart';
 
-(String, String) advanceAddName(AdvanceMenuAdd menu, FileInfo file, int index) {
-  String name = file.name, ext = file.extension;
+import 'normal.dart';
 
+(String, String) advanceAddName(
+  AdvanceMenuAdd menu,
+  FileInfo file,
+  int index,
+  String name,
+  String extension,
+) {
   switch (menu.mode) {
     case AddMode.text:
-      return insertPosition(menu, name, menu.value, ext);
+      return insertPosition(menu, name, menu.value, extension);
     case AddMode.indexes:
-      return insertPosition(menu, name, menu.value, ext);
+      int width = menu.advanceIndex.width, start = menu.advanceIndex.start;
+      String indexStr = formatNum(start + index, width);
+      return insertPosition(menu, name, indexStr, extension);
     case AddMode.random:
       const expandMap = {
         'a-z': 'abcdefghijklmnopqrstuvwxyz',
@@ -23,21 +35,49 @@ import 'package:once_power/model/file.dart';
           .expand((v) => [expandMap[v] ?? v])
           .toSet();
       String value = getRandomValue(values, menu.randomLength);
-      return insertPosition(menu, name, value, ext);
+      return insertPosition(menu, name, value, extension);
     case AddMode.folder:
-      return insertPosition(menu, name, menu.value, ext);
+      String folder = getFolderName(file.parent);
+      return insertPosition(menu, name, folder, extension);
     case AddMode.width:
-      return insertPosition(menu, name, menu.value, ext);
+      String width = file.resolution?.width.toString() ?? '';
+      return insertPosition(menu, name, width, extension);
     case AddMode.height:
-      return insertPosition(menu, name, menu.value, ext);
+      String height = file.resolution?.height.toString() ?? '';
+      return insertPosition(menu, name, height, extension);
     case AddMode.extension:
-      return insertPosition(menu, name, menu.value, ext);
+      return insertPosition(menu, name, file.extension, extension);
     case AddMode.group:
-      return insertPosition(menu, name, menu.value, ext);
+      String group = isAll(file.group) ? '' : file.group;
+      return insertPosition(menu, name, group, extension);
     case AddMode.date:
-      return insertPosition(menu, name, menu.value, ext);
+      return insertPosition(menu, name, menu.value, extension);
     case AddMode.metaData:
-      return insertPosition(menu, name, menu.value, ext);
+      String metaData = '';
+      switch (menu.metaData.type) {
+        case MetaDataType.title:
+          metaData = file.metaInfo?.title ?? '';
+          break;
+        case MetaDataType.artist:
+          metaData = file.metaInfo?.artist ?? '';
+          break;
+        case MetaDataType.album:
+          metaData = file.metaInfo?.album ?? '';
+          break;
+        case MetaDataType.year:
+          metaData = file.metaInfo?.year ?? '';
+          break;
+        case MetaDataType.make:
+          metaData = file.metaInfo?.make ?? '';
+          break;
+        case MetaDataType.model:
+          metaData = file.metaInfo?.model ?? '';
+          break;
+        case MetaDataType.location:
+          metaData = file.metaInfo?.location ?? '';
+          break;
+      }
+      return insertPosition(menu, name, metaData, extension);
   }
 }
 
@@ -82,4 +122,32 @@ String getRandomValue(Set<String> list, int len) {
       }
       return (result.join(value), ext);
   }
+}
+
+int getAddIndex(
+  int index,
+  FileInfo file,
+  AdvanceMenuAdd menu,
+  Map<String, dynamic> classifyMap,
+) {
+  switch (menu.advanceIndex.distinction) {
+    case IndexDistinction.none:
+      return index;
+    case IndexDistinction.file:
+      String type = file.type.label;
+      (_, index) = calculateIndex(classifyMap, [type], file);
+    case IndexDistinction.extension:
+      String extension = file.extension;
+      (_, index) = calculateIndex(classifyMap, [extension], file);
+    case IndexDistinction.date:
+      DateType distinguishDate = menu.advanceIndex.dateType;
+      String indexDate = getDateName(getDate(distinguishDate, file)?.date, 8);
+      (_, index) = calculateIndex(classifyMap, [indexDate], file);
+    case IndexDistinction.folder:
+      String folder = getFolderName(file.parent);
+      (_, index) = calculateIndex(classifyMap, [folder], file);
+    case IndexDistinction.group:
+      (_, index) = calculateIndex(classifyMap, [file.group], file);
+  }
+  return index;
 }

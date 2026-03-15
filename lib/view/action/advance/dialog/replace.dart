@@ -66,6 +66,7 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
       title: tr(AppL10n.advanceReplaceTitle),
       content: Column(
         spacing: AppNum.spaceMedium,
+        mainAxisSize: .min,
         children: [
           ActionItem(
             padding: .zero,

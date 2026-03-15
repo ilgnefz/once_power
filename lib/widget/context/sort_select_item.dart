@@ -49,14 +49,14 @@ class SortSelectItem extends ConsumerWidget {
       final SortSelectList provider = ref.read(sortSelectListProvider.notifier);
       if (isCtrlPressed) {
         // Ctrl键按下时：切换当前文件的选中状态（选中则取消，未选中则添加）
-        SelectionState.update(true);
+        SelectionState.filesUpdate(true);
         selectList.contains(file) ? provider.remove(file) : provider.add(file);
       } else if (isShiftPressed) {
         // Shift键按下时：按顺序选中从首个已选文件到当前文件的连续区间
         List<FileInfo> list = ref.read(sortListProvider);
         int begin = 0;
         if (selectList.isNotEmpty) {
-          FileInfo startFile = SelectionState.hadPressedCtrl
+          FileInfo startFile = SelectionState.filesPressedCtrl
               ? selectList.last
               : selectList.first;
           begin = list.indexOf(startFile);
@@ -67,9 +67,9 @@ class SortSelectItem extends ConsumerWidget {
             : newSelectList = list.sublist(index, begin + 1).reversed.toList();
         provider.clear();
         provider.addAll(newSelectList);
-        SelectionState.update(false);
+        SelectionState.filesUpdate(false);
       } else {
-        SelectionState.update(false);
+        SelectionState.filesUpdate(false);
         selectList.contains(file) && selectList.length == 1
             ? provider.clear()
             : provider.one(file);

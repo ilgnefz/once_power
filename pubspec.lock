@@ -400,6 +400,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_media_info:
+    dependency: "direct main"
+    description:
+      name: flutter_media_info
+      sha256: c15248e60a876669e2e04dcf48d16d2caf6323cfd49dae98628c78230a3fdb5f
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4-dev.3"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -471,6 +479,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.2"
+  hashcodes:
+    dependency: transitive
+    description:
+      name: hashcodes
+      sha256: "80f9410a5b3c8e110c4b7604546034749259f5d6dcca63e0d3c17c9258f1a651"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   http:
     dependency: transitive
     description:
@@ -495,6 +511,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.1.2"
+  image_size_getter:
+    dependency: "direct main"
+    description:
+      name: image_size_getter
+      sha256: "7c26937e0ae341ca558b7556591fd0cc456fcc454583b7cb665d2f03e93e590f"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.1"
   integration_test:
     dependency: "direct dev"
     description: flutter
@@ -1329,7 +1353,7 @@ packages:
     source: hosted
     version: "1.1.0"
   xml:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: xml
       sha256: "971043b3a0d3da28727e40ed3e0b5d18b742fa5a68665cca88e74b7876d5e025"

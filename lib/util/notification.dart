@@ -101,6 +101,15 @@ void showDateModifyNotification(List<InfoDetail> errors, int total) {
   info.show();
 }
 
+void showGroupAddErrorNotification() {
+  return NotificationInfo(
+    type: NotificationType.warning,
+    title: tr(AppL10n.errGroupNameTitle),
+    message: tr(AppL10n.errGroupName),
+    time: 3,
+  ).show();
+}
+
 void showPresetAddErrorNotification() {
   return NotificationInfo(
     type: NotificationType.warning,

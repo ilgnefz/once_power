@@ -1,13 +1,14 @@
+import 'package:once_power/model/progress.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'progress.g.dart';
 
-@riverpod
-class CurrentFile extends _$CurrentFile {
-  @override
-  String build() => '';
-  void update(String value) => state = value;
-}
+// @riverpod
+// class CurrentFile extends _$CurrentFile {
+//   @override
+//   String build() => '';
+//   void update(String value) => state = value;
+// }
 
 @riverpod
 class Count extends _$Count {
@@ -31,13 +32,13 @@ class Cost extends _$Cost {
   void update(double value) => state = value;
 }
 
-// @riverpod
-// class CurrentProgressFile extends _$CurrentProgressFile {
-//   @override
-//   ProgressFileInfo? build() => null;
-//   void update(ProgressFileInfo value) => state = value;
-//   void clear() => state = null;
-// }
+@riverpod
+class CurrentProgressFile extends _$CurrentProgressFile {
+  @override
+  ProgressFileInfo? build() => null;
+  void update(ProgressFileInfo value) => state = value;
+  void clear() => state = null;
+}
 
 @riverpod
 class CurrentSize extends _$CurrentSize {

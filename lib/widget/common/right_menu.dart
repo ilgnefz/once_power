@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:once_power/config/theme/theme.dart';
 
-final class RightMenuItem<T> extends ContextMenuItem<T> {
+final class RightMenuItem extends ContextMenuItem<dynamic> {
   final String label;
   final Color? color;
 
@@ -17,7 +17,7 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
   const RightMenuItem.submenu({
     required this.label,
     this.color,
-    required List<ContextMenuEntry<T>> items,
+    required List<ContextMenuEntry<dynamic>> items,
     super.onSelected,
     super.enabled,
   }) : super.submenu(items: items);
@@ -25,7 +25,7 @@ final class RightMenuItem<T> extends ContextMenuItem<T> {
   @override
   Widget builder(
     BuildContext context,
-    ContextMenuState<T> menuState, [
+    ContextMenuState<dynamic> menuState, [
     FocusNode? focusNode,
   ]) {
     final ThemeData theme = Theme.of(context);

@@ -14,8 +14,10 @@ class InputField extends StatefulWidget {
     required this.hintText,
     this.leading,
     this.action,
+    this.autofocus = false,
     this.obscureText = false,
     this.enabled = true,
+    this.margin,
     this.inputFormatters,
     this.onChanged,
     this.onComplete,
@@ -27,8 +29,10 @@ class InputField extends StatefulWidget {
   final String hintText;
   final Widget? leading;
   final Widget? action;
+  final bool autofocus;
   final bool obscureText;
   final bool enabled;
+  final EdgeInsetsGeometry? margin;
   final List<FilteringTextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
   final void Function(String)? onComplete;
@@ -80,13 +84,12 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return BaseInput(
-      padding: EdgeInsets.only(
-        left: AppNum.spaceMedium,
-        right: AppNum.spaceSmall,
-      ),
+      padding: .only(left: AppNum.spaceMedium, right: AppNum.spaceSmall),
+      margin: widget.margin,
       focusNode: focusNode,
       controller: controller,
       hintText: widget.enabled ? widget.hintText : tr(AppL10n.renameDisable),
+      autofocus: widget.autofocus,
       obscureText: widget.obscureText,
       enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,

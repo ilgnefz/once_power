@@ -388,6 +388,8 @@ class AppL10n {
   static const String errNoExist = 'error.noExist';
   static const String errNoOpen = 'error.noOpen';
   static const String errModifyDateFail = 'error.modifyDateFail';
+  static const String errGroupNameTitle = 'error.groupNameTitle';
+  static const String errGroupName = 'error.groupName';
   static const String errPresetNameTitle = 'error.presetNameTitle';
   static const String errPresetName = 'error.presetName';
   static const String errPresetAddTitle = 'error.presetAddTitle';

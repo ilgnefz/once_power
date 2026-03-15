@@ -20,37 +20,37 @@ class TypeList extends StatefulWidget {
 class _TypeListState extends State<TypeList> {
   List<RuleType> list = [
     RuleType(
-      name: FileClassify.image.label,
+      name: FileType.image.label,
       key: AppKeys.imageFolder,
       listKey: AppKeys.imageFolderList,
     ),
     RuleType(
-      name: FileClassify.video.label,
+      name: FileType.video.label,
       key: AppKeys.videoFolder,
       listKey: AppKeys.videoFolderList,
     ),
     RuleType(
-      name: FileClassify.doc.label,
+      name: FileType.doc.label,
       key: AppKeys.docFolder,
       listKey: AppKeys.docFolderList,
     ),
     RuleType(
-      name: FileClassify.audio.label,
+      name: FileType.audio.label,
       key: AppKeys.audioFolder,
       listKey: AppKeys.audioFolderList,
     ),
     RuleType(
-      name: FileClassify.folder.label,
+      name: FileType.folder.label,
       key: AppKeys.folderFolder,
       listKey: AppKeys.folderFolderList,
     ),
     RuleType(
-      name: FileClassify.archive.label,
+      name: FileType.archive.label,
       key: AppKeys.zipFolder,
       listKey: AppKeys.zipFolderList,
     ),
     RuleType(
-      name: FileClassify.other.label,
+      name: FileType.other.label,
       key: AppKeys.otherFolder,
       listKey: AppKeys.otherFolderList,
     ),

@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
+import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
+import 'package:once_power/enum/date.dart';
+import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_add.dart';
@@ -22,6 +26,7 @@ import 'package:path/path.dart';
 import 'advance_add.dart';
 import 'advance_delete.dart';
 import 'advance_replace.dart';
+import 'normal.dart';
 
 Future<void> advanceUpdateName(WidgetRef ref) async {
   List<FileInfo> list = ref.read(sortListProvider);
@@ -34,28 +39,34 @@ Future<void> advanceUpdateName(WidgetRef ref) async {
   int index = 0;
   for (FileInfo file in list) {
     if (!file.checked) continue;
-    String name = file.name, extension = file.extension;
+    String name = file.name, ext = file.extension;
     for (AdvanceMenuModel menu in menus) {
       if (menu.group != 'all' && menu.group != file.group) continue;
       switch (menu.type) {
         case AdvanceType.delete:
           menu as AdvanceMenuDelete;
           if (menu.mode.isExtension) {
-            extension = '';
+            ext = '';
           } else {
             name = advanceDeleteName(menu, name);
           }
+          break;
         case AdvanceType.add:
           menu as AdvanceMenuAdd;
-          (name, extension) = advanceAddName(menu, file, index);
+          if (menu.mode.isIndex) {
+            index = getAddIndex(index, file, menu, classifyMap);
+          }
+          (name, ext) = advanceAddName(menu, file, index, name, ext);
+          break;
         case AdvanceType.replace:
           menu as AdvanceMenuReplace;
           name = advanceReplaceName(menu, name);
+          break;
       }
     }
     name = removeForbiddenCharacters(name);
     provider.updateNewName(file.id, name);
-    provider.updateNewExtension(file.id, extension);
+    provider.updateNewExtension(file.id, ext);
     index++;
   }
 }

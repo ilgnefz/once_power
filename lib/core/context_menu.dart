@@ -40,7 +40,7 @@ Future<void> showRightMenu(
   List<FileInfo> sortSelectList = [];
   sortSelectList = isPreview ? [file] : ref.read(sortSelectListProvider);
   List<FileInfo> suspenseList = SuspenseState.list;
-  final entries = <ContextMenuEntry>[
+  final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(
       label: tr(AppL10n.menuLocal),
       onSelected: (_) => openFileLocation(file.path),
@@ -127,7 +127,7 @@ Future<void> showRightMenu(
           RightMenuItem(
             label: tr(AppL10n.menuEdit),
             color: Theme.of(context).primaryColor,
-            onSelected: (_) => editGroup(context),
+            onSelected: (_) => editGroup(context, false, file),
           ),
           RightMenuItem(
             label: tr(AppL10n.menuAutoGroup),
@@ -200,8 +200,8 @@ List<ContextMenuEntry> buildGroupList(
           color: file.group == e
               ? Theme.of(context).textTheme.bodyMedium?.color
               : Colors.grey,
-          onSelected: (_) => setGroup(context, ref, e),
-          items: [
+          onSelected: (_) => setGroup(context, ref, e, file),
+          items: <ContextMenuEntry>[
             RightMenuItem(
               label: tr(AppL10n.menuRemove),
               color: Colors.red,
@@ -216,10 +216,50 @@ List<ContextMenuEntry> buildGroupList(
 Future<void> showDirectiveRightMenu(
   BuildContext context,
   WidgetRef ref,
-  TapDownDetails details,
+  Offset position,
 ) async {
   List<AdvanceMenuModel> list = ref.watch(advanceMenuSelectedListProvider);
   ThemeData theme = Theme.of(context);
+  final List<ContextMenuEntry> entries = <ContextMenuEntry>[
+    RightMenuItem(
+      label: tr(AppL10n.menuToggle),
+      onSelected: (_) {
+        for (var element in list) {
+          ref.read(advanceMenuListProvider.notifier).toggle(element);
+        }
+        ref.read(advanceMenuSelectedListProvider.notifier).clear();
+        advanceUpdateName(ref);
+      },
+    ),
+    RightMenuItem.submenu(
+      label: tr(AppL10n.menuEdit),
+      items: <ContextMenuEntry>[
+        RightMenuItem(
+          label: tr(AppL10n.menuEdit),
+          color: Theme.of(context).primaryColor,
+          onSelected: (_) => editGroup(context, true),
+        ),
+        ...buildDirectiveGroupList(context, ref, list),
+      ],
+    ),
+    RightMenuItem(
+      label: tr(AppL10n.menuRemove),
+      onSelected: (_) {
+        for (var element in list) {
+          ref.read(advanceMenuListProvider.notifier).remove(element);
+        }
+        ref.read(currentPresetNameProvider.notifier).update('');
+        advanceUpdateName(ref);
+      },
+    ),
+    RightMenuItem(
+      label: tr(AppL10n.menuCancel),
+      onSelected: (_) {
+        ref.read(advanceMenuSelectedListProvider.notifier).clear();
+        advanceUpdateName(ref);
+      },
+    ),
+  ];
   await showContextMenu(
     context,
     contextMenu: ContextMenu(
@@ -231,48 +271,9 @@ Future<void> showDirectiveRightMenu(
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),
         ],
       ),
-      entries: <ContextMenuEntry>[
-        RightMenuItem(
-          label: tr(AppL10n.menuToggle),
-          onSelected: (_) {
-            for (var element in list) {
-              ref.read(advanceMenuListProvider.notifier).toggle(element);
-            }
-            ref.read(advanceMenuSelectedListProvider.notifier).clear();
-            advanceUpdateName(ref);
-          },
-        ),
-        RightMenuItem.submenu(
-          label: tr(AppL10n.menuEdit),
-          items: [
-            RightMenuItem(
-              label: tr(AppL10n.menuEdit),
-              color: Theme.of(context).primaryColor,
-              onSelected: (_) => editGroup(context, true),
-            ),
-            ...buildDirectiveGroupList(context, ref, list),
-          ],
-        ),
-        RightMenuItem(
-          label: tr(AppL10n.menuRemove),
-          onSelected: (_) {
-            for (var element in list) {
-              ref.read(advanceMenuListProvider.notifier).remove(element);
-            }
-            ref.read(currentPresetNameProvider.notifier).update('');
-            advanceUpdateName(ref);
-          },
-        ),
-        RightMenuItem(
-          label: tr(AppL10n.menuCancel),
-          onSelected: (_) {
-            ref.read(advanceMenuSelectedListProvider.notifier).clear();
-            advanceUpdateName(ref);
-          },
-        ),
-      ],
+      entries: entries,
       padding: EdgeInsets.zero,
-      position: details.globalPosition,
+      position: position,
       // maxWidth: 120,
     ),
   );

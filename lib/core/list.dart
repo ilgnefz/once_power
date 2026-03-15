@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/core/update/advance.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
@@ -88,21 +89,31 @@ void removeMultiple(WidgetRef ref, List<FileInfo> files) {
   updateName(ref);
 }
 
-void setGroup(BuildContext context, WidgetRef ref, String group) {
-  List<FileInfo> files = ref.watch(sortSelectListProvider);
-  for (FileInfo e in files) {
-    group = e.group == group ? '' : group;
-    ref.read(fileListProvider.notifier).updateGroup(e.id, group);
+void setGroup(
+  BuildContext context,
+  WidgetRef ref,
+  String group,
+  FileInfo file,
+) {
+  List<FileInfo> list = ref.read(sortSelectListProvider);
+  if (list.isEmpty) {
+    group = file.group == group ? '' : group;
+    ref.read(fileListProvider.notifier).updateGroup(file.id, group);
+  } else {
+    for (FileInfo f in list) {
+      if (f.group == group) continue;
+      ref.read(fileListProvider.notifier).updateGroup(f.id, group);
+    }
   }
-  updateName(ref);
-  if (context.mounted) Navigator.of(context).pop();
+  advanceUpdateName(ref);
+  Navigator.pop(context);
 }
 
 Future<void> removeGroup(WidgetRef ref, String group) async {
   List<String> list = StorageUtil.getStringList(AppKeys.groupList);
   list.remove(group);
   await StorageUtil.setStringList(AppKeys.groupList, list);
-  List<FileInfo> files = ref.watch(fileListProvider);
+  List<FileInfo> files = ref.read(fileListProvider);
   for (FileInfo e in files) {
     if (e.group == group) {
       ref.read(fileListProvider.notifier).updateGroup(e.id, '');

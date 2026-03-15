@@ -425,6 +425,8 @@
     "noExist": "File not exists",
     "noOpen": "Cannot open {file}",
     "modifyDateFail": "Failed to modify {file} date",
+    "groupNameTitle": "Invalid group name",
+    "groupName": "Group name cannot be empty",
     "presetNameTitle": "Invalid preset name",
     "presetName": "Preset name cannot be empty",
     "presetAddTitle": "Add preset failed",

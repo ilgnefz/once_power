@@ -219,6 +219,59 @@ abstract class _$CurrentDateType extends $Notifier<DateType> {
   }
 }
 
+@ProviderFor(CurrentOrganizeMode)
+final currentOrganizeModeProvider = CurrentOrganizeModeProvider._();
+
+final class CurrentOrganizeModeProvider
+    extends $NotifierProvider<CurrentOrganizeMode, OrganizeMode> {
+  CurrentOrganizeModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentOrganizeModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentOrganizeModeHash();
+
+  @$internal
+  @override
+  CurrentOrganizeMode create() => CurrentOrganizeMode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OrganizeMode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OrganizeMode>(value),
+    );
+  }
+}
+
+String _$currentOrganizeModeHash() =>
+    r'221a3e0a9d0fa9dd9c57d6b2e1af60cc65a269f2';
+
+abstract class _$CurrentOrganizeMode extends $Notifier<OrganizeMode> {
+  OrganizeMode build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<OrganizeMode, OrganizeMode>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<OrganizeMode, OrganizeMode>,
+              OrganizeMode,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(OrganizeDate)
 final organizeDateProvider = OrganizeDateProvider._();
 

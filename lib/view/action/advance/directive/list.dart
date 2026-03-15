@@ -43,7 +43,7 @@ class DirectiveList extends ConsumerWidget {
         return ReorderableDragStartListener(
           key: ValueKey(list[index].id),
           index: index,
-          child: DirectiveItem(menu: list[index]),
+          child: DirectiveItem(index: index, menu: list[index]),
         );
       },
     );

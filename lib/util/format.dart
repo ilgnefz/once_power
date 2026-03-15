@@ -1,4 +1,47 @@
+import 'package:flutter/material.dart';
 import 'package:once_power/model/file.dart';
+
+String convertToLocalTime(String utcTimeStr) {
+  try {
+    // 检查是否包含UTC前缀并移除
+    String cleanTimeStr = utcTimeStr;
+    if (utcTimeStr.startsWith('UTC ')) {
+      cleanTimeStr = utcTimeStr.substring(4);
+    }
+
+    // 解析时间字符串（格式：YYYY-MM-DD HH:mm:ss）
+    List<String> parts = cleanTimeStr.split(' ');
+    if (parts.length != 2) {
+      return utcTimeStr; // 如果格式不符合预期，返回原始字符串
+    }
+
+    List<String> dateParts = parts[0].split('-');
+    List<String> timeParts = parts[1].split(':');
+
+    if (dateParts.length != 3 || timeParts.length != 3) {
+      return utcTimeStr; // 如果格式不符合预期，返回原始字符串
+    }
+
+    // 构建DateTime对象
+    DateTime utcDateTime = DateTime.utc(
+      int.parse(dateParts[0]),
+      int.parse(dateParts[1]),
+      int.parse(dateParts[2]),
+      int.parse(timeParts[0]),
+      int.parse(timeParts[1]),
+      int.parse(timeParts[2]),
+    );
+
+    // 转换为本地时间
+    DateTime localDateTime = utcDateTime.toLocal();
+    // 格式化为标准字符串（可以根据需要调整格式）
+    return localDateTime.toString().substring(0, 19); // 格式：YYYY-MM-DD HH:mm:ss
+  } catch (e) {
+    // 如果解析失败，返回原始字符串
+    debugPrint('时间转换失败: $e');
+    return utcTimeStr;
+  }
+}
 
 int extractNum(String value) {
   final match = RegExp(r'\d+').firstMatch(value);

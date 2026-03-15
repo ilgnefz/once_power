@@ -35,14 +35,17 @@ class ContentView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
-      child: Column(
-        children: [
-          ContentTop(),
-          DropTarget(
-            onDragDone: (details) => dropFile(details, ref),
-            child: Expanded(child: ref.watch(_viewProvider)),
-          ),
-        ],
+      child: GestureDetector(
+        onTap: () => ref.read(sortSelectListProvider.notifier).clear(),
+        child: Column(
+          children: [
+            ContentTop(),
+            DropTarget(
+              onDragDone: (details) => dropFile(details, ref),
+              child: Expanded(child: ref.watch(_viewProvider)),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -8,9 +8,9 @@ class GroupRule {
 
   GroupRule({
     required this.infoType,
-    required this.operator,
+    this.operator = ComparisonOperator.contain,
     required this.value,
-    required this.group,
+    this.group = '',
   });
 
   @override

@@ -26,11 +26,10 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  void checkClassify(FileClassify classify, bool check) =>
-      state = state.map((e) {
-        if (e.type == classify) e.checked = check;
-        return e;
-      }).toList();
+  void checkClassify(FileType classify, bool check) => state = state.map((e) {
+    if (e.type == classify) e.checked = check;
+    return e;
+  }).toList();
 
   void checkExtension(String ext) => state = state.map((e) {
     if (e.extension == ext) e.checked = !e.checked;
@@ -53,7 +52,7 @@ class FileList extends _$FileList {
 
   void removeUncheck() => state = state.where((e) => e.checked).toList();
 
-  void removeOtherClassify(List<FileClassify> classifyList) {
+  void removeOtherClassify(List<FileType> classifyList) {
     state = state = state.where((e) => classifyList.contains(e.type)).toList();
   }
 
@@ -61,23 +60,6 @@ class FileList extends _$FileList {
     if (e.id == id) e.checked = value;
     return e;
   }).toList();
-
-  // TODO: 删除
-  void updateDate(
-    String id,
-    DateTime? createdDate,
-    DateTime? modifiedDate,
-    DateTime? accessedDate,
-  ) {
-    state = state.map((e) {
-      if (e.id == id) {
-        e.createdDate = getDateInfo(createdDate) ?? e.createdDate;
-        e.modifiedDate = getDateInfo(modifiedDate) ?? e.modifiedDate;
-        e.accessedDate = getDateInfo(accessedDate) ?? e.accessedDate;
-      }
-      return e;
-    }).toList();
-  }
 
   void updateCreatedDate(String id, DateTime? createdDate) => state = state.map(
     (e) {

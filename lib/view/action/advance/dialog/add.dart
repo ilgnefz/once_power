@@ -72,6 +72,7 @@ class _AddViewState extends ConsumerState<AddView> {
       title: tr(AppL10n.advanceAddTitle),
       content: Column(
         spacing: AppNum.spaceMedium,
+        mainAxisSize: .min,
         children: [
           InputField(
             text: value,

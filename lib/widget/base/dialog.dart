@@ -53,7 +53,7 @@ class EasyDialog extends StatelessWidget {
           color: theme.scaffoldBackgroundColor,
           child: Container(
             width: width ?? AppNum.easyDialog,
-            padding: padding ?? EdgeInsets.all(AppNum.padding),
+            padding: EdgeInsets.symmetric(vertical: AppNum.padding),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
             child: Column(
               spacing: AppNum.spaceLarge,
@@ -66,35 +66,47 @@ class EasyDialog extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                content,
-                Row(
-                  spacing: actionsSpacing ?? AppNum.spaceLarge,
-                  mainAxisAlignment: actionsAxisAlignment,
-                  children:
-                      actions ??
-                      [
-                        if (extraButton != null) ...[extraButton!, Spacer()],
-                        TextButton(
-                          onPressed: () {
-                            onCancel?.call();
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            cancelText ?? tr(AppL10n.dialogExit),
-                            style: textStyle,
+                // Padding(
+                //   padding: padding ?? .symmetric(horizontal: AppNum.padding),
+                //   child: content,
+                // ),
+                Flexible(
+                  child: Padding(
+                    padding: padding ?? .symmetric(horizontal: AppNum.padding),
+                    child: content,
+                  ),
+                ),
+                Padding(
+                  padding: .symmetric(horizontal: AppNum.padding),
+                  child: Row(
+                    spacing: actionsSpacing ?? AppNum.spaceLarge,
+                    mainAxisAlignment: actionsAxisAlignment,
+                    children:
+                        actions ??
+                        [
+                          if (extraButton != null) ...[extraButton!, Spacer()],
+                          TextButton(
+                            onPressed: () {
+                              onCancel?.call();
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              cancelText ?? tr(AppL10n.dialogExit),
+                              style: textStyle,
+                            ),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            onOk?.call();
-                            if (autoPop) Navigator.pop(context);
-                          },
-                          child: Text(
-                            okText ?? tr(AppL10n.dialogOk),
-                            style: textStyle,
+                          TextButton(
+                            onPressed: () {
+                              onOk?.call();
+                              if (autoPop) Navigator.pop(context);
+                            },
+                            child: Text(
+                              okText ?? tr(AppL10n.dialogOk),
+                              style: textStyle,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                  ),
                 ),
               ],
             ),

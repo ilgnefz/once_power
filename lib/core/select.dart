@@ -16,7 +16,7 @@ void selectGroup(WidgetRef ref, String group) {
   updateName(ref);
 }
 
-void selectType(WidgetRef ref, FileClassify type) {
+void selectType(WidgetRef ref, FileType type) {
   ref.read(sortSelectListProvider.notifier).clear();
   List<FileInfo> list = ref.watch(sortListProvider);
   for (FileInfo e in list) {

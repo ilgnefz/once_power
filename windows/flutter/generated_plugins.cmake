@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   file_selector_windows
+  flutter_media_info
   screen_retriever_windows
   shortcut_menu_extender_windows
   tray_manager

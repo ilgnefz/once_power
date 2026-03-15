@@ -34,7 +34,7 @@ class AffixInput extends ConsumerWidget {
       icon: AppIcons.cycle,
       checked: ref.watch(cycleProvider),
       onPressed: () {
-        ref.read(cycleProvider.notifier).update();
+        ref.read(cycleProvider.notifier).filesUpdate();
         Debounce.run(() => normalUpdateName(ref));
       },
       child: UploadInput(

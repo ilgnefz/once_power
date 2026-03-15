@@ -27,7 +27,7 @@ class FileInfo {
   DateInfo createdDate;
   DateInfo modifiedDate;
   DateInfo accessedDate;
-  FileClassify type;
+  FileType type;
   Resolution? resolution;
   FileMetaInfo? metaInfo;
   Uint8List? thumbnail;
@@ -257,5 +257,16 @@ class UploadMarkInfo {
   @override
   String toString() {
     return 'UploadMarkInfo{name: $name, content: $content, isPrefix: $isPrefix}';
+  }
+}
+
+class CountFileType {
+  final FileType type;
+  final int count;
+
+  CountFileType({required this.type, this.count = 0});
+
+  CountFileType copyWith({int? count}) {
+    return CountFileType(type: type, count: count ?? this.count);
   }
 }

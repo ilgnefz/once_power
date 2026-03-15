@@ -9,57 +9,6 @@ part of 'progress.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(CurrentFile)
-final currentFileProvider = CurrentFileProvider._();
-
-final class CurrentFileProvider extends $NotifierProvider<CurrentFile, String> {
-  CurrentFileProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'currentFileProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$currentFileHash();
-
-  @$internal
-  @override
-  CurrentFile create() => CurrentFile();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(String value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<String>(value),
-    );
-  }
-}
-
-String _$currentFileHash() => r'031f1fdf81335fadc37ffda6c6d2678ca2c25237';
-
-abstract class _$CurrentFile extends $Notifier<String> {
-  String build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final ref = this.ref as $Ref<String, String>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<String, String>,
-              String,
-              Object?,
-              Object?
-            >;
-    element.handleCreate(ref, build);
-  }
-}
-
 @ProviderFor(Count)
 final countProvider = CountProvider._();
 
@@ -206,6 +155,59 @@ abstract class _$Cost extends $Notifier<double> {
             as $ClassProviderElement<
               AnyNotifier<double, double>,
               double,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(CurrentProgressFile)
+final currentProgressFileProvider = CurrentProgressFileProvider._();
+
+final class CurrentProgressFileProvider
+    extends $NotifierProvider<CurrentProgressFile, ProgressFileInfo?> {
+  CurrentProgressFileProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentProgressFileProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentProgressFileHash();
+
+  @$internal
+  @override
+  CurrentProgressFile create() => CurrentProgressFile();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ProgressFileInfo? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ProgressFileInfo?>(value),
+    );
+  }
+}
+
+String _$currentProgressFileHash() =>
+    r'5296a0c110418d606b8c0c0d847ba1b286070016';
+
+abstract class _$CurrentProgressFile extends $Notifier<ProgressFileInfo?> {
+  ProgressFileInfo? build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<ProgressFileInfo?, ProgressFileInfo?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ProgressFileInfo?, ProgressFileInfo?>,
+              ProgressFileInfo?,
               Object?,
               Object?
             >;

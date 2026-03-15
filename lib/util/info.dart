@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_media_info/flutter_media_info.dart';
+import 'package:image_size_getter/file_input.dart';
+import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
@@ -5,6 +11,8 @@ import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/file.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
+import 'package:path/path.dart' as path;
+import 'package:xml/xml.dart';
 
 import 'format.dart';
 import 'verify.dart';
@@ -93,16 +101,18 @@ String getDateName(DateTime? dateTime, int dateLen) {
   return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }
 
-FileClassify getFileClassify(String ext) {
+FileType getFileType(String ext) {
   ext = ext.toLowerCase();
-  if (AppExtension.image.contains(ext)) return FileClassify.image;
-  if (AppExtension.video.contains(ext)) return FileClassify.video;
-  if (AppExtension.doc.contains(ext)) return FileClassify.doc;
-  if (AppExtension.audio.contains(ext)) return FileClassify.audio;
-  if (AppExtension.archive.contains(ext)) return FileClassify.archive;
+  if (AppExtension.image.contains(ext)) return FileType.image;
+  if (AppExtension.video.contains(ext)) return FileType.video;
+  if (AppExtension.doc.contains(ext)) return FileType.doc;
+  if (AppExtension.audio.contains(ext)) return FileType.audio;
+  if (AppExtension.archive.contains(ext)) return FileType.archive;
   // if (AppExtension.folder == ext) return FileClassify.folder;
-  return FileClassify.other;
+  return FileType.other;
 }
+
+String getFolderName(String folder) => path.basename(folder);
 
 String getFullName(String name, String extension) {
   if (extension == '') return name;
@@ -156,6 +166,117 @@ String getRuleTypeValue(InfoType type, FileInfo file) {
       return file.accessedDate.date.toString();
     case InfoType.capturedDate:
       return file.metaInfo?.capture?.date.toString() ?? '';
+  }
+}
+
+FileMetaInfo? getAudioInfo(String filePath) {
+  Mediainfo mi = Mediainfo()..quickLoad(filePath);
+  String title = audioMediaInfo(mi, "Title");
+  String album = audioMediaInfo(mi, "Album");
+  String artist = audioMediaInfo(mi, "Performer");
+  String year = audioMediaInfo(mi, "Recorded_Date");
+  mi.close();
+  return FileMetaInfo(title: title, album: album, artist: artist, year: year);
+}
+
+Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
+  Mediainfo mi = Mediainfo()..quickLoad(filePath);
+  String width = videoMediaInfo(mi, "Width");
+  String height = videoMediaInfo(mi, "Height");
+  String make = generalMediaInfo(mi, "com.android.manufacturer");
+  String model = generalMediaInfo(mi, "com.android.model");
+  String tagged = generalMediaInfo(mi, "Tagged_Date");
+  DateTime? capture = DateTime.tryParse(convertToLocalTime(tagged));
+  // print(mi.inform());
+  mi.close();
+  int rWidth = width.isEmpty ? 0 : int.parse(width);
+  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  return (
+    Resolution(rWidth, rHeight),
+    FileMetaInfo(
+      capture: capture == null ? null : getDateInfo(capture),
+      make: make,
+      model: model,
+    ),
+  );
+}
+
+String generalMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
+
+String audioMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
+
+String videoMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
+
+String imageMediaInfo(Mediainfo mi, String parameter) =>
+    mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);
+
+Future<Resolution> getImageDimensions(String assetPath) async {
+  // 调试计算图片尺寸耗时
+  Stopwatch stopwatch = Stopwatch()..start();
+  if (assetPath.endsWith('.psd')) return getPsdDimensions(assetPath);
+  if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
+  try {
+    File file = File(assetPath);
+    SizeResult result = ImageSizeGetter.getSizeResult(FileInput(file));
+    return Resolution(result.size.width, result.size.height);
+  } catch (e) {
+    debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
+    return Resolution.zero;
+  } finally {
+    double cost = stopwatch.elapsedMicroseconds / 1000000;
+    debugPrint('获取图片尺寸耗时: $cost');
+  }
+}
+
+Resolution getPsdDimensions(String assetPath) {
+  Mediainfo mi = Mediainfo()..quickLoad(assetPath);
+  String width = imageMediaInfo(mi, 'Width');
+  String height = imageMediaInfo(mi, 'Height');
+  mi.close();
+  int rWidth = width.isEmpty ? 0 : int.parse(width);
+  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  return Resolution(rWidth, rHeight);
+}
+
+Future<Resolution> getSvgDimensions(String svgFilePath) async {
+  try {
+    File file = File(svgFilePath);
+    String svgString = await file.readAsString();
+    XmlDocument document = XmlDocument.parse(svgString);
+    XmlElement svgElement = document.rootElement;
+    String? widthStr = svgElement.getAttribute('width');
+    String? heightStr = svgElement.getAttribute('height');
+    double? width;
+    double? height;
+    if (widthStr != null && heightStr != null) {
+      width = double.tryParse(widthStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+      height = double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+    }
+
+    // 如果 width 和 height 属性不存在，尝试从 viewBox 属性获取尺寸
+    if (width == null || height == null) {
+      final viewBoxStr = svgElement.getAttribute('viewBox');
+      if (viewBoxStr != null) {
+        final viewBoxValues = viewBoxStr.split(' ');
+        if (viewBoxValues.length == 4) {
+          width = double.tryParse(viewBoxValues[2]);
+          height = double.tryParse(viewBoxValues[3]);
+        }
+      }
+    }
+
+    if (width != null && height != null) {
+      return Resolution(width.toInt(), height.toInt());
+    } else {
+      debugPrint('无法获取 SVG 尺寸');
+      return Resolution.zero;
+    }
+  } catch (e) {
+    debugPrint('获取 SVG 尺寸失败: $e');
+    return Resolution.zero;
   }
 }
 

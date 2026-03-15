@@ -12,6 +12,8 @@ class BaseInput extends StatelessWidget {
     this.action,
     this.clearButton,
     this.padding,
+    this.margin,
+    this.autofocus = false,
     this.obscureText = false,
     this.enabled = true,
     this.textAlign = TextAlign.start,
@@ -25,7 +27,9 @@ class BaseInput extends StatelessWidget {
   final Widget? leading;
   final Widget? action;
   final Widget? clearButton;
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final bool autofocus;
   final bool obscureText;
   final bool enabled;
   final TextAlign textAlign;
@@ -38,6 +42,7 @@ class BaseInput extends StatelessWidget {
     return Container(
       height: AppNum.widgetHeight,
       padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         color: theme.inputDecorationTheme.fillColor,
         borderRadius: BorderRadius.circular(8),
@@ -57,6 +62,7 @@ class BaseInput extends StatelessWidget {
             child: TextField(
               focusNode: focusNode,
               controller: controller,
+              autofocus: autofocus,
               obscureText: obscureText,
               enabled: enabled,
               cursorHeight: 20,

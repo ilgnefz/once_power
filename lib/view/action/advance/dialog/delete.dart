@@ -60,6 +60,7 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
       title: tr(AppL10n.advanceDeleteTitle),
       content: Column(
         spacing: AppNum.spaceMedium,
+        mainAxisSize: .min,
         children: [
           ActionItem(
             padding: .zero,

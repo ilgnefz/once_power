@@ -6,10 +6,13 @@ class SelectionState {
   SelectionState._internal();
 
   // 记录是否刚使用过 Ctrl 键进行多选
-  static bool _hadPressedCtrl = false;
-  static bool get hadPressedCtrl => _hadPressedCtrl;
+  static bool _filesPressedCtrl = false;
+  static bool get filesPressedCtrl => _filesPressedCtrl;
+  static void filesUpdate(bool value) => _filesPressedCtrl = value;
 
-  static void update(bool value) => _hadPressedCtrl = value;
+  static bool _menusPressedCtrl = false;
+  static bool get menusPressedCtrl => _menusPressedCtrl;
+  static void menusUpdate(bool value) => _menusPressedCtrl = value;
 }
 
 class SuspenseState {

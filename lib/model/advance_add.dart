@@ -196,7 +196,7 @@ class AdvanceIndex {
 
   AdvanceIndex({
     this.width = 1,
-    this.start = 1,
+    this.start = 0,
     this.distinction = IndexDistinction.none,
     this.dateType = DateType.created,
   });

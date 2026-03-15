@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/const/num.dart';
-import 'package:once_power/widget/action/dynamic_button.dart';
-import 'package:once_power/widget/base/tooltip.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 import 'package:once_power/widget/common/one_line_text.dart';
 import 'package:once_power/widget/common/tooltip.dart';

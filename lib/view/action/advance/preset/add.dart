@@ -46,6 +46,7 @@ class _AddPresetViewState extends ConsumerState<AddPresetView> {
       content: Column(
         spacing: AppNum.spaceMedium,
         crossAxisAlignment: .start,
+        mainAxisSize: .min,
         children: [
           ConstrainedBox(
             constraints: BoxConstraints(maxHeight: 200),
@@ -67,6 +68,7 @@ class _AddPresetViewState extends ConsumerState<AddPresetView> {
           ),
           InputField(
             controller: controller,
+            autofocus: true,
             hintText: tr(AppL10n.advancePresetNameHint),
           ),
           BaseText(

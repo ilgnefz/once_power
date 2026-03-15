@@ -1,35 +1,35 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:once_power/const/l10n.dart';
 
-enum FileClassify { image, video, audio, doc, archive, folder, other }
+enum FileType { image, video, audio, doc, archive, folder, other }
 
-extension FileClassifyExtension on FileClassify {
+extension FileClassifyExtension on FileType {
   String get label {
     switch (this) {
-      case FileClassify.image:
+      case FileType.image:
         return tr(AppL10n.eTypeImage);
-      case FileClassify.video:
+      case FileType.video:
         return tr(AppL10n.eTypeVideo);
-      case FileClassify.audio:
+      case FileType.audio:
         return tr(AppL10n.eTypeAudio);
-      case FileClassify.doc:
+      case FileType.doc:
         return tr(AppL10n.eTypeDoc);
-      case FileClassify.archive:
+      case FileType.archive:
         return tr(AppL10n.eTypeArchive);
-      case FileClassify.folder:
+      case FileType.folder:
         return tr(AppL10n.eTypeFolder);
-      case FileClassify.other:
+      case FileType.other:
         return tr(AppL10n.eTypeOther);
     }
   }
 
-  bool get isImage => this == FileClassify.image;
-  bool get isVideo => this == FileClassify.video;
-  bool get isAudio => this == FileClassify.audio;
-  bool get isDoc => this == FileClassify.doc;
-  bool get isArchive => this == FileClassify.archive;
-  bool get isFolder => this == FileClassify.folder;
-  bool get isOther => this == FileClassify.other;
+  bool get isImage => this == FileType.image;
+  bool get isVideo => this == FileType.video;
+  bool get isAudio => this == FileType.audio;
+  bool get isDoc => this == FileType.doc;
+  bool get isArchive => this == FileType.archive;
+  bool get isFolder => this == FileType.folder;
+  bool get isOther => this == FileType.other;
 }
 
 enum RenameCondition { available, override, blocked }

@@ -425,6 +425,8 @@
     "noExist": "文件不存在",
     "noOpen": "无法打开 {file}",
     "modifyDateFail": "修改 {file} 日期失败",
+    "groupNameTitle": "组名称错误",
+    "groupName": "组名称不能为空",
     "presetNameTitle": "预设名称错误",
     "presetName": "预设名称不能为空",
     "presetAddTitle": "添加预设失败",

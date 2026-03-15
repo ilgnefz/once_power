@@ -59,11 +59,14 @@ dependencies:
   encrypt: ^5.0.3
   file_selector: ^1.1.0
   flutter_context_menu: ^0.4.2
+  flutter_media_info: ^0.0.4-dev.3
+  image_size_getter: ^2.4.1
   path: ^1.9.1
   package_info_plus: ^9.0.0
   shared_preferences: ^2.5.4
   string_util_xx: ^0.2.4
   url_launcher: ^6.3.2
+  xml: ^6.6.1
 
 dev_dependencies:
   flutter_test:
