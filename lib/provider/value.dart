@@ -1,4 +1,5 @@
 import 'package:once_power/const/key.dart';
+import 'package:once_power/const/num.dart';
 import 'package:once_power/model/date.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -66,5 +67,35 @@ class CurrentPresetName extends _$CurrentPresetName {
   Future<void> update(String value) async {
     state = value;
     await StorageUtil.setString(AppKeys.currentPresetName, value);
+  }
+}
+
+@riverpod
+class ViewImageWidth extends _$ViewImageWidth {
+  @override
+  int build() =>
+      StorageUtil.getInt(AppKeys.imageWidth) ?? AppNum.imageSizes.first;
+  Future<void> update(bool left) async {
+    List<int> list = AppNum.imageSizes;
+    int index = list.indexOf(state);
+    if (index == -1) {
+      final tempList = List.from(list)
+        ..add(state)
+        ..sort();
+      index = tempList.indexOf(state);
+      if (index == 0) {
+        index = -1;
+      } else if (index != tempList.length - 1) {
+        index = left ? index - 1 : index;
+      }
+    }
+    if (!left) state = index > 0 ? list[index - 1] : state;
+    if (left) state = index < list.length - 1 ? list[index + 1] : state;
+    await StorageUtil.setInt(AppKeys.imageWidth, state);
+  }
+
+  Future<void> set(int value) async {
+    state = value;
+    await StorageUtil.setInt(AppKeys.imageWidth, state);
   }
 }

@@ -270,6 +270,7 @@ class AppL10n {
   static const String dialogSave = 'dialog.save';
   static const String dialogExit = 'dialog.exit';
   static const String dialogImage = 'dialog.image';
+  static const String dialogImageHint = 'dialog.imageHint';
   static const String dialogApplyGroup = 'dialog.applyGroup';
 
   /* ---------- log ---------- */

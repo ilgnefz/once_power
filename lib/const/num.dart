@@ -25,4 +25,18 @@ class AppNum {
   // Radius
   static const double radius = 8.0;
   static const double radiusSmall = 4.0;
+  // List
+  static const List<int> imageSizes = [
+    136,
+    141,
+    156,
+    174,
+    196,
+    225,
+    263,
+    316,
+    397,
+    530,
+    798,
+  ];
 }

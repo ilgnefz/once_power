@@ -23,9 +23,9 @@ class AppKeys {
   static String prefixSerialStart = 'prefixSerialStart';
   static String suffixSerialLen = 'suffixSerialLength';
   static String suffixSerialStart = 'suffixSerialStart';
+  static String imageWidth = 'imageWidth';
 
   // double
-  static String viewImageW = 'viewImageW';
   static String backgroundOpacity = 'backgroundOpacity';
   static String windowWidth = 'windowWidth';
   static String windowHeight = 'windowHeight';

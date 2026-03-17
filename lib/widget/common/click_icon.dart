@@ -14,6 +14,8 @@ class ClickIcon extends StatelessWidget {
     this.iconSize,
     this.color,
     required this.onPressed,
+    this.onSecondaryTap,
+    this.onLongPress,
   });
 
   final String? tip;
@@ -24,6 +26,8 @@ class ClickIcon extends StatelessWidget {
   final double? iconSize;
   final Color? color;
   final void Function()? onPressed;
+  final void Function()? onSecondaryTap;
+  final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,8 @@ class ClickIcon extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
         child: InkWell(
           onTap: onPressed,
+          onSecondaryTap: onSecondaryTap,
+          onLongPress: onLongPress,
           mouseCursor: SystemMouseCursors.click,
           borderRadius: BorderRadius.circular(28),
           highlightColor: Colors.transparent,

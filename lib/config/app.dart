@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fvp/fvp.dart';
+import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
 import 'package:once_power/src/rust/frb_generated.dart';
 import 'package:once_power/util/pack.dart';
 import 'package:once_power/util/storage.dart';
+import 'package:once_power/util/tray.dart';
 import 'package:shortcut_menu_extender/shortcut_menu_extender.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -27,22 +30,61 @@ class AppConfig {
 
     await EasyLocalization.ensureInitialized();
 
+    registerWith(
+      options: {
+        'platforms': ['windows', 'macos', 'linux'],
+      },
+    );
+
+    launchAtStartup.setup(
+      appName: PackInfo.appName,
+      appPath: Platform.resolvedExecutable,
+      packageName: AppText.packageName,
+    );
+
+    bool powerBoot = await launchAtStartup.isEnabled();
+
     await windowManager.ensureInitialized();
 
-    final Size size = Size(AppNum.width, AppNum.height);
+    double width = AppNum.width, height = AppNum.height;
+    bool isCenter = true;
+    bool isMaxed = StorageUtil.getBool(AppKeys.isMaxed);
+
+    bool saveSize = StorageUtil.getBool(AppKeys.saveSize);
+    if (saveSize && !isMaxed) {
+      width = StorageUtil.getDouble(AppKeys.windowWidth) ?? AppNum.width;
+      height = StorageUtil.getDouble(AppKeys.windowHeight) ?? AppNum.height;
+    }
+    bool savePosition = StorageUtil.getBool(AppKeys.savePosition);
+    if (savePosition) isCenter = false;
+
+    if (!isCenter) {
+      await windowManager.setPosition(
+        Offset(
+          StorageUtil.getDouble(AppKeys.windowX) ?? 0,
+          StorageUtil.getDouble(AppKeys.windowY) ?? 0,
+        ),
+      );
+    }
 
     WindowOptions windowOptions = WindowOptions(
-      size: size,
-      minimumSize: size,
-      center: true,
+      size: Size(width, height),
+      minimumSize: Size(AppNum.width, AppNum.height),
+      center: isCenter,
       title: AppText.appName,
-      titleBarStyle: TitleBarStyle.hidden,
       backgroundColor: Colors.transparent,
     );
 
     windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
+      if (powerBoot) {
+        await windowManager.minimize();
+        await windowManager.setSkipTaskbar(true);
+        await AppTray.addTray();
+      } else {
+        await windowManager.show();
+        if (isMaxed) await windowManager.maximize();
+        await windowManager.focus();
+      }
       await windowManager.setAsFrameless();
       await windowManager.setHasShadow(true);
     });

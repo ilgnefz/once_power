@@ -15,13 +15,15 @@ class SortSelectItem extends ConsumerWidget {
     super.key,
     required this.index,
     required this.file,
-    required this.onTap,
+    this.onTap,
+    this.onDoubleTap,
     required this.child,
   });
 
   final int index;
   final FileInfo file;
   final void Function()? onTap;
+  final void Function()? onDoubleTap;
   final Widget child;
 
   @override
@@ -93,6 +95,7 @@ class SortSelectItem extends ConsumerWidget {
                 mouseCursor: SystemMouseCursors.click,
                 borderRadius: BorderRadius.circular(AppNum.radius),
                 onTap: onTap,
+                onDoubleTap: onDoubleTap,
                 onSecondaryTapDown: onSecondaryTapDown,
                 child: child,
               ),

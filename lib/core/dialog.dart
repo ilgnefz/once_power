@@ -16,6 +16,9 @@ import 'package:once_power/view/action/normal/upload_text.dart';
 import 'package:once_power/view/action/organize/dialog/group.dart';
 import 'package:once_power/view/action/organize/dialog/type.dart';
 import 'package:once_power/view/bottom/setting_view.dart';
+import 'package:once_power/view/content/grid/preview/preview.dart';
+import 'package:once_power/view/content/top/export_file.dart';
+import 'package:once_power/view/content/top/image_size.dart';
 import 'package:once_power/view/content/top/rule.dart';
 import 'package:once_power/view/content/top/type_detail.dart';
 
@@ -117,4 +120,19 @@ Future<void> showExportPreset(BuildContext context) async {
 Future<void> showRuleDetail(BuildContext context) async {
   Navigator.of(context).pop();
   await showDialog(context: context, builder: (context) => RuleFilter());
+}
+
+Future<void> previewView(BuildContext context, FileInfo file) async {
+  await showDialog(context: context, builder: (context) => PreviewView(file));
+}
+
+Future<void> showImageSize(BuildContext context) async {
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) => ImageSizeView(),
+  );
+}
+
+Future<void> showExportMenu(BuildContext context) async {
+  await showDialog(context: context, builder: (context) => ExportFileView());
 }

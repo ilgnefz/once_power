@@ -15,9 +15,7 @@ class LoadingImage extends StatelessWidget {
       children: [
         Expanded(
           child: isPreview
-              ? UnconstrainedBox(
-                  child: Image.asset(AppImages.loading, fit: BoxFit.contain),
-                )
+              ? UnconstrainedBox(child: Image.asset(AppImages.loading))
               : Image.asset(AppImages.loading, fit: BoxFit.contain),
         ),
         Text(

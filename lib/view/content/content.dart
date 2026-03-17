@@ -25,10 +25,14 @@ final _viewProvider = Provider((ref) {
   bool showView = isViewMode && !mode.isOrganize;
 
   if (files.isEmpty) return EmptyView(showImage: showView);
-  // if (ref.watch(onlyChangeProvider)) {
-  //   files =
-  //       files.where((e) => e.name != e.newName || e.ext != e.newExt).toList();
-  // }
+  if (ref.watch(toggleChangedProvider)) {
+    bool onlyChanged = ref.watch(onlyChangedProvider);
+    files = files.where((e) {
+      return onlyChanged
+          ? e.name != e.newName || e.extension != e.newExtension
+          : e.name == e.newName && e.extension == e.newExtension;
+    }).toList();
+  }
   if (showView) return ContentGridView(files);
   return ContentListView(files);
 });

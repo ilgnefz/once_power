@@ -276,6 +276,7 @@
     "save": "保存",
     "exit": "退出",
     "image": "自定义图片大小",
+    "imageHint": "请输入图片显示宽度",
     "applyGroup": "应用组"
   },
   "log": {
@@ -470,7 +471,7 @@
     "keyError6": "IP 访问超限",
     "keyError7": "远程 Key 被删除",
     "keyError": "错误代码：{code}，详情请去官网查询",
-    "createLog": "创建日志文件失败",
+    "createLog": "创建日志文件失败"
   },
   "success": {
     "copy": "复制成功",

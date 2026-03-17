@@ -26,9 +26,9 @@ class ContentItem extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final double? fontSize;
   final String title;
-  final Widget? titleAction;
+  final List<Widget>? titleAction;
   final String subTitle;
-  final Widget? subTitleAction;
+  final List<Widget>? subTitleAction;
   final Color? subColor;
   final Widget action;
   final IconData icon;
@@ -39,7 +39,7 @@ class ContentItem extends StatelessWidget {
     Widget titleText = OneLineText(title, fontSize: fontSize);
     Widget titleWidget = titleAction == null
         ? titleText
-        : Flexible(flex: 1, child: Row(children: [titleText, titleAction!]));
+        : Flexible(flex: 1, child: Row(children: [titleText, ...titleAction!]));
     Widget subTitleText = OneLineText(
       subTitle,
       color: subColor,
@@ -49,7 +49,7 @@ class ContentItem extends StatelessWidget {
         ? subTitleText
         : Flexible(
             flex: 1,
-            child: Row(children: [subTitleText, subTitleAction!]),
+            child: Row(children: [subTitleText, ...subTitleAction!]),
           );
 
     return Container(

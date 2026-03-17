@@ -781,6 +781,161 @@ abstract class _$IsAppendMode extends $Notifier<bool> {
   }
 }
 
+@ProviderFor(ExpandNewName)
+final expandNewNameProvider = ExpandNewNameProvider._();
+
+final class ExpandNewNameProvider
+    extends $NotifierProvider<ExpandNewName, bool> {
+  ExpandNewNameProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'expandNewNameProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$expandNewNameHash();
+
+  @$internal
+  @override
+  ExpandNewName create() => ExpandNewName();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$expandNewNameHash() => r'778a9161dd93601ad71aec2dd4460bac271d3a1a';
+
+abstract class _$ExpandNewName extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(ToggleChanged)
+final toggleChangedProvider = ToggleChangedProvider._();
+
+final class ToggleChangedProvider
+    extends $NotifierProvider<ToggleChanged, bool> {
+  ToggleChangedProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'toggleChangedProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$toggleChangedHash();
+
+  @$internal
+  @override
+  ToggleChanged create() => ToggleChanged();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$toggleChangedHash() => r'9c4bfe4e0381f19cfd840381f668b5d3deabcf4e';
+
+abstract class _$ToggleChanged extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(OnlyChanged)
+final onlyChangedProvider = OnlyChangedProvider._();
+
+final class OnlyChangedProvider extends $NotifierProvider<OnlyChanged, bool> {
+  OnlyChangedProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onlyChangedProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$onlyChangedHash();
+
+  @$internal
+  @override
+  OnlyChanged create() => OnlyChanged();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$onlyChangedHash() => r'6bd7f1fccdf57ff509b4e81524b71cfd4480265d';
+
+abstract class _$OnlyChanged extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(checkArchive)
 final checkArchiveProvider = CheckArchiveProvider._();
 

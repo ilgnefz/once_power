@@ -276,6 +276,7 @@
     "save": "Save",
     "exit": "Exit",
     "image": "Custom image size",
+    "imageHint": "Enter the image display width",
     "applyGroup": "Apply Group"
   },
   "log": {

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/info.dart';
@@ -126,10 +128,10 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  // void updateThumbnail(String id, Uint8List value) => state = state.map((e) {
-  //   if (e.id == id) e.thumbnail = value;
-  //   return e;
-  // }).toList();
+  void updateThumbnail(String id, Uint8List value) => state = state.map((e) {
+    if (e.id == id) e.thumbnail = value;
+    return e;
+  }).toList();
 
   void insertAt(int index, FileInfo file) {
     if (index == 0) {

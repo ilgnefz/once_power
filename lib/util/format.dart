@@ -157,3 +157,11 @@ String formatSystemError(Object e) {
   }
   return e.toString();
 }
+
+String formatVideoTime(Duration total, Duration current) {
+  String currentM = formatTimeNum(current.inMinutes);
+  String currentS = formatTimeNum(current.inSeconds.remainder(60));
+  String totalM = formatTimeNum(total.inMinutes);
+  String totalS = formatTimeNum(total.inSeconds.remainder(60));
+  return '$currentM:$currentS / $totalM:$totalS';
+}

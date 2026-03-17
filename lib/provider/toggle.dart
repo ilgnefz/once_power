@@ -161,6 +161,27 @@ class IsAppendMode extends _$IsAppendMode {
 }
 
 /* ----- Content ----- */
+@riverpod
+class ExpandNewName extends _$ExpandNewName {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+}
+
+@riverpod
+class ToggleChanged extends _$ToggleChanged {
+  @override
+  bool build() => false;
+  void update() => state = !state;
+  void reset() => state = false;
+}
+
+@riverpod
+class OnlyChanged extends _$OnlyChanged {
+  @override
+  bool build() => false;
+  void update(bool value) => state = value;
+}
 
 @riverpod
 bool checkArchive(Ref ref) {

@@ -419,3 +419,55 @@ abstract class _$CurrentPresetName extends $Notifier<String> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(ViewImageWidth)
+final viewImageWidthProvider = ViewImageWidthProvider._();
+
+final class ViewImageWidthProvider
+    extends $NotifierProvider<ViewImageWidth, int> {
+  ViewImageWidthProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'viewImageWidthProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$viewImageWidthHash();
+
+  @$internal
+  @override
+  ViewImageWidth create() => ViewImageWidth();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$viewImageWidthHash() => r'31b4e208f0373aab6207d1aac3ba67618dcce2c5';
+
+abstract class _$ViewImageWidth extends $Notifier<int> {
+  int build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
