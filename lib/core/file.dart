@@ -5,10 +5,12 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/update/update.dart';
+import 'package:once_power/enum/app.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
 import 'package:once_power/src/rust/api/file_meta.dart';
@@ -43,14 +45,18 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
 }
 
 Future<List<String>> handleFolder(WidgetRef ref, List<String> folders) async {
-  bool addFolder = ref.watch(isAddFolderProvider);
-  bool addSubfolder = ref.watch(isAddSubfolderProvider);
+  bool addFolder = ref.read(isAddFolderProvider);
+  bool addSubfolder = ref.read(isAddSubfolderProvider);
   final List<Future<List<String>>> futures = folders.map((folder) async {
     final List<String> folderPaths = <String>[];
     if (!addFolder) {
       folderPaths.addAll(await getAllPath(folder, false));
     } else {
-      if (addSubfolder) folderPaths.addAll(await getAllPath(folder, true));
+      if (addSubfolder) {
+        folderPaths.addAll(await getAllPath(folder, true));
+      } else {
+        folderPaths.add(folder);
+      }
     }
     return folderPaths;
   }).toList();
@@ -76,13 +82,16 @@ Future<List<String>> getAllPath(String folder, bool addSubfolder) async {
 
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   Stopwatch stopwatch = Stopwatch()..start();
-  bool isAppend = ref.watch(isAppendModeProvider);
+  bool isAppend = ref.read(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(countProvider.notifier).reset();
   ref.read(isApplyingProvider.notifier).start();
   await processFilesWithConcurrence(ref, paths);
-  if (ref.watch(isViewModeProvider)) filterFile(ref);
+  if (ref.read(isViewModeProvider) &&
+      !ref.read(currentModeProvider).isOrganize) {
+    filterFile(ref);
+  }
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);

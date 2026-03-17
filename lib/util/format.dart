@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/enum/advance.dart';
 import 'package:once_power/model/file.dart';
 
 String convertToLocalTime(String utcTimeStr) {
@@ -164,4 +165,55 @@ String formatVideoTime(Duration total, Duration current) {
   String totalM = formatTimeNum(total.inMinutes);
   String totalS = formatTimeNum(total.inSeconds.remainder(60));
   return '$currentM:$currentS / $totalM:$totalS';
+}
+
+String formatShowDate(String date, DateStyle style) {
+  if (date.length < 8) return date;
+  List<String> dateParts = [];
+  dateParts.add(date.substring(0, 4));
+  dateParts.add(date.substring(4, 6));
+  dateParts.add(date.substring(6, 8));
+
+  switch (style) {
+    case DateStyle.hidden:
+      return '';
+    case DateStyle.none:
+      return date.substring(0, 8);
+    case DateStyle.chinese:
+      return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
+    case DateStyle.space:
+      return '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
+    case DateStyle.dash:
+      return '${dateParts[0]}-${dateParts[1]}-${dateParts[2]}';
+    case DateStyle.dot:
+      return '${dateParts[0]}.${dateParts[1]}.${dateParts[2]}';
+    case DateStyle.underscore:
+      return '${dateParts[0]}_${dateParts[1]}_${dateParts[2]}';
+  }
+}
+
+String formatShowTime(String date, TimeStyle style) {
+  if (date.length < 14) return '';
+  List<String> timeParts = [];
+  timeParts.add(date.substring(8, 10));
+  timeParts.add(date.substring(10, 12));
+  timeParts.add(date.substring(12, 14));
+  switch (style) {
+    case TimeStyle.hidden:
+      return '';
+    case TimeStyle.none:
+      return '${timeParts[0]}${timeParts[1]}${timeParts[2]}';
+    case TimeStyle.chinese:
+      return '${timeParts[0]}时${timeParts[1]}分${timeParts[2]}秒';
+    case TimeStyle.english:
+      return '${timeParts[0]}h${timeParts[1]}m${timeParts[2]}s';
+    case TimeStyle.dash:
+      return '${timeParts[0]}-${timeParts[1]}-${timeParts[2]}';
+    case TimeStyle.dot:
+      return '${timeParts[0]}.${timeParts[1]}.${timeParts[2]}';
+    case TimeStyle.underscore:
+      return '${timeParts[0]}_${timeParts[1]}_${timeParts[2]}';
+    case TimeStyle.space:
+      return '${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
+  }
 }

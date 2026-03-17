@@ -17,48 +17,68 @@ class ImageSizeView extends ConsumerStatefulWidget {
 }
 
 class _CustomImageSizeState extends ConsumerState<ImageSizeView> {
-  int? width;
+  late TextEditingController controller;
 
   @override
   void initState() {
     super.initState();
-    width = ref.read(viewImageWidthProvider);
+    int width = ref.read(viewImageWidthProvider);
+    controller = TextEditingController(text: width.toString())
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void setValue(String value) {
+    controller.text = value;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
       title: tr(AppL10n.dialogImage),
-      onCancel: () {},
-      onOk: () {
-        if (width == null) return;
-        ref.read(viewImageWidthProvider.notifier).set(width!);
-      },
+      padding: .zero,
       content: Column(
         spacing: AppNum.spaceMedium,
+        mainAxisSize: .min,
         children: [
           InputField(
-            text: width?.toString() ?? '',
+            controller: controller,
+            margin: .symmetric(horizontal: AppNum.padding),
             hintText: tr(AppL10n.dialogImageHint),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}$')),
             ],
-            onChanged: (v) {},
           ),
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.start,
-            spacing: AppNum.spaceMedium,
+            spacing: AppNum.spaceSmall,
             runSpacing: AppNum.spaceMedium,
             children: AppNum.imageSizes.map((e) {
+              String label = e.toString();
               return EasyClickText(
-                label: e.toString(),
-                onPressed: () => setState(() => width = e),
+                label: label,
+                radius: AppNum.radiusSmall,
+                onPressed: () => setValue(label),
               );
             }).toList(),
           ),
         ],
       ),
+      onCancel: () {},
+      onOk: () {
+        int? value = int.tryParse(controller.text);
+        if (value == null) return;
+        ref.read(viewImageWidthProvider.notifier).set(value);
+      },
     );
   }
 }

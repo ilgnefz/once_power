@@ -53,6 +53,9 @@ class ContentGridItem extends StatelessWidget {
               newName,
               fontSize: 13,
               maxLines: 2,
+              color: newName == file.getFullOldName()
+                  ? Colors.grey
+                  : Theme.of(context).primaryColor,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
             ),

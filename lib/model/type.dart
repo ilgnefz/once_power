@@ -17,6 +17,18 @@ class RuleTypeValue {
     this.other = '',
   });
 
+  bool isEmpty() {
+    return image.isEmpty &&
+        video.isEmpty &&
+        doc.isEmpty &&
+        audio.isEmpty &&
+        folder.isEmpty &&
+        archive.isEmpty &&
+        other.isEmpty;
+  }
+
+  static bool allPropertiesEmpty(RuleTypeValue value) => value.isEmpty();
+
   @override
   String toString() {
     return 'RuleTypeValue{'
@@ -27,16 +39,6 @@ class RuleTypeValue {
         'folder: $folder, '
         'archive: $archive, '
         'other: $other}';
-  }
-
-  bool isEmpty() {
-    return image.isEmpty &&
-        video.isEmpty &&
-        doc.isEmpty &&
-        audio.isEmpty &&
-        folder.isEmpty &&
-        archive.isEmpty &&
-        other.isEmpty;
   }
 
   factory RuleTypeValue.fromJson(Map<String, dynamic> json) => RuleTypeValue(

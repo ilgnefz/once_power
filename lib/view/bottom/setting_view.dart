@@ -11,6 +11,7 @@ class SettingView extends StatelessWidget {
       title: '设置',
       content: Column(
         crossAxisAlignment: .start,
+        mainAxisSize: .min,
         children: [
           Text('配置'),
           EasyCheckbox(checked: true, label: '保存窗口大小', onChanged: (v) {}),

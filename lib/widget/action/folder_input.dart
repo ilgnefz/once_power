@@ -14,12 +14,14 @@ class FolderInput extends ConsumerWidget {
     required this.controller,
     this.cacheKey,
     this.cacheListKey,
+    this.onChanged,
     this.onUpload,
   });
 
   final String? cacheKey;
   final String? cacheListKey;
   final TextEditingController controller;
+  final void Function(String)? onChanged;
   final void Function(String)? onUpload;
 
   @override
@@ -28,7 +30,7 @@ class FolderInput extends ConsumerWidget {
       focusNode: FocusNode(),
       onKeyEvent: (event) {
         if (cacheKey == null || cacheListKey == null) return;
-        if (event is! KeyUpEvent) return;
+        if (event is KeyUpEvent) return;
         List<String> folders = StorageUtil.getStringList(cacheListKey!);
         if (folders.isEmpty) return;
         String currentFolder = controller.text;
@@ -49,6 +51,7 @@ class FolderInput extends ConsumerWidget {
       child: InputField(
         controller: controller,
         hintText: tr(AppL10n.organizeTarget),
+        onChanged: onChanged,
         onClear: () async {
           if (cacheKey == null || cacheListKey == null) return;
           String folder = controller.text;
@@ -65,6 +68,7 @@ class FolderInput extends ConsumerWidget {
             onUpload == null
                 ? controller.text = folder
                 : onUpload?.call(folder);
+            onChanged?.call(folder);
             if (cacheKey == null || cacheListKey == null) return;
             StorageUtil.setString(cacheKey!, folder);
             await saveFolder(folder, cacheListKey!);

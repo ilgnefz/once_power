@@ -39,6 +39,7 @@ Future<void> showRightMenu(
   bool onlyNormal = (mode.isReplace || mode.isReserve) && onlyFunctionMode;
   List<FileInfo> sortSelectList = [];
   sortSelectList = isPreview ? [file] : ref.read(sortSelectListProvider);
+  if (sortSelectList.isEmpty) sortSelectList.add(file);
   List<FileInfo> suspenseList = SuspenseState.list;
   final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(
@@ -217,8 +218,10 @@ Future<void> showDirectiveRightMenu(
   BuildContext context,
   WidgetRef ref,
   Offset position,
+  AdvanceMenuModel menu,
 ) async {
   List<AdvanceMenuModel> list = ref.watch(advanceMenuSelectedListProvider);
+  if (list.isEmpty) list.add(menu);
   ThemeData theme = Theme.of(context);
   final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(

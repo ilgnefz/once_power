@@ -41,7 +41,12 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
   bool isHover = false;
 
   Future<void> onSecondaryTapDown(TapDownDetails details) async {
-    await showDirectiveRightMenu(context, ref, details.globalPosition);
+    await showDirectiveRightMenu(
+      context,
+      ref,
+      details.globalPosition,
+      widget.menu,
+    );
   }
 
   Widget buildInfo() {

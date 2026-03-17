@@ -49,7 +49,7 @@ class ContentView extends ConsumerWidget {
           builder: (context) {
             ProgressFileInfo? progress = ref.watch(currentProgressFileProvider);
             if (progress != null && getTotalSize(ref) > AppNum.maxSize) {
-              return ProgressView();
+              return ProgressView(info: progress);
             }
             return Column(
               children: [

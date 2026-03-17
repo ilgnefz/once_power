@@ -18,11 +18,14 @@ import 'package:once_power/widget/common/input_field.dart';
 final Provider<bool> _enableProvider = Provider<bool>((Ref ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool matchIsEmpty = ref.watch(matchIsEmptyProvider);
+  bool isDateRename = ref.watch(isDateRenameProvider);
   switch (mode) {
     case FunctionMode.replace:
-      return !ref.watch(isDateRenameProvider);
+      return !isDateRename;
     case FunctionMode.reserve:
-      return ref.watch(selectedReserveTypeProvider).isEmpty && matchIsEmpty;
+      return ref.watch(selectedReserveTypeProvider).isEmpty &&
+          matchIsEmpty &&
+          !isDateRename;
     default:
       return true;
   }
@@ -35,6 +38,29 @@ class ModifyInput extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool enable = ref.watch(_enableProvider);
     TextEditingController controller = ref.watch(modifyControllerProvider);
+
+    void updateInput(String text, int num) {
+      // 保留前导零格式
+      String newText;
+      if (text.startsWith('0') && text.length > 1) {
+        // 计算前导零的数量
+        int leadingZeros = 0;
+        while (leadingZeros < text.length && text[leadingZeros] == '0') {
+          leadingZeros++;
+        }
+        // 格式化新数字，确保长度与原始输入相同
+        String numStr = num.toString();
+        if (numStr.length < text.length) {
+          newText = '0' * (text.length - numStr.length) + numStr;
+        } else {
+          newText = numStr;
+        }
+      } else {
+        newText = '$num';
+      }
+      ref.read(modifyControllerProvider.notifier).update(newText);
+      Debounce.run(() => normalUpdateName(ref));
+    }
 
     return ActionItem(
       icon: AppIcons.cases,
@@ -52,32 +78,11 @@ class ModifyInput extends ConsumerWidget {
           if (num != null && event is KeyUpEvent) {
             if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
               num++;
+              updateInput(text, num);
             } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
               if (num > 0) num--;
+              updateInput(text, num);
             }
-            // 保留前导零格式
-            String newText;
-            if (text.startsWith('0') && text.length > 1) {
-              // 计算前导零的数量
-              int leadingZeros = 0;
-              while (leadingZeros < text.length && text[leadingZeros] == '0') {
-                leadingZeros++;
-              }
-              // 格式化新数字，确保长度与原始输入相同
-              String numStr = num.toString();
-              if (numStr.length < text.length) {
-                newText = '0' * (text.length - numStr.length) + numStr;
-              } else {
-                newText = numStr;
-              }
-            } else {
-              newText = '$num';
-            }
-            ref.read(modifyControllerProvider.notifier).update(newText);
-            controller.selection = TextSelection.collapsed(
-              offset: controller.text.length,
-            );
-            Debounce.run(() => normalUpdateName(ref));
           }
         },
         child: InputField(

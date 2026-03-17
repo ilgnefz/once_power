@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 import 'package:once_power/widget/common/one_line_text.dart';
@@ -10,11 +13,11 @@ class ContentItem extends StatelessWidget {
     required this.checked,
     required this.onChanged,
     this.margin,
-    this.fontSize,
     required this.title,
     this.titleAction,
     required this.subTitle,
     this.subTitleAction,
+    this.showSubTitle = true,
     this.subColor,
     required this.action,
     required this.icon,
@@ -24,11 +27,11 @@ class ContentItem extends StatelessWidget {
   final bool checked;
   final void Function(bool?)? onChanged;
   final EdgeInsetsGeometry? margin;
-  final double? fontSize;
   final String title;
   final List<Widget>? titleAction;
   final String subTitle;
   final List<Widget>? subTitleAction;
+  final bool showSubTitle;
   final Color? subColor;
   final Widget action;
   final IconData icon;
@@ -36,21 +39,48 @@ class ContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleText = OneLineText(title, fontSize: fontSize);
-    Widget titleWidget = titleAction == null
-        ? titleText
-        : Flexible(flex: 1, child: Row(children: [titleText, ...titleAction!]));
-    Widget subTitleText = OneLineText(
+    Widget titleText = BaseText(
+      title,
+      fontSize: 13,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+    Widget titleWidget = Flexible(
+      flex: 1,
+      fit: .tight,
+      child: titleAction == null
+          ? titleText
+          : Row(
+              children: [
+                Expanded(child: titleText),
+                ...titleAction!,
+              ],
+            ),
+    );
+    Widget subTitleText = BaseText(
       subTitle,
       color: subColor,
-      fontSize: fontSize,
+      fontSize: 13,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
-    Widget subTitleWidget = subTitleAction == null
-        ? subTitleText
-        : Flexible(
-            flex: 1,
-            child: Row(children: [subTitleText, ...subTitleAction!]),
-          );
+    Widget subTitleWidget = Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        return Flexible(
+          flex: ref.watch(expandNewNameProvider) ? 2 : 1,
+          fit: .tight,
+          child: child!,
+        );
+      },
+      child: subTitleAction == null
+          ? subTitleText
+          : Row(
+              children: [
+                Expanded(child: subTitleText),
+                ...subTitleAction!,
+              ],
+            ),
+    );
 
     return Container(
       height: AppNum.topHeight,
@@ -66,7 +96,7 @@ class ContentItem extends StatelessWidget {
           EasyCheckbox(checked: checked, onChanged: onChanged),
           titleWidget,
           SizedBox(width: AppNum.spaceSmall),
-          subTitleWidget,
+          if (showSubTitle) subTitleWidget,
           Container(width: 40, alignment: Alignment.center, child: action),
           ClickIcon(onPressed: onDelete, icon: icon),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/core/file.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/provider/list.dart';
@@ -50,6 +51,9 @@ class ActionView extends ConsumerWidget {
                       ref
                           .read(currentModeProvider.notifier)
                           .update(modes[index]);
+                      if (index != 3 && ref.read(isViewModeProvider)) {
+                        filterFile(ref);
+                      }
                       Debounce.run(() => updateName(ref));
                     },
                   ),

@@ -69,7 +69,7 @@ class ContentListView extends ConsumerWidget {
               title: title,
               subTitle: subtitle,
               subColor: subColor,
-              fontSize: 13,
+              showSubTitle: !ref.watch(isDateModifyProvider),
               action: BaseText(
                 newExt,
                 fontSize: 13,

@@ -5,6 +5,8 @@ import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/core/file.dart';
 import 'package:once_power/core/update/update.dart';
+import 'package:once_power/enum/app.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/bottom/icon.dart';
 
@@ -19,7 +21,8 @@ class ViewButton extends ConsumerWidget {
       selected: ref.watch(isViewModeProvider),
       onPressed: () {
         ref.read(isViewModeProvider.notifier).update();
-        if (ref.read(isViewModeProvider)) {
+        if (ref.read(isViewModeProvider) &&
+            !ref.read(currentModeProvider).isOrganize) {
           filterFile(ref);
           updateName(ref);
         }

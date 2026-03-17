@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/provider/value.dart';
 import 'package:reorderable_grid/reorderable_grid.dart';
 
 import 'item.dart';
@@ -18,8 +19,7 @@ class ContentGridView extends ConsumerWidget {
       padding: const EdgeInsets.only(right: AppNum.padding),
       onReorder: (oldIndex, newIndex) =>
           reorderList(ref, files, oldIndex, newIndex),
-      // maxCrossAxisExtent: ref.watch(viewImageWidthProvider),
-      maxCrossAxisExtent: 136,
+      maxCrossAxisExtent: ref.watch(viewImageWidthProvider).toDouble(),
       childAspectRatio: 5 / 6,
       mainAxisSpacing: 4,
       crossAxisSpacing: 4,

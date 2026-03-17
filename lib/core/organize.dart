@@ -46,6 +46,7 @@ Future<void> organize(WidgetRef ref) async {
     case OrganizeMode.normal:
       folder = ref.read(folderControllerProvider).text;
       if (folder.isEmpty) {
+        ref.read(isApplyingProvider.notifier).finish();
         return showOrganizeNullNotification(tr(AppL10n.errTargetFolder));
       }
       for (FileInfo file in list) {
@@ -57,7 +58,8 @@ Future<void> organize(WidgetRef ref) async {
       Map<String, String>? folders = StorageUtil.getStringMap(
         AppKeys.groupFolder,
       );
-      if (folders == null || folders.isEmpty) {
+      if (folders == null || folders.values.every((path) => path.isEmpty)) {
+        ref.read(isApplyingProvider.notifier).finish();
         return showOrganizeNullNotification(tr(AppL10n.errGroupFolder));
       }
       for (FileInfo file in list) {
@@ -69,7 +71,8 @@ Future<void> organize(WidgetRef ref) async {
       break;
     case OrganizeMode.type:
       RuleTypeValue? rule = StorageUtil.getRuleTypeValue(AppKeys.ruleTypeValue);
-      if (rule == null || rule.isEmpty()) {
+      if (rule == null || RuleTypeValue.allPropertiesEmpty(rule)) {
+        ref.read(isApplyingProvider.notifier).finish();
         return showOrganizeNullNotification(tr(AppL10n.errTypeFolder));
       }
       for (FileInfo file in list) {

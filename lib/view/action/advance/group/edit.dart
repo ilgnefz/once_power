@@ -13,6 +13,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:once_power/util/storage.dart';
+import 'package:once_power/util/verify.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/input_field.dart';
 
@@ -79,13 +80,14 @@ class _EditGroupState extends ConsumerState<EditGroup> {
             autofocus: true,
             margin: .symmetric(horizontal: AppNum.padding),
             hintText: tr(AppL10n.dialogGroupHint),
-            onChanged: (value) => setState(() => name = value),
+            onChanged: (value) => setState(() => name = value.trim()),
           ),
         ],
       ),
       autoPop: false,
       onOk: () {
         if (name == '') return showGroupAddErrorNotification();
+        if (isAll(name)) return Navigator.pop(context);
         if (!list.contains(name)) {
           list.add(name);
           StorageUtil.setStringList(AppKeys.groupList, list);

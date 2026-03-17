@@ -11,6 +11,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:once_power/util/log.dart';
@@ -151,7 +152,7 @@ Future<InfoDetail?> renameFile(
       await File(oldPath).rename(newPath);
     }
   } on FileSystemException catch (e) {
-    return renameErrorNotification(e, oldPath, newPath);
+    return renameErrorNotification(formatSystemError(e), oldPath, newPath);
   }
   return null;
 }

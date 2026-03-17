@@ -55,24 +55,6 @@ class _RuleFilterState extends ConsumerState<RuleFilter> {
           }).toList(),
         ),
       ),
-      // content: ListView.builder(
-      //   shrinkWrap: true,
-      //   itemCount: list.length,
-      //   itemBuilder: (context, index) {
-      //     FilterRule e = list[index];
-      //     return FilterRuleItem(
-      //       isEnglish: isEnglish,
-      //       infoType: e.infoType,
-      //       operator: e.operator,
-      //       value: e.value,
-      //       action: e.action,
-      //       onInfoTypeChange: (v) => setState(() => e.infoType = v!),
-      //       onOperatorChange: (v) => setState(() => e.operator = v!),
-      //       onValueChange: (v) => setState(() => e.value = v!),
-      //       onActionChange: (v) => setState(() => e.action = v!),
-      //     );
-      //   },
-      // ),
       extraButton: EasyButton(
         label: tr(AppL10n.menuRule),
         onPressed: () => setState(() {
@@ -162,6 +144,7 @@ class _FilterRuleItemState extends State<FilterRuleItem> {
                 (item) => DropdownItem(
                   key: ValueKey(item),
                   value: item,
+                  height: AppNum.dropdownMenu,
                   child: BaseText(item.label),
                 ),
               )
@@ -176,6 +159,7 @@ class _FilterRuleItemState extends State<FilterRuleItem> {
                 (item) => DropdownItem(
                   key: ValueKey(item),
                   value: item,
+                  height: AppNum.dropdownMenu,
                   child: BaseText(item.label),
                 ),
               )

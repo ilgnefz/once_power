@@ -15,14 +15,17 @@ import 'package:once_power/widget/common/input_field.dart';
 final Provider<bool> _enableProvider = Provider((Ref ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
   bool modifyIsEmpty = ref.watch(modifyIsEmptyProvider);
+  bool isDateRename = ref.watch(isDateRenameProvider);
   switch (mode) {
     case FunctionMode.replace:
-      return !ref.watch(isDateRenameProvider);
+      return !isDateRename;
     case FunctionMode.reserve:
       if (!modifyIsEmpty && !ref.watch(matchIsEmptyProvider)) {
-        return ref.watch(selectedReserveTypeProvider).isEmpty;
+        return ref.watch(selectedReserveTypeProvider).isEmpty && !modifyIsEmpty;
       }
-      return ref.watch(selectedReserveTypeProvider).isEmpty && modifyIsEmpty;
+      return ref.watch(selectedReserveTypeProvider).isEmpty &&
+          modifyIsEmpty &&
+          !isDateRename;
     default:
       return true;
   }
@@ -37,7 +40,10 @@ class MatchInput extends ConsumerWidget {
       icon: AppIcons.ruler,
       tip: tr(AppL10n.renameLen),
       checked: ref.watch(isInputLenProvider),
-      onPressed: ref.read(isInputLenProvider.notifier).update,
+      onPressed: () {
+        ref.read(isInputLenProvider.notifier).update();
+        Debounce.run(() => normalUpdateName(ref));
+      },
       child: InputField(
         controller: ref.watch(matchControllerProvider),
         hintText: tr(AppL10n.renameMatch),

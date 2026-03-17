@@ -16,6 +16,7 @@ import 'video.dart';
 
 class PreviewView extends ConsumerStatefulWidget {
   const PreviewView(this.file, {super.key});
+
   final FileInfo file;
 
   @override
@@ -82,6 +83,7 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
       color: Colors.black.withValues(alpha: .5),
       child: InkWell(
         mouseCursor: SystemMouseCursors.click,
+        splashColor: Colors.transparent,
         onTap: () => Navigator.pop(context),
         onSecondaryTapDown: (details) => showRightMenu(
           context,

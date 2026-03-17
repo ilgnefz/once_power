@@ -36,8 +36,9 @@ final Provider<String> _labelRightProvider = Provider((Ref ref) {
 });
 
 final Provider<bool> _onlyViewMode = Provider((ref) {
-  return !ref.watch(currentModeProvider).isOrganize &&
-      ref.watch(isViewModeProvider);
+  return (!ref.watch(currentModeProvider).isOrganize &&
+          ref.watch(isViewModeProvider)) ||
+      ref.watch(isDateModifyProvider);
 });
 
 class ContentTop extends ConsumerWidget {

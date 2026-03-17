@@ -58,7 +58,7 @@ class _GroupListState extends ConsumerState<GroupList> {
                   controller: TextEditingController(
                     text: groupMap[list[index]],
                   ),
-                  onUpload: (value) =>
+                  onChanged: (value) =>
                       setState(() => groupMap[list[index]] = value),
                 ),
               ),

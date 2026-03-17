@@ -51,7 +51,24 @@ import 'normal.dart';
       String group = isAll(file.group) ? '' : file.group;
       return insertPosition(menu, name, group, extension);
     case AddMode.date:
-      return insertPosition(menu, name, menu.value, extension);
+      AdvanceDate advanceDate = menu.advanceDate;
+      String dateValue = '';
+      DateInfo? dateTime = getDate(advanceDate.type, file);
+      String date = getDateName(dateTime?.date, 14);
+      List<String> finalDate = [];
+      String value = formatShowDate(date, advanceDate.dateStyle);
+      String time = formatShowTime(date, advanceDate.timeStyle);
+      String weekday = advanceDate.weekdayStyle.isNone || dateTime == null
+          ? ''
+          : dateTime.weekday[advanceDate.weekdayStyle.value];
+      if (value.isNotEmpty) finalDate.add(value);
+      if (weekday.isNotEmpty) finalDate.add(weekday);
+      if (time.isNotEmpty) finalDate.add(time);
+      String dateSeparate = advanceDate.dateSeparate.isCustom
+          ? advanceDate.separate
+          : advanceDate.dateSeparate.value;
+      dateValue = finalDate.join(dateSeparate);
+      return insertPosition(menu, name, dateValue, extension);
     case AddMode.metaData:
       String metaData = '';
       switch (menu.metaData.type) {
@@ -77,6 +94,7 @@ import 'normal.dart';
           metaData = file.metaInfo?.location ?? '';
           break;
       }
+      metaData = menu.metaData.prefix + metaData + menu.metaData.suffix;
       return insertPosition(menu, name, metaData, extension);
   }
 }
