@@ -7,7 +7,6 @@ import 'package:once_power/core/preset.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/widget/base/dialog.dart';
-import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 
 class ExportPresetView extends ConsumerStatefulWidget {

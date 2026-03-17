@@ -28,6 +28,9 @@ import 'enum/app.dart';
 // TODO: 自动分组添加文件名以某某开头和结尾的条件
 // TODO: 自动过滤添加不包含
 // TODO: 删除加密的库
+// TODO: 重命名的是文件夹可以用一个变量存储起来，如果有哪个文件的父文件是这个文件夹，重命名时更改文件路径
+// TODO: 移动文件添加撤销按钮
+// TODO: 移动文件时关闭添加警告弹窗
 
 void main(List<String> args) async {
   await AppConfig.init(args);
@@ -58,7 +61,6 @@ class MyApp extends ConsumerWidget {
     //   1,
     // ).split('').reversed.join('');
     // print(r2);
-
     return MaterialApp(
       title: AppText.appName,
       debugShowCheckedModeBanner: false,

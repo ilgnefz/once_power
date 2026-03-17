@@ -5,11 +5,9 @@ import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/action/advance_rich_text.dart';
-import 'package:once_power/widget/base/text.dart';
 
 class AddCard extends StatelessWidget {
   const AddCard({super.key, required this.menu});

@@ -6,7 +6,6 @@ import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/app.dart';
-import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';

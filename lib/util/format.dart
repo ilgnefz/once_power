@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/const/l10n.dart';
 import 'package:once_power/model/file.dart';
 
 String convertToLocalTime(String utcTimeStr) {
@@ -136,4 +140,20 @@ List<String> stringToList(String content) {
     list.addAll(content.trim().split(' '));
   }
   return list;
+}
+
+String formatSystemError(Object e) {
+  if (e.runtimeType == PathNotFoundException) {
+    e as PathNotFoundException;
+    return e.osError?.message ?? tr(AppL10n.errNotExists);
+  }
+  if (e.runtimeType == PathAccessException) {
+    e as PathAccessException;
+    return e.osError?.message ?? e.message;
+  }
+  if (e.runtimeType == PathExistsException) {
+    e as PathAccessException;
+    return e.osError?.message ?? e.message;
+  }
+  return e.toString();
 }

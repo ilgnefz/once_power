@@ -50,7 +50,6 @@ Future<List<String>> handleFolder(WidgetRef ref, List<String> folders) async {
     if (!addFolder) {
       folderPaths.addAll(await getAllPath(folder, false));
     } else {
-      folderPaths.add(folder);
       if (addSubfolder) folderPaths.addAll(await getAllPath(folder, true));
     }
     return folderPaths;
@@ -77,11 +76,11 @@ Future<List<String>> getAllPath(String folder, bool addSubfolder) async {
 
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   Stopwatch stopwatch = Stopwatch()..start();
-  ref.read(isApplyingProvider.notifier).start();
   bool isAppend = ref.watch(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
   ref.read(totalProvider.notifier).update(paths.length);
   ref.read(countProvider.notifier).reset();
+  ref.read(isApplyingProvider.notifier).start();
   await processFilesWithConcurrence(ref, paths);
   if (ref.watch(isViewModeProvider)) filterFile(ref);
   stopwatch.stop();

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 
 class DynamicButton extends StatelessWidget {

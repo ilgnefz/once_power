@@ -1,12 +1,6 @@
-import 'dart:math';
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
-import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
-import 'package:once_power/enum/date.dart';
-import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_add.dart';
@@ -17,16 +11,13 @@ import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
-import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/storage.dart';
-import 'package:path/path.dart';
 
 import 'advance_add.dart';
 import 'advance_delete.dart';
 import 'advance_replace.dart';
-import 'normal.dart';
 
 Future<void> advanceUpdateName(WidgetRef ref) async {
   List<FileInfo> list = ref.read(sortListProvider);

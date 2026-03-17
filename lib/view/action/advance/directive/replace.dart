@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:once_power/config/theme/directive.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
-import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/widget/action/advance_rich_text.dart';
 

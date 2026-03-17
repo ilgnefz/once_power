@@ -32,3 +32,29 @@ Future<bool> isExist(bool isFolder, String filePath) async {
 bool isSameDisk(String oldPath, String newPath) =>
     path.rootPrefix(path.normalize(oldPath).toLowerCase()) ==
     path.rootPrefix(path.normalize(newPath).toLowerCase());
+
+// bool isValidFolderPath(String path) {
+//   // 检查路径是否为空
+//   if (path.isEmpty) return false;
+
+//   // 检查路径是否包含非法字符
+//   final illegalChars = RegExp(r'[<>:"/\\|?*]');
+//   if (illegalChars.hasMatch(path)) return false;
+
+//   // 检查路径长度是否合法（Windows 最大路径长度为 260 字符）
+//   if (path.length > 260) return false;
+
+//   // 检查路径是否为有效的驱动器路径（Windows）
+//   if (Platform.isWindows) {
+//     final driveRegex = RegExp(r'^[A-Za-z]:\\', caseSensitive: false);
+//     if (!driveRegex.hasMatch(path)) {
+//       // 检查是否为相对路径
+//       final relativeRegex = RegExp(r'^(\.\.?\\|\\)');
+//       if (!relativeRegex.hasMatch(path)) {
+//         return false;
+//       }
+//     }
+//   }
+
+//   return true;
+// }

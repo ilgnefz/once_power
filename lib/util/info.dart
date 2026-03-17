@@ -2,20 +2,33 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_media_info/flutter_media_info.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
+import 'package:once_power/enum/organize.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/provider/file.dart';
+import 'package:once_power/provider/select.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
 import 'format.dart';
 import 'verify.dart';
+
+double getTotalSize(WidgetRef ref) {
+  double size = 0;
+  List<FileInfo> list = ref.read(fileListProvider);
+  for (FileInfo file in list) {
+    size += file.size;
+  }
+  return size;
+}
 
 bool getCompareResult(ComparisonOperator operator, String value, String info) {
   switch (operator) {
@@ -277,6 +290,127 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
   } catch (e) {
     debugPrint('获取 SVG 尺寸失败: $e');
     return Resolution.zero;
+  }
+}
+
+String getTopPath(String filePath) {
+  final separator = Platform.pathSeparator;
+  final pathList = filePath
+      .split(separator)
+      .where((e) => e.isNotEmpty)
+      .toList();
+  final commonDirs = {
+    'Documents',
+    'Pictures',
+    'Downloads',
+    'Music',
+    'Videos',
+    'Desktop',
+  };
+
+  if (Platform.isWindows) {
+    if (pathList.isEmpty) return filePath;
+    final disk = pathList[0];
+    // 仅C盘处理系统目录
+    if (disk.toUpperCase() == 'C:') {
+      // 处理根目录通用文件夹（如 C:\Pictures）
+      if (pathList.length >= 2 && commonDirs.contains(pathList[1])) {
+        return '$disk$separator${pathList[1]}'; // 直接拼接磁盘号和目录
+      }
+
+      // 处理用户目录通用文件夹（如 C:\Users\John\Pictures）
+      if (pathList.length >= 4 &&
+          pathList[1] == 'Users' &&
+          commonDirs.contains(pathList[3])) {
+        return '$disk$separator${pathList[1]}\\${pathList[2]}\\${pathList[3]}';
+      }
+    }
+    // 返回磁盘根目录下的第一层目录（如 C:\Program Files）
+    return pathList.length >= 2
+        ? '$disk$separator${pathList[1]}'
+        : '$disk$separator'; // 处理纯磁盘根目录（如 C:\）
+  } else {
+    // macOS/Linux 处理逻辑
+    final homePrefix = Platform.isMacOS ? 'Users' : 'home';
+    final userIndex = pathList.indexWhere((e) => e == homePrefix);
+    // 处理用户主目录下的通用文件夹
+    if (userIndex != -1 && pathList.length > userIndex + 2) {
+      final userDirs = pathList.sublist(userIndex + 2);
+      final topDirIndex = userDirs.indexWhere((e) => commonDirs.contains(e));
+      if (topDirIndex != -1) {
+        return path.join(
+          separator,
+          pathList.take(userIndex + 2 + topDirIndex + 1).join(separator),
+        );
+      }
+      return path.join(separator, pathList.take(userIndex + 2).join(separator));
+    }
+    // 处理根目录下的第一层目录
+    return pathList.isEmpty ? filePath : path.join(separator, pathList.first);
+  }
+}
+
+String organizeDateFolder(WidgetRef ref, FileInfo file) {
+  DateType dateType = ref.read(organizeDateProvider);
+  String date = organizeDate(dateType, file);
+  if (date.isEmpty) return '';
+  DateFormat dateFormat = ref.read(organizeDateFormatProvider);
+  date = organizeDateFormat(dateFormat, date);
+  DateFormatSeparate formatSeparate = ref.read(organizeDateSeparateProvider);
+  date = organizeDateSeparate(formatSeparate, date);
+  return date;
+}
+
+String organizeDate(DateType type, FileInfo file) {
+  String date = file.createdDate.date.toString();
+  if (type.isModified) date = file.modifiedDate.date.toString();
+  if (type.isAccessed) date = file.accessedDate.date.toString();
+  if (type.isExif) {
+    date = file.metaInfo?.capture?.date == null
+        ? ''
+        : file.metaInfo!.capture!.date.toString().substring(0, 10);
+  }
+  return date == '' ? '' : date.substring(0, 10);
+}
+
+String organizeDateFormat(DateFormat format, String date) {
+  switch (format) {
+    case DateFormat.ymd:
+      return date;
+    case DateFormat.ym:
+      return date.substring(0, 7);
+    case DateFormat.y:
+      return date.substring(0, 4);
+  }
+}
+
+String organizeDateSeparate(DateFormatSeparate format, String date) {
+  List<String> dateParts = date.split('-');
+  switch (format) {
+    case DateFormatSeparate.none:
+      return dateParts.join('');
+    case DateFormatSeparate.chinese:
+      if (dateParts.length == 3) {
+        return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
+      } else if (dateParts.length == 2) {
+        return '${dateParts[0]}年${dateParts[1]}月';
+      } else {
+        return '${dateParts[0]}年';
+      }
+    case DateFormatSeparate.chineseSpace:
+      if (dateParts.length == 3) {
+        return '${dateParts[0]} 年 ${dateParts[1]} 月 ${dateParts[2]} 日';
+      } else if (dateParts.length == 2) {
+        return '${dateParts[0]} 年 ${dateParts[1]} 月';
+      } else {
+        return '${dateParts[0]} 年';
+      }
+    case DateFormatSeparate.space:
+      return dateParts.join(' ');
+    case DateFormatSeparate.underline:
+      return dateParts.join('_');
+    case DateFormatSeparate.dash:
+      return date;
   }
 }
 

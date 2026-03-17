@@ -7,7 +7,6 @@ import 'package:once_power/enum/advance.dart';
 import 'package:once_power/view/action/advance/dialog/mode_position.dart';
 import 'package:once_power/widget/action/dialog_option.dart';
 import 'package:once_power/widget/base/text.dart';
-import 'package:once_power/widget/common/digit_input.dart';
 import 'package:once_power/widget/common/radio.dart';
 import 'package:once_power/widget/common/text_dropdown.dart';
 

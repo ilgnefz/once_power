@@ -20,9 +20,6 @@ class DateOptions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ThemeData theme = Theme.of(context);
-    TextStyle? textStyle = theme.dropdownMenuTheme.textStyle;
-
     return Padding(
       padding: .only(left: AppNum.padding, bottom: AppNum.spaceSmall),
       child: Row(

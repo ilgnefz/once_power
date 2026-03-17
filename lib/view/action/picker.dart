@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/upload.dart';
-import 'package:once_power/widget/base/tooltip.dart';
 import 'package:once_power/widget/common/button.dart';
 
 class FilePickerGroup extends ConsumerWidget {

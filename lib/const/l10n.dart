@@ -409,10 +409,12 @@ class AppL10n {
   static const String errDelete = 'error.delete';
   static const String errDeleteInfo = 'error.deleteInfo';
   static const String errOrganize = 'error.organize';
-  static const String errOrganizeInfo1 = 'error.organizeInfo1';
-  static const String errOrganizeInfo2 = 'error.organizeInfo2';
+  static const String errOrganizeError = 'error.organizeErrorInfo';
+  static const String errTargetFolder = 'error.targetFolder';
   static const String errGroupFolder = 'error.groupFolder';
   static const String errTypeFolder = 'error.typeFolder';
+  static const String errCreateFolder = 'error.createFolder';
+  static const String errPartMove = 'error.partMove';
   static const String errMove = 'error.move';
   static const String errOpen = 'error.open';
   static const String errOpenInfo = 'error.openInfo';

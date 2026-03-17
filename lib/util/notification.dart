@@ -28,7 +28,7 @@ void showSuspenseErrorNotification() {
   NotificationInfo(
     type: NotificationType.error,
     title: tr(AppL10n.errSuspense),
-    message: tr(AppL10n.errTxtDecodeInfo),
+    message: tr(AppL10n.errSuspenseInfo),
     time: 3,
   ).show();
 }
@@ -164,6 +164,7 @@ void showPresetExportNotification({int? num, String? err}) {
   }
 }
 
+// TODO: 更改错误信息
 InfoDetail renameErrorNotification(Object e, String oldPath, String newPath) {
   debugPrint(e.runtimeType.toString());
   String message = '';
@@ -230,7 +231,7 @@ void showOrganizeEmptyNotification() {
   NotificationInfo(
     type: NotificationType.error,
     title: tr(AppL10n.errOrganize),
-    message: tr(AppL10n.errOrganizeInfo2),
+    message: tr(AppL10n.errTargetFolder),
   ).show();
 }
 
@@ -250,19 +251,15 @@ void showOrganizeNotification(List<InfoDetail> errors, int count) {
   if (errors.isNotEmpty) {
     info.type = NotificationType.error;
     info.title = tr(AppL10n.errOrganize);
-    info.message = tr(AppL10n.errOrganizeInfo1);
+    info.message = tr(AppL10n.errOrganizeError);
     info.detailList = errors;
   }
   info.show();
 }
 
-InfoDetail moveErrorNotification(
-  Object e,
-  bool sameDisk,
-  String oldPath,
-  String newPath,
-) {
-  String message = '${tr(AppL10n.errMove)}: $e';
+InfoDetail moveErrorNotification(String err, String oldPath, String newPath) {
+  // TODO: 翻译有问题
+  String message = '${tr(AppL10n.errMove)}: $err';
   return InfoDetail(file: oldPath, message: message);
 }
 
@@ -297,5 +294,6 @@ void showCreateLogError(String message) {
     type: NotificationType.error,
     title: tr(AppL10n.errCreateLog),
     message: message,
+    time: 5,
   ).show();
 }

@@ -42,9 +42,9 @@ class FolderInput extends ConsumerWidget {
           controller.text = folders[index];
           StorageUtil.setString(cacheKey!, controller.text);
         }
-        controller.selection = TextSelection.collapsed(
-          offset: controller.text.length,
-        );
+        // controller.selection = TextSelection.collapsed(
+        //   offset: controller.text.length,
+        // );
       },
       child: InputField(
         controller: controller,

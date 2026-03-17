@@ -34,7 +34,7 @@ class _PopoverButtonState extends State<PopoverButton> {
           child: Material(color: Colors.white, child: widget.builder(ctrl)),
         ),
       ),
-      builder: (_, ctrl, __) => MouseRegion(
+      builder: (_, ctrl, _) => MouseRegion(
         cursor: SystemMouseCursors.click,
         onHover: (e) => ctrl.open(),
         onExit: (e) {

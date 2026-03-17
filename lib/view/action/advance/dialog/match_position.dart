@@ -4,8 +4,6 @@ import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/widget/action/dialog_option.dart';
-import 'package:once_power/widget/base/text.dart';
-import 'package:once_power/widget/common/checkbox.dart';
 import 'package:once_power/widget/common/digit_input.dart';
 import 'package:once_power/widget/common/radio.dart';
 

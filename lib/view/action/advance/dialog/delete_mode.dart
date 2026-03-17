@@ -1,11 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
-import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/view/action/advance/dialog/mode_position.dart';
 import 'package:once_power/widget/action/dialog_option.dart';
-import 'package:once_power/widget/common/digit_input.dart';
 import 'package:once_power/widget/common/radio.dart';
 
 class DeleteModeGroup extends StatelessWidget {

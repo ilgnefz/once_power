@@ -446,10 +446,12 @@
     "delete": "删除失败",
     "deleteInfo": "删除选中文件失败",
     "organize": "整理失败",
-    "organizeInfo1": "以下几个文件移动失败：",
-    "organizeInfo2": "目标文件夹为空！",
+    "organizeErrorInfo": "以下原因导致移动失败：",
+    "targetFolder": "目标文件夹为空！",
     "groupFolder": "组文件夹为空！",
     "typeFolder": "类型文件夹为空！",
+    "createFolder": "文件夹创建失败",
+    "partMove": "部分移动失败，请手动操作",
     "move": "移动失败",
     "open": "打开失败",
     "openInfo": "目标位置已更改或已删除",
@@ -468,7 +470,7 @@
     "keyError6": "IP 访问超限",
     "keyError7": "远程 Key 被删除",
     "keyError": "错误代码：{code}，详情请去官网查询",
-    "createLog": "创建日志文件失败"
+    "createLog": "创建日志文件失败",
   },
   "success": {
     "copy": "复制成功",

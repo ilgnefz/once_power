@@ -27,7 +27,7 @@ class PathList extends ConsumerWidget {
         final String folder = pathList[index];
         return PathItem(folder: folder);
       },
-      separatorBuilder: (_, __) => const SizedBox(height: AppNum.spaceSmall),
+      separatorBuilder: (_, _) => const SizedBox(height: AppNum.spaceSmall),
     );
   }
 }

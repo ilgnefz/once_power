@@ -18,9 +18,10 @@ import 'package:once_power/util/verify.dart';
 import 'package:path/path.dart';
 
 Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
-  Stopwatch stopwatch = Stopwatch()..start();
   List<FileInfo> allFiles = ref.read(sortListProvider);
   List<FileInfo> list = allFiles.where((e) => e.checked).toList();
+  if (list.isEmpty) return;
+  Stopwatch stopwatch = Stopwatch()..start();
   Set<String> allPath = list.map((e) => e.path).toSet();
   int total = list.length;
   List<InfoDetail> errs = [];
@@ -28,8 +29,8 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   if (saveLog) LogServer.init();
   ref.read(countProvider.notifier).reset();
   ref.read(totalProvider.notifier).update(total);
+  ref.read(isApplyingProvider.notifier).start();
   for (FileInfo file in list) {
-    if (!file.checked) continue;
     if (file.path == file.getNewPath(isUndo)) continue;
     InfoDetail? info = await handelFile(ref, list, allPath, file, isUndo);
     if (info == null) {
@@ -44,6 +45,7 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
+  ref.read(isApplyingProvider.notifier).finish();
   ref.read(showUndoProvider.notifier).update(!isUndo);
   isUndo
       ? showUndoNotification(errs, total)

@@ -30,8 +30,7 @@ class LogServer {
       await file.writeAsString(content);
       debugPrint('已成功创建日志文件: ${file.path}');
     } catch (e) {
-      // TODO: 发送通知
-      showCreateLogError(e.toString());
+      showCreateLogError(formatSystemError(e));
       debugPrint('创建日志文件失败: $e');
     }
   }

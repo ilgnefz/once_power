@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/text.dart';
 import 'package:once_power/core/file.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/view/action/action.dart';
 import 'package:once_power/view/bottom/bottom.dart';
 import 'package:once_power/view/content/content.dart';
@@ -73,11 +74,14 @@ class _HomeViewState extends ConsumerState<HomeView> with ShortcutMenuListener {
               children: [
                 RepaintBoundary(child: TitleBarView()),
                 Flexible(
-                  child: Row(
-                    children: [
-                      RepaintBoundary(child: ActionView()),
-                      buildContent(),
-                    ],
+                  child: AbsorbPointer(
+                    absorbing: ref.watch(isApplyingProvider),
+                    child: Row(
+                      children: [
+                        RepaintBoundary(child: ActionView()),
+                        buildContent(),
+                      ],
+                    ),
                   ),
                 ),
                 BottomView(),

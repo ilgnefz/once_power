@@ -5,7 +5,6 @@ import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/organize.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 
 class OtherGroup extends ConsumerWidget {
