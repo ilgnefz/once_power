@@ -150,6 +150,7 @@
     "origin": "原名称",
     "name": "文件名",
     "new": "新名称",
+    "visible": "左键显示无新名称项，右键显示有新名称项",
     "adjustSize": "左键放大视图，右键缩小视图，长按自定义大小",
     "empty": "拖动文件（夹）到这里",
     "emptyImage": "拖动图片视频文件（夹）到这里",
@@ -243,6 +244,7 @@
     "hotKey": {
       "label": "快捷键",
       "all": "全选",
+      "cancel": "取消选择",
       "delete": "删除选中",
       "toggle": "切换选中",
       "suspense": "暂存文件",
@@ -266,6 +268,7 @@
   "dialog": {
     "ok": "确定",
     "cancel": "取消",
+    "close": "关闭",
     "group": "编辑组",
     "groupHint": "请输入组名",
     "all": "全部",
@@ -277,7 +280,8 @@
     "exit": "退出",
     "image": "自定义图片大小",
     "imageHint": "请输入图片显示宽度",
-    "applyGroup": "应用组"
+    "applyGroup": "应用组",
+    "setting": "设置"
   },
   "log": {
     "rename": "重命名日志",

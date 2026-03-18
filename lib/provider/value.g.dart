@@ -471,3 +471,55 @@ abstract class _$ViewImageWidth extends $Notifier<int> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(ConetentFocusNode)
+final conetentFocusNodeProvider = ConetentFocusNodeProvider._();
+
+final class ConetentFocusNodeProvider
+    extends $NotifierProvider<ConetentFocusNode, FocusNode> {
+  ConetentFocusNodeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'conetentFocusNodeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$conetentFocusNodeHash();
+
+  @$internal
+  @override
+  ConetentFocusNode create() => ConetentFocusNode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FocusNode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FocusNode>(value),
+    );
+  }
+}
+
+String _$conetentFocusNodeHash() => r'eb116cdc20110ae65858a73c678c11886d3ba3a2';
+
+abstract class _$ConetentFocusNode extends $Notifier<FocusNode> {
+  FocusNode build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<FocusNode, FocusNode>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<FocusNode, FocusNode>,
+              FocusNode,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

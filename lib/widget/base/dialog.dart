@@ -54,7 +54,7 @@ class EasyDialog extends StatelessWidget {
           child: Container(
             width: width ?? AppNum.easyDialog,
             padding: EdgeInsets.symmetric(vertical: AppNum.padding),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(borderRadius: .circular(8)),
             child: Column(
               spacing: AppNum.spaceLarge,
               mainAxisSize: MainAxisSize.min,

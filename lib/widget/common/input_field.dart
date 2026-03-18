@@ -17,6 +17,7 @@ class InputField extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.enabled = true,
+    this.showClear = false,
     this.margin,
     this.inputFormatters,
     this.onChanged,
@@ -32,6 +33,7 @@ class InputField extends StatefulWidget {
   final bool autofocus;
   final bool obscureText;
   final bool enabled;
+  final bool showClear;
   final EdgeInsetsGeometry? margin;
   final List<FilteringTextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
@@ -93,7 +95,7 @@ class _InputFieldState extends State<InputField> {
       obscureText: widget.obscureText,
       enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,
-      clearButton: isShow
+      clearButton: isShow || widget.showClear
           ? ClickIcon(onPressed: clear, icon: Icons.close_rounded, iconSize: 18)
           : null,
       leading: widget.leading,

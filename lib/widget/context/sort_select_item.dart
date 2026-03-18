@@ -7,6 +7,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/context_menu.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/value.dart';
 import 'package:once_power/util/selection.dart';
 import 'package:once_power/widget/context/tooltip_item.dart';
 
@@ -50,11 +51,9 @@ class SortSelectItem extends ConsumerWidget {
           keys.contains(LogicalKeyboardKey.shiftRight);
       final SortSelectList provider = ref.read(sortSelectListProvider.notifier);
       if (isCtrlPressed) {
-        // Ctrl键按下时：切换当前文件的选中状态（选中则取消，未选中则添加）
         SelectionState.filesUpdate(true);
         selectList.contains(file) ? provider.remove(file) : provider.add(file);
       } else if (isShiftPressed) {
-        // Shift键按下时：按顺序选中从首个已选文件到当前文件的连续区间
         List<FileInfo> list = ref.read(sortListProvider);
         int begin = 0;
         if (selectList.isNotEmpty) {
@@ -94,7 +93,10 @@ class SortSelectItem extends ConsumerWidget {
               InkWell(
                 mouseCursor: SystemMouseCursors.click,
                 borderRadius: BorderRadius.circular(AppNum.radius),
-                onTap: onTap,
+                onTap: () {
+                  onTap?.call();
+                  ref.read(conetentFocusNodeProvider).requestFocus();
+                },
                 onDoubleTap: onDoubleTap,
                 onSecondaryTapDown: onSecondaryTapDown,
                 child: child,

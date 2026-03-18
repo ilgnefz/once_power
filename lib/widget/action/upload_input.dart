@@ -34,6 +34,7 @@ class UploadInput extends ConsumerWidget {
       leading: info == null ? null : UploadFileCard(info: info),
       onChanged: (_) => Debounce.run(() => normalUpdateName(ref)),
       onClear: ref.read(infoProvider.notifier).clear,
+      showClear: info != null,
       action: ClickIcon(
         tip: tr(AppL10n.renameUpload),
         icon: Icons.upload_file_rounded,

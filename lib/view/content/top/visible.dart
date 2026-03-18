@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/const/l10n.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/common/click_icon.dart';
@@ -12,6 +14,7 @@ class ContentVisible extends ConsumerWidget {
     final ThemeData theme = Theme.of(context);
     bool active = ref.watch(toggleChangedProvider);
     return ClickIcon(
+      tip: tr(AppL10n.contentVisible),
       icon: active ? Icons.visibility_off : Icons.visibility,
       color: active ? theme.primaryColor : theme.iconTheme.color,
       onPressed: () {

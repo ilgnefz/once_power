@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/model/date.dart';
@@ -97,5 +98,15 @@ class ViewImageWidth extends _$ViewImageWidth {
   Future<void> set(int value) async {
     state = value;
     await StorageUtil.setInt(AppKeys.imageWidth, state);
+  }
+}
+
+@riverpod
+class ConetentFocusNode extends _$ConetentFocusNode {
+  @override
+  FocusNode build() {
+    final node = FocusNode();
+    ref.onDispose(() => node.dispose());
+    return node;
   }
 }

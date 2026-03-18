@@ -151,6 +151,7 @@ class AppL10n {
   static const String contentOrigin = 'content.origin';
   static const String contentName = 'content.name';
   static const String contentNew = 'content.new';
+  static const String contentVisible = 'content.visible';
   static const String contentAdjustSize = 'content.adjustSize';
   static const String contentEmpty = 'content.empty';
   static const String contentEmptyImage = 'content.emptyImage';
@@ -237,6 +238,7 @@ class AppL10n {
   static const String bottomDate = 'bottom.date';
   static const String bottomHotKey = 'bottom.hotKey.label';
   static const String bottomHotKeyAll = 'bottom.hotKey.all';
+  static const String bottomHotKeyCancel = 'bottom.hotKey.cancel';
   static const String bottomHotKeyDelete = 'bottom.hotKey.delete';
   static const String bottomHotKeyToggle = 'bottom.hotKey.toggle';
   static const String bottomHotKeySuspense = 'bottom.hotKey.suspense';
@@ -260,6 +262,7 @@ class AppL10n {
   /* ---------- dialog ---------- */
   static const String dialogOk = 'dialog.ok';
   static const String dialogCancel = 'dialog.cancel';
+  static const String dialogClose = 'dialog.close';
   static const String dialogGroup = 'dialog.group';
   static const String dialogGroupHint = 'dialog.groupHint';
   static const String dialogAll = 'dialog.all';
@@ -272,6 +275,7 @@ class AppL10n {
   static const String dialogImage = 'dialog.image';
   static const String dialogImageHint = 'dialog.imageHint';
   static const String dialogApplyGroup = 'dialog.applyGroup';
+  static const String dialogSetting = 'dialog.setting';
 
   /* ---------- log ---------- */
 

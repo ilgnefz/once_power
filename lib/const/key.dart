@@ -103,7 +103,7 @@ class AppKeys {
   // static String modifyCachea = 'modifyCache';
 
   /// Right click menu to add files
-  static String rightMenuFolderPath = 'folderPathCache';
+  // static String rightMenuFolderPath = 'folderPathCache';
 
   /// label
   static String cancelOperate = 'cancel_operate';

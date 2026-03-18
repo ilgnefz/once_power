@@ -17,6 +17,7 @@ import 'package:once_power/src/rust/api/file_meta.dart';
 import 'package:once_power/src/rust/api/file_type.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
+import 'package:once_power/util/location.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
 
@@ -147,12 +148,16 @@ Future<FileInfo> generateFileInfo(String filePath) async {
       DateInfo? capture = captureStr == null
           ? null
           : getDateInfo(DateTime.tryParse(captureStr));
+      double? longitude = photoMetaInfo.longitude;
+      double? latitude = photoMetaInfo.latitude;
+      String location = await getTrueLocation(longitude, latitude);
       metaInfo = FileMetaInfo(
         make: photoMetaInfo.make ?? '',
         model: photoMetaInfo.model ?? '',
         capture: capture,
-        latitude: photoMetaInfo.latitude,
-        longitude: photoMetaInfo.longitude,
+        latitude: latitude,
+        longitude: longitude,
+        location: location,
       );
     }
   }

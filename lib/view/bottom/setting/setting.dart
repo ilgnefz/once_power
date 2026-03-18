@@ -11,7 +11,6 @@ class SettingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomClickIcon(
       tip: tr(AppL10n.bottomView),
-      // svg: AppIcons.image,
       icon: Icons.settings_rounded,
       onPressed: () => showSettingView(context),
     );

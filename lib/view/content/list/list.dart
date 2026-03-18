@@ -59,7 +59,6 @@ class ContentListView extends ConsumerWidget {
           child: SortSelectItem(
             index: index,
             file: file,
-            onTap: () {},
             child: ContentItem(
               checked: file.checked,
               onChanged: (bool? value) {

@@ -129,6 +129,7 @@ class _FilterRuleItemState extends State<FilterRuleItem> {
       ? ComparisonOperator.values
       : [
           ComparisonOperator.contain,
+          ComparisonOperator.notContain,
           ComparisonOperator.equal,
           ComparisonOperator.notEqual,
         ];

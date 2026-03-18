@@ -5,7 +5,6 @@ import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 import 'package:once_power/widget/common/click_icon.dart';
-import 'package:once_power/widget/common/one_line_text.dart';
 
 class ContentItem extends StatelessWidget {
   const ContentItem({

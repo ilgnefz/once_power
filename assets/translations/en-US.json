@@ -150,7 +150,8 @@
     "origin": "Original",
     "name": "Filename",
     "new": "New Name",
-    "adjustSize": "Left: Zoom in, Right: Zoom out, Long press: Custom size",
+    "visible": "Left click: Show items without new name, Right click: Show items with new name",
+    "adjustSize": "Left click: Zoom in, Right click: Zoom out, Long press: Custom size",
     "empty": "Drag files/folders here",
     "emptyImage": "Drag images/videos/folder here",
     "export": {
@@ -184,11 +185,11 @@
     "size": "Size",
     "group": "Group",
     "filter": {
-      "unselected": "Remove unchecked",
-      "selected": "Remove checked",
-      "extension": "All exts",
-      "folder": "All paths",
-      "reserve": "Invert selection",
+      "unselected": "Rm uncheck",
+      "selected": "Rm checked",
+      "extension": "All extension",
+      "folder": "All path",
+      "reserve": "Toggle",
       "rule": "Rule filter",
       "select": "Select",
       "unselect": "Unselect",
@@ -243,6 +244,7 @@
     "hotKey": {
       "label": "Hotkeys",
       "all": "Select all",
+      "cancel": "Deselect all",
       "delete": "Delete selected",
       "toggle": "Toggle selection",
       "suspense": "Stash files",
@@ -266,6 +268,7 @@
   "dialog": {
     "ok": "OK",
     "cancel": "Cancel",
+    "close": "Close",
     "group": "Edit Group",
     "groupHint": "Enter group name",
     "all": "All",
@@ -277,7 +280,8 @@
     "exit": "Exit",
     "image": "Custom image size",
     "imageHint": "Enter the image display width",
-    "applyGroup": "Apply Group"
+    "applyGroup": "Apply Group",
+    "setting": "Settings"
   },
   "log": {
     "rename": "Rename Log",

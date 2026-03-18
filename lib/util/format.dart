@@ -217,3 +217,9 @@ String formatShowTime(String date, TimeStyle style) {
       return '${timeParts[0]} ${timeParts[1]} ${timeParts[2]}';
   }
 }
+
+int formatVersionNum(String version) {
+  List versionCells = version.split('.');
+  versionCells = versionCells.map((i) => int.parse(i)).toList();
+  return versionCells[0] * 10000 + versionCells[1] * 100 + versionCells[2];
+}

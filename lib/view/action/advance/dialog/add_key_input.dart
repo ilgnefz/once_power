@@ -40,7 +40,8 @@ class _KeyInputViewState extends State<KeyInputView> {
       title: tr(AppL10n.advanceLocationTitle),
       content: Column(
         spacing: 8,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
+        mainAxisSize: .min,
         children: [
           InputField(
             controller: _controller,

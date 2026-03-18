@@ -11,8 +11,8 @@ import 'package:once_power/util/selection.dart';
 
 import 'list.dart';
 
-List<FileInfo> tempSortSelectList = [];
-MovePosition tempMP = MovePosition.idle;
+List<FileInfo> _tempSortSelectList = [];
+MovePosition _tempMP = MovePosition.idle;
 
 void toThePosition(
   WidgetRef ref,
@@ -21,11 +21,11 @@ void toThePosition(
   int targetIndex,
   MovePosition mp,
 ) {
-  List<FileInfo> files = ref.watch(sortListProvider);
-  if (listEquals(tempSortSelectList, selectList) && tempMP == mp) return;
-  tempMP = mp;
-  tempSortSelectList.clear();
-  tempSortSelectList.addAll(selectList);
+  List<FileInfo> files = ref.read(sortListProvider);
+  if (listEquals(_tempSortSelectList, selectList) && _tempMP == mp) return;
+  _tempMP = mp;
+  _tempSortSelectList.clear();
+  _tempSortSelectList.addAll(selectList);
   if (selectList.length == 1) {
     int index = files.indexWhere((e) => e == selectList.single);
     if (index == targetIndex) return;
@@ -48,7 +48,7 @@ void toTheFirst(WidgetRef ref, List<FileInfo> selectList) {
 }
 
 void toTheCenter(WidgetRef ref, List<FileInfo> selectList) {
-  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> files = ref.read(sortListProvider);
   toThePosition(
     ref,
     selectList,
@@ -59,7 +59,7 @@ void toTheCenter(WidgetRef ref, List<FileInfo> selectList) {
 }
 
 void toTheLast(WidgetRef ref, List<FileInfo> selectList) {
-  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> files = ref.read(sortListProvider);
   toThePosition(
     ref,
     selectList,
@@ -70,7 +70,7 @@ void toTheLast(WidgetRef ref, List<FileInfo> selectList) {
 }
 
 void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
-  if (selectList.length < ref.watch(totalProvider)) {
+  if (selectList.length < ref.read(totalProvider)) {
     List<FileInfo> caches = [];
     for (FileInfo file in selectList) {
       caches.add(file);
@@ -83,7 +83,7 @@ void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
 }
 
 void toTheFront(WidgetRef ref, FileInfo file) {
-  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> files = ref.read(sortListProvider);
   int index = files.indexWhere((e) => e == file);
   List<FileInfo> list = SuspenseState.list;
   if (index == 0) {
@@ -97,7 +97,7 @@ void toTheFront(WidgetRef ref, FileInfo file) {
 }
 
 void toTheBehind(WidgetRef ref, FileInfo file) {
-  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> files = ref.read(sortListProvider);
   int index = files.indexWhere((e) => e == file);
   List<FileInfo> list = SuspenseState.list;
   if (index == files.length) {

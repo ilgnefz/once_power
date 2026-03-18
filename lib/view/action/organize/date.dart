@@ -21,11 +21,15 @@ class DateOptions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: .only(left: AppNum.padding, bottom: AppNum.spaceSmall),
+      padding: .only(
+        left: AppNum.padding,
+        right: AppNum.padding,
+        bottom: AppNum.spaceSmall,
+      ),
       child: Row(
-        spacing: 2,
         mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: .spaceBetween,
+        crossAxisAlignment: .center,
         children: [
           TextDropdown(
             items: _dateTypes
