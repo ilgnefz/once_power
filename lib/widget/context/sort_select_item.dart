@@ -31,10 +31,9 @@ class SortSelectItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<FileInfo> selectList = ref.watch(sortSelectListProvider);
     BorderRadius borderRadius = BorderRadius.circular(4);
-    // TODO: 深色模式下看不清
     Color? backgroundColor = selectList.contains(file)
         ? Theme.of(context).hoverColor
-        : null;
+        : Colors.transparent;
     String? indexLabel = selectList.contains(file) && selectList.length > 1
         ? '${selectList.indexOf(file) + 1}'
         : null;

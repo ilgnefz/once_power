@@ -60,7 +60,7 @@ class _CustomImageSizeState extends ConsumerState<ImageSizeView> {
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.start,
-            spacing: AppNum.spaceSmall,
+            spacing: AppNum.spaceMedium,
             runSpacing: AppNum.spaceMedium,
             children: AppNum.imageSizes.map((e) {
               String label = e.toString();

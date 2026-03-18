@@ -51,7 +51,7 @@ class ClickIcon extends StatelessWidget {
               icon: icon,
               svg: svg,
               size: iconSize ?? (icon == null ? 18 : 20),
-              color: color ?? Color(0xFFC4C4C4),
+              color: color ?? Theme.of(context).iconTheme.color,
             ),
           ),
         ),

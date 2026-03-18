@@ -16,6 +16,7 @@ import 'enum/app.dart';
 // TODO: 更新日志：破坏性更改-之前保存的预设内容会出错，需要重新修改
 // TODO: 视图模式选择按钮颜色
 // TODO: 下拉栏鼠标样式
+// TODO: 设置的内容没有在重命名时使用
 
 void main(List<String> args) async {
   await AppConfig.init(args);

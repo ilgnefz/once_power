@@ -45,10 +45,10 @@ class BaseInput extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         color: theme.inputDecorationTheme.fillColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: .circular(AppNum.radius),
         border: Border.all(
           color: theme.inputDecorationTheme.outlineBorder!.color,
-          width: 1,
+          width: theme.inputDecorationTheme.outlineBorder!.width,
         ),
         // boxShadow: [
         //   BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2),
@@ -66,7 +66,7 @@ class BaseInput extends StatelessWidget {
               obscureText: obscureText,
               enabled: enabled,
               cursorHeight: 20,
-              cursorRadius: Radius.circular(4),
+              cursorRadius: .circular(AppNum.radiusSmall),
               textAlign: textAlign,
               inputFormatters: inputFormatters,
               style: theme.textTheme.bodyMedium?.copyWith(

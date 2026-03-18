@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/widget/base/text.dart';
 
 class EasyElevatedButton extends StatelessWidget {
   const EasyElevatedButton({super.key, this.onPressed, required this.label});
@@ -11,13 +12,8 @@ class EasyElevatedButton extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return ElevatedButton(
       onPressed: onPressed,
-      style: ButtonStyle(padding: .all(.symmetric(horizontal: 23))),
-      child: Text(
-        label,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: onPressed == null ? Colors.grey : theme.primaryColor,
-        ),
-      ),
+      style: theme.elevatedButtonTheme.style,
+      child: BaseText(label, color: theme.primaryColor),
     );
   }
 }

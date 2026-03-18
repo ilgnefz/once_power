@@ -27,7 +27,8 @@ class AddGroup extends ConsumerWidget {
             child: ClickIcon(
               tip: tr(AppL10n.actionFolderTip),
               icon: Icons.folder_copy_rounded,
-              iconSize: 16,
+              iconSize: 14,
+              size: 22,
               color: ref.watch(isAddSubfolderProvider)
                   ? Theme.of(context).primaryColor
                   : Colors.grey,

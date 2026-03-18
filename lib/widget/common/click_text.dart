@@ -35,6 +35,7 @@ class EasyClickText extends StatelessWidget {
           );
 
     return Material(
+      color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(borderRadius: .circular(radius)),
         child: InkWell(

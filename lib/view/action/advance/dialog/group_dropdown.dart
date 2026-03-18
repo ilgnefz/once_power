@@ -54,6 +54,7 @@ class _GroupDropdownState extends ConsumerState<GroupDropdown> {
           style: TextStyle(color: theme.primaryColor),
         ),
         TextDropdown(
+          color: Colors.transparent,
           items: groups
               .map(
                 (item) => DropdownItem(
@@ -62,11 +63,6 @@ class _GroupDropdownState extends ConsumerState<GroupDropdown> {
                   alignment: Alignment.center,
                   height: AppNum.dropdownMenu,
                   child: BaseText(item),
-                  // child: Text(
-                  //   item,
-                  //   overflow: TextOverflow.ellipsis,
-                  //   style: theme.dropdownMenuTheme.textStyle,
-                  // ),
                 ),
               )
               .toList(),

@@ -38,12 +38,7 @@ class ContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleText = BaseText(
-      title,
-      fontSize: 13,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    );
+    Widget titleText = BaseText(title, fontSize: 13);
     Widget titleWidget = Flexible(
       flex: 1,
       fit: .tight,
@@ -56,13 +51,7 @@ class ContentItem extends StatelessWidget {
               ],
             ),
     );
-    Widget subTitleText = BaseText(
-      subTitle,
-      color: subColor,
-      fontSize: 13,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    );
+    Widget subTitleText = BaseText(subTitle, color: subColor, fontSize: 13);
     Widget subTitleWidget = Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return Flexible(
@@ -84,7 +73,6 @@ class ContentItem extends StatelessWidget {
     return Container(
       height: AppNum.topHeight,
       padding: EdgeInsets.symmetric(horizontal: AppNum.spaceSmall),
-      // margin: EdgeInsets.only(right: AppNum.paddingMedium),
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppNum.radius),

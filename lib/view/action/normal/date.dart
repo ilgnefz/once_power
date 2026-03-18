@@ -44,6 +44,7 @@ class DateInput extends ConsumerWidget {
           ),
           Expanded(
             child: TextDropdown<DateType>(
+              color: Colors.transparent,
               items: DateType.values
                   .map(
                     (e) => DropdownItem(

@@ -96,7 +96,12 @@ class _InputFieldState extends State<InputField> {
       enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,
       clearButton: isShow || widget.showClear
-          ? ClickIcon(onPressed: clear, icon: Icons.close_rounded, iconSize: 18)
+          ? ClickIcon(
+              onPressed: clear,
+              icon: Icons.close_rounded,
+              iconSize: 16,
+              size: 24,
+            )
           : null,
       leading: widget.leading,
       action: widget.action,

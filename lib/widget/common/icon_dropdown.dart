@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:once_power/config/theme/dropdown.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/base/icon.dart';
 
@@ -25,12 +26,13 @@ class IconDropdown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DropdownTheme? theme = Theme.of(context).extension<DropdownTheme>();
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
         customButton: InkIcon(
           icon: icon,
           svg: svg,
-          size: 18,
+          size: 20,
           iconSize: 28,
           color: Theme.of(context).iconTheme.color,
         ),
@@ -38,18 +40,18 @@ class IconDropdown<T> extends StatelessWidget {
         valueListenable: ValueNotifier<T>(value),
         onChanged: (value) => onChanged(value as T),
         buttonStyleData: ButtonStyleData(
-          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          overlayColor: .all(Colors.transparent),
         ),
         dropdownStyleData: DropdownStyleData(
           width: width ?? 112,
-          padding: EdgeInsets.zero,
+          padding: .zero,
           elevation: 2,
           decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(AppNum.radius),
+            color: theme?.backgroundColor,
+            borderRadius: .circular(AppNum.radius),
           ),
           scrollbarTheme: ScrollbarThemeData(
-            radius: const Radius.circular(40),
+            radius: const .circular(40),
             thickness: WidgetStateProperty.all(2),
             thumbVisibility: WidgetStateProperty.all(true),
           ),
@@ -59,12 +61,11 @@ class IconDropdown<T> extends StatelessWidget {
           //     padding ?? EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
           padding: .zero,
           overlayColor: .resolveWith((states) {
-            if (states.contains(WidgetState.hovered)) {
+            if (states.contains(WidgetState.hovered) ||
+                states.contains(WidgetState.pressed)) {
               return Theme.of(context).hoverColor;
-            } else if (states.contains(WidgetState.focused)) {
-              return Colors.transparent;
             }
-            return null;
+            return Colors.transparent;
           }),
         ),
       ),

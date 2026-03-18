@@ -69,10 +69,10 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
       advanceMenuSelectedListProvider,
     );
     BorderRadius borderRadius = .circular(AppNum.radiusSmall);
-    // TODO: 深色模式下看不清
+
     Color? backgroundColor = selectList.contains(menu)
         ? Theme.of(context).hoverColor
-        : null;
+        : Colors.transparent;
 
     void onPointerDown(PointerDownEvent event) {
       bool isLeft = event.buttons == kPrimaryButton;

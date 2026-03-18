@@ -2,9 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/config/theme/context_menu.dart';
+import 'package:once_power/config/theme/dropdown.dart';
 import 'package:once_power/const/input.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/file.dart';
@@ -39,7 +42,10 @@ Future<void> showRightMenu(
   bool onlyNormal = (mode.isReplace || mode.isReserve) && onlyFunctionMode;
   List<FileInfo> sortSelectList = [];
   sortSelectList = isPreview ? [file] : ref.read(sortSelectListProvider);
-  if (sortSelectList.isEmpty) sortSelectList.add(file);
+  if (!sortSelectList.contains(file)) {
+    sortSelectList.clear();
+    sortSelectList.add(file);
+  }
   List<FileInfo> suspenseList = SuspenseState.list;
   final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(
@@ -140,8 +146,9 @@ Future<void> showRightMenu(
       ),
     RightMenuItem(
       label: file.checked ? tr(AppL10n.menuUnselect) : tr(AppL10n.menuSelect),
-      color: file.checked ? Colors.grey : theme.colorScheme.surfaceDim,
-      onSelected: (_) => toggleMultipleCheck(ref, sortSelectList),
+      color: file.checked ? Colors.grey : theme.textTheme.bodyMedium?.color,
+      onSelected: (_) =>
+          toggleMultipleCheck(ref, sortSelectList, !file.checked),
     ),
     if (mode.isAdvance || mode.isOrganize && onlyFunctionMode)
       RightMenuItem(
@@ -178,8 +185,8 @@ Future<void> showRightMenu(
       padding: .zero,
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(8),
+        color: theme.extension<ContextMenuTheme>()?.backgroundColor,
+        borderRadius: .circular(AppNum.radius),
         boxShadow: [
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),
         ],
@@ -221,7 +228,10 @@ Future<void> showDirectiveRightMenu(
   AdvanceMenuModel menu,
 ) async {
   List<AdvanceMenuModel> list = ref.watch(advanceMenuSelectedListProvider);
-  if (list.isEmpty) list.add(menu);
+  if (!list.contains(menu)) {
+    list.clear();
+    list.add(menu);
+  }
   ThemeData theme = Theme.of(context);
   final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(
@@ -242,7 +252,7 @@ Future<void> showDirectiveRightMenu(
           color: Theme.of(context).primaryColor,
           onSelected: (_) => editGroup(context, true),
         ),
-        ...buildDirectiveGroupList(context, ref, list),
+        ...buildDirectiveGroupList(context, ref, list, menu),
       ],
     ),
     RightMenuItem(
@@ -268,7 +278,7 @@ Future<void> showDirectiveRightMenu(
     contextMenu: ContextMenu(
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
+        color: theme.extension<ContextMenuTheme>()?.backgroundColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),
@@ -286,6 +296,7 @@ List<ContextMenuEntry> buildDirectiveGroupList(
   BuildContext context,
   WidgetRef ref,
   List<AdvanceMenuModel> menuList,
+  AdvanceMenuModel menu,
 ) {
   List<String> list = ['all'];
   list.addAll(StorageUtil.getStringList(AppKeys.groupList));
@@ -293,7 +304,9 @@ List<ContextMenuEntry> buildDirectiveGroupList(
       .map(
         (e) => RightMenuItem(
           label: e == 'all' ? tr(AppL10n.dialogAll) : e,
-          color: Theme.of(context).textTheme.bodyMedium?.color,
+          color: menu.group == e
+              ? Theme.of(context).textTheme.bodyMedium?.color
+              : Colors.grey,
           onSelected: (_) {
             for (var element in menuList) {
               ref

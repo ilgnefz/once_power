@@ -57,11 +57,10 @@ void insertPosition(WidgetRef ref, int index, List<FileInfo> files) {
   updateName(ref);
 }
 
-void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files) {
+void toggleMultipleCheck(WidgetRef ref, List<FileInfo> files, [bool? checked]) {
   FileList fileProvider = ref.read(fileListProvider.notifier);
   for (FileInfo file in files) {
-    bool check = !file.checked;
-    fileProvider.updateCheck(file.id, check);
+    fileProvider.updateCheck(file.id, checked ?? !file.checked);
   }
   updateName(ref);
 }
@@ -101,7 +100,7 @@ void setGroup(
     ref.read(fileListProvider.notifier).updateGroup(file.id, group);
   } else {
     for (FileInfo f in list) {
-      if (f.group == group) continue;
+      group = f.group == group ? '' : group;
       ref.read(fileListProvider.notifier).updateGroup(f.id, group);
     }
   }

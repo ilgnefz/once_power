@@ -26,15 +26,12 @@ class _BottomTextButtonState extends State<BottomTextButton> {
         onTap: widget.onPressed,
         child: AnimatedDefaultTextStyle(
           duration: Duration(milliseconds: 200),
-          style: theme.textTheme.labelMedium!.copyWith(
-            fontSize: 13,
+          style: theme.extension<BottomTextTheme>()!.textStyle.copyWith(
             color: isHover
                 ? theme.primaryColor
                 : theme.extension<BottomTextTheme>()?.textStyle.color,
-            fontFamily: defaultFont,
-            height: 2,
           ),
-          child: Text(widget.label, textAlign: TextAlign.center),
+          child: Text(widget.label),
         ),
       ),
     );

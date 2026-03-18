@@ -66,10 +66,6 @@ class EasyDialog extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // Padding(
-                //   padding: padding ?? .symmetric(horizontal: AppNum.padding),
-                //   child: content,
-                // ),
                 Flexible(
                   child: Padding(
                     padding: padding ?? .symmetric(horizontal: AppNum.padding),

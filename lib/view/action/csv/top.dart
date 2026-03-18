@@ -30,7 +30,7 @@ class CSVTop extends ConsumerWidget {
                   text: ref.watch(cSVNameColumnProvider),
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    color: theme.primaryColor,
                   ),
                 ),
               ],

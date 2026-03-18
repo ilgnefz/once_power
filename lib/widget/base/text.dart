@@ -7,8 +7,8 @@ class BaseText extends StatelessWidget {
     this.fontSize,
     this.color,
     this.fontWeight,
-    this.maxLines,
-    this.overflow,
+    this.maxLines = 1,
+    this.overflow = TextOverflow.ellipsis,
     this.textAlign,
   });
 

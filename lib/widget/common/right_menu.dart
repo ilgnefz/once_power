@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
+import 'package:once_power/config/theme/context_menu.dart';
 import 'package:once_power/config/theme/theme.dart';
 
 final class RightMenuItem extends ContextMenuItem<dynamic> {
@@ -30,7 +31,9 @@ final class RightMenuItem extends ContextMenuItem<dynamic> {
   ]) {
     final ThemeData theme = Theme.of(context);
     bool isFocused = menuState.focusedEntry == this;
-    final Color background = theme.scaffoldBackgroundColor;
+    final Color background = theme
+        .extension<ContextMenuTheme>()!
+        .backgroundColor;
     final Color focusedBackground = Colors.grey.withValues(alpha: 0.2);
     final TextStyle textStyle = TextStyle(
       color: color ?? theme.textTheme.labelMedium?.color,

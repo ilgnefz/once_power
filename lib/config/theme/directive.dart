@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 
 class DirectiveTheme extends ThemeExtension<DirectiveTheme> {
-  final Color hoverColor;
   final WidgetStateColor defaultColor;
   final WidgetStateColor heightLight;
 
-  const DirectiveTheme({
-    required this.hoverColor,
-    required this.defaultColor,
-    required this.heightLight,
-  });
+  const DirectiveTheme({required this.defaultColor, required this.heightLight});
 
   @override
   ThemeExtension<DirectiveTheme> copyWith({
-    Color? hoverColor,
     WidgetStateColor? defaultColor,
     WidgetStateColor? heightLight,
   }) {
     return DirectiveTheme(
-      hoverColor: hoverColor ?? this.hoverColor,
       defaultColor: defaultColor ?? this.defaultColor,
       heightLight: heightLight ?? this.heightLight,
     );
@@ -33,7 +26,6 @@ class DirectiveTheme extends ThemeExtension<DirectiveTheme> {
       return this;
     }
     return DirectiveTheme(
-      hoverColor: Color.lerp(hoverColor, other.hoverColor, t)!,
       defaultColor: _lerpWidgetStateColor(defaultColor, other.defaultColor, t),
       heightLight: _lerpWidgetStateColor(heightLight, other.heightLight, t),
     );

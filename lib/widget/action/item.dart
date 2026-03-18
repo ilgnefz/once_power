@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/widget/action/icon_box.dart';
+import 'package:once_power/widget/base/text.dart';
 
 class ActionItem extends StatelessWidget {
   const ActionItem({
@@ -29,7 +30,7 @@ class ActionItem extends StatelessWidget {
       child: Row(
         spacing: AppNum.spaceMedium,
         children: [
-          if (label != null) Text('${label!}:'),
+          if (label != null) BaseText('${label!}:'),
           Expanded(child: child),
           IconBox(tip: tip, icon: icon, checked: checked, onPressed: onPressed),
         ],
