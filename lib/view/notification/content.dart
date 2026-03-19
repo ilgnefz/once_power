@@ -1,6 +1,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:once_power/config/theme/context_menu.dart';
+import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/notification.dart';
 import 'package:once_power/model/notification.dart';
 import 'package:once_power/widget/base/icon.dart';
@@ -24,8 +26,8 @@ class NotificationContent extends StatelessWidget {
       padding: const .symmetric(vertical: 8, horizontal: 12),
       margin: .only(bottom: 36, right: 6),
       decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        color: theme.extension<OverlayWidgetTheme>()?.backgroundColor,
+        borderRadius: .circular(AppNum.radius),
         boxShadow: [
           BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 8),
         ],
@@ -49,6 +51,7 @@ class NotificationContent extends StatelessWidget {
               if (info.type.isError())
                 ClickIcon(
                   iconSize: 16,
+                  size: 24,
                   icon: Icons.file_copy_rounded,
                   onPressed: () async {
                     String content = '';
@@ -59,12 +62,14 @@ class NotificationContent extends StatelessWidget {
                     await Clipboard.setData(ClipboardData(text: content));
                     cancelFunc.call();
                   },
-                  color: Colors.grey,
+                  color: Colors.grey[400],
                 ),
               ClickIcon(
                 icon: Icons.close,
+                iconSize: 18,
+                size: 24,
                 onPressed: cancelFunc.call,
-                color: Colors.grey,
+                color: Colors.grey[400],
               ),
             ],
           ),

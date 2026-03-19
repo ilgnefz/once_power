@@ -28,7 +28,8 @@ class CurrentMode extends _$CurrentMode {
 @riverpod
 class SelectedReplaceType extends _$SelectedReplaceType {
   @override
-  List<ReplaceType> build() => [ReplaceType.match];
+  List<ReplaceType> build() =>
+      StorageUtil.getReplaceTypeList(AppKeys.matchType);
   void update(ReplaceType type) {
     if (state.contains(type)) {
       if (state.length == 1) return;
@@ -42,17 +43,21 @@ class SelectedReplaceType extends _$SelectedReplaceType {
         state = [ReplaceType.match, type];
       }
     }
+    StorageUtil.setReplaceTypeList(AppKeys.matchType, state);
   }
 }
 
 @riverpod
 class SelectedReserveType extends _$SelectedReserveType {
   @override
-  List<ReserveType> build() => [];
-  void update(ReserveType type) => state.contains(type)
-      ? state = state.where((e) => e != type).toList()
-      : state = [...state, type];
-  void clear() => state = [];
+  List<ReserveType> build() =>
+      StorageUtil.getReserveTypeList(AppKeys.reverseType);
+  void update(ReserveType type) {
+    state.contains(type)
+        ? state = state.where((e) => e != type).toList()
+        : state = [...state, type];
+    StorageUtil.setReserveTypeList(AppKeys.reverseType, state);
+  }
 }
 
 @riverpod

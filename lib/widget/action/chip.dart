@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/chip.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/provider/setting.dart';
 
 class EasyChip extends StatelessWidget {
   const EasyChip({
@@ -25,8 +27,15 @@ class EasyChip extends StatelessWidget {
         : theme?.backgroundColor;
     TextStyle? style = selected ? theme?.selectTextStyle : theme?.textStyle;
 
-    return Material(
-      borderRadius: borderRadius,
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        bool shadow = ref.watch(themeSettingProvider.select((e) => e.shadow));
+        return Material(
+          borderRadius: borderRadius,
+          elevation: shadow ? 1 : 0,
+          child: child,
+        );
+      },
       child: Ink(
         decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
         child: InkWell(
@@ -37,6 +46,7 @@ class EasyChip extends StatelessWidget {
             height: AppNum.widgetHeight,
             padding: const EdgeInsets.symmetric(horizontal: AppNum.padding),
             alignment: Alignment.center,
+            decoration: BoxDecoration(),
             child: Text(label, style: style),
           ),
         ),

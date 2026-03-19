@@ -19,61 +19,29 @@ class TypeList extends StatefulWidget {
 
 class _TypeListState extends State<TypeList> {
   List<RuleType> list = [
-    RuleType(
-      name: FileType.image.label,
-      key: AppKeys.imageFolder,
-      listKey: AppKeys.imageFolderList,
-    ),
-    RuleType(
-      name: FileType.video.label,
-      key: AppKeys.videoFolder,
-      listKey: AppKeys.videoFolderList,
-    ),
-    RuleType(
-      name: FileType.doc.label,
-      key: AppKeys.docFolder,
-      listKey: AppKeys.docFolderList,
-    ),
-    RuleType(
-      name: FileType.audio.label,
-      key: AppKeys.audioFolder,
-      listKey: AppKeys.audioFolderList,
-    ),
-    RuleType(
-      name: FileType.folder.label,
-      key: AppKeys.folderFolder,
-      listKey: AppKeys.folderFolderList,
-    ),
-    RuleType(
-      name: FileType.archive.label,
-      key: AppKeys.zipFolder,
-      listKey: AppKeys.zipFolderList,
-    ),
-    RuleType(
-      name: FileType.other.label,
-      key: AppKeys.otherFolder,
-      listKey: AppKeys.otherFolderList,
-    ),
+    RuleType(FileType.image.label, AppKeys.imageFolder),
+    RuleType(FileType.video.label, AppKeys.videoFolder),
+    RuleType(FileType.doc.label, AppKeys.docFolder),
+    RuleType(FileType.audio.label, AppKeys.audioFolder),
+    RuleType(FileType.folder.label, AppKeys.folderFolder),
+    RuleType(FileType.archive.label, AppKeys.archiveFolder),
+    RuleType(FileType.other.label, AppKeys.otherFolder),
   ];
 
   List<String> origin = [];
-  List<List<String>> originList = [];
 
   @override
   void initState() {
     super.initState();
     for (RuleType type in list) {
       String cache = StorageUtil.getString(type.key) ?? '';
-      List<String> caches = StorageUtil.getStringList(type.listKey);
       origin.add(cache);
-      originList.add(caches);
     }
   }
 
   void cancel() {
     for (var i = 0; i < list.length; i++) {
       StorageUtil.setString(list[i].key, origin[i]);
-      StorageUtil.setStringList(list[i].listKey, originList[i]);
     }
   }
 
@@ -84,7 +52,7 @@ class _TypeListState extends State<TypeList> {
       doc: StorageUtil.getString(AppKeys.docFolder) ?? '',
       audio: StorageUtil.getString(AppKeys.audioFolder) ?? '',
       folder: StorageUtil.getString(AppKeys.folderFolder) ?? '',
-      archive: StorageUtil.getString(AppKeys.zipFolder) ?? '',
+      archive: StorageUtil.getString(AppKeys.archiveFolder) ?? '',
       other: StorageUtil.getString(AppKeys.otherFolder) ?? '',
     );
     await StorageUtil.setRuleTypeValue(AppKeys.ruleTypeValue, ruleTypeValue);
@@ -106,7 +74,6 @@ class _TypeListState extends State<TypeList> {
               Expanded(
                 child: FolderInput(
                   cacheKey: type.key,
-                  cacheListKey: type.listKey,
                   controller: TextEditingController(
                     text: StorageUtil.getString(type.key),
                   ),

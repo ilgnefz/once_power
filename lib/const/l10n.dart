@@ -116,7 +116,6 @@ class AppL10n {
   static const String advanceLocationLink = 'advance.locationLink';
 
   /* ---------- organize ---------- */
-
   static const String organizeDate = 'organize.date';
   static const String organizeTop = 'organize.top';
   static const String organizeTopDesc = 'organize.topDesc';
@@ -222,12 +221,6 @@ class AppL10n {
 
   /* ---------- bottom ---------- */
   static const String bottomSave = 'bottom.save';
-  static const String bottomSaveTip = 'bottom.saveTip';
-  static const String bottomSaveSize = 'bottom.saveSize';
-  static const String bottomSavePosition = 'bottom.savePosition';
-  static const String bottomAutoRename = 'bottom.autoRename';
-  static const String bottomCancelRename = 'bottom.cancelRename';
-  static const String bottomAutoRenameFormat = 'bottom.autoRenameFormat';
   static const String bottomRegedit = 'bottom.regedit';
   static const String bottomRegeditTip1 = 'bottom.regeditTip1';
   static const String bottomRegeditTip2 = 'bottom.regeditTip2';
@@ -236,22 +229,6 @@ class AppL10n {
   static const String bottomView = 'bottom.view';
   static const String bottomCSV = 'bottom.csv';
   static const String bottomDate = 'bottom.date';
-  static const String bottomHotKey = 'bottom.hotKey.label';
-  static const String bottomHotKeyAll = 'bottom.hotKey.all';
-  static const String bottomHotKeyCancel = 'bottom.hotKey.cancel';
-  static const String bottomHotKeyDelete = 'bottom.hotKey.delete';
-  static const String bottomHotKeyToggle = 'bottom.hotKey.toggle';
-  static const String bottomHotKeySuspense = 'bottom.hotKey.suspense';
-  static const String bottomHotKeyFront = 'bottom.hotKey.front';
-  static const String bottomHotKeyBehind = 'bottom.hotKey.behind';
-  static const String bottomThemeTip = 'bottom.themeTip';
-  static const String bottomTheme = 'bottom.theme';
-  static const String bottomInput = 'bottom.input';
-  static const String bottomBtn = 'bottom.btn';
-  static const String bottomDivider = 'bottom.divider';
-  static const String bottomMask = 'bottom.mask';
-  static const String bottomBackground = 'bottom.background';
-
   static const String bottomUndo = 'bottom.undo';
   static const String bottomTask = 'bottom.task';
   static const String bottomTime = 'bottom.time';
@@ -278,7 +255,6 @@ class AppL10n {
   static const String dialogSetting = 'dialog.setting';
 
   /* ---------- log ---------- */
-
   static const String logRename = 'log.rename';
   static const String logDelete = 'log.delete';
   static const String logOrganize = 'log.organize';
@@ -473,4 +449,29 @@ class AppL10n {
   static const String trayCancel = 'tray.cancel';
   static const String trayShow = 'tray.show';
   static const String trayExit = 'tray.exit';
+
+  /* ---------- setting ---------- */
+  static const String settingSaveSize = 'setting.saveSize';
+  static const String settingSavePosition = 'setting.savePosition';
+  static const String settingAutoRename = 'setting.autoRename';
+  static const String settingCancelRename = 'setting.cancelRename';
+  static const String settingAutoRenameFormat = 'setting.autoRenameFormat';
+  static const String settingWindow = 'setting.window';
+  static const String settingRename = 'setting.rename';
+  static const String settingTheme = 'setting.theme';
+  static const String settingDivider = 'setting.divider';
+  static const String settingShadow = 'setting.shadow';
+  static const String settingMask = 'setting.mask';
+  static const String settingSigma = 'setting.sigma';
+  static const String settingBackground = 'setting.background';
+  static const String settingUpload = 'setting.upload';
+  static const String settingUploading = 'setting.uploading';
+  static const String settingHotKey = 'setting.hotKey.label';
+  static const String settingHotKeyAll = 'setting.hotKey.all';
+  static const String settingHotKeyCancel = 'setting.hotKey.cancel';
+  static const String settingHotKeyDelete = 'setting.hotKey.delete';
+  static const String settingHotKeyToggle = 'setting.hotKey.toggle';
+  static const String settingHotKeySuspense = 'setting.hotKey.suspense';
+  static const String settingHotKeyFront = 'setting.hotKey.front';
+  static const String settingHotKeyBehind = 'setting.hotKey.behind';
 }

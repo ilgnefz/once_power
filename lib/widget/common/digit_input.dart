@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:once_power/config/theme/icon_box.dart';
+import 'package:once_power/config/theme/theme.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/base/input.dart';
 
@@ -57,6 +58,7 @@ class _DigitInputState extends State<DigitInput> {
     if (widget.max != null && currentValue > widget.max!) {
       currentValue = widget.max!;
     }
+    if (currentValue < widget.min) currentValue = widget.min;
     return currentValue;
   }
 
@@ -71,7 +73,6 @@ class _DigitInputState extends State<DigitInput> {
   void decrement() {
     int currentValue = extractNum(controller.text);
     if (currentValue > widget.min) {
-      // final unit = controller.text.replaceAll(RegExp(r'\d+'), '').trim();
       controller.text = '${currentValue - 1}$unit';
       setState(() {});
       widget.onChanged(currentValue - 1);
@@ -131,6 +132,7 @@ class DigitInputButton extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: theme?.iconColor,
+              fontFamily: defaultFont,
             ),
           ),
         ),

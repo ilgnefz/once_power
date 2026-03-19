@@ -28,14 +28,11 @@ class FilterButton extends ConsumerWidget {
       height: AppNum.widgetHeight,
       onTap: onPressed,
       closeOnTap: closeOnTap,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Container(
-          height: AppNum.widgetHeight,
-          padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
-          alignment: Alignment.centerLeft,
-          child: BaseText(title, color: color),
-        ),
+      child: Container(
+        height: AppNum.widgetHeight,
+        padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+        alignment: Alignment.centerLeft,
+        child: BaseText(title, color: color),
       ),
     );
   }
@@ -52,17 +49,14 @@ class FilterButton extends ConsumerWidget {
         key: UniqueKey(),
         height: AppNum.widgetHeight,
         onTap: () => checkedPressed(ref, e.type),
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: SizedBox(
-            height: AppNum.widgetHeight,
-            width: double.infinity,
-            child: StatefulBuilder(
-              builder: (context, setState) => EasyCheckbox(
-                checked: isCheckedClassify(ref, e.type),
-                label: '${e.type.label} (${e.count})',
-                onChanged: (_) => setState(() => checkedPressed(ref, e.type)),
-              ),
+        child: SizedBox(
+          height: AppNum.widgetHeight,
+          width: double.infinity,
+          child: StatefulBuilder(
+            builder: (context, setState) => EasyCheckbox(
+              checked: isCheckedClassify(ref, e.type),
+              label: '${e.type.label} (${e.count})',
+              onChanged: (_) => setState(() => checkedPressed(ref, e.type)),
             ),
           ),
         ),

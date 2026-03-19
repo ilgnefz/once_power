@@ -13,7 +13,6 @@ import 'package:once_power/model/version.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/pack.dart';
 import 'package:once_power/widget/bottom/text.dart';
-import 'package:once_power/widget/common/click_text.dart';
 
 import 'download.dart';
 

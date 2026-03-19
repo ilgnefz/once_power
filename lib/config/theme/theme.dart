@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:once_power/const/color.dart';
+import 'package:once_power/const/num.dart';
 
 import 'set.dart';
 
@@ -19,6 +20,10 @@ class ThemeConfig {
     elevatedButtonTheme: AppElevatedButtonTheme.light(),
     iconTheme: AppIconTheme.light(),
     inputDecorationTheme: AppInputTheme.light(),
+    sliderTheme: SliderThemeData(
+      overlayShape: .noOverlay,
+      padding: .symmetric(horizontal: AppNum.spaceLarge),
+    ),
     tabBarTheme: AppTabBarTheme.light(),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(mouseCursor: .all(SystemMouseCursors.click)),
@@ -27,7 +32,7 @@ class ThemeConfig {
     extensions: [
       AppBottomTextTheme.light(),
       AppCustomButtonTheme.light(),
-      AppContextMenuTheme.light(),
+      AppOverlayWidgetTheme.light(),
       AppDirectiveTheme.light(),
       AppDropdownTheme.light(),
       AppEasyChipTheme.light(),
@@ -48,6 +53,10 @@ class ThemeConfig {
     elevatedButtonTheme: AppElevatedButtonTheme.dark(),
     iconTheme: AppIconTheme.dark(),
     inputDecorationTheme: AppInputTheme.dark(),
+    sliderTheme: SliderThemeData(
+      overlayShape: .noOverlay,
+      padding: .symmetric(horizontal: AppNum.spaceLarge),
+    ),
     tabBarTheme: AppTabBarTheme.dark(),
     textTheme: AppTextTheme.dark(),
     textButtonTheme: TextButtonThemeData(
@@ -56,7 +65,7 @@ class ThemeConfig {
     extensions: [
       AppBottomTextTheme.dark(),
       AppCustomButtonTheme.dark(),
-      AppContextMenuTheme.dark(),
+      AppOverlayWidgetTheme.dark(),
       AppDirectiveTheme.dark(),
       AppDropdownTheme.dark(),
       AppEasyChipTheme.dark(),

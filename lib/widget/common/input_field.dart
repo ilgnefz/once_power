@@ -100,7 +100,7 @@ class _InputFieldState extends State<InputField> {
               onPressed: clear,
               icon: Icons.close_rounded,
               iconSize: 16,
-              size: 24,
+              size: 20,
             )
           : null,
       leading: widget.leading,

@@ -48,8 +48,7 @@ class ErrorImage extends StatelessWidget {
         ],
         Text(
           '${tr(AppL10n.contentError)} (((;꒪ꈊ꒪;)))',
-          style:
-              isPreview // TODO: 修改样式代码
+          style: isPreview
               ? TextStyle(
                   fontSize: 14,
                   color: Colors.white,

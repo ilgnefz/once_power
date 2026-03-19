@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:once_power/enum/match.dart';
 import 'package:once_power/model/advance.dart';
+import 'package:once_power/model/setting.dart';
 import 'package:once_power/model/type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,7 +13,11 @@ class StorageUtil {
 
   StorageUtil._();
 
-  static Future init() async {
+  static Future<bool> remove(String key) => _prefs.remove(key);
+
+  static Future<bool> clear() async => await _prefs.clear();
+
+  static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
@@ -69,43 +72,6 @@ class StorageUtil {
     return null; // 无存储值时返回空 Map
   }
 
-  static Future<bool> remove(String key) => _prefs.remove(key);
-
-  // 存储Locale
-  static Future<void> setLocale(String key, Locale value) async {
-    String localString = '${value.languageCode}_${value.countryCode}';
-    await _prefs.setString(key, localString);
-  }
-
-  // 获取Locale
-  static Locale? getLocale(String key) {
-    Locale? locale;
-    String? value = _prefs.getString(key);
-    if (value != null) {
-      List<String> localeList = value.split('_');
-      locale = Locale(localeList[0], localeList[1]);
-    }
-    return locale;
-  }
-
-  static Future<bool> setUint8List(String key, Uint8List value) {
-    String base64String = base64Encode(value);
-    return _prefs.setString(key, base64String);
-  }
-
-  static Uint8List? getUint8List(String key) {
-    String? base64String = _prefs.getString(key);
-    if (base64String != null) {
-      try {
-        return base64Decode(base64String);
-      } catch (e) {
-        // 解码失败时返回null
-        return null;
-      }
-    }
-    return null;
-  }
-
   // 存储高级规则
   static Future<bool> setAdvanceList(String key, List<AdvanceMenuModel> value) {
     List<String> list = value.map((e) => jsonEncode(e.toJson())).toList();
@@ -152,5 +118,76 @@ class StorageUtil {
       return RuleTypeValue.fromJson(jsonDecode(value));
     }
     return null;
+  }
+
+  static Future<bool> setCustomTheme(String key, CustomTheme value) {
+    return _prefs.setString(key, jsonEncode(value.toJson()));
+  }
+
+  static CustomTheme getCustomTheme(String key) {
+    String? value = _prefs.getString(key);
+    if (value != null) return CustomTheme.fromJson(jsonDecode(value));
+    return CustomTheme();
+  }
+
+  // 存储Locale
+  // static Future<void> setLocale(String key, Locale value) async {
+  //   String localString = '${value.languageCode}_${value.countryCode}';
+  //   await _prefs.setString(key, localString);
+  // }
+  //
+  // // 获取Locale
+  // static Locale? getLocale(String key) {
+  //   Locale? locale;
+  //   String? value = _prefs.getString(key);
+  //   if (value != null) {
+  //     List<String> localeList = value.split('_');
+  //     locale = Locale(localeList[0], localeList[1]);
+  //   }
+  //   return locale;
+  // }
+
+  // static Future<bool> setUint8List(String key, Uint8List value) {
+  //   String base64String = base64Encode(value);
+  //   return _prefs.setString(key, base64String);
+  // }
+
+  // static Uint8List? getUint8List(String key) {
+  //   String? base64String = _prefs.getString(key);
+  //   if (base64String != null) {
+  //     try {
+  //       return base64Decode(base64String);
+  //     } catch (e) {
+  //       // 解码失败时返回null
+  //       return null;
+  //     }
+  //   }
+  //   return null;
+  // }
+
+  // 存储 ReplaceType 数组
+  static Future<bool> setReplaceTypeList(String key, List<ReplaceType> value) {
+    List<String> list = value.map((e) => e.index.toString()).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取 ReplaceType 数组
+  static List<ReplaceType> getReplaceTypeList(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    if (list == null) return [ReplaceType.match];
+    return list.map((e) => ReplaceType.values[int.parse(e)]).toList();
+  }
+
+  // 存储 ReserveType 数组
+  static Future<bool> setReserveTypeList(String key, List<ReserveType> value) {
+    List<String> list = value.map((e) => e.index.toString()).toList();
+    return _prefs.setStringList(key, list);
+  }
+
+  // 获取 ReserveType 数组
+  static List<ReserveType> getReserveTypeList(String key) {
+    List<String>? list = _prefs.getStringList(key);
+    if (list == null) return [];
+    return list.map((e) => ReserveType.values[int.parse(e)]).toList();
   }
 }

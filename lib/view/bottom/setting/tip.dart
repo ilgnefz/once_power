@@ -9,39 +9,59 @@ class TipPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = tr(AppL10n.bottomHotKey);
-    final String all = tr(AppL10n.bottomHotKeyAll);
-    final String cancel = tr(AppL10n.bottomHotKeyCancel);
-    final String delete = tr(AppL10n.bottomHotKeyDelete);
-    final String toggle = tr(AppL10n.bottomHotKeyToggle);
-    final String suspense = tr(AppL10n.bottomHotKeySuspense);
-    final String front = tr(AppL10n.bottomHotKeyFront);
-    final String behind = tr(AppL10n.bottomHotKeyBehind);
+    final String all = tr(AppL10n.settingHotKeyAll);
+    final String cancel = tr(AppL10n.settingHotKeyCancel);
+    final String delete = tr(AppL10n.settingHotKeyDelete);
+    final String toggle = tr(AppL10n.settingHotKeyToggle);
+    final String suspense = tr(AppL10n.settingHotKeySuspense);
+    final String front = tr(AppL10n.settingHotKeyFront);
+    final String behind = tr(AppL10n.settingHotKeyBehind);
 
-    return Padding(
-      padding: .only(right: AppNum.spaceMedium),
-      child: Row(
-        spacing: AppNum.spaceMedium,
-        crossAxisAlignment: .start,
-        children: [
-          BaseText('$title:'),
-          Expanded(
-            child: Wrap(
-              runSpacing: AppNum.spaceMedium,
-              alignment: .spaceBetween,
-              children: [
-                BaseText('Ctrl+A  $all'),
-                BaseText('Ctrl+D  $cancel'),
-                BaseText('Delete  $delete'),
-                BaseText('Ctrl+S  $toggle'),
-                BaseText('Ctrl+X  $suspense'),
-                BaseText('Ctrl+C  $front'),
-                BaseText('Ctrl+V  $behind'),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return Table(
+      columnWidths: const {
+        0: FlexColumnWidth(1),
+        1: FlexColumnWidth(1),
+        2: FlexColumnWidth(1),
+      },
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      children: [
+        TableRow(
+          children: [
+            TableBaseText('Ctrl+A  $all'),
+            TableBaseText('Ctrl+D  $cancel'),
+            TableBaseText('Delete  $delete'),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableBaseText('Ctrl+S  $toggle'),
+            TableBaseText('Ctrl+X  $suspense'),
+            TableBaseText('Ctrl+C  $front'),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableBaseText('Ctrl+V  $behind'),
+            const SizedBox(),
+            const SizedBox(),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class TableBaseText extends StatelessWidget {
+  const TableBaseText(this.label, {super.key});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: AppNum.widgetHeight,
+      alignment: Alignment.centerLeft,
+      child: BaseText(label),
     );
   }
 }

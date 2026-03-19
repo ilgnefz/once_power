@@ -40,7 +40,7 @@ final class DateDigitProvider extends $NotifierProvider<DateDigit, int> {
   }
 }
 
-String _$dateDigitHash() => r'7a5555eb94cbffd94d5e5e7aa7479ef853d220bf';
+String _$dateDigitHash() => r'c0f7830ef6eb87077fb27725aaa6892c8ff08271';
 
 abstract class _$DateDigit extends $Notifier<int> {
   int build();
@@ -60,27 +60,27 @@ abstract class _$DateDigit extends $Notifier<int> {
   }
 }
 
-@ProviderFor(PrefixDigit)
-final prefixDigitProvider = PrefixDigitProvider._();
+@ProviderFor(PrefixWidth)
+final prefixWidthProvider = PrefixWidthProvider._();
 
-final class PrefixDigitProvider extends $NotifierProvider<PrefixDigit, int> {
-  PrefixDigitProvider._()
+final class PrefixWidthProvider extends $NotifierProvider<PrefixWidth, int> {
+  PrefixWidthProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'prefixDigitProvider',
+        name: r'prefixWidthProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$prefixDigitHash();
+  String debugGetCreateSourceHash() => _$prefixWidthHash();
 
   @$internal
   @override
-  PrefixDigit create() => PrefixDigit();
+  PrefixWidth create() => PrefixWidth();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(int value) {
@@ -91,9 +91,9 @@ final class PrefixDigitProvider extends $NotifierProvider<PrefixDigit, int> {
   }
 }
 
-String _$prefixDigitHash() => r'9dbed8cc1da9ac077933e6f9a11abba35a19a4a9';
+String _$prefixWidthHash() => r'e5e3941f040616fe957a9ced8b36e49a041e823a';
 
-abstract class _$PrefixDigit extends $Notifier<int> {
+abstract class _$PrefixWidth extends $Notifier<int> {
   int build();
   @$mustCallSuper
   @override
@@ -142,7 +142,7 @@ final class PrefixStartProvider extends $NotifierProvider<PrefixStart, int> {
   }
 }
 
-String _$prefixStartHash() => r'523d5c0046946f53124ad480e50925ad4282a80d';
+String _$prefixStartHash() => r'129dec404273c1f3d98a9741c026197bef6d7468';
 
 abstract class _$PrefixStart extends $Notifier<int> {
   int build();
@@ -162,27 +162,27 @@ abstract class _$PrefixStart extends $Notifier<int> {
   }
 }
 
-@ProviderFor(SuffixDigit)
-final suffixDigitProvider = SuffixDigitProvider._();
+@ProviderFor(SuffixWidth)
+final suffixWidthProvider = SuffixWidthProvider._();
 
-final class SuffixDigitProvider extends $NotifierProvider<SuffixDigit, int> {
-  SuffixDigitProvider._()
+final class SuffixWidthProvider extends $NotifierProvider<SuffixWidth, int> {
+  SuffixWidthProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'suffixDigitProvider',
+        name: r'suffixWidthProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$suffixDigitHash();
+  String debugGetCreateSourceHash() => _$suffixWidthHash();
 
   @$internal
   @override
-  SuffixDigit create() => SuffixDigit();
+  SuffixWidth create() => SuffixWidth();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(int value) {
@@ -193,9 +193,9 @@ final class SuffixDigitProvider extends $NotifierProvider<SuffixDigit, int> {
   }
 }
 
-String _$suffixDigitHash() => r'dd8d62c9fded7ae5dbadc20750a3e3f58868c4ca';
+String _$suffixWidthHash() => r'bc21faa65e2df7e3cbbbdd48151121a5c32de24a';
 
-abstract class _$SuffixDigit extends $Notifier<int> {
+abstract class _$SuffixWidth extends $Notifier<int> {
   int build();
   @$mustCallSuper
   @override
@@ -244,7 +244,7 @@ final class SuffixStartProvider extends $NotifierProvider<SuffixStart, int> {
   }
 }
 
-String _$suffixStartHash() => r'e0cce490583b1cee06453189c16d2ea129c22ae7';
+String _$suffixStartHash() => r'781efdef8c92755f70916ede421b9217075ffd93';
 
 abstract class _$SuffixStart extends $Notifier<int> {
   int build();
@@ -400,7 +400,7 @@ final class CurrentPresetNameProvider
   }
 }
 
-String _$currentPresetNameHash() => r'0369b13ae8c46441a96867ad5c9a06a7e635e87e';
+String _$currentPresetNameHash() => r'dae317c27ec062a6cf718f2605627396b3a2ac30';
 
 abstract class _$CurrentPresetName extends $Notifier<String> {
   String build();

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/context_menu.dart';
-import 'package:once_power/config/theme/dropdown.dart';
 import 'package:once_power/const/input.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
@@ -185,7 +184,7 @@ Future<void> showRightMenu(
       padding: .zero,
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: theme.extension<ContextMenuTheme>()?.backgroundColor,
+        color: theme.extension<OverlayWidgetTheme>()?.backgroundColor,
         borderRadius: .circular(AppNum.radius),
         boxShadow: [
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),
@@ -278,7 +277,7 @@ Future<void> showDirectiveRightMenu(
     contextMenu: ContextMenu(
       maxWidth: 120,
       boxDecoration: BoxDecoration(
-        color: theme.extension<ContextMenuTheme>()?.backgroundColor,
+        color: theme.extension<OverlayWidgetTheme>()?.backgroundColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(blurRadius: 2, color: Colors.black.withValues(alpha: .2)),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/icon_box.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/provider/setting.dart';
 import 'package:once_power/widget/base/icon.dart';
 import 'package:once_power/widget/common/tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
@@ -33,9 +35,16 @@ class IconBox extends StatelessWidget {
     return EasyTooltip(
       tip: tip,
       placement: Placement.right,
-      child: Material(
-        color: background,
-        borderRadius: borderRadius,
+      child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          bool shadow = ref.watch(themeSettingProvider.select((e) => e.shadow));
+          return Material(
+            color: background,
+            borderRadius: borderRadius,
+            elevation: shadow ? 1 : 0,
+            child: child,
+          );
+        },
         child: InkWell(
           mouseCursor: SystemMouseCursors.click,
           borderRadius: borderRadius,

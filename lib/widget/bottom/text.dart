@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:once_power/config/theme/bottom_text.dart';
-import 'package:once_power/config/theme/theme.dart';
 
 class BottomTextButton extends StatefulWidget {
   const BottomTextButton(this.label, {super.key, required this.onPressed});

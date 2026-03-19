@@ -122,14 +122,6 @@ class AppCustomButtonTheme {
   );
 }
 
-class AppContextMenuTheme {
-  static ContextMenuTheme light() =>
-      ContextMenuTheme(backgroundColor: AppColor.contextMenu);
-
-  static ContextMenuTheme dark() =>
-      ContextMenuTheme(backgroundColor: AppColor.contextMenuDark);
-}
-
 class AppDirectiveTheme {
   static DirectiveTheme light() => DirectiveTheme(
     defaultColor: WidgetStateColor.resolveWith((states) {
@@ -194,6 +186,14 @@ class AppEasyChipTheme {
     backgroundColor: AppColor.easyChipDark,
     selectBackgroundColor: AppColor.primaryDark,
   );
+}
+
+class AppOverlayWidgetTheme {
+  static OverlayWidgetTheme light() =>
+      OverlayWidgetTheme(backgroundColor: AppColor.overlayWidget);
+
+  static OverlayWidgetTheme dark() =>
+      OverlayWidgetTheme(backgroundColor: AppColor.overlayWidgetDark);
 }
 
 class AppTableTheme {

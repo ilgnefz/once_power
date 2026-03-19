@@ -10,41 +10,56 @@ part 'value.g.dart';
 @riverpod
 class DateDigit extends _$DateDigit {
   @override
-  int build() => 8;
+  int build() => StorageUtil.getInt(AppKeys.dateLength) ?? 8;
 
-  void update(int value) => state = value;
+  void update(int value) {
+    state = value;
+    StorageUtil.setInt(AppKeys.dateLength, value);
+  }
 }
 
 @riverpod
-class PrefixDigit extends _$PrefixDigit {
+class PrefixWidth extends _$PrefixWidth {
   @override
-  int build() => 0;
+  int build() => StorageUtil.getInt(AppKeys.prefixIndexWidth) ?? 0;
 
-  void update(int value) => state = value;
+  void update(int value) {
+    state = value;
+    StorageUtil.setInt(AppKeys.prefixIndexWidth, value);
+  }
 }
 
 @riverpod
 class PrefixStart extends _$PrefixStart {
   @override
-  int build() => 0;
+  int build() => StorageUtil.getInt(AppKeys.prefixIndexStart) ?? 0;
 
-  void update(int value) => state = value;
+  void update(int value) {
+    state = value;
+    StorageUtil.setInt(AppKeys.prefixIndexStart, value);
+  }
 }
 
 @riverpod
-class SuffixDigit extends _$SuffixDigit {
+class SuffixWidth extends _$SuffixWidth {
   @override
-  int build() => 0;
+  int build() => StorageUtil.getInt(AppKeys.suffixIndexWidth) ?? 0;
 
-  void update(int value) => state = value;
+  void update(int value) {
+    state = value;
+    StorageUtil.setInt(AppKeys.suffixIndexWidth, value);
+  }
 }
 
 @riverpod
 class SuffixStart extends _$SuffixStart {
   @override
-  int build() => 0;
+  int build() => StorageUtil.getInt(AppKeys.suffixIndexStart) ?? 0;
 
-  void update(int value) => state = value;
+  void update(int value) {
+    state = value;
+    StorageUtil.setInt(AppKeys.suffixIndexStart, value);
+  }
 }
 
 @riverpod
@@ -64,10 +79,10 @@ class FileDateProperty extends _$FileDateProperty {
 @riverpod
 class CurrentPresetName extends _$CurrentPresetName {
   @override
-  String build() => StorageUtil.getString(AppKeys.currentPresetName) ?? '';
+  String build() => StorageUtil.getString(AppKeys.presetName) ?? '';
   Future<void> update(String value) async {
     state = value;
-    await StorageUtil.setString(AppKeys.currentPresetName, value);
+    await StorageUtil.setString(AppKeys.presetName, value);
   }
 }
 

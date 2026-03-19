@@ -43,7 +43,7 @@ class ContentListView extends ConsumerWidget {
         FileInfo file = files[index];
         final ThemeData theme = Theme.of(context);
         String title = file.name, subtitle = file.newName;
-        String ext = file.extension, newExt = file.newExtension;
+        String extension = file.extension, newExt = file.newExtension;
         Color? subColor = title == subtitle ? Colors.grey : theme.primaryColor;
 
         if (ref.watch(currentModeProvider).isOrganize) {
@@ -75,10 +75,13 @@ class ContentListView extends ConsumerWidget {
                 maxLines: 2,
                 textAlign: .center,
                 overflow: TextOverflow.ellipsis,
-                color: ext == newExt ? Colors.grey : theme.primaryColor,
+                color: extension == newExt ? Colors.grey : theme.primaryColor,
               ),
               icon: Icons.delete_outline_rounded,
-              onDelete: () => provider.remove(file),
+              onDelete: () {
+                provider.remove(file);
+                updateName(ref);
+              },
             ),
           ),
         );

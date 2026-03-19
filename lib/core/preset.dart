@@ -36,12 +36,8 @@ Future<void> importPreset(WidgetRef ref) async {
     // 调用工具类解密方法
     List<AdvancePreset> value = PresetEncryptor.decryptPresets(fileContent);
 
-    // TODO: AI生成，需要自行修改
     // 检测解密结果是否为空
-    if (value.isEmpty) {
-      showPresetImportNotification(err: tr(AppL10n.errImportError2));
-      return;
-    }
+    if (value.isEmpty) return;
 
     // 过滤和list中相同的值
     List<AdvancePreset> newPresets = [];

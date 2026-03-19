@@ -65,7 +65,6 @@ class PathItem extends ConsumerWidget {
                   iconSize: 16,
                   onPressed: () async {
                     await Clipboard.setData(ClipboardData(text: folder));
-                    // TODO: 错误复制通知
                     showCopyNotification(folder);
                   },
                 ),

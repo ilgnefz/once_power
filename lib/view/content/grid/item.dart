@@ -3,9 +3,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/dialog.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
-import 'package:once_power/util/info.dart';
 import 'package:once_power/view/content/grid/image.dart';
-import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/context/sort_select_item.dart';
 
 import 'avif.dart';
@@ -21,7 +19,7 @@ class ContentGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String newName = getFullName(file.newName, file.newExtension);
+    ThemeData theme = Theme.of(context);
     return SortSelectItem(
       index: index,
       file: file,
@@ -49,16 +47,42 @@ class ContentGridItem extends StatelessWidget {
               right: AppNum.spaceSmall,
               bottom: AppNum.spaceSmall,
             ),
-            child: BaseText(
-              newName,
-              fontSize: 13,
+            child: RichText(
+              text: TextSpan(
+                text: file.newName,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontSize: 13,
+                  color: file.newName == file.name
+                      ? Colors.grey
+                      : theme.primaryColor,
+                ),
+                children: [
+                  TextSpan(
+                    text: file.newExtension.isEmpty
+                        ? ''
+                        : '.${file.newExtension}',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontSize: 13,
+                      color: file.newExtension == file.extension
+                          ? Colors.grey
+                          : theme.primaryColor,
+                    ),
+                  ),
+                ],
+              ),
               maxLines: 2,
-              color: newName == file.getFullOldName()
-                  ? Colors.grey
-                  : Theme.of(context).primaryColor,
-              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
             ),
+            // child: BaseText(
+            //   newName,
+            //   fontSize: 13,
+            //   maxLines: 2,
+            //   color: newName == file.getFullOldName()
+            //       ? Colors.grey
+            //       : Theme.of(context).primaryColor,
+            //   textAlign: TextAlign.center,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
           ),
         ],
       ),

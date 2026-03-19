@@ -65,12 +65,11 @@ class RuleTypeValue {
 class RuleType {
   final String name;
   final String key;
-  final String listKey;
 
-  RuleType({required this.name, required this.key, required this.listKey});
+  RuleType(this.name, this.key);
 
   @override
   String toString() {
-    return 'RuleTypeValue{name: $name, key: $key, listKey: $listKey}';
+    return 'RuleTypeValue{name: $name, key: $key}';
   }
 }

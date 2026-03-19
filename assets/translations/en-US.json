@@ -132,7 +132,7 @@
     "folder": "Folder"
   },
   "csv": {
-    "title": "Selected original column:",
+    "title": "Selected original column: ",
     "delete": "Delete Ext",
     "match": "Match Ext",
     "exit": "Exit"
@@ -226,13 +226,7 @@
     "cancel": "Deselect"
   },
   "bottom": {
-    "save": "Other Config",
-    "saveTip": "(Long press to configure)",
-    "saveSize": "Save Window Size",
-    "savePosition": "Save Window Position",
-    "autoRename": "Auto Rename on Duplicate",
-    "cancelRename": "Cancel Rename on Empty",
-    "autoRenameFormat": "Auto Rename Format",
+    "save": "Save Config",
     "regedit": "Enable right-click menu (single file/folder when app not running; use 'Send to (Open Explorer, enter \"sendto\" in the address bar, and press Enter)' for multiple)",
     "regeditTip1": "Add All",
     "regeditTip2": "Add",
@@ -241,23 +235,6 @@
     "view": "View Mode",
     "csv": "Upload CSV/TXT with old/new names (comma-separated) or software generated oplog file",
     "date": "Modify File Date",
-    "hotKey": {
-      "label": "Hotkeys",
-      "all": "Select all",
-      "cancel": "Deselect all",
-      "delete": "Delete selected",
-      "toggle": "Toggle selection",
-      "suspense": "Stash files",
-      "front": "Take to front",
-      "behind": "Take to behind"
-    },
-    "themeTip": "(Long press to set background image)",
-    "theme": "Custom theme",
-    "input": "Translucent input",
-    "btn": "Translucent btn",
-    "divider": "Transparent divider",
-    "mask": "Mask opacity",
-    "background": "Select background image",
     "undo": "Undo",
     "task": "Task",
     "time": "Time",
@@ -426,7 +403,7 @@
     "csv2": "Invalid CSV file",
     "log": "Invalid log file",
     "modifyDate": "Date modify failed",
-    "modifyDateInfo": "Failed to modify dates for:",
+    "modifyDateInfo": "Failed to modify dates for: ",
     "noExist": "File not exists",
     "noOpen": "Cannot open {file}",
     "modifyDateFail": "Failed to modify {file} date",
@@ -451,7 +428,7 @@
     "delete": "Delete failed",
     "deleteInfo": "Failed to delete selected files",
     "organize": "Organize failed",
-    "organizeErrorInfo": "Failed to move files:",
+    "organizeErrorInfo": "Failed to move files: ",
     "targetFolder": "Target folder empty!",
     "groupFolder": "Group folder empty!",
     "typeFolder": "Type folder empty!",
@@ -485,7 +462,7 @@
     "importNum": "Imported {count} presets",
     "export": "Preset exported",
     "exportNum": "Exported {count} presets",
-    "deleteFile": "【{file}】deleted",
+    "deleteFile": "{file} deleted",
     "rename": "Renamed",
     "renameNum": "All {count} selected renamed",
     "undo": "Undone",
@@ -510,5 +487,32 @@
     "cancel": "Cancel Operation",
     "show": "Show Window",
     "exit": "Exit App"
+  },
+  "setting": {
+    "saveSize": "Save Window Size",
+    "savePosition": "Save Window Position",
+    "autoRename": "Auto Rename on Duplicate",
+    "cancelRename": "Cancel Rename on Empty",
+    "autoRenameFormat": "Auto Rename Format",
+    "window": "Window info",
+    "rename": "Rename rule",
+    "theme": "Custom theme",
+    "divider": "Transparent divider",
+    "shadow": "Enable shadows",
+    "mask": "Mask opacity",
+    "sigma": "Sigma value",
+    "background": "No background image has been set",
+    "upload": "Select image",
+    "uploading": "Uploading...",
+    "hotKey": {
+      "label": "Hotkeys",
+      "all": "Select all",
+      "cancel": "Deselect all",
+      "delete": "Delete selected",
+      "toggle": "Toggle selection",
+      "suspense": "Stash files",
+      "front": "Take to front",
+      "behind": "Take to behind"
+    }
   }
 }

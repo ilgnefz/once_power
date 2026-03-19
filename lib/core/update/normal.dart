@@ -143,7 +143,7 @@ int getRealIndex(
 
 String prefixValue(WidgetRef ref, int index) {
   String prefix = inputPrefix(ref, index);
-  final int len = ref.read(prefixDigitProvider);
+  final int len = ref.read(prefixWidthProvider);
   final int start = ref.read(prefixStartProvider);
   final String serial = formatNum(start + index, len);
   final bool swap = ref.read(isSwapPrefixProvider);
@@ -162,7 +162,7 @@ String inputPrefix(WidgetRef ref, int index) {
 
 String suffixValue(WidgetRef ref, int index) {
   String suffix = inputSuffix(ref, index);
-  final int len = ref.watch(suffixDigitProvider);
+  final int len = ref.watch(suffixWidthProvider);
   final int start = ref.watch(suffixStartProvider);
   final String serial = formatNum(start + index, len);
   final bool swap = ref.watch(isSwapSuffixProvider);

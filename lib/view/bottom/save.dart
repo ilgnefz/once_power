@@ -12,11 +12,10 @@ class SaveButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return BottomClickIcon(
-      tip: '${tr(AppL10n.bottomSave)} ${tr(AppL10n.bottomSaveTip)}',
+      tip: tr(AppL10n.bottomSave),
       svg: AppIcons.save,
       selected: ref.watch(isSaveConfigProvider),
       onPressed: ref.read(isSaveConfigProvider.notifier).update,
-      // onLongPress: () => showSaveView(context),
     );
   }
 }

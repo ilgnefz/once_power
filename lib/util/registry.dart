@@ -10,8 +10,10 @@ class AppRegistry {
   static String appPath = Platform.resolvedExecutable;
   static String fileKey = r'Software\Classes\*\shell\' + appName;
   static String folderKey = r'Software\Classes\Directory\shell\' + appName;
+  static String backgroundKey =
+      r'Software\Classes\Directory\Background\shell\' + appName;
 
-  static void add() async {
+  static void addRunning() async {
     RegistryKey reg = Registry.currentUser;
 
     RegistryValue labelValue = RegistryValue.string(
@@ -31,11 +33,47 @@ class AppRegistry {
     reg.close();
   }
 
-  static void remove() async {
+  static void removeRunning() async {
     RegistryKey reg = Registry.currentUser;
 
     reg.deleteKey(fileKey, recursive: true);
     reg.deleteKey(folderKey, recursive: true);
+
+    reg.close();
+  }
+
+  static void addClosed() async {
+    RegistryKey reg = Registry.currentUser;
+
+    RegistryValue labelValue = RegistryValue.string(
+      '',
+      '${tr(AppL10n.bottomRegeditTip1)} $appName',
+    );
+    RegistryValue iconValue = RegistryValue.string('Icon', appPath);
+    String cmdKey = 'command';
+    RegistryValue cmdValue = RegistryValue.unexpandedString(
+      '',
+      '"$appPath" "%V"',
+    );
+
+    _createRegister(reg, folderKey, labelValue, iconValue, cmdKey, cmdValue);
+    _createRegister(
+      reg,
+      backgroundKey,
+      labelValue,
+      iconValue,
+      cmdKey,
+      cmdValue,
+    );
+
+    reg.close();
+  }
+
+  static void removeClosed() async {
+    RegistryKey reg = Registry.currentUser;
+
+    reg.deleteKey(folderKey, recursive: true);
+    reg.deleteKey(backgroundKey, recursive: true);
 
     reg.close();
   }

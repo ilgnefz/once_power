@@ -7,26 +7,25 @@ class AppColor {
   static const Color backgroundDark = Color(0xFF1A1A1A);
 
   //  Button
-  static const Color button = Color(0xFFFEF7FF);
+  static const Color button = Color(0xFFF3E8F4);
   static const Color buttonDark = Color(0xFF483E5D);
 
-  // ContextMenu
-
-  static const Color contextMenu = Color(0xFFFFFFFF);
-  static const Color contextMenuDark = Color(0xFF2C2C2C);
+  // OverlayWidget
+  static const Color overlayWidget = Color(0xFFFFFFFF);
+  static const Color overlayWidgetDark = Color(0xFF2C2C2C);
 
   // Divider
   static const Color divider = Color(0xFFF5F5F5);
   static const Color dividerDark = Color(0xFF2A2A2A);
 
   // Dropdown
-  static const Color dropdown = Color(0xFFF5F5F5);
+  static const Color dropdown = Color(0xFFEEEEEE);
   static const Color dropdownDark = Color(0xFF2C2C2C);
   static const Color dropdownBackground = Color(0xFFFFFFFF);
   static const Color dropdownBackgroundDark = Color(0xFF2C2C2C);
 
   // EasyChip
-  static const Color easyChip = Color(0xFFF5F5F5);
+  static const Color easyChip = Color(0xFFEEEEEE);
   static const Color easyChipDark = Color(0xFF363535);
   static const Color easyChipText = Color(0xFFA8A8A8);
   static const Color easyChipTextDark = Color(0xFF888888);
@@ -38,7 +37,7 @@ class AppColor {
   static const Color titleBarDark = Color(0xFF9E9E9E);
 
   // IconBox
-  static const Color iconBox = Color(0xFFF5F5F5);
+  static const Color iconBox = Color(0xFFEEEEEE);
   static const Color iconBoxDark = Color(0xFF363535);
   static const Color iconBoxIcon = Color(0xFFA8A8A8);
   static const Color iconBoxIconDark = Color(0xFF888787);
@@ -47,7 +46,7 @@ class AppColor {
   static const Color input = Color(0xFFFFFFFF);
   static const Color inputDark = Color(0xFF1A1A1A);
   static const Color inputBorder = Color(0xFFF1F1F1);
-  static const Color inputBorderDark = Color(0xFF2C2C2C);
+  static const Color inputBorderDark = Color(0xFF373636);
   static const Color inputHint = Color(0xFF999999);
   static const Color inputHintDark = Color(0xFF888888);
 

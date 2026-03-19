@@ -94,7 +94,7 @@ final class SelectedReplaceTypeProvider
 }
 
 String _$selectedReplaceTypeHash() =>
-    r'4fb71971a36d1e4a14ed988dee99414f35c6c925';
+    r'e5dbbf2763ea50a9c5ab8657460d9b3e116338e2';
 
 abstract class _$SelectedReplaceType extends $Notifier<List<ReplaceType>> {
   List<ReplaceType> build();
@@ -147,7 +147,7 @@ final class SelectedReserveTypeProvider
 }
 
 String _$selectedReserveTypeHash() =>
-    r'cdb7522a98c8d080dde495a0d46f33b403b0a522';
+    r'4f2b1c7cd36c65fe7590101dd77f4331e66a262d';
 
 abstract class _$SelectedReserveType extends $Notifier<List<ReserveType>> {
   List<ReserveType> build();

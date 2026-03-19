@@ -23,17 +23,24 @@ import 'package:once_power/widget/action/struct.dart';
 import 'chip.dart';
 import 'match.dart';
 
-class NormalView extends StatelessWidget {
+class NormalView extends StatefulWidget {
   const NormalView(this.isReplace, {super.key});
 
   final bool isReplace;
 
   @override
+  State<NormalView> createState() => _NormalViewState();
+}
+
+class _NormalViewState extends State<NormalView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ActionStruct(
       menus: [
         MatchInput(),
-        MatchChip(isReplace),
+        MatchChip(widget.isReplace),
         ModifyInput(),
         DateInput(),
         AffixInput(
@@ -55,7 +62,7 @@ class NormalView extends StatelessWidget {
           label: tr(AppL10n.renameIndex),
           tip: tr(AppL10n.renamePrefixSwap),
           swapProvider: isSwapPrefixProvider,
-          digitProvider: prefixDigitProvider,
+          digitProvider: prefixWidthProvider,
           startProvider: prefixStartProvider,
         ),
         AffixInput(
@@ -78,7 +85,7 @@ class NormalView extends StatelessWidget {
           label: tr(AppL10n.renameIndex),
           tip: tr(AppL10n.renameSuffixSwap),
           swapProvider: isSwapSuffixProvider,
-          digitProvider: suffixDigitProvider,
+          digitProvider: suffixWidthProvider,
           startProvider: suffixStartProvider,
         ),
         ExtensionInput(),
@@ -91,4 +98,7 @@ class NormalView extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

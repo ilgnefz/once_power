@@ -1298,7 +1298,7 @@ final class IsUseRegeditProvider extends $NotifierProvider<IsUseRegedit, bool> {
   }
 }
 
-String _$isUseRegeditHash() => r'cdba60a6933fef8918896a8ceb4a463023bfd460';
+String _$isUseRegeditHash() => r'57b2cae07031c5e639111801549f8a430fb8a82f';
 
 abstract class _$IsUseRegedit extends $Notifier<bool> {
   bool build();

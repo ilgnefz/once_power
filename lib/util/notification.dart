@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/notification.dart';
 import 'package:once_power/model/notification.dart';
+import 'package:once_power/util/format.dart';
 import 'package:path/path.dart' as path;
 
 void showCopyNotification(String message) {
@@ -164,15 +165,19 @@ void showPresetExportNotification({int? num, String? err}) {
   }
 }
 
-// TODO: 更改错误信息
 InfoDetail renameErrorNotification(Object e, String oldPath, String newPath) {
   debugPrint(e.runtimeType.toString());
   String message = '';
   if (e.runtimeType == PathNotFoundException) {
-    message =
-        ': ${tr(AppL10n.errNotExists, namedArgs: {'folder': path.dirname(newPath)})}';
+    message = tr(
+      AppL10n.errNotExists,
+      namedArgs: {'folder': path.dirname(newPath)},
+    );
   } else {
-    message = tr(AppL10n.errRenameInfo, namedArgs: {'err': e.toString()});
+    message = tr(
+      AppL10n.errRenameInfo,
+      namedArgs: {'err': formatSystemError(e)},
+    );
   }
   return InfoDetail(file: path.basename(oldPath), message: message);
 }
@@ -258,7 +263,6 @@ void showOrganizeNotification(List<InfoDetail> errors, int count) {
 }
 
 InfoDetail moveErrorNotification(String err, String oldPath, String newPath) {
-  // TODO: 翻译有问题
   String message = '${tr(AppL10n.errMove)}: $err';
   return InfoDetail(file: oldPath, message: message);
 }

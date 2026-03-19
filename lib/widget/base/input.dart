@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/provider/setting.dart';
 
 class BaseInput extends StatelessWidget {
   const BaseInput({
@@ -39,22 +41,35 @@ class BaseInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      height: AppNum.widgetHeight,
-      padding: padding,
-      margin: margin,
-      decoration: BoxDecoration(
-        color: theme.inputDecorationTheme.fillColor,
-        borderRadius: .circular(AppNum.radius),
-        border: Border.all(
-          color: theme.inputDecorationTheme.outlineBorder!.color,
-          width: theme.inputDecorationTheme.outlineBorder!.width,
-        ),
-        // boxShadow: [
-        //   BoxShadow(color: Colors.black.withValues(alpha: .1), blurRadius: 2),
-        // ],
-      ),
-      alignment: Alignment.center,
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        bool shadow = ref.watch(themeSettingProvider.select((e) => e.shadow));
+        return Container(
+          height: AppNum.widgetHeight,
+          padding: padding,
+          margin: margin,
+          decoration: BoxDecoration(
+            color: theme.inputDecorationTheme.fillColor,
+            borderRadius: .circular(AppNum.radius),
+            border: shadow
+                ? null
+                : Border.all(
+                    color: theme.inputDecorationTheme.outlineBorder!.color,
+                    width: theme.inputDecorationTheme.outlineBorder!.width,
+                  ),
+            boxShadow: shadow
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: .1),
+                      blurRadius: 2,
+                    ),
+                  ]
+                : [],
+          ),
+          alignment: Alignment.center,
+          child: child,
+        );
+      },
       child: Row(
         children: [
           if (leading != null) leading!,

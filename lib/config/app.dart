@@ -26,6 +26,8 @@ class AppConfig {
 
     await StorageUtil.init();
 
+    // await StorageUtil.clear();
+
     saveOrNo();
 
     await EasyLocalization.ensureInitialized();
@@ -97,6 +99,7 @@ void saveOrNo() {
     List<String> appKeyList = [
       AppKeys.advanceMenuList,
       AppKeys.advancePresetList,
+      AppKeys.presetName,
       AppKeys.dateLength,
       AppKeys.dateType,
       AppKeys.functionMode,
@@ -115,37 +118,26 @@ void saveOrNo() {
       AppKeys.isSwapSuffix,
       AppKeys.isUseRegex,
       AppKeys.isViewMode,
-      AppKeys.locale,
+      AppKeys.matchType,
+      AppKeys.organizeMode,
       AppKeys.organizeDate,
       AppKeys.organizeDateFormat,
       AppKeys.organizeDateSeparate,
-      AppKeys.prefixSerialLen,
-      AppKeys.prefixSerialStart,
+      AppKeys.prefixIndexWidth,
+      AppKeys.prefixIndexStart,
+      AppKeys.reverseType,
       AppKeys.ruleTypeValue,
-      AppKeys.suffixSerialLen,
-      AppKeys.suffixSerialStart,
+      AppKeys.suffixIndexWidth,
+      AppKeys.suffixIndexStart,
       AppKeys.sortType,
-      // AppKeys.viewImageW,
-      // organize keys
       AppKeys.targetFolder,
-      AppKeys.targetFolderList,
       AppKeys.imageFolder,
-      AppKeys.imageFolderList,
       AppKeys.videoFolder,
-      AppKeys.videoFolderList,
       AppKeys.audioFolder,
-      AppKeys.audioFolderList,
       AppKeys.docFolder,
-      AppKeys.docFolderList,
       AppKeys.folderFolder,
-      AppKeys.folderFolderList,
-      AppKeys.zipFolder,
-      AppKeys.zipFolderList,
+      AppKeys.archiveFolder,
       AppKeys.otherFolder,
-      AppKeys.otherFolderList,
-      // AppKeys.isUseExtraFunction,
-      AppKeys.currentPresetName,
-      AppKeys.organizeMode,
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);

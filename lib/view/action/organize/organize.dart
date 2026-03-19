@@ -14,11 +14,18 @@ import 'instructions.dart';
 
 final Widget _space = SizedBox(height: AppNum.spaceMedium);
 
-class OrganizeView extends StatelessWidget {
+class OrganizeView extends StatefulWidget {
   const OrganizeView({super.key});
 
   @override
+  State<OrganizeView> createState() => _OrganizeViewState();
+}
+
+class _OrganizeViewState extends State<OrganizeView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(child: Instructions()),
@@ -41,4 +48,7 @@ class OrganizeView extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

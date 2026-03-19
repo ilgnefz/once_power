@@ -32,7 +32,7 @@ final class RightMenuItem extends ContextMenuItem<dynamic> {
     final ThemeData theme = Theme.of(context);
     bool isFocused = menuState.focusedEntry == this;
     final Color background = theme
-        .extension<ContextMenuTheme>()!
+        .extension<OverlayWidgetTheme>()!
         .backgroundColor;
     final Color focusedBackground = Colors.grey.withValues(alpha: 0.2);
     final TextStyle textStyle = TextStyle(

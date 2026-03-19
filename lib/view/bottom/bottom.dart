@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
+import 'package:once_power/provider/setting.dart';
 import 'package:once_power/view/bottom/auto_run.dart';
 import 'package:once_power/view/bottom/check.dart';
 import 'package:once_power/view/bottom/csv.dart';
@@ -25,15 +27,22 @@ class BottomView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      height: AppNum.bottomBar,
-      padding: EdgeInsets.only(
-        left: AppNum.paddingMedium,
-        right: AppNum.padding,
-      ),
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(width: 1, color: theme.dividerColor)),
-      ),
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        return Container(
+          height: AppNum.bottomBar,
+          padding: EdgeInsets.only(
+            left: AppNum.paddingMedium,
+            right: AppNum.padding,
+          ),
+          decoration: BoxDecoration(
+            border: ref.watch(themeSettingProvider.select((e) => e.divider))
+                ? null
+                : Border(top: BorderSide(width: 1, color: theme.dividerColor)),
+          ),
+          child: child,
+        );
+      },
       child: Row(
         spacing: AppNum.spaceSmall,
         children: [

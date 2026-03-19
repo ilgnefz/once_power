@@ -24,18 +24,14 @@ class SortButton extends ConsumerWidget {
               value: e,
               key: ValueKey(e),
               height: AppNum.widgetHeight,
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: Container(
-                  height: AppNum.widgetHeight,
-                  padding: EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
-                  child: Row(
-                    spacing: AppNum.spaceSmall,
-                    children: [
-                      BaseIcon(svg: e.icon, size: 17),
-                      BaseText(e.label),
-                    ],
-                  ),
+              child: Padding(
+                padding: .symmetric(horizontal: AppNum.spaceMedium),
+                child: Row(
+                  spacing: AppNum.spaceSmall,
+                  children: [
+                    BaseIcon(svg: e.icon, size: 17),
+                    BaseText(e.label),
+                  ],
                 ),
               ),
             ),

@@ -18,20 +18,30 @@ class GroupList extends ConsumerStatefulWidget {
 class _GroupListState extends ConsumerState<GroupList> {
   List<String> list = [];
   Map<String, String> groupMap = {};
+  Map<String, TextEditingController> controllers = {};
 
   @override
   void initState() {
     super.initState();
     list = StorageUtil.getStringList(AppKeys.groupList);
     Map<String, String>? map = StorageUtil.getStringMap(AppKeys.groupFolder);
-    for (var element in list) {
+    for (String element in list) {
       if (map?.containsKey(element) == true) {
         groupMap[element] = map![element]!;
-        continue;
+      } else {
+        groupMap[element] = '';
       }
-      groupMap[element] = '';
+      controllers[element] = TextEditingController(text: groupMap[element]);
     }
     setState(() {});
+  }
+
+  @override
+  void dispose() {
+    for (var controller in controllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -42,24 +52,25 @@ class _GroupListState extends ConsumerState<GroupList> {
         spacing: AppNum.spaceMedium,
         mainAxisSize: MainAxisSize.min,
         children: List.generate(list.length, (index) {
+          String key = list[index];
           return Row(
             spacing: AppNum.spaceMedium,
             children: [
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 80),
                 child: Text(
-                  '${list[index]}: ',
+                  '$key: ',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Expanded(
                 child: FolderInput(
-                  controller: TextEditingController(
-                    text: groupMap[list[index]],
-                  ),
-                  onChanged: (value) =>
-                      setState(() => groupMap[list[index]] = value),
+                  controller: controllers[key]!, // 使用缓存的 controller
+                  onChanged: (value) {
+                    setState(() => groupMap[key] = value);
+                    controllers[key]!.text = value;
+                  },
                 ),
               ),
             ],

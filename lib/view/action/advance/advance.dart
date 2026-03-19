@@ -11,11 +11,18 @@ import 'package:once_power/view/action/picker.dart';
 
 final Widget _space = SizedBox(height: AppNum.spaceMedium);
 
-class AdvanceView extends StatelessWidget {
+class AdvanceView extends StatefulWidget {
   const AdvanceView({super.key});
 
   @override
+  State<AdvanceView> createState() => _AdvanceViewState();
+}
+
+class _AdvanceViewState extends State<AdvanceView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return GestureDetector(
@@ -39,4 +46,7 @@ class AdvanceView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -274,11 +274,11 @@ class IsUseRegedit extends _$IsUseRegedit {
     if (state) {
       // createGlobalRegedit();
       // AppRegedit.createLocalRegedit();
-      AppRegistry.add();
+      AppRegistry.addRunning();
     } else {
       // removeGlobalRegedit();
       // AppRegedit.removeLocalRegedit();
-      AppRegistry.remove();
+      AppRegistry.removeRunning();
     }
     await StorageUtil.setBool(AppKeys.isUseRegedit, state);
   }

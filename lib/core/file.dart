@@ -36,6 +36,7 @@ Future<void> formatPath(WidgetRef ref, List<String> paths) async {
   List<String> files = [];
   List<String> folders = [];
   for (String p in paths) {
+    // TODO: 更改文件添加顺序
     bool isFile = await FileSystemEntity.isFile(p);
     if (isFile) files.add(p);
     if (!isFile) folders.add(p);
@@ -131,11 +132,11 @@ Future<void> processFilesWithConcurrence(
 Future<FileInfo> generateFileInfo(String filePath) async {
   RFileInfo fileInfo = getFileInfo(filePath: filePath);
   String name = fileInfo.name;
-  String ext = fileInfo.ext;
-  if (ext.isEmpty && name.startsWith('.')) {
-    (name, ext) = ('', name.substring(1));
+  String extension = fileInfo.ext;
+  if (extension.isEmpty && name.startsWith('.')) {
+    (name, extension) = ('', name.substring(1));
   }
-  FileType type = fileInfo.isDir ? FileType.folder : getFileType(ext);
+  FileType type = fileInfo.isDir ? FileType.folder : getFileType(extension);
   FileMetaInfo? metaInfo;
   Resolution? resolution;
   Uint8List? thumbnail;
@@ -169,8 +170,8 @@ Future<FileInfo> generateFileInfo(String filePath) async {
     id: fileInfo.id,
     name: name,
     newName: name,
-    extension: ext,
-    newExtension: ext,
+    extension: extension,
+    newExtension: extension,
     parent: fileInfo.parent,
     path: filePath,
     tempPath: '',

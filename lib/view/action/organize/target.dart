@@ -14,7 +14,6 @@ class TargetInput extends ConsumerWidget {
       padding: .symmetric(horizontal: AppNum.padding),
       child: FolderInput(
         cacheKey: AppKeys.targetFolder,
-        cacheListKey: AppKeys.targetFolderList,
         controller: ref.watch(folderControllerProvider),
         onUpload: (value) =>
             ref.read(folderControllerProvider.notifier).update(value),
