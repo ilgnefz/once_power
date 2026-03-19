@@ -90,6 +90,10 @@ class AppConfig {
       await windowManager.setAsFrameless();
       await windowManager.setHasShadow(true);
     });
+
+    if (args.isNotEmpty) {
+      await StorageUtil.setStringList(AppKeys.rightMenuFolderPath, args);
+    }
   }
 }
 

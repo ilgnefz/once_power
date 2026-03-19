@@ -10,7 +10,6 @@ import 'package:once_power/const/text.dart';
 import 'package:once_power/model/amap.dart';
 import 'package:path/path.dart' as path;
 
-import 'notification.dart';
 import 'storage.dart';
 
 // 创建全局Dio实例，避免每次请求都创建新实例
@@ -54,16 +53,15 @@ Future<String> getTrueLocation(double? latitude, double? longitude) async {
         break;
       case '0':
         String info = errInfo(data.infocode);
-        showKeyErrorNotification('$info${tr(AppL10n.errLocationInfo)}');
+        debugPrint('位置信息错误: $info${tr(AppL10n.errLocationInfo)}');
         StorageUtil.remove(AppKeys.mapKey);
         break;
       default:
-        showKeyErrorNotification(data.info);
+        debugPrint('位置信息错误: ${data.info}');
         break;
     }
   } catch (e) {
     debugPrint('获取位置信息失败: $e');
-    showKeyErrorNotification(e.toString());
   }
   return location;
 }

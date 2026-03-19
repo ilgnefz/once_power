@@ -361,6 +361,7 @@ class AppL10n {
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';
   static const String errEmpty = 'error.empty';
+  static const String errAdd = 'error.add';
   static const String errCSV1 = 'error.csv1';
   static const String errCSV2 = 'error.csv2';
   static const String errLog = 'error.log';

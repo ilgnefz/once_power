@@ -40,7 +40,7 @@ final class CountProvider extends $NotifierProvider<Count, int> {
   }
 }
 
-String _$countHash() => r'99424e5de05742c2438dc5dd174dba5ac9b4d36d';
+String _$countHash() => r'8e80697fd3247b0a48ff736a7e798b5d73afec4f';
 
 abstract class _$Count extends $Notifier<int> {
   int build();

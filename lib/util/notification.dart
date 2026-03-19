@@ -8,6 +8,16 @@ import 'package:once_power/model/notification.dart';
 import 'package:once_power/util/format.dart';
 import 'package:path/path.dart' as path;
 
+void showAddErrorNotification(List<InfoDetail> list) {
+  NotificationInfo(
+    type: NotificationType.error,
+    title: tr(AppL10n.errAdd),
+    message: '',
+    detailList: list,
+    time: null,
+  ).show();
+}
+
 void showCopyNotification(String message) {
   NotificationInfo(
     title: tr(AppL10n.successCopy),

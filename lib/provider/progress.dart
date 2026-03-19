@@ -15,6 +15,7 @@ class Count extends _$Count {
   @override
   int build() => 0;
   void update() => state++;
+  void updateValue(int value) => state = value;
   void reset() => state = 0;
 }
 

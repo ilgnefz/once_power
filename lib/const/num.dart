@@ -19,6 +19,8 @@ class AppNum {
   static const double dropdownMenu = 32.0;
   static const double presetMenu = 160.0;
   static const double maxSize = 1024 * 1024 * 150;
+  // int
+  static const int maxCount = 20;
   // Padding
   static const double padding = 12.0;
   static const double paddingMedium = 8.0;

@@ -28,13 +28,18 @@ class HomeView extends ConsumerStatefulWidget {
 
 class _HomeViewState extends ConsumerState<HomeView>
     with WindowListener, ShortcutMenuListener {
-  final List<FileSystemEntity> _entities = [];
-
   void _init() async {
     await windowManager.setPreventClose(true);
     if (StorageUtil.getBool(AppKeys.isUseRegedit)) {
       AppRegistry.removeClosed();
       AppRegistry.addRunning();
+    }
+    List<String> fPath = StorageUtil.getStringList(AppKeys.rightMenuFolderPath);
+    if (fPath.isNotEmpty) {
+      Future.delayed(Duration.zero, () async {
+        await formatPath(ref, fPath);
+      });
+      StorageUtil.remove(AppKeys.rightMenuFolderPath);
     }
   }
 
@@ -45,9 +50,8 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   Future<void> closeWindow() async {
     toggleRegedit();
-    await windowManager.close();
-    // await windowManager.destroy();
-    // exit(0);
+    await windowManager.destroy();
+    exit(0);
   }
 
   void toggleRegedit() {
@@ -103,19 +107,14 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   Future<void> onShortcutMenuClicked(String key, String path) async {
     if (key == AppText.appName) {
+      if (!ref.watch(isAppendModeProvider)) {
+        ref.read(isAppendModeProvider.notifier).update();
+      }
       await formatPath(ref, [path]);
-      setState(() {});
+      await windowManager.setSkipTaskbar(false);
+      await windowManager.show();
     }
   }
-
-  Widget buildContent() => _entities.isEmpty
-      ? ContentView()
-      : ListView.builder(
-          itemCount: _entities.length,
-          itemBuilder: (context, index) {
-            return ListTile(title: Text(_entities[index].path));
-          },
-        );
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +153,7 @@ class _HomeViewState extends ConsumerState<HomeView>
                     child: Row(
                       children: [
                         RepaintBoundary(child: ActionView()),
-                        buildContent(),
+                        ContentView(),
                       ],
                     ),
                   ),

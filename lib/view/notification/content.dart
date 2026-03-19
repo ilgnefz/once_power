@@ -73,7 +73,7 @@ class NotificationContent extends StatelessWidget {
               ),
             ],
           ),
-          Text(info.message),
+          if (info.message.isNotEmpty) Text(info.message),
           if (info.detailList.isNotEmpty)
             ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 360),

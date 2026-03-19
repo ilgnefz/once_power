@@ -11,10 +11,6 @@ import 'config/theme/theme.dart';
 import 'const/text.dart';
 import 'enum/app.dart';
 
-// TODO: 更改 main.cpp 软件名
-// TODO: 更新日志：破坏性更改-之前保存的预设内容会出错，需要重新修改
-// TODO: 整理文件。重命名文件。添加文件阻塞UI
-
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(

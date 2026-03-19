@@ -399,6 +399,7 @@
   "error": {
     "emptyTitle": "File fetch failed",
     "empty": "Selected folder is empty",
+    "add": "File addition error",
     "csv1": "File parse error",
     "csv2": "Invalid CSV file",
     "log": "Invalid log file",

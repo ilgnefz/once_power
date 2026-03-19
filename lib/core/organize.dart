@@ -173,15 +173,53 @@ Future<InfoDetail?> organizeFile(
     File? newFile;
     if (sameDisk) {
       newFile = await File(oldPath).rename(newPath);
+      // 更新进度
+      ref.read(currentSizeProvider.notifier).update(file.size);
     } else {
-      newFile = await File(oldPath).copy(newPath);
+      // 使用带进度的文件传输
+      await moveFileWithProgress(ref, oldPath, newPath);
       await File(oldPath).delete();
+      newFile = File(newPath);
     }
     updateInfo(ref, file, newFile.absolute.path);
     return null;
   } catch (e) {
     return moveErrorNotification(formatSystemError(e), oldPath, newPath);
   }
+}
+
+// 带进度的文件传输方法
+Future<void> moveFileWithProgress(
+  WidgetRef ref,
+  String oldPath,
+  String newPath,
+) async {
+  const chunkSize = 1024 * 1024; // 1MB 分块
+  final input = File(oldPath).openRead();
+  final output = File(newPath).openWrite();
+  int copied = 0;
+  ProgressFileInfo? pf = ref.read(currentProgressFileProvider);
+
+  await for (final chunk in input) {
+    output.add(chunk);
+    copied += chunk.length;
+
+    // 更新文件传输进度
+    if (pf != null) {
+      ProgressFileInfo info = pf.copyWith(transferred: copied);
+      ref.read(currentProgressFileProvider.notifier).update(info);
+    }
+
+    // 更新总进度
+    ref.read(currentSizeProvider.notifier).update(chunk.length);
+
+    // 每1MB更新一次UI
+    if (copied % chunkSize == 0) {
+      await Future.delayed(Duration.zero);
+    }
+  }
+
+  await output.close();
 }
 
 Future<InfoDetail?> organizeFolder(
@@ -195,9 +233,11 @@ Future<InfoDetail?> organizeFolder(
     Directory dir;
     if (sameDisk) {
       dir = await Directory(oldPath).rename(newPath);
+      // 更新进度
+      ref.read(currentSizeProvider.notifier).update(file.size);
     } else {
       dir = await Directory(newPath).create(recursive: true);
-      bool flag = await moveFolderChild(oldPath, newPath);
+      bool flag = await moveFolderChildWithProgress(ref, oldPath, newPath);
       if (flag) {
         await Directory(oldPath).delete();
       } else {
@@ -211,7 +251,11 @@ Future<InfoDetail?> organizeFolder(
   }
 }
 
-Future<bool> moveFolderChild(String oldPath, String newPath) async {
+Future<bool> moveFolderChildWithProgress(
+  WidgetRef ref,
+  String oldPath,
+  String newPath,
+) async {
   bool flag = true;
   Directory dir = Directory(oldPath);
   List<FileSystemEntity> list = await dir.list().toList();
@@ -219,11 +263,16 @@ Future<bool> moveFolderChild(String oldPath, String newPath) async {
     String targetPath = path.join(newPath, path.basename(entity.path));
     try {
       if (entity is File) {
-        await File(entity.path).copy(targetPath);
+        // 使用带进度的文件传输
+        await moveFileWithProgress(ref, entity.path, targetPath);
         await entity.delete();
       } else {
         await Directory(targetPath).create(recursive: true);
-        bool childFlag = await moveFolderChild(entity.path, newPath);
+        bool childFlag = await moveFolderChildWithProgress(
+          ref,
+          entity.path,
+          targetPath,
+        );
         childFlag ? await entity.delete() : flag = false;
       }
     } catch (e) {

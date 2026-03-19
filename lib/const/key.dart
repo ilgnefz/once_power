@@ -10,6 +10,7 @@ class AppKeys {
   static String otherFolder = 'otherFolder';
   static String presetName = 'presetName';
   static String mapKey = 'mapKey';
+  static String rightMenuFolderPath = 'rightMenuFolderPath';
   // int
   static String dateLength = 'dateLength';
   static String prefixIndexWidth = 'prefixIndexWidth';
