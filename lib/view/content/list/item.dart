@@ -13,8 +13,10 @@ class ContentItem extends StatelessWidget {
     required this.onChanged,
     this.margin,
     required this.title,
+    this.titleFontSize,
     this.titleAction,
     required this.subTitle,
+    this.subFontSize,
     this.subTitleAction,
     this.showSubTitle = true,
     this.subColor,
@@ -27,8 +29,10 @@ class ContentItem extends StatelessWidget {
   final void Function(bool?)? onChanged;
   final EdgeInsetsGeometry? margin;
   final String title;
+  final double? titleFontSize;
   final List<Widget>? titleAction;
   final String subTitle;
+  final double? subFontSize;
   final List<Widget>? subTitleAction;
   final bool showSubTitle;
   final Color? subColor;
@@ -38,7 +42,7 @@ class ContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleText = BaseText(title, fontSize: 13);
+    Widget titleText = BaseText(title, fontSize: titleFontSize ?? 13);
     Widget titleWidget = Flexible(
       flex: 1,
       fit: .tight,
@@ -51,7 +55,11 @@ class ContentItem extends StatelessWidget {
               ],
             ),
     );
-    Widget subTitleText = BaseText(subTitle, color: subColor, fontSize: 13);
+    Widget subTitleText = BaseText(
+      subTitle,
+      color: subColor,
+      fontSize: subFontSize ?? 13,
+    );
     Widget subTitleWidget = Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return Flexible(

@@ -54,6 +54,7 @@ class ContentTop extends ConsumerWidget {
       },
       margin: EdgeInsets.only(right: AppNum.padding),
       title: ref.watch(_labelLeftProvider),
+      titleFontSize: 14,
       titleAction: [
         if (!ref.watch(_onlyViewMode)) ...[
           ContentExpend(),
@@ -64,6 +65,7 @@ class ContentTop extends ConsumerWidget {
         ],
       ],
       subTitle: ref.watch(_labelRightProvider),
+      subFontSize: 14,
       subTitleAction: [
         if (ref.watch(_onlyViewMode)) ...[
           ExportFileButton(),
