@@ -344,6 +344,9 @@ String getTopPath(String filePath) {
         );
       }
       return path.join(separator, pathList.take(userIndex + 2).join(separator));
+    } else if (userIndex != -1 && pathList.length == userIndex + 2) {
+      // 处理用户主目录本身
+      return path.join(separator, pathList.take(userIndex + 2).join(separator));
     }
     // 处理根目录下的第一层目录
     return pathList.isEmpty ? filePath : path.join(separator, pathList.first);

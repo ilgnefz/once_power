@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/icons.dart';
@@ -47,8 +49,8 @@ class BottomView extends StatelessWidget {
         spacing: AppNum.spaceSmall,
         children: [
           SaveButton(),
-          RegeditButton(),
-          AutoRunButton(),
+          if (Platform.isWindows) ...[RegeditButton(),
+          AutoRunButton()],
           LogButton(),
           ViewButton(),
           CSVButton(),
