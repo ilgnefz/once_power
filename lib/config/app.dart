@@ -87,8 +87,10 @@ class AppConfig {
         if (isMaxed) await windowManager.maximize();
         await windowManager.focus();
       }
-      await windowManager.setAsFrameless();
-      await windowManager.setHasShadow(true);
+      if (Platform.isWindows) {
+        await windowManager.setAsFrameless();
+        await windowManager.setHasShadow(true);
+      }
     });
 
     if (args.isNotEmpty) {

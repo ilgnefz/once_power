@@ -8,14 +8,38 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v4
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: ${{ runner.os }}-flutter-sdk-${{ hashFiles('**/.flutter-version') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-sdk-
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true  # 启用 Action 自带的 Pub 依赖缓存
+          cache-key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          cache-path: ${{ github.workspace }}/.pub-cache
+
+      - name: Cache Pub dependencies (备用缓存)
+        if: steps.setup-flutter.outputs.cache-hit != 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}/.pub-cache
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install Linux build dependencies
         run: |
@@ -31,9 +55,9 @@ jobs:
       - name: Build Linux app
         run: flutter build linux --release
 
-      # 新增：上传编译好的产物（关键！否则文件会丢失）
       - name: Upload Linux build files
         uses: actions/upload-artifact@v4
         with:
-          name: flutter-linux-app  # 下载时的文件夹名称（可自定义）
-          path: build/linux/x64/release/bundle/  # 编译产物的路径（固定）
+          name: flutter-linux-app
+          path: build/linux/x64/release/bundle/
+          retention-days: 7
