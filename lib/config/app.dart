@@ -74,6 +74,7 @@ class AppConfig {
       minimumSize: Size(AppNum.width, AppNum.height),
       center: isCenter,
       title: AppText.appName,
+      titleBarStyle: TitleBarStyle.hidden,
       backgroundColor: Colors.transparent,
     );
 
