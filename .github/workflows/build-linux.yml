@@ -14,32 +14,34 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: Cache Flutter SDK
-        uses: actions/cache@v4
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.os }}-flutter-sdk-${{ hashFiles('**/.flutter-version') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-sdk-
+      # 删除不稳定的 Flutter SDK 缓存步骤，让 flutter-action 自行管理
+      # 改为只缓存 pub 依赖，这是最有效的缓存
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
+        id: setup-flutter
         with:
           channel: stable
-          cache: true  # 启用 Action 自带的 Pub 依赖缓存
+          cache: true
           cache-key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          cache-path: ${{ github.workspace }}/.pub-cache
+          # flutter-action 会自动处理缓存路径
 
-      - name: Cache Pub dependencies (备用缓存)
-        if: steps.setup-flutter.outputs.cache-hit != 'true'
+      - name: Get Flutter SDK version
+        id: flutter-version
+        run: |
+          FLUTTER_VERSION=$(flutter --version | head -n 1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "flutter_version=${FLUTTER_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Cache Flutter SDK (备用)
         uses: actions/cache@v4
+        id: flutter-sdk-cache
         with:
-          path: |
-            ${{ github.workspace }}/.pub-cache
-            ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          # GitHub 运行器中 Flutter SDK 的标准安装路径
+          path: ${{ github.workspace }}/_flutter
+          # 使用 Flutter 版本作为缓存键的一部分
+          key: ${{ runner.os }}-flutter-${{ steps.flutter-version.outputs.flutter_version }}-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pub-
+            ${{ runner.os }}-flutter-
 
       - name: Install Linux build dependencies
         run: |
