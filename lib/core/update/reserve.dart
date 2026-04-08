@@ -17,7 +17,7 @@ String reserveName(WidgetRef ref, String name, NormalInfo info) {
 }
 
 String addEscapeIfPunctuation(String text) {
-  Set<String> punctuations = {
+  Set<String> regexSpecialChars = {
     '.',
     ',',
     ';',
@@ -30,11 +30,17 @@ String addEscapeIfPunctuation(String text) {
     ']',
     '{',
     '}',
+    '*',
+    '+',
+    '^',
+    '\$',
+    '|',
+    '\\',
   };
   String result = '';
   for (int i = 0; i < text.length; i++) {
     final char = text[i];
-    if (punctuations.contains(char)) {
+    if (regexSpecialChars.contains(char)) {
       result += '\\$char';
     } else {
       result += char;

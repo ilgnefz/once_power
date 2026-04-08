@@ -2,11 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/bottom_text.dart';
-import 'package:once_power/config/theme/theme.dart';
 import 'package:once_power/const/l10n.dart';
-import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
-import 'package:once_power/widget/bottom/text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DownloadTextButton extends ConsumerWidget {
