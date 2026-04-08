@@ -18,15 +18,18 @@ import 'export.dart';
 import 'filter.dart';
 import 'sort.dart';
 
-final Provider<String> _labelLeftProvider = Provider((ref) {
+final Provider<String> _countProvider = Provider((ref) {
   List<FileInfo> files = ref.watch(fileListProvider);
   int total = files.length;
   int checked = files.where((e) => e.checked).toList().length;
-  String name = ref.watch(currentModeProvider).isOrganize
-      ? tr(AppL10n.contentName)
-      : tr(AppL10n.contentOrigin);
-  return '$name ($checked/$total)';
+  return '($checked/$total)';
 });
+
+final Provider<String> _labelLeftProvider = Provider(
+  (ref) => ref.watch(currentModeProvider).isOrganize
+      ? tr(AppL10n.contentName)
+      : tr(AppL10n.contentOrigin),
+);
 
 final Provider<String> _labelRightProvider = Provider((Ref ref) {
   if (ref.watch(isDateModifyProvider) || ref.watch(_onlyViewMode)) return '';
@@ -46,6 +49,9 @@ class ContentTop extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final (title, subtitle) = ref.watch(swapLabelProvider)
+        ? (ref.watch(_labelRightProvider), ref.watch(_labelLeftProvider))
+        : (ref.watch(_labelLeftProvider), ref.watch(_labelRightProvider));
     return ContentItem(
       checked: ref.watch(selectAllProvider),
       onChanged: (bool? value) {
@@ -53,7 +59,7 @@ class ContentTop extends ConsumerWidget {
         updateName(ref);
       },
       margin: EdgeInsets.only(right: AppNum.padding),
-      title: ref.watch(_labelLeftProvider),
+      title: '$title ${ref.watch(_countProvider)}',
       titleFontSize: 14,
       titleAction: [
         if (!ref.watch(_onlyViewMode)) ...[
@@ -64,7 +70,7 @@ class ContentTop extends ConsumerWidget {
           ContentVisible(),
         ],
       ],
-      subTitle: ref.watch(_labelRightProvider),
+      subTitle: subtitle,
       subFontSize: 14,
       subTitleAction: [
         if (ref.watch(_onlyViewMode)) ...[

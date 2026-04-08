@@ -47,19 +47,17 @@ class _SettingViewState extends State<SettingView> {
           maxHeight: MediaQuery.of(context).size.height * 0.95,
         ),
         child: Material(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: .circular(AppNum.radius),
           color: theme.scaffoldBackgroundColor,
           child: Container(
             width: AppNum.easyDialog,
             padding: .symmetric(vertical: AppNum.padding),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(borderRadius: .circular(AppNum.radius)),
             child: Column(
               crossAxisAlignment: .center,
               mainAxisSize: .min,
               children: [
-                Center(
-                  child: BaseText(tr(AppL10n.dialogSetting), fontWeight: .bold),
-                ),
+                Center(child: BaseText(tr(AppL10n.dialogSetting))),
                 SizedBox(height: AppNum.spaceLarge),
                 Flexible(
                   child: SingleChildScrollView(
@@ -121,6 +119,7 @@ class _SettingViewState extends State<SettingView> {
                         ThemeSetting(),
                         SizedBox(height: AppNum.spaceMedium),
                         SettingTitle(tr(AppL10n.settingHotKey)),
+                        SizedBox(height: AppNum.spaceSmall),
                         TipPanel(),
                       ],
                     ),

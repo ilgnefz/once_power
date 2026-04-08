@@ -49,6 +49,7 @@ class AppKeys {
   static String isTranslucentInput = 'isTranslucentInput';
   static String isTranslucentBtn = 'isTranslucentBtn';
   static String isTransparentDivider = 'isTransparentDivider';
+  static String isSwapLabel = 'isSwapLabel';
   static String isMaxed = 'isMaxed';
   static String savePosition = 'savePosition';
   static String saveSize = 'saveSize';

@@ -44,6 +44,7 @@ class ContentListView extends ConsumerWidget {
         final ThemeData theme = Theme.of(context);
         String title = file.name, subtitle = file.newName;
         String extension = file.extension, newExt = file.newExtension;
+        Color? color;
         Color? subColor = title == subtitle ? Colors.grey : theme.primaryColor;
 
         if (ref.watch(currentModeProvider).isOrganize) {
@@ -52,6 +53,11 @@ class ContentListView extends ConsumerWidget {
         }
 
         if (ref.watch(isDateModifyProvider)) subtitle = '';
+
+        if (ref.watch(swapLabelProvider)) {
+          (title, subtitle) = (subtitle, title);
+          (color, subColor) = (subColor, color);
+        }
 
         return ReorderableDragStartListener(
           index: index,
@@ -66,6 +72,7 @@ class ContentListView extends ConsumerWidget {
                 updateName(ref);
               },
               title: title,
+              color: color,
               subTitle: subtitle,
               subColor: subColor,
               showSubTitle: !ref.watch(isDateModifyProvider),

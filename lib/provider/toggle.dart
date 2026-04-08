@@ -253,6 +253,16 @@ bool checkVideo(Ref ref) {
   return check >= list.length / 2;
 }
 
+@riverpod
+class SwapLabel extends _$SwapLabel {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.isSwapLabel);
+  Future<void> update() async {
+    state = !state;
+    await StorageUtil.setBool(AppKeys.isSwapLabel, state);
+  }
+}
+
 /* ----- Bottom ----- */
 
 @riverpod

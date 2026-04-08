@@ -454,6 +454,7 @@ class AppL10n {
   /* ---------- setting ---------- */
   static const String settingSaveSize = 'setting.saveSize';
   static const String settingSavePosition = 'setting.savePosition';
+  static const String settingSwapLabel = 'setting.swapLabel';
   static const String settingAutoRename = 'setting.autoRename';
   static const String settingCancelRename = 'setting.cancelRename';
   static const String settingAutoRenameFormat = 'setting.autoRenameFormat';

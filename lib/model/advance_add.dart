@@ -99,7 +99,7 @@ class AdvanceDate {
     this.type = DateType.created,
     this.dateStyle = DateStyle.none,
     this.weekdayStyle = WeekdayStyle.none,
-    this.timeStyle = TimeStyle.none,
+    this.timeStyle = TimeStyle.hidden,
     this.dateSeparate = DateSeparate.none,
     this.separate = '',
   });

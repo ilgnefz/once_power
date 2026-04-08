@@ -492,6 +492,7 @@
   "setting": {
     "saveSize": "Save Window Size",
     "savePosition": "Save Window Position",
+    "swapLabel": "Swap new and old name positions",
     "autoRename": "Auto Rename on Duplicate",
     "cancelRename": "Cancel Rename on Empty",
     "autoRenameFormat": "Auto Rename Format",

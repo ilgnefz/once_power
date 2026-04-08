@@ -18,32 +18,31 @@ class TipPanel extends StatelessWidget {
     final String behind = tr(AppL10n.settingHotKeyBehind);
 
     return Table(
-      columnWidths: const {
-        0: FlexColumnWidth(1),
-        1: FlexColumnWidth(1),
-        2: FlexColumnWidth(1),
-      },
+      columnWidths: const {0: FlexColumnWidth(1), 1: FlexColumnWidth(1)},
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(
           children: [
-            TableBaseText('Ctrl+A  $all'),
-            TableBaseText('Ctrl+D  $cancel'),
-            TableBaseText('Delete  $delete'),
+            TableContent(keys: ['Ctrl', 'A'], label: all),
+            TableContent(keys: ['Ctrl', 'D'], label: cancel),
           ],
         ),
         TableRow(
           children: [
-            TableBaseText('Ctrl+S  $toggle'),
-            TableBaseText('Ctrl+X  $suspense'),
-            TableBaseText('Ctrl+C  $front'),
+            TableContent(keys: ['Delete'], label: delete),
+            TableContent(keys: ['Ctrl', 'S'], label: toggle),
           ],
         ),
         TableRow(
           children: [
-            TableBaseText('Ctrl+V  $behind'),
-            const SizedBox(),
-            const SizedBox(),
+            TableContent(keys: ['Ctrl', 'X'], label: suspense),
+            TableContent(keys: ['Ctrl', 'C'], label: front),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableContent(keys: ['Ctrl', 'V'], label: behind),
+            const SizedBox.shrink(),
           ],
         ),
       ],
@@ -51,16 +50,53 @@ class TipPanel extends StatelessWidget {
   }
 }
 
-class TableBaseText extends StatelessWidget {
-  const TableBaseText(this.label, {super.key});
+class TableContent extends StatelessWidget {
+  const TableContent({super.key, required this.keys, required this.label});
+
+  final List<String> keys;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: AppNum.widgetHeight,
+      child: Row(
+        spacing: AppNum.spaceSmall,
+        children: [
+          ...keys.length > 1
+              ? [KeyBox(keys.first), BaseText('+'), KeyBox(keys.last)]
+              : [KeyBox(keys.single)],
+          const SizedBox.shrink(),
+          BaseText(label),
+        ],
+      ),
+    );
+  }
+}
+
+class KeyBox extends StatelessWidget {
+  const KeyBox(this.label, {super.key});
 
   final String label;
 
   @override
   Widget build(BuildContext context) {
+    final double size = AppNum.widgetHeight - 4.0;
+    final BorderSide side = BorderSide(color: Colors.grey, width: 1);
     return Container(
-      height: AppNum.widgetHeight,
-      alignment: Alignment.centerLeft,
+      height: size,
+      padding: .symmetric(horizontal: AppNum.spaceMedium),
+      alignment: .centerLeft,
+      constraints: BoxConstraints(minWidth: size),
+      decoration: BoxDecoration(
+        borderRadius: .circular(AppNum.radiusSmall),
+        border: Border(
+          left: side,
+          top: side,
+          right: side,
+          bottom: BorderSide(color: Colors.grey, width: 2),
+        ),
+      ),
       child: BaseText(label),
     );
   }

@@ -75,6 +75,7 @@ class AddDateGroup extends StatelessWidget {
               .toList(),
           value: weekdayStyle,
           onChanged: onWeekdayStyleChange,
+          width: 98,
         ),
         TextDropdown<TimeStyle>(
           items: TimeStyle.values

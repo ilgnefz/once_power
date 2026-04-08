@@ -62,9 +62,7 @@ class EasyDialog extends StatelessWidget {
               children: <Widget>[
                 Text(
                   title,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 Flexible(
                   child: Padding(

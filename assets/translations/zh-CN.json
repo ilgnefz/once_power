@@ -86,7 +86,7 @@
     "addPresetDesc": "注: 点击上方预设名称可自动填充至输入框，同名预设将被覆盖",
     "dateSeparate": "日期分隔",
     "indexDistinction": "序列区分",
-    "addType": "添加类型",
+    "addType": "添加模式",
     "addPrefix": "前缀",
     "addSuffix": "后缀",
     "convertLetters": "转换文本",
@@ -492,6 +492,7 @@
   "setting": {
     "saveSize": "保存窗口大小",
     "savePosition": "保存窗口位置",
+    "swapLabel": "交换新旧名称位置",
     "autoRename": "同名时自动重命名",
     "cancelRename": "名称为空不重命名",
     "autoRenameFormat": "自动重命名序列格式",

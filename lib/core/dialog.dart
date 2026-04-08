@@ -21,18 +21,19 @@ import 'package:once_power/view/content/top/export_file.dart';
 import 'package:once_power/view/content/top/image_size.dart';
 import 'package:once_power/view/content/top/rule.dart';
 import 'package:once_power/view/content/top/type_detail.dart';
+import 'package:once_power/widget/common/animated_dialog.dart';
 
 Future<void> showMarkText(BuildContext context, UploadMarkInfo info) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (BuildContext context) => ShowUploadText(info: info),
+    child: ShowUploadText(info: info),
   );
 }
 
 Future<void> showSettingView(BuildContext context) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (BuildContext context) => SettingView(),
+    child: SettingView(),
   );
 }
 
@@ -41,38 +42,44 @@ Future<void> editGroup(
   bool isDirective = false,
   FileInfo? file,
 ]) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => EditGroup(isDirective: isDirective, file: file),
+    child: EditGroup(isDirective: isDirective, file: file),
   );
 }
 
 Future<void> autoGroup(BuildContext context, FileInfo file) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => AutoGroup(file: file),
+    child: AutoGroup(file: file),
   );
 }
 
 Future<void> showAllGroup(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => GroupList());
+  await AnimatedDialog.show(
+    context: context,
+    child: GroupList(),
+  );
 }
 
 Future<void> showAllTypeRule(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => TypeList());
+  await AnimatedDialog.show(
+    context: context,
+    child: TypeList(),
+  );
 }
 
 Future<void> deleteText(BuildContext context, [AdvanceMenuDelete? menu]) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => DeleteView(menu: menu),
+    child: DeleteView(menu: menu),
   );
 }
 
 Future<void> addText(BuildContext context, [AdvanceMenuAdd? menu]) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => AddView(menu: menu),
+    child: AddView(menu: menu),
   );
 }
 
@@ -80,9 +87,9 @@ Future<void> replaceText(
   BuildContext context, [
   AdvanceMenuReplace? menu,
 ]) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => ReplaceView(menu: menu),
+    child: ReplaceView(menu: menu),
   );
 }
 
@@ -92,47 +99,65 @@ Future<void> showAllTypeDetail(
   bool needPop = false,
 ]) async {
   if (needPop) Navigator.of(context).pop();
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => TypeDetailPanel(isPath: isPath),
+    child: TypeDetailPanel(isPath: isPath),
   );
 }
 
 Future<void> showKeyInput(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => KeyInputView());
+  await AnimatedDialog.show(
+    context: context,
+    child: KeyInputView(),
+  );
 }
 
 Future<void> showAddExport(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => AddPresetView());
+  await AnimatedDialog.show(
+    context: context,
+    child: AddPresetView(),
+  );
 }
 
 Future<void> renamePreset(BuildContext context, AdvancePreset preset) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (context) => AddPresetView(preset: preset),
+    child: AddPresetView(preset: preset),
   );
 }
 
 Future<void> showExportPreset(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => ExportPresetView());
+  await AnimatedDialog.show(
+    context: context,
+    child: ExportPresetView(),
+  );
 }
 
 Future<void> showRuleDetail(BuildContext context) async {
   Navigator.of(context).pop();
-  await showDialog(context: context, builder: (context) => RuleFilter());
+  await AnimatedDialog.show(
+    context: context,
+    child: RuleFilter(),
+  );
 }
 
 Future<void> previewView(BuildContext context, FileInfo file) async {
-  await showDialog(context: context, builder: (context) => PreviewView(file));
+  await AnimatedDialog.show(
+    context: context,
+    child: PreviewView(file),
+  );
 }
 
 Future<void> showImageSize(BuildContext context) async {
-  await showDialog(
+  await AnimatedDialog.show(
     context: context,
-    builder: (BuildContext context) => ImageSizeView(),
+    child: ImageSizeView(),
   );
 }
 
 Future<void> showExportMenu(BuildContext context) async {
-  await showDialog(context: context, builder: (context) => ExportFileView());
+  await AnimatedDialog.show(
+    context: context,
+    child: ExportFileView(),
+  );
 }

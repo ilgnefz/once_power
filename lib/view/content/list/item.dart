@@ -19,6 +19,7 @@ class ContentItem extends StatelessWidget {
     this.subFontSize,
     this.subTitleAction,
     this.showSubTitle = true,
+    this.color,
     this.subColor,
     required this.action,
     required this.icon,
@@ -35,6 +36,7 @@ class ContentItem extends StatelessWidget {
   final double? subFontSize;
   final List<Widget>? subTitleAction;
   final bool showSubTitle;
+  final Color? color;
   final Color? subColor;
   final Widget action;
   final IconData icon;
@@ -42,10 +44,20 @@ class ContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleText = BaseText(title, fontSize: titleFontSize ?? 13);
-    Widget titleWidget = Flexible(
-      flex: 1,
-      fit: .tight,
+    Widget titleText = BaseText(
+      title,
+      color: color,
+      fontSize: titleFontSize ?? 13,
+    );
+    Widget titleWidget = Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        int flex = ref.watch(swapLabelProvider)
+            ? ref.watch(expandNewNameProvider)
+                  ? 2
+                  : 1
+            : 1;
+        return Flexible(flex: flex, fit: .tight, child: child!);
+      },
       child: titleAction == null
           ? titleText
           : Row(
@@ -62,11 +74,12 @@ class ContentItem extends StatelessWidget {
     );
     Widget subTitleWidget = Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Flexible(
-          flex: ref.watch(expandNewNameProvider) ? 2 : 1,
-          fit: .tight,
-          child: child!,
-        );
+        int flex = ref.watch(swapLabelProvider)
+            ? 1
+            : ref.watch(expandNewNameProvider)
+            ? 2
+            : 1;
+        return Flexible(flex: flex, fit: .tight, child: child!);
       },
       child: subTitleAction == null
           ? subTitleText

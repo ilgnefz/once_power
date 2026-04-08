@@ -100,10 +100,10 @@ class _AddViewState extends ConsumerState<AddView> {
               advanceDate = advanceDate.copyWith(weekdayStyle: value);
               mode = AddMode.date;
             }),
-            onTimeStyleChange: (value) {
+            onTimeStyleChange: (value) => setState(() {
               advanceDate = advanceDate.copyWith(timeStyle: value);
               mode = AddMode.date;
-            },
+            }),
             metaData: metaData,
             onMetaDataChange: (value) => setState(() {
               metaData = metaData.copyWith(type: value);

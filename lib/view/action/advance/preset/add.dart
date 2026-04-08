@@ -42,7 +42,7 @@ class _AddPresetViewState extends ConsumerState<AddPresetView> {
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
-      title: tr(AppL10n.advancePresetName),
+      title: tr(AppL10n.advanceAddPreset),
       content: Column(
         spacing: AppNum.spaceMedium,
         crossAxisAlignment: .start,

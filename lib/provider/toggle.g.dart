@@ -1216,6 +1216,57 @@ final class CheckVideoProvider extends $FunctionalProvider<bool, bool, bool>
 
 String _$checkVideoHash() => r'33553bac69b94627334f1bd73605a70ea10c9c77';
 
+@ProviderFor(SwapLabel)
+final swapLabelProvider = SwapLabelProvider._();
+
+final class SwapLabelProvider extends $NotifierProvider<SwapLabel, bool> {
+  SwapLabelProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'swapLabelProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$swapLabelHash();
+
+  @$internal
+  @override
+  SwapLabel create() => SwapLabel();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$swapLabelHash() => r'a0d510365870b57d6ce467f1e8ef139992288ff5';
+
+abstract class _$SwapLabel extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(IsSaveConfig)
 final isSaveConfigProvider = IsSaveConfigProvider._();
 
