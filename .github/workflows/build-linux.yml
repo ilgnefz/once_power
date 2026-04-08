@@ -43,8 +43,14 @@ jobs:
       - name: Install Fastforge
         run: dart pub global activate fastforge
 
-      - name: Build packages with Fastforge
-        run: fastforge build --name production
+      - name: Build AppImage with Fastforge
+        run: fastforge package --platform linux --targets appimage
+
+      - name: Build DEB with Fastforge
+        run: fastforge package --platform linux --targets deb
+
+      - name: Build RPM with Fastforge
+        run: fastforge package --platform linux --targets rpm
 
       - name: Rename AppImage
         run: |

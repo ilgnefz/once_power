@@ -6,16 +6,12 @@ releases:
         package:
           platform: linux
           target: appimage
-          build_args:
-            target-platform: linux-x64
       - name: linux-deb
         package:
           platform: linux
           target: deb
-          build_args:
-            target-platform: linux-x64
       # 可选：rpm、pacman
-      # - name: linux-rpm
-      #   package:
-      #     platform: linux
-      #     target: rpm
+      - name: linux-rpm
+        package:
+          platform: linux
+          target: rpm
