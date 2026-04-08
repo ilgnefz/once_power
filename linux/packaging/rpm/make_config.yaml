@@ -20,7 +20,6 @@ keywords:
 generic_name: OncePower
 
 categories:
-  - Tool
   - Utility
 
 startup_notify: true

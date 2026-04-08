@@ -25,7 +25,7 @@ actions:
       - bye
 
 categories:
-  - Tool
+  - Utility
 
 startup_notify: true
 

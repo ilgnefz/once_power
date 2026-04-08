@@ -54,9 +54,6 @@ jobs:
           VERSION=$(grep 'version:' pubspec.yaml | cut -d ' ' -f 2)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Build Linux app
-        run: flutter build linux --release
-
       - name: Install Fastforge
         run: dart pub global activate fastforge
 
