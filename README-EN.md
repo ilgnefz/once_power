@@ -322,4 +322,4 @@ All content settings are only valid if the storage function is enabled.
 
 # LICENSE
 
-[GPL 2.0 License](./LICENSE)
+[GPL 3.0 License](./LICENSE)
