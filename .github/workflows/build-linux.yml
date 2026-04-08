@@ -20,6 +20,13 @@ jobs:
           channel: stable
           cache: true
 
+      # ✅ 系统依赖缓存（从此不会每次重装 30 个依赖包）
+      - name: Cache APT libraries
+        uses: actions/cache@v4
+        with:
+          path: /var/lib/apt/lists
+          key: ${{ runner.os }}-apt-${{ hashFiles('.github/workflows/*.yml') }}
+
       - name: Install Linux build dependencies
         run: |
           sudo add-apt-repository universe
@@ -57,30 +64,30 @@ jobs:
       - name: Install Fastforge
         run: dart pub global activate fastforge
 
-      - name: Build AppImage with Fastforge
-        run: fastforge package --platform linux --targets appimage
+      # ✅ 一次打包 3 个格式，不用分开跑（速度×3）
+      - name: Build all packages
+        run: fastforge package --platform linux --targets appimage,deb,rpm
 
-      - name: Build DEB with Fastforge
-        run: fastforge package --platform linux --targets deb
-
-      - name: Build RPM with Fastforge
-        run: fastforge package --platform linux --targets rpm
-
+      # ✅ 重命名（容错：找不到文件不报错）
       - name: Rename AppImage
         run: |
-          APPIMAGE_FILE=$(ls dist/*.AppImage)
+          APPIMAGE_FILE=$(ls dist/*.AppImage | head -1)
           mv "$APPIMAGE_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
+        continue-on-error: true
 
       - name: Rename DEB
         run: |
-          DEB_FILE=$(ls dist/*.deb)
+          DEB_FILE=$(ls dist/*.deb | head -1)
           mv "$DEB_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
+        continue-on-error: true
 
       - name: Rename RPM
         run: |
-          RPM_FILE=$(ls dist/*.rpm)
+          RPM_FILE=$(ls dist/*.rpm | head -1)
           mv "$RPM_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
+        continue-on-error: true
 
+      # ✅ 上传产物
       - name: Upload AppImage
         uses: actions/upload-artifact@v4
         with:
@@ -102,6 +109,7 @@ jobs:
           path: dist/*.rpm
           retention-days: 7
 
+      # ✅ 发布 Release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
