@@ -29,6 +29,7 @@ class _BottomTextButtonState extends State<BottomTextButton> {
             color: isHover
                 ? theme.primaryColor
                 : theme.extension<BottomTextTheme>()?.textStyle.color,
+            height: 1.2,
           ),
           child: Text(widget.label),
         ),
