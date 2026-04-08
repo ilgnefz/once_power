@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+# 给权限（解决 Release 创建失败）
+permissions:
+  contents: write
+
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -20,14 +24,13 @@ jobs:
           channel: stable
           cache: true
 
-      # ✅ 系统依赖缓存（从此不会每次重装 30 个依赖包）
-      - name: Cache APT libraries
+      - name: Cache APT dependencies
         uses: actions/cache@v4
         with:
           path: /var/lib/apt/lists
           key: ${{ runner.os }}-apt-${{ hashFiles('.github/workflows/*.yml') }}
 
-      - name: Install Linux build dependencies
+      - name: Install Linux dependencies
         run: |
           sudo add-apt-repository universe
           sudo apt-get update -y
@@ -46,7 +49,7 @@ jobs:
             liblzma-dev \
             libstdc++-12-dev
 
-      - name: Install AppImageTool
+      - name: Install appimagetool
         run: |
           wget -O appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
           chmod +x appimagetool
@@ -55,39 +58,52 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Extract version from pubspec.yaml
+      - name: Extract version
         id: extract_version
         run: |
-          VERSION=$(grep 'version:' pubspec.yaml | cut -d ' ' -f 2)
+          VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Install Fastforge
+      - name: Install fastforge
         run: dart pub global activate fastforge
 
-      # ✅ 一次打包 3 个格式，不用分开跑（速度×3）
+      # 一次打包全部格式
       - name: Build all packages
         run: fastforge package --platform linux --targets appimage,deb,rpm
 
-      # ✅ 重命名（容错：找不到文件不报错）
+      # 把所有包移动到 dist 根目录（解决找不到文件）
+      - name: Collect packages to dist/
+        run: |
+          find dist/ -name "*.AppImage" -exec mv {} dist/ \;
+          find dist/ -name "*.deb" -exec mv {} dist/ \;
+          find dist/ -name "*.rpm" -exec mv {} dist/ \;
+
+      # 重命名（安全版）
       - name: Rename AppImage
         run: |
-          APPIMAGE_FILE=$(ls dist/*.AppImage | head -1)
-          mv "$APPIMAGE_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
+          FILE=$(ls dist/*.AppImage | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
+          fi
         continue-on-error: true
 
       - name: Rename DEB
         run: |
-          DEB_FILE=$(ls dist/*.deb | head -1)
-          mv "$DEB_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
+          FILE=$(ls dist/*.deb | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
+          fi
         continue-on-error: true
 
       - name: Rename RPM
         run: |
-          RPM_FILE=$(ls dist/*.rpm | head -1)
-          mv "$RPM_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
+          FILE=$(ls dist/*.rpm | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
+          fi
         continue-on-error: true
 
-      # ✅ 上传产物
+      # 上传产物
       - name: Upload AppImage
         uses: actions/upload-artifact@v4
         with:
@@ -109,44 +125,12 @@ jobs:
           path: dist/*.rpm
           retention-days: 7
 
-      # ✅ 发布 Release
+      # 创建 Release
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
+          files: dist/*.AppImage dist/*.deb dist/*.rpm
           tag_name: v${{ steps.extract_version.outputs.version }}
-          release_name: Release v${{ steps.extract_version.outputs.version }}
-          draft: false
-          prerelease: false
-
-      - name: Upload AppImage to Release
-        uses: actions/upload-release-asset@v1
+          name: Release v${{ steps.extract_version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*.AppImage
-          asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage
-          asset_content_type: application/octet-stream
-
-      - name: Upload DEB to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*.deb
-          asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
-
-      - name: Upload RPM to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*.rpm
-          asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm
-          asset_content_type: application/x-rpm
