@@ -1,0 +1,26 @@
+icon: assets/images/logo.png
+summary: Batch rename and organize files tool
+group: Application/Tool
+vendor: ilgnefz
+packager: ilgnefz
+packagerEmail: ilgnefz@foxmail.com
+license: GPLv3
+url: https://github.com/ilgnefz/once_power
+
+display_name: OncePower
+
+keywords:
+  - Tool
+  - File
+  - Folder
+  - Rename
+  - Organize
+  - Application
+
+generic_name: OncePower
+
+categories:
+  - Tool
+  - Utility
+
+startup_notify: true
