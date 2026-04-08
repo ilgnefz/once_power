@@ -35,8 +35,8 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=E:\
-OutputBaseFilename=OncePower
+OutputDir=E:\Workspace\Desktop
+OutputBaseFilename=OncePower-v{#MyAppVersion}-Windows-x64-Install
 SetupIconFile=E:\WorkSpace\Desktop\once_power\windows\runner\resources\app_icon.ico
 Compression=lzma
 SolidCompression=yes

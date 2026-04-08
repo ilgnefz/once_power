@@ -4,7 +4,7 @@ import 'package:once_power/const/icons.dart';
 import 'package:once_power/const/images.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/const/text.dart';
-import 'package:once_power/widget/common/click_icon.dart';
+import 'package:once_power/widget/base/icon.dart';
 import 'package:window_manager/window_manager.dart';
 
 class TitleBarView extends StatefulWidget {
@@ -40,8 +40,8 @@ class _TitleBarViewState extends State<TitleBarView> {
 
   @override
   Widget build(BuildContext context) {
-    TitleBarTheme? theme = Theme.of(context).extension<TitleBarTheme>();
-    Color? color = theme?.iconColor;
+    final theme = Theme.of(context).extension<TitleBarTheme>();
+    final Color? color = theme?.iconColor;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (details) => windowManager.startDragging(),
@@ -49,33 +49,52 @@ class _TitleBarViewState extends State<TitleBarView> {
       child: Container(
         width: double.infinity,
         height: AppNum.titleBar,
-        padding: EdgeInsets.symmetric(horizontal: AppNum.padding),
+        padding: .only(left: AppNum.padding),
         child: Row(
-          spacing: 8,
           children: [
             Image.asset(AppImages.logo, height: AppNum.logoSize),
+            const SizedBox(width: 8),
             Text(AppText.appName, style: theme?.textStyle),
             const Spacer(),
-            ClickIcon(
+            TitleBarIcon(
               svg: AppIcons.minimize,
-              iconSize: size,
               color: color,
               onPressed: minimize,
             ),
-            ClickIcon(
+            TitleBarIcon(
               svg: isMax ? AppIcons.unmaximize : AppIcons.maximize,
-              iconSize: size,
               color: color,
               onPressed: maximizeOrUnmaximize,
             ),
-            ClickIcon(
-              svg: AppIcons.close,
-              iconSize: size,
-              color: color,
-              onPressed: close,
-            ),
+            TitleBarIcon(svg: AppIcons.close, color: color, onPressed: close),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TitleBarIcon extends StatelessWidget {
+  const TitleBarIcon({
+    super.key,
+    required this.svg,
+    required this.color,
+    required this.onPressed,
+  });
+
+  final String svg;
+  final Color? color;
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      mouseCursor: SystemMouseCursors.click,
+      onTap: onPressed,
+      child: Container(
+        width: 48,
+        alignment: Alignment.center,
+        child: BaseIcon(svg: svg, size: AppNum.titleBarIcon, color: color),
       ),
     );
   }

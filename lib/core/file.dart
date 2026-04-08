@@ -112,27 +112,11 @@ Future<void> _processFilesWithWorkerPool(
       if (message is _IndexedFileInfo) {
         // 存储带索引的文件信息
         results[message.index] = message.fileInfo;
-
-        // 检查是否有连续的文件可以添加
-        for (int i = 0; i < results.length; i++) {
-          if (results[i] != null) {
-            onFileProcessed(results[i]!);
-            results[i] = null; // 标记为已添加
-            processedCount++;
-            onProgress(processedCount);
-          } else {
-            break; // 遇到空值，停止添加
-          }
-        }
+        // 立即处理当前文件，不等待连续结果
+        onFileProcessed(message.fileInfo);
+        processedCount++;
+        onProgress(processedCount);
       } else if (message is bool && message == true) {
-        // 处理完成，添加剩余的文件
-        for (int i = 0; i < results.length; i++) {
-          if (results[i] != null) {
-            onFileProcessed(results[i]!);
-            processedCount++;
-            onProgress(processedCount);
-          }
-        }
         break;
       }
     }
@@ -178,30 +162,14 @@ Future<void> _processFilesWithWorkerPool(
     if (message is _IndexedFileInfo) {
       // 存储带索引的文件信息
       results[message.index] = message.fileInfo;
-
-      // 检查是否有连续的文件可以添加
-      for (int i = 0; i < results.length; i++) {
-        if (results[i] != null) {
-          onFileProcessed(results[i]!);
-          results[i] = null; // 标记为已添加
-          processedCount++;
-          onProgress(processedCount);
-        } else {
-          break; // 遇到空值，停止添加
-        }
-      }
+      // 立即处理当前文件，不等待连续结果
+      onFileProcessed(message.fileInfo);
+      processedCount++;
+      onProgress(processedCount);
     } else if (message is bool && message == true) {
       // 一个工作器完成
       completedWorkers++;
       if (completedWorkers >= workerCountFinal) {
-        // 所有工作器完成，添加剩余的文件
-        for (int i = 0; i < results.length; i++) {
-          if (results[i] != null) {
-            onFileProcessed(results[i]!);
-            processedCount++;
-            onProgress(processedCount);
-          }
-        }
         break;
       }
     }
@@ -295,6 +263,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
         final fileInfo = await generateFileInfo(path);
         if (!existingPaths.contains(fileInfo.path)) {
           ref.read(fileListProvider.notifier).add(fileInfo);
+          existingPaths.add(fileInfo.path);
         }
         processedCount++;
         ref.read(countProvider.notifier).updateValue(processedCount);
@@ -311,6 +280,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
         // 处理单个文件结果
         if (!existingPaths.contains(fileInfo.path)) {
           ref.read(fileListProvider.notifier).add(fileInfo);
+          existingPaths.add(fileInfo.path);
         }
       },
       (progress) {
