@@ -68,38 +68,38 @@ jobs:
 
       - name: Rename AppImage
         run: |
-          APPIMAGE_FILE=$(ls build/linux/x64/release/*.AppImage)
-          mv "$APPIMAGE_FILE" "build/linux/x64/release/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
+          APPIMAGE_FILE=$(ls dist/*.AppImage)
+          mv "$APPIMAGE_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
 
       - name: Rename DEB
         run: |
-          DEB_FILE=$(ls build/linux/x64/release/*.deb)
-          mv "$DEB_FILE" "build/linux/x64/release/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
+          DEB_FILE=$(ls dist/*.deb)
+          mv "$DEB_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
 
       - name: Rename RPM
         run: |
-          RPM_FILE=$(ls build/linux/x64/release/*.rpm)
-          mv "$RPM_FILE" "build/linux/x64/release/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
+          RPM_FILE=$(ls dist/*.rpm)
+          mv "$RPM_FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
 
       - name: Upload AppImage
         uses: actions/upload-artifact@v4
         with:
           name: linux-appimage
-          path: build/linux/x64/release/*.AppImage
+          path: dist/*.AppImage
           retention-days: 7
 
       - name: Upload DEB
         uses: actions/upload-artifact@v4
         with:
           name: linux-deb
-          path: build/linux/x64/release/*.deb
+          path: dist/*.deb
           retention-days: 7
 
       - name: Upload RPM
         uses: actions/upload-artifact@v4
         with:
           name: linux-rpm
-          path: build/linux/x64/release/*.rpm
+          path: dist/*.rpm
           retention-days: 7
 
       - name: Create Release
@@ -119,7 +119,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux/x64/release/*.AppImage
+          asset_path: dist/*.AppImage
           asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage
           asset_content_type: application/octet-stream
 
@@ -129,7 +129,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux/x64/release/*.deb
+          asset_path: dist/*.deb
           asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
 
@@ -139,6 +139,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux/x64/release/*.rpm
+          asset_path: dist/*.rpm
           asset_name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm
           asset_content_type: application/x-rpm
