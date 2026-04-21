@@ -261,10 +261,10 @@ packages:
     dependency: "direct main"
     description:
       name: desktop_drop
-      sha256: e70b46b2d61f1af7a81a40d1f79b43c28a879e30a4ef31e87e9c27bea4d784e8
+      sha256: aa1e797255bfbc76f9eb5aa4f61e5b68dbf69962ab1be6495816d2f251bc0d1f
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   dio:
     dependency: "direct main"
     description:
@@ -540,10 +540,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_rust_bridge
-      sha256: "37ef40bc6f863652e865f0b2563ea07f0d3c58d8efad803cc01933a4b2ee067e"
+      sha256: e87d6b9ee934dcd24a128ccb2bd91905d2d5fe5c06245d6a8f5477d4907a437a
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.11.1"
+    version: "2.12.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -1103,10 +1103,10 @@ packages:
     dependency: "direct main"
     description:
       name: shared_preferences
-      sha256: "2939ae520c9024cb197fc20dee269cd8cdbf564c8b5746374ec6cacdc5169e64"
+      sha256: c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.5.4"
+    version: "2.5.5"
   shared_preferences_android:
     dependency: transitive
     description:

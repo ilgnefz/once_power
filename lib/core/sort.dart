@@ -13,7 +13,7 @@ void reorderList(
   int oldIndex,
   int newIndex,
 ) {
-  if (ref.watch(currentSortProvider) != SortType.defaultSort) {
+  if (ref.read(currentSortProvider) != SortType.defaultSort) {
     ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
     ref.read(fileListProvider.notifier).addAll(files);
   }

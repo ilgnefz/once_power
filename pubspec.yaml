@@ -36,18 +36,18 @@ dependencies:
   cupertino_icons: ^1.0.8
   rust_lib_once_power:
     path: rust_builder
-  flutter_rust_bridge: ^2.11.1
+  flutter_rust_bridge: ^2.12.0
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
   # --- System ---
-  desktop_drop: ^0.7.0
+  desktop_drop: ^0.7.1
   launch_at_startup: ^0.5.1
   shortcut_menu_extender: ^0.2.0
   tray_manager: ^0.5.2
   win32_registry: ^2.1.0
   window_manager: ^0.5.1
   # --- UI ---
-  dropdown_button2: ^3.0.0-beta.25
+  dropdown_button2: ^3.0.0
   flutter_avif: ^3.1.0
   flutter_svg: ^2.2.4
   reorderable_grid: ^1.0.13
@@ -69,7 +69,7 @@ dependencies:
   image_size_getter: ^2.4.1
   path: ^1.9.1
   package_info_plus: ^9.0.0
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.5.5
   string_util_xx: ^0.2.4
   url_launcher: ^6.3.2
   xml: ^6.6.1

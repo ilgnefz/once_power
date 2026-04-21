@@ -41,6 +41,7 @@ class _DigitInputState extends State<DigitInput> {
       ..addListener(() {
         if (!focusNode.hasFocus) {
           controller.text = '${change()}$unit';
+          widget.onChanged(change());
           setState(() {});
         }
       });
