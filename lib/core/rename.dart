@@ -39,12 +39,12 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   ref.read(isApplyingProvider.notifier).start();
   List<FileInfo> tempList = List.from(list);
   for (FileInfo file in list) {
-    tempList.removeAt(0);
     if (file.path == file.getNewPath(isUndo)) continue;
     if (cancelEmptyRename && file.newName.isEmpty) continue;
     InfoDetail? info = await handelFile(ref, tempList, file, isUndo, saveLog);
     if (info != null) errs.add(info);
     ref.read(countProvider.notifier).update();
+    tempList.removeAt(0);
   }
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
@@ -58,34 +58,6 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   if (saveLog) await LogServer.create();
 }
 
-Future<String> renameExistFile(String filePath) async {
-  String folder = path.dirname(filePath);
-  String name = path.basenameWithoutExtension(filePath);
-  String extension = path.extension(filePath);
-  if (extension.isEmpty && name.startsWith('.')) {
-    (name, extension) = ('', name);
-  }
-  String duplicateKey = Platform.isLinux
-      ? path.join(folder, name + extension.toLowerCase())
-      : filePath.toLowerCase();
-  int counter = 1;
-  if (_duplicateMap.containsKey(duplicateKey)) {
-    counter = _duplicateMap[duplicateKey] ?? 2;
-    _duplicateMap[duplicateKey] = counter + 1;
-  } else {
-    _duplicateMap[duplicateKey] = 2;
-  }
-  String prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
-  int width = StorageUtil.getInt(AppKeys.autoWidth) ?? 2;
-  String suffix = StorageUtil.getString(AppKeys.autoSuffix) ?? '';
-  String newPath = path.join(
-    folder,
-    '$name$prefix${formatNum(counter, width)}$suffix$extension',
-  );
-  if (await isExist(false, newPath)) return renameExistFile(newPath);
-  return newPath;
-}
-
 Future<InfoDetail?> handelFile(
   WidgetRef ref,
   List<FileInfo> list,
@@ -93,7 +65,7 @@ Future<InfoDetail?> handelFile(
   bool isUndo,
   bool saveLog,
 ) async {
-  // print('${file.path} -- ${file.tempPath} -- ${file.getNewPath()}');
+  // print('${file.path} -- ${file.tempPath} -- ${file.getNewPath(isUndo)}');
   Set<String> pendingFiles = {};
   RenameCondition condition = await checkCondition(
     ref,
@@ -135,7 +107,9 @@ Future<RenameCondition> checkCondition(
   String newPath = file.getNewPath(isUndo);
   // 检测是否存在，如果不存在就返回 available
   if (await isExist(false, newPath)) {
-    FileInfo? tempFile = list.firstWhereOrNull((e) => e.path == newPath);
+    List<FileInfo> tempList = List.from(list);
+    tempList.remove(file);
+    FileInfo? tempFile = tempList.firstWhereOrNull((e) => e.path == newPath);
     if (tempFile == null) return RenameCondition.blocked;
     if (pendingFiles.contains(tempFile.id)) return RenameCondition.override;
     pendingFiles.add(file.id);
@@ -155,9 +129,9 @@ Future<RenameCondition> checkCondition(
       if (res.isAvailable) {
         updateShowInfo(ref, tempFile, tempPath);
       } else if (res.isOverride) {
-        ref
-            .read(fileListProvider.notifier)
-            .updateTempPath(tempFile.id, tempPath);
+        final provider = ref.read(fileListProvider.notifier);
+        provider.updateTempPath(tempFile.id, tempPath);
+        provider.updatePath(tempFile.id, tempPath);
       }
       return RenameCondition.available;
     } catch (e) {
@@ -167,8 +141,37 @@ Future<RenameCondition> checkCondition(
   return RenameCondition.available;
 }
 
+Future<String> renameExistFile(String filePath) async {
+  String folder = path.dirname(filePath);
+  String name = path.basenameWithoutExtension(filePath);
+  String extension = path.extension(filePath);
+  if (extension.isEmpty && name.startsWith('.')) {
+    (name, extension) = ('', name);
+  }
+  String duplicateKey = Platform.isLinux
+      ? path.join(folder, name + extension.toLowerCase())
+      : filePath.toLowerCase();
+  int counter = 1;
+  if (_duplicateMap.containsKey(duplicateKey)) {
+    counter = _duplicateMap[duplicateKey] ?? 2;
+    _duplicateMap[duplicateKey] = counter + 1;
+  } else {
+    _duplicateMap[duplicateKey] = 2;
+  }
+  String prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
+  int width = StorageUtil.getInt(AppKeys.autoWidth) ?? 2;
+  String suffix = StorageUtil.getString(AppKeys.autoSuffix) ?? '';
+  String newPath = path.join(
+    folder,
+    '$name$prefix${formatNum(counter, width)}$suffix$extension',
+  );
+  if (await isExist(false, newPath)) return renameExistFile(newPath);
+  return newPath;
+}
+
 String generateTempName(FileInfo file) {
-  String temp = '${file.name}.${DateTime.now().hashCode}.once-power.tmp';
+  String temp =
+      '${file.name}.${DateTime.now().millisecondsSinceEpoch}.once-power.tmp';
   String tempName = getFullName(temp, file.newExtension);
   return path.join(file.parent, tempName);
 }
