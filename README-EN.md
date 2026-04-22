@@ -1,6 +1,6 @@
-<div style="text-align:center"><img src="doc/logo.webp" alt="OncePower"></div>
+<div align="center"><img alt="OncePower" src="doc/logo.webp"></div>
 
-<center> <a href="README.md" style="text-decoration:none;">简体中文</a> | English </center>
+[简体中文](README.md) | English
 
 **OncePower** is an all-in-one desktop tool designed for **batch file renaming** and **file organization**. Users can perform advanced matching and modification on filenames without needing to learn regular expressions. Originally developed to meet the demand for batch renaming images, it features a specialized function tailored for photos and videos—the **View Mode**, allowing users to preview images and videos.
 
