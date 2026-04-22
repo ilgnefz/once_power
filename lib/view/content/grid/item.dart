@@ -71,6 +71,7 @@ class ContentGridItem extends StatelessWidget {
                 ],
               ),
               maxLines: 2,
+              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
             ),
             // child: BaseText(

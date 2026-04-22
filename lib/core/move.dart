@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/sort.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
@@ -22,6 +23,10 @@ void toThePosition(
   MovePosition mp,
 ) {
   List<FileInfo> files = ref.read(sortListProvider);
+  if (ref.read(currentSortProvider) != SortType.defaultSort) {
+    ref.read(fileListProvider.notifier).addAll(files);
+    ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
+  }
   if (listEquals(_tempSortSelectList, selectList) && _tempMP == mp) return;
   _tempMP = mp;
   _tempSortSelectList.clear();
@@ -34,7 +39,6 @@ void toThePosition(
     removeOne(ref, file);
   }
   insertFunction(selectList);
-  ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
 }
 
 void toTheFirst(WidgetRef ref, List<FileInfo> selectList) {

@@ -14,8 +14,8 @@ void reorderList(
   int newIndex,
 ) {
   if (ref.read(currentSortProvider) != SortType.defaultSort) {
-    ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
     ref.read(fileListProvider.notifier).addAll(files);
+    ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
   }
   FileInfo item = files.elementAt(oldIndex);
   ref.read(fileListProvider.notifier).removeAt(oldIndex);

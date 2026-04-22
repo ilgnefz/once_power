@@ -440,37 +440,60 @@ List<FileInfo> splitSortList(List<FileInfo> fileList, bool reverse) {
 }
 
 int naturalCompare(String a, String b) {
-  if (a.isEmpty || b.isEmpty) {
-    return a.length.compareTo(b.length);
-  }
+  int i = 0, j = 0;
+  int lenA = a.length, lenB = b.length;
 
-  final aFirstChar = a[0];
-  final bFirstChar = b[0];
+  while (i < lenA && j < lenB) {
+    String charA = a[i];
+    String charB = b[j];
 
-  final aIsDigit = aFirstChar.contains(RegExp(r'\d'));
-  final bIsDigit = bFirstChar.contains(RegExp(r'\d'));
+    // 如果两边都是数字 → 提取整个数字比较
+    if (_isDigit(charA) && _isDigit(charB)) {
+      int numA = 0, numB = 0;
 
-  if (aIsDigit && bIsDigit) {
-    final regExp = RegExp(r'^\d+');
-    final aMatch = regExp.firstMatch(a);
-    final bMatch = regExp.firstMatch(b);
-
-    if (aMatch != null && bMatch != null) {
-      final aNum = int.tryParse(aMatch.group(0)!);
-      final bNum = int.tryParse(bMatch.group(0)!);
-
-      if (aNum != null && bNum != null) {
-        final result = aNum.compareTo(bNum);
-        if (result != 0) return result;
+      while (i < lenA && _isDigit(a[i])) {
+        numA = numA * 10 + int.parse(a[i]);
+        i++;
       }
-    }
+      while (j < lenB && _isDigit(b[j])) {
+        numB = numB * 10 + int.parse(b[j]);
+        j++;
+      }
 
-    return a.compareTo(b);
-  } else if (aIsDigit) {
-    return -1;
-  } else if (bIsDigit) {
-    return 1;
-  } else {
-    return a.compareTo(b);
+      if (numA != numB) return numA.compareTo(numB);
+    }
+    // 左边数字，右边非数字 → 数字优先
+    else if (_isDigit(charA)) {
+      return -1;
+    }
+    // 右边数字，左边非数字 → 数字排后
+    else if (_isDigit(charB)) {
+      return 1;
+    }
+    // 普通字符比较
+    else {
+      if (charA != charB) return charA.compareTo(charB);
+      i++;
+      j++;
+    }
   }
+
+  // 处理括号数字 (1) (10) (2) → 强制按里面数字排序
+  final numA = _extractNumberInParentheses(a);
+  final numB = _extractNumberInParentheses(b);
+  if (numA != null && numB != null) {
+    return numA.compareTo(numB);
+  }
+
+  return lenA.compareTo(lenB);
+}
+
+// 辅助：判断是否数字
+bool _isDigit(String s) => RegExp(r'\d').hasMatch(s);
+
+// 辅助：提取 (1) (10) 里的数字
+int? _extractNumberInParentheses(String s) {
+  final match = RegExp(r'\((\d+)\)').firstMatch(s);
+  if (match == null) return null;
+  return int.tryParse(match.group(1)!);
 }
