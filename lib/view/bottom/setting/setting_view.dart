@@ -4,6 +4,7 @@ import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/util/storage.dart';
+import 'package:once_power/view/bottom/setting/info.dart';
 import 'package:once_power/view/bottom/setting/rename.dart';
 import 'package:once_power/view/bottom/setting/rename_format.dart';
 import 'package:once_power/view/bottom/setting/theme.dart';
@@ -121,6 +122,8 @@ class _SettingViewState extends State<SettingView> {
                         SettingTitle(tr(AppL10n.settingHotKey)),
                         SizedBox(height: AppNum.spaceSmall),
                         TipPanel(),
+                        SizedBox(height: AppNum.spaceSmall),
+                        InfoPanel(),
                       ],
                     ),
                   ),

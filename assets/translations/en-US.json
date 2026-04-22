@@ -22,7 +22,7 @@
     "len": "Enter number or length",
     "modify": "Enter replace text",
     "today": "Today's Date",
-    "case": "Case Sensitive",
+    "case": "Case insensitive",
     "date": "Date",
     "dateRename": "Rename by Date",
     "prefix": "Prefix",
@@ -515,6 +515,7 @@
       "suspense": "Stash files",
       "front": "Take to front",
       "behind": "Take to behind"
-    }
+    },
+    "tutorial": "Tutorial"
   }
 }

@@ -51,7 +51,7 @@ String addEscapeIfPunctuation(String text) {
 
 String getMatchedStrings(String pattern, String input, bool matchCase) {
   pattern = addEscapeIfPunctuation(pattern);
-  RegExp regex = RegExp(pattern, caseSensitive: matchCase);
+  RegExp regex = RegExp(pattern, caseSensitive: !matchCase);
   Iterable<Match> matches = regex.allMatches(input);
   List<String?> matchedStrings = matches.map((m) => m.group(0)).toList();
   return matchedStrings.isEmpty ? '' : matchedStrings.join('');
@@ -73,7 +73,8 @@ String reserveTypeString(List<ReserveType> typeList, String name) {
         r"\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u0f00-\u0fff";
   }
   if (!punctuation) {
-    pattern += r"()\~!@#\$%\^&,'\.;_\[\]`\{\}\-=+！，。？：、‘’“”（）【】{}<>《》「」";
+    pattern +=
+        r"\[\](){}<>～~ !@#$%^&*_+\-=\\|;:‘’“”,'.`/?×÷+−*/=！，。？：；、（）【】《》「」『』…·—#￥%……&×÷±=≠≈∞π√°℃‰€£¥★☆○●◎◇◆□■△▲▽▼→←↑↓↔〓＃＆※＠☆♂♀♪♭♯卐卍";
   }
   RegExp reg = RegExp("[$pattern]");
   return name.replaceAll(reg, "");

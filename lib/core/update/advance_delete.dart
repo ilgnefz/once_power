@@ -28,7 +28,7 @@ String advanceDeleteName(AdvanceMenuDelete menu, String name) {
       }
       if (types.contains(DeleteType.punctuation)) {
         String pattern =
-            r"\[\](){}<>～~!@#$%^&*_+\-=\\|;:‘’“”,'.`/?×÷+−*/=！，。？：；、（）【】《》「」『』…·—#￥%……&×÷±=≠≈∞π√°℃‰€£¥★☆○●◎◇◆□■△▲▽▼→←↑↓↔〓＃＆※＠☆♂♀♪♭♯卐卍";
+            r"\[\](){}<>～~ !@#$%^&*_+\-=\\|;:‘’“”,'.`/?×÷+−*/=！，。？：；、（）【】《》「」『』…·—#￥%……&×÷±=≠≈∞π√°℃‰€£¥★☆○●◎◇◆□■△▲▽▼→←↑↓↔〓＃＆※＠☆♂♀♪♭♯卐卍";
         name = name.replaceAll(RegExp("[$pattern]"), '');
       }
       if (types.contains(DeleteType.space)) name = name.replaceAll(' ', '');

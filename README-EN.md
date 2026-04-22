@@ -1,23 +1,19 @@
-<div align="center"><img alt="OncePower" src="doc/logo.png"></div>
+<div style="text-align:center"><img src="doc/logo.webp" alt="OncePower"></div>
 
-[简体中文](README.md) | English
+<center> <a href="README.md" style="text-decoration:none;">简体中文</a> | English </center>
 
-OncePower is a file and folder batch renaming utility with additional features of batch deleting empty folders and batch moving files, allowing users to do advanced matching without learning regular expressions.
+**OncePower** is an all-in-one desktop tool designed for **batch file renaming** and **file organization**. Users can perform advanced matching and modification on filenames without needing to learn regular expressions. Originally developed to meet the demand for batch renaming images, it features a specialized function tailored for photos and videos—the **View Mode**, allowing users to preview images and videos.
 
-The original intention of software development was to batch rename images, so the new version has updated a new feature specifically for image renaming —— **View Mode**.
+# 语言平台支持
+
+- **中文**、**English**
+- **Windows** (Supports Windows 10 and above)、**Linux**
+
 
 > [!Tip]
 >
 > Due to the difficulty of recording GIFs, only dynamic diagrams in Chinese are available. If you do not understand, you can open the software and refer to the pictures to learn and use them
 
-# Language Support
-
-- **中文**
-- **English**
-
-# Platform Support
-
-- **Windows**(Support system versions of Win10 and above)
 
 # New Feature
 

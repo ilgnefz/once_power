@@ -87,7 +87,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   riverpod_generator: ^4.0.3
-  build_runner: ^2.12.2
+  build_runner: ^2.14.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,19 +1,14 @@
-<div align="center"><img alt="OncePower" src="doc/logo.png"></div>
+<div style="text-align:center"><img src="doc/logo.webp" alt="OncePower"></div>
 
-简体中文 | [English](README-EN.md)
+<center> 简体中文 | <a href="README-EN.md" style="text-decoration:none;">English</a> </center>
 
-OncePower 是一个文件和文件夹批量重命名工具，额外添加了批量删除空文件夹和批量移动文件的功能，用户无需学正则表达式既可进行高级匹配。
+**OncePower** 是一款集**批量重命名文件**并**整理文件**于一身的桌面端工具。用户无需学习编写正则表达式就能对文件名称进行高级匹配并修改。软件开发的初衷是想要对图片进行批量重命名，因此拥有特别针对图片视频的功能——**视图模式**，来预览图片和视频。
 
-软件开发的初衷是想要对图片进行批量重命名，因此新版更新了特别针对图片重命名的新功能——**视图模式**。
+# 语言平台支持
 
-# 语言支持
+- **中文**、**English**
+- **Windows** （支持win10及其以上的系统版本）、**Linux**
 
-- **中文**
-- **English**
-
-# 平台支持
-
-- **Windows** （支持win10及其以上的系统版本）
 
 # 新功能
 

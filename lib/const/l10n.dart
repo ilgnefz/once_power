@@ -476,4 +476,5 @@ class AppL10n {
   static const String settingHotKeySuspense = 'setting.hotKey.suspense';
   static const String settingHotKeyFront = 'setting.hotKey.front';
   static const String settingHotKeyBehind = 'setting.hotKey.behind';
+  static const String settingTutorial = 'setting.tutorial';
 }

@@ -19,12 +19,14 @@ List<FileInfo> sortList(Ref ref) {
 
   switch (type) {
     case SortType.nameAscending:
-      // sortedList = splitSortList(list, false);
-      sortedList = [...list]..sort((a, b) => naturalCompare(a.name, b.name));
+      sortedList = splitSortList(list, false);
+      // sortedList = [...list]
+      //   ..sort((a, b) => CustomSort.compareExtend(a.name, b.name));
       break;
     case SortType.nameDescending:
-      // sortedList = splitSortList(list, true);
-      sortedList = [...list]..sort((a, b) => naturalCompare(b.name, a.name));
+      sortedList = splitSortList(list, true);
+      // sortedList = [...list]
+      //   ..sort((a, b) => CustomSort.compareExtend(b.name, a.name));
       break;
     case SortType.dateAscending:
       sortedList = [...list]

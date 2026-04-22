@@ -21,10 +21,11 @@ String replaceName(WidgetRef ref, String name, NormalInfo info) {
   List<String> matchText = match.trim().split(' ');
   bool isDigit = matchText.every((e) => int.tryParse(e) != null);
   bool oneNum = isDigit && matchText.length == 1;
-  if (caseSen) {
-    name = name.toLowerCase();
-    match = match.toLowerCase();
-  }
+  // if (caseSen) {
+  //   print('进来');
+  //   name = name.toLowerCase();
+  //   match = match.toLowerCase();
+  // }
   // 匹配的
   if (types.length == 1 && checkMatch) {
     if (isLen) {
@@ -104,7 +105,7 @@ String regexReplace(
 ) {
   final RegExp regExp = RegExp(
     addEscapeIfPunctuation(pattern),
-    caseSensitive: caseSensitive,
+    caseSensitive: !caseSensitive,
   );
   return text.replaceAll(regExp, replacement);
 }

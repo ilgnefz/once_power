@@ -17,9 +17,12 @@ class UploadFileCard extends StatelessWidget {
       mouseCursor: SystemMouseCursors.click,
       onTap: () => showMarkText(context, info),
       child: Container(
-        width: 80,
-        padding: EdgeInsets.all(AppNum.spaceSmall),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+        constraints: BoxConstraints(maxWidth: 64),
+        padding: .only(right: AppNum.spaceSmall),
+        decoration: BoxDecoration(
+          // color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 2,

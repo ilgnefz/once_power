@@ -64,7 +64,9 @@ class _VideoViewState extends ConsumerState<VideoView> {
       debugPrint('Error creating controller: $e');
       _controller?.dispose();
       _controller = null;
-      setState(() => _controllerFailed = true);
+      if (mounted) {
+        setState(() => _controllerFailed = true);
+      }
     }
   }
 
@@ -76,11 +78,12 @@ class _VideoViewState extends ConsumerState<VideoView> {
       await _controller!.play();
       await Future.delayed(const Duration(seconds: 1));
       await _controller!.pause();
-      final info = _controller!.getMediaInfo()?.video?[0].codec;
-      if (info == null) {
+      final videoInfo = _controller!.getMediaInfo()?.video;
+      if (videoInfo == null || videoInfo.isEmpty) {
         debugPrint('No video codec info');
         return;
       }
+      final info = videoInfo[0].codec;
       final int width = info.width;
       final int height = info.height;
       final Uint8List? snapshot = await _controller!.snapshot();
@@ -95,18 +98,22 @@ class _VideoViewState extends ConsumerState<VideoView> {
         height,
       );
       if (imageBytes.isNotEmpty) {
-        setState(() => _coverData = imageBytes);
         if (mounted) {
+          setState(() => _coverData = imageBytes);
           ref
               .read(fileListProvider.notifier)
               .updateThumbnail(widget.file.id, imageBytes);
         }
       } else {
-        setState(() => _controllerFailed = true);
+        if (mounted) {
+          setState(() => _controllerFailed = true);
+        }
       }
     } catch (e) {
       debugPrint('Error generating thumbnail: $e');
-      setState(() => _controllerFailed = true);
+      if (mounted) {
+        setState(() => _controllerFailed = true);
+      }
     } finally {
       _releaseController();
     }

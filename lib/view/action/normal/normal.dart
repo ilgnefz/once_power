@@ -75,7 +75,7 @@ class _NormalViewState extends State<NormalView>
           onUpload: (ref, value) async {
             UploadMarkInfo? info = await uploadTextFile(value);
             if (info != null) {
-              info.copyWith(isPrefix: false);
+              info = info.copyWith(isPrefix: false);
               ref.read(suffixUploadMarkProvider.notifier).update(info);
               normalUpdateName(ref);
             }

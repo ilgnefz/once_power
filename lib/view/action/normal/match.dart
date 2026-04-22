@@ -14,18 +14,15 @@ import 'package:once_power/widget/common/input_field.dart';
 
 final Provider<bool> _enableProvider = Provider((Ref ref) {
   FunctionMode mode = ref.watch(currentModeProvider);
-  bool modifyIsEmpty = ref.watch(modifyIsEmptyProvider);
   bool isDateRename = ref.watch(isDateRenameProvider);
   switch (mode) {
     case FunctionMode.replace:
       return !isDateRename;
     case FunctionMode.reserve:
-      if (!modifyIsEmpty && !ref.watch(matchIsEmptyProvider)) {
-        return ref.watch(selectedReserveTypeProvider).isEmpty && !modifyIsEmpty;
-      }
-      return ref.watch(selectedReserveTypeProvider).isEmpty &&
-          modifyIsEmpty &&
-          !isDateRename;
+      bool modifyIsEmpty = ref.watch(modifyIsEmptyProvider);
+      bool selectIsEmpty = ref.watch(selectedReserveTypeProvider).isEmpty;
+      // if (modifyIsEmpty && selectIsEmpty && !isDateRename) return true;
+      return modifyIsEmpty && selectIsEmpty && !isDateRename;
     default:
       return true;
   }
