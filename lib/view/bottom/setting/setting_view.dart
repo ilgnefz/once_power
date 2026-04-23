@@ -9,6 +9,7 @@ import 'package:once_power/view/bottom/setting/rename.dart';
 import 'package:once_power/view/bottom/setting/rename_format.dart';
 import 'package:once_power/view/bottom/setting/theme.dart';
 import 'package:once_power/view/bottom/setting/tip.dart';
+import 'package:once_power/view/bottom/setting/visual.dart';
 import 'package:once_power/view/bottom/setting/window.dart';
 import 'package:once_power/widget/base/text.dart';
 
@@ -82,6 +83,8 @@ class _SettingViewState extends State<SettingView> {
                             );
                           }),
                         ),
+                        SizedBox(height: AppNum.spaceMedium),
+                        VisualSetting(),
                         SizedBox(height: AppNum.spaceMedium),
                         RenameSetting(
                           cancelRename: cancelRename,

@@ -208,6 +208,12 @@ class AppL10n {
   static const String menuGroup = 'menu.group';
   static const String menuEdit = 'menu.edit';
   static const String menuAutoGroup = 'menu.autoGroup';
+  static const String menuAutoDate = 'menu.autoDate.title';
+  static const String menuAutoYear = 'menu.autoDate.year';
+  static const String menuAutoMonth = 'menu.autoDate.month';
+  static const String menuAutoDay = 'menu.autoDate.day';
+  static const String menuAutoWeek = 'menu.autoDate.week';
+  static const String menuRuleGroup = 'menu.ruleGroup';
   static const String menuRule = 'menu.rule';
   static const String menuSelect = 'menu.select';
   static const String menuUnselect = 'menu.unselect';
@@ -357,6 +363,10 @@ class AppL10n {
   static const String eRuleBeforeOrEqual = 'enum.rule.beforeOrEqual';
   static const String eRuleAfterOrEqual = 'enum.rule.afterOrEqual';
   static const String eRuleValue = 'enum.rule.value';
+  static const String eAutoFolder = 'enum.auto.folder';
+  static const String eAutoType = 'enum.auto.type';
+  static const String eAutoExtension = 'enum.auto.extension';
+  static const String eAutoDate = 'enum.auto.date';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';
@@ -459,6 +469,8 @@ class AppL10n {
   static const String settingCancelRename = 'setting.cancelRename';
   static const String settingAutoRenameFormat = 'setting.autoRenameFormat';
   static const String settingWindow = 'setting.window';
+  static const String settingVisual = 'setting.visual';
+  static const String settingTip = 'setting.tip';
   static const String settingRename = 'setting.rename';
   static const String settingTheme = 'setting.theme';
   static const String settingDivider = 'setting.divider';

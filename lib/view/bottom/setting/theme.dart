@@ -31,12 +31,12 @@ class ThemeSetting extends ConsumerWidget {
         SettingCheckbox(
           label: tr(AppL10n.settingDivider),
           checked: ref.watch(themeSettingProvider.select((e) => e.divider)),
-          onChanged: (value) => provider.updateDivider(value),
+          onChanged: provider.updateDivider,
         ),
         SettingCheckbox(
           label: tr(AppL10n.settingShadow),
           checked: ref.watch(themeSettingProvider.select((e) => e.shadow)),
-          onChanged: (value) => provider.updateShadow(value),
+          onChanged: provider.updateShadow,
         ),
         SizedBox(height: AppNum.spaceSmall),
         Row(
@@ -47,7 +47,7 @@ class ThemeSetting extends ConsumerWidget {
                 value: alpha,
                 divisions: 10,
                 max: 1,
-                onChanged: (value) => provider.updateAlpha(value),
+                onChanged: provider.updateAlpha,
               ),
             ),
             BaseText('${alpha * 100}%'),
@@ -62,7 +62,7 @@ class ThemeSetting extends ConsumerWidget {
                 value: sigma,
                 divisions: 20,
                 max: 60,
-                onChanged: (value) => provider.updateSigma(value),
+                onChanged: provider.updateSigma,
               ),
             ),
             BaseText('$sigma'),

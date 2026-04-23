@@ -7,6 +7,7 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/context_menu.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/setting.dart';
 import 'package:once_power/provider/value.dart';
 import 'package:once_power/util/selection.dart';
 import 'package:once_power/widget/context/tooltip_item.dart';
@@ -82,6 +83,7 @@ class SortSelectItem extends ConsumerWidget {
 
     return TooltipItem(
       file: file,
+      waitDuration: Duration(seconds: ref.watch(hiddenTipProvider) ? 600 : 1),
       child: Listener(
         onPointerDown: onPointerDown,
         child: Material(

@@ -93,3 +93,20 @@ extension ActionTypeExtension on ActionType {
   bool get isSelect => this == ActionType.select;
   bool get isUnselect => this == ActionType.unselect;
 }
+
+enum AutoType { folder, extension, type, date }
+
+extension AutoTypeExtension on AutoType {
+  String get label {
+    switch (this) {
+      case AutoType.folder:
+        return tr(AppL10n.eAutoFolder);
+      case AutoType.extension:
+        return tr(AppL10n.eAutoExtension);
+      case AutoType.type:
+        return tr(AppL10n.eAutoType);
+      case AutoType.date:
+        return tr(AppL10n.eAutoDate);
+    }
+  }
+}

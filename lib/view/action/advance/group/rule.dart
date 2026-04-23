@@ -1,99 +1,70 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
+import 'package:once_power/core/update/advance.dart';
+import 'package:once_power/enum/app.dart';
 import 'package:once_power/enum/rule.dart';
-import 'package:once_power/widget/base/text.dart';
-import 'package:once_power/widget/common/input_field.dart';
-import 'package:once_power/widget/common/text_dropdown.dart';
+import 'package:once_power/model/file.dart';
+import 'package:once_power/model/rule.dart';
+import 'package:once_power/util/info.dart';
+import 'package:once_power/view/action/advance/group/rule_item.dart';
+import 'package:once_power/widget/base/dialog.dart';
+import 'package:once_power/widget/common/button.dart';
 
-class GroupRuleItem extends StatefulWidget {
-  const GroupRuleItem({
-    super.key,
-    required this.isEnglish,
-    required this.infoType,
-    required this.operator,
-    required this.value,
-    required this.onInfoTypeChange,
-    required this.onOperatorChange,
-    required this.onValueChange,
-    required this.onGroupChange,
-  });
+class RuleGroup extends ConsumerStatefulWidget {
+  const RuleGroup({super.key, required this.file});
 
-  final bool isEnglish;
-  final InfoType infoType;
-  final ComparisonOperator operator;
-  final String value;
-  final void Function(InfoType?) onInfoTypeChange;
-  final void Function(ComparisonOperator?) onOperatorChange;
-  final void Function(String?) onValueChange;
-  final void Function(String?) onGroupChange;
+  final FileInfo file;
 
   @override
-  State<GroupRuleItem> createState() => _GroupRuleItemState();
+  ConsumerState<RuleGroup> createState() => _AutoGroupState();
 }
 
-class _GroupRuleItemState extends State<GroupRuleItem> {
-  List<ComparisonOperator> get operators => widget.infoType.isDateType
-      ? ComparisonOperator.values
-      : [
-          ComparisonOperator.contain,
-          ComparisonOperator.equal,
-          ComparisonOperator.notEqual,
-        ];
+class _AutoGroupState extends ConsumerState<RuleGroup> {
+  List<GroupRule> list = [];
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: AppNum.spaceSmall,
-      children: [
-        TextDropdown<InfoType>(
-          items: InfoType.values
-              .map(
-                (e) => DropdownItem(
-                  value: e,
-                  key: ValueKey(e),
-                  height: AppNum.widgetHeight,
-                  child: BaseText(e.label),
-                ),
-              )
-              .toList(),
-          value: widget.infoType,
-          width: widget.isEnglish ? 114 : 104,
-          onChanged: widget.onInfoTypeChange,
+    bool isEnglish = context.locale == LanguageType.english.locale;
+    return EasyDialog(
+      width: isEnglish ? 648 : 608,
+      title: tr(AppL10n.menuRuleGroup),
+      content: SingleChildScrollView(
+        child: Column(
+          spacing: AppNum.spaceSmall,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: list.map((e) {
+            InfoType type = e.infoType;
+            return GroupRuleItem(
+              isEnglish: isEnglish,
+              infoType: type,
+              operator: e.operator,
+              value: getRuleTypeValue(type, widget.file),
+              onInfoTypeChange: (v) => setState(() => e.infoType = v!),
+              onOperatorChange: (v) => setState(() => e.operator = v!),
+              onValueChange: (v) => setState(() => e.value = v!),
+              onGroupChange: (v) => setState(() => e.group = v!),
+            );
+          }).toList(),
         ),
-        TextDropdown<ComparisonOperator>(
-          items: operators
-              .map(
-                (e) => DropdownItem(
-                  value: e,
-                  key: ValueKey(e),
-                  height: AppNum.widgetHeight,
-                  child: BaseText(e.label),
-                ),
-              )
-              .toList(),
-          value: widget.operator,
-          width: widget.isEnglish ? 130 : 104,
-          onChanged: widget.onOperatorChange,
-        ),
-        SizedBox(
-          width: 200,
-          child: InputField(
-            text: widget.value,
-            hintText: tr(AppL10n.eRuleValue),
-            onChanged: widget.onValueChange,
-          ),
-        ),
-        SizedBox(
-          width: 152,
-          child: InputField(
-            hintText: tr(AppL10n.dialogGroupHint),
-            onChanged: widget.onGroupChange,
-          ),
-        ),
-      ],
+      ),
+      extraButton: EasyButton(
+        label: tr(AppL10n.menuRule),
+        onPressed: () {
+          setState(() {
+            final InfoType type = InfoType.values.first;
+            list.add(
+              GroupRule(
+                infoType: type,
+                value: getRuleTypeValue(type, widget.file),
+              ),
+            );
+          });
+        },
+      ),
+      onOk: () => ruleGroupFile(ref, list),
     );
   }
 }

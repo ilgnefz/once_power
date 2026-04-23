@@ -8,6 +8,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'setting.g.dart';
 
 @riverpod
+class HiddenTip extends _$HiddenTip {
+  @override
+  bool build() => StorageUtil.getBool(AppKeys.hiddenTip);
+
+  void update() {
+    state = !state;
+    StorageUtil.setBool(AppKeys.hiddenTip, state);
+  }
+}
+
+@riverpod
 class ThemeSetting extends _$ThemeSetting {
   @override
   CustomTheme build() => StorageUtil.getCustomTheme(AppKeys.customTheme);

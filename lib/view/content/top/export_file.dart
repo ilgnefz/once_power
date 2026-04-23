@@ -12,6 +12,7 @@ import 'package:once_power/util/info.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/checkbox.dart';
 import 'package:once_power/widget/common/input_field.dart';
+import 'package:once_power/widget/common/radio.dart';
 
 class ExportFileView extends ConsumerStatefulWidget {
   const ExportFileView({super.key});
@@ -74,18 +75,7 @@ class _ExportMenuState extends ConsumerState<ExportFileView> {
                     ),
                     const SizedBox(width: 4),
                     ...ExportType.values.map(
-                      (e) => Row(
-                        children: [
-                          Radio(value: e),
-                          Text(
-                            e.label,
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.copyWith(height: 1.5),
-                          ),
-                          SizedBox(width: 12),
-                        ],
-                      ),
+                      (e) => EasyRadio(label: e.label, value: e),
                     ),
                   ],
                 ),

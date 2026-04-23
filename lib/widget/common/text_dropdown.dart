@@ -29,6 +29,8 @@ class TextDropdown<T> extends StatelessWidget {
         items: items,
         valueListenable: ValueNotifier<T>(value),
         onChanged: (value) => onChanged(value as T),
+        style: TextStyle(overflow: TextOverflow.ellipsis),
+        isExpanded: true,
         buttonStyleData: ButtonStyleData(
           padding: const .symmetric(horizontal: AppNum.spaceMedium),
           height: AppNum.widgetHeight,

@@ -1,6 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:once_power/const/l10n.dart';
-
 enum ExportType { csv, txt }
 
 extension ExportTypeExtension on ExportType {
@@ -9,7 +6,7 @@ extension ExportTypeExtension on ExportType {
       case ExportType.csv:
         return 'CSV';
       case ExportType.txt:
-        return tr(AppL10n.eAddText);
+        return 'TXT';
     }
   }
 

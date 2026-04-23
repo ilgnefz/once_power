@@ -17,7 +17,7 @@ import 'package:once_power/util/verify.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/input_field.dart';
 
-import 'item.dart';
+import 'list_item.dart';
 
 class EditGroup extends ConsumerStatefulWidget {
   const EditGroup({super.key, required this.isDirective, this.file});

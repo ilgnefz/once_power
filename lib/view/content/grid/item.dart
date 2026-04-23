@@ -23,7 +23,7 @@ class ContentGridItem extends StatelessWidget {
     return SortSelectItem(
       index: index,
       file: file,
-      onDoubleTap: () => previewView(context, file),
+      onDoubleTap: () => showPreviewView(context, file),
       child: Column(
         key: key,
         spacing: AppNum.spaceSmall,

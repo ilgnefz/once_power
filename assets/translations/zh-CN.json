@@ -203,7 +203,7 @@
     "date": "匹配日期",
     "all": "所有日期",
     "move": "移动",
-    "first": "移至首尾",
+    "first": "移至首位",
     "center": "移至中间",
     "last": "移至末尾",
     "suspense": "暂存文件",
@@ -213,6 +213,14 @@
     "path": "匹配路径",
     "group": "设置组",
     "autoGroup": "自动分组",
+    "autoDate": {
+      "title": "日期分组",
+      "year": "年份",
+      "month": "月份",
+      "day": "日期",
+      "week": "星期"
+    },
+    "ruleGroup": "条件分组",
     "rule": "添加条件",
     "edit": "编辑组",
     "select": "选择",
@@ -394,6 +402,12 @@
       "beforeOrEqual": "早于等于",
       "afterOrEqual": "晚于等于",
       "value": "输入值"
+    },
+    "auto": {
+      "folder": "文件夹",
+      "type": "类型",
+      "extension": "扩展名",
+      "date": "日期"
     }
   },
   "error": {
@@ -497,6 +511,8 @@
     "cancelRename": "名称为空不重命名",
     "autoRenameFormat": "自动重命名序列格式",
     "window": "窗口设置",
+    "visual": "显示设置",
+    "tip": "隐藏文件信息悬浮提示",
     "rename": "命名规则",
     "theme": "自定义主题",
     "divider": "透明分割线",

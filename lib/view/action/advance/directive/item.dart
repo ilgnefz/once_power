@@ -174,13 +174,16 @@ class _DirectiveItemState extends ConsumerState<DirectiveItem> {
                     onPressed: () {
                       switch (widget.menu.type) {
                         case AdvanceType.delete:
-                          deleteText(context, widget.menu as AdvanceMenuDelete);
+                          showDeleteText(
+                            context,
+                            widget.menu as AdvanceMenuDelete,
+                          );
                           break;
                         case AdvanceType.add:
-                          addText(context, widget.menu as AdvanceMenuAdd);
+                          showAddText(context, widget.menu as AdvanceMenuAdd);
                           break;
                         case AdvanceType.replace:
-                          replaceText(
+                          showReplaceText(
                             context,
                             widget.menu as AdvanceMenuReplace,
                           );

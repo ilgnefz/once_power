@@ -8,6 +8,7 @@ import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/app.dart';
+import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/advance.dart';
@@ -133,12 +134,25 @@ Future<void> showRightMenu(
           RightMenuItem(
             label: tr(AppL10n.menuEdit),
             color: Theme.of(context).primaryColor,
-            onSelected: (_) => editGroup(context, false, file),
+            onSelected: (_) => showEditGroup(context, false, file),
           ),
           RightMenuItem(
+            label: tr(AppL10n.menuRuleGroup),
+            color: Theme.of(context).primaryColor,
+            onSelected: (_) => showRuleGroup(context, file),
+          ),
+          RightMenuItem.submenu(
             label: tr(AppL10n.menuAutoGroup),
             color: Theme.of(context).primaryColor,
-            onSelected: (_) => autoGroup(context, file),
+            items: AutoType.values
+                .map(
+                  (e) => RightMenuItem(
+                    label: e.label,
+                    color: Theme.of(context).primaryColor,
+                    onSelected: (_) => autoGroupFile(context, ref, e),
+                  ),
+                )
+                .toList(),
           ),
           ...buildGroupList(context, ref, file),
         ],
@@ -249,7 +263,7 @@ Future<void> showDirectiveRightMenu(
         RightMenuItem(
           label: tr(AppL10n.menuEdit),
           color: Theme.of(context).primaryColor,
-          onSelected: (_) => editGroup(context, true),
+          onSelected: (_) => showEditGroup(context, true),
         ),
         ...buildDirectiveGroupList(context, ref, list, menu),
       ],

@@ -1,3 +1,4 @@
+import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/rule.dart';
 
 class GroupRule {
@@ -35,5 +36,42 @@ class FilterRule {
   @override
   String toString() {
     return 'FilterRule(infoType: $infoType, operator: $operator, value: $value, actionType: $action)';
+  }
+}
+
+class DateGroupInfo {
+  DateType type;
+  bool year;
+  bool month;
+  bool day;
+  bool week;
+
+  DateGroupInfo({
+    this.type = DateType.created,
+    this.year = true,
+    this.month = true,
+    this.day = false,
+    this.week = false,
+  });
+
+  DateGroupInfo copyWith({
+    DateType? type,
+    bool? year,
+    bool? month,
+    bool? day,
+    bool? week,
+  }) {
+    return DateGroupInfo(
+      type: type ?? this.type,
+      year: year ?? this.year,
+      month: month ?? this.month,
+      day: day ?? this.day,
+      week: week ?? this.week,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'DateGroup(type: $type, year: $year, month: $month, day: $day, week: $week)';
   }
 }

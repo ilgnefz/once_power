@@ -10,14 +10,14 @@ import 'package:once_power/widget/common/input_field.dart';
 class FolderInput extends ConsumerWidget {
   const FolderInput({
     super.key,
-    required this.controller,
+    this.controller,
     this.cacheKey,
     this.onChanged,
     this.onUpload,
   });
 
   final String? cacheKey;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final void Function(String)? onChanged;
   final void Function(String)? onUpload;
 
@@ -35,7 +35,7 @@ class FolderInput extends ConsumerWidget {
         onPressed: () async {
           final String? folder = await getDirectoryPath();
           if (folder == null || folder.isEmpty) return;
-          onUpload == null ? controller.text = folder : onUpload?.call(folder);
+          onUpload?.call(folder);
           onChanged?.call(folder);
           if (cacheKey != null) StorageUtil.setString(cacheKey!, folder);
         },

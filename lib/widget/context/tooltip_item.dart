@@ -7,8 +7,14 @@ import 'package:once_power/widget/common/tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
 
 class TooltipItem extends StatelessWidget {
-  const TooltipItem({super.key, required this.file, required this.child});
+  const TooltipItem({
+    super.key,
+    required this.waitDuration,
+    required this.file,
+    required this.child,
+  });
 
+  final Duration? waitDuration;
   final FileInfo file;
   final Widget child;
 
@@ -29,7 +35,7 @@ class TooltipItem extends StatelessWidget {
 
     return EasyTooltip(
       placement: Placement.bottom,
-      waitDuration: const Duration(seconds: 1),
+      waitDuration: waitDuration,
       // constraints: BoxConstraints(
       //   maxWidth: MediaQuery.of(context).size.width * .4,
       // ),

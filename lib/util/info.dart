@@ -12,6 +12,7 @@ import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/organize.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
@@ -496,4 +497,18 @@ int? _extractNumberInParentheses(String s) {
   final match = RegExp(r'\((\d+)\)').firstMatch(s);
   if (match == null) return null;
   return int.tryParse(match.group(1)!);
+}
+
+String getDateGroup(DateGroupInfo info, FileInfo file) {
+  String group = '';
+  DateInfo? dateInfo = getDate(info.type, file);
+  if (dateInfo != null) {
+    List<String> list = [];
+    if (info.year) list.add(formatNum(dateInfo.date.year, 2));
+    if (info.month) list.add(formatNum(dateInfo.date.month, 2));
+    if (info.day) list.add(formatNum(dateInfo.date.day, 2));
+    if (info.week) list.add('${dateInfo.date.weekday}');
+    group = list.join('-');
+  }
+  return group;
 }

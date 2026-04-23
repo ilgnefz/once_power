@@ -94,7 +94,7 @@ class FileList extends _$FileList {
   }).toList();
 
   void updateGroup(String id, String value) => state = state.map((e) {
-    if (e.id == id) e.group = value;
+    if (e.id == id && e.group != value) e.group = value;
     return e;
   }).toList();
 

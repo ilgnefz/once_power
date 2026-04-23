@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
+import 'package:once_power/core/dialog.dart';
 import 'package:once_power/enum/advance.dart';
+import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_add.dart';
@@ -163,7 +166,7 @@ String insertReplace(String name, String match, String modify, int num) {
   return result;
 }
 
-Future<void> autoGroupFile(WidgetRef ref, List<GroupRule> list) async {
+Future<void> ruleGroupFile(WidgetRef ref, List<GroupRule> list) async {
   if (list.isEmpty) return;
   List<FileInfo> files = ref.watch(sortListProvider);
   List<FileInfo> checkedFiles = files.where((e) => e.checked).toList();
@@ -175,16 +178,58 @@ Future<void> autoGroupFile(WidgetRef ref, List<GroupRule> list) async {
     for (FileInfo file in checkedFiles) {
       String info = getRuleTypeValue(type, file);
       if (getCompareResult(operator, value, info)) {
-        if (group != '') {
-          List<String> list = StorageUtil.getStringList(AppKeys.groupList);
-          if (!list.contains(group)) {
-            list.add(group);
-            await StorageUtil.setStringList(AppKeys.groupList, list);
-          }
-        }
         ref.read(fileListProvider.notifier).updateGroup(file.id, group);
       }
     }
   }
   advanceUpdateName(ref);
+}
+
+Future<void> autoGroupFile(
+  BuildContext context,
+  WidgetRef ref,
+  AutoType type,
+) async {
+  List<FileInfo> files = ref.watch(sortListProvider);
+  List<FileInfo> checkedFiles = files.where((e) => e.checked).toList();
+  final FileList provider = ref.read(fileListProvider.notifier);
+  switch (type) {
+    case AutoType.folder:
+      for (FileInfo file in checkedFiles) {
+        String group = getFolderName(file.parent);
+        provider.updateGroup(file.id, group);
+        await saveGroup(group);
+      }
+    case AutoType.extension:
+      for (FileInfo file in checkedFiles) {
+        String group = file.extension.isEmpty ? ' ' : file.extension;
+        provider.updateGroup(file.id, group);
+        await saveGroup(group);
+      }
+    case AutoType.type:
+      for (FileInfo file in checkedFiles) {
+        String group = file.type.label;
+        provider.updateGroup(file.id, group);
+        await saveGroup(group);
+      }
+    case AutoType.date:
+      DateGroupInfo? info = await showAutoGroup(context);
+      if (info == null) return;
+      for (FileInfo file in checkedFiles) {
+        String group = getDateGroup(info, file);
+        provider.updateGroup(file.id, group);
+        await saveGroup(group);
+      }
+  }
+  advanceUpdateName(ref);
+}
+
+Future<void> saveGroup(String group) async {
+  if (group != '') {
+    List<String> list = StorageUtil.getStringList(AppKeys.groupList);
+    if (!list.contains(group)) {
+      list.add(group);
+      await StorageUtil.setStringList(AppKeys.groupList, list);
+    }
+  }
 }

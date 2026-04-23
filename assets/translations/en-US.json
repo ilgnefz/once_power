@@ -213,6 +213,14 @@
     "path": "Match Path",
     "group": "Set Group",
     "autoGroup": "Auto Group",
+    "autoDate": {
+      "title": "Date grouping",
+      "year": "Year",
+      "month": "Month",
+      "day": "Day",
+      "week": "Week"
+    },
+    "ruleGroup": "Rule Group",
     "rule": "Add Rule",
     "edit": "Edit Group",
     "select": "Select",
@@ -394,6 +402,12 @@
       "beforeOrEqual": "On or Before",
       "afterOrEqual": "On or After",
       "value": "Input value"
+    },
+    "auto": {
+      "folder": "Folder",
+      "type": "Type",
+      "extension": "Extension",
+      "date": "Date"
     }
   },
   "error": {
@@ -497,6 +511,8 @@
     "cancelRename": "Cancel rename on empty",
     "autoRenameFormat": "Auto rename format",
     "window": "Window info",
+    "visual": "Show info",
+    "tip": "Hidden file info hover preview",
     "rename": "Rename rule",
     "theme": "Custom theme",
     "divider": "Transparent divider",

@@ -53,6 +53,7 @@ class AppKeys {
   static String isMaxed = 'isMaxed';
   static String savePosition = 'savePosition';
   static String saveSize = 'saveSize';
+  static String hiddenTip = 'hiddenTip';
   static String autoRename = 'autoRename';
   static String cancelEmptyRename = 'cancelEmptyRename';
   static String autoPrefix = 'autoPrefix';

@@ -37,7 +37,7 @@ class PresetList extends ConsumerWidget {
                   .update(list[index].name);
               advanceUpdateName(ref);
             },
-            onRename: () => renamePreset(context, preset),
+            onRename: () => showRenamePreset(context, preset),
             onAppend: () {
               final menus = preset.menus
                   .map((e) => e.copyWith(id: generateId()))

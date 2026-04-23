@@ -184,7 +184,7 @@ class _VideoViewState extends ConsumerState<VideoView> {
                     icon: Icons.play_circle_fill_rounded,
                     color: Colors.white,
                     size: 28,
-                    onPressed: () => previewView(context, widget.file),
+                    onPressed: () => showPreviewView(context, widget.file),
                   ),
                 ),
               ],

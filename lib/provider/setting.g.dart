@@ -9,6 +9,57 @@ part of 'setting.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
+@ProviderFor(HiddenTip)
+final hiddenTipProvider = HiddenTipProvider._();
+
+final class HiddenTipProvider extends $NotifierProvider<HiddenTip, bool> {
+  HiddenTipProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hiddenTipProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hiddenTipHash();
+
+  @$internal
+  @override
+  HiddenTip create() => HiddenTip();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hiddenTipHash() => r'002c2a2019f9ad8c27ffe4fd1051c6218d335051';
+
+abstract class _$HiddenTip extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(ThemeSetting)
 final themeSettingProvider = ThemeSettingProvider._();
 

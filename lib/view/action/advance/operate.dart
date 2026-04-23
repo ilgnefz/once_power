@@ -20,15 +20,15 @@ class OperateGroup extends StatelessWidget {
         children: [
           EasyButton(
             label: tr(AppL10n.advanceDelete),
-            onPressed: () => deleteText(context),
+            onPressed: () => showDeleteText(context),
           ),
           EasyButton(
             label: tr(AppL10n.advanceAdd),
-            onPressed: () => addText(context),
+            onPressed: () => showAddText(context),
           ),
           EasyButton(
             label: tr(AppL10n.advanceReplace),
-            onPressed: () => replaceText(context),
+            onPressed: () => showReplaceText(context),
           ),
           Spacer(),
           PresetButton(),

@@ -28,12 +28,12 @@ class WindowSetting extends StatelessWidget {
         SettingCheckbox(
           label: tr(AppL10n.settingSaveSize),
           checked: saveSize,
-          onChanged: (value) => onSizeChanged(value),
+          onChanged: onSizeChanged,
         ),
         SettingCheckbox(
           label: tr(AppL10n.settingSavePosition),
           checked: savePosition,
-          onChanged: (value) => onPositionChanged(value),
+          onChanged: onPositionChanged,
         ),
       ],
     );

@@ -4,11 +4,13 @@ import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/model/advance_delete.dart';
 import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/model/rule.dart';
 import 'package:once_power/view/action/advance/dialog/add.dart';
 import 'package:once_power/view/action/advance/dialog/add_key_input.dart';
 import 'package:once_power/view/action/advance/dialog/delete.dart';
 import 'package:once_power/view/action/advance/dialog/replace.dart';
 import 'package:once_power/view/action/advance/group/auto.dart';
+import 'package:once_power/view/action/advance/group/rule.dart';
 import 'package:once_power/view/action/advance/group/edit.dart';
 import 'package:once_power/view/action/advance/preset/add.dart';
 import 'package:once_power/view/action/advance/preset/export.dart';
@@ -31,13 +33,10 @@ Future<void> showMarkText(BuildContext context, UploadMarkInfo info) async {
 }
 
 Future<void> showSettingView(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: SettingView(),
-  );
+  await AnimatedDialog.show(context: context, child: SettingView());
 }
 
-Future<void> editGroup(
+Future<void> showEditGroup(
   BuildContext context, [
   bool isDirective = false,
   FileInfo? file,
@@ -48,42 +47,43 @@ Future<void> editGroup(
   );
 }
 
-Future<void> autoGroup(BuildContext context, FileInfo file) async {
+Future<void> showRuleGroup(BuildContext context, FileInfo file) async {
   await AnimatedDialog.show(
     context: context,
-    child: AutoGroup(file: file),
+    child: RuleGroup(file: file),
   );
+}
+
+Future<DateGroupInfo?> showAutoGroup(BuildContext context) async {
+  return await AnimatedDialog.show(context: context, child: AutoGroup());
 }
 
 Future<void> showAllGroup(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: GroupList(),
-  );
+  await AnimatedDialog.show(context: context, child: GroupList());
 }
 
 Future<void> showAllTypeRule(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: TypeList(),
-  );
+  await AnimatedDialog.show(context: context, child: TypeList());
 }
 
-Future<void> deleteText(BuildContext context, [AdvanceMenuDelete? menu]) async {
+Future<void> showDeleteText(
+  BuildContext context, [
+  AdvanceMenuDelete? menu,
+]) async {
   await AnimatedDialog.show(
     context: context,
     child: DeleteView(menu: menu),
   );
 }
 
-Future<void> addText(BuildContext context, [AdvanceMenuAdd? menu]) async {
+Future<void> showAddText(BuildContext context, [AdvanceMenuAdd? menu]) async {
   await AnimatedDialog.show(
     context: context,
     child: AddView(menu: menu),
   );
 }
 
-Future<void> replaceText(
+Future<void> showReplaceText(
   BuildContext context, [
   AdvanceMenuReplace? menu,
 ]) async {
@@ -106,20 +106,17 @@ Future<void> showAllTypeDetail(
 }
 
 Future<void> showKeyInput(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: KeyInputView(),
-  );
+  await AnimatedDialog.show(context: context, child: KeyInputView());
 }
 
 Future<void> showAddExport(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: AddPresetView(),
-  );
+  await AnimatedDialog.show(context: context, child: AddPresetView());
 }
 
-Future<void> renamePreset(BuildContext context, AdvancePreset preset) async {
+Future<void> showRenamePreset(
+  BuildContext context,
+  AdvancePreset preset,
+) async {
   await AnimatedDialog.show(
     context: context,
     child: AddPresetView(preset: preset),
@@ -127,37 +124,22 @@ Future<void> renamePreset(BuildContext context, AdvancePreset preset) async {
 }
 
 Future<void> showExportPreset(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: ExportPresetView(),
-  );
+  await AnimatedDialog.show(context: context, child: ExportPresetView());
 }
 
 Future<void> showRuleDetail(BuildContext context) async {
   Navigator.of(context).pop();
-  await AnimatedDialog.show(
-    context: context,
-    child: RuleFilter(),
-  );
+  await AnimatedDialog.show(context: context, child: RuleFilter());
 }
 
-Future<void> previewView(BuildContext context, FileInfo file) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: PreviewView(file),
-  );
+Future<void> showPreviewView(BuildContext context, FileInfo file) async {
+  await AnimatedDialog.show(context: context, child: PreviewView(file));
 }
 
 Future<void> showImageSize(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: ImageSizeView(),
-  );
+  await AnimatedDialog.show(context: context, child: ImageSizeView());
 }
 
 Future<void> showExportMenu(BuildContext context) async {
-  await AnimatedDialog.show(
-    context: context,
-    child: ExportFileView(),
-  );
+  await AnimatedDialog.show(context: context, child: ExportFileView());
 }

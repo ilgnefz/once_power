@@ -30,12 +30,12 @@ class RenameSetting extends StatelessWidget {
         SettingCheckbox(
           label: tr(AppL10n.settingCancelRename),
           checked: cancelRename,
-          onChanged: (value) => onCancelChanged(value),
+          onChanged: onCancelChanged,
         ),
         SettingCheckbox(
           label: tr(AppL10n.settingAutoRename),
           checked: autoRename,
-          onChanged: (value) => onAutoChanged(value),
+          onChanged: onAutoChanged,
         ),
       ],
     );
