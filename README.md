@@ -1,6 +1,10 @@
-<div style="text-align:center"><img src="doc/logo.webp" alt="OncePower"></div>
+<div align="center"><img src="doc/logo.webp" alt="OncePower"></div>
 
-<div align="center"> 简体中文 | <a href="README-EN.md" style="text-decoration:none;">English</a> </div>
+<!-- markdownlint-disable MD033 -->
+<p></p>
+<p align="center">简体中文 | <a href="README-EN.md" style="text-decoration:none;">English</a></p>
+<!-- markdownlint-enable MD033 -->
+
 
 **OncePower** 是一款集**批量重命名文件**并**整理文件**于一身的桌面端工具。用户无需学习编写正则表达式就能对文件名称进行高级匹配并修改。软件开发的初衷是想要对图片进行批量重命名，因此拥有特别针对图片视频的功能——**视图模式**，来预览图片和视频。
 
@@ -11,7 +15,7 @@
 
 # 快速上手
 
-目录：[基本操作](#基本操作)、[替换和保留模式](#替换和保留模式)、[CSV 文件命名](#CSV 文件命名)、[修改文件日期](#修改文件日期)、[高级模式](#高级模式)、[整理模式](#整理模式)
+目录：[基本操作](#基本操作)、[替换和保留模式](#替换和保留模式)、[CSV 文件命名](#csv-文件命名)、[修改文件日期](#修改文件日期)、[高级模式](#高级模式)、[整理模式](#整理模式)
 
 ## 基本操作
 
@@ -31,7 +35,7 @@
 
 ![17](doc/17.gif)
 
-添加文件夹旁边的图标按钮，用来添加文件夹下的子文件夹（不推荐文件夹本身）
+添加文件夹旁边的图标按钮，用来添加文件夹下的子文件夹（不添加文件夹本身）
 
 ![18](doc/18.gif)
 
@@ -294,7 +298,7 @@
 
 #### 添加位置
 
-底部还有添加位置的选项，通过最右边的数字输入框来控制推荐内容的位置
+底部还有添加位置的选项，通过最右边的数字输入框来控制条件内容的位置
 
 ![image-20260423121828306](doc/6.png)
 

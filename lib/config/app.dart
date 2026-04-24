@@ -138,13 +138,6 @@ void saveOrNo() {
       AppKeys.suffixIndexStart,
       AppKeys.sortType,
       AppKeys.targetFolder,
-      AppKeys.imageFolder,
-      AppKeys.videoFolder,
-      AppKeys.audioFolder,
-      AppKeys.docFolder,
-      AppKeys.folderFolder,
-      AppKeys.archiveFolder,
-      AppKeys.otherFolder,
     ];
     for (String appKey in appKeyList) {
       StorageUtil.remove(appKey);

@@ -20,10 +20,6 @@ void dropFile(DropDoneDetails details, WidgetRef ref) async {
   List<XFile> paths = details.files;
   if (paths.isNotEmpty) {
     final List<String> files = paths.map((e) => e.path).toList();
-    if (files.length > 1) {
-      final firstFile = files.removeAt(0);
-      files.add(firstFile);
-    }
     await formatPath(ref, files);
   }
 }

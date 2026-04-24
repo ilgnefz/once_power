@@ -1,320 +1,358 @@
-<div align="center"><img alt="OncePower" src="doc/logo.webp"></div>
+<div align="center"><img src="doc/logo.webp" alt="OncePower"></div>
 
-[简体中文](README.md) | English
+<!-- markdownlint-disable MD033 -->
+<p></p>
+<p align="center"><a href="README.md" style="text-decoration:none;">简体中文</a> | English </p>
+<!-- markdownlint-enable MD033 -->
 
-**OncePower** is an all-in-one desktop tool designed for **batch file renaming** and **file organization**. Users can perform advanced matching and modification on filenames without needing to learn regular expressions. Originally developed to meet the demand for batch renaming images, it features a specialized function tailored for photos and videos—the **View Mode**, allowing users to preview images and videos.
 
-# 语言平台支持
+**OncePower** is a desktop tool that combines **batch file renaming** and **file organization** into one. Users can perform advanced matching and modification of file names without learning regular expressions. The software was originally developed to batch rename images, so it has a special feature for images and videos - **View Mode** - to preview images and videos.
 
-- **中文**、**English**
-- **Windows** (Supports Windows 10 and above)、**Linux**
+# Language and Platform Support
 
+- **中文** (Chinese), **English**
+- **Windows** (supports Windows 10 and above), **Linux**
+
+# Quick Start
+
+Table of Contents: [Basic Operations](#basic-operations), [Replace and Reserve Modes](#replace-and-reserve-modes), [CSV File Naming](#csv-file-naming), [Modify File Date](#modify-file-date), [Advance Mode](#advance-mode), [Organize Mode](#organize-mode)
 
 > [!Tip]
 >
 > Due to the difficulty of recording GIFs, only dynamic diagrams in Chinese are available. If you do not understand, you can open the software and refer to the pictures to learn and use them
 
+## Basic Operations
 
-# New Feature
+### Add Files
 
-## Add option to auto append suffix when renaming if file exists
-
-When not automatically renaming
-
-![50](doc/50.gif)
-
-
-## Added the function of inserting content based on spaced repetition.
-
-![49](doc/49.gif)
-
-## Metadata adds shooting device information recording
-
-![48](doc/48.gif)
-
-## Automatically restore the previous window size and position
-
-Long-press the "Save Configuration" icon for settings
-
-![47](doc/47.gif)
-
-## Export filename
-
-![46](doc/46.gif)
-
-## Add content to the extension name
-
-![45](doc/45.gif)
-
-## Custom background image
-
-Long press the theme switch button
-
-![44](doc/44.gif)
-
-## Preset overlay with the same name
-
-![43](doc/43.gif)
-
-## Naming of media file metadata
-
-![42](doc/42.gif)
-
-## Batch operation instructions
-
-Right click to open the menu by selecting multiple directives
-
-![41](doc/41.gif)
-
-## Modify file date
-
-![40](doc/40.gif)
-
-## Preset sorting
-
-![39](doc/39.gif)
-
-## Import presets
-
-![38](doc/38.gif)
-
-## Export presets
-
-![37](doc/37.gif)
-
-## Filter Unnamed Files
-
-![36](doc/36.gif)
-
-## Expand the display width of the new name
-
-![35](doc/35.gif)
-
-## Dark theme
+Add files via the button in the bottom left corner, or by dragging files directly into the software
 
 ![34](doc/34.gif)
 
-## Customize image size
+### Add Folders
 
-Long press the image size adjustment button to customize the image size
-
-![33](doc/33.gif)
-
-## Added the function of zooming in and out of images
-
-Click the left mouse button to enlarge the image and right-click to shrink the image
-
-![32](doc/32.gif)
-
-## Added the function of temporarily storing files
-
-![31](doc/31.gif)
-
-## Simplification conversion
-
-![30](doc/30.gif)
-
-## Added PSD file preview
-
-![29](doc/29.gif)
-
-## Grouping Function
-
-File settings group (only in AdvanceMode)
-
-![27](doc/27.gif)
-
-Instruction setting group
-
-![28](doc/28.gif)
-
-## Multiple Choice Function
-
-You can sort files by numbering them with a single click using the Ctrl key
-
-![25](doc/25.gif)
-
-You can also use the Shift key to select multiple files and sort them by numbering them at once
-
-![26](doc/26.gif)
-
-## Advance Menu Function
-
-Open and enter through the menu in the bottom left corner
-
-![04](doc/04.png)
-
-In the advanced menu, use the command to rename
-
-![05](doc/05.png)
-
-Adding different instructions and the order of instructions will cause different changes in the file name
-
-![23](doc/23.gif)
-
-We can store commonly used instructions as presets for future use
-
-![24](doc/24.gif)
-
-## View mode has added the function of previewing videos
-
-![22](doc/22.gif)
-
-## View mode adds the ability to move images to the beginning and end
-
-![21](doc/21.gif)
-
-## Organize mode can move the selected files directly to the respective top parent folder
-
-## The target file input box in Collate mode can be switched by the up and down keys
-
-## Add files through the Windows system right-click menu
-
-Activate this function in the lower left corner
-
-![03](doc/03-e.png)
-
-After opening it, we can right-click in the File Explorer to view the menu for directly adding files to the software when selecting or not selecting a folder.
-
-Due to the limitation of the Windows system that only one file path can be passed in at a time, this feature can only select folders when the program is not running.
-
-![17](doc/17.gif)
-
-If you want to use multiple file or folder paths, you can place the shortcut of this software in the "Launch to" folder.
-
-![18](doc/18.gif)
-
-Then select the file that needs to be passed in and right-click
-
-![19](doc/19.gif)
-
-In the running state of the software, multiple files can be directly added using the right-click menu without the need to use "send to" to add multiple files (when running, adding by right clicking will automatically select the append mode).
-
-![20](doc/20.gif)
-
-## Match length with negative input
-
-When the matching length is negative, start truncating from the end of the file name
+By default, when selecting a folder, only the files under the folder are added
 
 ![16](doc/16.gif)
 
-## Filter files by extension
+When "Add Folder" is selected, if a folder is added, the folder itself is added
 
-![15](doc/15.gif)
+![17](doc/17.gif)
 
-## Generate operation log files in OPLOG format
+Add an icon button next to the folder to add subfolders within the folder (excluding the folder itself)
 
-The log files generated by renaming are located in the "logs" folder of the software. The log files generated from the **Organize** menu are also located here by default, unless a target folder is set.
+![18](doc/18.gif)
 
-![02](doc/02.png)
+### Append Mode
 
-## Upload CSV file renaming
+If Append Mode is not selected, newly added files will replace the original files
 
-*Note: Currently unable to recognize Korean, Tibetan, or other text in CSV files (can recognize Japanese)*
+![32](doc/32.gif)
 
-Click the button in the lower right corner to upload a CSV file (only the first two columns of the CSV file will be read), or a TXT file with “,” separating the old and new names, or an OPLOG log file generated by OncePower (which can be used to revert back to the original name).
+If Append Mode is selected, the previous files will not be removed
 
-![14](doc/14.gif)
+![33](doc/33.gif)
 
-## Added undo function
+### List Operations
 
-## View Mode
+You can quickly adjust the position of files by dragging list items
 
-In view mode, you can directly view images for sorting. To enable view mode, simply switch to the bottom left corner (Switching to View Mode will automatically delete files other than images).
+![35](doc/35.gif)
 
-![11](doc/11.gif)
+### Collapse Original Names
 
-In view mode, long press the image to drag and sort it.
+If you feel the original names are too wide, you can collapse the width of the original name display
 
-![12](doc/12.gif)
+![43](doc/43.gif)
 
-Right click on the image to switch between selected and deleted states.
+### Export File Names
 
-![13](doc/13.gif)
+You can also export the names of files in the list. The exported format is CSV, with commas at the end
 
-# Quick Start
+![44](doc/44.gif)
 
-For unfamiliar icon functions, a prompt can be displayed after hovering over the mouse for the first time. You can also view the following image introduction
+The exported file can be edited and then used to batch rename files by uploading the CSV file
 
-![01](doc/01.png)
+### List Item Right-Click Menu
 
-# Function Introduction
+If there are many items in the list, you can quickly move to the beginning or end via the right-click menu
 
-Add files or folders to the software, and you can choose multiple options to drag them directly or select them through the menu in the bottom left corner.
+![36](doc/36.gif)
 
-Double clicking on an item in the list will automatically fill in the matching box with the original name of that item.
+The right-click menu varies depending on the mode. You can experiment with each option yourself
+
+### View Mode
+
+Click the icon button at the bottom to enable image and video preview. This feature will remove other types of files
+
+![21](doc/21.gif)
+
+You can double-click to preview large images
+
+![22](doc/22.gif)
+
+### Multi-Select
+
+You can use **Ctrl** and **Shift** with **left mouse button** to multi-select items in the list
+
+![37](doc/37.gif)
+
+Selected files will have serial numbers in the top left corner. You can quickly sort images by moving them via the right-click menu
+
+![38](doc/38.gif)
+
+### Stash Files
+
+Since there is no feature to drag multiple files at once, a **stash feature** has been added
+
+![39](doc/39.gif)
+
+### Groups
+
+Groups are only available in Advance Mode and Organize Mode
+
+You can apply different naming effects to files in different groups via group mode
+
+![40](doc/40.gif)
+
+### Toggle Display List
+
+By default, all files in the list are displayed. If you only want to show files with new names or without new names, you can toggle via left and right mouse buttons
+
+![42](doc/42.gif)
+
+### Change Image Display Size
+
+If you are viewing preview images on a high-resolution screen and feel the images are too small, you can long-press the icon button in the top right corner of View Mode to change the width of the image display
+
+![41](doc/41.gif)
+
+### **Save Configuration**
+
+By default, the software does not save any changes made by the user except for settings. When enabled, it can store the values of most input contents in each mode for direct use next time
+
+![image-20260423100436944](doc/3.png)
+
+### **System Right-Click Menu**
+
+Click the right-click menu icon button at the bottom
+
+![19](doc/19.gif)
+
+When enabled, you can add files via the right-click menu in File Explorer
+
+![20](doc/20.gif)
+
+Due to Windows system limitations, only one file path can be passed at a time. This feature can only select folders when the program is not running. You can use it with the "Start on Boot" button next to it. Of course, if you want to pass multiple file or folder paths, you can place a shortcut to this software in the "Send To" folder, so you can also pass multiple files without starting the software.
+
+### Save Logs
+
+Click the Save Logs button at the bottom. When enabled, it will save data before and after renaming. The files will be saved in the logs folder under the software directory
+
+![image-20260423100711239](doc/3.png)
+
+## Replace and Reserve Modes
+
+### Main Differences Between Replace and Reserve Modes
+
+#### **Default State**
+
+![1](doc/1.gif)
+
+#### **Match Content**
+
+![2](doc/2.gif)
+
+When the button to the right of the match input box is lit, it becomes match length:
+
+![5](doc/5.gif)
+
+#### **Modify Content**
+
+![3](doc/3.gif)
+
+There is a date button in the modify input box. Clicking it will automatically fill in today's date. You can also use the up and down keys to adjust the date (the adjustment is for numbers, so 20260401 minus 1 becomes 20260400):
+
+![4](doc/4.gif)
+
+When the button to the right of the modify input box is lit, it becomes case-insensitive:
+
+![6](doc/6.gif)
+
+#### **Replace Mode Match Features**
+
+![7](doc/7.gif)
+
+#### Reserve Mode Match Features
+
+![8](doc/8.gif)
+
+### Date Naming
+
+Click the rightmost button of the date item to rename using file date
+
+![9](doc/9.gif)
+
+### Prefix and Suffix
+
+Via input
 
 ![10](doc/10.gif)
 
-**Append Mode**: Off by default, each time a new file is added it will clear the existing files.It will not be cleared when it is turned on.
+Via file upload
 
-**Add Folder**: Enable this option to drag a folder directly into the list. By default, dragging in a folder will add all files under the folder to the list.
+![11](doc/11.gif)
 
-The storage icon in the lower left corner allows you to save some of the user's configurations to the point where you don't need to reset them each time you open it (the contents of the input box are not saved).
+You can also directly edit the content uploaded from the file (this will not change the file itself)
 
-## Batch rename
+![12](doc/12.gif)
+
+The same operation applies to suffixes
+
+### Sequence
+
+![13](doc/13.gif)
+
+The same operation applies to suffix sequences
+
+### Extension
+
+Batch modify file extensions
+
+![14](doc/14.gif)
+
+### Distinction Options
+
+Add sequences by category
+
+![15](doc/15.gif)
+
+If using date naming, files with the same date will be added as a sequence group, and sequences will be added by file type and extension
+
+## CSV File Naming
+
+Click the Upload CSV File button at the bottom to upload CSV files, or TXT files in CSV format, or log files generated by this software to batch rename files
+
+![23](doc/23.gif)
+
+## Modify File Date
+
+Click the Modify Date button at the bottom
+
+![24](doc/24.gif)
+
+If an interval value other than 0 is selected, the date will be incremented or decremented according to the file order
+
+## Advance Mode
+
+### Delete
+
+#### Text
+
+![25](doc/25.gif)
+
+You can also delete the Nth matched value
+
+![26](doc/26.gif)
+
+You can also perform more detailed matching and deletion based on the following options
+
+![image-20260422212114785](doc/1.png)
+
+#### Type
+
+You can also delete specific types without entering anything
+
+![27](doc/27.gif)
+
+#### Position
+
+Delete content at a specified position
+
+![28](doc/28.gif)
+
+#### Extension
+
+You can also delete file extensions
+
+![29](doc/29.gif)
+
+### Add
+
+#### Text
+
+![30](doc/30.gif)
+
+#### Sequence
+
+![31](doc/31.gif)
+
+Advance Mode has more precise sequence control than Replace and Reserve modes
+
+![image-20260423121142586](doc/4.png)
+
+#### Random Number
+
+![45](doc/45.gif)
+
+#### Other
+
+There are other types that can be added, which will not be demonstrated here
+
+![image-20260423121725437](doc/5.png)
+
+#### Add Position
+
+There is also an option to add position at the bottom, which controls the position of the condition content through the number input box on the far right
+
+![image-20260423121828306](doc/6.png)
+
+The "After" and "Before" options will not be demonstrated here. Let's focus on the "End" and "Interval" options:
+
+- **End**: The input content will be added to the end of the file extension. The value in the input box on the right does not affect the position added to the extension
+- **Interval**: ![46](doc/46.gif)
 
 ### Replace
 
-Replace is to replace the matching content.
+#### Normal
 
-![01](doc/01.gif)
+Same as Replace Mode, so it will not be demonstrated here. The only difference is that the two buttons on the right are used to match regular expressions and match extensions respectively
 
-#### Replacement is the replacement of a match.
+![image-20260423124211350](doc/7.png)
 
-![04](doc/04.gif)
+#### Convert
 
-#### Match length
+![47](doc/47.gif)
 
-Input a number is the matching length, input "**number + space + number**" to intercept the specified section
+#### Format
 
-![05](doc/05.gif)
+When Format is selected, if the matched content is not a number, it will be converted to the length of each name
 
-#### Named by Date
+![48](doc/48.gif)
 
-If Naming by Date is turned on, matches are modified to be dates. The default is to name in 8-digit format for the date of creation.
+#### Word Interval
 
-You can control the number of digits in the date by adding or subtracting digits, or by entering numbers directly.
+Automatically separate words. Due to technical limitations, separation can only be done via capitalization at the beginning
 
-![06](doc/06.gif)
+![49](doc/49.gif)
 
-#### Prefix and suffix
+### Preset
 
-##### Direct input
+You can store commonly used instruction groups as presets for easy use next time. You can also import and export stored presets. The preset list can be operated in batches via the right-click menu just like the file list, which will not be demonstrated here
 
-![07](doc/07.gif)
+![image-20260423125557893](doc/8.png)
 
-##### Upload file
+## Organize Mode
 
-Upload a txt file with the names separated by spaces or line breaks. If the file is simple you can just type "**name + space + name**" which will have the same effect.
+Sometimes after renaming files, we need to move them to other folders. This is where Organize Mode comes in. It has the following move options:
 
-![08](doc/08.gif)
+- Default: Move all selected files to the **target folder**
+- Group Name Classification: Set different folders for different groups via the **Set Group Folder** button
+- Type Classification: Set different folders for different types of files via the **Set Type Folder** button
+- Date Classification: Classify files by date and create folders named after dates
+- Top Folder, Delete Selected Files, Delete Empty Folders have explanations in the software
 
-### Reserve
-
-Keep is to delete content outside of the match.
-
-![02](doc/02.gif)
-
-It can also be retained through the following options:
-
-![03](doc/03.gif)
-
-Other function introduction reference **Replace**
-
-## Organize files
-
-The Organize Files feature needs to be turned on by clicking on the bottom left corner. Once enabled, you can batch move files and batch delete empty folders.
-
-Some instructions for this function are given in the software.
-
-![09](doc/09.gif)
-
-## Store Configuration
-
-Clicking on the Store icon in the lower left corner allows you to save the fill option settings for certain options of the menu so that you will not have to repeat the settings the next time you use them.
-
-All content settings are only valid if the storage function is enabled.
+![image-20260423125925490](doc/9.png)
 
 # LICENSE
 

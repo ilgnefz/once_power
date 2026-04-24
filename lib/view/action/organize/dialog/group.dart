@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/util/storage.dart';
-import 'package:once_power/widget/action/folder_input.dart';
 import 'package:once_power/widget/base/dialog.dart';
+import 'package:once_power/widget/common/click_icon.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 class GroupList extends ConsumerStatefulWidget {
   const GroupList({super.key});
@@ -18,7 +20,6 @@ class GroupList extends ConsumerStatefulWidget {
 class _GroupListState extends ConsumerState<GroupList> {
   List<String> list = [];
   Map<String, String> groupMap = {};
-  Map<String, TextEditingController> controllers = {};
 
   @override
   void initState() {
@@ -31,54 +32,54 @@ class _GroupListState extends ConsumerState<GroupList> {
       } else {
         groupMap[element] = '';
       }
-      controllers[element] = TextEditingController(text: groupMap[element]);
     }
     setState(() {});
-  }
-
-  @override
-  void dispose() {
-    for (var controller in controllers.values) {
-      controller.dispose();
-    }
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
       title: tr(AppL10n.organizeGroupFolder),
-      content: Column(
-        spacing: AppNum.spaceMedium,
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(list.length, (index) {
+      padding: .zero,
+      content: ListView.separated(
+        itemCount: list.length,
+        shrinkWrap: true,
+        padding: .symmetric(horizontal: AppNum.padding),
+        itemBuilder: (BuildContext context, int index) {
           String key = list[index];
           return Row(
             spacing: AppNum.spaceMedium,
             children: [
               ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 80),
-                child: Text(
-                  '$key: ',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                constraints: const BoxConstraints(maxWidth: 120),
+                child: Text('$key: ', maxLines: 1, overflow: .ellipsis),
               ),
               Expanded(
-                child: FolderInput(
-                  controller: controllers[key]!, // 使用缓存的 controller
-                  onChanged: (value) {
-                    setState(() => groupMap[key] = value);
-                    controllers[key]!.text = value;
-                  },
+                child: InputField(
+                  key: ValueKey(key),
+                  text: groupMap[key] ?? '',
+                  hintText: tr(AppL10n.organizeTarget),
+                  onClear: () => setState(() => groupMap[key] = ''),
+                  onChanged: (value) => setState(() => groupMap[key] = value),
+                  action: ClickIcon(
+                    icon: Icons.folder_open_rounded,
+                    onPressed: () async {
+                      final String? folder = await getDirectoryPath();
+                      if (folder == null || folder.isEmpty) return;
+                      setState(() => groupMap[key] = folder);
+                    },
+                  ),
                 ),
               ),
             ],
           );
-        }).toList(),
+        },
+        separatorBuilder: (_, _) => SizedBox(height: AppNum.spaceSmall),
       ),
-      onOk: () async =>
-          await StorageUtil.setStringMap(AppKeys.groupFolder, groupMap),
+      onOk: () async {
+        debugPrint(groupMap.toString());
+        await StorageUtil.setStringMap(AppKeys.groupFolder, groupMap);
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
@@ -6,9 +7,10 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/type.dart';
 import 'package:once_power/util/storage.dart';
-import 'package:once_power/widget/action/folder_input.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/base/text.dart';
+import 'package:once_power/widget/common/click_icon.dart';
+import 'package:once_power/widget/common/input_field.dart';
 
 class TypeList extends StatefulWidget {
   const TypeList({super.key});
@@ -18,44 +20,31 @@ class TypeList extends StatefulWidget {
 }
 
 class _TypeListState extends State<TypeList> {
-  List<RuleType> list = [
-    RuleType(FileType.image.label, AppKeys.imageFolder),
-    RuleType(FileType.video.label, AppKeys.videoFolder),
-    RuleType(FileType.doc.label, AppKeys.docFolder),
-    RuleType(FileType.audio.label, AppKeys.audioFolder),
-    RuleType(FileType.folder.label, AppKeys.folderFolder),
-    RuleType(FileType.archive.label, AppKeys.archiveFolder),
-    RuleType(FileType.other.label, AppKeys.otherFolder),
-  ];
-
-  List<String> origin = [];
+  Map<FileType, String> typeMap = {
+    FileType.image: '',
+    FileType.video: '',
+    FileType.doc: '',
+    FileType.audio: '',
+    FileType.folder: '',
+    FileType.archive: '',
+    FileType.other: '',
+  };
 
   @override
   void initState() {
     super.initState();
-    for (RuleType type in list) {
-      String cache = StorageUtil.getString(type.key) ?? '';
-      origin.add(cache);
-    }
-  }
-
-  void cancel() {
-    for (var i = 0; i < list.length; i++) {
-      StorageUtil.setString(list[i].key, origin[i]);
-    }
-  }
-
-  Future<void> ok() async {
-    RuleTypeValue ruleTypeValue = RuleTypeValue(
-      image: StorageUtil.getString(AppKeys.imageFolder) ?? '',
-      video: StorageUtil.getString(AppKeys.videoFolder) ?? '',
-      doc: StorageUtil.getString(AppKeys.docFolder) ?? '',
-      audio: StorageUtil.getString(AppKeys.audioFolder) ?? '',
-      folder: StorageUtil.getString(AppKeys.folderFolder) ?? '',
-      archive: StorageUtil.getString(AppKeys.archiveFolder) ?? '',
-      other: StorageUtil.getString(AppKeys.otherFolder) ?? '',
+    RuleTypeValue? ruleTypeValue = StorageUtil.getRuleTypeValue(
+      AppKeys.ruleTypeValue,
     );
-    await StorageUtil.setRuleTypeValue(AppKeys.ruleTypeValue, ruleTypeValue);
+    if (ruleTypeValue != null) {
+      typeMap[FileType.image] = ruleTypeValue.image;
+      typeMap[FileType.video] = ruleTypeValue.video;
+      typeMap[FileType.doc] = ruleTypeValue.doc;
+      typeMap[FileType.audio] = ruleTypeValue.audio;
+      typeMap[FileType.folder] = ruleTypeValue.folder;
+      typeMap[FileType.archive] = ruleTypeValue.archive;
+      typeMap[FileType.other] = ruleTypeValue.other;
+    }
   }
 
   @override
@@ -65,17 +54,26 @@ class _TypeListState extends State<TypeList> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: AppNum.spaceSmall,
-        children: List.generate(list.length, (index) {
-          RuleType type = list[index];
+        children: List.generate(typeMap.keys.length, (index) {
+          FileType type = typeMap.keys.toList()[index];
           return Row(
             spacing: AppNum.spaceMedium,
             children: [
-              BaseText('${type.name}:'),
+              BaseText('${type.label}:'),
               Expanded(
-                child: FolderInput(
-                  cacheKey: type.key,
-                  controller: TextEditingController(
-                    text: StorageUtil.getString(type.key),
+                child: InputField(
+                  key: ValueKey(type.label),
+                  text: typeMap[type] ?? '',
+                  hintText: tr(AppL10n.organizeTarget),
+                  onClear: () => setState(() => typeMap[type] = ''),
+                  onChanged: (value) => setState(() => typeMap[type] = value),
+                  action: ClickIcon(
+                    icon: Icons.folder_open_rounded,
+                    onPressed: () async {
+                      final String? folder = await getDirectoryPath();
+                      if (folder == null || folder.isEmpty) return;
+                      setState(() => typeMap[type] = folder);
+                    },
                   ),
                 ),
               ),
@@ -83,8 +81,21 @@ class _TypeListState extends State<TypeList> {
           );
         }).toList(),
       ),
-      onCancel: cancel,
-      onOk: ok,
+      onOk: () async {
+        RuleTypeValue ruleTypeValue = RuleTypeValue(
+          image: typeMap[FileType.image] ?? '',
+          video: typeMap[FileType.video] ?? '',
+          doc: typeMap[FileType.doc] ?? '',
+          audio: typeMap[FileType.audio] ?? '',
+          folder: typeMap[FileType.folder] ?? '',
+          archive: typeMap[FileType.archive] ?? '',
+          other: typeMap[FileType.other] ?? '',
+        );
+        await StorageUtil.setRuleTypeValue(
+          AppKeys.ruleTypeValue,
+          ruleTypeValue,
+        );
+      },
     );
   }
 }

@@ -1,13 +1,6 @@
 class AppKeys {
   // String
   static String targetFolder = 'targetFolder';
-  static String imageFolder = 'imageFolder';
-  static String videoFolder = 'videoFolder';
-  static String docFolder = 'docFolder';
-  static String audioFolder = 'audioFolder';
-  static String folderFolder = 'folderFolder';
-  static String archiveFolder = 'archiveFolder';
-  static String otherFolder = 'otherFolder';
   static String presetName = 'presetName';
   static String mapKey = 'mapKey';
   static String rightMenuFolderPath = 'rightMenuFolderPath';
