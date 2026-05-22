@@ -1,7 +1,9 @@
+use lofty::prelude::*;
+use lofty::probe::Probe;
 use rexif::{ExifTag, TagValue};
-use std::f64::consts::PI;
+use std::{f64::consts::PI, path::Path};
 
-use crate::api::file_type::PhotoMetaInfo;
+use crate::api::file_type::{AudioMetaInfo, PhotoMetaInfo};
 
 /// 验证日期字符串是否有效
 /// 过滤掉像 ":  :     :  : " 这样的无效格式，但保留包含"上午"或"下午"的有效日期
@@ -185,4 +187,35 @@ pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
         latitude,
         longitude,
     })
+}
+
+#[flutter_rust_bridge::frb(sync)]
+// 注意：这是完整的 get_audio_info 函数实现
+pub fn get_audio_meta_info(file_path: &str) -> AudioMetaInfo {
+    let mut info = AudioMetaInfo {
+        title: String::new(),
+        artist: String::new(),
+        album: String::new(),
+        year: String::new(),
+    };
+
+    let path = Path::new(file_path);
+    let tagged_file = Probe::open(path)
+        .expect("ERROR: Bad path provided!")
+		.read()
+		.expect("ERROR: Failed to read file!");
+
+    let tag = match tagged_file.primary_tag() {
+        Some(primary_tag) => primary_tag,
+        None => return info,
+    };
+
+    info.title = tag.title().unwrap_or_default().to_string();
+    info.artist = tag.artist().unwrap_or_default().to_string();
+    info.album = tag.album().unwrap_or_default().to_string();
+    info.year = tag.get_string(ItemKey::RecordingDate)
+        .or_else(|| tag.get_string(ItemKey::Year))
+        .unwrap_or_default().to_string();
+
+    info
 }

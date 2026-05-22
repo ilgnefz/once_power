@@ -59,6 +59,7 @@ class IconDropdown<T> extends StatelessWidget {
         menuItemStyleData: MenuItemStyleData(
           // padding:
           //     padding ?? EdgeInsets.symmetric(horizontal: AppNum.spaceMedium),
+          mouseCursor: SystemMouseCursors.click,
           padding: .zero,
           overlayColor: .resolveWith((states) {
             if (states.contains(WidgetState.hovered) ||

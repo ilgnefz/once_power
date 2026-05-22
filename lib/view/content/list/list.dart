@@ -35,7 +35,7 @@ class ContentListView extends ConsumerWidget {
           child: proxy,
         );
       },
-      onReorder: (oldIndex, newIndex) {
+      onReorderItem: (oldIndex, newIndex) {
         if (newIndex > oldIndex) newIndex -= 1;
         reorderList(ref, files, oldIndex, newIndex);
       },

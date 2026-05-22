@@ -15,6 +15,8 @@ import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/src/rust/api/file_meta.dart';
+import 'package:once_power/src/rust/api/file_type.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
@@ -184,13 +186,13 @@ String getRuleTypeValue(InfoType type, FileInfo file) {
 }
 
 FileMetaInfo? getAudioInfo(String filePath) {
-  Mediainfo mi = Mediainfo()..quickLoad(filePath);
-  String title = audioMediaInfo(mi, "Title");
-  String album = audioMediaInfo(mi, "Album");
-  String artist = audioMediaInfo(mi, "Performer");
-  String year = audioMediaInfo(mi, "Recorded_Date");
-  mi.close();
-  return FileMetaInfo(title: title, album: album, artist: artist, year: year);
+  AudioMetaInfo info = getAudioMetaInfo(filePath: filePath);
+  return FileMetaInfo(
+    title: info.title,
+    album: info.album,
+    artist: info.artist,
+    year: info.year,
+  );
 }
 
 Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
@@ -218,9 +220,6 @@ Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
 String generalMediaInfo(Mediainfo mi, String parameter) =>
     mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
 
-String audioMediaInfo(Mediainfo mi, String parameter) =>
-    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
-
 String videoMediaInfo(Mediainfo mi, String parameter) =>
     mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
 
@@ -246,12 +245,15 @@ Future<Resolution> getImageDimensions(String assetPath) async {
 }
 
 Resolution getPsdDimensions(String assetPath) {
+  Stopwatch stopwatch = Stopwatch()..start();
   Mediainfo mi = Mediainfo()..quickLoad(assetPath);
   String width = imageMediaInfo(mi, 'Width');
   String height = imageMediaInfo(mi, 'Height');
   mi.close();
   int rWidth = width.isEmpty ? 0 : int.parse(width);
   int rHeight = height.isEmpty ? 0 : int.parse(height);
+  double cost = stopwatch.elapsedMicroseconds / 1000000;
+  debugPrint('获PSD尺寸耗时: $cost');
   return Resolution(rWidth, rHeight);
 }
 

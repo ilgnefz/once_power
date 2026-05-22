@@ -94,7 +94,9 @@ import 'normal.dart';
           metaData = file.metaInfo?.location ?? '';
           break;
       }
-      metaData = menu.metaData.prefix + metaData + menu.metaData.suffix;
+      if (metaData.isNotEmpty) {
+        metaData = menu.metaData.prefix + metaData + menu.metaData.suffix;
+      }
       return insertPosition(menu, name, metaData, extension);
   }
 }

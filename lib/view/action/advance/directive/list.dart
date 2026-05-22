@@ -29,7 +29,7 @@ class DirectiveList extends ConsumerWidget {
           child: child,
         );
       },
-      onReorder: (int oldIndex, int newIndex) {
+      onReorderItem: (int oldIndex, int newIndex) {
         if (newIndex > oldIndex) newIndex -= 1;
         AdvanceMenuModel item = list.removeAt(oldIndex);
         list.insert(newIndex, item);

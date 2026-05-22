@@ -14,7 +14,7 @@ pub struct AudioMetaInfo {
     pub title: String,
     pub artist: String,
     pub album: String,
-    pub year: i32,
+    pub year: String,
 }
 
 pub struct PhotoMetaInfo {

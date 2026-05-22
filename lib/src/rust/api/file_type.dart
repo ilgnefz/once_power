@@ -6,7 +6,33 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `AudioMetaInfo`
+class AudioMetaInfo {
+  final String title;
+  final String artist;
+  final String album;
+  final String year;
+
+  const AudioMetaInfo({
+    required this.title,
+    required this.artist,
+    required this.album,
+    required this.year,
+  });
+
+  @override
+  int get hashCode =>
+      title.hashCode ^ artist.hashCode ^ album.hashCode ^ year.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AudioMetaInfo &&
+          runtimeType == other.runtimeType &&
+          title == other.title &&
+          artist == other.artist &&
+          album == other.album &&
+          year == other.year;
+}
 
 class PhotoMetaInfo {
   final String? make;

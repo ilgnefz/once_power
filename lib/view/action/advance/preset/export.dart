@@ -29,7 +29,7 @@ class _ExportPresetViewState extends ConsumerState<ExportPresetView> {
         itemCount: list.length,
         // itemExtent: ,
         buildDefaultDragHandles: false,
-        onReorder: (int oldIndex, int newIndex) {
+        onReorderItem: (int oldIndex, int newIndex) {
           if (newIndex > oldIndex) newIndex -= 1;
           AdvancePreset item = list[oldIndex];
           ref.read(advancePresetListProvider.notifier).remove(item);

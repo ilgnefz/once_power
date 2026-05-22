@@ -61,6 +61,7 @@ class TextDropdown<T> extends StatelessWidget {
           ),
         ),
         menuItemStyleData: MenuItemStyleData(
+          mouseCursor: SystemMouseCursors.click,
           padding: .symmetric(horizontal: AppNum.spaceMedium),
           overlayColor: .resolveWith((states) {
             if (states.contains(WidgetState.hovered) ||

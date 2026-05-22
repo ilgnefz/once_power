@@ -11,3 +11,6 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 PhotoMetaInfo? getImageMetaInfo({required String imagePath}) =>
     RustLib.instance.api.crateApiFileMetaGetImageMetaInfo(imagePath: imagePath);
+
+AudioMetaInfo getAudioMetaInfo({required String filePath}) =>
+    RustLib.instance.api.crateApiFileMetaGetAudioMetaInfo(filePath: filePath);
