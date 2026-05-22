@@ -12,7 +12,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
@@ -59,6 +59,9 @@ jobs:
 
       - name: Install fastforge
         run: dart pub global activate fastforge
+
+      - name: Clean previous build artifacts
+        run: rm -rf dist/
 
       - name: Build all packages
         run: fastforge package --platform linux --targets appimage,deb,rpm
