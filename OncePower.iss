@@ -58,6 +58,7 @@ Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutte
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_avif_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\fvp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\fvp_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\libass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk.dll"; DestDir: "{app}"; Flags: ignoreversion
