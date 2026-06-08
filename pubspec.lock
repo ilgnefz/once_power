@@ -1404,10 +1404,10 @@ packages:
     dependency: "direct main"
     description:
       name: tolyui_feedback
-      sha256: dd0265260b5f5b6728b288267807bf58d6f92aa74fe60cdebaad277e31d6def4
+      sha256: "575a795a9995e122dc293489a066fb39f1c6b0aefc53b92980d9ea7dc3aa071c"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.6+10"
+    version: "0.3.6+16"
   tolyui_message:
     dependency: transitive
     description:

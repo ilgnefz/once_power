@@ -189,6 +189,7 @@ class AppL10n {
   static const String contentFilterSelect = 'content.filter.select';
   static const String contentFilterUnselect = 'content.filter.unselect';
   static const String contentFilterRemove = 'content.filter.remove';
+  static const String contentLoadingInfo = 'content.loadingInfo';
 
   /* ---------- menu ---------- */
   static const String menuLocal = 'menu.local';

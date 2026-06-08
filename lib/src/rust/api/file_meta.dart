@@ -7,7 +7,7 @@ import '../frb_generated.dart';
 import 'file_type.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `format_date`, `is_in_china`, `is_valid_date`, `parse_gps_coordinates`, `parse_urational_coordinate`, `transform_lat`, `transform_lon`, `wgs84_to_gcj02`
+// These functions are ignored because they are not marked as `pub`: `format_date`, `is_valid_date`, `parse_gps_coordinates`, `parse_urational_coordinate`
 
 PhotoMetaInfo? getImageMetaInfo({required String imagePath}) =>
     RustLib.instance.api.crateApiFileMetaGetImageMetaInfo(imagePath: imagePath);

@@ -22,6 +22,7 @@ import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
 import 'format.dart';
+import 'location.dart';
 import 'verify.dart';
 
 double getTotalSize(WidgetRef ref) {
@@ -294,6 +295,32 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
     debugPrint('获取 SVG 尺寸失败: $e');
     return Resolution.zero;
   }
+}
+
+Future<FileMetaInfo?> getImageMeta(String filePath) async{
+  PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
+  if (photoMetaInfo == null) return null;
+  String? captureStr = photoMetaInfo.capture;
+  DateInfo? capture = captureStr == null
+      ? null
+      : getDateInfo(DateTime.tryParse(captureStr));
+  double? longitude = photoMetaInfo.longitude;
+  double? latitude = photoMetaInfo.latitude;
+  // 避免在 Isolate 中调用可能涉及 UI 的函数
+  String location = '';
+  try {
+    location = await getTrueLocation(longitude, latitude);
+  } catch (e) {
+    debugPrint('Error getting location: $e');
+  }
+  return FileMetaInfo(
+    make: photoMetaInfo.make ?? '',
+    model: photoMetaInfo.model ?? '',
+    capture: capture,
+    latitude: latitude,
+    longitude: longitude,
+    location: location,
+  );
 }
 
 String getTopPath(String filePath) {

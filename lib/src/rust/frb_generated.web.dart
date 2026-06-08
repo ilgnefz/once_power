@@ -9,6 +9,7 @@
 import 'api/file_info.dart';
 import 'api/file_meta.dart';
 import 'api/file_type.dart';
+import 'api/gps_info.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -66,6 +67,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RFileInfo dco_decode_r_file_info(dynamic raw);
 
   @protected
+  (double, double) dco_decode_record_f_64_f_64(dynamic raw);
+
+  @protected
   BigInt dco_decode_u_64(dynamic raw);
 
   @protected
@@ -119,6 +123,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
+
+  @protected
+  (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
 
   @protected
   BigInt sse_decode_u_64(SseDeserializer deserializer);
@@ -182,6 +189,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_f_64_f_64(
+    (double, double) self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_u_64(BigInt self, SseSerializer serializer);

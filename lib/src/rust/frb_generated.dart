@@ -6,6 +6,7 @@
 import 'api/file_info.dart';
 import 'api/file_meta.dart';
 import 'api/file_type.dart';
+import 'api/gps_info.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -69,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 150017681;
+  int get rustContentHash => 1785403150;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -99,6 +100,11 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiSimpleInitApp();
 
+  Future<bool> crateApiGpsInfoIsInChina({
+    required double lat,
+    required double lon,
+  });
+
   void crateApiSimpleSetAtime({
     required String filePath,
     required PlatformInt64 time,
@@ -117,6 +123,11 @@ abstract class RustLibApi extends BaseApi {
   String crateApiSimpleSimplifiedToTraditional({required String text});
 
   String crateApiSimpleTraditionalToSimplified({required String text});
+
+  Future<(double, double)> crateApiGpsInfoWgs84ToGcj02({
+    required double wgsLat,
+    required double wgsLon,
+  });
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -336,6 +347,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
+  Future<bool> crateApiGpsInfoIsInChina({
+    required double lat,
+    required double lon,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(lat, serializer);
+          sse_encode_f_64(lon, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 9,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiGpsInfoIsInChinaConstMeta,
+        argValues: [lat, lon],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiGpsInfoIsInChinaConstMeta =>
+      const TaskConstMeta(debugName: "is_in_china", argNames: ["lat", "lon"]);
+
+  @override
   void crateApiSimpleSetAtime({
     required String filePath,
     required PlatformInt64 time,
@@ -346,7 +389,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -375,7 +418,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -404,7 +447,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -429,7 +472,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -455,7 +498,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -472,6 +515,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "traditional_to_simplified",
         argNames: ["text"],
+      );
+
+  @override
+  Future<(double, double)> crateApiGpsInfoWgs84ToGcj02({
+    required double wgsLat,
+    required double wgsLon,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(wgsLat, serializer);
+          sse_encode_f_64(wgsLon, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 15,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_record_f_64_f_64,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiGpsInfoWgs84ToGcj02ConstMeta,
+        argValues: [wgsLat, wgsLon],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiGpsInfoWgs84ToGcj02ConstMeta =>
+      const TaskConstMeta(
+        debugName: "wgs84_to_gcj02",
+        argNames: ["wgsLat", "wgsLon"],
       );
 
   @protected
@@ -586,6 +664,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       size: dco_decode_u_64(arr[7]),
       isDir: dco_decode_bool(arr[8]),
     );
+  }
+
+  @protected
+  (double, double) dco_decode_record_f_64_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_f_64(arr[0]), dco_decode_f_64(arr[1]));
   }
 
   @protected
@@ -757,6 +845,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_f_64(deserializer);
+    var var_field1 = sse_decode_f_64(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   BigInt sse_decode_u_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getBigUint64();
@@ -907,6 +1003,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.accessTime, serializer);
     sse_encode_u_64(self.size, serializer);
     sse_encode_bool(self.isDir, serializer);
+  }
+
+  @protected
+  void sse_encode_record_f_64_f_64(
+    (double, double) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.$1, serializer);
+    sse_encode_f_64(self.$2, serializer);
   }
 
   @protected
