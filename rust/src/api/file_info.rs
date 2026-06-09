@@ -13,13 +13,22 @@ pub fn generate_id() -> String {
 pub fn get_file_info(file_path: &str) -> Result<RFileInfo, String> {
     let path = Path::new(file_path);
     let id = generate_id();
-    let name = path.file_stem().unwrap_or_else(|| path.file_name().unwrap()).to_string_lossy().to_string();
-    let parent = path.parent().unwrap().to_string_lossy().to_string();
     let metadata = fs::metadata(path.to_string_lossy().to_string().as_str()).map_err(|e| e.to_string())?;
     let is_dir = metadata.is_dir();
-    let ext = path.extension()
-            .map(|e| e.to_string_lossy().to_string())
-            .unwrap_or_default();
+    let (name, ext) = if is_dir {
+        (
+            path.file_name().unwrap_or_default().to_string_lossy().to_string(),
+            String::new(),
+        )
+    } else {
+        (
+            path.file_stem().unwrap_or_else(|| path.file_name().unwrap()).to_string_lossy().to_string(),
+            path.extension()
+                .map(|e| e.to_string_lossy().to_string())
+                .unwrap_or_default(),
+        )
+    };
+    let parent = path.parent().unwrap().to_string_lossy().to_string();
     let create_time = get_timestamp(metadata.created().map_err(|e| e.to_string())?)?;
     let modify_time = get_timestamp(metadata.modified().map_err(|e| e.to_string())?)?;
     let access_time = get_timestamp(metadata.accessed().map_err(|e| e.to_string())?)?;
