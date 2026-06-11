@@ -37,7 +37,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
-  PhotoMetaInfo dco_decode_box_autoadd_photo_meta_info(dynamic raw);
+  (double, double) dco_decode_box_autoadd_record_f_64_f_64(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -58,16 +58,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
 
   @protected
-  PhotoMetaInfo? dco_decode_opt_box_autoadd_photo_meta_info(dynamic raw);
+  (double, double)? dco_decode_opt_box_autoadd_record_f_64_f_64(dynamic raw);
 
   @protected
   PhotoMetaInfo dco_decode_photo_meta_info(dynamic raw);
+
+  @protected
+  PsdMetaInfo dco_decode_psd_meta_info(dynamic raw);
 
   @protected
   RFileInfo dco_decode_r_file_info(dynamic raw);
 
   @protected
   (double, double) dco_decode_record_f_64_f_64(dynamic raw);
+
+  @protected
+  int dco_decode_u_32(dynamic raw);
 
   @protected
   BigInt dco_decode_u_64(dynamic raw);
@@ -77,6 +83,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void dco_decode_unit(dynamic raw);
+
+  @protected
+  VideoMetaInfo dco_decode_video_meta_info(dynamic raw);
 
   @protected
   String sse_decode_String(SseDeserializer deserializer);
@@ -91,7 +100,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
-  PhotoMetaInfo sse_decode_box_autoadd_photo_meta_info(
+  (double, double) sse_decode_box_autoadd_record_f_64_f_64(
     SseDeserializer deserializer,
   );
 
@@ -114,7 +123,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
-  PhotoMetaInfo? sse_decode_opt_box_autoadd_photo_meta_info(
+  (double, double)? sse_decode_opt_box_autoadd_record_f_64_f_64(
     SseDeserializer deserializer,
   );
 
@@ -122,10 +131,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotoMetaInfo sse_decode_photo_meta_info(SseDeserializer deserializer);
 
   @protected
+  PsdMetaInfo sse_decode_psd_meta_info(SseDeserializer deserializer);
+
+  @protected
   RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
 
   @protected
   (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer);
 
   @protected
   BigInt sse_decode_u_64(SseDeserializer deserializer);
@@ -135,6 +150,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_decode_unit(SseDeserializer deserializer);
+
+  @protected
+  VideoMetaInfo sse_decode_video_meta_info(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -152,8 +170,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_photo_meta_info(
-    PhotoMetaInfo self,
+  void sse_encode_box_autoadd_record_f_64_f_64(
+    (double, double) self,
     SseSerializer serializer,
   );
 
@@ -179,13 +197,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
 
   @protected
-  void sse_encode_opt_box_autoadd_photo_meta_info(
-    PhotoMetaInfo? self,
+  void sse_encode_opt_box_autoadd_record_f_64_f_64(
+    (double, double)? self,
     SseSerializer serializer,
   );
 
   @protected
   void sse_encode_photo_meta_info(PhotoMetaInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_psd_meta_info(PsdMetaInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
@@ -197,6 +218,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_u_32(int self, SseSerializer serializer);
+
+  @protected
   void sse_encode_u_64(BigInt self, SseSerializer serializer);
 
   @protected
@@ -204,6 +228,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_video_meta_info(VideoMetaInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);

@@ -7,10 +7,16 @@ import '../frb_generated.dart';
 import 'file_type.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `format_date`, `is_valid_date`, `parse_gps_coordinates`, `parse_urational_coordinate`
+// These functions are ignored because they are not marked as `pub`: `format_date`, `is_valid_date`
 
-PhotoMetaInfo? getImageMetaInfo({required String imagePath}) =>
+PhotoMetaInfo getImageMetaInfo({required String imagePath}) =>
     RustLib.instance.api.crateApiFileMetaGetImageMetaInfo(imagePath: imagePath);
 
 AudioMetaInfo getAudioMetaInfo({required String filePath}) =>
     RustLib.instance.api.crateApiFileMetaGetAudioMetaInfo(filePath: filePath);
+
+PsdMetaInfo getPsdMetaInfo({required String psdPath}) =>
+    RustLib.instance.api.crateApiFileMetaGetPsdMetaInfo(psdPath: psdPath);
+
+VideoMetaInfo getVideoMetaInfo({required String videoPath}) =>
+    RustLib.instance.api.crateApiFileMetaGetVideoMetaInfo(videoPath: videoPath);

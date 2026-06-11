@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_media_info/flutter_media_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_size_getter/file_input.dart';
 import 'package:image_size_getter/image_size_getter.dart';
@@ -197,41 +196,42 @@ FileMetaInfo? getAudioInfo(String filePath) {
 }
 
 Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
-  Mediainfo mi = Mediainfo()..quickLoad(filePath);
-  String width = videoMediaInfo(mi, "Width");
-  String height = videoMediaInfo(mi, "Height");
-  String make = generalMediaInfo(mi, "com.android.manufacturer");
-  String model = generalMediaInfo(mi, "com.android.model");
-  String tagged = generalMediaInfo(mi, "Tagged_Date");
-  DateTime? capture = DateTime.tryParse(convertToLocalTime(tagged));
-  // print(mi.inform());
-  mi.close();
-  int rWidth = width.isEmpty ? 0 : int.parse(width);
-  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  // Mediainfo mi = Mediainfo()..quickLoad(filePath);
+  // String width = videoMediaInfo(mi, "Width");
+  // String height = videoMediaInfo(mi, "Height");
+  // String make = generalMediaInfo(mi, "com.android.manufacturer");
+  // String model = generalMediaInfo(mi, "com.android.model");
+  // String tagged = generalMediaInfo(mi, "Tagged_Date");
+  // DateTime? capture = DateTime.tryParse(convertToLocalTime(tagged));
+  // // print(mi.inform());
+  // mi.close();
+  // int rWidth = width.isEmpty ? 0 : int.parse(width);
+  // int rHeight = height.isEmpty ? 0 : int.parse(height);
+  VideoMetaInfo info = getVideoMetaInfo(videoPath: filePath);
   return (
-    Resolution(rWidth, rHeight),
+    Resolution(info.width, info.height),
     FileMetaInfo(
-      capture: capture == null ? null : getDateInfo(capture),
-      make: make,
-      model: model,
+      capture: info.capture == ''
+          ? null
+          : getDateInfo(DateTime.tryParse(info.capture)),
+      make: info.make,
+      model: info.model,
     ),
   );
 }
 
-String generalMediaInfo(Mediainfo mi, String parameter) =>
-    mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
-
-String videoMediaInfo(Mediainfo mi, String parameter) =>
-    mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
-
-String imageMediaInfo(Mediainfo mi, String parameter) =>
-    mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);
+// String generalMediaInfo(Mediainfo mi, String parameter) =>
+//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
+//
+// String videoMediaInfo(Mediainfo mi, String parameter) =>
+//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
+//
+// String imageMediaInfo(Mediainfo mi, String parameter) =>
+//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);
 
 Future<Resolution> getImageDimensions(String assetPath) async {
   // 调试计算图片尺寸耗时
   Stopwatch stopwatch = Stopwatch()..start();
-  if (assetPath.endsWith('.psd')) return getPsdDimensions(assetPath);
-  if (assetPath.endsWith('.svg')) return await getSvgDimensions(assetPath);
   try {
     File file = File(assetPath);
     SizeResult result = ImageSizeGetter.getSizeResult(FileInput(file));
@@ -247,15 +247,17 @@ Future<Resolution> getImageDimensions(String assetPath) async {
 
 Resolution getPsdDimensions(String assetPath) {
   Stopwatch stopwatch = Stopwatch()..start();
-  Mediainfo mi = Mediainfo()..quickLoad(assetPath);
-  String width = imageMediaInfo(mi, 'Width');
-  String height = imageMediaInfo(mi, 'Height');
-  mi.close();
-  int rWidth = width.isEmpty ? 0 : int.parse(width);
-  int rHeight = height.isEmpty ? 0 : int.parse(height);
+  // Mediainfo mi = Mediainfo()..quickLoad(assetPath);
+  // String width = imageMediaInfo(mi, 'Width');
+  // String height = imageMediaInfo(mi, 'Height');
+  // mi.close();
+  // int rWidth = width.isEmpty ? 0 : int.parse(width);
+  // int rHeight = height.isEmpty ? 0 : int.parse(height);
+  PsdMetaInfo info = getPsdMetaInfo(psdPath: assetPath);
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   debugPrint('获PSD尺寸耗时: $cost');
-  return Resolution(rWidth, rHeight);
+  debugPrint('PSD值: ${info.width}, ${info.height}');
+  return Resolution(info.width, info.height);
 }
 
 Future<Resolution> getSvgDimensions(String svgFilePath) async {
@@ -297,11 +299,10 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
   }
 }
 
-Future<FileMetaInfo?> getImageMeta(String filePath) async{
+Future<FileMetaInfo?> getImageMeta(String filePath) async {
   PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
-  if (photoMetaInfo == null) return null;
   String? captureStr = photoMetaInfo.capture;
-  DateInfo? capture = captureStr == null
+  DateInfo? capture = captureStr == ''
       ? null
       : getDateInfo(DateTime.tryParse(captureStr));
   double? longitude = photoMetaInfo.longitude;
@@ -314,8 +315,8 @@ Future<FileMetaInfo?> getImageMeta(String filePath) async{
     debugPrint('Error getting location: $e');
   }
   return FileMetaInfo(
-    make: photoMetaInfo.make ?? '',
-    model: photoMetaInfo.model ?? '',
+    make: photoMetaInfo.make,
+    model: photoMetaInfo.model,
     capture: capture,
     latitude: latitude,
     longitude: longitude,

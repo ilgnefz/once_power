@@ -6,17 +6,17 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `transform_lat`, `transform_lon`
+// These functions are ignored because they are not marked as `pub`: `is_in_china`, `parse_gps_string`, `transform_lat`, `transform_lon`, `wgs84_to_gcj02`
 
-/// 判断坐标是否在中国大陆境内
-Future<bool> isInChina({required double lat, required double lon}) =>
-    RustLib.instance.api.crateApiGpsInfoIsInChina(lat: lat, lon: lon);
-
-/// 将WGS84坐标转换为火星坐标(GCJ-02)
-Future<(double, double)> wgs84ToGcj02({
-  required double wgsLat,
-  required double wgsLon,
-}) => RustLib.instance.api.crateApiGpsInfoWgs84ToGcj02(
-  wgsLat: wgsLat,
-  wgsLon: wgsLon,
+/// 解析GPS坐标并转换为高德地图坐标(GCJ-02)
+Future<(double, double)?> parseAndConvertGps({
+  required String latStr,
+  required String latRef,
+  required String lonStr,
+  required String lonRef,
+}) => RustLib.instance.api.crateApiGpsInfoParseAndConvertGps(
+  latStr: latStr,
+  latRef: latRef,
+  lonStr: lonStr,
+  lonRef: lonRef,
 );

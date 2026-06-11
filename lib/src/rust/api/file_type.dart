@@ -35,16 +35,16 @@ class AudioMetaInfo {
 }
 
 class PhotoMetaInfo {
-  final String? make;
-  final String? model;
-  final String? capture;
+  final String make;
+  final String model;
+  final String capture;
   final double? latitude;
   final double? longitude;
 
   const PhotoMetaInfo({
-    this.make,
-    this.model,
-    this.capture,
+    required this.make,
+    required this.model,
+    required this.capture,
     this.latitude,
     this.longitude,
   });
@@ -67,6 +67,24 @@ class PhotoMetaInfo {
           capture == other.capture &&
           latitude == other.latitude &&
           longitude == other.longitude;
+}
+
+class PsdMetaInfo {
+  final int width;
+  final int height;
+
+  const PsdMetaInfo({required this.width, required this.height});
+
+  @override
+  int get hashCode => width.hashCode ^ height.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PsdMetaInfo &&
+          runtimeType == other.runtimeType &&
+          width == other.width &&
+          height == other.height;
 }
 
 class RFileInfo {
@@ -118,4 +136,39 @@ class RFileInfo {
           accessTime == other.accessTime &&
           size == other.size &&
           isDir == other.isDir;
+}
+
+class VideoMetaInfo {
+  final int width;
+  final int height;
+  final String make;
+  final String model;
+  final String capture;
+
+  const VideoMetaInfo({
+    required this.width,
+    required this.height,
+    required this.make,
+    required this.model,
+    required this.capture,
+  });
+
+  @override
+  int get hashCode =>
+      width.hashCode ^
+      height.hashCode ^
+      make.hashCode ^
+      model.hashCode ^
+      capture.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VideoMetaInfo &&
+          runtimeType == other.runtimeType &&
+          width == other.width &&
+          height == other.height &&
+          make == other.make &&
+          model == other.model &&
+          capture == other.capture;
 }

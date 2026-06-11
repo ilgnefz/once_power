@@ -70,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1785403150;
+  int get rustContentHash => -915102304;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -94,15 +94,21 @@ abstract class RustLibApi extends BaseApi {
 
   RFileInfo crateApiFileInfoGetFileInfo({required String filePath});
 
-  PhotoMetaInfo? crateApiFileMetaGetImageMetaInfo({required String imagePath});
+  PhotoMetaInfo crateApiFileMetaGetImageMetaInfo({required String imagePath});
+
+  PsdMetaInfo crateApiFileMetaGetPsdMetaInfo({required String psdPath});
+
+  VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath});
 
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
 
-  Future<bool> crateApiGpsInfoIsInChina({
-    required double lat,
-    required double lon,
+  Future<(double, double)?> crateApiGpsInfoParseAndConvertGps({
+    required String latStr,
+    required String latRef,
+    required String lonStr,
+    required String lonRef,
   });
 
   void crateApiSimpleSetAtime({
@@ -123,11 +129,6 @@ abstract class RustLibApi extends BaseApi {
   String crateApiSimpleSimplifiedToTraditional({required String text});
 
   String crateApiSimpleTraditionalToSimplified({required String text});
-
-  Future<(double, double)> crateApiGpsInfoWgs84ToGcj02({
-    required double wgsLat,
-    required double wgsLon,
-  });
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -271,7 +272,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "get_file_info", argNames: ["filePath"]);
 
   @override
-  PhotoMetaInfo? crateApiFileMetaGetImageMetaInfo({required String imagePath}) {
+  PhotoMetaInfo crateApiFileMetaGetImageMetaInfo({required String imagePath}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -280,7 +281,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_photo_meta_info,
+          decodeSuccessData: sse_decode_photo_meta_info,
           decodeErrorData: null,
         ),
         constMeta: kCrateApiFileMetaGetImageMetaInfoConstMeta,
@@ -297,13 +298,65 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  PsdMetaInfo crateApiFileMetaGetPsdMetaInfo({required String psdPath}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(psdPath, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_psd_meta_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileMetaGetPsdMetaInfoConstMeta,
+        argValues: [psdPath],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileMetaGetPsdMetaInfoConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_psd_meta_info",
+        argNames: ["psdPath"],
+      );
+
+  @override
+  VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(videoPath, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_video_meta_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileMetaGetVideoMetaInfoConstMeta,
+        argValues: [videoPath],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileMetaGetVideoMetaInfoConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_video_meta_info",
+        argNames: ["videoPath"],
+      );
+
+  @override
   String crateApiSimpleGreet({required String name}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -328,7 +381,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 8,
+            funcId: 10,
             port: port_,
           );
         },
@@ -347,36 +400,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  Future<bool> crateApiGpsInfoIsInChina({
-    required double lat,
-    required double lon,
+  Future<(double, double)?> crateApiGpsInfoParseAndConvertGps({
+    required String latStr,
+    required String latRef,
+    required String lonStr,
+    required String lonRef,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_f_64(lat, serializer);
-          sse_encode_f_64(lon, serializer);
+          sse_encode_String(latStr, serializer);
+          sse_encode_String(latRef, serializer);
+          sse_encode_String(lonStr, serializer);
+          sse_encode_String(lonRef, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 9,
+            funcId: 11,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
+          decodeSuccessData: sse_decode_opt_box_autoadd_record_f_64_f_64,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiGpsInfoIsInChinaConstMeta,
-        argValues: [lat, lon],
+        constMeta: kCrateApiGpsInfoParseAndConvertGpsConstMeta,
+        argValues: [latStr, latRef, lonStr, lonRef],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiGpsInfoIsInChinaConstMeta =>
-      const TaskConstMeta(debugName: "is_in_china", argNames: ["lat", "lon"]);
+  TaskConstMeta get kCrateApiGpsInfoParseAndConvertGpsConstMeta =>
+      const TaskConstMeta(
+        debugName: "parse_and_convert_gps",
+        argNames: ["latStr", "latRef", "lonStr", "lonRef"],
+      );
 
   @override
   void crateApiSimpleSetAtime({
@@ -389,7 +449,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -418,7 +478,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -447,7 +507,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -472,7 +532,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -498,7 +558,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -515,41 +575,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "traditional_to_simplified",
         argNames: ["text"],
-      );
-
-  @override
-  Future<(double, double)> crateApiGpsInfoWgs84ToGcj02({
-    required double wgsLat,
-    required double wgsLon,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_f_64(wgsLat, serializer);
-          sse_encode_f_64(wgsLon, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 15,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_record_f_64_f_64,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiGpsInfoWgs84ToGcj02ConstMeta,
-        argValues: [wgsLat, wgsLon],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiGpsInfoWgs84ToGcj02ConstMeta =>
-      const TaskConstMeta(
-        debugName: "wgs84_to_gcj02",
-        argNames: ["wgsLat", "wgsLon"],
       );
 
   @protected
@@ -585,9 +610,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PhotoMetaInfo dco_decode_box_autoadd_photo_meta_info(dynamic raw) {
+  (double, double) dco_decode_box_autoadd_record_f_64_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_photo_meta_info(raw);
+    return raw as (double, double);
   }
 
   @protected
@@ -627,9 +652,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PhotoMetaInfo? dco_decode_opt_box_autoadd_photo_meta_info(dynamic raw) {
+  (double, double)? dco_decode_opt_box_autoadd_record_f_64_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_photo_meta_info(raw);
+    return raw == null ? null : dco_decode_box_autoadd_record_f_64_f_64(raw);
   }
 
   @protected
@@ -639,11 +664,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 5)
       throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return PhotoMetaInfo(
-      make: dco_decode_opt_String(arr[0]),
-      model: dco_decode_opt_String(arr[1]),
-      capture: dco_decode_opt_String(arr[2]),
+      make: dco_decode_String(arr[0]),
+      model: dco_decode_String(arr[1]),
+      capture: dco_decode_String(arr[2]),
       latitude: dco_decode_opt_box_autoadd_f_64(arr[3]),
       longitude: dco_decode_opt_box_autoadd_f_64(arr[4]),
+    );
+  }
+
+  @protected
+  PsdMetaInfo dco_decode_psd_meta_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return PsdMetaInfo(
+      width: dco_decode_u_32(arr[0]),
+      height: dco_decode_u_32(arr[1]),
     );
   }
 
@@ -677,6 +714,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   BigInt dco_decode_u_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeU64(raw);
@@ -692,6 +735,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void dco_decode_unit(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return;
+  }
+
+  @protected
+  VideoMetaInfo dco_decode_video_meta_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return VideoMetaInfo(
+      width: dco_decode_u_32(arr[0]),
+      height: dco_decode_u_32(arr[1]),
+      make: dco_decode_String(arr[2]),
+      model: dco_decode_String(arr[3]),
+      capture: dco_decode_String(arr[4]),
+    );
   }
 
   @protected
@@ -729,11 +787,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PhotoMetaInfo sse_decode_box_autoadd_photo_meta_info(
+  (double, double) sse_decode_box_autoadd_record_f_64_f_64(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_photo_meta_info(deserializer));
+    return (sse_decode_record_f_64_f_64(deserializer));
   }
 
   @protected
@@ -790,13 +848,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PhotoMetaInfo? sse_decode_opt_box_autoadd_photo_meta_info(
+  (double, double)? sse_decode_opt_box_autoadd_record_f_64_f_64(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_photo_meta_info(deserializer));
+      return (sse_decode_box_autoadd_record_f_64_f_64(deserializer));
     } else {
       return null;
     }
@@ -805,9 +863,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   PhotoMetaInfo sse_decode_photo_meta_info(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_make = sse_decode_opt_String(deserializer);
-    var var_model = sse_decode_opt_String(deserializer);
-    var var_capture = sse_decode_opt_String(deserializer);
+    var var_make = sse_decode_String(deserializer);
+    var var_model = sse_decode_String(deserializer);
+    var var_capture = sse_decode_String(deserializer);
     var var_latitude = sse_decode_opt_box_autoadd_f_64(deserializer);
     var var_longitude = sse_decode_opt_box_autoadd_f_64(deserializer);
     return PhotoMetaInfo(
@@ -817,6 +875,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       latitude: var_latitude,
       longitude: var_longitude,
     );
+  }
+
+  @protected
+  PsdMetaInfo sse_decode_psd_meta_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_width = sse_decode_u_32(deserializer);
+    var var_height = sse_decode_u_32(deserializer);
+    return PsdMetaInfo(width: var_width, height: var_height);
   }
 
   @protected
@@ -853,6 +919,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint32();
+  }
+
+  @protected
   BigInt sse_decode_u_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getBigUint64();
@@ -867,6 +939,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_decode_unit(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+  }
+
+  @protected
+  VideoMetaInfo sse_decode_video_meta_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_width = sse_decode_u_32(deserializer);
+    var var_height = sse_decode_u_32(deserializer);
+    var var_make = sse_decode_String(deserializer);
+    var var_model = sse_decode_String(deserializer);
+    var var_capture = sse_decode_String(deserializer);
+    return VideoMetaInfo(
+      width: var_width,
+      height: var_height,
+      make: var_make,
+      model: var_model,
+      capture: var_capture,
+    );
   }
 
   @protected
@@ -906,12 +995,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_photo_meta_info(
-    PhotoMetaInfo self,
+  void sse_encode_box_autoadd_record_f_64_f_64(
+    (double, double) self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_photo_meta_info(self, serializer);
+    sse_encode_record_f_64_f_64(self, serializer);
   }
 
   @protected
@@ -966,15 +1055,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_photo_meta_info(
-    PhotoMetaInfo? self,
+  void sse_encode_opt_box_autoadd_record_f_64_f_64(
+    (double, double)? self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
-      sse_encode_box_autoadd_photo_meta_info(self, serializer);
+      sse_encode_box_autoadd_record_f_64_f_64(self, serializer);
     }
   }
 
@@ -984,11 +1073,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_opt_String(self.make, serializer);
-    sse_encode_opt_String(self.model, serializer);
-    sse_encode_opt_String(self.capture, serializer);
+    sse_encode_String(self.make, serializer);
+    sse_encode_String(self.model, serializer);
+    sse_encode_String(self.capture, serializer);
     sse_encode_opt_box_autoadd_f_64(self.latitude, serializer);
     sse_encode_opt_box_autoadd_f_64(self.longitude, serializer);
+  }
+
+  @protected
+  void sse_encode_psd_meta_info(PsdMetaInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.width, serializer);
+    sse_encode_u_32(self.height, serializer);
   }
 
   @protected
@@ -1016,6 +1112,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint32(self);
+  }
+
+  @protected
   void sse_encode_u_64(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putBigUint64(self);
@@ -1030,6 +1132,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_unit(void self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+  }
+
+  @protected
+  void sse_encode_video_meta_info(
+    VideoMetaInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.width, serializer);
+    sse_encode_u_32(self.height, serializer);
+    sse_encode_String(self.make, serializer);
+    sse_encode_String(self.model, serializer);
+    sse_encode_String(self.capture, serializer);
   }
 
   @protected
