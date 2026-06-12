@@ -921,12 +921,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a2d987857b319362043e95f5353c0535c1f58eec5336fdfcf626430af7def58"
 
 [[package]]
+name = "rexif"
+version = "0.7.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be932047c168919c8d5af065b16fa7d4bd24835ffa256bf0cf1ff463f91c15df"
+
+[[package]]
 name = "rust_lib_once_power"
 version = "0.1.0"
 dependencies = [
  "exiftool-rs",
  "filetime_creation",
  "flutter_rust_bridge",
+ "rexif",
  "trash",
  "uuid",
  "zhconv",

@@ -194,8 +194,7 @@
       "select": "Select",
       "unselect": "Unselect",
       "remove": "Remove"
-    },
-    "loadingInfo": "Video information is being read..."
+    }
   },
   "menu": {
     "local": "Open Location",

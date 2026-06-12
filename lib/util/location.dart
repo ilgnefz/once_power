@@ -41,27 +41,34 @@ Future<String> getTrueLocation(double? latitude, double? longitude) async {
 
   try {
     Response response = await _dio.get(uri, queryParameters: queryParameters);
-    debugPrint(response.data);
-    AMapReverseGeo? data = AMapReverseGeo.fromJson(response.data);
-    switch (data.status) {
-      case '1':
-        location = data.formattedAddress;
-        if (location.isNotEmpty) {
-          await setCacheLocation(cacheKey, location);
-          debugPrint('位置信息已保存到缓存: $location');
-        }
-        break;
-      case '0':
-        String info = errInfo(data.infocode);
-        debugPrint('位置信息错误: $info${tr(AppL10n.errLocationInfo)}');
-        StorageUtil.remove(AppKeys.mapKey);
-        break;
-      default:
-        debugPrint('位置信息错误: ${data.info}');
-        break;
+    debugPrint('响应数据类型: ${response.data.runtimeType}');
+    debugPrint('响应数据: $response.data');
+
+    if (response.data is Map) {
+      AMapReverseGeo? data = AMapReverseGeo.fromJson(response.data);
+      switch (data.status) {
+        case '1':
+          location = data.formattedAddress;
+          if (location.isNotEmpty) {
+            await setCacheLocation(cacheKey, location);
+            debugPrint('位置信息已保存到缓存: $location');
+          }
+          break;
+        case '0':
+          String info = errInfo(data.infocode);
+          debugPrint('位置信息错误: $info${tr(AppL10n.errLocationInfo)}');
+          StorageUtil.remove(AppKeys.mapKey);
+          break;
+        default:
+          debugPrint('位置信息错误: ${data.info}');
+          break;
+      }
+    } else {
+      debugPrint('响应数据格式错误，不是 Map 类型');
     }
-  } catch (e) {
+  } catch (e, stackTrace) {
     debugPrint('获取位置信息失败: $e');
+    debugPrint('堆栈跟踪:\n$stackTrace');
   }
   return location;
 }

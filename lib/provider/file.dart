@@ -1,14 +1,36 @@
+import 'dart:developer';
+import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
+import 'package:fvp/fvp.dart';
+import 'package:image/image.dart' as img;
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/util/info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:video_player/video_player.dart';
 
 part 'file.g.dart';
 
+class _IsolateData {
+  final SendPort sendPort;
+  final Uint8List snapshotData;
+  final int width;
+  final int height;
+
+  _IsolateData({
+    required this.sendPort,
+    required this.snapshotData,
+    required this.width,
+    required this.height,
+  });
+}
+
 @riverpod
 class FileList extends _$FileList {
+  bool _cancelGeneration = false;
+
   @override
   List<FileInfo> build() => [];
 
@@ -16,7 +38,10 @@ class FileList extends _$FileList {
 
   void addAll(List<FileInfo> list) => state = list;
 
-  void clear() => state = [];
+  void clear() {
+    _cancelGeneration = true;
+    state = [];
+  }
 
   void checkAll(bool check) => state = state.map((e) {
     if (e.checked != check) e.checked = check;
@@ -132,6 +157,123 @@ class FileList extends _$FileList {
     if (e.id == id) e.thumbnail = value;
     return e;
   }).toList();
+
+  Future<void> generateVideoThumbnails(
+    List<FileInfo> videos, {
+    int concurrency = 5,
+  }) async {
+    final noThumbnails = videos
+        .where((e) => e.type.isVideo && e.thumbnail == null)
+        .toList();
+    if (noThumbnails.isEmpty) return;
+
+    log('共 ${noThumbnails.length} 个视频待生成封面');
+
+    _cancelGeneration = false;
+    int index = 0;
+
+    Future<void> runSlot() async {
+      while (!_cancelGeneration && index < noThumbnails.length) {
+        final file = noThumbnails[index];
+        index++;
+        if (_cancelGeneration) break;
+        await _generateSingleThumbnail(file);
+        if (_cancelGeneration) break;
+      }
+    }
+
+    final runners = List.generate(
+      concurrency.clamp(1, noThumbnails.length),
+      (_) => runSlot(),
+    );
+
+    await Future.wait(runners);
+
+    log('全部封面生成结束');
+  }
+
+  Future<void> _generateSingleThumbnail(FileInfo file) async {
+    log('开始生成 ${file.name}');
+    VideoPlayerController? controller;
+    try {
+      controller = VideoPlayerController.file(File(file.path));
+      await controller.initialize();
+      if (_cancelGeneration) return;
+      await controller.setVolume(0);
+      await controller.play();
+      await Future.delayed(const Duration(seconds: 1));
+      if (_cancelGeneration) return;
+      await controller.pause();
+
+      final videoInfo = controller.getMediaInfo()?.video;
+      if (videoInfo == null || videoInfo.isEmpty) {
+        log('生成失败 ${file.name}: 无法获取视频信息');
+        return;
+      }
+
+      final info = videoInfo[0].codec;
+      final width = info.width;
+      final height = info.height;
+      final Uint8List? snapshot = await controller.snapshot();
+      if (_cancelGeneration) return;
+      if (snapshot == null || snapshot.isEmpty) {
+        log('生成失败 ${file.name}: 截图数据为空');
+        return;
+      }
+
+      final imageBytes = await _generateThumbnailInIsolate(
+        snapshot.buffer.asUint8List(),
+        width,
+        height,
+      );
+
+      if (_cancelGeneration) return;
+      if (imageBytes.isNotEmpty) {
+        updateThumbnail(file.id, imageBytes);
+        log('生成完成 ${file.name}');
+      } else {
+        log('生成失败 ${file.name}: 图片处理失败');
+      }
+    } catch (e) {
+      log('生成失败 ${file.name}: $e');
+    } finally {
+      controller?.dispose();
+    }
+  }
+
+  Future<Uint8List> _generateThumbnailInIsolate(
+    Uint8List snapshotData,
+    int width,
+    int height,
+  ) async {
+    final receivePort = ReceivePort();
+    await Isolate.spawn(
+      _isolateGenerateThumbnail,
+      _IsolateData(
+        sendPort: receivePort.sendPort,
+        snapshotData: snapshotData,
+        width: width,
+        height: height,
+      ),
+    );
+    return await receivePort.first as Uint8List;
+  }
+
+  static void _isolateGenerateThumbnail(_IsolateData data) {
+    try {
+      final image = img.Image.fromBytes(
+        width: data.width,
+        height: data.height,
+        bytes: data.snapshotData.buffer,
+        numChannels: 4,
+        rowStride: data.width * 4,
+      );
+      final Uint8List imageBytes = img.encodeJpg(image, quality: 85);
+      data.sendPort.send(imageBytes);
+    } catch (e) {
+      data.sendPort.send(Uint8List(0));
+    }
+  }
 
   void insertAt(int index, FileInfo file) {
     if (index == 0) {

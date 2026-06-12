@@ -35,16 +35,16 @@ class AudioMetaInfo {
 }
 
 class PhotoMetaInfo {
-  final String make;
-  final String model;
-  final String capture;
+  final String? make;
+  final String? model;
+  final String? capture;
   final double? latitude;
   final double? longitude;
 
   const PhotoMetaInfo({
-    required this.make,
-    required this.model,
-    required this.capture,
+    this.make,
+    this.model,
+    this.capture,
     this.latitude,
     this.longitude,
   });

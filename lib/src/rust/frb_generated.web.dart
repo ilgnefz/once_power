@@ -9,7 +9,7 @@
 import 'api/file_info.dart';
 import 'api/file_meta.dart';
 import 'api/file_type.dart';
-import 'api/gps_info.dart';
+import 'api/image_info.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -37,7 +37,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
-  (double, double) dco_decode_box_autoadd_record_f_64_f_64(dynamic raw);
+  PhotoMetaInfo dco_decode_box_autoadd_photo_meta_info(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -58,7 +58,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
 
   @protected
-  (double, double)? dco_decode_opt_box_autoadd_record_f_64_f_64(dynamic raw);
+  PhotoMetaInfo? dco_decode_opt_box_autoadd_photo_meta_info(dynamic raw);
 
   @protected
   PhotoMetaInfo dco_decode_photo_meta_info(dynamic raw);
@@ -68,9 +68,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RFileInfo dco_decode_r_file_info(dynamic raw);
-
-  @protected
-  (double, double) dco_decode_record_f_64_f_64(dynamic raw);
 
   @protected
   int dco_decode_u_32(dynamic raw);
@@ -100,7 +97,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
-  (double, double) sse_decode_box_autoadd_record_f_64_f_64(
+  PhotoMetaInfo sse_decode_box_autoadd_photo_meta_info(
     SseDeserializer deserializer,
   );
 
@@ -123,7 +120,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
-  (double, double)? sse_decode_opt_box_autoadd_record_f_64_f_64(
+  PhotoMetaInfo? sse_decode_opt_box_autoadd_photo_meta_info(
     SseDeserializer deserializer,
   );
 
@@ -135,9 +132,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
-
-  @protected
-  (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_32(SseDeserializer deserializer);
@@ -170,8 +164,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_record_f_64_f_64(
-    (double, double) self,
+  void sse_encode_box_autoadd_photo_meta_info(
+    PhotoMetaInfo self,
     SseSerializer serializer,
   );
 
@@ -197,8 +191,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
 
   @protected
-  void sse_encode_opt_box_autoadd_record_f_64_f_64(
-    (double, double)? self,
+  void sse_encode_opt_box_autoadd_photo_meta_info(
+    PhotoMetaInfo? self,
     SseSerializer serializer,
   );
 
@@ -210,12 +204,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_record_f_64_f_64(
-    (double, double) self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_u_32(int self, SseSerializer serializer);

@@ -1,14 +1,11 @@
 use std::collections::HashMap;
 
-use crate::api::{
-    file_type::{AudioMetaInfo, PhotoMetaInfo, PsdMetaInfo, VideoMetaInfo},
-    gps_info::parse_and_convert_gps,
-};
+use crate::api::file_type::{AudioMetaInfo, PsdMetaInfo, VideoMetaInfo};
 use exiftool_rs::ExifTool;
 
 /// 验证日期字符串是否有效
 /// 过滤掉像 ":  :     :  : " 这样的无效格式，但保留包含"上午"或"下午"的有效日期
-fn is_valid_date(date_str: &str) -> bool {
+pub fn is_valid_date(date_str: &str) -> bool {
     // 去除空格后检查是否为空或者只有冒号和空格
     let cleaned = date_str.replace(' ', "");
     if cleaned.is_empty() || cleaned.chars().all(|c| c == ':' || c == ' ') {
@@ -28,7 +25,7 @@ fn is_valid_date(date_str: &str) -> bool {
 /// 输入格式: "2020:03:10 18:56:08"
 /// 输出格式: "2020-03-10T18:56:08"
 /// 处理失败时返回: "0000-01-01T00:00:00"
-fn format_date(date_str: &str) -> String {
+pub fn format_date(date_str: &str) -> String {
     let trimmed = date_str.trim();
     let date_str = trimmed.chars().take(19).collect::<String>();
     let parts: Vec<&str> = date_str.split_whitespace().collect();
@@ -43,68 +40,6 @@ fn format_date(date_str: &str) -> String {
     let time_part = parts.get(1).unwrap_or(&"00:00:00");
 
     format!("{}T{}", date_part, time_part)
-}
-
-#[flutter_rust_bridge::frb(sync)]
-pub fn get_image_meta_info(image_path: &str) -> PhotoMetaInfo {
-    let mut info: PhotoMetaInfo = PhotoMetaInfo {
-        make: String::new(),
-        model: String::new(),
-        capture: String::new(),
-        latitude: None,
-        longitude: None,
-    };
-
-    let et = ExifTool::new();
-    let tags = et.extract_info(image_path).unwrap();
-
-    let wanted_tags = [
-        "Make",
-        "Model",
-        "DateTimeOriginal",
-        "CreateDate",
-        "SubSecDateTimeOriginal",
-        "GPSLatitudeRef",
-        "GPSLatitude",
-        "GPSLongitudeRef",
-        "GPSLongitude",
-    ];
-
-    let results: HashMap<&str, String> = tags
-        .iter()
-        .filter(|tag| wanted_tags.contains(&tag.name.as_str()))
-        .map(|tag| (tag.name.as_str(), tag.print_value.clone()))
-        .collect();
-
-    info.make = results.get("Make").cloned().unwrap_or_default();
-    info.model = results.get("Model").cloned().unwrap_or_default();
-
-    let capture = results
-        .get("DateTimeOriginal")
-        .filter(|dt| is_valid_date(dt))
-        .or(results.get("CreateDate").filter(|dt| is_valid_date(dt)))
-        .or(results
-            .get("SubSecDateTimeOriginal")
-            .filter(|dt| is_valid_date(dt)));
-
-    if let Some(dt) = capture {
-        info.capture = format_date(dt);
-    }
-
-    if let (Some(lat_ref), Some(lat_str), Some(lon_ref), Some(lon_str)) = (
-        results.get("GPSLatitudeRef"),
-        results.get("GPSLatitude"),
-        results.get("GPSLongitudeRef"),
-        results.get("GPSLongitude"),
-    ) {
-        if let Some((gcj_lat, gcj_lon)) = parse_and_convert_gps(lat_str, lat_ref, lon_str, lon_ref)
-        {
-            info.latitude = Some(gcj_lat);
-            info.longitude = Some(gcj_lon);
-        }
-    }
-
-    info
 }
 
 #[flutter_rust_bridge::frb(sync)]
@@ -232,8 +167,12 @@ pub fn get_video_meta_info(video_path: &str) -> VideoMetaInfo {
     let capture = results
         .get("CreateDate")
         .filter(|dt| is_valid_date(dt))
-        .or(results.get("MediaCreateDate").filter(|dt| is_valid_date(dt)))
-        .or(results.get("TrackCreateDate").filter(|dt| is_valid_date(dt)));
+        .or(results
+            .get("MediaCreateDate")
+            .filter(|dt| is_valid_date(dt)))
+        .or(results
+            .get("TrackCreateDate")
+            .filter(|dt| is_valid_date(dt)));
 
     if let Some(dt) = capture {
         info.capture = format_date(dt);

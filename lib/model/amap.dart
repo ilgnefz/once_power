@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class AMapReverseGeo {
   final String status;
   final String info;
@@ -12,9 +14,18 @@ class AMapReverseGeo {
   });
 
   factory AMapReverseGeo.fromJson(Map<String, dynamic> json) {
+    dynamic infoValue = json['info'];
+    String infoStr = '';
+    if (infoValue is String) {
+      infoStr = infoValue;
+    } else if (infoValue is Map) {
+      infoStr = infoValue.toString();
+      debugPrint('info 字段是 Map 类型: $infoValue');
+    }
+
     return AMapReverseGeo(
       status: json['status'] as String? ?? '0',
-      info: json['info'] as String? ?? '',
+      info: infoStr,
       infocode: json['infocode'] as String? ?? '',
       regeocode: json['regeocode'] != null
           ? Regeocode.fromJson(json['regeocode'] as Map<String, dynamic>)

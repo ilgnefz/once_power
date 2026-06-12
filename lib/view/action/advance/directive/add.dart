@@ -111,7 +111,7 @@ class AddCard extends StatelessWidget {
       case AddMode.date:
         return AdvanceRichText(
           text: advanceTextSpan(
-            menu.advanceIndex.dateType.label,
+            menu.advanceDate.type.label,
             color: highlightColor,
             children: buildInlineSpan(),
           ),

@@ -7,10 +7,17 @@ import '../frb_generated.dart';
 import 'file_type.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `format_date`, `is_valid_date`
+/// 验证日期字符串是否有效
+/// 过滤掉像 ":  :     :  : " 这样的无效格式，但保留包含"上午"或"下午"的有效日期
+Future<bool> isValidDate({required String dateStr}) =>
+    RustLib.instance.api.crateApiFileMetaIsValidDate(dateStr: dateStr);
 
-PhotoMetaInfo getImageMetaInfo({required String imagePath}) =>
-    RustLib.instance.api.crateApiFileMetaGetImageMetaInfo(imagePath: imagePath);
+/// 处理EXIF日期字符串，转换为标准格式
+/// 输入格式: "2020:03:10 18:56:08"
+/// 输出格式: "2020-03-10T18:56:08"
+/// 处理失败时返回: "0000-01-01T00:00:00"
+Future<String> formatDate({required String dateStr}) =>
+    RustLib.instance.api.crateApiFileMetaFormatDate(dateStr: dateStr);
 
 AudioMetaInfo getAudioMetaInfo({required String filePath}) =>
     RustLib.instance.api.crateApiFileMetaGetAudioMetaInfo(filePath: filePath);

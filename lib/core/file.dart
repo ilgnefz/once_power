@@ -16,12 +16,10 @@ import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
-import 'package:once_power/src/rust/api/file_meta.dart';
 import 'package:once_power/src/rust/api/file_type.dart';
 import 'package:once_power/src/rust/frb_generated.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
-import 'package:once_power/util/location.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
 
@@ -339,6 +337,9 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   ref.read(costProvider.notifier).update(cost);
   ref.read(isApplyingProvider.notifier).finish();
   updateName(ref);
+  ref
+      .read(fileListProvider.notifier)
+      .generateVideoThumbnails(ref.read(fileListProvider));
 }
 
 Future<void> processFilesWithConcurrence(
@@ -390,34 +391,7 @@ Future<FileInfo> generateFileInfo(String filePath) async {
       resolution = await getSvgDimensions(filePath);
     } else {
       resolution = await getImageDimensions(filePath);
-      if (!filePath.endsWith('.gif')) {
-        Stopwatch stopwatch = Stopwatch()..start();
-        PhotoMetaInfo photoMetaInfo = getImageMetaInfo(imagePath: filePath);
-        double cost = stopwatch.elapsedMicroseconds / 1000000;
-        debugPrint('获图片尺寸耗时: $cost');
-        String? captureStr = photoMetaInfo.capture;
-        print('拍摄初始日期：$captureStr');
-        DateInfo? capture = captureStr == ''
-            ? null
-            : getDateInfo(DateTime.tryParse(captureStr));
-        print('拍摄转化日期：$captureStr');
-        double? longitude = photoMetaInfo.longitude;
-        double? latitude = photoMetaInfo.latitude;
-        String location = '';
-        try {
-          location = await getTrueLocation(longitude, latitude);
-        } catch (e) {
-          debugPrint('Error getting location: $e');
-        }
-        metaInfo = FileMetaInfo(
-          make: photoMetaInfo.make,
-          model: photoMetaInfo.model,
-          capture: capture,
-          latitude: latitude,
-          longitude: longitude,
-          location: location,
-        );
-      }
+      if (!filePath.endsWith('.gif')) metaInfo = await getImageMeta(filePath);
     }
   }
   if (type.isVideo) {

@@ -18,9 +18,9 @@ pub struct AudioMetaInfo {
 }
 
 pub struct PhotoMetaInfo {
-    pub make: String,
-    pub model: String,
-    pub capture: String,
+    pub make: Option<String>,
+    pub model: Option<String>,
+    pub capture: Option<String>,
     pub latitude: Option<f64>,
     pub longitude: Option<f64>,
 }

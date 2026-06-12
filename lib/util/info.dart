@@ -16,6 +16,7 @@ import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/src/rust/api/file_meta.dart';
 import 'package:once_power/src/rust/api/file_type.dart';
+import 'package:once_power/src/rust/api/image_info.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
@@ -196,17 +197,6 @@ FileMetaInfo? getAudioInfo(String filePath) {
 }
 
 Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
-  // Mediainfo mi = Mediainfo()..quickLoad(filePath);
-  // String width = videoMediaInfo(mi, "Width");
-  // String height = videoMediaInfo(mi, "Height");
-  // String make = generalMediaInfo(mi, "com.android.manufacturer");
-  // String model = generalMediaInfo(mi, "com.android.model");
-  // String tagged = generalMediaInfo(mi, "Tagged_Date");
-  // DateTime? capture = DateTime.tryParse(convertToLocalTime(tagged));
-  // // print(mi.inform());
-  // mi.close();
-  // int rWidth = width.isEmpty ? 0 : int.parse(width);
-  // int rHeight = height.isEmpty ? 0 : int.parse(height);
   VideoMetaInfo info = getVideoMetaInfo(videoPath: filePath);
   return (
     Resolution(info.width, info.height),
@@ -219,15 +209,6 @@ Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
     ),
   );
 }
-
-// String generalMediaInfo(Mediainfo mi, String parameter) =>
-//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamGeneral, 0, parameter);
-//
-// String videoMediaInfo(Mediainfo mi, String parameter) =>
-//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamVideo, 0, parameter);
-//
-// String imageMediaInfo(Mediainfo mi, String parameter) =>
-//     mi.getInfo(MediaInfoStreamType.mediaInfoStreamImage, 0, parameter);
 
 Future<Resolution> getImageDimensions(String assetPath) async {
   // 调试计算图片尺寸耗时
@@ -247,12 +228,6 @@ Future<Resolution> getImageDimensions(String assetPath) async {
 
 Resolution getPsdDimensions(String assetPath) {
   Stopwatch stopwatch = Stopwatch()..start();
-  // Mediainfo mi = Mediainfo()..quickLoad(assetPath);
-  // String width = imageMediaInfo(mi, 'Width');
-  // String height = imageMediaInfo(mi, 'Height');
-  // mi.close();
-  // int rWidth = width.isEmpty ? 0 : int.parse(width);
-  // int rHeight = height.isEmpty ? 0 : int.parse(height);
   PsdMetaInfo info = getPsdMetaInfo(psdPath: assetPath);
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   debugPrint('获PSD尺寸耗时: $cost');
@@ -301,27 +276,29 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
 
 Future<FileMetaInfo?> getImageMeta(String filePath) async {
   PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
-  String? captureStr = photoMetaInfo.capture;
-  DateInfo? capture = captureStr == ''
-      ? null
-      : getDateInfo(DateTime.tryParse(captureStr));
-  double? longitude = photoMetaInfo.longitude;
-  double? latitude = photoMetaInfo.latitude;
-  // 避免在 Isolate 中调用可能涉及 UI 的函数
-  String location = '';
-  try {
-    location = await getTrueLocation(longitude, latitude);
-  } catch (e) {
-    debugPrint('Error getting location: $e');
+  if (photoMetaInfo != null) {
+    String? captureStr = photoMetaInfo.capture;
+    DateInfo? capture = captureStr == null
+        ? null
+        : getDateInfo(DateTime.tryParse(captureStr));
+    double? longitude = photoMetaInfo.longitude;
+    double? latitude = photoMetaInfo.latitude;
+    String location = '';
+    try {
+      location = await getTrueLocation(longitude, latitude);
+    } catch (e) {
+      debugPrint('Error getting location: $e');
+    }
+    return FileMetaInfo(
+      make: photoMetaInfo.make ?? '',
+      model: photoMetaInfo.model ?? '',
+      capture: capture,
+      latitude: latitude,
+      longitude: longitude,
+      location: location,
+    );
   }
-  return FileMetaInfo(
-    make: photoMetaInfo.make,
-    model: photoMetaInfo.model,
-    capture: capture,
-    latitude: latitude,
-    longitude: longitude,
-    location: location,
-  );
+  return null;
 }
 
 String getTopPath(String filePath) {
