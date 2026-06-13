@@ -89,7 +89,8 @@ class AppL10n {
   static const String advanceAddType = 'advance.addType';
   static const String advanceAddPrefix = 'advance.addPrefix';
   static const String advanceAddSuffix = 'advance.addSuffix';
-  static const String advanceConvertLetters = 'advance.convertLetters';
+  static const String advanceConvertText = 'advance.convertText';
+  static const String advanceSwapText = 'advance.swapText';
   static const String advanceMatchContent = 'advance.matchContent';
   static const String advanceMatchPosition = 'advance.matchPosition';
   static const String advanceDeleteTitle = 'advance.deleteTitle';
@@ -114,6 +115,11 @@ class AppL10n {
   static const String advanceLocationHint = 'advance.locationHint';
   static const String advanceLocationNote = 'advance.locationNote';
   static const String advanceLocationLink = 'advance.locationLink';
+  static const String advanceSeparator = 'advance.separator';
+  static const String advanceSwapAll = 'advance.swapAll';
+  static const String advanceSwapAllTip = 'advance.swapAllTip';
+  static const String advanceReverseName = 'advance.reverseName';
+  static const String advanceSeparatorName = 'advance.separatorName';
 
   /* ---------- organize ---------- */
   static const String organizeDate = 'organize.date';
@@ -331,6 +337,7 @@ class AppL10n {
   static const String eConvertSimplified = 'enum.convert.simplified';
   static const String eReplaceNormal = 'enum.replace.normal';
   static const String eReplaceConvert = 'enum.replace.convert';
+  static const String eReplaceSwap = 'enum.replace.swap';
   static const String eReplaceInterval = 'enum.replace.interval';
   static const String eReplaceFormat = 'enum.replace.format';
   static const String eFillFront = 'enum.fill.front';
@@ -367,6 +374,7 @@ class AppL10n {
   static const String eAutoType = 'enum.auto.type';
   static const String eAutoExtension = 'enum.auto.extension';
   static const String eAutoDate = 'enum.auto.date';
+  static const String eSwapReverse = 'enum.swap.reverse';
 
   /* ---------- error ---------- */
   static const String errEmptyTitle = 'error.emptyTitle';

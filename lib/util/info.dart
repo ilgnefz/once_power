@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_size_getter/file_input.dart';
-import 'package:image_size_getter/image_size_getter.dart';
 import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
@@ -210,31 +209,6 @@ Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
   );
 }
 
-Future<Resolution> getImageDimensions(String assetPath) async {
-  // 调试计算图片尺寸耗时
-  Stopwatch stopwatch = Stopwatch()..start();
-  try {
-    File file = File(assetPath);
-    SizeResult result = ImageSizeGetter.getSizeResult(FileInput(file));
-    return Resolution(result.size.width, result.size.height);
-  } catch (e) {
-    debugPrint('获取图片尺寸失败: $assetPath, 错误: $e');
-    return Resolution.zero;
-  } finally {
-    double cost = stopwatch.elapsedMicroseconds / 1000000;
-    debugPrint('获取图片尺寸耗时: $cost');
-  }
-}
-
-Resolution getPsdDimensions(String assetPath) {
-  Stopwatch stopwatch = Stopwatch()..start();
-  PsdMetaInfo info = getPsdMetaInfo(psdPath: assetPath);
-  double cost = stopwatch.elapsedMicroseconds / 1000000;
-  debugPrint('获PSD尺寸耗时: $cost');
-  debugPrint('PSD值: ${info.width}, ${info.height}');
-  return Resolution(info.width, info.height);
-}
-
 Future<Resolution> getSvgDimensions(String svgFilePath) async {
   try {
     File file = File(svgFilePath);
@@ -275,6 +249,7 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
 }
 
 Future<FileMetaInfo?> getImageMeta(String filePath) async {
+  Stopwatch stopwatch = Stopwatch()..start();
   PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
   if (photoMetaInfo != null) {
     String? captureStr = photoMetaInfo.capture;
@@ -298,6 +273,8 @@ Future<FileMetaInfo?> getImageMeta(String filePath) async {
       location: location,
     );
   }
+  double cost = stopwatch.elapsedMicroseconds / 1000000;
+  debugPrint('获取图片信息耗时: $cost');
   return null;
 }
 

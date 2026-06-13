@@ -16,6 +16,7 @@ import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
+import 'package:once_power/src/rust/api/file_meta.dart';
 import 'package:once_power/src/rust/api/file_type.dart';
 import 'package:once_power/src/rust/frb_generated.dart';
 import 'package:once_power/util/format.dart';
@@ -264,8 +265,12 @@ class _IsolateArgs {
   _IsolateArgs(this.sendPort, this.paths, this.baseIndex, this.isolateId);
 }
 
-// 默认工作器数量
-const int _kDefaultWorkerCount = 2;
+// 获取最优的 worker 数量
+int _getOptimalWorkerCount() {
+  final int processors = Platform.numberOfProcessors;
+  // 使用核心数的 75%，最少 2 个，最多 8 个
+  return (processors * 0.75).clamp(2, 8).toInt();
+}
 
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   Stopwatch stopwatch = Stopwatch()..start();
@@ -318,7 +323,7 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
         // 更新进度
         ref.read(countProvider.notifier).updateValue(progress);
       },
-      _kDefaultWorkerCount,
+      _getOptimalWorkerCount(),
     );
     // 收集所有 Isolate 的错误
     final List<InfoDetail> allErrors = _isolateErrors.values
@@ -342,6 +347,19 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
       .generateVideoThumbnails(ref.read(fileListProvider));
 }
 
+// 根据文件数量动态计算批量处理大小
+int _getDynamicChunkSize(int totalFiles) {
+  if (totalFiles < 50) {
+    return 5; // 少量文件：小批量，更快响应
+  } else if (totalFiles < 200) {
+    return 10; // 中等数量：平衡性能和响应
+  } else if (totalFiles < 500) {
+    return 20; // 大量文件：较大批量，更高吞吐量
+  } else {
+    return 30; // 超大数量：更大批量，最大化并行
+  }
+}
+
 Future<void> processFilesWithConcurrence(
   WidgetRef ref,
   List<String> paths,
@@ -351,7 +369,11 @@ Future<void> processFilesWithConcurrence(
       .read(fileListProvider)
       .map((e) => e.path)
       .toSet();
-  const int chunkSize = 10;
+  // 根据文件数量动态调整批量大小
+  final int chunkSize = _getDynamicChunkSize(paths.length);
+  // 大量文件时给 UI 线程喘息机会
+  final bool needYield = paths.length > 200;
+
   for (int i = 0; i < paths.length; i += chunkSize) {
     final int end = (i + chunkSize < paths.length)
         ? i + chunkSize
@@ -368,6 +390,10 @@ Future<void> processFilesWithConcurrence(
         ref.read(fileListProvider.notifier).add(result);
       }
     }
+    // 大量文件处理时，每处理几个批次后给 UI 线程更新机会
+    if (needYield && (i / chunkSize) % 5 == 0) {
+      await Future.delayed(const Duration(milliseconds: 50));
+    }
   }
 }
 
@@ -382,19 +408,22 @@ Future<FileInfo> generateFileInfo(String filePath) async {
   FileMetaInfo? metaInfo;
   Resolution? resolution;
   Uint8List? thumbnail;
-  if (type.isAudio) metaInfo = getAudioInfo(filePath);
-  if (type.isImage) {
-    resolution = await getImageDimensions(filePath);
-    if (filePath.endsWith('.psd')) {
-      resolution = getPsdDimensions(filePath);
-    } else if (filePath.endsWith('.svg')) {
+  if (type.isAudio) {
+    metaInfo = getAudioInfo(filePath);
+  } else if (type.isImage) {
+    if (filePath.endsWith('.svg')) {
       resolution = await getSvgDimensions(filePath);
     } else {
-      resolution = await getImageDimensions(filePath);
-      if (!filePath.endsWith('.gif')) metaInfo = await getImageMeta(filePath);
+      Stopwatch stopwatch = Stopwatch()..start();
+      RustImageSize size = getImageSize(imagePath: filePath);
+      double cost = stopwatch.elapsedMicroseconds / 1000000;
+      debugPrint('获图片尺寸耗时: $cost 值: ${size.width}, ${size.height}');
+      resolution = Resolution(size.width, size.height);
+      if (!filePath.endsWith('.gif') && !filePath.endsWith('.psd')) {
+        metaInfo = await getImageMeta(filePath);
+      }
     }
-  }
-  if (type.isVideo) {
+  } else if (type.isVideo) {
     (Resolution, FileMetaInfo) result = await getVideoInfo(filePath);
     (resolution, metaInfo) = result;
   }

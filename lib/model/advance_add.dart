@@ -51,9 +51,15 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
     id: json["id"],
     value: json["value"] ?? '',
     mode: AddMode.values[json["mode"] ?? 0],
-    advanceDate: AdvanceDate.fromJson(json["advanceDate"]),
-    metaData: AdvanceMetaData.fromJson(json["metaData"]),
-    advanceIndex: AdvanceIndex.fromJson(json["advanceIndex"]),
+    advanceDate: json["advanceDate"] == null
+        ? AdvanceDate()
+        : AdvanceDate.fromJson(json["advanceDate"]),
+    metaData: json["metaData"] == null
+        ? AdvanceMetaData()
+        : AdvanceMetaData.fromJson(json["metaData"]),
+    advanceIndex: json["advanceIndex"] == null
+        ? AdvanceIndex()
+        : AdvanceIndex.fromJson(json["advanceIndex"]),
     randomLength: json["randomLength"] ?? 1,
     randomValue: json["randomValue"] == null
         ? <String>[]
@@ -83,7 +89,10 @@ class AdvanceMenuAdd extends AdvanceMenuModel {
 
   @override
   String toString() {
-    return 'AdvanceMenuAdd{mode: $mode, advanceDate: $advanceDate, metaData: $metaData, advanceIndex: $advanceIndex, randomLength: $randomLength, randomValue: $randomValue, addPosition: $addPosition, positionIndex: $positionIndex}';
+    return 'AdvanceMenuAdd{mode: $mode, advanceDate: $advanceDate, '
+        'metaData: $metaData, advanceIndex: $advanceIndex, '
+        'randomLength: $randomLength, randomValue: $randomValue, '
+        'addPosition: $addPosition, positionIndex: $positionIndex}';
   }
 }
 
@@ -142,7 +151,9 @@ class AdvanceDate {
 
   @override
   String toString() {
-    return 'AdvanceDate{type: $type, dateStyle: $dateStyle, weekdayStyle: $weekdayStyle, timeStyle: $timeStyle, dateSeparate: $dateSeparate, separate: $separate}';
+    return 'AdvanceDate{type: $type, dateStyle: $dateStyle, '
+        'weekdayStyle: $weekdayStyle, timeStyle: $timeStyle, '
+        'dateSeparate: $dateSeparate, separate: $separate}';
   }
 }
 
@@ -231,6 +242,7 @@ class AdvanceIndex {
 
   @override
   String toString() {
-    return 'AdvanceIndex{width: $width, start: $start, distinction: $distinction, dateType: $dateType}';
+    return 'AdvanceIndex{width: $width, start: $start, '
+        'distinction: $distinction, dateType: $dateType}';
   }
 }

@@ -70,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -672626664;
+  int get rustContentHash => -567101932;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -98,7 +98,7 @@ abstract class RustLibApi extends BaseApi {
 
   PhotoMetaInfo? crateApiImageInfoGetImageMetaInfo({required String imagePath});
 
-  PsdMetaInfo crateApiFileMetaGetPsdMetaInfo({required String psdPath});
+  RustImageSize crateApiFileMetaGetImageSize({required String imagePath});
 
   VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath});
 
@@ -325,30 +325,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  PsdMetaInfo crateApiFileMetaGetPsdMetaInfo({required String psdPath}) {
+  RustImageSize crateApiFileMetaGetImageSize({required String imagePath}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(psdPath, serializer);
+          sse_encode_String(imagePath, serializer);
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_psd_meta_info,
+          decodeSuccessData: sse_decode_rust_image_size,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaGetPsdMetaInfoConstMeta,
-        argValues: [psdPath],
+        constMeta: kCrateApiFileMetaGetImageSizeConstMeta,
+        argValues: [imagePath],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaGetPsdMetaInfoConstMeta =>
-      const TaskConstMeta(
-        debugName: "get_psd_meta_info",
-        argNames: ["psdPath"],
-      );
+  TaskConstMeta get kCrateApiFileMetaGetImageSizeConstMeta =>
+      const TaskConstMeta(debugName: "get_image_size", argNames: ["imagePath"]);
 
   @override
   VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath}) {
@@ -689,18 +686,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PsdMetaInfo dco_decode_psd_meta_info(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return PsdMetaInfo(
-      width: dco_decode_u_32(arr[0]),
-      height: dco_decode_u_32(arr[1]),
-    );
-  }
-
-  @protected
   RFileInfo dco_decode_r_file_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -716,6 +701,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       accessTime: dco_decode_i_64(arr[6]),
       size: dco_decode_u_64(arr[7]),
       isDir: dco_decode_bool(arr[8]),
+    );
+  }
+
+  @protected
+  RustImageSize dco_decode_rust_image_size(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return RustImageSize(
+      width: dco_decode_u_32(arr[0]),
+      height: dco_decode_u_32(arr[1]),
     );
   }
 
@@ -884,14 +881,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PsdMetaInfo sse_decode_psd_meta_info(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_width = sse_decode_u_32(deserializer);
-    var var_height = sse_decode_u_32(deserializer);
-    return PsdMetaInfo(width: var_width, height: var_height);
-  }
-
-  @protected
   RFileInfo sse_decode_r_file_info(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_String(deserializer);
@@ -914,6 +903,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       size: var_size,
       isDir: var_isDir,
     );
+  }
+
+  @protected
+  RustImageSize sse_decode_rust_image_size(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_width = sse_decode_u_32(deserializer);
+    var var_height = sse_decode_u_32(deserializer);
+    return RustImageSize(width: var_width, height: var_height);
   }
 
   @protected
@@ -1079,13 +1076,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_psd_meta_info(PsdMetaInfo self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_u_32(self.width, serializer);
-    sse_encode_u_32(self.height, serializer);
-  }
-
-  @protected
   void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.id, serializer);
@@ -1097,6 +1087,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.accessTime, serializer);
     sse_encode_u_64(self.size, serializer);
     sse_encode_bool(self.isDir, serializer);
+  }
+
+  @protected
+  void sse_encode_rust_image_size(
+    RustImageSize self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.width, serializer);
+    sse_encode_u_32(self.height, serializer);
   }
 
   @protected

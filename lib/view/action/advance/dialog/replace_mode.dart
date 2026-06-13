@@ -40,8 +40,8 @@ class ReplaceModeGroup extends StatelessWidget {
       child: DialogOption(
         title: tr(AppL10n.advanceReplaceMode),
         padding: const .only(top: 4.0),
-        // alignment: .spaceBetween,
-        spacing: 24,
+        alignment: .spaceBetween,
+        // spacing: 24,
         runSpacing: AppNum.spaceMedium,
         children: ReplaceMode.values.map((e) {
           switch (e) {

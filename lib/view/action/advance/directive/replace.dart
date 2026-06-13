@@ -52,6 +52,29 @@ class ReplaceCard extends StatelessWidget {
             ],
           ),
         );
+      case ReplaceMode.swap:
+        SwapMenu swap = menu.swap;
+        return AdvanceRichText(
+          text: advanceTextSpan(
+            swap.type.isReverse
+                ? tr(AppL10n.advanceReverseName)
+                : '${tr(AppL10n.advanceDi)} ',
+            color: defaultColor,
+            children: swap.type.isReverse
+                ? []
+                : [
+                    advanceTextSpan('${swap.index} ', color: highlightColor),
+                    advanceTextSpan(tr(AppL10n.advanceGe), color: defaultColor),
+                    advanceTextSpan(' "', color: defaultColor),
+                    advanceTextSpan(swap.separator, color: highlightColor),
+                    advanceTextSpan('"', color: defaultColor),
+                    advanceTextSpan(
+                      ' ${tr(AppL10n.advanceSeparatorName)}',
+                      color: defaultColor,
+                    ),
+                  ],
+          ),
+        );
       case ReplaceMode.format:
         String text = int.tryParse(menu.value[0]) == null
             ? menu.value[0].length.toString()

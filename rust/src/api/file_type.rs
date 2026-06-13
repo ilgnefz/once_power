@@ -33,7 +33,7 @@ pub struct VideoMetaInfo {
     pub capture: String,
 }
 
-pub struct PsdMetaInfo {
+pub struct RustImageSize {
     pub width: u32,
     pub height: u32,
 }

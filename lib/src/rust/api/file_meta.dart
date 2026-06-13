@@ -22,8 +22,8 @@ Future<String> formatDate({required String dateStr}) =>
 AudioMetaInfo getAudioMetaInfo({required String filePath}) =>
     RustLib.instance.api.crateApiFileMetaGetAudioMetaInfo(filePath: filePath);
 
-PsdMetaInfo getPsdMetaInfo({required String psdPath}) =>
-    RustLib.instance.api.crateApiFileMetaGetPsdMetaInfo(psdPath: psdPath);
+RustImageSize getImageSize({required String imagePath}) =>
+    RustLib.instance.api.crateApiFileMetaGetImageSize(imagePath: imagePath);
 
 VideoMetaInfo getVideoMetaInfo({required String videoPath}) =>
     RustLib.instance.api.crateApiFileMetaGetVideoMetaInfo(videoPath: videoPath);

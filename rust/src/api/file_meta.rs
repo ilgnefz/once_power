@@ -1,6 +1,6 @@
-use std::collections::HashMap;
+use std::{cell::RefMut, collections::HashMap};
 
-use crate::api::file_type::{AudioMetaInfo, PsdMetaInfo, VideoMetaInfo};
+use crate::api::file_type::{AudioMetaInfo, RustImageSize, VideoMetaInfo};
 use exiftool_rs::ExifTool;
 
 /// 验证日期字符串是否有效
@@ -71,35 +71,19 @@ pub fn get_audio_meta_info(file_path: &str) -> AudioMetaInfo {
 }
 
 #[flutter_rust_bridge::frb(sync)]
-pub fn get_psd_meta_info(psd_path: &str) -> PsdMetaInfo {
-    let mut info: PsdMetaInfo = PsdMetaInfo {
+pub fn get_image_size(image_path: &str) -> RustImageSize {
+    let mut info: RustImageSize = RustImageSize {
         width: 0,
         height: 0,
     };
 
-    let et = ExifTool::new();
-    let tags = et.extract_info(psd_path).unwrap();
-
-    let wanted_tags = ["ImageWidth", "ImageHeight"];
-
-    let results: HashMap<&str, String> = tags
-        .iter()
-        .filter(|tag| wanted_tags.contains(&tag.name.as_str()))
-        .map(|tag| (tag.name.as_str(), tag.print_value.clone()))
-        .collect();
-
-    info.width = results
-        .get("ImageWidth")
-        .cloned()
-        .unwrap_or_default()
-        .parse()
-        .unwrap_or(0);
-    info.height = results
-        .get("ImageHeight")
-        .cloned()
-        .unwrap_or_default()
-        .parse()
-        .unwrap_or(0);
+    match imagesize::size(image_path) {
+        Ok(size) => {
+            info.width = size.width as u32;
+            info.height = size.height as u32;
+        }
+        Err(why) => println!("[RUST] Error getting dimensions: {:?}", why),
+    }
 
     info
 }

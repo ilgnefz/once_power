@@ -89,7 +89,8 @@
     "addType": "添加模式",
     "addPrefix": "前缀",
     "addSuffix": "后缀",
-    "convertLetters": "转换文本",
+    "convertText": "转换文本",
+    "swapText": "交换文本",
     "matchPosition": "匹配位置",
     "matchContent": "匹配内容",
     "deleteTitle": "删除菜单",
@@ -113,7 +114,12 @@
     "locationTitle": "地图 Key",
     "locationHint": "请输入高德地图 Key，用于获取位置信息",
     "locationNote": "注:填写 key 之前添加的文件无法获取地址，需要重新添加。还没有高德地图 key？",
-    "locationLink": "去申请"
+    "locationLink": "去申请",
+    "separator": "分隔符",
+    "swapAll": "所有",
+    "swapAllTip": "选中前，第2个\"_\"：A_B_C → A_C_B\n选中后，第2个\"_\"：A_B_C → C_A_B",
+    "reverseName": "反转名称",
+    "separatorName": "前后位置"
   },
   "organize": {
     "date": "日期分类",
@@ -289,6 +295,7 @@
       "between": "之间的",
       "normal": "普通",
       "convert": "转换",
+      "swap": "交换",
       "interval": "间隔",
       "format": "格式化"
     },
@@ -408,6 +415,9 @@
       "type": "类型",
       "extension": "扩展名",
       "date": "日期"
+    },
+    "swap": {
+      "reverse": "反转"
     }
   },
   "error": {

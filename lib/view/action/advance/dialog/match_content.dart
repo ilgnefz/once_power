@@ -37,7 +37,7 @@ class MatchContentGroup extends StatelessWidget {
                 label: e.label,
                 value: e,
                 trailing: DigitInput(
-                  width: 120,
+                  width: 112,
                   value: number,
                   min: 1,
                   unit: tr(AppL10n.advanceGe),

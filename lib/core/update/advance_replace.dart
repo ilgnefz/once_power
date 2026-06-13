@@ -34,6 +34,28 @@ String advanceReplaceName(AdvanceMenuReplace menu, String name) {
         case ConvertType.simplified:
           return traditionalToSimplified(text: name);
       }
+    case ReplaceMode.swap:
+      SwapMenu swap = menu.swap;
+      switch (swap.type) {
+        case SwapType.reverse:
+          return name.split('').reversed.join('');
+        case SwapType.custom:
+          String separator = swap.separator;
+          if (separator.isEmpty) return name;
+          List<String> letters = name.split(separator);
+          int index = swap.index;
+          if (index >= letters.length) return name;
+          if (swap.all) {
+            List<String> part1 = letters.sublist(0, index);
+            List<String> part2 = letters.sublist(index);
+            return part2.join(separator) + separator + part1.join(separator);
+          } else {
+            String temp = letters[index];
+            letters[index] = letters[index - 1];
+            letters[index - 1] = temp;
+            return letters.join(separator);
+          }
+      }
     case ReplaceMode.format:
       int? num = int.tryParse(oldValue);
       int length = num ?? oldValue.length;

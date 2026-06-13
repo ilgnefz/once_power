@@ -69,24 +69,6 @@ class PhotoMetaInfo {
           longitude == other.longitude;
 }
 
-class PsdMetaInfo {
-  final int width;
-  final int height;
-
-  const PsdMetaInfo({required this.width, required this.height});
-
-  @override
-  int get hashCode => width.hashCode ^ height.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PsdMetaInfo &&
-          runtimeType == other.runtimeType &&
-          width == other.width &&
-          height == other.height;
-}
-
 class RFileInfo {
   final String id;
   final String name;
@@ -136,6 +118,24 @@ class RFileInfo {
           accessTime == other.accessTime &&
           size == other.size &&
           isDir == other.isDir;
+}
+
+class RustImageSize {
+  final int width;
+  final int height;
+
+  const RustImageSize({required this.width, required this.height});
+
+  @override
+  int get hashCode => width.hashCode ^ height.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RustImageSize &&
+          runtimeType == other.runtimeType &&
+          width == other.width &&
+          height == other.height;
 }
 
 class VideoMetaInfo {

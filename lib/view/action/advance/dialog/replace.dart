@@ -15,6 +15,7 @@ import 'package:once_power/util/verify.dart';
 import 'package:once_power/view/action/advance/dialog/match_content.dart';
 import 'package:once_power/view/action/advance/dialog/replace_conversion.dart';
 import 'package:once_power/view/action/advance/dialog/replace_mode.dart';
+import 'package:once_power/view/action/advance/dialog/replace_swap.dart';
 import 'package:once_power/widget/action/item.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/base/text.dart';
@@ -39,7 +40,8 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
   FillPosition position = FillPosition.front;
   int start = 1, length = 1;
   AdvanceMatch match = AdvanceMatch();
-  ConvertType type = ConvertType.uppercase;
+  ConvertType convertType = ConvertType.uppercase;
+  SwapMenu swap = SwapMenu();
 
   @override
   void initState() {
@@ -54,7 +56,8 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
     match = widget.menu!.match;
     start = widget.menu!.start;
     length = widget.menu!.length;
-    type = widget.menu!.convertType;
+    convertType = widget.menu!.convertType;
+    swap = widget.menu!.swap;
     wordSpacing = widget.menu!.wordSpacing;
     group = widget.menu!.group;
   }
@@ -62,7 +65,7 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
-      width: 500,
+      width: 544,
       title: tr(AppL10n.advanceReplaceTitle),
       content: Column(
         spacing: AppNum.spaceMedium,
@@ -160,10 +163,32 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
             }),
           ),
           ReplaceConversion(
-            type: type,
+            type: convertType,
             onChanged: (value) => setState(() {
-              type = value;
+              convertType = value;
               mode = ReplaceMode.convert;
+            }),
+          ),
+          ReplaceSwap(
+            type: swap.type,
+            onChanged: (value) => setState(() {
+              swap = swap.copyWith(type: value);
+              mode = ReplaceMode.swap;
+            }),
+            index: swap.index,
+            onIndexChanged: (value) => setState(() {
+              swap = swap.copyWith(type: SwapType.custom, index: value);
+              mode = ReplaceMode.swap;
+            }),
+            separator: swap.separator,
+            onSeparatorChanged: (value) => setState(() {
+              swap = swap.copyWith(type: SwapType.custom, separator: value);
+              mode = ReplaceMode.swap;
+            }),
+            all: swap.all,
+            onAllChanged: (value) => setState(() {
+              swap = swap.copyWith(type: SwapType.custom, all: value);
+              mode = ReplaceMode.swap;
             }),
           ),
           Row(
@@ -204,7 +229,8 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
           start: start,
           length: length,
           match: match,
-          convertType: type,
+          convertType: convertType,
+          swap: swap,
           wordSpacing: wordSpacing,
           group: group,
         );

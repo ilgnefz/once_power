@@ -47,7 +47,7 @@ abstract class _$FileList extends $Notifier<List<FileInfo>> {
   List<FileInfo> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<FileInfo>, List<FileInfo>>;
     final element =
         ref.element
@@ -57,7 +57,7 @@ abstract class _$FileList extends $Notifier<List<FileInfo>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -98,7 +98,7 @@ abstract class _$SelectAll extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -108,7 +108,7 @@ abstract class _$SelectAll extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -150,7 +150,7 @@ abstract class _$PrefixUploadMark extends $Notifier<UploadMarkInfo?> {
   UploadMarkInfo? build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<UploadMarkInfo?, UploadMarkInfo?>;
     final element =
         ref.element
@@ -160,7 +160,7 @@ abstract class _$PrefixUploadMark extends $Notifier<UploadMarkInfo?> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -202,7 +202,7 @@ abstract class _$SuffixUploadMark extends $Notifier<UploadMarkInfo?> {
   UploadMarkInfo? build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<UploadMarkInfo?, UploadMarkInfo?>;
     final element =
         ref.element
@@ -212,6 +212,6 @@ abstract class _$SuffixUploadMark extends $Notifier<UploadMarkInfo?> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

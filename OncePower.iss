@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OncePower"
-#define MyAppVersion "3.1.3"
+#define MyAppVersion "3.2.0"
 #define MyAppPublisher "ilgnefz"
 #define MyAppURL "https://github.com/ilgnefz/once_power"
 #define MyAppExeName "once_power.exe"
@@ -56,16 +56,13 @@ Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\ffmpeg
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\file_selector_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_avif.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_avif_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_media_info_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\fvp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\fvp_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\libass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-braw.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-nvjp2k.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\mdk-r3d.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\rust_lib_once_power.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\screen_retriever_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\WorkSpace\Desktop\once_power\build\windows\x64\runner\Release\shortcut_menu_extender_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion

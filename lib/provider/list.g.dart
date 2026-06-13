@@ -88,7 +88,7 @@ abstract class _$SortSelectList extends $Notifier<List<FileInfo>> {
   List<FileInfo> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<FileInfo>, List<FileInfo>>;
     final element =
         ref.element
@@ -98,7 +98,7 @@ abstract class _$SortSelectList extends $Notifier<List<FileInfo>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -428,7 +428,7 @@ abstract class _$CSVData extends $Notifier<List<CSVRenameInfo>> {
   List<CSVRenameInfo> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<CSVRenameInfo>, List<CSVRenameInfo>>;
     final element =
         ref.element
@@ -438,7 +438,7 @@ abstract class _$CSVData extends $Notifier<List<CSVRenameInfo>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -482,7 +482,7 @@ abstract class _$AdvanceMenuSelectedList
   List<AdvanceMenuModel> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref =
         this.ref as $Ref<List<AdvanceMenuModel>, List<AdvanceMenuModel>>;
     final element =
@@ -493,6 +493,6 @@ abstract class _$AdvanceMenuSelectedList
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

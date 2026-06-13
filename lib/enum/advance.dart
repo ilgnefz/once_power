@@ -327,7 +327,7 @@ extension ConvertTypeExtension on ConvertType {
   bool get isSimplified => this == ConvertType.simplified;
 }
 
-enum ReplaceMode { normal, convert, format, position, separator }
+enum ReplaceMode { normal, convert, swap, separator, format, position }
 
 extension ReplaceModeExtension on ReplaceMode {
   String get label {
@@ -336,6 +336,8 @@ extension ReplaceModeExtension on ReplaceMode {
         return tr(AppL10n.eReplaceNormal);
       case ReplaceMode.convert:
         return tr(AppL10n.eReplaceConvert);
+      case ReplaceMode.swap:
+        return tr(AppL10n.eReplaceSwap);
       case ReplaceMode.separator:
         return tr(AppL10n.advanceWord);
       case ReplaceMode.format:
@@ -347,6 +349,7 @@ extension ReplaceModeExtension on ReplaceMode {
 
   bool get isNormal => this == ReplaceMode.normal;
   bool get isConvert => this == ReplaceMode.convert;
+  bool get isSwap => this == ReplaceMode.swap;
   bool get isSeparator => this == ReplaceMode.separator;
   bool get isFormat => this == ReplaceMode.format;
   bool get isPosition => this == ReplaceMode.position;
@@ -369,3 +372,19 @@ extension FillPositionExtension on FillPosition {
 }
 
 enum MovePosition { first, center, last, idle }
+
+enum SwapType { reverse, custom }
+
+extension SwapTypeExtension on SwapType {
+  String get label {
+    switch (this) {
+      case SwapType.reverse:
+        return tr(AppL10n.eSwapReverse);
+      case SwapType.custom:
+        return tr(AppL10n.advanceDi);
+    }
+  }
+
+  bool get isReverse => this == SwapType.reverse;
+  bool get isCustom => this == SwapType.custom;
+}

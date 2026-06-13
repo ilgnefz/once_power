@@ -89,7 +89,8 @@
     "addType": "Mode",
     "addPrefix": "Prefix",
     "addSuffix": "Suffix",
-    "convertLetters": "Convert Text",
+    "convertText": "Convert",
+    "swapText": "Swap",
     "matchPosition": "Position",
     "matchContent": "Content",
     "deleteTitle": "Delete Menu",
@@ -113,7 +114,12 @@
     "locationTitle": "Map Key",
     "locationHint": "Enter AMap Key for location",
     "locationNote": "Note: Files added before key input cannot get location, need to re-add. Don’t have an Amap key yet?",
-    "locationLink": " Apply Key"
+    "locationLink": " Apply Key",
+    "separator": "Separator",
+    "swapAll": "All",
+    "swapAllTip": "Checked 2nd \"_\": A_B_C → C_A_B\nUnchecked 2nd \"_\": A_B_C → A_C_B",
+    "reverseName": "Reverse name",
+    "separatorName": "front & rear positions"
   },
   "organize": {
     "date": "Date Folder",
@@ -289,6 +295,7 @@
       "between": "Between",
       "normal": "Normal",
       "convert": "Convert",
+      "swap": "Swap",
       "interval": "Interval",
       "format": "Format"
     },
@@ -408,6 +415,9 @@
       "type": "Type",
       "extension": "Extension",
       "date": "Date"
+    },
+    "swap": {
+      "reverse": "Reverse"
     }
   },
   "error": {

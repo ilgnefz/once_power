@@ -22,7 +22,7 @@ class ReplaceConversion extends StatelessWidget {
       groupValue: type,
       onChanged: (value) => onChanged(value!),
       child: DialogOption(
-        title: tr(AppL10n.advanceConvertLetters),
+        title: tr(AppL10n.advanceConvertText),
         padding: const .only(top: 4.0),
         spacing: AppNum.spaceLarge,
         children: ConvertType.values

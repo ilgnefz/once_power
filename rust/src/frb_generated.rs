@@ -38,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -672626664;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -567101932;
 
 // Section: executor
 
@@ -279,14 +279,14 @@ fn wire__crate__api__image_info__get_image_meta_info_impl(
         },
     )
 }
-fn wire__crate__api__file_meta__get_psd_meta_info_impl(
+fn wire__crate__api__file_meta__get_image_size_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "get_psd_meta_info",
+            debug_name: "get_image_size",
             port: None,
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
@@ -300,11 +300,11 @@ fn wire__crate__api__file_meta__get_psd_meta_info_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_psd_path = <String>::sse_decode(&mut deserializer);
+            let api_image_path = <String>::sse_decode(&mut deserializer);
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
                 let output_ok =
-                    Result::<_, ()>::Ok(crate::api::file_meta::get_psd_meta_info(&api_psd_path))?;
+                    Result::<_, ()>::Ok(crate::api::file_meta::get_image_size(&api_image_path))?;
                 Ok(output_ok)
             })())
         },
@@ -720,18 +720,6 @@ impl SseDecode for crate::api::file_type::PhotoMetaInfo {
     }
 }
 
-impl SseDecode for crate::api::file_type::PsdMetaInfo {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_width = <u32>::sse_decode(deserializer);
-        let mut var_height = <u32>::sse_decode(deserializer);
-        return crate::api::file_type::PsdMetaInfo {
-            width: var_width,
-            height: var_height,
-        };
-    }
-}
-
 impl SseDecode for crate::api::file_type::RFileInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -754,6 +742,18 @@ impl SseDecode for crate::api::file_type::RFileInfo {
             access_time: var_accessTime,
             size: var_size,
             is_dir: var_isDir,
+        };
+    }
+}
+
+impl SseDecode for crate::api::file_type::RustImageSize {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_width = <u32>::sse_decode(deserializer);
+        let mut var_height = <u32>::sse_decode(deserializer);
+        return crate::api::file_type::RustImageSize {
+            width: var_width,
+            height: var_height,
         };
     }
 }
@@ -839,7 +839,7 @@ fn pde_ffi_dispatcher_sync_impl(
         5 => wire__crate__api__file_meta__get_audio_meta_info_impl(ptr, rust_vec_len, data_len),
         6 => wire__crate__api__file_info__get_file_info_impl(ptr, rust_vec_len, data_len),
         7 => wire__crate__api__image_info__get_image_meta_info_impl(ptr, rust_vec_len, data_len),
-        8 => wire__crate__api__file_meta__get_psd_meta_info_impl(ptr, rust_vec_len, data_len),
+        8 => wire__crate__api__file_meta__get_image_size_impl(ptr, rust_vec_len, data_len),
         9 => wire__crate__api__file_meta__get_video_meta_info_impl(ptr, rust_vec_len, data_len),
         10 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
         13 => wire__crate__api__simple__set_atime_impl(ptr, rust_vec_len, data_len),
@@ -901,27 +901,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::file_type::PhotoMetaInfo>
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::file_type::PsdMetaInfo {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.width.into_into_dart().into_dart(),
-            self.height.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::file_type::PsdMetaInfo
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::file_type::PsdMetaInfo>
-    for crate::api::file_type::PsdMetaInfo
-{
-    fn into_into_dart(self) -> crate::api::file_type::PsdMetaInfo {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::api::file_type::RFileInfo {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -946,6 +925,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::file_type::RFileInfo>
     for crate::api::file_type::RFileInfo
 {
     fn into_into_dart(self) -> crate::api::file_type::RFileInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::file_type::RustImageSize {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.width.into_into_dart().into_dart(),
+            self.height.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::file_type::RustImageSize
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::file_type::RustImageSize>
+    for crate::api::file_type::RustImageSize
+{
+    fn into_into_dart(self) -> crate::api::file_type::RustImageSize {
         self
     }
 }
@@ -1073,14 +1073,6 @@ impl SseEncode for crate::api::file_type::PhotoMetaInfo {
     }
 }
 
-impl SseEncode for crate::api::file_type::PsdMetaInfo {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <u32>::sse_encode(self.width, serializer);
-        <u32>::sse_encode(self.height, serializer);
-    }
-}
-
 impl SseEncode for crate::api::file_type::RFileInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -1093,6 +1085,14 @@ impl SseEncode for crate::api::file_type::RFileInfo {
         <i64>::sse_encode(self.access_time, serializer);
         <u64>::sse_encode(self.size, serializer);
         <bool>::sse_encode(self.is_dir, serializer);
+    }
+}
+
+impl SseEncode for crate::api::file_type::RustImageSize {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u32>::sse_encode(self.width, serializer);
+        <u32>::sse_encode(self.height, serializer);
     }
 }
 

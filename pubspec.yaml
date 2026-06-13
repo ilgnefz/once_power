@@ -33,12 +33,12 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
   rust_lib_once_power:
     path: rust_builder
   flutter_rust_bridge: ^2.12.0
-  flutter_riverpod: ^3.3.1
-  riverpod_annotation: ^4.0.2
+  flutter_riverpod: ^3.3.2
+  riverpod_annotation: ^4.0.3
   # --- System ---
   desktop_drop: ^0.7.1
   launch_at_startup: ^0.5.1
@@ -65,7 +65,6 @@ dependencies:
   flutter_context_menu: ^0.4.2
   fvp: ^0.37.2
   image: ^4.9.1
-  image_size_getter: ^2.4.1
   path: ^1.9.1
   package_info_plus: ^9.0.0
   shared_preferences: ^2.5.5
@@ -85,8 +84,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   integration_test:
     sdk: flutter
-  riverpod_generator: ^4.0.3
-  build_runner: ^2.14.0
+  riverpod_generator: ^4.0.4
+  build_runner: ^2.15.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

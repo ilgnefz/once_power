@@ -62,10 +62,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotoMetaInfo dco_decode_photo_meta_info(dynamic raw);
 
   @protected
-  PsdMetaInfo dco_decode_psd_meta_info(dynamic raw);
+  RFileInfo dco_decode_r_file_info(dynamic raw);
 
   @protected
-  RFileInfo dco_decode_r_file_info(dynamic raw);
+  RustImageSize dco_decode_rust_image_size(dynamic raw);
 
   @protected
   int dco_decode_u_32(dynamic raw);
@@ -126,10 +126,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotoMetaInfo sse_decode_photo_meta_info(SseDeserializer deserializer);
 
   @protected
-  PsdMetaInfo sse_decode_psd_meta_info(SseDeserializer deserializer);
+  RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
 
   @protected
-  RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
+  RustImageSize sse_decode_rust_image_size(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_32(SseDeserializer deserializer);
@@ -198,10 +198,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_photo_meta_info(PhotoMetaInfo self, SseSerializer serializer);
 
   @protected
-  void sse_encode_psd_meta_info(PsdMetaInfo self, SseSerializer serializer);
+  void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
 
   @protected
-  void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
+  void sse_encode_rust_image_size(RustImageSize self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_32(int self, SseSerializer serializer);

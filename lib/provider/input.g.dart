@@ -47,7 +47,7 @@ abstract class _$MatchController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -57,7 +57,7 @@ abstract class _$MatchController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -98,7 +98,7 @@ abstract class _$MatchIsEmpty extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -108,7 +108,7 @@ abstract class _$MatchIsEmpty extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -150,7 +150,7 @@ abstract class _$ModifyController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -160,7 +160,7 @@ abstract class _$ModifyController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -202,7 +202,7 @@ abstract class _$ModifyIsEmpty extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -212,7 +212,7 @@ abstract class _$ModifyIsEmpty extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -254,7 +254,7 @@ abstract class _$PrefixController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -264,7 +264,7 @@ abstract class _$PrefixController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -306,7 +306,7 @@ abstract class _$SuffixController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -316,7 +316,7 @@ abstract class _$SuffixController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -359,7 +359,7 @@ abstract class _$ExtensionController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -369,7 +369,7 @@ abstract class _$ExtensionController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -411,7 +411,7 @@ abstract class _$FolderController extends $Notifier<TextEditingController> {
   TextEditingController build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<TextEditingController, TextEditingController>;
     final element =
         ref.element
@@ -421,6 +421,6 @@ abstract class _$FolderController extends $Notifier<TextEditingController> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

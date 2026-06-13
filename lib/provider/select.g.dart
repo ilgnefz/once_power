@@ -47,7 +47,7 @@ abstract class _$CurrentMode extends $Notifier<FunctionMode> {
   FunctionMode build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<FunctionMode, FunctionMode>;
     final element =
         ref.element
@@ -57,7 +57,7 @@ abstract class _$CurrentMode extends $Notifier<FunctionMode> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -100,7 +100,7 @@ abstract class _$SelectedReplaceType extends $Notifier<List<ReplaceType>> {
   List<ReplaceType> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<ReplaceType>, List<ReplaceType>>;
     final element =
         ref.element
@@ -110,7 +110,7 @@ abstract class _$SelectedReplaceType extends $Notifier<List<ReplaceType>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -153,7 +153,7 @@ abstract class _$SelectedReserveType extends $Notifier<List<ReserveType>> {
   List<ReserveType> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<ReserveType>, List<ReserveType>>;
     final element =
         ref.element
@@ -163,7 +163,7 @@ abstract class _$SelectedReserveType extends $Notifier<List<ReserveType>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -205,7 +205,7 @@ abstract class _$CurrentDateType extends $Notifier<DateType> {
   DateType build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<DateType, DateType>;
     final element =
         ref.element
@@ -215,7 +215,7 @@ abstract class _$CurrentDateType extends $Notifier<DateType> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -258,7 +258,7 @@ abstract class _$CurrentOrganizeMode extends $Notifier<OrganizeMode> {
   OrganizeMode build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<OrganizeMode, OrganizeMode>;
     final element =
         ref.element
@@ -268,7 +268,7 @@ abstract class _$CurrentOrganizeMode extends $Notifier<OrganizeMode> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -310,7 +310,7 @@ abstract class _$OrganizeDate extends $Notifier<DateType> {
   DateType build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<DateType, DateType>;
     final element =
         ref.element
@@ -320,7 +320,7 @@ abstract class _$OrganizeDate extends $Notifier<DateType> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -363,7 +363,7 @@ abstract class _$OrganizeDateFormat extends $Notifier<DateFormat> {
   DateFormat build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<DateFormat, DateFormat>;
     final element =
         ref.element
@@ -373,7 +373,7 @@ abstract class _$OrganizeDateFormat extends $Notifier<DateFormat> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -416,7 +416,7 @@ abstract class _$OrganizeDateSeparate extends $Notifier<DateFormatSeparate> {
   DateFormatSeparate build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<DateFormatSeparate, DateFormatSeparate>;
     final element =
         ref.element
@@ -426,7 +426,7 @@ abstract class _$OrganizeDateSeparate extends $Notifier<DateFormatSeparate> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -468,7 +468,7 @@ abstract class _$CurrentSort extends $Notifier<SortType> {
   SortType build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<SortType, SortType>;
     final element =
         ref.element
@@ -478,6 +478,6 @@ abstract class _$CurrentSort extends $Notifier<SortType> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

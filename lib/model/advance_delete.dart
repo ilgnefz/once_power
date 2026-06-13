@@ -47,7 +47,9 @@ class AdvanceMenuDelete extends AdvanceMenuModel {
         mode: DeleteMode.values[json["mode"] ?? 0],
         start: json["start"] ?? 1,
         length: json["length"] ?? 1,
-        match: AdvanceMatch.fromJson(json["match"]),
+        match: json["match"] == null
+            ? AdvanceMatch()
+            : AdvanceMatch.fromJson(json["match"]),
         deleteTypes: json["deleteTypes"] == null
             ? <DeleteType>[]
             : List<DeleteType>.from(

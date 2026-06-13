@@ -11,6 +11,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
   final int length;
   final AdvanceMatch match;
   final ConvertType convertType;
+  final SwapMenu swap;
   final String wordSpacing;
 
   AdvanceMenuReplace({
@@ -24,6 +25,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     required this.length,
     required this.match,
     required this.convertType,
+    required this.swap,
     required this.wordSpacing,
     required super.group,
     required super.checked,
@@ -42,6 +44,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
       length: length,
       match: match,
       convertType: convertType,
+      swap: swap,
       wordSpacing: wordSpacing,
       group: group,
       checked: checked,
@@ -60,8 +63,13 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         fillPosition: FillPosition.values[json["fillPosition"] ?? 0],
         start: json["start"] ?? 1,
         length: json["length"] ?? 1,
-        match: AdvanceMatch.fromJson(json["match"]),
+        match: json["match"] == null
+            ? AdvanceMatch()
+            : AdvanceMatch.fromJson(json["match"]),
         convertType: ConvertType.values[json["convertType"] ?? 0],
+        swap: json["swap"] == null
+            ? SwapMenu()
+            : SwapMenu.fromJson(json["swap"]),
         wordSpacing: json["wordSpacing"] ?? "",
         group: json["group"] ?? 'all',
         checked: json["checked"] ?? true,
@@ -80,6 +88,7 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
     "length": length,
     "match": match.toJson(),
     "convertType": convertType.index,
+    "swap": swap.toJson(),
     "wordSpacing": wordSpacing,
     "group": group,
     "checked": checked,
@@ -99,7 +108,67 @@ class AdvanceMenuReplace extends AdvanceMenuModel {
         'match: $match, '
         'convertType: $convertType, '
         'wordSpacing: $wordSpacing, '
+        'swap: $swap, '
         'group: $group, '
         'checked: $checked}';
+  }
+}
+
+class SwapMenu {
+  final SwapType type;
+  final int start;
+  final int length;
+  final int index;
+  final String separator;
+  final bool all;
+
+  SwapMenu({
+    this.type = SwapType.reverse,
+    this.start = 1,
+    this.length = 1,
+    this.index = 1,
+    this.separator = '',
+    this.all = false,
+  });
+
+  SwapMenu copyWith({
+    SwapType? type,
+    int? start,
+    int? length,
+    int? index,
+    String? separator,
+    bool? all,
+  }) {
+    return SwapMenu(
+      type: type ?? this.type,
+      start: start ?? this.start,
+      length: length ?? this.length,
+      index: index ?? this.index,
+      separator: separator ?? this.separator,
+      all: all ?? this.all,
+    );
+  }
+
+  factory SwapMenu.fromJson(Map<String, dynamic> json) => SwapMenu(
+    type: SwapType.values[json["type"] ?? 0],
+    start: json["start"] ?? 1,
+    length: json["length"] ?? 1,
+    index: json["index"] ?? 1,
+    separator: json["separator"] ?? "",
+    all: json["all"] ?? false,
+  );
+
+  Map<String, dynamic> toJson() => {
+    "type": type.index,
+    "start": start,
+    "length": length,
+    "index": index,
+    "separator": separator,
+    "all": all,
+  };
+
+  @override
+  String toString() {
+    return 'SwapMenu{type: $type, start: $start, length: $length, index: $index, separator: $separator, all: $all}';
   }
 }

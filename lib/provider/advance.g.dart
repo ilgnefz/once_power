@@ -47,7 +47,7 @@ abstract class _$AdvanceMenuList extends $Notifier<List<AdvanceMenuModel>> {
   List<AdvanceMenuModel> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref =
         this.ref as $Ref<List<AdvanceMenuModel>, List<AdvanceMenuModel>>;
     final element =
@@ -58,7 +58,7 @@ abstract class _$AdvanceMenuList extends $Notifier<List<AdvanceMenuModel>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 
@@ -100,7 +100,7 @@ abstract class _$AdvancePresetList extends $Notifier<List<AdvancePreset>> {
   List<AdvancePreset> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<List<AdvancePreset>, List<AdvancePreset>>;
     final element =
         ref.element
@@ -110,6 +110,6 @@ abstract class _$AdvancePresetList extends $Notifier<List<AdvancePreset>> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
