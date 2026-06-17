@@ -249,7 +249,7 @@ Future<Resolution> getSvgDimensions(String svgFilePath) async {
 }
 
 Future<FileMetaInfo?> getImageMeta(String filePath) async {
-  Stopwatch stopwatch = Stopwatch()..start();
+  // Stopwatch stopwatch = Stopwatch()..start();
   PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
   if (photoMetaInfo != null) {
     String? captureStr = photoMetaInfo.capture;
@@ -273,8 +273,8 @@ Future<FileMetaInfo?> getImageMeta(String filePath) async {
       location: location,
     );
   }
-  double cost = stopwatch.elapsedMicroseconds / 1000000;
-  debugPrint('获取图片信息耗时: $cost');
+  // double cost = stopwatch.elapsedMicroseconds / 1000000;
+  // debugPrint('获取图片信息耗时: $cost');
   return null;
 }
 

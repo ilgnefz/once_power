@@ -181,6 +181,12 @@ String formatShowDate(String date, DateStyle style) {
       return date.substring(0, 8);
     case DateStyle.chinese:
       return '${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日';
+    case DateStyle.year:
+      return '${dateParts[0]}年';
+    case DateStyle.month:
+      return '${dateParts[1]}月';
+    case DateStyle.day:
+      return '${dateParts[2]}日';
     case DateStyle.space:
       return '${dateParts[0]} ${dateParts[1]} ${dateParts[2]}';
     case DateStyle.dash:

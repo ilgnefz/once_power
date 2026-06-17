@@ -164,7 +164,18 @@ extension AddModeExtension on AddMode {
   bool get isGroup => this == AddMode.group;
 }
 
-enum DateStyle { hidden, none, chinese, space, dash, underscore, dot }
+enum DateStyle {
+  hidden,
+  none,
+  chinese,
+  year,
+  month,
+  day,
+  space,
+  dash,
+  underscore,
+  dot,
+}
 
 extension DateStyleExtension on DateStyle {
   String get label {
@@ -175,6 +186,12 @@ extension DateStyleExtension on DateStyle {
         return tr(AppL10n.eSplitNone);
       case DateStyle.chinese:
         return '年月日';
+      case DateStyle.year:
+        return '年';
+      case DateStyle.month:
+        return '月';
+      case DateStyle.day:
+        return '日';
       case DateStyle.space:
         return tr(AppL10n.eSplitSpace);
       case DateStyle.dash:
