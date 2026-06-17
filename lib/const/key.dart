@@ -47,7 +47,7 @@ class AppKeys {
   static String savePosition = 'savePosition';
   static String saveSize = 'saveSize';
   static String hiddenTip = 'hiddenTip';
-  static String autoRename = 'autoRename';
+  // static String autoRename = 'autoRename';
   static String cancelEmptyRename = 'cancelEmptyRename';
   static String autoPrefix = 'autoPrefix';
   static String autoWidth = 'autoWidth';

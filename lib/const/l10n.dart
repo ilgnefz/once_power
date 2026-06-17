@@ -399,7 +399,7 @@ class AppL10n {
   static const String errImportError2 = 'error.importError2';
   static const String errImportError3 = 'error.importError3';
   static const String errExport = 'error.export';
-  static const String errExists = 'error.exists';
+  // static const String errExists = 'error.exists';
   static const String errNotExists = 'error.notExists';
   static const String errRenameInfo = 'error.renameInfo';
   static const String errRename = 'error.rename';

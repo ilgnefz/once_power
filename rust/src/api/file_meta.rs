@@ -1,6 +1,7 @@
-use std::{cell::RefMut, collections::HashMap};
+use std::collections::HashMap;
 
 use crate::api::file_type::{AudioMetaInfo, RustImageSize, VideoMetaInfo};
+use crate::api::log::write_error;
 use exiftool_rs::ExifTool;
 
 /// 验证日期字符串是否有效
@@ -52,7 +53,20 @@ pub fn get_audio_meta_info(file_path: &str) -> AudioMetaInfo {
     };
 
     let et = ExifTool::new();
-    let tags = et.extract_info(file_path).unwrap();
+    let tags = match et.extract_info(file_path) {
+        Ok(tags) => tags,
+        Err(why) => {
+            write_error(&format!(
+                "Error extracting tags from {}: {:?}",
+                file_path, why
+            ));
+            Vec::new()
+        }
+    };
+
+    if tags.is_empty() {
+        return info;
+    }
 
     let wanted_tags = ["Title", "Artist", "Album", "Date"];
 
@@ -82,7 +96,10 @@ pub fn get_image_size(image_path: &str) -> RustImageSize {
             info.width = size.width as u32;
             info.height = size.height as u32;
         }
-        Err(why) => println!("[RUST] Error getting dimensions: {:?}", why),
+        Err(why) => write_error(&format!(
+            "Error getting dimensions for {}: {:?}",
+            image_path, why
+        )),
     }
 
     info
@@ -99,7 +116,20 @@ pub fn get_video_meta_info(video_path: &str) -> VideoMetaInfo {
     };
 
     let et = ExifTool::new();
-    let tags = et.extract_info(video_path).unwrap();
+    let tags = match et.extract_info(video_path) {
+        Ok(tags) => tags,
+        Err(why) => {
+            write_error(&format!(
+                "Error extracting tags from {}: {:?}",
+                video_path, why
+            ));
+            Vec::new()
+        }
+    };
+
+    if tags.is_empty() {
+        return info;
+    }
 
     let wanted_tags = [
         "SourceImageWidth",

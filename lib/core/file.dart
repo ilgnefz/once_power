@@ -342,9 +342,6 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   ref.read(costProvider.notifier).update(cost);
   ref.read(isApplyingProvider.notifier).finish();
   updateName(ref);
-  ref
-      .read(fileListProvider.notifier)
-      .generateVideoThumbnails(ref.read(fileListProvider));
 }
 
 // 根据文件数量动态计算批量处理大小
@@ -454,4 +451,5 @@ void filterFile(WidgetRef ref) {
   provider.removeOtherClassify([FileType.image, FileType.video]);
   final int after = ref.watch(fileListProvider).length;
   showFilterNotification(before - after);
+  provider.generateVideoThumbnails();
 }

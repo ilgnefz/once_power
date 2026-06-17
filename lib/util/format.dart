@@ -110,10 +110,10 @@ DateTime intToDateTime(int time) =>
     DateTime.fromMillisecondsSinceEpoch(time * 1000);
 
 /// 删除文件名中的禁止字符
-String removeForbiddenCharacters(String fileName) {
+String removeForbiddenCharacters(String value) {
   // Windows系统中文件名禁止的字符 < > : " / \ | ? *
   // 注意：! @ # $ % ^ & ( ) 等字符
-  return fileName
+  return value
       .replaceAll('<', '[')
       .replaceAll('>', ']')
       .replaceAll(':', '-')

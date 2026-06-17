@@ -24,16 +24,21 @@ class _PreviewVideoState extends State<PreviewVideo> {
   Duration totalDuration = Duration.zero;
   Duration currentPosition = Duration.zero;
   String timeLine = '';
+  bool isError = false;
 
   @override
   void initState() {
     super.initState();
     _controller = VideoPlayerController.file(File(widget.file))
-      ..initialize().then((_) {
-        _controller.play();
-        totalDuration = _controller.value.duration;
-        setState(() {});
-      })
+      ..initialize()
+          .then((_) {
+            _controller.play();
+            totalDuration = _controller.value.duration;
+            setState(() {});
+          })
+          .catchError((_) {
+            setState(() => isError = true);
+          })
       ..addListener(() {
         if (_controller.value.isCompleted) {
           _controller.pause();
@@ -52,6 +57,7 @@ class _PreviewVideoState extends State<PreviewVideo> {
 
   @override
   Widget build(BuildContext context) {
+    if (isError) return ErrorImage(file: widget.file, isPreview: true);
     if (_controller.value.isInitialized) {
       if (_controller.value.hasError) {
         return Center(child: ErrorImage(isPreview: true, file: widget.file));

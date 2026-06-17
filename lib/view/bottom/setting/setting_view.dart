@@ -33,7 +33,7 @@ class _SettingViewState extends State<SettingView> {
     super.initState();
     saveSize = StorageUtil.getBool(AppKeys.saveSize);
     savePosition = StorageUtil.getBool(AppKeys.savePosition);
-    autoRename = StorageUtil.getBool(AppKeys.autoRename);
+    // autoRename = StorageUtil.getBool(AppKeys.autoRename);
     cancelRename = StorageUtil.getBool(AppKeys.cancelEmptyRename);
     prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
     width = StorageUtil.getInt(AppKeys.autoWidth) ?? 1;
@@ -88,7 +88,7 @@ class _SettingViewState extends State<SettingView> {
                         SizedBox(height: AppNum.spaceMedium),
                         RenameSetting(
                           cancelRename: cancelRename,
-                          autoRename: autoRename,
+                          // autoRename: autoRename,
                           onCancelChanged: (value) => setState(() {
                             cancelRename = value;
                             StorageUtil.setBool(
@@ -96,10 +96,10 @@ class _SettingViewState extends State<SettingView> {
                               cancelRename,
                             );
                           }),
-                          onAutoChanged: (value) => setState(() {
-                            autoRename = value;
-                            StorageUtil.setBool(AppKeys.autoRename, autoRename);
-                          }),
+                          // onAutoChanged: (value) => setState(() {
+                          //   autoRename = value;
+                          //   StorageUtil.setBool(AppKeys.autoRename, autoRename);
+                          // }),
                         ),
                         SizedBox(height: AppNum.spaceSmall),
                         RenameFormat(

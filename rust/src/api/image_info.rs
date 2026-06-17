@@ -1,7 +1,11 @@
 use rexif::{ExifTag, TagValue};
 use std::f64::consts::PI;
 
-use crate::api::{file_meta::{format_date, is_valid_date}, file_type::PhotoMetaInfo};
+use crate::api::{
+    file_meta::{format_date, is_valid_date},
+    file_type::PhotoMetaInfo,
+    log::write_error,
+};
 
 /// 解析GPS坐标并转换为高德地图坐标
 /// 直接处理rexif的URational数据，避免字符串转换的中间步骤
@@ -9,7 +13,7 @@ fn parse_gps_coordinates(lat_value: &TagValue, lon_value: &TagValue) -> Result<(
     // 直接从URational数据解析坐标
     let wgs_lat = parse_urational_coordinate(lat_value)?;
     let wgs_lon = parse_urational_coordinate(lon_value)?;
-    
+
     // 判断是否在中国境内
     if is_in_china(wgs_lat, wgs_lon) {
         // 转换为火星坐标(GCJ-02)
@@ -28,16 +32,16 @@ fn parse_urational_coordinate(value: &TagValue) -> Result<f64, String> {
             if rationals.len() < 3 {
                 return Err("GPS坐标需要至少3个有理数".to_string());
             }
-            
+
             // 解析度分秒
             let degrees = rationals[0].numerator as f64 / rationals[0].denominator.max(1) as f64;
             let minutes = rationals[1].numerator as f64 / rationals[1].denominator.max(1) as f64;
             let seconds = rationals[2].numerator as f64 / rationals[2].denominator.max(1) as f64;
-            
+
             // 转换为十进制度
             Ok(degrees + (minutes / 60.0) + (seconds / 3600.0))
-        },
-        _ => Err("GPS坐标必须是有理数数组".to_string())
+        }
+        _ => Err("GPS坐标必须是有理数数组".to_string()),
     }
 }
 
@@ -51,17 +55,17 @@ fn is_in_china(lat: f64, lon: f64) -> bool {
 fn wgs84_to_gcj02(wgs_lat: f64, wgs_lon: f64) -> (f64, f64) {
     let a = 6378245.0;
     let ee = 0.00669342162296594323;
-    
+
     let mut dlat = transform_lat(wgs_lon - 105.0, wgs_lat - 35.0);
     let mut dlon = transform_lon(wgs_lon - 105.0, wgs_lat - 35.0);
-    
+
     let rad_lat = wgs_lat / 180.0 * PI;
     let magic = 1.0 - ee * rad_lat.sin() * rad_lat.sin();
     let sqrt_magic = magic.sqrt();
-    
+
     dlat = (dlat * 180.0) / ((a * (1.0 - ee)) / (magic * sqrt_magic) * PI);
     dlon = (dlon * 180.0) / (a / sqrt_magic * rad_lat.cos() * PI);
-    
+
     (wgs_lat + dlat, wgs_lon + dlon)
 }
 
@@ -94,7 +98,7 @@ pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
     let mut longitude = None;
     let mut lat_value = None;
     let mut lon_value = None;
-    
+
     // 分别保存三个日期字段
     let mut date_time_original = None;
     let mut date_time_digitized = None;
@@ -110,10 +114,10 @@ pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
             ExifTag::DateTime => date_time = Some(entry.value.to_string()),
             ExifTag::GPSLatitude => lat_value = Some(entry.value),
             ExifTag::GPSLongitude => lon_value = Some(entry.value),
-            _ => {},
+            _ => {}
         }
     }
-    
+
     // 按照优先级顺序给capture赋值，过滤无效日期并处理格式
     let mut capture = date_time_original
         .filter(|dt| is_valid_date(dt))
@@ -125,20 +129,23 @@ pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
     } else {
         capture = capture.map(|dt| format_date(&dt));
     }
-    
+
     // 解析GPS坐标
     if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {
         match parse_gps_coordinates(&lat_val, &lon_val) {
             Ok((lat, lon)) => {
                 latitude = Some(lat);
                 longitude = Some(lon);
-            },
-            Err(e) => {
-                eprintln!("GPS坐标解析失败: {}", e);
+            }
+            Err(why) => {
+                write_error(&format!(
+                    "Failed to parse GPS coordinates from {}: {}",
+                    image_path, why
+                ));
             }
         }
     }
-   
+
     Some(PhotoMetaInfo {
         make,
         model,

@@ -10,15 +10,11 @@ class RenameSetting extends StatelessWidget {
   const RenameSetting({
     super.key,
     required this.cancelRename,
-    required this.autoRename,
     required this.onCancelChanged,
-    required this.onAutoChanged,
   });
 
   final bool cancelRename;
-  final bool autoRename;
   final void Function(bool) onCancelChanged;
-  final void Function(bool) onAutoChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +30,8 @@ class RenameSetting extends StatelessWidget {
         ),
         SettingCheckbox(
           label: tr(AppL10n.settingAutoRename),
-          checked: autoRename,
-          onChanged: onAutoChanged,
+          checked: true,
+          onChanged: (_) {},
         ),
       ],
     );

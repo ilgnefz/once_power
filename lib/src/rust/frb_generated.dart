@@ -7,6 +7,7 @@ import 'api/file_info.dart';
 import 'api/file_meta.dart';
 import 'api/file_type.dart';
 import 'api/image_info.dart';
+import 'api/log.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -70,7 +71,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -567101932;
+  int get rustContentHash => -657891261;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -126,6 +127,12 @@ abstract class RustLibApi extends BaseApi {
   String crateApiSimpleSimplifiedToTraditional({required String text});
 
   String crateApiSimpleTraditionalToSimplified({required String text});
+
+  Future<void> crateApiLogWriteError({required String message});
+
+  Future<void> crateApiLogWriteInfo({required String message});
+
+  Future<void> crateApiLogWriteWarning({required String message});
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -589,6 +596,90 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         debugName: "traditional_to_simplified",
         argNames: ["text"],
       );
+
+  @override
+  Future<void> crateApiLogWriteError({required String message}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(message, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 18,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiLogWriteErrorConstMeta,
+        argValues: [message],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiLogWriteErrorConstMeta =>
+      const TaskConstMeta(debugName: "write_error", argNames: ["message"]);
+
+  @override
+  Future<void> crateApiLogWriteInfo({required String message}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(message, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 19,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiLogWriteInfoConstMeta,
+        argValues: [message],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiLogWriteInfoConstMeta =>
+      const TaskConstMeta(debugName: "write_info", argNames: ["message"]);
+
+  @override
+  Future<void> crateApiLogWriteWarning({required String message}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(message, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 20,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiLogWriteWarningConstMeta,
+        argValues: [message],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiLogWriteWarningConstMeta =>
+      const TaskConstMeta(debugName: "write_warning", argNames: ["message"]);
 
   @protected
   String dco_decode_String(dynamic raw) {

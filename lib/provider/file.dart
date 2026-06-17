@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
 import 'package:fvp/fvp.dart';
 import 'package:image/image.dart' as img;
 import 'package:once_power/enum/file.dart';
@@ -158,11 +159,8 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  Future<void> generateVideoThumbnails(
-    List<FileInfo> videos, {
-    int concurrency = 5,
-  }) async {
-    final noThumbnails = videos
+  Future<void> generateVideoThumbnails({int concurrency = 5}) async {
+    final noThumbnails = state
         .where((e) => e.type.isVideo && e.thumbnail == null)
         .toList();
     if (noThumbnails.isEmpty) return;
@@ -197,16 +195,20 @@ class FileList extends _$FileList {
     VideoPlayerController? controller;
     try {
       controller = VideoPlayerController.file(File(file.path));
-      await controller.initialize();
+      await controller.initialize().catchError((e) {
+        updateThumbnail(file.id, Uint8List(0));
+        log('生成失败 ${file.name}: 初始化失败，$e');
+        return;
+      });
       if (_cancelGeneration) return;
       await controller.setVolume(0);
       await controller.play();
       await Future.delayed(const Duration(seconds: 1));
       if (_cancelGeneration) return;
       await controller.pause();
-
       final videoInfo = controller.getMediaInfo()?.video;
       if (videoInfo == null || videoInfo.isEmpty) {
+        updateThumbnail(file.id, Uint8List(0));
         log('生成失败 ${file.name}: 无法获取视频信息');
         return;
       }
@@ -217,11 +219,12 @@ class FileList extends _$FileList {
       final Uint8List? snapshot = await controller.snapshot();
       if (_cancelGeneration) return;
       if (snapshot == null || snapshot.isEmpty) {
+        updateThumbnail(file.id, Uint8List(0));
         log('生成失败 ${file.name}: 截图数据为空');
         return;
       }
 
-      final imageBytes = await _generateThumbnailInIsolate(
+      Uint8List imageBytes = await _generateThumbnailInIsolate(
         snapshot.buffer.asUint8List(),
         width,
         height,
@@ -232,9 +235,11 @@ class FileList extends _$FileList {
         updateThumbnail(file.id, imageBytes);
         log('生成完成 ${file.name}');
       } else {
+        updateThumbnail(file.id, Uint8List(0));
         log('生成失败 ${file.name}: 图片处理失败');
       }
     } catch (e) {
+      updateThumbnail(file.id, Uint8List(0));
       log('生成失败 ${file.name}: $e');
     } finally {
       controller?.dispose();

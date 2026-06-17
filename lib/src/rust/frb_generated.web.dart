@@ -10,6 +10,7 @@ import 'api/file_info.dart';
 import 'api/file_meta.dart';
 import 'api/file_type.dart';
 import 'api/image_info.dart';
+import 'api/log.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';

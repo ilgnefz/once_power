@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:once_power/const/images.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/dialog.dart';
 import 'package:once_power/enum/file.dart';
@@ -33,6 +34,7 @@ class ContentGridItem extends StatelessWidget {
               child: Builder(
                 builder: (context) {
                   if (file.type.isVideo) return VideoView(file);
+                  if (!file.type.isImage) return Image.asset(AppImages.error);
                   if (file.extension == 'avif') return AvifView(file);
                   if (file.extension == 'psd') return PsdView(file);
                   if (file.extension == 'svg') return SvgView(file);
