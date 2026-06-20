@@ -6,8 +6,9 @@ part 'progress.g.dart';
 // @riverpod
 // class CurrentFile extends _$CurrentFile {
 //   @override
-//   String build() => '';
+//   String? build() => null;
 //   void update(String value) => state = value;
+//   void reset() => state = null;
 // }
 
 @riverpod
@@ -51,6 +52,14 @@ class CurrentSize extends _$CurrentSize {
 
 @riverpod
 class IsApplying extends _$IsApplying {
+  @override
+  bool build() => false;
+  void start() => state = true;
+  void finish() => state = false;
+}
+
+@riverpod
+class IsLoading extends _$IsLoading {
   @override
   bool build() => false;
   void start() => state = true;

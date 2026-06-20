@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
 import 'update/update.dart';
 
@@ -20,7 +19,7 @@ void selectType(WidgetRef ref, FileType type) {
   ref.read(sortSelectListProvider.notifier).clear();
   List<FileInfo> list = ref.watch(sortListProvider);
   for (FileInfo e in list) {
-    if (e.type != type) continue;
+    if (e.fileType != type) continue;
     ref.read(sortSelectListProvider.notifier).add(e);
   }
   updateName(ref);

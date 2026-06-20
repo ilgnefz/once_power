@@ -6,6 +6,7 @@ import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/type.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/base/text.dart';

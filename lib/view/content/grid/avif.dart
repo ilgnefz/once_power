@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_avif/flutter_avif.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
 import 'error.dart';
 

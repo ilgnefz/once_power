@@ -7,18 +7,19 @@ edition = "2021"
 crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
+chrono = { version = "0.4.5", features = ["clock"] }
+dirs = "6.0.0"
 exiftool-rs = "0.6.1"
-# exiftool-rs = { git = "https://github.com/ilgnefz/exiftool-rs" }
-# exiftool-rs = { path = "E:\\Workspace\\Rust\\exiftool-rs" }
 filetime_creation = "0.2.0"
-flutter_rust_bridge = "=2.12.0"
+flutter_rust_bridge = { version = "=2.12.0", features = ["chrono"] }
 imagesize = "0.14.0"
+num_cpus = "1.17.0"
+rayon = "1.12.0"
 rexif = "0.7.5"
-trash = "5.2.3"
-uuid = { version = "1.19.0", features = ["v4"] }
-zhconv = "0.3.3"
-chrono = "0.4"
-dirs = "5.0"
+roxmltree = "0.21.1"
+trash = "5.2.6"
+uuid = { version = "1.23.3", features = ["v4"] }
+zhconv = "0.4.1"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }

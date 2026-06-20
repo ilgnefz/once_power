@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/advance.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
 String convertToLocalTime(String utcTimeStr) {
   try {
@@ -167,6 +167,7 @@ String formatVideoTime(Duration total, Duration current) {
   return '$currentM:$currentS / $totalM:$totalS';
 }
 
+// TODO: 可能出错
 String formatShowDate(String date, DateStyle style) {
   if (date.length < 8) return date;
   List<String> dateParts = [];

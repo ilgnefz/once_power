@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:once_power/const/l10n.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/widget/common/tooltip.dart';
 import 'package:tolyui_feedback/toly_tooltip/tooltip_placement.dart';
@@ -48,12 +48,23 @@ class TooltipItem extends StatelessWidget {
       // ),
       richMessage: TextSpan(
         children: [
-          richTextTooltip(context, name, file.getFullOldName()),
-          richTextTooltip(context, newName, file.getFullNewName()),
+          richTextTooltip(context, name, file.fullOldName()),
+          richTextTooltip(context, newName, file.fullNewName()),
           richTextTooltip(context, folder, file.parent),
-          richTextTooltip(context, createTime, '${file.createdDate.date}'),
-          richTextTooltip(context, modifyDate, '${file.modifiedDate.date}'),
-          richTextTooltip(context, accessDate, '${file.accessedDate.date}'),
+          if (file.created != null)
+            richTextTooltip(context, createTime, file.created!.date.toString()),
+          if (file.modified != null)
+            richTextTooltip(
+              context,
+              modifyDate,
+              file.modified!.date.toString(),
+            ),
+          if (file.accessed != null)
+            richTextTooltip(
+              context,
+              accessDate,
+              file.accessed!.date.toString(),
+            ),
           if (file.metaInfo?.capture != null)
             richTextTooltip(
               context,

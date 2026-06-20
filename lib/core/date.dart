@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/date.dart';
-import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/date.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/model/notification.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:once_power/util/verify.dart';
@@ -30,12 +29,12 @@ Future<void> updateDate(WidgetRef ref) async {
   DateTimeUnit dateUnit = dateProperty.dateUnit;
   bool fullReplace = dateProperty.fullReplace;
   int count = 0;
-  for (FileInfo f in files) {
-    if (!await isExist(f.type.isFolder, f.path)) {
-      errors.add(InfoDetail(file: f.path, message: tr(AppL10n.errNoExist)));
+  for (FileInfo file in files) {
+    if (!await isExist(file.isDir(), file.path)) {
+      errors.add(InfoDetail(file: file.path, message: tr(AppL10n.errNoExist)));
       continue;
     }
-    String filePath = f.path;
+    String filePath = file.path;
     int interval = diffType.isAdd
         ? dateProperty.interval
         : -dateProperty.interval;
@@ -44,63 +43,64 @@ Future<void> updateDate(WidgetRef ref) async {
     DateTime? modifiedDate;
     DateTime? accessedDate;
     if (dateProperty.createdDateChecked) {
+      // TODO: file.created 如果为空就用现在的时间
       createdDate = selfAdjust
-          ? f.createdDate.date.addSingleUnit(dateUnit, interval)
+          ? file.created!.date.addSingleUnit(dateUnit, interval)
           : finalDate(
               dateProperty.createdDate,
               fullReplace,
               interval,
               dateUnit,
-              f.createdDate.date,
+              file.created!.date,
             );
     }
     if (dateProperty.modifiedDateChecked) {
       modifiedDate = selfAdjust
-          ? f.modifiedDate.date.addSingleUnit(dateUnit, interval)
+          ? file.modified!.date.addSingleUnit(dateUnit, interval)
           : finalDate(
               dateProperty.modifiedDate,
               fullReplace,
               interval,
               dateUnit,
-              f.modifiedDate.date,
+              file.modified!.date,
             );
     }
     if (dateProperty.accessedDateChecked) {
       accessedDate = selfAdjust
-          ? f.accessedDate.date.addSingleUnit(dateUnit, interval)
+          ? file.accessed!.date.addSingleUnit(dateUnit, interval)
           : finalDate(
               dateProperty.accessedDate,
               fullReplace,
               interval,
               dateUnit,
-              f.accessedDate.date,
+              file.accessed!.date,
             );
     }
     if (createdDate != null) {
       try {
         int timestamp = createdDate.millisecondsSinceEpoch ~/ 1000;
         setCtime(filePath: filePath, time: timestamp);
-        provider.updateCreatedDate(f.id, createdDate);
+        provider.updateCreatedDate(file.id, createdDate);
       } catch (e) {
-        errors.add(InfoDetail(file: f.name, message: e.toString()));
+        errors.add(InfoDetail(file: file.name, message: e.toString()));
       }
     }
     if (modifiedDate != null) {
       try {
         int timestamp = modifiedDate.millisecondsSinceEpoch ~/ 1000;
         setMtime(filePath: filePath, time: timestamp);
-        provider.updateModifiedDate(f.id, modifiedDate);
+        provider.updateModifiedDate(file.id, modifiedDate);
       } catch (e) {
-        errors.add(InfoDetail(file: f.name, message: e.toString()));
+        errors.add(InfoDetail(file: file.name, message: e.toString()));
       }
     }
     if (accessedDate != null) {
       try {
         int timestamp = accessedDate.millisecondsSinceEpoch ~/ 1000;
         setAtime(filePath: filePath, time: timestamp);
-        provider.updateAccessedDate(f.id, accessedDate);
+        provider.updateAccessedDate(file.id, accessedDate);
       } catch (e) {
-        errors.add(InfoDetail(file: f.name, message: e.toString()));
+        errors.add(InfoDetail(file: file.name, message: e.toString()));
       }
     }
     count++;

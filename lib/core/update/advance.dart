@@ -9,11 +9,11 @@ import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/advance_add.dart';
 import 'package:once_power/model/advance_delete.dart';
 import 'package:once_power/model/advance_replace.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/storage.dart';
@@ -33,7 +33,7 @@ Future<void> advanceUpdateName(WidgetRef ref) async {
   int index = 0;
   for (FileInfo file in list) {
     if (!file.checked) continue;
-    String name = file.name, ext = file.extension;
+    String name = file.name, ext = file.ext;
     for (AdvanceMenuModel menu in menus) {
       if (menu.group != 'all' && menu.group != file.group) continue;
       switch (menu.type) {
@@ -202,13 +202,13 @@ Future<void> autoGroupFile(
       }
     case AutoType.extension:
       for (FileInfo file in checkedFiles) {
-        String group = file.extension.isEmpty ? ' ' : file.extension;
+        String group = file.ext.isEmpty ? ' ' : file.ext;
         provider.updateGroup(file.id, group);
         await saveGroup(group);
       }
     case AutoType.type:
       for (FileInfo file in checkedFiles) {
-        String group = file.type.label;
+        String group = file.fileType.label;
         provider.updateGroup(file.id, group);
         await saveGroup(group);
       }

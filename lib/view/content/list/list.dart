@@ -4,10 +4,10 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/app.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/context/sort_select_item.dart';
 
@@ -43,7 +43,7 @@ class ContentListView extends ConsumerWidget {
         FileInfo file = files[index];
         final ThemeData theme = Theme.of(context);
         String title = file.name, subtitle = file.newName;
-        String extension = file.extension, newExt = file.newExtension;
+        String extension = file.ext, newExt = file.newExt;
         Color? color;
         Color? subColor = title == subtitle ? Colors.grey : theme.primaryColor;
 

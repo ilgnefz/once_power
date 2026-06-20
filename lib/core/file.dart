@@ -1,32 +1,18 @@
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:file_selector/file_selector.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/extension.dart';
-import 'package:once_power/const/num.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/app.dart';
-import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
-import 'package:once_power/model/notification.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/src/rust/api/file_info.dart';
-import 'package:once_power/src/rust/api/file_meta.dart';
-import 'package:once_power/src/rust/api/file_type.dart';
-import 'package:once_power/src/rust/frb_generated.dart';
-import 'package:once_power/util/format.dart';
-import 'package:once_power/util/info.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
-
-// 使用全局 Map 存储各 Isolate 的错误，key 为 isolate id
-final Map<int, List<InfoDetail>> _isolateErrors = {};
-int _isolateCounter = 0;
 
 Future<void> formatXFile(WidgetRef ref, List<XFile> files) async {
   final List<String> paths = files.map((e) => e.path).toList();
@@ -90,249 +76,35 @@ Future<List<String>> getAllPath(String folder, bool addSubfolder) async {
   return children;
 }
 
-// 处理文件的阈值常量
-const int _kSmallFileThreshold = 10;
-
-// 工作池处理文件信息生成
-Future<void> _processFilesWithWorkerPool(
-  List<String> paths,
-  Function(FileInfo) onFileProcessed,
-  Function(int) onProgress,
-  int workerCount,
-) async {
-  // 如果文件数量较少，直接使用单个 isolate 处理
-  if (paths.length < _kSmallFileThreshold) {
-    final receivePort = ReceivePort();
-    final isolateId = _isolateCounter++;
-    _isolateErrors[isolateId] = [];
-
-    final isolate = await Isolate.spawn(
-      _isolateEntryPoint,
-      _IsolateArgs(receivePort.sendPort, paths, 0, isolateId),
-    );
-
-    int processedCount = 0;
-
-    await for (final message in receivePort) {
-      if (message is _IndexedFileInfo) {
-        // 立即处理当前文件，不等待连续结果
-        onFileProcessed(message.fileInfo);
-        processedCount++;
-        onProgress(processedCount);
-      } else if (message is bool && message == true) {
-        break;
-      } else if (message is _IsolateError) {
-        // 收集 Isolate 中的错误
-        _isolateErrors[isolateId]?.add(message.error);
-      }
-    }
-
-    isolate.kill();
-    return;
-  }
-
-  final workerCountFinal = workerCount;
-  final receivePort = ReceivePort();
-  final List<Isolate> isolates = [];
-  final List<List<String>> chunks = _splitList(paths, workerCountFinal);
-
-  int processedCount = 0;
-  int completedWorkers = 0;
-
-  // 计算每个 chunk 的基础索引
-  int baseIndex = 0;
-  final List<int> baseIndices = [];
-  for (int i = 0; i < workerCountFinal; i++) {
-    baseIndices.add(baseIndex);
-    baseIndex += chunks[i].length;
-  }
-
-  // 创建工作池
-  for (int i = 0; i < workerCountFinal; i++) {
-    if (chunks[i].isNotEmpty) {
-      final isolateId = _isolateCounter++;
-      _isolateErrors[isolateId] = [];
-
-      final isolate = await Isolate.spawn(
-        _isolateEntryPoint,
-        _IsolateArgs(
-          receivePort.sendPort,
-          chunks[i],
-          baseIndices[i],
-          isolateId,
-        ),
-      );
-      isolates.add(isolate);
-    } else {
-      completedWorkers++;
-    }
-  }
-
-  // 接收处理结果
-  await for (final message in receivePort) {
-    if (message is _IndexedFileInfo) {
-      // 立即处理当前文件，不等待连续结果
-      onFileProcessed(message.fileInfo);
-      processedCount++;
-      onProgress(processedCount);
-    } else if (message is bool && message == true) {
-      // 一个工作器完成
-      completedWorkers++;
-      if (completedWorkers >= workerCountFinal) {
-        break;
-      }
-    } else if (message is _IsolateError) {
-      // 收集 Isolate 中的错误
-      _isolateErrors[message.isolateId]?.add(message.error);
-    }
-  }
-
-  // 清理所有 isolate
-  for (final isolate in isolates) {
-    isolate.kill();
-  }
-}
-
-// 将列表分割成指定数量的子列表
-List<List<String>> _splitList(List<String> list, int parts) {
-  final List<List<String>> result = [];
-  final int length = list.length;
-  final int chunkSize = (length / parts).ceil();
-
-  for (int i = 0; i < parts; i++) {
-    final int start = i * chunkSize;
-    final int end = start + chunkSize > length ? length : start + chunkSize;
-    if (start < length) {
-      result.add(list.sublist(start, end));
-    } else {
-      result.add([]);
-    }
-  }
-
-  return result;
-}
-
-// 带索引的文件信息
-class _IndexedFileInfo {
-  final int index;
-  final FileInfo fileInfo;
-  _IndexedFileInfo(this.index, this.fileInfo);
-}
-
-// Isolate 错误信息封装
-class _IsolateError {
-  final int isolateId;
-  final InfoDetail error;
-  _IsolateError(this.isolateId, this.error);
-}
-
-// Isolate 入口点
-void _isolateEntryPoint(_IsolateArgs args) async {
-  try {
-    await RustLib.init();
-  } catch (e) {
-    debugPrint('Error initializing RustLib: $e');
-  }
-
-  // 实时处理每个文件，减少批量更新的卡顿感
-  for (int i = 0; i < args.paths.length; i++) {
-    String path = args.paths[i];
-    try {
-      final fileInfo = await generateFileInfo(path);
-      // 处理完一个文件就发送结果，附带原始索引，实现实时更新并保持顺序
-      args.sendPort.send(_IndexedFileInfo(args.baseIndex + i, fileInfo));
-    } catch (e) {
-      // 通过 SendPort 将错误发送回主 Isolate
-      args.sendPort.send(
-        _IsolateError(
-          args.isolateId,
-          InfoDetail(file: path, message: formatSystemError(e)),
-        ),
-      );
-      debugPrint('Error processing file $path: $e');
-    }
-  }
-  // 发送完成信号
-  args.sendPort.send(true);
-}
-
-// Isolate 参数类
-class _IsolateArgs {
-  final SendPort sendPort;
-  final List<String> paths;
-  final int baseIndex; // 基础索引，用于保持原始顺序
-  final int isolateId; // Isolate 唯一标识，用于错误收集
-  _IsolateArgs(this.sendPort, this.paths, this.baseIndex, this.isolateId);
-}
-
-// 获取最优的 worker 数量
-int _getOptimalWorkerCount() {
-  final int processors = Platform.numberOfProcessors;
-  // 使用核心数的 75%，最少 2 个，最多 8 个
-  return (processors * 0.75).clamp(2, 8).toInt();
-}
-
 Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   Stopwatch stopwatch = Stopwatch()..start();
-  // 重置错误收集
-  _isolateErrors.clear();
   bool isAppend = ref.read(isAppendModeProvider);
   if (!isAppend) ref.read(fileListProvider.notifier).clear();
-  ref.read(totalProvider.notifier).update(paths.length);
-  ref.read(countProvider.notifier).reset();
+  int total = paths.length;
+  ref.read(totalProvider.notifier).update(total);
+  final cProvider = ref.read(countProvider.notifier);
+  cProvider.reset();
   ref.read(isApplyingProvider.notifier).start();
-
-  // 过滤重复路径
-  final Set<String> existingPaths = ref
-      .read(fileListProvider)
-      .map((e) => e.path)
-      .toSet();
-
-  // 根据文件数量决定处理方式
-  if (paths.length <= AppNum.maxCount) {
-    // 文件数量较少，使用串行处理
-    int processedCount = 0;
-    final List<InfoDetail> errors = [];
-    for (String path in paths) {
-      try {
-        final fileInfo = await generateFileInfo(path);
-        if (!existingPaths.contains(fileInfo.path)) {
-          ref.read(fileListProvider.notifier).add(fileInfo);
-          existingPaths.add(fileInfo.path);
-        }
-        processedCount++;
-        ref.read(countProvider.notifier).updateValue(processedCount);
-      } catch (e) {
-        errors.add(InfoDetail(file: path, message: formatSystemError(e)));
-        debugPrint('Error processing file $path: $e');
-      }
-    }
-    if (errors.isNotEmpty) showAddErrorNotification(errors);
-  } else {
-    // 文件数量较多，使用工作池处理
-    await _processFilesWithWorkerPool(
-      paths,
-      (fileInfo) {
-        // 处理单个文件结果
-        if (!existingPaths.contains(fileInfo.path)) {
-          ref.read(fileListProvider.notifier).add(fileInfo);
-          existingPaths.add(fileInfo.path);
-        }
-      },
-      (progress) {
-        // 更新进度
-        ref.read(countProvider.notifier).updateValue(progress);
-      },
-      _getOptimalWorkerCount(),
-    );
-    // 收集所有 Isolate 的错误
-    final List<InfoDetail> allErrors = _isolateErrors.values
-        .expand((e) => e)
-        .toList();
-    if (allErrors.isNotEmpty) showAddErrorNotification(allErrors);
-    _isolateErrors.clear();
-  }
-
+  ref.read(isLoadingProvider.notifier).start();
+  // ================= Start =================
+  // int len = paths.length;
+  // int listCount = len ~/ 100;
+  final provider = ref.read(fileListProvider.notifier);
+  // List<FileInfo> list = [];
+  bool tooLength = total > 200;
+  List<FileInfo> list = tooLength
+      ? getListPool(paths: paths)
+      : getList(paths: paths);
+  // int count = 1, batch = (total ~/ 10).clamp(10, 50);
+  // await for (final file in stream) {
+  //   if (count == 1 || count % batch == 0) cProvider.updateValue(count);
+  //   list.add(file);
+  //   count++;
+  // }
+  if (tooLength) list = sortFileInfoByPaths(paths: paths, fileInfoList: list);
+  cProvider.updateValue(paths.length);
+  provider.insertLast(list);
+  // ================== End ==================
   if (ref.read(isViewModeProvider) &&
       !ref.read(currentModeProvider).isOrganize) {
     filterFile(ref);
@@ -340,109 +112,9 @@ Future<void> addFileInfo(WidgetRef ref, List<String> paths) async {
   stopwatch.stop();
   double cost = stopwatch.elapsedMicroseconds / 1000000;
   ref.read(costProvider.notifier).update(cost);
-  ref.read(isApplyingProvider.notifier).finish();
   updateName(ref);
-}
-
-// 根据文件数量动态计算批量处理大小
-int _getDynamicChunkSize(int totalFiles) {
-  if (totalFiles < 50) {
-    return 5; // 少量文件：小批量，更快响应
-  } else if (totalFiles < 200) {
-    return 10; // 中等数量：平衡性能和响应
-  } else if (totalFiles < 500) {
-    return 20; // 大量文件：较大批量，更高吞吐量
-  } else {
-    return 30; // 超大数量：更大批量，最大化并行
-  }
-}
-
-Future<void> processFilesWithConcurrence(
-  WidgetRef ref,
-  List<String> paths,
-) async {
-  if (paths.isEmpty) return;
-  final Set<String> existingPaths = ref
-      .read(fileListProvider)
-      .map((e) => e.path)
-      .toSet();
-  // 根据文件数量动态调整批量大小
-  final int chunkSize = _getDynamicChunkSize(paths.length);
-  // 大量文件时给 UI 线程喘息机会
-  final bool needYield = paths.length > 200;
-
-  for (int i = 0; i < paths.length; i += chunkSize) {
-    final int end = (i + chunkSize < paths.length)
-        ? i + chunkSize
-        : paths.length;
-    final List<String> chunk = paths.sublist(i, end);
-    final List<FileInfo?> results = await Future.wait(
-      chunk.map((filePath) async {
-        if (existingPaths.contains(filePath)) return null;
-        return await generateFileInfo(filePath);
-      }),
-    );
-    for (var result in results) {
-      if (result != null) {
-        ref.read(fileListProvider.notifier).add(result);
-      }
-    }
-    // 大量文件处理时，每处理几个批次后给 UI 线程更新机会
-    if (needYield && (i / chunkSize) % 5 == 0) {
-      await Future.delayed(const Duration(milliseconds: 50));
-    }
-  }
-}
-
-Future<FileInfo> generateFileInfo(String filePath) async {
-  RFileInfo fileInfo = getFileInfo(filePath: filePath);
-  String name = fileInfo.name;
-  String extension = fileInfo.ext;
-  if (extension.isEmpty && name.startsWith('.')) {
-    (name, extension) = ('', name.substring(1));
-  }
-  FileType type = fileInfo.isDir ? FileType.folder : getFileType(extension);
-  FileMetaInfo? metaInfo;
-  Resolution? resolution;
-  Uint8List? thumbnail;
-  if (type.isAudio) {
-    metaInfo = getAudioInfo(filePath);
-  } else if (type.isImage) {
-    if (filePath.endsWith('.svg')) {
-      resolution = await getSvgDimensions(filePath);
-    } else {
-      Stopwatch stopwatch = Stopwatch()..start();
-      RustImageSize size = getImageSize(imagePath: filePath);
-      double cost = stopwatch.elapsedMicroseconds / 1000000;
-      debugPrint('获图片尺寸耗时: $cost 值: ${size.width}, ${size.height}');
-      resolution = Resolution(size.width, size.height);
-      if (!filePath.endsWith('.gif') && !filePath.endsWith('.psd')) {
-        metaInfo = await getImageMeta(filePath);
-      }
-    }
-  } else if (type.isVideo) {
-    (Resolution, FileMetaInfo) result = await getVideoInfo(filePath);
-    (resolution, metaInfo) = result;
-  }
-  return FileInfo(
-    id: fileInfo.id,
-    name: name,
-    newName: name,
-    extension: extension,
-    newExtension: extension,
-    parent: fileInfo.parent,
-    path: filePath,
-    tempPath: '',
-    beforePath: filePath,
-    createdDate: getDateInfo(intToDateTime(fileInfo.createTime))!,
-    modifiedDate: getDateInfo(intToDateTime(fileInfo.modifyTime))!,
-    accessedDate: getDateInfo(intToDateTime(fileInfo.accessTime))!,
-    metaInfo: metaInfo,
-    resolution: resolution,
-    thumbnail: thumbnail,
-    type: type,
-    size: fileInfo.size.toInt(),
-  );
+  ref.read(isApplyingProvider.notifier).finish();
+  ref.read(isLoadingProvider.notifier).finish();
 }
 
 void filterFile(WidgetRef ref) {

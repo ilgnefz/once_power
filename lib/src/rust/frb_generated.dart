@@ -3,11 +3,12 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'api/base_info.dart';
 import 'api/file_info.dart';
-import 'api/file_meta.dart';
-import 'api/file_type.dart';
 import 'api/image_info.dart';
 import 'api/log.dart';
+import 'api/meta_info.dart';
+import 'api/models.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -71,7 +72,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -657891261;
+  int get rustContentHash => -2105412676;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -89,25 +90,63 @@ abstract class RustLibApi extends BaseApi {
 
   Future<String?> crateApiSimpleDeleteToTrash({required String filePath});
 
-  Future<String> crateApiFileMetaFormatDate({required String dateStr});
+  String crateApiModelsFileInfoFullNewName({required FileInfo that});
+
+  String crateApiModelsFileInfoFullOldName({required FileInfo that});
+
+  bool crateApiModelsFileInfoIsDir({required FileInfo that});
+
+  String crateApiModelsFileInfoNewPath({
+    required FileInfo that,
+    required bool isUndo,
+  });
+
+  Future<FileMetaInfo> crateApiModelsFileMetaInfoDefault();
 
   String crateApiFileInfoGenerateId();
 
-  AudioMetaInfo crateApiFileMetaGetAudioMetaInfo({required String filePath});
+  Future<AudioMetaInfo> crateApiMetaInfoGetAudioMetaInfo({
+    required String filePath,
+  });
 
-  RFileInfo crateApiFileInfoGetFileInfo({required String filePath});
+  Future<BaseInfo> crateApiBaseInfoGetBaseInfo({required String filePath});
 
-  PhotoMetaInfo? crateApiImageInfoGetImageMetaInfo({required String imagePath});
+  DateInfo? crateApiFileInfoGetDateInfo({DateTime? date});
 
-  RustImageSize crateApiFileMetaGetImageSize({required String imagePath});
+  Future<PhotoMetaInfo?> crateApiImageInfoGetImageMetaInfo({
+    required String imagePath,
+  });
 
-  VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath});
+  Future<Resolution?> crateApiMetaInfoGetImageSize({
+    required String imagePath,
+    required String ext,
+  });
+
+  List<FileInfo> crateApiFileInfoGetList({required List<String> paths});
+
+  List<FileInfo> crateApiFileInfoGetListPool({required List<String> paths});
+
+  Stream<FileInfo> crateApiFileInfoGetListStream({required List<String> paths});
+
+  Stream<FileInfo> crateApiFileInfoGetListStreamPool({
+    required List<String> paths,
+  });
+
+  Future<Resolution?> crateApiMetaInfoGetSvgSize({required String svgPath});
+
+  Future<VideoMetaInfo> crateApiMetaInfoGetVideoMetaInfo({
+    required String videoPath,
+  });
 
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
 
-  Future<bool> crateApiFileMetaIsValidDate({required String dateStr});
+  Future<bool> crateApiMetaInfoIsValidDate({required String dateStr});
+
+  Future<DateTime?> crateApiFileInfoParseStrDatetime({required String s});
+
+  Future<Resolution> crateApiModelsResolutionDefault();
 
   void crateApiSimpleSetAtime({
     required String filePath,
@@ -125,6 +164,11 @@ abstract class RustLibApi extends BaseApi {
   });
 
   String crateApiSimpleSimplifiedToTraditional({required String text});
+
+  List<FileInfo> crateApiFileInfoSortFileInfoByPaths({
+    required List<String> paths,
+    required List<FileInfo> fileInfoList,
+  });
 
   String crateApiSimpleTraditionalToSimplified({required String text});
 
@@ -205,32 +249,136 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "delete_to_trash", argNames: ["filePath"]);
 
   @override
-  Future<String> crateApiFileMetaFormatDate({required String dateStr}) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+  String crateApiModelsFileInfoFullNewName({required FileInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(dateStr, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 3,
-            port: port_,
-          );
+          sse_encode_box_autoadd_file_info(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaFormatDateConstMeta,
-        argValues: [dateStr],
+        constMeta: kCrateApiModelsFileInfoFullNewNameConstMeta,
+        argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaFormatDateConstMeta =>
-      const TaskConstMeta(debugName: "format_date", argNames: ["dateStr"]);
+  TaskConstMeta get kCrateApiModelsFileInfoFullNewNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "file_info_full_new_name",
+        argNames: ["that"],
+      );
+
+  @override
+  String crateApiModelsFileInfoFullOldName({required FileInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_file_info(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsFileInfoFullOldNameConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsFileInfoFullOldNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "file_info_full_old_name",
+        argNames: ["that"],
+      );
+
+  @override
+  bool crateApiModelsFileInfoIsDir({required FileInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_file_info(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsFileInfoIsDirConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsFileInfoIsDirConstMeta =>
+      const TaskConstMeta(debugName: "file_info_is_dir", argNames: ["that"]);
+
+  @override
+  String crateApiModelsFileInfoNewPath({
+    required FileInfo that,
+    required bool isUndo,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_file_info(that, serializer);
+          sse_encode_bool(isUndo, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsFileInfoNewPathConstMeta,
+        argValues: [that, isUndo],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsFileInfoNewPathConstMeta =>
+      const TaskConstMeta(
+        debugName: "file_info_new_path",
+        argNames: ["that", "isUndo"],
+      );
+
+  @override
+  Future<FileMetaInfo> crateApiModelsFileMetaInfoDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 7,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_file_meta_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsFileMetaInfoDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsFileMetaInfoDefaultConstMeta =>
+      const TaskConstMeta(debugName: "file_meta_info_default", argNames: []);
 
   @override
   String crateApiFileInfoGenerateId() {
@@ -238,7 +386,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -255,64 +403,104 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "generate_id", argNames: []);
 
   @override
-  AudioMetaInfo crateApiFileMetaGetAudioMetaInfo({required String filePath}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+  Future<AudioMetaInfo> crateApiMetaInfoGetAudioMetaInfo({
+    required String filePath,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 9,
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_audio_meta_info,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaGetAudioMetaInfoConstMeta,
+        constMeta: kCrateApiMetaInfoGetAudioMetaInfoConstMeta,
         argValues: [filePath],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaGetAudioMetaInfoConstMeta =>
+  TaskConstMeta get kCrateApiMetaInfoGetAudioMetaInfoConstMeta =>
       const TaskConstMeta(
         debugName: "get_audio_meta_info",
         argNames: ["filePath"],
       );
 
   @override
-  RFileInfo crateApiFileInfoGetFileInfo({required String filePath}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+  Future<BaseInfo> crateApiBaseInfoGetBaseInfo({required String filePath}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 10,
+            port: port_,
+          );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_r_file_info,
-          decodeErrorData: sse_decode_String,
+          decodeSuccessData: sse_decode_base_info,
+          decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileInfoGetFileInfoConstMeta,
+        constMeta: kCrateApiBaseInfoGetBaseInfoConstMeta,
         argValues: [filePath],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileInfoGetFileInfoConstMeta =>
-      const TaskConstMeta(debugName: "get_file_info", argNames: ["filePath"]);
+  TaskConstMeta get kCrateApiBaseInfoGetBaseInfoConstMeta =>
+      const TaskConstMeta(debugName: "get_base_info", argNames: ["filePath"]);
 
   @override
-  PhotoMetaInfo? crateApiImageInfoGetImageMetaInfo({
-    required String imagePath,
-  }) {
+  DateInfo? crateApiFileInfoGetDateInfo({DateTime? date}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_opt_box_autoadd_Chrono_Local(date, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_date_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileInfoGetDateInfoConstMeta,
+        argValues: [date],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileInfoGetDateInfoConstMeta =>
+      const TaskConstMeta(debugName: "get_date_info", argNames: ["date"]);
+
+  @override
+  Future<PhotoMetaInfo?> crateApiImageInfoGetImageMetaInfo({
+    required String imagePath,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(imagePath, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 12,
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_photo_meta_info,
@@ -332,49 +520,218 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  RustImageSize crateApiFileMetaGetImageSize({required String imagePath}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+  Future<Resolution?> crateApiMetaInfoGetImageSize({
+    required String imagePath,
+    required String ext,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(imagePath, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+          sse_encode_String(ext, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 13,
+            port: port_,
+          );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_rust_image_size,
+          decodeSuccessData: sse_decode_opt_box_autoadd_resolution,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaGetImageSizeConstMeta,
-        argValues: [imagePath],
+        constMeta: kCrateApiMetaInfoGetImageSizeConstMeta,
+        argValues: [imagePath, ext],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaGetImageSizeConstMeta =>
-      const TaskConstMeta(debugName: "get_image_size", argNames: ["imagePath"]);
+  TaskConstMeta get kCrateApiMetaInfoGetImageSizeConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_image_size",
+        argNames: ["imagePath", "ext"],
+      );
 
   @override
-  VideoMetaInfo crateApiFileMetaGetVideoMetaInfo({required String videoPath}) {
+  List<FileInfo> crateApiFileInfoGetList({required List<String> paths}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_String(paths, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_file_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileInfoGetListConstMeta,
+        argValues: [paths],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileInfoGetListConstMeta =>
+      const TaskConstMeta(debugName: "get_list", argNames: ["paths"]);
+
+  @override
+  List<FileInfo> crateApiFileInfoGetListPool({required List<String> paths}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_String(paths, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_file_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileInfoGetListPoolConstMeta,
+        argValues: [paths],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileInfoGetListPoolConstMeta =>
+      const TaskConstMeta(debugName: "get_list_pool", argNames: ["paths"]);
+
+  @override
+  Stream<FileInfo> crateApiFileInfoGetListStream({
+    required List<String> paths,
+  }) {
+    final sink = RustStreamSink<FileInfo>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_list_String(paths, serializer);
+            sse_encode_StreamSink_file_info_Sse(sink, serializer);
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 16,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: sse_decode_String,
+          ),
+          constMeta: kCrateApiFileInfoGetListStreamConstMeta,
+          argValues: [paths, sink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return sink.stream;
+  }
+
+  TaskConstMeta get kCrateApiFileInfoGetListStreamConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_list_stream",
+        argNames: ["paths", "sink"],
+      );
+
+  @override
+  Stream<FileInfo> crateApiFileInfoGetListStreamPool({
+    required List<String> paths,
+  }) {
+    final sink = RustStreamSink<FileInfo>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_list_String(paths, serializer);
+            sse_encode_StreamSink_file_info_Sse(sink, serializer);
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 17,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: sse_decode_String,
+          ),
+          constMeta: kCrateApiFileInfoGetListStreamPoolConstMeta,
+          argValues: [paths, sink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return sink.stream;
+  }
+
+  TaskConstMeta get kCrateApiFileInfoGetListStreamPoolConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_list_stream_pool",
+        argNames: ["paths", "sink"],
+      );
+
+  @override
+  Future<Resolution?> crateApiMetaInfoGetSvgSize({required String svgPath}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(svgPath, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 18,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_resolution,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiMetaInfoGetSvgSizeConstMeta,
+        argValues: [svgPath],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiMetaInfoGetSvgSizeConstMeta =>
+      const TaskConstMeta(debugName: "get_svg_size", argNames: ["svgPath"]);
+
+  @override
+  Future<VideoMetaInfo> crateApiMetaInfoGetVideoMetaInfo({
+    required String videoPath,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(videoPath, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 19,
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_video_meta_info,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaGetVideoMetaInfoConstMeta,
+        constMeta: kCrateApiMetaInfoGetVideoMetaInfoConstMeta,
         argValues: [videoPath],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaGetVideoMetaInfoConstMeta =>
+  TaskConstMeta get kCrateApiMetaInfoGetVideoMetaInfoConstMeta =>
       const TaskConstMeta(
         debugName: "get_video_meta_info",
         argNames: ["videoPath"],
@@ -387,7 +744,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -412,7 +769,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 21,
             port: port_,
           );
         },
@@ -431,7 +788,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  Future<bool> crateApiFileMetaIsValidDate({required String dateStr}) {
+  Future<bool> crateApiMetaInfoIsValidDate({required String dateStr}) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
@@ -440,7 +797,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 22,
             port: port_,
           );
         },
@@ -448,15 +805,70 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_bool,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiFileMetaIsValidDateConstMeta,
+        constMeta: kCrateApiMetaInfoIsValidDateConstMeta,
         argValues: [dateStr],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiFileMetaIsValidDateConstMeta =>
+  TaskConstMeta get kCrateApiMetaInfoIsValidDateConstMeta =>
       const TaskConstMeta(debugName: "is_valid_date", argNames: ["dateStr"]);
+
+  @override
+  Future<DateTime?> crateApiFileInfoParseStrDatetime({required String s}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(s, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 23,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_Chrono_Local,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileInfoParseStrDatetimeConstMeta,
+        argValues: [s],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileInfoParseStrDatetimeConstMeta =>
+      const TaskConstMeta(debugName: "parse_str_datetime", argNames: ["s"]);
+
+  @override
+  Future<Resolution> crateApiModelsResolutionDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_resolution,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsResolutionDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsResolutionDefaultConstMeta =>
+      const TaskConstMeta(debugName: "resolution_default", argNames: []);
 
   @override
   void crateApiSimpleSetAtime({
@@ -469,7 +881,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 25)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -498,7 +910,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 26)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -527,7 +939,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(filePath, serializer);
           sse_encode_i_64(time, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 27)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -552,7 +964,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 28)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -572,13 +984,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  List<FileInfo> crateApiFileInfoSortFileInfoByPaths({
+    required List<String> paths,
+    required List<FileInfo> fileInfoList,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_String(paths, serializer);
+          sse_encode_list_file_info(fileInfoList, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 29)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_file_info,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiFileInfoSortFileInfoByPathsConstMeta,
+        argValues: [paths, fileInfoList],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiFileInfoSortFileInfoByPathsConstMeta =>
+      const TaskConstMeta(
+        debugName: "sort_file_info_by_paths",
+        argNames: ["paths", "fileInfoList"],
+      );
+
+  @override
   String crateApiSimpleTraditionalToSimplified({required String text}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(text, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 30)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -607,7 +1049,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 18,
+            funcId: 31,
             port: port_,
           );
         },
@@ -635,7 +1077,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 19,
+            funcId: 32,
             port: port_,
           );
         },
@@ -663,7 +1105,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 20,
+            funcId: 33,
             port: port_,
           );
         },
@@ -680,6 +1122,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiLogWriteWarningConstMeta =>
       const TaskConstMeta(debugName: "write_warning", argNames: ["message"]);
+
+  @protected
+  AnyhowException dco_decode_AnyhowException(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return AnyhowException(raw as String);
+  }
+
+  @protected
+  int dco_decode_CastedPrimitive_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError(
+      'Not implemented in this codec, please use the other one',
+    );
+  }
+
+  @protected
+  DateTime dco_decode_Chrono_Local(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: false);
+  }
+
+  @protected
+  RustStreamSink<FileInfo> dco_decode_StreamSink_file_info_Sse(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
+  }
 
   @protected
   String dco_decode_String(dynamic raw) {
@@ -702,9 +1170,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BaseInfo dco_decode_base_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 8)
+      throw Exception('unexpected arr length: expect 8 but see ${arr.length}');
+    return BaseInfo(
+      name: dco_decode_String(arr[0]),
+      ext: dco_decode_String(arr[1]),
+      parent: dco_decode_String(arr[2]),
+      create: dco_decode_opt_box_autoadd_Chrono_Local(arr[3]),
+      modify: dco_decode_Chrono_Local(arr[4]),
+      access: dco_decode_Chrono_Local(arr[5]),
+      size: dco_decode_CastedPrimitive_u_64(arr[6]),
+      isDir: dco_decode_bool(arr[7]),
+    );
+  }
+
+  @protected
   bool dco_decode_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as bool;
+  }
+
+  @protected
+  DateTime dco_decode_box_autoadd_Chrono_Local(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Chrono_Local(raw);
+  }
+
+  @protected
+  DateInfo dco_decode_box_autoadd_date_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_date_info(raw);
   }
 
   @protected
@@ -714,15 +1212,106 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FileInfo dco_decode_box_autoadd_file_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_file_info(raw);
+  }
+
+  @protected
+  FileMetaInfo dco_decode_box_autoadd_file_meta_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_file_meta_info(raw);
+  }
+
+  @protected
   PhotoMetaInfo dco_decode_box_autoadd_photo_meta_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_photo_meta_info(raw);
   }
 
   @protected
+  Resolution dco_decode_box_autoadd_resolution(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_resolution(raw);
+  }
+
+  @protected
+  DateInfo dco_decode_date_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return DateInfo(
+      date: dco_decode_Chrono_Local(arr[0]),
+      weekday: dco_decode_list_String(arr[1]),
+    );
+  }
+
+  @protected
   double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
+  }
+
+  @protected
+  FileInfo dco_decode_file_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 19)
+      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    return FileInfo(
+      id: dco_decode_String(arr[0]),
+      name: dco_decode_String(arr[1]),
+      newName: dco_decode_String(arr[2]),
+      parent: dco_decode_String(arr[3]),
+      path: dco_decode_String(arr[4]),
+      tempPath: dco_decode_String(arr[5]),
+      beforePath: dco_decode_String(arr[6]),
+      ext: dco_decode_String(arr[7]),
+      newExt: dco_decode_String(arr[8]),
+      created: dco_decode_opt_box_autoadd_date_info(arr[9]),
+      modified: dco_decode_opt_box_autoadd_date_info(arr[10]),
+      accessed: dco_decode_opt_box_autoadd_date_info(arr[11]),
+      fileType: dco_decode_file_type(arr[12]),
+      resolution: dco_decode_opt_box_autoadd_resolution(arr[13]),
+      metaInfo: dco_decode_opt_box_autoadd_file_meta_info(arr[14]),
+      thumbnail: dco_decode_opt_list_prim_u_8_strict(arr[15]),
+      size: dco_decode_CastedPrimitive_u_64(arr[16]),
+      group: dco_decode_String(arr[17]),
+      checked: dco_decode_bool(arr[18]),
+    );
+  }
+
+  @protected
+  FileMetaInfo dco_decode_file_meta_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return FileMetaInfo(
+      title: dco_decode_String(arr[0]),
+      artist: dco_decode_String(arr[1]),
+      album: dco_decode_String(arr[2]),
+      year: dco_decode_String(arr[3]),
+      capture: dco_decode_opt_box_autoadd_date_info(arr[4]),
+      make: dco_decode_String(arr[5]),
+      model: dco_decode_String(arr[6]),
+      longitude: dco_decode_opt_box_autoadd_f_64(arr[7]),
+      latitude: dco_decode_opt_box_autoadd_f_64(arr[8]),
+      location: dco_decode_String(arr[9]),
+    );
+  }
+
+  @protected
+  FileType dco_decode_file_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FileType.values[raw as int];
+  }
+
+  @protected
+  int dco_decode_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
   }
 
   @protected
@@ -738,6 +1327,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<FileInfo> dco_decode_list_file_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_file_info).toList();
+  }
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
@@ -750,15 +1345,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  DateTime? dco_decode_opt_box_autoadd_Chrono_Local(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_Chrono_Local(raw);
+  }
+
+  @protected
+  DateInfo? dco_decode_opt_box_autoadd_date_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_date_info(raw);
+  }
+
+  @protected
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
   }
 
   @protected
+  FileMetaInfo? dco_decode_opt_box_autoadd_file_meta_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_file_meta_info(raw);
+  }
+
+  @protected
   PhotoMetaInfo? dco_decode_opt_box_autoadd_photo_meta_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_photo_meta_info(raw);
+  }
+
+  @protected
+  Resolution? dco_decode_opt_box_autoadd_resolution(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_resolution(raw);
+  }
+
+  @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
   }
 
   @protected
@@ -770,38 +1395,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return PhotoMetaInfo(
       make: dco_decode_opt_String(arr[0]),
       model: dco_decode_opt_String(arr[1]),
-      capture: dco_decode_opt_String(arr[2]),
+      capture: dco_decode_opt_box_autoadd_Chrono_Local(arr[2]),
       latitude: dco_decode_opt_box_autoadd_f_64(arr[3]),
       longitude: dco_decode_opt_box_autoadd_f_64(arr[4]),
     );
   }
 
   @protected
-  RFileInfo dco_decode_r_file_info(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 9)
-      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
-    return RFileInfo(
-      id: dco_decode_String(arr[0]),
-      name: dco_decode_String(arr[1]),
-      ext: dco_decode_String(arr[2]),
-      parent: dco_decode_String(arr[3]),
-      createTime: dco_decode_i_64(arr[4]),
-      modifyTime: dco_decode_i_64(arr[5]),
-      accessTime: dco_decode_i_64(arr[6]),
-      size: dco_decode_u_64(arr[7]),
-      isDir: dco_decode_bool(arr[8]),
-    );
-  }
-
-  @protected
-  RustImageSize dco_decode_rust_image_size(dynamic raw) {
+  Resolution dco_decode_resolution(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return RustImageSize(
+    return Resolution(
       width: dco_decode_u_32(arr[0]),
       height: dco_decode_u_32(arr[1]),
     );
@@ -842,8 +1448,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       height: dco_decode_u_32(arr[1]),
       make: dco_decode_String(arr[2]),
       model: dco_decode_String(arr[3]),
-      capture: dco_decode_String(arr[4]),
+      capture: dco_decode_opt_box_autoadd_Chrono_Local(arr[4]),
     );
+  }
+
+  @protected
+  AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_String(deserializer);
+    return AnyhowException(inner);
+  }
+
+  @protected
+  int sse_decode_CastedPrimitive_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_u_64(deserializer);
+    return inner.toInt();
+  }
+
+  @protected
+  DateTime sse_decode_Chrono_Local(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_64(deserializer);
+    return DateTime.fromMicrosecondsSinceEpoch(inner.toInt(), isUtc: false);
+  }
+
+  @protected
+  RustStreamSink<FileInfo> sse_decode_StreamSink_file_info_Sse(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    throw UnimplementedError('Unreachable ()');
   }
 
   @protected
@@ -869,15 +1504,64 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BaseInfo sse_decode_base_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_name = sse_decode_String(deserializer);
+    var var_ext = sse_decode_String(deserializer);
+    var var_parent = sse_decode_String(deserializer);
+    var var_create = sse_decode_opt_box_autoadd_Chrono_Local(deserializer);
+    var var_modify = sse_decode_Chrono_Local(deserializer);
+    var var_access = sse_decode_Chrono_Local(deserializer);
+    var var_size = sse_decode_CastedPrimitive_u_64(deserializer);
+    var var_isDir = sse_decode_bool(deserializer);
+    return BaseInfo(
+      name: var_name,
+      ext: var_ext,
+      parent: var_parent,
+      create: var_create,
+      modify: var_modify,
+      access: var_access,
+      size: var_size,
+      isDir: var_isDir,
+    );
+  }
+
+  @protected
   bool sse_decode_bool(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint8() != 0;
   }
 
   @protected
+  DateTime sse_decode_box_autoadd_Chrono_Local(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Chrono_Local(deserializer));
+  }
+
+  @protected
+  DateInfo sse_decode_box_autoadd_date_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_date_info(deserializer));
+  }
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
+  FileInfo sse_decode_box_autoadd_file_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_file_info(deserializer));
+  }
+
+  @protected
+  FileMetaInfo sse_decode_box_autoadd_file_meta_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_file_meta_info(deserializer));
   }
 
   @protected
@@ -889,9 +1573,108 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Resolution sse_decode_box_autoadd_resolution(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_resolution(deserializer));
+  }
+
+  @protected
+  DateInfo sse_decode_date_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_date = sse_decode_Chrono_Local(deserializer);
+    var var_weekday = sse_decode_list_String(deserializer);
+    return DateInfo(date: var_date, weekday: var_weekday);
+  }
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat64();
+  }
+
+  @protected
+  FileInfo sse_decode_file_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_name = sse_decode_String(deserializer);
+    var var_newName = sse_decode_String(deserializer);
+    var var_parent = sse_decode_String(deserializer);
+    var var_path = sse_decode_String(deserializer);
+    var var_tempPath = sse_decode_String(deserializer);
+    var var_beforePath = sse_decode_String(deserializer);
+    var var_ext = sse_decode_String(deserializer);
+    var var_newExt = sse_decode_String(deserializer);
+    var var_created = sse_decode_opt_box_autoadd_date_info(deserializer);
+    var var_modified = sse_decode_opt_box_autoadd_date_info(deserializer);
+    var var_accessed = sse_decode_opt_box_autoadd_date_info(deserializer);
+    var var_fileType = sse_decode_file_type(deserializer);
+    var var_resolution = sse_decode_opt_box_autoadd_resolution(deserializer);
+    var var_metaInfo = sse_decode_opt_box_autoadd_file_meta_info(deserializer);
+    var var_thumbnail = sse_decode_opt_list_prim_u_8_strict(deserializer);
+    var var_size = sse_decode_CastedPrimitive_u_64(deserializer);
+    var var_group = sse_decode_String(deserializer);
+    var var_checked = sse_decode_bool(deserializer);
+    return FileInfo(
+      id: var_id,
+      name: var_name,
+      newName: var_newName,
+      parent: var_parent,
+      path: var_path,
+      tempPath: var_tempPath,
+      beforePath: var_beforePath,
+      ext: var_ext,
+      newExt: var_newExt,
+      created: var_created,
+      modified: var_modified,
+      accessed: var_accessed,
+      fileType: var_fileType,
+      resolution: var_resolution,
+      metaInfo: var_metaInfo,
+      thumbnail: var_thumbnail,
+      size: var_size,
+      group: var_group,
+      checked: var_checked,
+    );
+  }
+
+  @protected
+  FileMetaInfo sse_decode_file_meta_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_title = sse_decode_String(deserializer);
+    var var_artist = sse_decode_String(deserializer);
+    var var_album = sse_decode_String(deserializer);
+    var var_year = sse_decode_String(deserializer);
+    var var_capture = sse_decode_opt_box_autoadd_date_info(deserializer);
+    var var_make = sse_decode_String(deserializer);
+    var var_model = sse_decode_String(deserializer);
+    var var_longitude = sse_decode_opt_box_autoadd_f_64(deserializer);
+    var var_latitude = sse_decode_opt_box_autoadd_f_64(deserializer);
+    var var_location = sse_decode_String(deserializer);
+    return FileMetaInfo(
+      title: var_title,
+      artist: var_artist,
+      album: var_album,
+      year: var_year,
+      capture: var_capture,
+      make: var_make,
+      model: var_model,
+      longitude: var_longitude,
+      latitude: var_latitude,
+      location: var_location,
+    );
+  }
+
+  @protected
+  FileType sse_decode_file_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return FileType.values[inner];
+  }
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt32();
   }
 
   @protected
@@ -908,6 +1691,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <String>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<FileInfo> sse_decode_list_file_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <FileInfo>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_file_info(deserializer));
     }
     return ans_;
   }
@@ -931,11 +1726,48 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  DateTime? sse_decode_opt_box_autoadd_Chrono_Local(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Chrono_Local(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  DateInfo? sse_decode_opt_box_autoadd_date_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_date_info(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  FileMetaInfo? sse_decode_opt_box_autoadd_file_meta_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_file_meta_info(deserializer));
     } else {
       return null;
     }
@@ -955,11 +1787,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Resolution? sse_decode_opt_box_autoadd_resolution(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_resolution(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_prim_u_8_strict(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   PhotoMetaInfo sse_decode_photo_meta_info(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_make = sse_decode_opt_String(deserializer);
     var var_model = sse_decode_opt_String(deserializer);
-    var var_capture = sse_decode_opt_String(deserializer);
+    var var_capture = sse_decode_opt_box_autoadd_Chrono_Local(deserializer);
     var var_latitude = sse_decode_opt_box_autoadd_f_64(deserializer);
     var var_longitude = sse_decode_opt_box_autoadd_f_64(deserializer);
     return PhotoMetaInfo(
@@ -972,36 +1828,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RFileInfo sse_decode_r_file_info(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
-    var var_name = sse_decode_String(deserializer);
-    var var_ext = sse_decode_String(deserializer);
-    var var_parent = sse_decode_String(deserializer);
-    var var_createTime = sse_decode_i_64(deserializer);
-    var var_modifyTime = sse_decode_i_64(deserializer);
-    var var_accessTime = sse_decode_i_64(deserializer);
-    var var_size = sse_decode_u_64(deserializer);
-    var var_isDir = sse_decode_bool(deserializer);
-    return RFileInfo(
-      id: var_id,
-      name: var_name,
-      ext: var_ext,
-      parent: var_parent,
-      createTime: var_createTime,
-      modifyTime: var_modifyTime,
-      accessTime: var_accessTime,
-      size: var_size,
-      isDir: var_isDir,
-    );
-  }
-
-  @protected
-  RustImageSize sse_decode_rust_image_size(SseDeserializer deserializer) {
+  Resolution sse_decode_resolution(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_width = sse_decode_u_32(deserializer);
     var var_height = sse_decode_u_32(deserializer);
-    return RustImageSize(width: var_width, height: var_height);
+    return Resolution(width: var_width, height: var_height);
   }
 
   @protected
@@ -1034,7 +1865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_height = sse_decode_u_32(deserializer);
     var var_make = sse_decode_String(deserializer);
     var var_model = sse_decode_String(deserializer);
-    var var_capture = sse_decode_String(deserializer);
+    var var_capture = sse_decode_opt_box_autoadd_Chrono_Local(deserializer);
     return VideoMetaInfo(
       width: var_width,
       height: var_height,
@@ -1045,9 +1876,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int sse_decode_i_32(SseDeserializer deserializer) {
+  void sse_encode_AnyhowException(
+    AnyhowException self,
+    SseSerializer serializer,
+  ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getInt32();
+    sse_encode_String(self.message, serializer);
+  }
+
+  @protected
+  void sse_encode_CastedPrimitive_u_64(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(sseEncodeCastedPrimitiveU64(self), serializer);
+  }
+
+  @protected
+  void sse_encode_Chrono_Local(DateTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(
+      PlatformInt64Util.from(self.microsecondsSinceEpoch),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_StreamSink_file_info_Sse(
+    RustStreamSink<FileInfo> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(
+      self.setupAndSerialize(
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_file_info,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+      ),
+      serializer,
+    );
   }
 
   @protected
@@ -1069,15 +1935,64 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_base_info(BaseInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.name, serializer);
+    sse_encode_String(self.ext, serializer);
+    sse_encode_String(self.parent, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Local(self.create, serializer);
+    sse_encode_Chrono_Local(self.modify, serializer);
+    sse_encode_Chrono_Local(self.access, serializer);
+    sse_encode_CastedPrimitive_u_64(self.size, serializer);
+    sse_encode_bool(self.isDir, serializer);
+  }
+
+  @protected
   void sse_encode_bool(bool self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint8(self ? 1 : 0);
   }
 
   @protected
+  void sse_encode_box_autoadd_Chrono_Local(
+    DateTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Chrono_Local(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_date_info(
+    DateInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_date_info(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_f_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_file_info(
+    FileInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_file_info(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_file_meta_info(
+    FileMetaInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_file_meta_info(self, serializer);
   }
 
   @protected
@@ -1090,9 +2005,76 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_resolution(
+    Resolution self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_resolution(self, serializer);
+  }
+
+  @protected
+  void sse_encode_date_info(DateInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Chrono_Local(self.date, serializer);
+    sse_encode_list_String(self.weekday, serializer);
+  }
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat64(self);
+  }
+
+  @protected
+  void sse_encode_file_info(FileInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_String(self.name, serializer);
+    sse_encode_String(self.newName, serializer);
+    sse_encode_String(self.parent, serializer);
+    sse_encode_String(self.path, serializer);
+    sse_encode_String(self.tempPath, serializer);
+    sse_encode_String(self.beforePath, serializer);
+    sse_encode_String(self.ext, serializer);
+    sse_encode_String(self.newExt, serializer);
+    sse_encode_opt_box_autoadd_date_info(self.created, serializer);
+    sse_encode_opt_box_autoadd_date_info(self.modified, serializer);
+    sse_encode_opt_box_autoadd_date_info(self.accessed, serializer);
+    sse_encode_file_type(self.fileType, serializer);
+    sse_encode_opt_box_autoadd_resolution(self.resolution, serializer);
+    sse_encode_opt_box_autoadd_file_meta_info(self.metaInfo, serializer);
+    sse_encode_opt_list_prim_u_8_strict(self.thumbnail, serializer);
+    sse_encode_CastedPrimitive_u_64(self.size, serializer);
+    sse_encode_String(self.group, serializer);
+    sse_encode_bool(self.checked, serializer);
+  }
+
+  @protected
+  void sse_encode_file_meta_info(FileMetaInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.title, serializer);
+    sse_encode_String(self.artist, serializer);
+    sse_encode_String(self.album, serializer);
+    sse_encode_String(self.year, serializer);
+    sse_encode_opt_box_autoadd_date_info(self.capture, serializer);
+    sse_encode_String(self.make, serializer);
+    sse_encode_String(self.model, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.longitude, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.latitude, serializer);
+    sse_encode_String(self.location, serializer);
+  }
+
+  @protected
+  void sse_encode_file_type(FileType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt32(self);
   }
 
   @protected
@@ -1107,6 +2089,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_file_info(
+    List<FileInfo> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_file_info(item, serializer);
     }
   }
 
@@ -1131,12 +2125,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_Chrono_Local(
+    DateTime? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Chrono_Local(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_date_info(
+    DateInfo? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_date_info(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_file_meta_info(
+    FileMetaInfo? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_file_meta_info(self, serializer);
     }
   }
 
@@ -1154,6 +2187,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_resolution(
+    Resolution? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_resolution(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+    Uint8List? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_prim_u_8_strict(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_photo_meta_info(
     PhotoMetaInfo self,
     SseSerializer serializer,
@@ -1161,30 +2220,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_opt_String(self.make, serializer);
     sse_encode_opt_String(self.model, serializer);
-    sse_encode_opt_String(self.capture, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Local(self.capture, serializer);
     sse_encode_opt_box_autoadd_f_64(self.latitude, serializer);
     sse_encode_opt_box_autoadd_f_64(self.longitude, serializer);
   }
 
   @protected
-  void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
-    sse_encode_String(self.name, serializer);
-    sse_encode_String(self.ext, serializer);
-    sse_encode_String(self.parent, serializer);
-    sse_encode_i_64(self.createTime, serializer);
-    sse_encode_i_64(self.modifyTime, serializer);
-    sse_encode_i_64(self.accessTime, serializer);
-    sse_encode_u_64(self.size, serializer);
-    sse_encode_bool(self.isDir, serializer);
-  }
-
-  @protected
-  void sse_encode_rust_image_size(
-    RustImageSize self,
-    SseSerializer serializer,
-  ) {
+  void sse_encode_resolution(Resolution self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_32(self.width, serializer);
     sse_encode_u_32(self.height, serializer);
@@ -1223,12 +2265,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_u_32(self.height, serializer);
     sse_encode_String(self.make, serializer);
     sse_encode_String(self.model, serializer);
-    sse_encode_String(self.capture, serializer);
-  }
-
-  @protected
-  void sse_encode_i_32(int self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putInt32(self);
+    sse_encode_opt_box_autoadd_Chrono_Local(self.capture, serializer);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
 class SelectionState {
   static final SelectionState _instance = SelectionState._internal();

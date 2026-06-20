@@ -72,7 +72,7 @@ class BaseInput extends StatelessWidget {
       },
       child: Row(
         children: [
-          if (leading != null) leading!,
+          ?leading,
           Expanded(
             child: TextField(
               focusNode: focusNode,

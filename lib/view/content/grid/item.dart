@@ -3,7 +3,7 @@ import 'package:once_power/const/images.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/dialog.dart';
 import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/view/content/grid/image.dart';
 import 'package:once_power/widget/context/sort_select_item.dart';
 
@@ -33,11 +33,13 @@ class ContentGridItem extends StatelessWidget {
             child: Center(
               child: Builder(
                 builder: (context) {
-                  if (file.type.isVideo) return VideoView(file);
-                  if (!file.type.isImage) return Image.asset(AppImages.error);
-                  if (file.extension == 'avif') return AvifView(file);
-                  if (file.extension == 'psd') return PsdView(file);
-                  if (file.extension == 'svg') return SvgView(file);
+                  if (file.fileType.isVideo) return VideoView(file);
+                  if (!file.fileType.isImage) {
+                    return Image.asset(AppImages.error);
+                  }
+                  if (file.ext == 'avif') return AvifView(file);
+                  if (file.ext == 'psd') return PsdView(file);
+                  if (file.ext == 'svg') return SvgView(file);
                   return ImageView(file);
                 },
               ),
@@ -60,12 +62,10 @@ class ContentGridItem extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: file.newExtension.isEmpty
-                        ? ''
-                        : '.${file.newExtension}',
+                    text: file.newExt.isEmpty ? '' : '.${file.newExt}',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontSize: 13,
-                      color: file.newExtension == file.extension
+                      color: file.newExt == file.ext
                           ? Colors.grey
                           : theme.primaryColor,
                     ),

@@ -4,7 +4,7 @@ import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/date.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/advance_add.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/verify.dart';
@@ -46,7 +46,7 @@ import 'normal.dart';
       String height = file.resolution?.height.toString() ?? '';
       return insertPosition(menu, name, height, extension);
     case AddMode.extension:
-      return insertPosition(menu, name, file.extension, extension);
+      return insertPosition(menu, name, file.ext, extension);
     case AddMode.group:
       String group = isAll(file.group) ? '' : file.group;
       return insertPosition(menu, name, group, extension);
@@ -54,11 +54,12 @@ import 'normal.dart';
       AdvanceDate advanceDate = menu.advanceDate;
       String dateValue = '';
       DateInfo? dateTime = getDate(advanceDate.type, file);
-      String date = getDateName(dateTime?.date, 14);
+      // TODO: dateTime!.date 可能为空
+      String date = getDateName(dateTime!.date, 14);
       List<String> finalDate = [];
       String value = formatShowDate(date, advanceDate.dateStyle);
       String time = formatShowTime(date, advanceDate.timeStyle);
-      String weekday = advanceDate.weekdayStyle.isNone || dateTime == null
+      String weekday = advanceDate.weekdayStyle.isNone
           ? ''
           : dateTime.weekday[advanceDate.weekdayStyle.value];
       if (value.isNotEmpty) finalDate.add(value);
@@ -154,10 +155,10 @@ int getAddIndex(
     case IndexDistinction.none:
       return index;
     case IndexDistinction.file:
-      String type = file.type.label;
+      String type = file.fileType.label;
       (_, index) = calculateIndex(classifyMap, [type], file);
     case IndexDistinction.extension:
-      String extension = file.extension;
+      String extension = file.ext;
       (_, index) = calculateIndex(classifyMap, [extension], file);
     case IndexDistinction.date:
       DateType distinguishDate = menu.advanceIndex.dateType;

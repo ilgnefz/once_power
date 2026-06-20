@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/psd.dart';
 
 import 'error.dart';

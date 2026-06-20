@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:path/path.dart' as path;
 
 bool isAll(String group) {
@@ -14,13 +15,13 @@ bool isChinese(String text) => RegExp(r'^[\u4e00-\u9fa5]').hasMatch(text);
 
 // bool isEnglish(BuildContext context) => context.locale == Locale('en', 'US');
 
-bool isCheckedClassify(WidgetRef ref, FileType classify) {
-  if (classify.isAudio) return ref.watch(checkAudioProvider);
-  if (classify.isOther) return ref.watch(checkOtherProvider);
-  if (classify.isImage) return ref.watch(checkImageProvider);
-  if (classify.isDoc) return ref.watch(checkTextProvider);
-  if (classify.isVideo) return ref.watch(checkVideoProvider);
-  if (classify.isArchive) return ref.watch(checkArchiveProvider);
+bool isCheckedClassify(WidgetRef ref, FileType type) {
+  if (type.isAudio) return ref.watch(checkAudioProvider);
+  if (type.isOther) return ref.watch(checkOtherProvider);
+  if (type.isImage) return ref.watch(checkImageProvider);
+  if (type.isDoc) return ref.watch(checkTextProvider);
+  if (type.isVideo) return ref.watch(checkVideoProvider);
+  if (type.isArchive) return ref.watch(checkArchiveProvider);
   return ref.watch(checkFolderProvider);
 }
 

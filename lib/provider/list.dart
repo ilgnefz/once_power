@@ -1,8 +1,8 @@
-import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/sort.dart';
 import 'package:once_power/model/advance.dart';
 import 'package:once_power/model/csv.dart';
 import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -31,24 +31,24 @@ List<FileInfo> sortList(Ref ref) {
     case SortType.dateAscending:
       sortedList = [...list]
         ..sort((a, b) {
-          int result = a.createdDate.date.compareTo(b.createdDate.date);
+          // TODO: 处理null值
+          // if (a.created == null || b.created == null) return 0;
+          int result = a.created!.date.compareTo(b.created!.date);
           return result == 0 ? a.name.compareTo(b.name) : result;
         });
       break;
     case SortType.dateDescending:
       sortedList = [...list]
         ..sort((a, b) {
-          int result = b.createdDate.date.compareTo(a.createdDate.date);
+          int result = b.created!.date.compareTo(a.created!.date);
           return result == 0 ? b.name.compareTo(a.name) : result;
         });
       break;
     case SortType.typeAscending:
-      sortedList = [...list]
-        ..sort((a, b) => a.extension.compareTo(b.extension));
+      sortedList = [...list]..sort((a, b) => a.ext.compareTo(b.ext));
       break;
     case SortType.typeDescending:
-      sortedList = [...list]
-        ..sort((a, b) => b.extension.compareTo(a.extension));
+      sortedList = [...list]..sort((a, b) => b.ext.compareTo(a.ext));
       break;
     case SortType.checkAscending:
       sortedList = [...list]
@@ -126,14 +126,14 @@ class SortSelectList extends _$SortSelectList {
 }
 
 @riverpod
-List<CountFileType> fileTypeList(Ref ref) {
-  List<CountFileType> list = [];
+List<FileTypeCount> fileTypeList(Ref ref) {
+  List<FileTypeCount> list = [];
   for (FileInfo file in ref.watch(fileListProvider)) {
-    int index = list.indexWhere((e) => e.type == file.type);
+    int index = list.indexWhere((e) => e.type == file.fileType);
     if (index != -1) {
       list[index] = list[index].copyWith(count: list[index].count + 1);
     } else {
-      list.add(CountFileType(type: file.type, count: 1));
+      list.add(FileTypeCount(type: file.fileType, count: 1));
     }
   }
   return list;
@@ -143,11 +143,11 @@ List<CountFileType> fileTypeList(Ref ref) {
 Map<FileType, List<String>> extensionListMap(Ref ref) {
   Map<FileType, List<String>> extMap = {};
   for (var e in ref.watch(fileListProvider)) {
-    if (!extMap.containsKey(e.type)) {
-      extMap[e.type] = [e.extension];
+    if (!extMap.containsKey(e.fileType)) {
+      extMap[e.fileType] = [e.ext];
     } else {
-      if (!extMap[e.type]!.contains(e.extension)) {
-        extMap[e.type]!.add(e.extension);
+      if (!extMap[e.fileType]!.contains(e.ext)) {
+        extMap[e.fileType]!.add(e.ext);
       }
     }
   }
@@ -160,7 +160,7 @@ Map<FileType, List<String>> extensionListMap(Ref ref) {
 @riverpod
 bool selectedExtension(Ref ref, String ext) {
   return ref.watch(fileListProvider).every((e) {
-    if (e.extension == ext) return e.checked;
+    if (e.ext == ext) return e.checked;
     return true;
   });
 }

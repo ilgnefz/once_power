@@ -4,12 +4,12 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
-import 'file_type.dart';
+import 'models.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `is_in_china`, `parse_gps_coordinates`, `parse_urational_coordinate`, `transform_lat`, `transform_lon`, `wgs84_to_gcj02`
 
-PhotoMetaInfo? getImageMetaInfo({required String imagePath}) => RustLib
+Future<PhotoMetaInfo?> getImageMetaInfo({required String imagePath}) => RustLib
     .instance
     .api
     .crateApiImageInfoGetImageMetaInfo(imagePath: imagePath);

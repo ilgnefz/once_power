@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/context_menu.dart';
 import 'package:once_power/core/list.dart';
 import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 
 import 'avif.dart';
@@ -101,21 +101,21 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
             children: [
               Builder(
                 builder: (BuildContext context) {
-                  if (previewList[index].type.isVideo) {
+                  if (previewList[index].fileType.isVideo) {
                     return PreviewVideo(
                       file: previewList[index].path,
                       key: ValueKey(previewList[index].id),
                     );
                   }
 
-                  if (previewList[index].extension == 'avif') {
+                  if (previewList[index].ext == 'avif') {
                     return PreviewAvif(
                       id: previewList[index].id,
                       file: previewList[index].path,
                     );
                   }
 
-                  if (previewList[index].extension == 'psd') {
+                  if (previewList[index].ext == 'psd') {
                     return PreviewPsd(
                       id: previewList[index].id,
                       file: previewList[index],
@@ -123,7 +123,7 @@ class _PreviewImageViewState extends ConsumerState<PreviewView> {
                     );
                   }
 
-                  if (previewList[index].extension == 'svg') {
+                  if (previewList[index].ext == 'svg') {
                     return PreviewSvg(
                       id: previewList[index].id,
                       file: previewList[index].path,

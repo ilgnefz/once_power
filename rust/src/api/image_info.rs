@@ -2,10 +2,74 @@ use rexif::{ExifTag, TagValue};
 use std::f64::consts::PI;
 
 use crate::api::{
-    file_meta::{format_date, is_valid_date},
-    file_type::PhotoMetaInfo,
-    log::write_error,
+    file_info::parse_str_datetime, log::write_error, meta_info::is_valid_date,
+    models::PhotoMetaInfo,
 };
+
+pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
+    let exif_data = match rexif::parse_file(&image_path) {
+        Ok(data) => data,
+        Err(_) => return None,
+    };
+
+    let mut make = None;
+    let mut model = None;
+    let mut latitude = None;
+    let mut longitude = None;
+    let mut lat_value = None;
+    let mut lon_value = None;
+
+    // 分别保存三个日期字段
+    let mut date_time_original = None;
+    let mut date_time_digitized = None;
+    let mut date_time = None;
+
+    // 收集EXIF数据
+    for entry in exif_data.entries {
+        match entry.tag {
+            ExifTag::Make => make = Some(entry.value.to_string()),
+            ExifTag::Model => model = Some(entry.value.to_string()),
+            ExifTag::DateTimeOriginal => date_time_original = Some(entry.value.to_string()),
+            ExifTag::DateTimeDigitized => date_time_digitized = Some(entry.value.to_string()),
+            ExifTag::DateTime => date_time = Some(entry.value.to_string()),
+            ExifTag::GPSLatitude => lat_value = Some(entry.value),
+            ExifTag::GPSLongitude => lon_value = Some(entry.value),
+            _ => {}
+        }
+    }
+
+    // 按照优先级顺序给capture赋值，过滤无效日期并处理格式
+    let capture = date_time_original
+        .filter(|dt| is_valid_date(dt))
+        .or(date_time_digitized.filter(|dt| is_valid_date(dt)))
+        .or(date_time.filter(|dt| is_valid_date(dt)));
+
+    let capture = capture.and_then(|dt| parse_str_datetime(&dt));
+
+    // 解析GPS坐标
+    if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {
+        match parse_gps_coordinates(&lat_val, &lon_val) {
+            Ok((lat, lon)) => {
+                latitude = Some(lat);
+                longitude = Some(lon);
+            }
+            Err(why) => {
+                write_error(&format!(
+                    "Failed to parse GPS coordinates from {}: {}",
+                    image_path, why
+                ));
+            }
+        }
+    }
+
+    Some(PhotoMetaInfo {
+        make,
+        model,
+        capture,
+        latitude,
+        longitude,
+    })
+}
 
 /// 解析GPS坐标并转换为高德地图坐标
 /// 直接处理rexif的URational数据，避免字符串转换的中间步骤
@@ -83,74 +147,4 @@ fn transform_lon(x: f64, y: f64) -> f64 {
     ret += (20.0 * (PI * x).sin() + 40.0 * (PI / 3.0 * x).sin()) * 2.0 / 3.0;
     ret += (150.0 * (PI / 12.0 * x).sin() + 300.0 * (PI / 30.0 * x).sin()) * 2.0 / 3.0;
     ret
-}
-
-#[flutter_rust_bridge::frb(sync)]
-pub fn get_image_meta_info(image_path: String) -> Option<PhotoMetaInfo> {
-    let exif_data = match rexif::parse_file(&image_path) {
-        Ok(data) => data,
-        Err(_) => return None,
-    };
-
-    let mut make = None;
-    let mut model = None;
-    let mut latitude = None;
-    let mut longitude = None;
-    let mut lat_value = None;
-    let mut lon_value = None;
-
-    // 分别保存三个日期字段
-    let mut date_time_original = None;
-    let mut date_time_digitized = None;
-    let mut date_time = None;
-
-    // 收集EXIF数据
-    for entry in exif_data.entries {
-        match entry.tag {
-            ExifTag::Make => make = Some(entry.value.to_string()),
-            ExifTag::Model => model = Some(entry.value.to_string()),
-            ExifTag::DateTimeOriginal => date_time_original = Some(entry.value.to_string()),
-            ExifTag::DateTimeDigitized => date_time_digitized = Some(entry.value.to_string()),
-            ExifTag::DateTime => date_time = Some(entry.value.to_string()),
-            ExifTag::GPSLatitude => lat_value = Some(entry.value),
-            ExifTag::GPSLongitude => lon_value = Some(entry.value),
-            _ => {}
-        }
-    }
-
-    // 按照优先级顺序给capture赋值，过滤无效日期并处理格式
-    let mut capture = date_time_original
-        .filter(|dt| is_valid_date(dt))
-        .or(date_time_digitized.filter(|dt| is_valid_date(dt)))
-        .or(date_time.filter(|dt| is_valid_date(dt)));
-
-    if capture.is_none() {
-        return None;
-    } else {
-        capture = capture.map(|dt| format_date(&dt));
-    }
-
-    // 解析GPS坐标
-    if let (Some(lat_val), Some(lon_val)) = (lat_value, lon_value) {
-        match parse_gps_coordinates(&lat_val, &lon_val) {
-            Ok((lat, lon)) => {
-                latitude = Some(lat);
-                longitude = Some(lon);
-            }
-            Err(why) => {
-                write_error(&format!(
-                    "Failed to parse GPS coordinates from {}: {}",
-                    image_path, why
-                ));
-            }
-        }
-    }
-
-    Some(PhotoMetaInfo {
-        make,
-        model,
-        capture,
-        latitude,
-        longitude,
-    })
 }

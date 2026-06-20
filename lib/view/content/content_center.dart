@@ -4,12 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/list.dart';
 import 'package:once_power/core/move.dart';
 import 'package:once_power/enum/app.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
+import 'package:once_power/view/loading.dart';
 
 import 'empty.dart';
 import 'grid/grid.dart';
@@ -22,13 +24,14 @@ final _viewProvider = Provider((ref) {
 
   bool showView = isViewMode && !mode.isOrganize;
 
+  if (ref.watch(isLoadingProvider)) return LoadingView();
   if (files.isEmpty) return EmptyView(showImage: showView);
   if (ref.watch(toggleChangedProvider)) {
     bool onlyChanged = ref.watch(onlyChangedProvider);
     files = files.where((e) {
       return onlyChanged
-          ? e.name != e.newName || e.extension != e.newExtension
-          : e.name == e.newName && e.extension == e.newExtension;
+          ? e.name != e.newName || e.ext != e.newExt
+          : e.name == e.newName && e.ext == e.newExt;
     }).toList();
   }
   if (showView) return ContentGridView(files);

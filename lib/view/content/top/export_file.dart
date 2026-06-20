@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/export.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/checkbox.dart';
@@ -107,8 +107,8 @@ class _ExportMenuState extends ConsumerState<ExportFileView> {
           String a = file.name;
           String b = file.newName == a ? '' : file.newName;
           if (includeExt) {
-            a = getFullName(a, file.extension);
-            b = b.isEmpty ? '' : getFullName(b, file.newExtension);
+            a = getFullName(a, file.ext);
+            b = b.isEmpty ? '' : getFullName(b, file.newExt);
           }
           content += '$a, $b\n';
         }

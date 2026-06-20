@@ -10,13 +10,13 @@ import 'package:once_power/const/num.dart';
 import 'package:once_power/enum/app.dart';
 import 'package:once_power/enum/rule.dart';
 import 'package:once_power/model/advance.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/advance.dart';
 import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/selection.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:once_power/widget/common/right_menu.dart';
@@ -170,7 +170,7 @@ Future<void> showRightMenu(
       ),
     RightMenuItem(
       label: tr(AppL10n.menuSelectType),
-      onSelected: (_) => selectType(ref, file.type),
+      onSelected: (_) => selectType(ref, file.fileType),
     ),
     RightMenuItem(
       label: tr(AppL10n.menuSelectPath),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/core/dialog.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/view/content/grid/loading.dart';
 import 'package:once_power/widget/common/click_icon.dart';
 

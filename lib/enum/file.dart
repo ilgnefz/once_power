@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:once_power/const/l10n.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
-enum FileType { image, video, audio, doc, archive, folder, other }
+// enum type { image, video, audio, doc, archive, folder, other }
 
 extension FileClassifyExtension on FileType {
   String get label {

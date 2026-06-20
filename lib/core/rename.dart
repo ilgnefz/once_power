@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/const/key.dart';
 import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/model/notification.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/log.dart';
@@ -35,11 +35,12 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   final Map<String, int> pathMap = {};
   Set<FileInfo> errFiles = {};
   for (FileInfo file in list) {
-    if (file.getNewPath(isUndo) == file.path) continue;
+    if (file.newPath(isUndo: isUndo) == file.path) continue;
     if (cancelEmptyRename && file.newName.isEmpty) continue;
-    String tempPath = generateTempName(file), newPath = file.getNewPath(isUndo);
+    String tempPath = generateTempName(file),
+        newPath = file.newPath(isUndo: isUndo);
     InfoDetail? info = await renameFile(
-      file.type.isFolder,
+      file.fileType.isFolder,
       file.path,
       tempPath,
       realNewPath: newPath,
@@ -54,11 +55,11 @@ Future<void> runRename(WidgetRef ref, [bool isUndo = false]) async {
   final cProvider = ref.read(countProvider.notifier);
   for (FileInfo file in list) {
     cProvider.update();
-    if (file.getNewPath(isUndo) == file.path) continue;
+    if (file.newPath(isUndo: isUndo) == file.path) continue;
     if (cancelEmptyRename && file.newName.isEmpty) continue;
     if (errFiles.contains(file)) continue;
-    bool isFolder = file.type.isFolder;
-    String oldPath = file.tempPath, newPath = file.getNewPath(isUndo);
+    bool isFolder = file.fileType.isFolder;
+    String oldPath = file.tempPath, newPath = file.newPath(isUndo: isUndo);
     bool isExist = await checkExist(isFolder, newPath);
     if (isExist) {
       int counter = pathMap[newPath] ?? 1;
@@ -98,13 +99,13 @@ Future<bool> checkExist(bool isFolder, String path) async =>
 
 Future<(String, int)> generateExistName(FileInfo file, int counter) async {
   String name = file.newName, finalPath = '';
-  bool isFolder = file.type.isFolder;
+  bool isFolder = file.fileType.isFolder;
   String prefix = StorageUtil.getString(AppKeys.autoPrefix) ?? '_';
   int width = StorageUtil.getInt(AppKeys.autoWidth) ?? 2;
   String suffix = StorageUtil.getString(AppKeys.autoSuffix) ?? '';
   while (true) {
     name = '$name$prefix${formatNum(counter, width)}$suffix';
-    String newPath = getFullName(name, file.newExtension);
+    String newPath = getFullName(name, file.newExt);
     finalPath = path.join(file.parent, newPath);
     counter++;
     if (!await checkExist(isFolder, finalPath)) break;
@@ -115,7 +116,7 @@ Future<(String, int)> generateExistName(FileInfo file, int counter) async {
 String generateTempName(FileInfo file) {
   String temp =
       '${file.name}.${removeForbiddenCharacters(file.id)}.${DateTime.now().millisecondsSinceEpoch}.once-power.tmp';
-  String tempName = getFullName(temp, file.extension);
+  String tempName = getFullName(temp, file.ext);
   return path.join(file.parent, tempName);
 }
 
@@ -151,7 +152,7 @@ void updateShowInfo(FileList provider, FileInfo file, String newPath) {
 
   provider.updateOriginName(id, newName);
   newExt = newExt.isEmpty ? '' : newExt.substring(1);
-  if (file.extension != newExt) provider.updateOriginExtension(id, newExt);
+  if (file.ext != newExt) provider.updateOriginExtension(id, newExt);
   provider.updatePath(id, newPath);
   if (file.tempPath.isNotEmpty) provider.updateTempPath(id, '');
 }

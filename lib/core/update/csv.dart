@@ -5,11 +5,11 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/model/csv.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/info.dart';
 import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
@@ -22,13 +22,11 @@ void cSVUpdateName(WidgetRef ref) {
   for (FileInfo file in list) {
     if (!file.checked) {
       ref.read(fileListProvider.notifier).updateNewName(file.id, file.name);
-      ref
-          .read(fileListProvider.notifier)
-          .updateNewExtension(file.id, file.extension);
+      ref.read(fileListProvider.notifier).updateNewExtension(file.id, file.ext);
       continue;
     }
     bool isDeleteExtension = ref.watch(deleteExtensionProvider);
-    String extension = isDeleteExtension ? '' : file.extension;
+    String extension = isDeleteExtension ? '' : file.ext;
     bool isMatchExtension = ref.watch(matchExtensionProvider);
     String name = file.name;
     if (isMatchExtension) name = getFullName(name, extension);

@@ -1,6 +1,6 @@
 import 'package:once_power/const/key.dart';
 import 'package:once_power/enum/file.dart';
-import 'package:once_power/model/file.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/registry.dart';
 import 'package:once_power/util/storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -187,7 +187,7 @@ class OnlyChanged extends _$OnlyChanged {
 bool checkArchive(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isArchive)
+      .where((e) => e.fileType.isArchive)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -197,7 +197,7 @@ bool checkArchive(Ref ref) {
 bool checkAudio(Ref ref) {
   List<FileInfo> audioList = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isAudio)
+      .where((e) => e.fileType.isAudio)
       .toList();
   int check = audioList.where((e) => e.checked == true).length;
   return check >= audioList.length;
@@ -207,7 +207,7 @@ bool checkAudio(Ref ref) {
 bool checkFolder(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isFolder)
+      .where((e) => e.fileType.isFolder)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -217,7 +217,7 @@ bool checkFolder(Ref ref) {
 bool checkImage(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isImage)
+      .where((e) => e.fileType.isImage)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -227,7 +227,7 @@ bool checkImage(Ref ref) {
 bool checkOther(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isOther)
+      .where((e) => e.fileType.isOther)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -237,7 +237,7 @@ bool checkOther(Ref ref) {
 bool checkText(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isDoc)
+      .where((e) => e.fileType.isDoc)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;
@@ -247,7 +247,7 @@ bool checkText(Ref ref) {
 bool checkVideo(Ref ref) {
   List<FileInfo> list = ref
       .watch(fileListProvider)
-      .where((e) => e.type.isVideo)
+      .where((e) => e.fileType.isVideo)
       .toList();
   int check = list.where((e) => e.checked == true).toList().length;
   return check >= list.length / 2;

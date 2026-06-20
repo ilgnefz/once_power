@@ -36,10 +36,7 @@ class AnimatedDialog extends StatefulWidget {
       },
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
-          opacity: CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeInOut,
-          ),
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeInOut),
           child: child,
         );
       },
@@ -50,8 +47,6 @@ class AnimatedDialog extends StatefulWidget {
 class _AnimatedDialogState extends State<AnimatedDialog> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: widget.child,
-    );
+    return Center(child: widget.child);
   }
 }

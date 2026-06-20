@@ -64,8 +64,8 @@ class _InputFieldState extends State<InputField> {
   @override
   void didUpdateWidget(InputField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller == null && 
-        oldWidget.text != widget.text && 
+    if (widget.controller == null &&
+        oldWidget.text != widget.text &&
         controller.text != widget.text) {
       controller.text = widget.text ?? '';
     }

@@ -8,7 +8,8 @@ import 'package:fvp/fvp.dart';
 import 'package:image/image.dart' as img;
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/model/file.dart';
-import 'package:once_power/util/info.dart';
+import 'package:once_power/src/rust/api/file_info.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:video_player/video_player.dart';
 
@@ -54,13 +55,13 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  void checkClassify(FileType classify, bool check) => state = state.map((e) {
-    if (e.type == classify) e.checked = check;
+  void checkClassify(FileType type, bool check) => state = state.map((e) {
+    if (e.fileType == type) e.checked = check;
     return e;
   }).toList();
 
   void checkExtension(String ext) => state = state.map((e) {
-    if (e.extension == ext) e.checked = !e.checked;
+    if (e.ext == ext) e.checked = !e.checked;
     return e;
   }).toList();
 
@@ -81,7 +82,9 @@ class FileList extends _$FileList {
   void removeUncheck() => state = state.where((e) => e.checked).toList();
 
   void removeOtherClassify(List<FileType> classifyList) {
-    state = state = state.where((e) => classifyList.contains(e.type)).toList();
+    state = state = state
+        .where((e) => classifyList.contains(e.fileType))
+        .toList();
   }
 
   void updateCheck(String id, bool value) => state = state.map((e) {
@@ -89,17 +92,16 @@ class FileList extends _$FileList {
     return e;
   }).toList();
 
-  void updateCreatedDate(String id, DateTime? createdDate) => state = state.map(
-    (e) {
-      if (e.id == id) e.createdDate = getDateInfo(createdDate) ?? e.createdDate;
-      return e;
-    },
-  ).toList();
+  void updateCreatedDate(String id, DateTime? createdDate) =>
+      state = state.map((e) {
+        if (e.id == id) e.created = getDateInfo(date: createdDate) ?? e.created;
+        return e;
+      }).toList();
 
   void updateModifiedDate(String id, DateTime? modifiedDate) {
     state = state.map((e) {
       if (e.id == id) {
-        e.modifiedDate = getDateInfo(modifiedDate) ?? e.modifiedDate;
+        e.modified = getDateInfo(date: modifiedDate) ?? e.modified;
       }
       return e;
     }).toList();
@@ -108,7 +110,7 @@ class FileList extends _$FileList {
   void updateAccessedDate(String id, DateTime? accessedDate) {
     state = state.map((e) {
       if (e.id == id) {
-        e.accessedDate = getDateInfo(accessedDate) ?? e.accessedDate;
+        e.accessed = getDateInfo(date: accessedDate) ?? e.accessed;
       }
       return e;
     }).toList();
@@ -125,7 +127,7 @@ class FileList extends _$FileList {
   }).toList();
 
   void updateNewExtension(String id, String value) => state = state.map((e) {
-    if (e.id == id && !e.type.isFolder) e.newExtension = value;
+    if (e.id == id && !e.fileType.isFolder) e.newExt = value;
     return e;
   }).toList();
 
@@ -140,7 +142,7 @@ class FileList extends _$FileList {
   }).toList();
 
   void updateOriginExtension(String id, String value) => state = state.map((e) {
-    if (e.id == id) e.extension = value;
+    if (e.id == id) e.ext = value;
     return e;
   }).toList();
 
@@ -161,7 +163,7 @@ class FileList extends _$FileList {
 
   Future<void> generateVideoThumbnails({int concurrency = 5}) async {
     final noThumbnails = state
-        .where((e) => e.type.isVideo && e.thumbnail == null)
+        .where((e) => e.fileType.isVideo && e.thumbnail == null)
         .toList();
     if (noThumbnails.isEmpty) return;
 

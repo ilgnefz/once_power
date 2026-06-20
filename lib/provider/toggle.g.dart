@@ -974,7 +974,7 @@ final class CheckArchiveProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkArchiveHash() => r'f8d6f714f5d642b24b861f1839535eb4bc126385';
+String _$checkArchiveHash() => r'41f2436933f5b51424eceeecccf64d7d8e84120f';
 
 @ProviderFor(checkAudio)
 final checkAudioProvider = CheckAudioProvider._();
@@ -1014,7 +1014,7 @@ final class CheckAudioProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkAudioHash() => r'92b48925781d227554fd35b7f62cd4d0f698a832';
+String _$checkAudioHash() => r'4f4ff4afe7f01abc6c36ef7c620c6ce8825f7469';
 
 @ProviderFor(checkFolder)
 final checkFolderProvider = CheckFolderProvider._();
@@ -1054,7 +1054,7 @@ final class CheckFolderProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkFolderHash() => r'e9807b2af79a7da8634bf0276aab48586c53947e';
+String _$checkFolderHash() => r'87f2ad1902f6f7975d4f98f361893ffc6ff6c04a';
 
 @ProviderFor(checkImage)
 final checkImageProvider = CheckImageProvider._();
@@ -1094,7 +1094,7 @@ final class CheckImageProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkImageHash() => r'33758a1e94a712abf84b4093d62737e3691ad0c0';
+String _$checkImageHash() => r'5d81f434cfe94f3efd02e09f1ab01ff95b68866b';
 
 @ProviderFor(checkOther)
 final checkOtherProvider = CheckOtherProvider._();
@@ -1134,7 +1134,7 @@ final class CheckOtherProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkOtherHash() => r'a20aac7d6a494f00e5f340920c783d3e8d8be1ba';
+String _$checkOtherHash() => r'b760a392d603f481c54940c111d90dea7bfb405f';
 
 @ProviderFor(checkText)
 final checkTextProvider = CheckTextProvider._();
@@ -1174,7 +1174,7 @@ final class CheckTextProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkTextHash() => r'ed5e7e957a51284cb7278cc9419645438d9a93cb';
+String _$checkTextHash() => r'7862451fd199a6d2aee14bcf5b43adbc7f55ddd2';
 
 @ProviderFor(checkVideo)
 final checkVideoProvider = CheckVideoProvider._();
@@ -1214,7 +1214,7 @@ final class CheckVideoProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$checkVideoHash() => r'33553bac69b94627334f1bd73605a70ea10c9c77';
+String _$checkVideoHash() => r'09459cf2b439d453c782292d2167d72f68158d96';
 
 @ProviderFor(SwapLabel)
 final swapLabelProvider = SwapLabelProvider._();

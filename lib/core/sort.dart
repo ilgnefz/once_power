@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/enum/sort.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/src/rust/api/models.dart';
 
 import 'update/update.dart';
 
@@ -25,7 +25,8 @@ void reorderList(
 }
 
 List<DateInfo> sortDateTime(FileInfo file) {
-  List<DateInfo> list = [file.createdDate, file.modifiedDate];
+  // TODO：file.created! 可能为空
+  List<DateInfo> list = [file.created!, file.modified!];
   DateInfo? captureDate = file.metaInfo?.capture;
   if (captureDate != null) list.add(captureDate);
   list.sort((a, b) => a.date.compareTo(b.date));

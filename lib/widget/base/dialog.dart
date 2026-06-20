@@ -60,10 +60,7 @@ class EasyDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  title,
-                  style: theme.textTheme.bodyMedium,
-                ),
+                Text(title, style: theme.textTheme.bodyMedium),
                 Flexible(
                   child: Padding(
                     padding: padding ?? .symmetric(horizontal: AppNum.padding),

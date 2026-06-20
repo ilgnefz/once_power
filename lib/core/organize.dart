@@ -6,7 +6,6 @@ import 'package:once_power/const/key.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/organize.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/model/notification.dart';
 import 'package:once_power/model/progress.dart';
 import 'package:once_power/model/type.dart';
@@ -15,6 +14,7 @@ import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/progress.dart';
 import 'package:once_power/provider/select.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/src/rust/api/simple.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
@@ -76,13 +76,13 @@ Future<void> organize(WidgetRef ref) async {
         return showOrganizeNullNotification(tr(AppL10n.errTypeFolder));
       }
       for (FileInfo file in list) {
-        if (file.type == FileType.image) folder = rule.image;
-        if (file.type == FileType.folder) folder = rule.folder;
-        if (file.type == FileType.video) folder = rule.video;
-        if (file.type == FileType.doc) folder = rule.doc;
-        if (file.type == FileType.audio) folder = rule.audio;
-        if (file.type == FileType.other) folder = rule.other;
-        if (file.type == FileType.archive) folder = rule.archive;
+        if (file.fileType.isImage) folder = rule.image;
+        if (file.fileType.isFolder) folder = rule.folder;
+        if (file.fileType.isVideo) folder = rule.video;
+        if (file.fileType.isDoc) folder = rule.doc;
+        if (file.fileType.isAudio) folder = rule.audio;
+        if (file.fileType.isOther) folder = rule.other;
+        if (file.fileType.isArchive) folder = rule.archive;
         InfoDetail? err = await moveFile(ref, file, folder, errFolders);
         if (err != null) _errorList.add(err);
       }
@@ -133,7 +133,7 @@ Future<InfoDetail?> moveFile(
     );
   }
   String oldPath = file.path;
-  String newPath = path.join(folder, file.getFullOldName());
+  String newPath = path.join(folder, file.fullOldName());
   bool exist = await File(newPath).exists();
   if (exist) newPath = await renameExistFile(newPath);
   bool sameDisk = isSameDisk(oldPath, newPath);
@@ -145,7 +145,7 @@ Future<InfoDetail?> moveFile(
   );
   final progressProvider = ref.read(currentProgressFileProvider.notifier);
   progressProvider.update(info);
-  InfoDetail? infoDetail = file.type.isFolder
+  InfoDetail? infoDetail = file.fileType.isFolder
       ? await organizeFolder(ref, file, sameDisk, oldPath, newPath)
       : await organizeFile(ref, file, sameDisk, oldPath, newPath);
   progressProvider.update(info.copyWith(transferred: info.size));
@@ -331,7 +331,7 @@ Future<void> deleteEmptyFolder(WidgetRef ref) async {
   List<FileInfo> files = ref.read(fileListProvider);
   for (FileInfo file in files) {
     if (!file.checked) continue;
-    if (!file.type.isFolder) continue;
+    if (!file.fileType.isFolder) continue;
     deleteFolders(file.path);
   }
   showDeleteNotification(_errorList);

@@ -1,4 +1,4 @@
-use filetime_creation::{FileTime, set_file_atime, set_file_ctime, set_file_mtime};
+use filetime_creation::{set_file_atime, set_file_ctime, set_file_mtime, FileTime};
 use trash;
 use zhconv::zhconv;
 

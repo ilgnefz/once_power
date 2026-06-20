@@ -4,12 +4,35 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
-import 'file_type.dart';
+import 'models.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `calculate_dir_size`, `get_timestamp`
+// These functions are ignored because they are not marked as `pub`: `generate_info`, `get_audio_info`, `get_file_type`, `get_image_info`, `get_video_info`
+
+List<FileInfo> sortFileInfoByPaths({
+  required List<String> paths,
+  required List<FileInfo> fileInfoList,
+}) => RustLib.instance.api.crateApiFileInfoSortFileInfoByPaths(
+  paths: paths,
+  fileInfoList: fileInfoList,
+);
 
 String generateId() => RustLib.instance.api.crateApiFileInfoGenerateId();
 
-RFileInfo getFileInfo({required String filePath}) =>
-    RustLib.instance.api.crateApiFileInfoGetFileInfo(filePath: filePath);
+Stream<FileInfo> getListStreamPool({required List<String> paths}) =>
+    RustLib.instance.api.crateApiFileInfoGetListStreamPool(paths: paths);
+
+Stream<FileInfo> getListStream({required List<String> paths}) =>
+    RustLib.instance.api.crateApiFileInfoGetListStream(paths: paths);
+
+List<FileInfo> getListPool({required List<String> paths}) =>
+    RustLib.instance.api.crateApiFileInfoGetListPool(paths: paths);
+
+List<FileInfo> getList({required List<String> paths}) =>
+    RustLib.instance.api.crateApiFileInfoGetList(paths: paths);
+
+Future<DateTime?> parseStrDatetime({required String s}) =>
+    RustLib.instance.api.crateApiFileInfoParseStrDatetime(s: s);
+
+DateInfo? getDateInfo({DateTime? date}) =>
+    RustLib.instance.api.crateApiFileInfoGetDateInfo(date: date);

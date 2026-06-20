@@ -9,6 +9,7 @@ import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/list.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/verify.dart';
 import 'package:once_power/widget/base/text.dart';
 import 'package:once_power/widget/common/checkbox.dart';
@@ -37,9 +38,9 @@ class FilterButton extends ConsumerWidget {
     );
   }
 
-  void checkedPressed(WidgetRef ref, FileType e) {
+  void checkedPressed(WidgetRef ref, FileType type) {
     final provider = ref.read(fileListProvider.notifier);
-    provider.checkClassify(e, !isCheckedClassify(ref, e));
+    provider.checkClassify(type, !isCheckedClassify(ref, type));
     updateName(ref);
   }
 

@@ -1,27 +1,18 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:once_power/const/extension.dart';
 import 'package:once_power/core/sort.dart';
 import 'package:once_power/enum/date.dart';
-import 'package:once_power/enum/file.dart';
 import 'package:once_power/enum/organize.dart';
 import 'package:once_power/enum/rule.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
-import 'package:once_power/src/rust/api/file_meta.dart';
-import 'package:once_power/src/rust/api/file_type.dart';
-import 'package:once_power/src/rust/api/image_info.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:string_util_xx/StringUtilxx.dart';
 import 'package:path/path.dart' as path;
-import 'package:xml/xml.dart';
 
 import 'format.dart';
-import 'location.dart';
 import 'verify.dart';
 
 double getTotalSize(WidgetRef ref) {
@@ -91,11 +82,11 @@ bool getCompareResult(ComparisonOperator operator, String value, String info) {
 DateInfo? getDate(DateType type, FileInfo file) {
   switch (type) {
     case DateType.created:
-      return file.createdDate;
+      return file.created;
     case DateType.modified:
-      return file.modifiedDate;
+      return file.modified;
     case DateType.accessed:
-      return file.accessedDate;
+      return file.accessed;
     case DateType.exif:
       return file.metaInfo?.capture;
     case DateType.earliest:
@@ -105,11 +96,12 @@ DateInfo? getDate(DateType type, FileInfo file) {
   }
 }
 
-DateInfo? getDateInfo(DateTime? date) {
-  if (date == null) return null;
-  DateInfo dateInfo = DateInfo(date, weekdayNames[date.weekday - 1]);
-  return dateInfo;
-}
+// TODO: 不需要
+// DateInfo? getDateInfo(DateTime? date) {
+//   if (date == null) return null;
+//   DateInfo dateInfo = DateInfo(date, weekdayNames[date.weekday - 1]);
+//   return dateInfo;
+// }
 
 String getDateName(DateTime? dateTime, int dateLen) {
   if (dateTime == null) return '';
@@ -117,16 +109,17 @@ String getDateName(DateTime? dateTime, int dateLen) {
   return date.substring(0, dateLen > date.length ? date.length : dateLen);
 }
 
-FileType getFileType(String ext) {
-  ext = ext.toLowerCase();
-  if (AppExtension.image.contains(ext)) return FileType.image;
-  if (AppExtension.video.contains(ext)) return FileType.video;
-  if (AppExtension.doc.contains(ext)) return FileType.doc;
-  if (AppExtension.audio.contains(ext)) return FileType.audio;
-  if (AppExtension.archive.contains(ext)) return FileType.archive;
-  // if (AppExtension.folder == ext) return FileClassify.folder;
-  return FileType.other;
-}
+// TODO: 不需要
+// type gettype(String ext) {
+//   ext = ext.toLowerCase();
+//   if (AppExtension.image.contains(ext)) return type.image;
+//   if (AppExtension.video.contains(ext)) return type.video;
+//   if (AppExtension.doc.contains(ext)) return type.doc;
+//   if (AppExtension.audio.contains(ext)) return type.audio;
+//   if (AppExtension.archive.contains(ext)) return type.archive;
+// if (AppExtension.folder == ext) return FileClassify.folder;
+//   return type.other;
+// }
 
 String getFolderName(String folder) => path.basename(folder);
 
@@ -173,110 +166,111 @@ String getRuleTypeValue(InfoType type, FileInfo file) {
     case InfoType.folder:
       return file.parent;
     case InfoType.extension:
-      return file.extension;
+      return file.ext;
     case InfoType.createdDate:
-      return file.createdDate.date.toString();
+      // TODO: 可能为空
+      return file.created!.date.toString();
     case InfoType.modifiedDate:
-      return file.modifiedDate.date.toString();
+      return file.modified!.date.toString();
     case InfoType.accessedDate:
-      return file.accessedDate.date.toString();
+      return file.accessed!.date.toString();
     case InfoType.capturedDate:
       return file.metaInfo?.capture?.date.toString() ?? '';
   }
 }
 
-FileMetaInfo? getAudioInfo(String filePath) {
-  AudioMetaInfo info = getAudioMetaInfo(filePath: filePath);
-  return FileMetaInfo(
-    title: info.title,
-    album: info.album,
-    artist: info.artist,
-    year: info.year,
-  );
-}
-
-Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
-  VideoMetaInfo info = getVideoMetaInfo(videoPath: filePath);
-  return (
-    Resolution(info.width, info.height),
-    FileMetaInfo(
-      capture: info.capture == ''
-          ? null
-          : getDateInfo(DateTime.tryParse(info.capture)),
-      make: info.make,
-      model: info.model,
-    ),
-  );
-}
-
-Future<Resolution> getSvgDimensions(String svgFilePath) async {
-  try {
-    File file = File(svgFilePath);
-    String svgString = await file.readAsString();
-    XmlDocument document = XmlDocument.parse(svgString);
-    XmlElement svgElement = document.rootElement;
-    String? widthStr = svgElement.getAttribute('width');
-    String? heightStr = svgElement.getAttribute('height');
-    double? width;
-    double? height;
-    if (widthStr != null && heightStr != null) {
-      width = double.tryParse(widthStr.replaceAll(RegExp(r'[^0-9.]'), ''));
-      height = double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9.]'), ''));
-    }
-
-    // 如果 width 和 height 属性不存在，尝试从 viewBox 属性获取尺寸
-    if (width == null || height == null) {
-      final viewBoxStr = svgElement.getAttribute('viewBox');
-      if (viewBoxStr != null) {
-        final viewBoxValues = viewBoxStr.split(' ');
-        if (viewBoxValues.length == 4) {
-          width = double.tryParse(viewBoxValues[2]);
-          height = double.tryParse(viewBoxValues[3]);
-        }
-      }
-    }
-
-    if (width != null && height != null) {
-      return Resolution(width.toInt(), height.toInt());
-    } else {
-      debugPrint('无法获取 SVG 尺寸');
-      return Resolution.zero;
-    }
-  } catch (e) {
-    debugPrint('获取 SVG 尺寸失败: $e');
-    return Resolution.zero;
-  }
-}
-
-Future<FileMetaInfo?> getImageMeta(String filePath) async {
-  // Stopwatch stopwatch = Stopwatch()..start();
-  PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
-  if (photoMetaInfo != null) {
-    String? captureStr = photoMetaInfo.capture;
-    DateInfo? capture = captureStr == null
-        ? null
-        : getDateInfo(DateTime.tryParse(captureStr));
-    double? longitude = photoMetaInfo.longitude;
-    double? latitude = photoMetaInfo.latitude;
-    String location = '';
-    try {
-      location = await getTrueLocation(longitude, latitude);
-    } catch (e) {
-      debugPrint('Error getting location: $e');
-    }
-    return FileMetaInfo(
-      make: photoMetaInfo.make ?? '',
-      model: photoMetaInfo.model ?? '',
-      capture: capture,
-      latitude: latitude,
-      longitude: longitude,
-      location: location,
-    );
-  }
-  // double cost = stopwatch.elapsedMicroseconds / 1000000;
-  // debugPrint('获取图片信息耗时: $cost');
-  return null;
-}
+// FileMetaInfo? getAudioInfo(String filePath) {
+//   AudioMetaInfo info = getAudioMetaInfo(filePath: filePath);
+//   return FileMetaInfo(
+//     title: info.title,
+//     album: info.album,
+//     artist: info.artist,
+//     year: info.year,
+//   );
+// }
+//
+// Future<(Resolution, FileMetaInfo)> getVideoInfo(String filePath) async {
+//   VideoMetaInfo info = getVideoMetaInfo(videoPath: filePath);
+//   return (
+//     Resolution(info.width, info.height),
+//     FileMetaInfo(
+//       capture: info.capture == ''
+//           ? null
+//           : getDateInfo(DateTime.tryParse(info.capture)),
+//       make: info.make,
+//       model: info.model,
+//     ),
+//   );
+// }
+//
+// Future<Resolution> getSvgDimensions(String svgFilePath) async {
+//   try {
+//     File file = File(svgFilePath);
+//     String svgString = await file.readAsString();
+//     XmlDocument document = XmlDocument.parse(svgString);
+//     XmlElement svgElement = document.rootElement;
+//     String? widthStr = svgElement.getAttribute('width');
+//     String? heightStr = svgElement.getAttribute('height');
+//     double? width;
+//     double? height;
+//     if (widthStr != null && heightStr != null) {
+//       width = double.tryParse(widthStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+//       height = double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9.]'), ''));
+//     }
+//
+//     // 如果 width 和 height 属性不存在，尝试从 viewBox 属性获取尺寸
+//     if (width == null || height == null) {
+//       final viewBoxStr = svgElement.getAttribute('viewBox');
+//       if (viewBoxStr != null) {
+//         final viewBoxValues = viewBoxStr.split(' ');
+//         if (viewBoxValues.length == 4) {
+//           width = double.tryParse(viewBoxValues[2]);
+//           height = double.tryParse(viewBoxValues[3]);
+//         }
+//       }
+//     }
+//
+//     if (width != null && height != null) {
+//       return Resolution(width.toInt(), height.toInt());
+//     } else {
+//       debugPrint('无法获取 SVG 尺寸');
+//       return Resolution.zero;
+//     }
+//   } catch (e) {
+//     debugPrint('获取 SVG 尺寸失败: $e');
+//     return Resolution.zero;
+//   }
+// }
+//
+// Future<FileMetaInfo?> getImageMeta(String filePath) async {
+//   // Stopwatch stopwatch = Stopwatch()..start();
+//   PhotoMetaInfo? photoMetaInfo = getImageMetaInfo(imagePath: filePath);
+//   if (photoMetaInfo != null) {
+//     String? captureStr = photoMetaInfo.capture;
+//     DateInfo? capture = captureStr == null
+//         ? null
+//         : getDateInfo(DateTime.tryParse(captureStr));
+//     double? longitude = photoMetaInfo.longitude;
+//     double? latitude = photoMetaInfo.latitude;
+//     String location = '';
+//     try {
+//       location = await getTrueLocation(longitude, latitude);
+//     } catch (e) {
+//       debugPrint('Error getting location: $e');
+//     }
+//     return FileMetaInfo(
+//       make: photoMetaInfo.make ?? '',
+//       model: photoMetaInfo.model ?? '',
+//       capture: capture,
+//       latitude: latitude,
+//       longitude: longitude,
+//       location: location,
+//     );
+//   }
+//   // double cost = stopwatch.elapsedMicroseconds / 1000000;
+//   // debugPrint('获取图片信息耗时: $cost');
+//   return null;
+// }
 
 String getTopPath(String filePath) {
   final separator = Platform.pathSeparator;
@@ -350,9 +344,10 @@ String organizeDateFolder(WidgetRef ref, FileInfo file) {
 }
 
 String organizeDate(DateType type, FileInfo file) {
-  String date = file.createdDate.date.toString();
-  if (type.isModified) date = file.modifiedDate.date.toString();
-  if (type.isAccessed) date = file.accessedDate.date.toString();
+  // TODO: NULL
+  String date = file.created!.date.toString();
+  if (type.isModified) date = file.modified!.date.toString();
+  if (type.isAccessed) date = file.accessed!.date.toString();
   if (type.isExif) {
     date = file.metaInfo?.capture?.date == null
         ? ''

@@ -6,11 +6,12 @@
 // Static analysis wrongly picks the IO variant, thus ignore this
 // ignore_for_file: argument_type_not_assignable
 
+import 'api/base_info.dart';
 import 'api/file_info.dart';
-import 'api/file_meta.dart';
-import 'api/file_type.dart';
 import 'api/image_info.dart';
 import 'api/log.dart';
+import 'api/meta_info.dart';
+import 'api/models.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -26,22 +27,67 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   });
 
   @protected
+  AnyhowException dco_decode_AnyhowException(dynamic raw);
+
+  @protected
+  int dco_decode_CastedPrimitive_u_64(dynamic raw);
+
+  @protected
+  DateTime dco_decode_Chrono_Local(dynamic raw);
+
+  @protected
+  RustStreamSink<FileInfo> dco_decode_StreamSink_file_info_Sse(dynamic raw);
+
+  @protected
   String dco_decode_String(dynamic raw);
 
   @protected
   AudioMetaInfo dco_decode_audio_meta_info(dynamic raw);
 
   @protected
+  BaseInfo dco_decode_base_info(dynamic raw);
+
+  @protected
   bool dco_decode_bool(dynamic raw);
+
+  @protected
+  DateTime dco_decode_box_autoadd_Chrono_Local(dynamic raw);
+
+  @protected
+  DateInfo dco_decode_box_autoadd_date_info(dynamic raw);
 
   @protected
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
+  FileInfo dco_decode_box_autoadd_file_info(dynamic raw);
+
+  @protected
+  FileMetaInfo dco_decode_box_autoadd_file_meta_info(dynamic raw);
+
+  @protected
   PhotoMetaInfo dco_decode_box_autoadd_photo_meta_info(dynamic raw);
 
   @protected
+  Resolution dco_decode_box_autoadd_resolution(dynamic raw);
+
+  @protected
+  DateInfo dco_decode_date_info(dynamic raw);
+
+  @protected
   double dco_decode_f_64(dynamic raw);
+
+  @protected
+  FileInfo dco_decode_file_info(dynamic raw);
+
+  @protected
+  FileMetaInfo dco_decode_file_meta_info(dynamic raw);
+
+  @protected
+  FileType dco_decode_file_type(dynamic raw);
+
+  @protected
+  int dco_decode_i_32(dynamic raw);
 
   @protected
   PlatformInt64 dco_decode_i_64(dynamic raw);
@@ -50,25 +96,40 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
+  List<FileInfo> dco_decode_list_file_info(dynamic raw);
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
+  DateTime? dco_decode_opt_box_autoadd_Chrono_Local(dynamic raw);
+
+  @protected
+  DateInfo? dco_decode_opt_box_autoadd_date_info(dynamic raw);
+
+  @protected
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
+
+  @protected
+  FileMetaInfo? dco_decode_opt_box_autoadd_file_meta_info(dynamic raw);
 
   @protected
   PhotoMetaInfo? dco_decode_opt_box_autoadd_photo_meta_info(dynamic raw);
 
   @protected
+  Resolution? dco_decode_opt_box_autoadd_resolution(dynamic raw);
+
+  @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
+
+  @protected
   PhotoMetaInfo dco_decode_photo_meta_info(dynamic raw);
 
   @protected
-  RFileInfo dco_decode_r_file_info(dynamic raw);
-
-  @protected
-  RustImageSize dco_decode_rust_image_size(dynamic raw);
+  Resolution dco_decode_resolution(dynamic raw);
 
   @protected
   int dco_decode_u_32(dynamic raw);
@@ -86,16 +147,47 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   VideoMetaInfo dco_decode_video_meta_info(dynamic raw);
 
   @protected
+  AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_CastedPrimitive_u_64(SseDeserializer deserializer);
+
+  @protected
+  DateTime sse_decode_Chrono_Local(SseDeserializer deserializer);
+
+  @protected
+  RustStreamSink<FileInfo> sse_decode_StreamSink_file_info_Sse(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
   AudioMetaInfo sse_decode_audio_meta_info(SseDeserializer deserializer);
 
   @protected
+  BaseInfo sse_decode_base_info(SseDeserializer deserializer);
+
+  @protected
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
+  DateTime sse_decode_box_autoadd_Chrono_Local(SseDeserializer deserializer);
+
+  @protected
+  DateInfo sse_decode_box_autoadd_date_info(SseDeserializer deserializer);
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  FileInfo sse_decode_box_autoadd_file_info(SseDeserializer deserializer);
+
+  @protected
+  FileMetaInfo sse_decode_box_autoadd_file_meta_info(
+    SseDeserializer deserializer,
+  );
 
   @protected
   PhotoMetaInfo sse_decode_box_autoadd_photo_meta_info(
@@ -103,7 +195,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Resolution sse_decode_box_autoadd_resolution(SseDeserializer deserializer);
+
+  @protected
+  DateInfo sse_decode_date_info(SseDeserializer deserializer);
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer);
+
+  @protected
+  FileInfo sse_decode_file_info(SseDeserializer deserializer);
+
+  @protected
+  FileMetaInfo sse_decode_file_meta_info(SseDeserializer deserializer);
+
+  @protected
+  FileType sse_decode_file_type(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
@@ -112,13 +222,29 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
+  List<FileInfo> sse_decode_list_file_info(SseDeserializer deserializer);
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
+  DateTime? sse_decode_opt_box_autoadd_Chrono_Local(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DateInfo? sse_decode_opt_box_autoadd_date_info(SseDeserializer deserializer);
+
+  @protected
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  FileMetaInfo? sse_decode_opt_box_autoadd_file_meta_info(
+    SseDeserializer deserializer,
+  );
 
   @protected
   PhotoMetaInfo? sse_decode_opt_box_autoadd_photo_meta_info(
@@ -126,13 +252,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Resolution? sse_decode_opt_box_autoadd_resolution(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
   PhotoMetaInfo sse_decode_photo_meta_info(SseDeserializer deserializer);
 
   @protected
-  RFileInfo sse_decode_r_file_info(SseDeserializer deserializer);
-
-  @protected
-  RustImageSize sse_decode_rust_image_size(SseDeserializer deserializer);
+  Resolution sse_decode_resolution(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_32(SseDeserializer deserializer);
@@ -150,7 +281,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   VideoMetaInfo sse_decode_video_meta_info(SseDeserializer deserializer);
 
   @protected
-  int sse_decode_i_32(SseDeserializer deserializer);
+  void sse_encode_AnyhowException(
+    AnyhowException self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_CastedPrimitive_u_64(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_Chrono_Local(DateTime self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_StreamSink_file_info_Sse(
+    RustStreamSink<FileInfo> self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
@@ -159,10 +305,37 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_audio_meta_info(AudioMetaInfo self, SseSerializer serializer);
 
   @protected
+  void sse_encode_base_info(BaseInfo self, SseSerializer serializer);
+
+  @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_Chrono_Local(
+    DateTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_date_info(
+    DateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_file_info(
+    FileInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_file_meta_info(
+    FileMetaInfo self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_photo_meta_info(
@@ -171,13 +344,37 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_resolution(
+    Resolution self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_date_info(DateInfo self, SseSerializer serializer);
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_file_info(FileInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_file_meta_info(FileMetaInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_file_type(FileType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_file_info(List<FileInfo> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_strict(
@@ -189,7 +386,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_Chrono_Local(
+    DateTime? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_date_info(
+    DateInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_file_meta_info(
+    FileMetaInfo? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_box_autoadd_photo_meta_info(
@@ -198,13 +413,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_resolution(
+    Resolution? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+    Uint8List? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_photo_meta_info(PhotoMetaInfo self, SseSerializer serializer);
 
   @protected
-  void sse_encode_r_file_info(RFileInfo self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_rust_image_size(RustImageSize self, SseSerializer serializer);
+  void sse_encode_resolution(Resolution self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_32(int self, SseSerializer serializer);
@@ -220,9 +444,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_video_meta_info(VideoMetaInfo self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_i_32(int self, SseSerializer serializer);
 }
 
 // Section: wire_class

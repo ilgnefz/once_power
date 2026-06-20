@@ -48,7 +48,7 @@ final class SortListProvider
   }
 }
 
-String _$sortListHash() => r'65d8764165fcde3fd95c8bd96534120666abe2d4';
+String _$sortListHash() => r'5b2adc3eb9df0ca1103929029e52fcd6ffd1e232';
 
 @ProviderFor(SortSelectList)
 final sortSelectListProvider = SortSelectListProvider._();
@@ -108,11 +108,11 @@ final fileTypeListProvider = FileTypeListProvider._();
 final class FileTypeListProvider
     extends
         $FunctionalProvider<
-          List<CountFileType>,
-          List<CountFileType>,
-          List<CountFileType>
+          List<FileTypeCount>,
+          List<FileTypeCount>,
+          List<FileTypeCount>
         >
-    with $Provider<List<CountFileType>> {
+    with $Provider<List<FileTypeCount>> {
   FileTypeListProvider._()
     : super(
         from: null,
@@ -129,25 +129,25 @@ final class FileTypeListProvider
 
   @$internal
   @override
-  $ProviderElement<List<CountFileType>> $createElement(
+  $ProviderElement<List<FileTypeCount>> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  List<CountFileType> create(Ref ref) {
+  List<FileTypeCount> create(Ref ref) {
     return fileTypeList(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<CountFileType> value) {
+  Override overrideWithValue(List<FileTypeCount> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<List<CountFileType>>(value),
+      providerOverride: $SyncValueProvider<List<FileTypeCount>>(value),
     );
   }
 }
 
-String _$fileTypeListHash() => r'7f002ecfd173fede0664119180eb32202d4c6524';
+String _$fileTypeListHash() => r'3f16b3466dbb8e0761601b720a07ca1c9fe29045';
 
 @ProviderFor(extensionListMap)
 final extensionListMapProvider = ExtensionListMapProvider._();
@@ -194,7 +194,7 @@ final class ExtensionListMapProvider
   }
 }
 
-String _$extensionListMapHash() => r'334fda6931435f951f4143f65af78b3fb3230bd2';
+String _$extensionListMapHash() => r'd284f6a10759b779c7b3686633793afed0cd520a';
 
 @ProviderFor(selectedExtension)
 final selectedExtensionProvider = SelectedExtensionFamily._();
@@ -253,7 +253,7 @@ final class SelectedExtensionProvider
   }
 }
 
-String _$selectedExtensionHash() => r'9099f30769bba0f9a4b258cc30a7f89cc6d6dc2d';
+String _$selectedExtensionHash() => r'56fe0f08a8b23505129f7f431e6c9e4ffb093b1b';
 
 final class SelectedExtensionFamily extends $Family
     with $FunctionalFamilyOverride<bool, String> {

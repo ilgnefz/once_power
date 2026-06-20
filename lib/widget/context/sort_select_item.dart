@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/config/theme/theme.dart';
 import 'package:once_power/const/num.dart';
 import 'package:once_power/core/context_menu.dart';
-import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/setting.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/selection.dart';
 import 'package:once_power/widget/context/tooltip_item.dart';
 
@@ -81,41 +81,43 @@ class SortSelectItem extends ConsumerWidget {
       await showRightMenu(context, ref, details.globalPosition, file);
     }
 
-    return TooltipItem(
-      file: file,
-      waitDuration: Duration(seconds: ref.watch(hiddenTipProvider) ? 600 : 1),
-      child: Listener(
-        onPointerDown: onPointerDown,
-        child: Material(
-          borderRadius: borderRadius,
-          color: backgroundColor,
-          child: Stack(
-            children: [
-              InkWell(
-                mouseCursor: SystemMouseCursors.click,
-                borderRadius: BorderRadius.circular(AppNum.radius),
-                onTap: () {
-                  onTap?.call();
-                  ref.read(conetentFocusNodeProvider).requestFocus();
-                },
-                onDoubleTap: onDoubleTap,
-                onSecondaryTapDown: onSecondaryTapDown,
-                child: child,
-              ),
-              if (indexLabel != null)
-                Badge(
-                  alignment: Alignment.topRight,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  label: Text(
-                    indexLabel,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontFamily: defaultFont,
+    return RepaintBoundary(
+      child: TooltipItem(
+        file: file,
+        waitDuration: Duration(seconds: ref.watch(hiddenTipProvider) ? 600 : 1),
+        child: Listener(
+          onPointerDown: onPointerDown,
+          child: Material(
+            borderRadius: borderRadius,
+            color: backgroundColor,
+            child: Stack(
+              children: [
+                InkWell(
+                  mouseCursor: SystemMouseCursors.click,
+                  borderRadius: BorderRadius.circular(AppNum.radius),
+                  onTap: () {
+                    onTap?.call();
+                    ref.read(conetentFocusNodeProvider).requestFocus();
+                  },
+                  onDoubleTap: onDoubleTap,
+                  onSecondaryTapDown: onSecondaryTapDown,
+                  child: child,
+                ),
+                if (indexLabel != null)
+                  Badge(
+                    alignment: Alignment.topRight,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    label: Text(
+                      indexLabel,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontFamily: defaultFont,
+                      ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -10,6 +10,7 @@ import 'package:once_power/provider/list.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/provider/value.dart';
+import 'package:once_power/src/rust/api/models.dart';
 import 'package:once_power/util/format.dart';
 import 'package:once_power/util/info.dart';
 
@@ -36,7 +37,7 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
   for (FileInfo file in files) {
     if (!file.checked) {
       fileProvider.updateNewName(file.id, file.name);
-      fileProvider.updateNewExtension(file.id, file.extension);
+      fileProvider.updateNewExtension(file.id, file.ext);
       continue;
     }
     String date = dateName(ref, file);
@@ -62,7 +63,7 @@ void normalUpdateName(WidgetRef ref, [bool? replace]) {
     fileProvider.updateNewName(file.id, name);
     fileProvider.updateNewExtension(
       file.id,
-      isExtension ? extension : file.extension,
+      isExtension ? extension : file.ext,
     );
     index++;
   }
@@ -86,17 +87,20 @@ int getRealIndex(
   if (dateRename) {
     (classifyMap, index) = calculateIndex(classifyMap, [date], file);
     if (caseFile && !caseExt) {
-      (_, index) = calculateIndex(classifyMap, [date, file.type.label], file);
+      (_, index) = calculateIndex(classifyMap, [
+        date,
+        file.fileType.label,
+      ], file);
     }
     if (caseExt) {
-      (_, index) = calculateIndex(classifyMap, [date, file.extension], file);
+      (_, index) = calculateIndex(classifyMap, [date, file.ext], file);
     }
   } else {
     if (caseFile && !caseExt) {
-      (_, index) = calculateIndex(classifyMap, [file.type.label], file);
+      (_, index) = calculateIndex(classifyMap, [file.fileType.label], file);
     }
     if (caseExt) {
-      (_, index) = calculateIndex(classifyMap, [file.extension], file);
+      (_, index) = calculateIndex(classifyMap, [file.ext], file);
     }
   }
   return index;
