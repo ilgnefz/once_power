@@ -15,16 +15,18 @@ class ExtensionInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isModify = ref.watch(isModifyExtensionProvider);
     return ActionItem(
       label: tr(AppL10n.renameExt),
       icon: AppIcons.extension,
       tip: tr(AppL10n.renameExtEnable),
-      checked: ref.watch(isModifyExtensionProvider),
+      checked: isModify,
       onPressed: () {
         ref.read(isModifyExtensionProvider.notifier).update();
         Debounce.run(() => normalUpdateName(ref));
       },
       child: InputField(
+        enabled: isModify,
         controller: ref.watch(extensionControllerProvider),
         hintText: tr(AppL10n.renameExtHint),
         onChanged: (_) => Debounce.run(() => normalUpdateName(ref)),

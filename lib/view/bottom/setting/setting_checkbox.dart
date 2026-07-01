@@ -6,19 +6,21 @@ class SettingCheckbox extends StatelessWidget {
     super.key,
     required this.label,
     required this.checked,
+    this.disabled = false,
     required this.onChanged,
   });
 
   final String label;
   final bool checked;
+  final bool disabled;
   final void Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return InkWell(
-      mouseCursor: SystemMouseCursors.click,
-      onTap: () => onChanged(!checked),
+      mouseCursor: disabled ? null : SystemMouseCursors.click,
+      onTap: disabled ? null : () => onChanged(!checked),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -28,7 +30,7 @@ class SettingCheckbox extends StatelessWidget {
           OneLineText(label),
           Checkbox(
             value: checked,
-            mouseCursor: SystemMouseCursors.click,
+            mouseCursor: disabled ? null : SystemMouseCursors.click,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             visualDensity: VisualDensity.compact,
             shape: RoundedRectangleBorder(
@@ -36,8 +38,10 @@ class SettingCheckbox extends StatelessWidget {
             ),
             side: theme.checkboxTheme.side,
             checkColor: Colors.white,
-            fillColor: theme.checkboxTheme.fillColor,
-            onChanged: (value) => onChanged(value!),
+            fillColor: disabled
+                ? WidgetStateProperty.all(theme.disabledColor)
+                : theme.checkboxTheme.fillColor,
+            onChanged: disabled ? null : (value) => onChanged(value!),
           ),
         ],
       ),

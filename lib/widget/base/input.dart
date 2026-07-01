@@ -88,6 +88,7 @@ class BaseInput extends StatelessWidget {
                 decoration: enabled
                     ? null
                     : TextDecoration.combine([TextDecoration.lineThrough]),
+                decorationThickness: enabled ? null : 2,
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
