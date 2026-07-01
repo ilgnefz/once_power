@@ -39,6 +39,7 @@
     "width": "width",
     "length": "len",
     "start": "start",
+    "step": "step",
     "extension": "Extension",
     "extensionHint": "Enter new extension",
     "extensionEnable": "Enable ext change",

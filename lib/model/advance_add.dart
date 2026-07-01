@@ -202,12 +202,14 @@ class AdvanceMetaData {
 class AdvanceIndex {
   final int width;
   final int start;
+  final int step;
   final IndexDistinction distinction;
   final DateType dateType;
 
   AdvanceIndex({
     this.width = 1,
     this.start = 0,
+    this.step = 1,
     this.distinction = IndexDistinction.none,
     this.dateType = DateType.created,
   });
@@ -215,12 +217,14 @@ class AdvanceIndex {
   AdvanceIndex copyWith({
     int? width,
     int? start,
+    int? step,
     IndexDistinction? distinction,
     DateType? dateType,
   }) {
     return AdvanceIndex(
       width: width ?? this.width,
       start: start ?? this.start,
+      step: step ?? this.step,
       distinction: distinction ?? this.distinction,
       dateType: dateType ?? this.dateType,
     );
@@ -229,6 +233,7 @@ class AdvanceIndex {
   factory AdvanceIndex.fromJson(Map<String, dynamic> json) => AdvanceIndex(
     width: json['width'] ?? 1,
     start: json['start'] ?? 1,
+    step: json['step'] ?? 1,
     distinction: IndexDistinction.values[json['distinction'] ?? 0],
     dateType: DateType.values[json['dateType'] ?? 0],
   );
@@ -236,13 +241,14 @@ class AdvanceIndex {
   Map<String, dynamic> toJson() => {
     'width': width,
     'start': start,
+    'step': step,
     'distinction': distinction.index,
     'dateType': dateType.index,
   };
 
   @override
   String toString() {
-    return 'AdvanceIndex{width: $width, start: $start, '
+    return 'AdvanceIndex{width: $width, start: $start, step: $step, '
         'distinction: $distinction, dateType: $dateType}';
   }
 }

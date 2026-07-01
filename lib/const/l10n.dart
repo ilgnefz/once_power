@@ -39,6 +39,7 @@ class AppL10n {
   static const String renameWidth = 'rename.width';
   static const String renameLength = 'rename.length';
   static const String renameStart = 'rename.start';
+  static const String renameStep = 'rename.step';
   static const String renameExt = 'rename.extension';
   static const String renameExtHint = 'rename.extensionHint';
   static const String renameExtEnable = 'rename.extensionEnable';

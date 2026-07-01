@@ -23,7 +23,8 @@ import 'normal.dart';
       return insertPosition(menu, name, menu.value, extension);
     case AddMode.indexes:
       int width = menu.advanceIndex.width, start = menu.advanceIndex.start;
-      String indexStr = formatNum(start + index, width);
+      int interval = menu.advanceIndex.step;
+      String indexStr = formatNum(start + index * interval, width);
       return insertPosition(menu, name, indexStr, extension);
     case AddMode.random:
       const expandMap = {

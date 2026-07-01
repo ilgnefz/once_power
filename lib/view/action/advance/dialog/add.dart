@@ -169,6 +169,11 @@ class _AddViewState extends ConsumerState<AddView> {
               advanceIndex = advanceIndex.copyWith(start: value);
               mode = AddMode.indexes;
             }),
+            step: advanceIndex.step,
+            onStepChanged: (value) => setState(() {
+              advanceIndex = advanceIndex.copyWith(step: value);
+              mode = AddMode.indexes;
+            }),
           ),
           AddIndexDistinction(
             distinction: advanceIndex.distinction,

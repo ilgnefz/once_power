@@ -39,6 +39,7 @@
     "width": "位",
     "length": "位",
     "start": "开始",
+    "step": "步长",
     "extension": "扩展",
     "extensionHint": "请输入新的扩展名",
     "extensionEnable": "启用修改扩展名",

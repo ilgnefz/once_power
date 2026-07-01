@@ -12,12 +12,16 @@ class AddIndex extends StatelessWidget {
     required this.onWidthChanged,
     required this.start,
     required this.onStartChanged,
+    required this.step,
+    required this.onStepChanged,
   });
 
   final int width;
   final void Function(int) onWidthChanged;
   final int start;
   final void Function(int) onStartChanged;
+  final int step;
+  final void Function(int) onStepChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,13 @@ class AddIndex extends StatelessWidget {
           value: start,
           unit: tr(AppL10n.renameStart),
           onChanged: onStartChanged,
+        ),
+        DigitInput(
+          width: 120,
+          value: step,
+          min: 1,
+          unit: tr(AppL10n.renameStep),
+          onChanged: onStepChanged,
         ),
       ],
     );
