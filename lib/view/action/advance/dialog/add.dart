@@ -62,6 +62,34 @@ class _AddViewState extends ConsumerState<AddView> {
     group = widget.menu!.group;
   }
 
+  void _ok() {
+    String id = widget.menu?.id ?? generateId();
+    AdvanceMenuAdd add = AdvanceMenuAdd(
+      id: id,
+      value: value,
+      mode: mode,
+      advanceDate: advanceDate,
+      metaData: metaData,
+      advanceIndex: advanceIndex,
+      randomLength: randomLength,
+      randomValue: randoms,
+      addPosition: position,
+      positionIndex: positionIndex,
+      group: group,
+      checked: true,
+    );
+    widget.menu == null
+        ? ref.read(advanceMenuListProvider.notifier).add(add)
+        : ref.read(advanceMenuListProvider.notifier).update(id, add);
+    ref.read(currentPresetNameProvider.notifier).update('');
+    advanceUpdateName(ref);
+    Navigator.pop(context);
+    if (mode.isMetaData && metaData.type.isLocation) {
+      String? key = StorageUtil.getString(AppKeys.mapKey);
+      if (key == null || key.isEmpty) showKeyInput(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
@@ -180,33 +208,8 @@ class _AddViewState extends ConsumerState<AddView> {
         },
       ),
       autoPop: false,
-      onOk: () {
-        String id = widget.menu?.id ?? generateId();
-        AdvanceMenuAdd add = AdvanceMenuAdd(
-          id: id,
-          value: value,
-          mode: mode,
-          advanceDate: advanceDate,
-          metaData: metaData,
-          advanceIndex: advanceIndex,
-          randomLength: randomLength,
-          randomValue: randoms,
-          addPosition: position,
-          positionIndex: positionIndex,
-          group: group,
-          checked: true,
-        );
-        widget.menu == null
-            ? ref.read(advanceMenuListProvider.notifier).add(add)
-            : ref.read(advanceMenuListProvider.notifier).update(id, add);
-        ref.read(currentPresetNameProvider.notifier).update('');
-        advanceUpdateName(ref);
-        Navigator.pop(context);
-        if (mode.isMetaData && metaData.type.isLocation) {
-          String? key = StorageUtil.getString(AppKeys.mapKey);
-          if (key == null || key.isEmpty) showKeyInput(context);
-        }
-      },
+      onOk: _ok,
+      onEnter: _ok,
     );
   }
 }

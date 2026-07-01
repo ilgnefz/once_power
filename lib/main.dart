@@ -11,6 +11,12 @@ import 'config/theme/theme.dart';
 import 'const/text.dart';
 import 'enum/app.dart';
 
+// TODO: 高级模式添加序列统计间隔数字
+// TODO: 普通模式修改扩展添加禁止提示
+// TODO: 设置将无法修改的配置项改成灰色，或者添加之前的方案
+// TODO: README 保存配置图片出错
+// TODO: 弹窗监听 entre 键
+
 void main(List<String> args) async {
   await AppConfig.init(args);
   runApp(

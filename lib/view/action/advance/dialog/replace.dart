@@ -62,6 +62,31 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
     group = widget.menu!.group;
   }
 
+  void _ok() {
+    String id = widget.menu?.id ?? generateId();
+    AdvanceMenuReplace replace = AdvanceMenuReplace(
+      id: id,
+      checked: true,
+      value: [oldValue, newValue],
+      useRegex: useRegex,
+      matchExtension: matchExtension,
+      mode: mode,
+      fillPosition: position,
+      start: start,
+      length: length,
+      match: match,
+      convertType: convertType,
+      swap: swap,
+      wordSpacing: wordSpacing,
+      group: group,
+    );
+    widget.menu == null
+        ? ref.read(advanceMenuListProvider.notifier).add(replace)
+        : ref.read(advanceMenuListProvider.notifier).update(id, replace);
+    ref.read(currentPresetNameProvider.notifier).update('');
+    advanceUpdateName(ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
@@ -216,29 +241,10 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
           setState(() {});
         },
       ),
-      onOk: () {
-        String id = widget.menu?.id ?? generateId();
-        AdvanceMenuReplace replace = AdvanceMenuReplace(
-          id: id,
-          checked: true,
-          value: [oldValue, newValue],
-          useRegex: useRegex,
-          matchExtension: matchExtension,
-          mode: mode,
-          fillPosition: position,
-          start: start,
-          length: length,
-          match: match,
-          convertType: convertType,
-          swap: swap,
-          wordSpacing: wordSpacing,
-          group: group,
-        );
-        widget.menu == null
-            ? ref.read(advanceMenuListProvider.notifier).add(replace)
-            : ref.read(advanceMenuListProvider.notifier).update(id, replace);
-        ref.read(currentPresetNameProvider.notifier).update('');
-        advanceUpdateName(ref);
+      onOk: _ok,
+      onEnter: () {
+        _ok();
+        Navigator.pop(context);
       },
     );
   }

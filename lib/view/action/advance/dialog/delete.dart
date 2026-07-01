@@ -53,6 +53,27 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
     group = widget.menu!.group;
   }
 
+  void _ok() {
+    String id = widget.menu?.id ?? generateId();
+    AdvanceMenuDelete delete = AdvanceMenuDelete(
+      id: id,
+      value: value,
+      useRegex: useRegex,
+      mode: mode,
+      start: start,
+      length: length,
+      match: match,
+      deleteTypes: deleteTypes,
+      group: group,
+      checked: true,
+    );
+    widget.menu == null
+        ? ref.read(advanceMenuListProvider.notifier).add(delete)
+        : ref.read(advanceMenuListProvider.notifier).update(id, delete);
+    ref.read(currentPresetNameProvider.notifier).update('');
+    advanceUpdateName(ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     return EasyDialog(
@@ -156,25 +177,10 @@ class _DeleteViewState extends ConsumerState<DeleteView> {
           setState(() {});
         },
       ),
-      onOk: () {
-        String id = widget.menu?.id ?? generateId();
-        AdvanceMenuDelete delete = AdvanceMenuDelete(
-          id: id,
-          value: value,
-          useRegex: useRegex,
-          mode: mode,
-          start: start,
-          length: length,
-          match: match,
-          deleteTypes: deleteTypes,
-          group: group,
-          checked: true,
-        );
-        widget.menu == null
-            ? ref.read(advanceMenuListProvider.notifier).add(delete)
-            : ref.read(advanceMenuListProvider.notifier).update(id, delete);
-        ref.read(currentPresetNameProvider.notifier).update('');
-        advanceUpdateName(ref);
+      onOk: _ok,
+      onEnter: () {
+        _ok();
+        Navigator.pop(context);
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:once_power/const/l10n.dart';
 import 'package:once_power/const/num.dart';
 
@@ -20,6 +21,7 @@ class EasyDialog extends StatelessWidget {
     this.autoPop = true,
     this.actionsAxisAlignment = MainAxisAlignment.spaceBetween,
     this.onModelTap,
+    this.onEnter,
   });
 
   final String title;
@@ -36,6 +38,7 @@ class EasyDialog extends StatelessWidget {
   final bool autoPop;
   final MainAxisAlignment actionsAxisAlignment;
   final void Function()? onModelTap;
+  final void Function()? onEnter;
 
   @override
   Widget build(BuildContext context) {
@@ -43,66 +46,76 @@ class EasyDialog extends StatelessWidget {
     TextStyle? textStyle = theme.textTheme.bodyMedium?.copyWith(
       color: theme.primaryColor,
     );
-    return UnconstrainedBox(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.95,
-        ),
-        child: Material(
-          borderRadius: BorderRadius.circular(8),
-          color: theme.scaffoldBackgroundColor,
-          child: Container(
-            width: width ?? AppNum.easyDialog,
-            padding: EdgeInsets.symmetric(vertical: AppNum.padding),
-            decoration: BoxDecoration(borderRadius: .circular(8)),
-            child: Column(
-              spacing: AppNum.spaceLarge,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                Flexible(
-                  child: Padding(
-                    padding: padding ?? .symmetric(horizontal: AppNum.padding),
-                    child: content,
+    return Focus(
+      autofocus: true,
+      onKeyEvent: (node, event) {
+        if (event.logicalKey == LogicalKeyboardKey.enter) {
+          onEnter?.call();
+        }
+        return KeyEventResult.ignored;
+      },
+      child: UnconstrainedBox(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.95,
+          ),
+          child: Material(
+            borderRadius: BorderRadius.circular(8),
+            color: theme.scaffoldBackgroundColor,
+            child: Container(
+              width: width ?? AppNum.easyDialog,
+              padding: EdgeInsets.symmetric(vertical: AppNum.padding),
+              decoration: BoxDecoration(borderRadius: .circular(8)),
+              child: Column(
+                spacing: AppNum.spaceLarge,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(title, style: theme.textTheme.bodyMedium),
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          padding ?? .symmetric(horizontal: AppNum.padding),
+                      child: content,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: .symmetric(horizontal: AppNum.padding),
-                  child: Row(
-                    spacing: actionsSpacing ?? AppNum.spaceLarge,
-                    mainAxisAlignment: actionsAxisAlignment,
-                    children:
-                        actions ??
-                        [
-                          if (extraButton != null) ...[extraButton!, Spacer()],
-                          TextButton(
-                            onPressed: () {
-                              onCancel?.call();
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              cancelText ?? tr(AppL10n.dialogExit),
-                              style: textStyle,
+                  Padding(
+                    padding: .symmetric(horizontal: AppNum.padding),
+                    child: Row(
+                      spacing: actionsSpacing ?? AppNum.spaceLarge,
+                      mainAxisAlignment: actionsAxisAlignment,
+                      children:
+                          actions ??
+                          [
+                            if (extraButton != null) ...[
+                              extraButton!,
+                              Spacer(),
+                            ],
+                            TextButton(
+                              onPressed: () {
+                                onCancel?.call();
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                cancelText ?? tr(AppL10n.dialogExit),
+                                style: textStyle,
+                              ),
                             ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              onOk?.call();
-                              if (autoPop) Navigator.pop(context);
-                            },
-                            child: Text(
-                              okText ?? tr(AppL10n.dialogOk),
-                              style: textStyle,
+                            TextButton(
+                              onPressed: () {
+                                onOk?.call();
+                                if (autoPop) Navigator.pop(context);
+                              },
+                              child: Text(
+                                okText ?? tr(AppL10n.dialogOk),
+                                style: textStyle,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
