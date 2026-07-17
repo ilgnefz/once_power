@@ -6,7 +6,7 @@ import 'package:once_power/model/advance_replace.dart';
 import 'package:once_power/model/file.dart';
 import 'package:once_power/model/rule.dart';
 import 'package:once_power/view/action/advance/dialog/add.dart';
-import 'package:once_power/view/action/advance/dialog/add_key_input.dart';
+import 'package:once_power/view/action/advance/dialog/add_map_key.dart';
 import 'package:once_power/view/action/advance/dialog/delete.dart';
 import 'package:once_power/view/action/advance/dialog/replace.dart';
 import 'package:once_power/view/action/advance/group/auto.dart';
@@ -105,8 +105,8 @@ Future<void> showAllTypeDetail(
   );
 }
 
-Future<void> showKeyInput(BuildContext context) async {
-  await AnimatedDialog.show(context: context, child: KeyInputView());
+Future<void> showMapKeyInput(BuildContext context) async {
+  await AnimatedDialog.show(context: context, child: MapKeyView());
 }
 
 Future<void> showAddExport(BuildContext context) async {

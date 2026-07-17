@@ -49,8 +49,7 @@ class BottomView extends StatelessWidget {
         spacing: AppNum.spaceSmall,
         children: [
           SaveButton(),
-          if (Platform.isWindows) ...[RegeditButton(),
-          AutoRunButton()],
+          if (Platform.isWindows) ...[RegeditButton(), AutoRunButton()],
           LogButton(),
           ViewButton(),
           CSVButton(),

@@ -131,7 +131,7 @@ If you are viewing preview images on a high-resolution screen and feel the image
 
 By default, the software does not save any changes made by the user except for settings. When enabled, it can store the values of most input contents in each mode for direct use next time
 
-![image-20260423100436944](doc/3.png)
+![image-20260423100436944](doc/2.png)
 
 ### **System Right-Click Menu**
 

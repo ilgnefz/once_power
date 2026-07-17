@@ -70,7 +70,7 @@ class AddMetaGroup extends StatelessWidget {
               angle: 45,
               child: ClickIcon(
                 icon: Icons.key_rounded,
-                onPressed: () async => await showKeyInput(context),
+                onPressed: () async => await showMapKeyInput(context),
               ),
             ),
           ),

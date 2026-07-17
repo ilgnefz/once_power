@@ -35,7 +35,7 @@ class InputField extends StatefulWidget {
   final bool enabled;
   final bool showClear;
   final EdgeInsetsGeometry? margin;
-  final List<FilteringTextInputFormatter>? inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
   final void Function(String)? onComplete;
   final void Function()? onClear;

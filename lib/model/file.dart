@@ -104,6 +104,11 @@ class FileInfo {
 
   String getNewPath(bool isUndo) =>
       isUndo ? beforePath : join(parent, getFullNewName());
+
+  @override
+  String toString() {
+    return 'FileInfo{id: $id, name: $name, newName: $newName, parent: $parent, path: $path, tempPath: $tempPath, beforePath: $beforePath, extension: $extension, newExtension: $newExtension, createdDate: $createdDate, modifiedDate: $modifiedDate, accessedDate: $accessedDate, type: $type, resolution: $resolution, metaInfo: $metaInfo, thumbnail: $thumbnail, size: $size, group: $group, checked: $checked}';
+  }
 }
 
 class DateInfo {

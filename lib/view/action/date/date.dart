@@ -109,7 +109,7 @@ class DateView extends ConsumerWidget {
           ),
           Spacer(),
           AddGroup(),
-          SizedBox(height: space),
+          SizedBox(height: AppNum.spaceMedium),
           FilePickerGroup(slot: ApplyModify()),
           SizedBox(height: 8),
         ],

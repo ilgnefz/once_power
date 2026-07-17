@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OncePower"
-#define MyAppVersion "3.2.1"
+#define MyAppVersion "3.2.2"
 #define MyAppPublisher "ilgnefz"
 #define MyAppURL "https://github.com/ilgnefz/once_power"
 #define MyAppExeName "once_power.exe"

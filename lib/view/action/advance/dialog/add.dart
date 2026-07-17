@@ -86,7 +86,7 @@ class _AddViewState extends ConsumerState<AddView> {
     Navigator.pop(context);
     if (mode.isMetaData && metaData.type.isLocation) {
       String? key = StorageUtil.getString(AppKeys.mapKey);
-      if (key == null || key.isEmpty) showKeyInput(context);
+      if (key == null || key.isEmpty) showMapKeyInput(context);
     }
   }
 

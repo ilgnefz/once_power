@@ -3,6 +3,8 @@ class AppKeys {
   static String targetFolder = 'targetFolder';
   static String presetName = 'presetName';
   static String mapKey = 'mapKey';
+  // static String videoKey = 'videoKey';
+  // static String language = 'language';
   static String rightMenuFolderPath = 'rightMenuFolderPath';
   // int
   static String dateLength = 'dateLength';

@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: aff32c08f92787a557dd5c0145ac91536481831a01b4648136373cddb0e64f8c
+      sha256: ea2bad3c89a27635ce2d85cce4d6b199da49a5a48ec77b03e45b65a3b90922b0
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.9.2"
+    version: "5.10.0"
   dio_web_adapter:
     dependency: transitive
     description:
@@ -579,10 +579,10 @@ packages:
     dependency: "direct main"
     description:
       name: fvp
-      sha256: "0f147516a2520bb37efc9027bce1f20a0aa4487428e9f1437ad7dfa449aa93bd"
+      sha256: ac06c5ecdf65abb2ce413c9ca6c73fd74bff7c394879c17a98d6b94056b71c52
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.37.2"
+    version: "0.37.3"
   glob:
     dependency: transitive
     description:

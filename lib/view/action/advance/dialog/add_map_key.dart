@@ -8,14 +8,14 @@ import 'package:once_power/widget/base/dialog.dart';
 import 'package:once_power/widget/common/input_field.dart';
 import 'package:once_power/widget/common/link_text.dart';
 
-class KeyInputView extends StatefulWidget {
-  const KeyInputView({super.key});
+class MapKeyView extends StatefulWidget {
+  const MapKeyView({super.key});
 
   @override
-  State<KeyInputView> createState() => _KeyInputViewState();
+  State<MapKeyView> createState() => _KeyInputViewState();
 }
 
-class _KeyInputViewState extends State<KeyInputView> {
+class _KeyInputViewState extends State<MapKeyView> {
   late TextEditingController _controller;
 
   @override

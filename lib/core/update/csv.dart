@@ -15,7 +15,7 @@ import 'package:once_power/util/notification.dart';
 import 'package:path/path.dart' as path;
 
 void cSVUpdateName(WidgetRef ref) {
-  List<FileInfo> list = ref.watch(fileListProvider);
+  List<FileInfo> list = ref.read(fileListProvider);
   List<CSVRenameInfo> csvList = ref.watch(cSVDataProvider);
   bool isA = ref.watch(cSVNameColumnProvider) == 'A';
   CSVRenameInfo badInfo = CSVRenameInfo(nameA: '', nameB: '');

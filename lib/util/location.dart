@@ -74,7 +74,10 @@ Future<String> getTrueLocation(double? latitude, double? longitude) async {
 }
 
 Future<String?> getCacheLocation(String key) async {
-  String folder = path.join(path.dirname(Platform.resolvedExecutable), 'cache');
+  String folder = path.join(
+    path.dirname(Platform.resolvedExecutable),
+    'caches',
+  );
   String filePath = path.join(folder, 'location.json');
 
   try {
