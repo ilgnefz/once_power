@@ -81,6 +81,7 @@ void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
       removeOne(ref, file);
     }
     SuspenseState.addAll(caches);
+    ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
   } else {
     showSuspenseErrorNotification();
   }
