@@ -9,6 +9,7 @@ import 'package:once_power/model/file.dart';
 import 'package:once_power/provider/file.dart';
 import 'package:once_power/provider/select.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/util/selection.dart';
 import 'package:once_power/view/content/list/item.dart';
 import 'package:once_power/view/content/top/adjust_size.dart';
 import 'package:once_power/view/content/top/expand.dart';
@@ -84,7 +85,10 @@ class ContentTop extends ConsumerWidget {
       ],
       action: FilterButton(),
       icon: Icons.delete_rounded,
-      onDelete: ref.read(fileListProvider.notifier).clear,
+      onDelete: () {
+        StashState.clear();
+        ref.read(fileListProvider.notifier).clear();
+      },
     );
   }
 }

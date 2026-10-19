@@ -77,7 +77,7 @@ class ContentCenter extends ConsumerWidget {
               provider.clear();
               break;
             case LogicalKeyboardKey.keyX when isControlPressed:
-              suspenseFileList(ref, ref.watch(sortSelectListProvider));
+              stashFileList(ref, ref.watch(sortSelectListProvider));
               break;
             case LogicalKeyboardKey.keyC when isControlPressed:
               if (selects.isNotEmpty) toTheFront(ref, selects.last);

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:once_power/core/update/update.dart';
 import 'package:once_power/enum/advance.dart';
 import 'package:once_power/enum/sort.dart';
 import 'package:once_power/model/file.dart';
@@ -72,31 +73,33 @@ void toTheLast(WidgetRef ref, List<FileInfo> selectList) {
   );
 }
 
-void suspenseFileList(WidgetRef ref, List<FileInfo> selectList) async {
-  int total = ref.read(fileListProvider).length;
-  if (selectList.length < total) {
-    List<FileInfo> caches = [];
+void stashFileList(WidgetRef ref, List<FileInfo> selectList) async {
+  List<FileInfo> all = ref.read(sortListProvider);
+  if (selectList.length < all.length) {
+    List<FileInfo> stashList = [];
     for (FileInfo file in selectList) {
-      caches.add(file);
-      removeOne(ref, file);
+      stashList.add(file);
+      all.remove(file);
     }
-    SuspenseState.addAll(caches);
+    StashState.addAll(stashList);
     ref.read(currentSortProvider.notifier).update(SortType.defaultSort);
+    ref.read(fileListProvider.notifier).addAll(all);
+    updateName(ref);
   } else {
-    showSuspenseErrorNotification();
+    showStashErrorNotification();
   }
 }
 
 void toTheFront(WidgetRef ref, FileInfo file) {
   List<FileInfo> files = ref.read(sortListProvider);
   int index = files.indexWhere((e) => e == file);
-  List<FileInfo> list = SuspenseState.list;
+  List<FileInfo> list = StashState.list;
   if (index == 0) {
     insertFirst(ref, list);
   } else {
     insertPosition(ref, index, list);
   }
-  SuspenseState.clear();
+  StashState.clear();
   ref.read(sortSelectListProvider.notifier).clear();
   ref.read(sortSelectListProvider.notifier).addAll(list);
 }
@@ -104,13 +107,13 @@ void toTheFront(WidgetRef ref, FileInfo file) {
 void toTheBehind(WidgetRef ref, FileInfo file) {
   List<FileInfo> files = ref.read(sortListProvider);
   int index = files.indexWhere((e) => e == file);
-  List<FileInfo> list = SuspenseState.list;
+  List<FileInfo> list = StashState.list;
   if (index == files.length) {
     insertLast(ref, list);
   } else {
     insertPosition(ref, index + 1, list);
   }
-  SuspenseState.clear();
+  StashState.clear();
   ref.read(sortSelectListProvider.notifier).clear();
   ref.read(sortSelectListProvider.notifier).addAll(list);
 }

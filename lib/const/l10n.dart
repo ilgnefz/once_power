@@ -208,8 +208,8 @@ class AppL10n {
   static const String menuFirst = 'menu.first';
   static const String menuCenter = 'menu.center';
   static const String menuLast = 'menu.last';
-  static const String menuSuspense = 'menu.suspense';
-  static const String menuTakeout = 'menu.takeout';
+  static const String menuStash = 'menu.stash';
+  static const String menuRestore = 'menu.restore';
   static const String menuFront = 'menu.front';
   static const String menuBehind = 'menu.behind';
   static const String menuPath = 'menu.path';
@@ -420,8 +420,8 @@ class AppL10n {
   static const String errMove = 'error.move';
   static const String errOpen = 'error.open';
   static const String errOpenInfo = 'error.openInfo';
-  static const String errSuspense = 'error.suspense';
-  static const String errSuspenseInfo = 'error.suspenseInfo';
+  static const String errStash = 'error.stash';
+  static const String errStashInfo = 'error.stashInfo';
   static const String errTxtDecode = 'error.txtDecode';
   static const String errTxtDecodeInfo = 'error.txtDecodeInfo';
   static const String errCheck = 'error.check';
@@ -495,7 +495,7 @@ class AppL10n {
   static const String settingHotKeyCancel = 'setting.hotKey.cancel';
   static const String settingHotKeyDelete = 'setting.hotKey.delete';
   static const String settingHotKeyToggle = 'setting.hotKey.toggle';
-  static const String settingHotKeySuspense = 'setting.hotKey.suspense';
+  static const String settingHotKeyStash = 'setting.hotKey.stash';
   static const String settingHotKeyFront = 'setting.hotKey.front';
   static const String settingHotKeyBehind = 'setting.hotKey.behind';
   static const String settingTutorial = 'setting.tutorial';
