@@ -15,10 +15,10 @@ class SelectionState {
   static void menusUpdate(bool value) => _menusPressedCtrl = value;
 }
 
-class SuspenseState {
-  static final SuspenseState _instance = SuspenseState._internal();
-  factory SuspenseState() => _instance;
-  SuspenseState._internal();
+class StashState {
+  static final StashState _instance = StashState._internal();
+  factory StashState() => _instance;
+  StashState._internal();
 
   // 记录是否刚使用过 Ctrl 键进行多选
   static final List<FileInfo> _list = [];

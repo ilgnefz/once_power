@@ -13,7 +13,7 @@ class TipPanel extends StatelessWidget {
     final String cancel = tr(AppL10n.settingHotKeyCancel);
     final String delete = tr(AppL10n.settingHotKeyDelete);
     final String toggle = tr(AppL10n.settingHotKeyToggle);
-    final String suspense = tr(AppL10n.settingHotKeySuspense);
+    final String stash = tr(AppL10n.settingHotKeyStash);
     final String front = tr(AppL10n.settingHotKeyFront);
     final String behind = tr(AppL10n.settingHotKeyBehind);
 
@@ -35,7 +35,7 @@ class TipPanel extends StatelessWidget {
         ),
         TableRow(
           children: [
-            TableContent(keys: ['Ctrl', 'X'], label: suspense),
+            TableContent(keys: ['Ctrl', 'X'], label: stash),
             TableContent(keys: ['Ctrl', 'C'], label: front),
           ],
         ),

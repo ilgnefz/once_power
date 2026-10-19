@@ -35,11 +35,11 @@ void showEmptyNotification() {
   ).show();
 }
 
-void showSuspenseErrorNotification() {
+void showStashErrorNotification() {
   NotificationInfo(
     type: NotificationType.error,
-    title: tr(AppL10n.errSuspense),
-    message: tr(AppL10n.errSuspenseInfo),
+    title: tr(AppL10n.errStash),
+    message: tr(AppL10n.errStashInfo),
     time: 3,
   ).show();
 }

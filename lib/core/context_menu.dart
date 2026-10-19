@@ -46,7 +46,7 @@ Future<void> showRightMenu(
     sortSelectList.clear();
     sortSelectList.add(file);
   }
-  List<FileInfo> suspenseList = SuspenseState.list;
+  List<FileInfo> stashList = StashState.list;
   final List<ContextMenuEntry> entries = <ContextMenuEntry>[
     RightMenuItem(
       label: tr(AppL10n.menuLocal),
@@ -101,14 +101,14 @@ Future<void> showRightMenu(
         ),
       ],
     ),
-    if (suspenseList.isEmpty && !isPreview)
+    if (stashList.isEmpty && !isPreview)
       RightMenuItem(
-        label: tr(AppL10n.menuSuspense),
-        onSelected: (_) => suspenseFileList(ref, sortSelectList),
+        label: tr(AppL10n.menuStash),
+        onSelected: (_) => stashFileList(ref, sortSelectList),
       ),
-    if (suspenseList.isNotEmpty && !isPreview)
+    if (stashList.isNotEmpty && !isPreview)
       RightMenuItem.submenu(
-        label: tr(AppL10n.menuTakeout),
+        label: tr(AppL10n.menuRestore),
         color: Theme.of(context).primaryColor,
         items: [
           RightMenuItem(
