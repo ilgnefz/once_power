@@ -5,9 +5,9 @@ import 'package:once_power/model/advance_delete.dart';
 import 'advance.dart';
 
 String advanceDeleteName(AdvanceMenuDelete menu, String name) {
-  if (menu.useRegex) return name.replaceAll(RegExp(menu.value), '');
   switch (menu.mode) {
     case DeleteMode.input:
+      if (menu.useRegex) return name.replaceAll(RegExp(menu.value), '');
       AdvanceMatch match = menu.match;
       return changeMatch(menu.match.content, match, name, menu.value, '');
     case DeleteMode.type:

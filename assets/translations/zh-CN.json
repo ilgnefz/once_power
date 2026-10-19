@@ -111,6 +111,7 @@
     "replaceHint1": "请输入匹配内容",
     "completeContent": "请输入补全内容",
     "replaceHint2": "请输入替换内容",
+    "replaceHint3": "请输入替换内容(捕获组请以 : 开头)",
     "selectedAll": "全选",
     "locationTitle": "地图 Key",
     "locationHint": "请输入高德地图 Key，用于获取位置信息",

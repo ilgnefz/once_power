@@ -111,6 +111,7 @@ class AppL10n {
   static const String advanceReplaceHint1 = 'advance.replaceHint1';
   static const String advanceCompleteContent = 'advance.completeContent';
   static const String advanceReplaceHint2 = 'advance.replaceHint2';
+  static const String advanceReplaceHint3 = 'advance.replaceHint3';
   static const String advanceSelectedAll = 'advance.selectedAll';
   static const String advanceLocationTitle = 'advance.locationTitle';
   static const String advanceLocationHint = 'advance.locationHint';

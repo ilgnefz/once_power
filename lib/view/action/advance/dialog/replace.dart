@@ -126,6 +126,8 @@ class _ReplaceViewState extends ConsumerState<ReplaceView> {
               text: newValue,
               hintText: mode.isFormat
                   ? tr(AppL10n.advanceCompleteContent)
+                  : useRegex
+                  ? tr(AppL10n.advanceReplaceHint3)
                   : tr(AppL10n.advanceReplaceHint2),
               onChanged: (value) => setState(() => newValue = value),
             ),

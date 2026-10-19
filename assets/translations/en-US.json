@@ -111,6 +111,7 @@
     "replaceHint1": "Enter match text",
     "completeContent": "Enter fill content",
     "replaceHint2": "Enter replace text",
+    "replaceHint3": "Enter replace text (Prefix with \":\" to use capture groups)",
     "selectedAll": "Select All",
     "locationTitle": "Map Key",
     "locationHint": "Enter AMap Key for location",

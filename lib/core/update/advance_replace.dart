@@ -7,9 +7,23 @@ import 'advance.dart';
 
 String advanceReplaceName(AdvanceMenuReplace menu, String name) {
   String oldValue = menu.value[0], newValue = menu.value[1];
-  if (menu.useRegex) return name.replaceAll(RegExp(oldValue), newValue);
   switch (menu.mode) {
     case ReplaceMode.normal:
+      if (menu.useRegex) {
+        final reg = RegExp(oldValue);
+        if (newValue.startsWith(":") || newValue.endsWith("：")) {
+          final template = newValue.substring(1);
+          return name.replaceAllMapped(reg, (match) {
+            String result = template;
+            for (int i = 1; i <= match.groupCount; i++) {
+              final g = match.group(i) ?? '';
+              result = result.replaceAll('\$$i', g);
+            }
+            return result;
+          });
+        }
+        return name.replaceAll(reg, newValue);
+      }
       AdvanceMatch match = menu.match;
       return changeMatch(menu.match.content, match, name, oldValue, newValue);
     case ReplaceMode.convert:
