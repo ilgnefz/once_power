@@ -1,0 +1,118 @@
+name: Build Flutter Linux App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read  # 因为不发Release，只读权限即可
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install Linux dependencies
+        run: |
+          sudo add-apt-repository universe
+          sudo apt-get update -y
+          sudo apt-get install -y \
+            libfuse2 \
+            ninja-build \
+            libgtk-3-dev \
+            libayatana-appindicator3-dev \
+            locate \
+            rpm \
+            patchelf \
+            libpulse0 \
+            libc++1 \
+            libgl1 \
+            libblkid-dev \
+            liblzma-dev \
+            libstdc++-12-dev
+
+      - name: Install appimagetool
+        run: |
+          wget -O appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+          chmod +x appimagetool
+          sudo mv appimagetool /usr/local/bin/
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Extract version
+        id: extract_version
+        run: |
+          VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Install fastforge
+        run: dart pub global activate fastforge
+
+      - name: Clean previous build artifacts
+        run: rm -rf dist/
+
+      - name: Build all packages
+        run: fastforge package --platform linux --targets appimage,deb,rpm
+
+      - name: Collect packages to dist/
+        run: |
+          find dist/ -name "*.AppImage" -exec mv {} dist/ \;
+          find dist/ -name "*.deb" -exec mv {} dist/ \;
+          find dist/ -name "*.rpm" -exec mv {} dist/ \;
+
+      - name: Rename AppImage
+        run: |
+          FILE=$(ls dist/*.AppImage | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage"
+          fi
+        continue-on-error: true
+
+      - name: Rename DEB
+        run: |
+          FILE=$(ls dist/*.deb | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb"
+          fi
+        continue-on-error: true
+
+      - name: Rename RPM
+        run: |
+          FILE=$(ls dist/*.rpm | head -1)
+          if [ -n "$FILE" ]; then
+            mv "$FILE" "dist/OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm"
+          fi
+        continue-on-error: true
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.AppImage
+          path: dist/*.AppImage
+          retention-days: 7
+
+      - name: Upload DEB
+        uses: actions/upload-artifact@v4
+        with:
+          name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.deb
+          path: dist/*.deb
+          retention-days: 7
+
+      - name: Upload RPM
+        uses: actions/upload-artifact@v4
+        with:
+          name: OncePower-v${{ steps.extract_version.outputs.version }}-Linux.rpm
+          path: dist/*.rpm
+          retention-days: 7

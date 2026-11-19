@@ -1,0 +1,30 @@
+class AppKeys {
+  static const String addFolder = 'addFolder';
+  static const String addSelf = 'addSelf';
+  static const String addSubfolder = 'addSubfolder';
+  static const String append = 'append';
+  static const String autoRename = 'autoRename';
+  static const String autoRun = 'autoRun';
+  static const String cancelRename = 'cancelRename';
+  static const String color = 'color';
+  static const String contextMenu = 'contextMenu';
+  static const String caseType = 'caseType';
+  static const String caseExtension = 'caseExtension';
+  static const String ignoreCase = 'ignoreCase';
+  static const String isCyclePrefix = 'isCyclePrefix';
+  static const String isCycleSuffix = 'isCycleSuffix';
+  static const String isDateRename = 'isDateRename';
+  static const String isSwapPrefix = 'isSwapPrefix';
+  static const String isSwapSuffix = 'isSwapSuffix';
+  static const String language = 'language';
+  static const String length = 'length';
+  static const String maximize = 'maximize';
+  static const String position = 'position';
+  static const String save = 'save';
+  static const String saveLog = 'saveLog';
+  static const String sendNotification = 'sendNotification';
+  static const String size = 'size';
+  static const String swapLabel = 'swapLabel';
+  static const String theme = 'theme';
+  static const String viewMode = 'viewMode';
+}

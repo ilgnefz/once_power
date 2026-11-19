@@ -1,0 +1,119 @@
+{
+  "action": {
+    "function": {
+      "replace": "替换",
+      "keep": "保留",
+      "advanced": "高级",
+      "organize": "整理"
+    },
+    "normal": {
+      "match": "请输入匹配内容",
+      "length": "输入数字或指定长度字符串",
+      "modify": "请输入修改内容",
+      "case": "不区分大小写",
+      "today": "今天的日期",
+      "matchType": {
+        "self": "匹配的",
+        "front": "之前的",
+        "behind": "之后的",
+        "between": "之间的"
+      },
+      "date": "日期",
+      "dateRename": "以日期命名",
+      "prefix": "前缀",
+      "prefixHint": "请输入前缀内容",
+      "prefixCircle": "循环前缀内容",
+      "prefixSwap": "交换前缀和递增数字位置",
+      "suffix": "后缀",
+      "suffixHint": "请输入后缀内容",
+      "suffixCircle": "循环后缀内容",
+      "suffixSwap": "交换后缀和递增数字位置",
+      "upload": "上传以空格或换行符隔开各个名称的 .txt 文件",
+      "extension": "扩展",
+      "extensionHint": "请输入新的扩展名",
+      "extensionEnable": "启用修改扩展名",
+      "caseFile": "区分文件类型",
+      "caseExtension": "区分扩展"
+    },
+    "organize": {
+      "target": "请选择目标文件夹"
+    },
+    "addFolder": "添加文件夹",
+    "addSubfolder": "添加子文件夹",
+    "append": "追加模式",
+    "addFile": "添加文件",
+    "selectFolder": "选择文件夹",
+    "apply": "应用更改"
+  },
+  "content": {
+    "origin": "原名称",
+    "new": "新名称",
+    "files": "文件",
+    "name": "文件名",
+    "folder": "文件夹",
+    "empty1": "拖动文件（夹）到这里",
+    "empty2": "拖动图片视频文件（夹）到这里",
+    "loading": "加载中...",
+    "error": "图片加载失败"
+  },
+  "bottom": {
+    "save": "保存输入内容和选项状态",
+    "view": "视图模式",
+    "csv": "上传 CSV 文件、以\",\"分隔新旧名称的 TXT 文件或本软件生成的日志文件",
+    "tv": "影视视频文件修改模式",
+    "date": "修改文件日期",
+    "export": "导出列表原文件名",
+    "setting": "设置",
+    "undo": "撤销重命名",
+    "task": "任务",
+    "time": "用时"
+  },
+  "setting": {
+    "rule": {
+      "label": "规则",
+      "self": "添加子文件夹时添加文件夹本身",
+      "swapLabel": "交换新旧名称位置",
+      "cancelRename": "名称为空不重命名",
+      "autoRename": "同名时自动重命名",
+      "autoRenameFormat": "自动重命名序列格式"
+    },
+    "general": {
+      "label": "常规",
+      "language": "软件语言",
+      "size": "记住窗口大小",
+      "position": "记住窗口位置",
+      "maximize": "启动时最大化窗口",
+      "autoRun": "开机自启",
+      "contextMenu": "开启系统右键菜单",
+      "notification": "后台完成发送系统通知"
+    },
+    "appearance": {
+      "label": "外观",
+      "theme": "主题",
+      "light": "浅色主题",
+      "dark": "深色主题",
+      "system": "跟随系统",
+      "color": "颜色"
+    },
+    "log": {
+      "label": "日志",
+      "save": "保存重命名日志"
+    },
+    "shortcut": {
+      "label": "快捷键",
+      "all": "全选",
+      "cancel": "取消选择",
+      "delete": "删除选中",
+      "toggle": "切换选中",
+      "stash": "暂存文件",
+      "front": "取出至前面",
+      "behind": "取出至后面"
+    },
+    "other": {
+      "label": "其他",
+      "check": "检查更新",
+      "checking": "检查中",
+      "download": "下载"
+    }
+  }
+}
