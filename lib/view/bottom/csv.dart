@@ -14,9 +14,9 @@ class CSVButton extends ConsumerWidget {
     return BottomClickIcon(
       tip: context.tr(AppL10n.csv),
       svg: AppIcons.csv,
-      selected: ref.watch(isViewModeProvider),
+      selected: ref.watch(isCSVModeProvider),
       onPressed: () {
-        ref.read(isViewModeProvider.notifier).toggle();
+        ref.read(isCSVModeProvider.notifier).toggle();
       },
     );
   }

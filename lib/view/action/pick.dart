@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/widget/base/button.dart';
+import 'package:once_power/widget/base/text.dart';
 
 class PickerGroup extends StatelessWidget {
   const PickerGroup({super.key});
@@ -15,13 +16,18 @@ class PickerGroup extends StatelessWidget {
         right: AppNumber.padding,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           EasyButton(label: context.tr(AppL10n.addFile), onPressed: () {}),
+          SizedBox(width: AppNumber.paddingSmall),
           EasyButton(label: context.tr(AppL10n.selectFolder), onPressed: () {}),
+          const Spacer(),
           ElevatedButton(
-            child: Text(context.tr(AppL10n.apply)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              enabledMouseCursor: SystemMouseCursors.click,
+            ),
             onPressed: () {},
+            child: BaseText(context.tr(AppL10n.apply), color: Colors.white),
           ),
         ],
       ),

@@ -50,7 +50,7 @@ class _EasySwitchState extends State<EasySwitch> {
         widget.thumbColor ??
         (widget.value
             ? theme.colorScheme.onPrimary
-            : (dark ? AppColors.iconDark : Colors.white));
+            : (dark ? AppColors.darkSwitchThumb : AppColors.switchThumb));
 
     Color trackColor = widget.value ? active : inactive;
     if (enabled && _hovering) {

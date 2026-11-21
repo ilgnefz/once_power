@@ -29,6 +29,7 @@ class EmptyView extends ConsumerWidget {
             transitionBuilder: (child, animation) =>
                 RotationTransition(turns: animation, child: child),
             child: Center(
+              key: ValueKey(viewInfo),
               child: BaseIcon(
                 icon: viewInfo ? null : Icons.drive_folder_upload_rounded,
                 svg: viewInfo ? AppIcons.image : null,

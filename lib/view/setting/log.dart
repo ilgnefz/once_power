@@ -42,7 +42,6 @@ class _LogViewState extends ConsumerState<LogView> {
           width: double.infinity,
           height: 300,
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.grey.shade300),
           ),

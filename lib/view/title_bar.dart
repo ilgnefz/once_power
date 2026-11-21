@@ -51,10 +51,20 @@ class _TitleBarViewState extends State<TitleBarView> {
         padding: .only(left: AppNumber.paddingMedium),
         child: Row(
           children: [
-            BaseIcon(
-              svg: AppIcons.logo,
-              size: AppNumber.logo,
-              color: theme.colorScheme.primary,
+            Stack(
+              fit: .loose,
+              children: [
+                Positioned(
+                  top: 6,
+                  left: 6,
+                  child: Container(width: 14, height: 14, color: Colors.white),
+                ),
+                BaseIcon(
+                  svg: AppIcons.logo,
+                  size: AppNumber.logo,
+                  color: theme.colorScheme.primary,
+                ),
+              ],
             ),
             SizedBox(width: AppNumber.spaceSmall),
             Text(AppText.appName, style: titleBarTheme?.textStyle),

@@ -4,8 +4,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/widget/action/input.dart';
 import 'package:once_power/widget/action/item.dart';
-import 'package:once_power/widget/base/input.dart';
 
 class PrefixInput extends ConsumerWidget {
   const PrefixInput({super.key});
@@ -18,7 +18,7 @@ class PrefixInput extends ConsumerWidget {
       icon: AppIcons.cycle,
       checked: ref.watch(isCyclePrefixProvider),
       onIconPressed: ref.read(isCyclePrefixProvider.notifier).toggle,
-      child: BaseInput(
+      child: EasyInput(
         hintText: context.tr(AppL10n.prefixHint),
         onChanged: (value) {},
         suffixIcon: AppIcons.fileUp,

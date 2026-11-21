@@ -12,6 +12,7 @@ class AppIcons {
   static const String date = '${basePath}date.svg';
   static const String dateAscending = '${basePath}date-ascending.svg';
   static const String dateDescending = '${basePath}date-descending.svg';
+  static const String dateRename = '${basePath}date-rename.svg';
   static const String error = '${basePath}error.svg';
   static const String extension = '${basePath}extension.svg';
   static const String export = '${basePath}export.svg';

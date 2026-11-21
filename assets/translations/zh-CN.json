@@ -18,7 +18,15 @@
         "behind": "之后的",
         "between": "之间的"
       },
-      "date": "日期",
+      "date": {
+        "label":"日期",
+        "created": "创建日期",
+        "modified": "修改日期",
+        "accessed": "访问日期",
+        "captured": "拍摄日期",
+        "earliest": "最早日期",
+        "latest": "最晚日期"
+      },
       "dateRename": "以日期命名",
       "prefix": "前缀",
       "prefixHint": "请输入前缀内容",
@@ -89,11 +97,17 @@
     },
     "appearance": {
       "label": "外观",
-      "theme": "主题",
       "light": "浅色主题",
       "dark": "深色主题",
       "system": "跟随系统",
-      "color": "颜色"
+      "color": "主题色",
+      "background": "背景色",
+      "icon": "图标色",
+      "outline": "轮廓色",
+      "controlSurface": "控件底色",
+      "containerSurface": "容器底色",
+      "sync": "同步背景色",
+      "divider": "分割线透明"
     },
     "log": {
       "label": "日志",

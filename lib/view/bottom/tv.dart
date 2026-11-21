@@ -14,10 +14,8 @@ class TvButton extends ConsumerWidget {
     return BottomClickIcon(
       tip: context.tr(AppL10n.tv),
       svg: AppIcons.tv,
-      selected: ref.watch(isViewModeProvider),
-      onPressed: () {
-        ref.read(isViewModeProvider.notifier).toggle();
-      },
+      selected: ref.watch(isTVModeProvider),
+      onPressed: ref.read(isTVModeProvider.notifier).toggle,
     );
   }
 }

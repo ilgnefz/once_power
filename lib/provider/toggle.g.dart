@@ -369,6 +369,58 @@ abstract class _$IsSwapSuffix extends $Notifier<bool> {
   }
 }
 
+@ProviderFor(IsModifyExtension)
+final isModifyExtensionProvider = IsModifyExtensionProvider._();
+
+final class IsModifyExtensionProvider
+    extends $NotifierProvider<IsModifyExtension, bool> {
+  IsModifyExtensionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isModifyExtensionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isModifyExtensionHash();
+
+  @$internal
+  @override
+  IsModifyExtension create() => IsModifyExtension();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isModifyExtensionHash() => r'd6aed8025e05af26d63061abcaa3141a48c95463';
+
+abstract class _$IsModifyExtension extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(IsCaseType)
 final isCaseTypeProvider = IsCaseTypeProvider._();
 
@@ -677,6 +729,159 @@ abstract class _$IsViewMode extends $Notifier<bool> {
   }
 }
 
+@ProviderFor(IsTVMode)
+final isTVModeProvider = IsTVModeProvider._();
+
+final class IsTVModeProvider extends $NotifierProvider<IsTVMode, bool> {
+  IsTVModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isTVModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isTVModeHash();
+
+  @$internal
+  @override
+  IsTVMode create() => IsTVMode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isTVModeHash() => r'4ee2c02cd4d2f0ff61917faecdc6c53489f84644';
+
+abstract class _$IsTVMode extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsCSVMode)
+final isCSVModeProvider = IsCSVModeProvider._();
+
+final class IsCSVModeProvider extends $NotifierProvider<IsCSVMode, bool> {
+  IsCSVModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isCSVModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isCSVModeHash();
+
+  @$internal
+  @override
+  IsCSVMode create() => IsCSVMode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isCSVModeHash() => r'6f32ed9a58c437026e492bee0f642bd03402c36e';
+
+abstract class _$IsCSVMode extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsDateMode)
+final isDateModeProvider = IsDateModeProvider._();
+
+final class IsDateModeProvider extends $NotifierProvider<IsDateMode, bool> {
+  IsDateModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isDateModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isDateModeHash();
+
+  @$internal
+  @override
+  IsDateMode create() => IsDateMode();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isDateModeHash() => r'76bb66a7f534b0ad7018c6ed30663aeabcc620d8';
+
+abstract class _$IsDateMode extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(IsSwapLabel)
 final isSwapLabelProvider = IsSwapLabelProvider._();
 
@@ -711,6 +916,213 @@ final class IsSwapLabelProvider extends $NotifierProvider<IsSwapLabel, bool> {
 String _$isSwapLabelHash() => r'1a4d98878e1d1c3f2caafde57a685838f3fccf4e';
 
 abstract class _$IsSwapLabel extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsLightSync)
+final isLightSyncProvider = IsLightSyncProvider._();
+
+final class IsLightSyncProvider extends $NotifierProvider<IsLightSync, bool> {
+  IsLightSyncProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isLightSyncProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isLightSyncHash();
+
+  @$internal
+  @override
+  IsLightSync create() => IsLightSync();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isLightSyncHash() => r'88f82cbafaa4f363f6c1741b6d6f404258b0caf7';
+
+abstract class _$IsLightSync extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsLightTransparent)
+final isLightTransparentProvider = IsLightTransparentProvider._();
+
+final class IsLightTransparentProvider
+    extends $NotifierProvider<IsLightTransparent, bool> {
+  IsLightTransparentProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isLightTransparentProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isLightTransparentHash();
+
+  @$internal
+  @override
+  IsLightTransparent create() => IsLightTransparent();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isLightTransparentHash() =>
+    r'1b4ba90a10e67ccd5a48179e01747bd12ee18467';
+
+abstract class _$IsLightTransparent extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsDarkSync)
+final isDarkSyncProvider = IsDarkSyncProvider._();
+
+final class IsDarkSyncProvider extends $NotifierProvider<IsDarkSync, bool> {
+  IsDarkSyncProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isDarkSyncProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isDarkSyncHash();
+
+  @$internal
+  @override
+  IsDarkSync create() => IsDarkSync();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isDarkSyncHash() => r'37dc88e50078110ea7579caac8e0502d96851795';
+
+abstract class _$IsDarkSync extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsDarkTransparent)
+final isDarkTransparentProvider = IsDarkTransparentProvider._();
+
+final class IsDarkTransparentProvider
+    extends $NotifierProvider<IsDarkTransparent, bool> {
+  IsDarkTransparentProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isDarkTransparentProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isDarkTransparentHash();
+
+  @$internal
+  @override
+  IsDarkTransparent create() => IsDarkTransparent();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isDarkTransparentHash() => r'd748537763f1189bf3211e598c3016828c076f5e';
+
+abstract class _$IsDarkTransparent extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override

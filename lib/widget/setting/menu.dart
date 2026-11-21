@@ -1,7 +1,7 @@
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:once_power/config/theme/theme.dart';
 import 'package:once_power/constant/number.dart';
+import 'package:once_power/widget/base/dropdown.dart';
 import 'package:once_power/widget/base/switch.dart';
 import 'package:once_power/widget/base/text.dart';
 
@@ -22,15 +22,11 @@ class SettingMenu<T extends Object> extends StatelessWidget {
     required List<TextDropdownItem<T>> items,
     double width = 120.0,
     ValueChanged<T>? onChanged,
-  }) : action = TextDropdown<T>(
+  }) : action = EasyTextDropdown<T>(
          value: value,
          items: items,
          onChanged: onChanged,
-         textStyle: TextStyle(fontSize: 14, fontFamily: ThemeConfig.font),
          width: width,
-         height: AppNumber.widgetHeight,
-         itemGap: AppNumber.spaceSmall / 2,
-         radius: AppNumber.radius,
        );
 
   final String label;

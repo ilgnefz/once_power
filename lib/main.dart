@@ -5,12 +5,12 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/config/language.dart';
 import 'package:once_power/constant/text.dart';
 import 'package:once_power/enmu/app.dart';
-import 'package:once_power/provider/switch.dart';
-import 'package:once_power/provider/value.dart';
 import 'package:once_power/view/home.dart';
 
 import 'config/app.dart';
 import 'config/theme/theme.dart';
+import 'model/appearance.dart';
+import 'provider/value.dart';
 
 // TODO: 使用系统字体
 // TODO: 更改省略式中间还是末尾
@@ -51,13 +51,13 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Color seed = Color(ref.watch(themeColorProvider));
+    final AppearanceSettings appearance = ref.watch(appearanceProvider);
     return MaterialApp(
       title: AppText.appName,
       debugShowCheckedModeBanner: false,
-      themeMode: ref.watch(currentThemeProvider).mode,
-      theme: ThemeConfig.light(seed),
-      darkTheme: ThemeConfig.dark(seed),
+      themeMode: appearance.theme.mode,
+      theme: ThemeConfig.light(appearance),
+      darkTheme: ThemeConfig.dark(appearance),
       localizationsDelegates: [
         ...context.localizationDelegates,
         GlobalMaterialLocalizations.delegate,

@@ -3,7 +3,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
-import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/bottom/icon.dart';
 
 class ExportButton extends ConsumerWidget {
@@ -15,10 +14,8 @@ class ExportButton extends ConsumerWidget {
       tip: context.tr(AppL10n.export),
       svg: AppIcons.export,
       // icon: Icons.ios_share_rounded,
-      selected: ref.watch(isViewModeProvider),
-      onPressed: () {
-        ref.read(isViewModeProvider.notifier).toggle();
-      },
+      selected: false,
+      onPressed: () {},
     );
   }
 }

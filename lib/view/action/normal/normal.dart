@@ -1,11 +1,13 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/view/action/case.dart';
-import 'package:once_power/view/action/normal/extension.dart';
 import 'package:once_power/view/action/pick.dart';
 
 import '../add.dart';
 import 'chip.dart';
+import 'date.dart';
+import 'extension.dart';
+import 'index.dart';
 import 'match.dart';
 import 'modify.dart';
 import 'prefix.dart';
@@ -30,7 +32,9 @@ class ActionNormal extends StatelessWidget {
                   const MatchInput(),
                   MatchChip(isReplace),
                   const ModifyInput(),
+                  const DateInput(),
                   const PrefixInput(),
+                  const IndexInput(),
                   const SuffixInput(),
                   const ExtensionInput(),
                 ],

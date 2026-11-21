@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/provider/toggle.dart';
+import 'package:once_power/service/storage.dart';
 import 'package:once_power/widget/bottom/icon.dart';
 
 class UndoButton extends ConsumerWidget {
@@ -15,7 +16,7 @@ class UndoButton extends ConsumerWidget {
       icon: Icons.undo,
       selected: ref.watch(isViewModeProvider),
       onPressed: () {
-        ref.read(isViewModeProvider.notifier).toggle();
+        StorageService.clear();
       },
     );
   }

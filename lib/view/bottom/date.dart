@@ -14,10 +14,8 @@ class DateButton extends ConsumerWidget {
     return BottomClickIcon(
       tip: context.tr(AppL10n.modifyDate),
       svg: AppIcons.date,
-      selected: ref.watch(isViewModeProvider),
-      onPressed: () {
-        ref.read(isViewModeProvider.notifier).toggle();
-      },
+      selected: ref.watch(isDateModeProvider),
+      onPressed: () => ref.read(isDateModeProvider.notifier).toggle(),
     );
   }
 }

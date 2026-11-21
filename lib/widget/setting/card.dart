@@ -2,12 +2,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/widget/base/text.dart';
 
-class SettingCard extends StatelessWidget {
-  const SettingCard({super.key, required this.title, required this.children});
-
-  final String title;
-  final List<Widget> children;
-
+class const SettingCard({
+  super.key,
+  required final String title,
+  required final List<Widget> children,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,8 +16,7 @@ class SettingCard extends StatelessWidget {
         crossAxisAlignment: .start,
         spacing: AppNumber.spaceMedium,
         children: [
-          BaseText(title, fontSize: 16, fontWeight: .w600),
-          // SizedBox(height: AppNumber.spaceMedium),
+          BaseText(title, style: Theme.of(context).textTheme.titleMedium),
           ...children,
         ],
       ),

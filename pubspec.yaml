@@ -47,19 +47,19 @@ dependencies:
   window_manager: ^0.5.2
   # ----- UI -----
   flutter_anchored_overlay:
-    path: E:/Workspace/Package/flutter_anchored_overlay
+    path: E:/Workspace/FlutterPackages/flutter_anchored_overlay
   flutter_color_picker:
-    path: E:/Workspace/Package/flutter_color_picker
+    path: E:/Workspace/FlutterPackages/flutter_color_picker
   flutter_dropdown:
-    path: E:/Workspace/Package/flutter_dropdown
+    path: E:/Workspace/FlutterPackages/flutter_dropdown
   flutter_avif: ^3.1.0
-  flutter_svg: ^2.4.0
+  flutter_svg: ^2.5.0
   flutter_multi_select_reorder:
-    path: E:/Workspace/Package/flutter_multi_select_reorder
+    path: E:/Workspace/FlutterPackages/flutter_multi_select_reorder
   flutter_side_anchor_nav:
-    path: E:/Workspace/Package/flutter_side_anchor_nav
+    path: E:/Workspace/FlutterPackages/flutter_side_anchor_nav
   flutter_split_pane:
-    path: E:/Workspace/Package/flutter_split_pane
+    path: E:/Workspace/FlutterPackages/flutter_split_pane
 #  video_player: ^2.14.0
   # ----- Function -----
   easy_localization: ^4.0.0-dev.0

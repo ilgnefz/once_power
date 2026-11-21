@@ -17,7 +17,7 @@ class const BaseIcon({
   Widget build(BuildContext context) {
     Color iconColor = color ?? Theme.of(context).iconTheme.color!;
     return icon != null
-        ? Icon(icon, size: size, color: color)
+        ? Icon(icon, size: size, color: iconColor)
         : SvgPicture.asset(
             svg!,
             width: size ?? 20.0,

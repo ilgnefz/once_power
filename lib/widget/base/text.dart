@@ -5,6 +5,7 @@ class const BaseText(
   super.key,
   final double? fontSize,
   final Color? color,
+  final TextStyle? style,
   final FontWeight? fontWeight,
   final int maxLines = 1,
   final TextOverflow overflow = TextOverflow.ellipsis,
@@ -14,8 +15,13 @@ class const BaseText(
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: Theme.of(context).textTheme.bodyMedium
-          ?.copyWith(fontSize: fontSize, color: color, fontWeight: fontWeight),
+      style:
+          style ??
+          Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontSize: fontSize,
+            color: color,
+            fontWeight: fontWeight,
+          ),
       maxLines: maxLines,
       overflow: overflow,
       textAlign: textAlign,

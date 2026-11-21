@@ -41,7 +41,7 @@ final class CurrentModeProvider
   }
 }
 
-String _$currentModeHash() => r'120a6e7af85006154a5241ffb47396a275f76c60';
+String _$currentModeHash() => r'3f7e5c1085f36aeeb86ef1594188eeee14f68571';
 
 abstract class _$CurrentMode extends $Notifier<FunctionMode> {
   FunctionMode build();
@@ -54,6 +54,58 @@ abstract class _$CurrentMode extends $Notifier<FunctionMode> {
             as $ClassProviderElement<
               AnyNotifier<FunctionMode, FunctionMode>,
               FunctionMode,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(CurrentDate)
+final currentDateProvider = CurrentDateProvider._();
+
+final class CurrentDateProvider
+    extends $NotifierProvider<CurrentDate, DateType> {
+  CurrentDateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentDateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentDateHash();
+
+  @$internal
+  @override
+  CurrentDate create() => CurrentDate();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateType value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateType>(value),
+    );
+  }
+}
+
+String _$currentDateHash() => r'045d549a1cd4c4e017a466b2fe2c3f9d601495b7';
+
+abstract class _$CurrentDate extends $Notifier<DateType> {
+  DateType build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<DateType, DateType>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateType, DateType>,
+              DateType,
               Object?,
               Object?
             >;

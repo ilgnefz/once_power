@@ -1,114 +1,38 @@
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/number.dart';
-import 'package:once_power/widget/base/icon.dart';
 
 class const BaseInput({
   super.key,
   required final String hintText,
-  final String? value,
-  final String? suffixIcon,
-  final String? suffixTip,
-  required final void Function(String) onChanged,
-  final void Function()? onSuffixPressed,
-}) extends StatefulWidget {
-  @override
-  State<BaseInput> createState() => _BaseInputState();
-}
-
-class _BaseInputState extends State<BaseInput> {
-  late final TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController(text: widget.value ?? '');
-  }
-
-  @override
-  void didUpdateWidget(covariant BaseInput oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.value != null && widget.value != oldWidget.value) {
-      if (controller.text != widget.value) controller.text = widget.value!;
-    }
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  void clear() {
-    controller.clear();
-    widget.onChanged('');
-  }
-
+  final bool obscureText = false,
+  final bool enabled = true,
+  final List<TextInputFormatter>? inputFormatters,
+  final TextStyle? style,
+  final TextAlign textAlign = .left,
+  final EdgeInsetsGeometry? contentPadding,
+  required final TextEditingController controller,
+  required final void Function(String value)? onChanged,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-
-    return Container(
-      padding: .symmetric(horizontal: AppNumber.paddingMedium),
-      height: AppNumber.widgetHeight,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: theme.inputDecorationTheme.fillColor,
-        borderRadius: .circular(AppNumber.radius),
-        border: Border.all(
-          color: theme.inputDecorationTheme.outlineBorder!.color,
-          width: theme.inputDecorationTheme.outlineBorder!.width,
-        ),
-      ),
-      alignment: .center,
-      child: Row(
-        spacing: AppNumber.spaceSmall,
-        children: [
-          Expanded(
-            child: TextField(
-              controller: controller,
-              onChanged: (value) {
-                setState(() {});
-                widget.onChanged(value);
-              },
-              cursorHeight: 16,
-              cursorRadius: .circular(AppNumber.radiusSmall),
-              style: theme.textTheme.bodyMedium,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                hintStyle: theme.inputDecorationTheme.hintStyle,
-                border: InputBorder.none,
-                isCollapsed: true,
-              ),
-            ),
-          ),
-          ValueListenableBuilder<TextEditingValue>(
-            valueListenable: controller,
-            builder: (BuildContext _, TextEditingValue value, _) {
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
-                child: value.text.isEmpty
-                    ? const SizedBox.shrink()
-                    : ClickIcon(
-                        onPressed: clear,
-                        icon: Icons.close_rounded,
-                        iconSize: 16,
-                        size: 24,
-                      ),
-              );
-            },
-          ),
-          if (widget.suffixIcon != null)
-            ClickIcon(
-              tip: widget.suffixTip,
-              onPressed: widget.onSuffixPressed,
-              svg: widget.suffixIcon!,
-              iconSize: 18,
-              size: 24,
-            ),
-        ],
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      cursorHeight: 16,
+      obscureText: obscureText,
+      enabled: enabled,
+      inputFormatters: inputFormatters,
+      cursorRadius: .circular(AppNumber.radiusSmall),
+      style: style ?? theme.textTheme.bodyMedium,
+      textAlign: textAlign,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: theme.inputDecorationTheme.hintStyle,
+        border: InputBorder.none,
+        isCollapsed: true,
+        contentPadding: contentPadding,
       ),
     );
   }

@@ -22,6 +22,7 @@ class _SettingViewState extends State<SettingView> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return EasyDialog(
       width: MediaQuery.of(context).size.width * .6,
       child: SideAnchorNav(
@@ -30,11 +31,12 @@ class _SettingViewState extends State<SettingView> {
             .map((e) => SideTabView(label: e.label, child: e.view))
             .toList(),
         style: SideTabStyle(
+          labelStyle: theme.textTheme.bodyMedium,
           tabMouseCursor: SystemMouseCursors.click,
           tabBarWidth: AppNumber.settingTab,
           tabHeight: AppNumber.topHeight,
           tabRadius: AppNumber.radius,
-          tabBarBackground: Theme.of(context).scaffoldBackgroundColor,
+          tabBarBackground: theme.scaffoldBackgroundColor,
           tabBarDivider: BorderSide.none,
           tabGap: 0.0,
           tabBarPadding: .all(AppNumber.padding),

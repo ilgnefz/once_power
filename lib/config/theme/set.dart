@@ -4,6 +4,7 @@ import 'package:once_power/constant/color.dart';
 
 import 'button.dart';
 import 'chip.dart';
+import 'container_surface.dart';
 import 'icon_box.dart';
 import 'title_bar.dart';
 
@@ -41,20 +42,19 @@ class AppCheckboxTheme {
 }
 
 class AppIconTheme {
-  static IconThemeData of(Brightness brightness) => IconThemeData(
-    color: brightness == Brightness.dark ? AppColors.iconDark : AppColors.icon,
-  );
+  static IconThemeData of(AppColorScheme colors) =>
+      IconThemeData(color: colors.icon);
 }
 
 class AppInputTheme {
   static InputDecorationTheme of(ColorScheme scheme) {
-    final bool dark = scheme.brightness == Brightness.dark;
     return InputDecorationTheme(
       // surfaceContainer 就是 AppColor 里给输入框定的那层表面。
       fillColor: scheme.surfaceContainer,
       hintStyle: _textStyle.copyWith(color: scheme.onSurfaceVariant),
-      // 深色下不画描边（靠表面色分层），浅色下 1px 发丝线。
-      outlineBorder: BorderSide(color: scheme.outline, width: dark ? 0 : 1),
+      // 输入框 / dropdown 的描边一律 1px，颜色来自 ColorScheme.outline，
+      // 这样设置页选的边框色在深色模式下也看得见。
+      outlineBorder: BorderSide(color: scheme.outline, width: 1),
     );
   }
 }
@@ -96,8 +96,18 @@ class AppTabBarTheme {
 
 class AppTextTheme {
   static TextTheme of(ColorScheme scheme) => TextTheme(
+    titleMedium: _textStyle.copyWith(
+      fontSize: 16.0,
+      fontWeight: .bold,
+      color: scheme.onSurface,
+    ),
     bodyMedium: _textStyle.copyWith(color: scheme.onSurface),
-    bodySmall: _textStyle.copyWith(color: scheme.onSurface, fontSize: 13.0),
+    bodySmall: _textStyle.copyWith(fontSize: 13.0, color: scheme.onSurface),
+    labelMedium: _textStyle.copyWith(
+      fontSize: 12.0,
+      fontWeight: FontWeight.bold,
+      color: scheme.onSurface,
+    ),
   );
 }
 
@@ -105,38 +115,33 @@ class AppTextTheme {
 class AppEasyButtonTheme {
   static EasyButtonTheme of(ColorScheme scheme) => EasyButtonTheme(
     textStyle: _textStyle.copyWith(color: scheme.primary),
-    // 跟 M3 ElevatedButton 默认背景一致（_ElevatedButtonDefaultsM3）；
-    // 上面的 primary 文字正好对应它的 foregroundColor。
-    backgroundColor: scheme.surfaceContainerLow,
+    backgroundColor: scheme.surfaceContainerHighest,
   );
 }
 
 class AppEasyChipTheme {
-  static EasyChipTheme of(ColorScheme scheme) => EasyChipTheme(
+  static EasyChipTheme of(AppColorScheme colors) => EasyChipTheme(
     textStyle: _textStyle.copyWith(
-      color: scheme.brightness == Brightness.dark
-          ? AppColors.easyChipTextDark
+      color: colors.scheme.brightness == Brightness.dark
+          ? AppColors.darkEasyChipText
           : AppColors.easyChipText,
     ),
     selectTextStyle: _textStyle.copyWith(color: Colors.white),
-    backgroundColor: scheme.brightness == Brightness.dark
-        ? AppColors.easyChipDark
-        : AppColors.easyChip,
-    selectBackgroundColor: scheme.brightness == Brightness.dark
-        ? scheme.primary
-        : scheme.primary,
+    backgroundColor: colors.containerSurface,
+    selectBackgroundColor: colors.scheme.primary,
   );
 }
 
 class AppIconBoxTheme {
-  static IconBoxTheme of(ColorScheme scheme) => IconBoxTheme(
-    backgroundColor: scheme.brightness == Brightness.dark
-        ? AppColors.iconBoxDark
-        : AppColors.iconBox,
-    iconColor: scheme.brightness == Brightness.dark
-        ? AppColors.iconBoxIconDark
-        : AppColors.iconBoxIcon,
+  static IconBoxTheme of(AppColorScheme colors) => IconBoxTheme(
+    backgroundColor: colors.containerSurface,
+    iconColor: colors.icon,
   );
+}
+
+class AppContainerSurfaceTheme {
+  static ContainerSurfaceTheme of(AppColorScheme colors) =>
+      ContainerSurfaceTheme(color: colors.containerSurface);
 }
 
 class AppTitleBarTheme {
@@ -151,4 +156,17 @@ class AppTitleBarTheme {
         ? AppColors.titleBarDark
         : AppColors.titleBar,
   );
+}
+
+/// Tooltip 用官方 [TooltipThemeData] 承载配色，SmartTooltip 不读官方主题，
+/// 由 EasyTooltip 从 TooltipTheme.of(context) 取出后逐项传给它。
+class AppTooltipTheme {
+  static TooltipThemeData of(ColorScheme scheme) {
+    // 气泡底色与输入框 / 下拉面板 / 右键菜单共用 surfaceContainer：同步时跟随
+    // 页面背景，不同步时取用户选的控件底色。文字统一走 bodySmall，颜色随 onSurface。
+    return TooltipThemeData(
+      decoration: BoxDecoration(color: scheme.surfaceContainer),
+      textStyle: AppTextTheme.of(scheme).bodySmall,
+    );
+  }
 }

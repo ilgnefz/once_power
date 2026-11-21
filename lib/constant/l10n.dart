@@ -14,7 +14,13 @@ class AppL10n {
   static const String front = 'action.normal.matchType.front';
   static const String behind = 'action.normal.matchType.behind';
   static const String between = 'action.normal.matchType.between';
-  static const String date = 'action.normal.date';
+  static const String date = 'action.normal.date.label';
+  static const String created = 'action.normal.date.created';
+  static const String modified = 'action.normal.date.modified';
+  static const String accessed = 'action.normal.date.accessed';
+  static const String captured = 'action.normal.date.captured';
+  static const String earliest = 'action.normal.date.earliest';
+  static const String latest = 'action.normal.date.latest';
   static const String dateRename = 'action.normal.dateRename';
   static const String upload = 'action.normal.upload';
   static const String prefix = 'action.normal.prefix';
@@ -78,11 +84,17 @@ class AppL10n {
   static const String notification = 'setting.general.notification';
   /* ---------- Setting Appearance ---------- */
   static const String appearance = 'setting.appearance.label';
-  static const String theme = 'setting.appearance.theme';
   static const String light = 'setting.appearance.light';
   static const String dark = 'setting.appearance.dark';
   static const String system = 'setting.appearance.system';
   static const String color = 'setting.appearance.color';
+  static const String background = 'setting.appearance.background';
+  static const String icon = 'setting.appearance.icon';
+  static const String outline = 'setting.appearance.outline';
+  static const String controlSurface = 'setting.appearance.controlSurface';
+  static const String containerSurface = 'setting.appearance.containerSurface';
+  static const String sync = 'setting.appearance.sync';
+  static const String divider = 'setting.appearance.divider';
   /* ---------- Setting Log ---------- */
   static const String log = 'setting.log.label';
   static const String saveLog = 'setting.log.save';

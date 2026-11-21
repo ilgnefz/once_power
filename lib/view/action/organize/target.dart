@@ -3,7 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
-import 'package:once_power/widget/base/input.dart';
+import 'package:once_power/widget/action/input.dart';
 
 class TargetInput extends StatelessWidget {
   const TargetInput({super.key});
@@ -12,7 +12,7 @@ class TargetInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: .symmetric(horizontal: AppNumber.padding),
-      child: BaseInput(
+      child: EasyInput(
         hintText: context.tr(AppL10n.target),
         onChanged: (value) {},
         suffixIcon: AppIcons.folder,

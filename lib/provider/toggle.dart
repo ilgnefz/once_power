@@ -85,6 +85,17 @@ class IsSwapSuffix extends _$IsSwapSuffix {
 }
 
 @riverpod
+class IsModifyExtension extends _$IsModifyExtension {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isModifyExtension);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isModifyExtension, state));
+  }
+}
+
+@riverpod
 class IsCaseType extends _$IsCaseType {
   @override
   bool build() => StorageService.getBoolDefault(AppKeys.caseType);
@@ -152,6 +163,39 @@ class IsViewMode extends _$IsViewMode {
   }
 }
 
+@riverpod
+class IsTVMode extends _$IsTVMode {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.tvMode);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.tvMode, state));
+  }
+}
+
+@riverpod
+class IsCSVMode extends _$IsCSVMode {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.csvMode);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.csvMode, state));
+  }
+}
+
+@riverpod
+class IsDateMode extends _$IsDateMode {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.dateMode);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.dateMode, state));
+  }
+}
+
 /* ---------- Setting ---------- */
 
 @riverpod
@@ -162,5 +206,49 @@ class IsSwapLabel extends _$IsSwapLabel {
   void toggle() {
     state = !state;
     unawaited(StorageService.setBool(AppKeys.swapLabel, state));
+  }
+}
+
+@riverpod
+class IsLightSync extends _$IsLightSync {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isLightSync);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isLightSync, state));
+  }
+}
+
+@riverpod
+class IsLightTransparent extends _$IsLightTransparent {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isLightTransparent);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isLightTransparent, state));
+  }
+}
+
+@riverpod
+class IsDarkSync extends _$IsDarkSync {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isDarkSync);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isDarkSync, state));
+  }
+}
+
+@riverpod
+class IsDarkTransparent extends _$IsDarkTransparent {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isDarkTransparent);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isDarkTransparent, state));
   }
 }

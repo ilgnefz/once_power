@@ -1,7 +1,6 @@
 import 'package:flutter_anchored_overlay/flutter_anchored_overlay.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/config/theme/theme.dart';
-import 'package:once_power/constant/color.dart';
 import 'package:once_power/constant/number.dart';
 
 class const EasyTooltip({
@@ -15,16 +14,17 @@ class const EasyTooltip({
 }) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final bool isDark = theme.brightness == Brightness.dark;
+    // SmartTooltip 不读官方 TooltipTheme，这里把官方主题里的颜色取出来传给它。
+    final TooltipThemeData tooltipTheme = TooltipTheme.of(context);
+    final BoxDecoration decoration =
+        (tooltipTheme.decoration ?? const BoxDecoration()) as BoxDecoration;
     return SmartTooltip(
       message: tip,
-      textStyle:
-          textStyle ??
-          theme.textTheme.bodySmall?.copyWith(
-            color: isDark ? AppColors.tooltipTextDark : AppColors.tooltipText,
-          ),
-      backgroundColor: isDark ? AppColors.tooltipDark : AppColors.tooltip,
+      textStyle: textStyle ?? tooltipTheme.textStyle,
+      backgroundColor: decoration.color ?? Colors.white,
+      borderColor: decoration.border is Border
+          ? (decoration.border! as Border).top.color
+          : null,
       richMessage: richMessage,
       gap: AppNumber.spaceSmall,
       placement: placement,

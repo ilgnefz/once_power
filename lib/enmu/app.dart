@@ -6,7 +6,7 @@ import 'package:once_power/view/setting/log.dart';
 import 'package:once_power/view/setting/other.dart';
 import 'package:once_power/view/setting/rule.dart';
 import 'package:once_power/view/setting/shortcut.dart';
-import 'package:once_power/view/setting/theme.dart';
+import 'package:once_power/view/setting/appearance.dart';
 
 enum ThemeType { light, dark, system }
 
@@ -33,14 +33,36 @@ extension ThemeTypeExtension on ThemeType {
     }
   }
 
-  IconData get icon {
+  // IconData get icon {
+  //   switch (this) {
+  //     case ThemeType.light:
+  //       return Icons.light_mode_rounded;
+  //     case ThemeType.dark:
+  //       return Icons.dark_mode_rounded;
+  //     case ThemeType.system:
+  //       return Icons.brightness_4_rounded;
+  //   }
+  // }
+
+  Color? get color {
     switch (this) {
       case ThemeType.light:
-        return Icons.light_mode_rounded;
+        return Colors.white;
       case ThemeType.dark:
-        return Icons.dark_mode_rounded;
+        return Colors.black;
       case ThemeType.system:
-        return Icons.brightness_4_rounded;
+        return null;
+    }
+  }
+
+  Color? get borderColor {
+    switch (this) {
+      case ThemeType.light:
+        return Colors.white;
+      case ThemeType.dark:
+        return Colors.black;
+      case ThemeType.system:
+        return null;
     }
   }
 
@@ -120,7 +142,7 @@ extension SettingTypeExtension on SettingType {
       case SettingType.general:
         return const GeneralView();
       case SettingType.theme:
-        return const ThemeView();
+        return const AppearanceView();
       case SettingType.log:
         return const LogView();
       case SettingType.shortcut:

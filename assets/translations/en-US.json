@@ -18,7 +18,15 @@
         "behind": "Behind",
         "between": "Between"
       },
-      "date": "Date",
+      "date": {
+       "label": "Date",
+        "created": "Created",
+        "modified": "Modified",
+        "accessed": "Accessed",
+        "captured": "Captured",
+        "earliest": "Earliest",
+        "latest": "Latest"
+      },
       "dateRename": "Rename by Date",
       "prefix": "Prefix",
       "prefixHint": "Enter prefix",
@@ -89,11 +97,17 @@
     },
     "appearance": {
       "label": "Appearance",
-      "theme": "Theme",
       "light": "Light",
       "dark": "Dark",
       "system": "System",
-      "color": "Color"
+      "color": "Theme color",
+      "background": "Background color",
+      "icon": "Icon color",
+      "outline": "Outline color",
+      "controlSurface": "Control surface color",
+      "containerSurface": "Container surface color",
+      "sync": "Sync background color",
+      "divider": "Divider transparent"
     },
     "log": {
       "label": "Log",

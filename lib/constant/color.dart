@@ -7,13 +7,10 @@ import 'dart:ui';
 /// 深色表面按 elevation 分四级，越高越亮：
 ///   background   #1C1B1F  (surface)
 ///   input/table  #211F26  (surfaceContainer)
-///   浮层/弹窗    #2B2930  (surfaceContainerHigh)
-///   chip/选中    #36343B  (surfaceContainerHighest)
+///   对话框      #2B2930  (surfaceContainerHigh)
+///   chip/选中    #36343B  (easyChip / iconBox 自有色，不走 ColorScheme)
 /// 前景：主文字 #E6E1E5，次级文字/图标 #CAC4D0，弱化文字 #938F99
 class AppColors {
-  static const Color primary = Color(0xFF6750A4);
-  static const Color primaryDark = Color(0xFFD0BCFF); // tonal 80，只做前景（文字/图标）
-
   /// 设置页可选的强调色种子（ARGB 整数：存储、ColorItem 都直接用这份）。
   ///
   /// 第一个是默认值，就是 Material 3 基线紫 #6750A4 —— 整套主题色由它派生出
@@ -29,83 +26,66 @@ class AppColors {
     0xFF5050A4,
   ];
 
-  static const Color onPrimaryDark = Color(
-    0xFF381E72,
-  ); // tonal 20，primaryDark 背景上的文字
-  static const Color primaryContainerDark = Color(
-    0xFF4F378B,
-  ); // tonal 30，深色下的选中态背景
-  static const Color onPrimaryContainerDark = Color(
-    0xFFEADDFF,
-  ); // tonal 90，其上的文字
-  static const Color background = Color(0xFFFFFFFF);
-  static const Color backgroundDark = Color(0xFF1C1B1F);
+  /// 背景色预设：第一个是默认值。背景色在色块里画的就是它自己，不做 tonal 派生。
+  static const List<int> backgroundSeeds = <int>[
+    0xFFFFFFFF,
+    0xFFFAFAFA,
+    0xFFF5F5F5,
+    0xFFEEF0F2,
+    0xFFFFF8E1,
+    0xFFECEFF4,
+  ];
+  static const List<int> darkBackgroundSeeds = <int>[
+    0xFF1C1B1F,
+    0xFF000000,
+    0xFF121212,
+    0xFF211F26,
+    0xFF1B2027,
+    0xFF26211F,
+  ];
 
-  //  Button
-  static const Color button = Color(0xFFF3E8F4);
-  static const Color buttonDark = Color(0xFF4A4458);
-
-  // Tooltip 气泡背景（独立于主题色，中性灰，不跟随 primary 的紫调）
-  // 浅色：纯白，靠阴影与页面区分
-  // 深色：中性深灰，与页面表面拉开层次又不抢内容
-  static const Color tooltip = Color(0xFFFFFFFF);
-  static const Color tooltipDark = Color(0xFF3A3A3A);
-  static const Color tooltipText = Color(0xFF2B2B2B);
-  static const Color tooltipTextDark = Color(0xFFF2F2F2);
-
-  // OverlayWidget
-  static const Color overlayWidget = Color(0xFFFFFFFF);
-  static const Color overlayWidgetDark = Color(0xFF2B2930);
+  // Dialog：Material Dialog 默认背景（surfaceContainerHigh）
+  static const Color dialog = Color(0xFFFFFFFF);
+  static const Color darkDialog = Color(0xFF2B2930);
 
   // Divider
   static const Color divider = Color(0xFFF5F5F5);
-  static const Color dividerDark = Color(0xFF49454F);
+  static const Color darkDivider = Color(0xFF49454F);
 
-  // Dropdown
-  static const Color dropdown = Color(0xFFF1F1F1);
-  static const Color dropdownDark = Color(0xFF36343B);
-  static const Color dropdownBackground = Color(0xFFFFFFFF);
-  static const Color dropdownBackgroundDark = Color(0xFF211F26);
+  // 容器底色：NumberInput / EasyChip / IconBox 共用的表面色，也是三者的默认值。
+  // 与控件底色的默认白不同，这一层默认带一点灰，用来和页面背景/输入框拉开层次。
+  static const Color containerSurface = Color(0xFFF1F1F1);
+  static const Color darkContainerSurface = Color(0xFF36343B);
 
   // EasyChip
-  static const Color easyChip = Color(0xFFF1F1F1);
-  static const Color easyChipDark = Color(0xFF36343B);
   static const Color easyChipText = Color(0xFFA8A8A8);
-  static const Color easyChipTextDark = Color(0xFFCAC4D0);
+  static const Color darkEasyChipText = Color(0xFFCAC4D0);
 
   // Icon
   static const Color icon = Color(0xFFA8A8A8);
-  static const Color iconDark = Color(0xFFCAC4D0);
+  static const Color darkIcon = Color(0xFFA8A8A8);
   static const Color titleBar = Color(0xFF9E9E9E);
   static const Color titleBarDark = Color(0xFF938F99);
 
+  // Switch
+  static const Color switchThumb = Color(0xFFFFFFFF);
+  static const Color darkSwitchThumb = Color(0xFFCAC4D0);
+
   // IconBox
   static const Color iconBox = Color(0xFFF1F1F1);
-  static const Color iconBoxDark = Color(0xFF36343B);
-  static const Color iconBoxIcon = Color(0xFFA8A8A8);
-  static const Color iconBoxIconDark = Color(0xFFCAC4D0);
+  static const Color darkIconBox = Color(0xFF36343B);
 
-  // Input
-  static const Color input = Color(0xFFFFFFFF);
-  static const Color inputDark = Color(0xFF211F26);
-  static const Color inputBorder = Color(0xFFF1F1F1);
-  static const Color inputBorderDark = Color(0xFF49454F);
-  static const Color inputHint = Color(0xFF999999);
-  static const Color inputHintDark = Color(0xFF938F99);
+  // controlSurface
+  static const Color controlSurface = Color(0xFFFFFFFF);
+  static const Color darkControlSurface = Color(0xFF211F26);
 
-  // Table
-  static const Color table = Color(0xFFF5F5F5);
-  static const Color tableDark = Color(0xFF211F26);
+  // outline
+  static const Color outline = Color(0xFFF1F1F1);
+  static const Color darkOutline = Color(0xFF49454F);
 
   // Text
-  static const Color text = Color(0xFF000000);
-  static const Color textDark = Color(0xFFE6E1E5);
+  static const Color text = Color(0xFF1D1D1F);
+  static const Color darkText = Color(0xFFF5F5F7);
   static const Color textHint = Color(0xFFA8A8A8);
-  static const Color textHintDark = Color(0xFF938F99);
-  static const Color bottomText = Color(0xFF9E9E9E);
-  static const Color bottomTextDark = Color(0xFF938F99);
-
-  // List
-  static const Color selected = Color(0xFFE0E0E0);
-  static const Color selectedDark = Color(0xFF36343B);
+  static const Color darkTextHint = Color(0xFF938F99);
 }
