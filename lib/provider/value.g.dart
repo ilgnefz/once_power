@@ -365,7 +365,7 @@ final class LightComponentSurfaceColorProvider
 }
 
 String _$lightComponentSurfaceColorHash() =>
-    r'4f4c4f3a2949101f64c0ba1e550ffde487cfa710';
+    r'7e9ecd37140759c97bc59439ab8fe34f77ea1e35';
 
 /// 控件底色：输入框 / 下拉面板 / 右键菜单 / tooltip 共用的表面色。
 /// 同步背景打开时这些组件改成跟随页面背景，该值仅在不同步时生效。
@@ -421,7 +421,7 @@ final class DarkComponentSurfaceColorProvider
 }
 
 String _$darkComponentSurfaceColorHash() =>
-    r'a269efc2fb3e1ba4bdc725b813451e968661c040';
+    r'34ef2464e842960f1e8feee78d43eaea244f06f2';
 
 abstract class _$DarkComponentSurfaceColor extends $Notifier<int> {
   int build();

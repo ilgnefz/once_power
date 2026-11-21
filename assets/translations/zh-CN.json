@@ -28,6 +28,7 @@
         "latest": "最晚日期"
       },
       "dateRename": "以日期命名",
+      "index": "序列",
       "prefix": "前缀",
       "prefixHint": "请输入前缀内容",
       "prefixCircle": "循环前缀内容",
@@ -46,6 +47,8 @@
     "organize": {
       "target": "请选择目标文件夹"
     },
+    "digit": "位",
+    "start": "开始",
     "addFolder": "添加文件夹",
     "addSubfolder": "添加子文件夹",
     "append": "追加模式",
@@ -81,6 +84,7 @@
       "label": "规则",
       "self": "添加子文件夹时添加文件夹本身",
       "swapLabel": "交换新旧名称位置",
+      "hiddenUnit": "隐藏单位",
       "cancelRename": "名称为空不重命名",
       "autoRename": "同名时自动重命名",
       "autoRenameFormat": "自动重命名序列格式"

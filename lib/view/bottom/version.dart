@@ -7,6 +7,10 @@ class VersionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseText('v${PackageService.getVersion()}', fontSize: 13);
+    return BaseText(
+      'v${PackageService.getVersion()}',
+      fontSize: 13,
+      color: Theme.of(context).iconTheme.color,
+    );
   }
 }

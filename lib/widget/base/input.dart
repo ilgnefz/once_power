@@ -10,6 +10,7 @@ class const BaseInput({
   final List<TextInputFormatter>? inputFormatters,
   final TextStyle? style,
   final TextAlign textAlign = .left,
+  final FocusNode? focusNode,
   final EdgeInsetsGeometry? contentPadding,
   required final TextEditingController controller,
   required final void Function(String value)? onChanged,
@@ -19,6 +20,7 @@ class const BaseInput({
     ThemeData theme = Theme.of(context);
     return TextField(
       controller: controller,
+      focusNode: focusNode,
       onChanged: onChanged,
       cursorHeight: 16,
       obscureText: obscureText,

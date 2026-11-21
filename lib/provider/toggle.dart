@@ -210,6 +210,17 @@ class IsSwapLabel extends _$IsSwapLabel {
 }
 
 @riverpod
+class IsHiddenUnit extends _$IsHiddenUnit {
+  @override
+  bool build() => StorageService.getBoolDefault(AppKeys.isHiddenUnit);
+
+  void toggle() {
+    state = !state;
+    unawaited(StorageService.setBool(AppKeys.isHiddenUnit, state));
+  }
+}
+
+@riverpod
 class IsLightSync extends _$IsLightSync {
   @override
   bool build() => StorageService.getBoolDefault(AppKeys.isLightSync);

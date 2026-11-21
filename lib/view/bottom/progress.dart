@@ -11,6 +11,7 @@ class ProgressButton extends StatelessWidget {
     return BaseText(
       '${context.tr(AppL10n.task)}: 0/0  ${context.tr(AppL10n.time)}: 0.00s',
       fontSize: 13,
+      color: Theme.of(context).iconTheme.color,
     );
   }
 }

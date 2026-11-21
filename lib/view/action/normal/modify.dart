@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/action/input.dart';
 import 'package:once_power/widget/action/item.dart';
@@ -19,10 +20,13 @@ class ModifyInput extends ConsumerWidget {
       onIconPressed: ref.read(isIgnoreCaseProvider.notifier).toggle,
       child: EasyInput(
         hintText: context.tr(AppL10n.modify),
-        onChanged: (value) {},
+        value: ref.watch(modifyProvider),
+        onChanged: ref.read(modifyProvider.notifier).update,
         suffixIcon: AppIcons.today,
         suffixTip: context.tr(AppL10n.today),
-        onSuffixPressed: () {},
+        onSuffixPressed: () {
+          ref.read(modifyProvider.notifier).update(DateTime.now().toString());
+        },
       ),
     );
   }

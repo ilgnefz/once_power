@@ -6,6 +6,7 @@ import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/enmu/date.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/switch.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/action/item.dart';
@@ -27,7 +28,14 @@ class DateInput extends ConsumerWidget {
       child: Row(
         spacing: AppNumber.spaceSmall,
         children: [
-          Expanded(child: NumberInput()),
+          Expanded(
+            child: NumberInput(
+              unit: context.tr(AppL10n.digit),
+              value: ref.watch(dateDigitsProvider),
+              max: 14,
+              onChanged: ref.read(dateDigitsProvider.notifier).update,
+            ),
+          ),
           Expanded(
             child: EasyTextDropdown<DateType>(
               width: 108,
@@ -35,8 +43,7 @@ class DateInput extends ConsumerWidget {
               items: DateType.values.map((value) {
                 return TextDropdownItem<DateType>(value, label: value.label);
               }).toList(),
-              onChanged: (value) =>
-                  ref.read(currentDateProvider.notifier).update(value),
+              onChanged: ref.read(currentDateProvider.notifier).update,
             ),
           ),
         ],

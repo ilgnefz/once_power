@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/action/input.dart';
 import 'package:once_power/widget/action/item.dart';
@@ -19,7 +20,8 @@ class MatchInput extends ConsumerWidget {
       onIconPressed: ref.read(isInputLengthProvider.notifier).toggle,
       child: EasyInput(
         hintText: context.tr(AppL10n.match),
-        onChanged: (value) {},
+        value: ref.watch(matchProvider),
+        onChanged: ref.read(matchProvider.notifier).update,
       ),
     );
   }

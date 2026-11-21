@@ -28,6 +28,7 @@
         "latest": "Latest"
       },
       "dateRename": "Rename by Date",
+      "index": "Index",
       "prefix": "Prefix",
       "prefixHint": "Enter prefix",
       "prefixCircle": "Cycle Prefix",
@@ -46,6 +47,8 @@
     "organize": {
       "target": "Please select target folder"
     },
+    "digit": "digits",
+    "start": "start",
     "addFolder": "Add Folder",
     "addSubfolder": "Add Subfolder",
     "append": "Append Mode",
@@ -81,6 +84,7 @@
       "label": "Rule",
       "self": "Add the folder itself when adding its subfolder",
       "swapLabel": "Swap new and old name positions",
+      "hiddenUnit": "Hidden unit",
       "cancelRename": "Cancel rename on empty",
       "autoRename": "Auto rename on duplicate",
       "autoRenameFormat": "Auto rename format"

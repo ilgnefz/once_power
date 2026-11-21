@@ -56,11 +56,21 @@ class _RuleViewState extends State<RuleView> {
       children: [
         _storageToggle(AppKeys.addSelf, AppL10n.addSelf),
         Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? _) {
+          builder: (context, ref, _) {
             return SettingMenu.toggle(
               label: context.tr(AppL10n.swapLabel),
               value: ref.watch(isSwapLabelProvider),
               onChanged: (_) => ref.read(isSwapLabelProvider.notifier).toggle(),
+            );
+          },
+        ),
+        Consumer(
+          builder: (context, ref, _) {
+            return SettingMenu.toggle(
+              label: context.tr(AppL10n.hiddenUnit),
+              value: ref.watch(isHiddenUnitProvider),
+              onChanged: (_) =>
+                  ref.read(isHiddenUnitProvider.notifier).toggle(),
             );
           },
         ),

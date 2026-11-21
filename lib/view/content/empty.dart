@@ -5,6 +5,8 @@ import 'package:once_power/constant/icon.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/enmu/app.dart';
+import 'package:once_power/enmu/date.dart';
+import 'package:once_power/provider/input.dart';
 import 'package:once_power/provider/switch.dart';
 import 'package:once_power/provider/toggle.dart';
 import 'package:once_power/widget/base/icon.dart';
@@ -48,6 +50,24 @@ class EmptyView extends ConsumerWidget {
               fontSize: 18,
               color: color,
             ),
+          ),
+          Column(
+            children: [
+              BaseText('匹配: ${ref.watch(matchProvider)}'),
+              BaseText('修改: ${ref.watch(modifyProvider)}'),
+              BaseText(
+                '日期: ${ref.watch(dateDigitsProvider)} - ${ref.watch(currentDateProvider).label}',
+              ),
+              BaseText('前缀: ${ref.watch(prefixProvider)}'),
+              BaseText(
+                '序列: ${ref.watch(prefixDigitsProvider)} - ${ref.watch(prefixStartProvider)}',
+              ),
+              BaseText('后缀: ${ref.watch(suffixProvider)}'),
+              BaseText(
+                '序列: ${ref.watch(suffixDigitsProvider)} - ${ref.watch(suffixStartProvider)}',
+              ),
+              BaseText('扩展: ${ref.watch(extensionProvider)}'),
+            ],
           ),
         ],
       ),

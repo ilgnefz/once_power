@@ -22,6 +22,7 @@ class AppL10n {
   static const String earliest = 'action.normal.date.earliest';
   static const String latest = 'action.normal.date.latest';
   static const String dateRename = 'action.normal.dateRename';
+  static const String index = 'action.normal.index';
   static const String upload = 'action.normal.upload';
   static const String prefix = 'action.normal.prefix';
   static const String prefixHint = 'action.normal.prefixHint';
@@ -39,6 +40,8 @@ class AppL10n {
   /* ---------- Action Organize ---------- */
   static const String target = 'action.organize.target';
   /* ---------- Action Common ---------- */
+  static const String digit = 'action.digit';
+  static const String start = 'action.start';
   static const String addFolder = 'action.addFolder';
   static const String addSubfolder = 'action.addSubfolder';
   static const String append = 'action.append';
@@ -70,8 +73,9 @@ class AppL10n {
   static const String rule = 'setting.rule.label';
   static const String addSelf = 'setting.rule.self';
   static const String swapLabel = 'setting.rule.swapLabel';
-  static const String autoRename = 'setting.rule.autoRename';
+  static const String hiddenUnit = 'setting.rule.hiddenUnit';
   static const String cancelRename = 'setting.rule.cancelRename';
+  static const String autoRename = 'setting.rule.autoRename';
   static const String renameFormat = 'setting.rule.autoRenameFormat';
   /* ---------- Setting General ---------- */
   static const String general = 'setting.general.label';
