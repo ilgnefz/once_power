@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/color.dart';
+import 'package:once_power/constant/number.dart';
 
 /// 紧凑开关。
 ///
@@ -114,26 +115,34 @@ class _EasySwitchState extends State<EasySwitch> {
       control = Opacity(opacity: 0.45, child: control);
     }
 
+    // 外壳固定 widgetHeight；轨道、thumb 保持原尺寸并垂直居中，不随外壳撑高。
     final bool hasAccessory = widget.label != null || widget.child != null;
-    if (!hasAccessory) {
-      return RepaintBoundary(child: control);
-    }
+    final Widget content = !hasAccessory
+        ? control
+        : Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              control,
+              if (widget.label != null)
+                Text(
+                  widget.label!,
+                  style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
+                ),
+              if (widget.space > 0) SizedBox(width: widget.space),
+              ?widget.child,
+            ],
+          );
 
     return RepaintBoundary(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          control,
-          if (widget.label != null)
-            Text(
-              widget.label!,
-              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
-            ),
-          if (widget.space > 0) SizedBox(width: widget.space),
-          ?widget.child,
-        ],
+      child: SizedBox(
+        height: AppNumber.widgetHeight,
+        child: Row(
+          mainAxisSize: .min,
+          crossAxisAlignment: .center,
+          children: [content],
+        ),
       ),
     );
   }

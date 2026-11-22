@@ -15,7 +15,11 @@ part 'value.g.dart';
 @riverpod
 class SelectedReplaceType extends _$SelectedReplaceType {
   @override
-  Set<ReplaceType> build() => {ReplaceType.match};
+  Set<ReplaceType> build() => StorageService.getEnumSet(
+    AppKeys.matchType,
+    ReplaceType.values,
+    fallback: {ReplaceType.match},
+  );
   void update(ReplaceType type) {
     if (state.contains(type)) {
       if (state.length == 1) return;
@@ -29,19 +33,20 @@ class SelectedReplaceType extends _$SelectedReplaceType {
         state = {...state, ReplaceType.match, type};
       }
     }
-    // StorageUtil.setReplaceTypeList(AppKeys.matchType, state);
+    unawaited(StorageService.setEnumSet(AppKeys.matchType, state));
   }
 }
 
 @riverpod
 class SelectedKeepType extends _$SelectedKeepType {
   @override
-  Set<KeepType> build() => {};
+  Set<KeepType> build() =>
+      StorageService.getEnumSet(AppKeys.reverseType, KeepType.values);
   void update(KeepType type) {
     state.contains(type)
         ? state = state.where((e) => e != type).toSet()
         : state = {...state, type};
-    // StorageUtil.setKeepTypeList(AppKeys.reverseType, state);
+    unawaited(StorageService.setEnumSet(AppKeys.reverseType, state));
   }
 }
 

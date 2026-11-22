@@ -89,7 +89,7 @@ class _ThemeViewState extends ConsumerState<AppearanceView> {
         // SizedBox(height: AppNumber.spaceSmall / 2),
         BaseText(
           context.tr(AppL10n.light),
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         _ThemeColorMenu(
           label: context.tr(AppL10n.color),
@@ -160,7 +160,7 @@ class _ThemeViewState extends ConsumerState<AppearanceView> {
         ),
         BaseText(
           context.tr(AppL10n.dark),
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         _ThemeColorMenu(
           label: context.tr(AppL10n.color),

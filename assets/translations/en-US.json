@@ -44,6 +44,52 @@
       "caseFile": "Case file type",
       "caseExtension": "Case extension"
     },
+    "advance": {
+      "total": "Total {count}",
+      "delete": {
+        "label":"Delete",
+        "title": "Delete Menu",
+        "input": "Input",
+        "type": "Type",
+        "part": "Part",
+        "extension": "Extension",
+        "positionLabel": "Position",
+        "typeLabel": "Delete type",
+        "digit": "Digits",
+        "capital": "Uppercase",
+        "lowercase": "Lowercase",
+        "nonLetter": "Non-letters",
+        "punctuation": "Punctuation",
+        "space": "Spaces",
+        "deleteExtension": "Delete extension"
+      },
+      "add": {
+        "label": "Add",
+        "title": "Add Menu"
+      },
+      "replace": {
+        "label" :"Replace",
+        "title": "Replace Menu"
+      },
+      "common": {
+        "all": "All",
+        "regex": "Use regex",
+        "inputContent": "Input Content",
+        "inputPosition": "Input Position",
+        "matchPart": "Match part",
+        "ordinal": "The",
+        "ordinalUnit": "th",
+        "last": "Last 1st",
+        "self": "Self",
+        "front": "Front",
+        "behind": "Behind"
+      },
+      "preset": "Preset",
+      "addPreset": "Add Preset",
+      "import": "Import",
+      "export": "Export",
+      "empty": "No commands added\nClick below\n\"Delete\", \"Add\", \"Replace\"\nto add"
+    },
     "organize": {
       "target": "Please select target folder"
     },

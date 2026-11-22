@@ -7,6 +7,7 @@ import 'icon_box.dart';
 class const ActionItem({
   super.key,
   final String? label,
+  final EdgeInsets? padding,
   required final Widget child,
   required final String icon,
   required final String tip,
@@ -16,7 +17,7 @@ class const ActionItem({
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: .symmetric(horizontal: AppNumber.padding),
+      padding: padding ?? .symmetric(horizontal: AppNumber.padding),
       child: Row(
         spacing: AppNumber.spaceMedium,
         crossAxisAlignment: .center,

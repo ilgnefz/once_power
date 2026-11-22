@@ -7,7 +7,7 @@ class const BaseText(
   final Color? color,
   final TextStyle? style,
   final FontWeight? fontWeight,
-  final int maxLines = 1,
+  final int? maxLines = 1,
   final TextOverflow overflow = TextOverflow.ellipsis,
   final TextAlign? textAlign,
 }) extends StatelessWidget {

@@ -44,6 +44,52 @@
       "caseFile": "区分文件类型",
       "caseExtension": "区分扩展"
     },
+    "advance": {
+      "total": "共 {count} 条",
+      "delete": {
+        "label": "删除",
+        "title": "删除菜单",
+        "input": "输入",
+        "type": "类型",
+        "part": "部分",
+        "extension": "扩展",
+        "positionLabel": "删除位置",
+        "typeLabel": "删除类型",
+        "digit": "数字",
+        "capital": "大写字母",
+        "lowercase": "小写字母",
+        "nonLetter": "非字母",
+        "punctuation": "标点符号",
+        "space": "空格",
+        "deleteExtension": "删除扩展"
+      },
+      "add": {
+        "label":"添加",
+        "title": "添加菜单"
+      },
+      "replace": {
+        "label": "替换",
+        "title": "替换菜单"
+      },
+      "common": {
+        "all": "全部",
+        "regex": "使用正则",
+        "inputContent": "匹配内容",
+        "inputPosition": "匹配位置",
+        "matchPart": "匹配部分",
+        "ordinal": "第",
+        "ordinalUnit": "个",
+        "last": "最后 1 个",
+        "self": "自身",
+        "front": "前",
+        "behind": "后"
+      },
+      "preset": "预设",
+      "addPreset": "添加预设",
+      "import": "导入预设",
+      "export": "导出预设",
+      "empty": "还没添加任何指令\n点击下方的\n\"删除\"、\"添加\"、\"替换\"\n按钮来添加"
+    },
     "organize": {
       "target": "请选择目标文件夹"
     },

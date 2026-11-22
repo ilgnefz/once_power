@@ -4,12 +4,11 @@ import 'package:once_power/constant/number.dart';
 class const EasyDialog({
   super.key,
   required final Widget child,
-  final double? width,
+  final double width = AppNumber.dialog,
 }) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    final double dialogWidth = width ?? AppNumber.dialog;
     return UnconstrainedBox(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -18,8 +17,8 @@ class const EasyDialog({
           // maxWidth 仍是 infinity，内部 Row + Expanded 会抛
           // 「RenderFlex ... incoming width constraints are unbounded」，
           // 后续 hit test / hover 回调再抛异常就会污染 MouseTracker 状态。
-          minWidth: dialogWidth,
-          maxWidth: dialogWidth,
+          minWidth: width,
+          maxWidth: width,
         ),
         child: Material(
           borderRadius: .circular(AppNumber.radius),

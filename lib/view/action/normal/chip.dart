@@ -21,16 +21,14 @@ class MatchChip extends ConsumerWidget {
               selected: ref.watch(selectedReplaceTypeProvider),
               spacing: AppNumber.spaceSmall,
               speed: 64,
-              onTap: (ReplaceType value) =>
-                  ref.read(selectedReplaceTypeProvider.notifier).update(value),
+              onTap: ref.read(selectedReplaceTypeProvider.notifier).update,
             )
           : MarqueeChipRow<KeepType>(
               items: KeepType.values,
               labelOf: (KeepType value) => value.label,
               selected: ref.watch(selectedKeepTypeProvider),
               spacing: AppNumber.spaceSmall,
-              onTap: (KeepType value) =>
-                  ref.read(selectedKeepTypeProvider.notifier).update(value),
+              onTap: ref.read(selectedKeepTypeProvider.notifier).update,
             ),
     );
   }

@@ -41,11 +41,13 @@ class AppKeys {
   static const String language = 'language';
   static const String length = 'length';
   static const String match = 'match';
+  static const String matchType = 'matchType';
   static const String maximize = 'maximize';
   static const String mode = 'mode';
   static const String modify = 'modify';
   static const String position = 'position';
   static const String prefix = 'prefix';
+  static const String reverseType = 'reverseType';
   static const String prefixDigits = 'prefixDigits';
   static const String prefixStart = 'prefixStart';
   static const String save = 'save';

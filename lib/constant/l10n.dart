@@ -37,8 +37,53 @@ class AppL10n {
   static const String extensionEnable = 'action.normal.extensionEnable';
   static const String caseFile = 'action.normal.caseFile';
   static const String caseExtension = 'action.normal.caseExtension';
+
+  /* ---------- Action Advance ---------- */
+  static const String presetTotal = 'action.advance.total';
+  static const String preset = 'action.advance.preset';
+  static const String addPreset = 'action.advance.addPreset';
+  static const String presetImport = 'action.advance.import';
+  static const String presetExport = 'action.advance.export';
+  static const String presetEmpty = 'action.advance.empty';
+  /* ---------- Action Advance Delete---------- */
+  static const String deleteAction = 'action.advance.delete.label';
+  static const String deleteMenu = 'action.advance.delete.title';
+  static const String deleteInput = 'action.advance.delete.input';
+  static const String deleteType = 'action.advance.delete.type';
+  static const String deletePart = 'action.advance.delete.part';
+  static const String deleteExtension = 'action.advance.delete.extension';
+  static const String positionLabel = 'action.advance.delete.positionLabel';
+  static const String deleteTypeLabel = 'action.advance.delete.typeLabel';
+  static const String deleteDigit = 'action.advance.delete.digit';
+  static const String deleteCapital = 'action.advance.delete.capital';
+  static const String deleteLowercase = 'action.advance.delete.lowercase';
+  static const String deleteNonLetter = 'action.advance.delete.nonLetter';
+  static const String deletePunctuation = 'action.advance.delete.punctuation';
+  static const String deleteSpace = 'action.advance.delete.space';
+  // TODO: 改名
+  static const String removeExtension = 'action.advance.delete.deleteExtension';
+  /* ---------- Action Advance Add---------- */
+  static const String addAction = 'action.advance.add.label';
+  static const String addMenu = 'action.advance.add.title';
+  /* ---------- Action Advance Replace---------- */
+  static const String replaceAction = 'action.advance.replace.label';
+  static const String replaceMenu = 'action.advance.add.title';
+  /* ---------- Action Advance Common---------- */
+  static const String all = 'action.advance.common.all';
+  static const String regex = 'action.advance.common.regex';
+  static const String inputContent = 'action.advance.common.inputContent';
+  static const String inputPosition = 'action.advance.common.inputPosition';
+  static const String matchPart = 'action.advance.common.matchPart';
+  static const String ordinal = 'action.advance.common.ordinal';
+  static const String ordinalUnit = 'action.advance.common.ordinalUnit';
+  static const String last = 'action.advance.common.last';
+  static const String advanceSelf = 'action.advance.common.self';
+  static const String advanceFront = 'action.advance.common.front';
+  static const String advanceBehind = 'action.advance.common.behind';
+
   /* ---------- Action Organize ---------- */
   static const String target = 'action.organize.target';
+
   /* ---------- Action Common ---------- */
   static const String digit = 'action.digit';
   static const String start = 'action.start';
@@ -48,6 +93,7 @@ class AppL10n {
   static const String addFile = 'action.addFile';
   static const String selectFolder = 'action.selectFolder';
   static const String apply = 'action.apply';
+
   /* ---------- Content ---------- */
   static const String originName = 'content.origin';
   static const String newName = 'content.new';
@@ -58,6 +104,7 @@ class AppL10n {
   static const String empty2 = 'content.empty2';
   static const String loading = 'content.loading';
   static const String error = 'content.error';
+
   /* ---------- Bottom ---------- */
   static const String save = 'bottom.save';
   static const String view = 'bottom.view';
@@ -69,6 +116,7 @@ class AppL10n {
   static const String undo = 'bottom.undo';
   static const String task = 'bottom.task';
   static const String time = 'bottom.time';
+
   /* ---------- Setting ---------- */
   static const String rule = 'setting.rule.label';
   static const String addSelf = 'setting.rule.self';
@@ -77,6 +125,7 @@ class AppL10n {
   static const String cancelRename = 'setting.rule.cancelRename';
   static const String autoRename = 'setting.rule.autoRename';
   static const String renameFormat = 'setting.rule.autoRenameFormat';
+
   /* ---------- Setting General ---------- */
   static const String general = 'setting.general.label';
   static const String size = 'setting.general.size';
@@ -86,6 +135,7 @@ class AppL10n {
   static const String contextMenu = 'setting.general.contextMenu';
   static const String language = 'setting.general.language';
   static const String notification = 'setting.general.notification';
+
   /* ---------- Setting Appearance ---------- */
   static const String appearance = 'setting.appearance.label';
   static const String light = 'setting.appearance.light';
@@ -99,9 +149,11 @@ class AppL10n {
   static const String containerSurface = 'setting.appearance.containerSurface';
   static const String sync = 'setting.appearance.sync';
   static const String divider = 'setting.appearance.divider';
+
   /* ---------- Setting Log ---------- */
   static const String log = 'setting.log.label';
   static const String saveLog = 'setting.log.save';
+
   /* ---------- Setting Shortcut ---------- */
   static const String shortcut = 'setting.shortcut.label';
   static const String shortcutAll = 'setting.shortcut.all';
@@ -111,6 +163,7 @@ class AppL10n {
   static const String shortcutStash = 'setting.shortcut.stash';
   static const String shortcutFront = 'setting.shortcut.front';
   static const String shortcutBehind = 'setting.shortcut.behind';
+
   /* ---------- Setting Other ---------- */
   static const String other = 'setting.other.label';
   static const String check = 'setting.other.check';

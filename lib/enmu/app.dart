@@ -22,16 +22,16 @@ extension ThemeTypeExtension on ThemeType {
     }
   }
 
-  String get label {
-    switch (this) {
-      case ThemeType.light:
-        return tr(AppL10n.light);
-      case ThemeType.dark:
-        return tr(AppL10n.dark);
-      case ThemeType.system:
-        return tr(AppL10n.system);
-    }
-  }
+  // String get label {
+  //   switch (this) {
+  //     case ThemeType.light:
+  //       return tr(AppL10n.light);
+  //     case ThemeType.dark:
+  //       return tr(AppL10n.dark);
+  //     case ThemeType.system:
+  //       return tr(AppL10n.system);
+  //   }
+  // }
 
   // IconData get icon {
   //   switch (this) {

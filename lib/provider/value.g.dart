@@ -42,7 +42,7 @@ final class SelectedReplaceTypeProvider
 }
 
 String _$selectedReplaceTypeHash() =>
-    r'364e4a9fd7e6f295197680aea1a77df450491ff4';
+    r'18a286f802db21cf5968cabb007b8f15a9303e14';
 
 abstract class _$SelectedReplaceType extends $Notifier<Set<ReplaceType>> {
   Set<ReplaceType> build();
@@ -94,7 +94,7 @@ final class SelectedKeepTypeProvider
   }
 }
 
-String _$selectedKeepTypeHash() => r'4f30a2386eb5b8ecb51c39a04f33afe0625c9b89';
+String _$selectedKeepTypeHash() => r'1464ea65f4d7b091eaf1f3945a54b9b822c0a6de';
 
 abstract class _$SelectedKeepType extends $Notifier<Set<KeepType>> {
   Set<KeepType> build();

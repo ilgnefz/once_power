@@ -157,9 +157,13 @@ class ThemeConfig {
       iconTheme: AppIconTheme.of(colors),
       inputDecorationTheme: AppInputTheme.of(scheme),
       tabBarTheme: AppTabBarTheme.of(scheme),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(mouseCursor: .all(SystemMouseCursors.click)),
+      ),
       textTheme: AppTextTheme.of(scheme),
       tooltipTheme: AppTooltipTheme.of(scheme),
       extensions: [
+        AppDotTheme.of(colors),
         AppEasyButtonTheme.of(scheme),
         AppEasyChipTheme.of(colors),
         AppIconBoxTheme.of(colors),

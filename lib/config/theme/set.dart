@@ -5,6 +5,7 @@ import 'package:once_power/constant/color.dart';
 import 'button.dart';
 import 'chip.dart';
 import 'container_surface.dart';
+import 'dot.dart';
 import 'icon_box.dart';
 import 'title_bar.dart';
 
@@ -65,7 +66,10 @@ class AppTabBarTheme {
       fontWeight: FontWeight.bold,
       color: scheme.primary,
     ),
-    unselectedLabelStyle: _textStyle.copyWith(color: scheme.onSurface),
+    unselectedLabelStyle: _textStyle.copyWith(
+      color: scheme.onSurface,
+      fontWeight: .normal,
+    ),
     indicator: _indicator(scheme.primary),
     indicatorSize: TabBarIndicatorSize.tab,
     // indicatorSize.tab 默认走 linear；显式指定 elastic 才能保留切换时
@@ -103,15 +107,23 @@ class AppTextTheme {
     ),
     bodyMedium: _textStyle.copyWith(color: scheme.onSurface),
     bodySmall: _textStyle.copyWith(fontSize: 13.0, color: scheme.onSurface),
-    labelMedium: _textStyle.copyWith(
+    titleSmall: _textStyle.copyWith(
       fontSize: 12.0,
       fontWeight: FontWeight.bold,
-      color: scheme.onSurface,
+      color: scheme.onSurfaceVariant,
     ),
+    labelMedium: _textStyle.copyWith(color: scheme.onSurfaceVariant),
   );
 }
 
 /* ---------- Custom Widget Theme ----------*/
+class AppDotTheme {
+  static DotTheme of(AppColorScheme colors) => DotTheme(
+    color: colors.scheme.primary.withValues(alpha: .5),
+    selectedColor: colors.scheme.primary,
+  );
+}
+
 class AppEasyButtonTheme {
   static EasyButtonTheme of(ColorScheme scheme) => EasyButtonTheme(
     textStyle: _textStyle.copyWith(color: scheme.primary),

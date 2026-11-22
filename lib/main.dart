@@ -22,6 +22,8 @@ import 'provider/value.dart';
 // TODO: 实时监测和修改上传的txt和csv文件
 // TODO:设置新增文件在前面还是后面
 // TODO:关于获取子文件夹及其子子文件夹的问题
+// TODO:预览音频和电子书
+// TODO:灰色文字主题
 
 Future<void> main(List<String> args) async {
   await AppConfig.init(args);

@@ -1,7 +1,9 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:once_power/constant/number.dart';
 
 class const EasyCheckbox({
   super.key,
+
   /// null 表示部分选中（三态横杠）；传 null 时会自动打开 [Checkbox.tristate]。
   required final bool? checked,
   required final Function(bool?)? onChanged,
@@ -46,8 +48,16 @@ class const EasyCheckbox({
       ],
     );
 
+    // 外壳固定 widgetHeight，checkbox/文字保持原尺寸、垂直居中。
     return RepaintBoundary(
-      child: label == null && child == null ? checkbox : row,
+      child: SizedBox(
+        height: AppNumber.widgetHeight,
+        child: Row(
+          mainAxisSize: .min,
+          crossAxisAlignment: .center,
+          children: [label == null && child == null ? checkbox : row],
+        ),
+      ),
     );
   }
 }
