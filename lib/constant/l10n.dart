@@ -41,7 +41,7 @@ class AppL10n {
   /* ---------- Action Advance ---------- */
   static const String presetTotal = 'action.advance.total';
   static const String preset = 'action.advance.preset';
-  static const String addPreset = 'action.advance.addPreset';
+  static const String presetAdd = 'action.advance.addPreset';
   static const String presetImport = 'action.advance.import';
   static const String presetExport = 'action.advance.export';
   static const String presetEmpty = 'action.advance.empty';

@@ -10,6 +10,7 @@ class AppNumber {
   static const double topHeight = 36.0;
   static const double widgetHeight = 32.0;
   static const double shortcutWidth = 108.0;
+  static const double presetWidth = 160.0;
 
   /// 网格条目最大宽度；图片解码缓存按它 × 设备像素比算，避免大图按原尺寸解码。
   static const double gridCellWidth = 136.0;

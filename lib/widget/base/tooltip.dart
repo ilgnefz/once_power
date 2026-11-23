@@ -14,7 +14,6 @@ class const EasyTooltip({
 }) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SmartTooltip 不读官方 TooltipTheme，这里把官方主题里的颜色取出来传给它。
     final TooltipThemeData tooltipTheme = TooltipTheme.of(context);
     final BoxDecoration decoration =
         (tooltipTheme.decoration ?? const BoxDecoration()) as BoxDecoration;
@@ -29,7 +28,10 @@ class const EasyTooltip({
       gap: AppNumber.spaceSmall,
       placement: placement,
       waitDuration: waitDuration,
-      contentPadding: .symmetric(horizontal: 8, vertical: 6),
+      contentPadding: .symmetric(
+        horizontal: AppNumber.paddingMedium,
+        vertical: 6.0,
+      ),
       child: child,
     );
   }

@@ -4,7 +4,7 @@ import 'package:once_power/core/dialog.dart';
 import 'package:once_power/model/actions.dart';
 import 'package:once_power/widget/base/button.dart';
 
-import 'preset.dart';
+import 'preset/preset.dart';
 
 class ActionsGroup extends StatelessWidget {
   const ActionsGroup({super.key});

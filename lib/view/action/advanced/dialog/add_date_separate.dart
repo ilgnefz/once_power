@@ -37,7 +37,7 @@ class AddDateSeparate extends StatelessWidget {
           onChanged: onDateSeparateChange,
         ),
         SizedBox(
-          width: 256,
+          width: 242,
           child: EasyInput(
             value: custom,
             hintText: tr(AppL10n.dateSeparateCustomHint),

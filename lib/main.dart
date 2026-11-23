@@ -28,6 +28,7 @@ import 'provider/value.dart';
 // TODO:添加自定义打开时选择功能的选项
 // TODO: 输入框日期可以选择
 // TODO: 序列类型：罗马数字、中文
+// TODO: 滑动时bottom添加个快速到顶部的按钮
 
 Future<void> main(List<String> args) async {
   await AppConfig.init(args);

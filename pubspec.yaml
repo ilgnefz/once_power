@@ -41,8 +41,8 @@ dependencies:
   # ----- System -----
   desktop_drop: ^0.9.2
 #  desktop_multi_window: ^0.3.1
-#  file_picker: ^14.0.0
-  tray_manager: ^0.9.0
+  # file_picker: ^13.4.1
+  tray_manager: ^0.9.1
   win32_registry: ^3.0.3
   window_manager: ^0.5.2
   # ----- UI -----
