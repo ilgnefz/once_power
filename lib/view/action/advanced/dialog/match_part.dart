@@ -27,8 +27,9 @@ class MatchPartGroup extends StatelessWidget {
       selected: selected,
       child: DialogItem(
         title: context.tr(AppL10n.matchPart),
-        spacing: AppNumber.spaceMedium,
+        // spacing: AppNumber.spaceMedium,
         children: [
+          SizedBox(width: AppNumber.spaceSmall),
           SizedBox(
             width: 108,
             child: NumberInput(
@@ -38,6 +39,7 @@ class MatchPartGroup extends StatelessWidget {
               onChanged: onStartChanged,
             ),
           ),
+          SizedBox(width: AppNumber.spaceMedium),
           SizedBox(
             width: 108,
             child: NumberInput(

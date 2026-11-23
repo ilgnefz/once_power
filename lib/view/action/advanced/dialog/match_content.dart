@@ -27,7 +27,7 @@ class MatchContentGroup extends StatelessWidget {
       groupValue: content,
       onChanged: (value) => onChanged(value!),
       child: DialogItem(
-        title: tr(AppL10n.inputContent),
+        title: tr(AppL10n.enterContent),
         spacing: AppNumber.space,
         children: MatchContent.values.map((e) {
           switch (e) {

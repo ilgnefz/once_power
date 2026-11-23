@@ -31,7 +31,7 @@ class MatchPositionGroup extends StatelessWidget {
       groupValue: position,
       onChanged: (value) => onChanged(value!),
       child: DialogItem(
-        title: context.tr(AppL10n.inputPosition),
+        title: context.tr(AppL10n.enterPosition),
         spacing: AppNumber.space,
         runSpacing: AppNumber.spaceSmall,
         // alignment: .spaceBetween,

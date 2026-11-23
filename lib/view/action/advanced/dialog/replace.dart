@@ -1,182 +1,192 @@
-import 'dart:io';
-
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/number.dart';
-import 'package:once_power/widget/base/text.dart';
+import 'package:once_power/enmu/advance.dart';
+import 'package:once_power/enmu/replace.dart';
+import 'package:once_power/view/action/advanced/dialog/replace_format.dart';
+import 'package:once_power/view/action/advanced/dialog/replace_inserter.dart';
+import 'package:once_power/widget/action/mode_switch.dart';
 
-import 'button.dart';
+import 'frame.dart';
+import 'match_part.dart';
+import 'repalce_convert.dart';
+import 'repalce_swap.dart';
+import 'replace_input.dart';
 
-/// ColorFiltered 效果示例页。
-///
-/// 把同一个 [ColorFilter] 同时作用在「图片」与「组件 + 文字」上，
-/// 方便直观对比每种滤镜的真实表现。第一组 `linearToSrgbGamma`
-/// 正是 `dialog_item.dart` 的 `SelectedBox` 用来做「未选中变淡」的方案，
-/// 放在这里可以直接看出它对图片与 UI 组件分别是什么效果。
-class ReplaceDialog extends StatelessWidget {
+class ReplaceDialog extends StatefulWidget {
   const ReplaceDialog({super.key});
 
-  static const String _imagePath = r'D:\天翼云盘下载\AI\B6gwbZI.png';
+  @override
+  State<ReplaceDialog> createState() => _ReplaceDialogState();
+}
 
-  /// 标准灰度矩阵（亮度权重 0.2126 / 0.7152 / 0.0722）。
-  static const List<double> _greyMatrix = [
-    0.2126, 0.7152, 0.0722, 0, 0, //
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0, 0, 0, 1, 0,
-  ];
-
-  static const List<_FilterEntry> _filters = [
-    _FilterEntry('原图 / 原样（无滤镜）', null),
-    _FilterEntry(
-      'linearToSrgbGamma（dialog_item 当前用法）',
-      ColorFilter.linearToSrgbGamma(),
-    ),
-    _FilterEntry('srgbToLinearGamma', ColorFilter.srgbToLinearGamma()),
-    _FilterEntry(
-      '去饱和置灰 · saturation',
-      ColorFilter.mode(Colors.grey, BlendMode.saturation),
-    ),
-    _FilterEntry(
-      '半透明遮罩 · srcATop',
-      ColorFilter.mode(Colors.black38, BlendMode.srcATop),
-    ),
-    _FilterEntry('灰度矩阵 · matrix', ColorFilter.matrix(_greyMatrix)),
-  ];
+class _ReplaceDialogState extends State<ReplaceDialog> {
+  String match = '', modify = '', swapSeparator = '', word = '', group = '0';
+  int number = 1, font = 1, behind = 1, start = 1, digit = 1, swapIndex = 1;
+  bool regex = false, extension = false, swapAll = false;
+  ReplaceMode mode = .input;
+  MatchContent content = .number;
+  MatchPosition position = .self;
+  FillPosition fillPosition = .front;
+  ConvertType convertType = .uppercase;
+  SwapType swapType = .reverse;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double contentMax =
-            (constraints.maxHeight -
-                    AppNumber.widgetHeight -
-                    AppNumber.spaceMedium)
-                .clamp(0.0, double.infinity)
-                .toDouble();
-        return Column(
-          spacing: AppNumber.spaceMedium,
-          mainAxisSize: .min,
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: contentMax),
-              child: SingleChildScrollView(
-                padding: .symmetric(horizontal: AppNumber.padding),
-                child: Column(
-                  crossAxisAlignment: .stretch,
-                  spacing: AppNumber.spaceMedium,
-                  children: [
-                    for (final entry in _filters)
-                      _FilterSample(entry: entry, imagePath: _imagePath),
-                  ],
-                ),
-              ),
-            ),
-            ButtonGroup(
-              group: '0',
-              onComplete: () {},
-              onCompleteExit: () {},
-              onGroupChange: (value) {},
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _FilterEntry {
-  const _FilterEntry(this.label, this.filter);
-
-  final String label;
-  final ColorFilter? filter;
-}
-
-class _FilterSample extends StatelessWidget {
-  const _FilterSample({required this.entry, required this.imagePath});
-
-  final _FilterEntry entry;
-  final String imagePath;
-
-  @override
-  Widget build(BuildContext context) {
-    // 标题保持在滤镜之外，避免文字一起变色、影响阅读。
-    final Widget content = Row(
-      crossAxisAlignment: .start,
-      spacing: AppNumber.padding,
-      children: [
-        SizedBox(
-          width: AppNumber.gridCellWidth,
-          child: AspectRatio(
-            aspectRatio: 1152 / 1472,
-            child: Image.file(
-              File(imagePath),
-              fit: .cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                alignment: .center,
-                child: const Icon(Icons.broken_image_outlined),
-              ),
-            ),
+    Localizations.localeOf(context);
+    return AdvanceDialogFrame(
+      // 按钮上方留白：等价于原先 spacing + SizedBox + spacing。
+      footerSpacing: AppNumber.space,
+      group: group,
+      onComplete: () {},
+      onCompleteExit: () => Navigator.of(context).pop(),
+      onGroupChange: (value) => setState(() => group = value),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: .center,
+            spacing: AppNumber.space,
+            children: ReplaceMode.values.map((e) {
+              return ModeSwitchItem(
+                selected: mode == e,
+                label: e.label,
+                onTap: () => setState(() => mode = e),
+              );
+            }).toList(),
           ),
-        ),
-        const Expanded(child: _WidgetSample()),
-      ],
-    );
-
-    final filter = entry.filter;
-    return Column(
-      crossAxisAlignment: .stretch,
-      spacing: AppNumber.paddingSmall,
-      children: [
-        BaseText(entry.label, fontWeight: FontWeight.bold),
-        filter == null
-            ? content
-            : ColorFiltered(colorFilter: filter, child: content),
-      ],
-    );
-  }
-}
-
-/// 组件 + 文字的示例内容：主题色 Chip、图标与两段文字，
-/// 用来观察滤镜作用在 UI 组件（而非图片）上的表现。
-class _WidgetSample extends StatelessWidget {
-  const _WidgetSample();
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: .start,
-      spacing: AppNumber.paddingSmall,
-      children: [
-        BaseText('组件文字 Abc 123', fontSize: 16, fontWeight: FontWeight.bold),
-        Row(
-          mainAxisSize: .min,
-          spacing: AppNumber.space,
-          children: [
-            Container(
-              padding: .symmetric(
-                horizontal: AppNumber.paddingMedium,
-                vertical: AppNumber.paddingSmall,
-              ),
-              decoration: BoxDecoration(
-                color: colorScheme.primary,
-                borderRadius: .circular(AppNumber.radiusSmall),
-              ),
-              child: Row(
-                mainAxisSize: .min,
-                spacing: AppNumber.spaceSmall,
-                children: [
-                  Icon(Icons.check, size: 16, color: colorScheme.onPrimary),
-                  BaseText('选中 Chip', color: colorScheme.onPrimary),
-                ],
-              ),
-            ),
-            Icon(Icons.star, size: AppNumber.widgetHeight, color: colorScheme.primary),
-          ],
-        ),
-        const BaseText('默认文字 abc 123 — ColorFiltered'),
-      ],
+          SizedBox(height: AppNumber.spaceMedium),
+          ReplaceInputGroup(
+            selected: mode == ReplaceMode.input,
+            match: match,
+            onMatchChanged: (value) {
+              match = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            regex: regex,
+            onRegexPressed: () {
+              regex = !regex;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            modify: modify,
+            onModifyChanged: (value) {
+              modify = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            extension: extension,
+            onExtensionPressed: () {
+              extension = !extension;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            content: content,
+            onContentChanged: (value) {
+              content = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            number: number,
+            onNumberChanged: (value) {
+              number = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            position: position,
+            onPositionChanged: (value) {
+              position = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            front: font,
+            onFrontChanged: (value) {
+              font = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+            behind: behind,
+            onBehindChanged: (value) {
+              behind = value;
+              mode = ReplaceMode.input;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: AppNumber.spaceMedium),
+          MatchPartGroup(
+            selected: mode == ReplaceMode.part,
+            start: start,
+            digit: digit,
+            onStartChanged: (value) {
+              start = value;
+              mode = ReplaceMode.part;
+              setState(() {});
+            },
+            onDigitChanged: (value) {
+              digit = value;
+              mode = ReplaceMode.part;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: AppNumber.spaceMedium),
+          ReplaceFormatGroup(
+            selected: mode == ReplaceMode.format,
+            fillPosition: fillPosition,
+            onPositionChanged: (value) {
+              fillPosition = value;
+              mode = ReplaceMode.format;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: AppNumber.spaceMedium),
+          ReplaceConvertGroup(
+            selected: mode == ReplaceMode.convert,
+            type: convertType,
+            onConvertChanged: (value) {
+              convertType = value;
+              mode = ReplaceMode.convert;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: AppNumber.spaceMedium),
+          ReplaceSwapGroup(
+            selected: mode == ReplaceMode.swap,
+            type: swapType,
+            onTypeChanged: (value) {
+              swapType = value;
+              mode = ReplaceMode.swap;
+              setState(() {});
+            },
+            index: swapIndex,
+            onIndexChanged: (value) {
+              swapIndex = value;
+              mode = ReplaceMode.swap;
+              setState(() {});
+            },
+            separator: swapSeparator,
+            onSeparatorChanged: (value) {
+              swapSeparator = value;
+              mode = ReplaceMode.swap;
+              setState(() {});
+            },
+            all: swapAll,
+            onAllChanged: (value) {
+              swapAll = value;
+              mode = ReplaceMode.swap;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: AppNumber.spaceMedium),
+          ReplaceInserterGroup(
+            selected: mode == ReplaceMode.inserter,
+            inserter: word,
+            onInserterChanged: (value) {
+              word = value;
+              mode = ReplaceMode.inserter;
+              setState(() {});
+            },
+          ),
+        ],
+      ),
     );
   }
 }

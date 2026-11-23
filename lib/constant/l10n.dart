@@ -48,7 +48,6 @@ class AppL10n {
   /* ---------- Action Advance Delete---------- */
   static const String deleteAction = 'action.advance.delete.label';
   static const String deleteMenu = 'action.advance.delete.title';
-  static const String deleteInput = 'action.advance.delete.input';
   static const String deleteType = 'action.advance.delete.type';
   static const String deletePart = 'action.advance.delete.part';
   static const String deleteExtension = 'action.advance.delete.extension';
@@ -60,6 +59,8 @@ class AppL10n {
   static const String deleteNonLetter = 'action.advance.delete.nonLetter';
   static const String deletePunctuation = 'action.advance.delete.punctuation';
   static const String deleteSpace = 'action.advance.delete.space';
+  static const String deleteExtensionHint =
+      'action.advance.delete.extensionHint';
   // TODO: 改名
   static const String removeExtension = 'action.advance.delete.deleteExtension';
   /* ---------- Action Advance Add---------- */
@@ -67,12 +68,33 @@ class AppL10n {
   static const String addMenu = 'action.advance.add.title';
   /* ---------- Action Advance Replace---------- */
   static const String replaceAction = 'action.advance.replace.label';
-  static const String replaceMenu = 'action.advance.add.title';
+  static const String replaceMenu = 'action.advance.replace.title';
+  static const String replaceConvert = 'action.advance.replace.convert';
+  static const String replaceSwap = 'action.advance.replace.swap';
+  static const String replaceWord = 'action.advance.replace.word';
+  static const String replaceFormat = 'action.advance.replace.format';
+  static const String replaceFormatText = 'action.advance.replace.formatText';
+  static const String replaceFront = 'action.advance.replace.front';
+  static const String replaceConvertText = 'action.advance.replace.convertText';
+  static const String replaceBehind = 'action.advance.replace.behind';
+  static const String replaceUpper = 'action.advance.replace.upper';
+  static const String replaceLower = 'action.advance.replace.lower';
+  static const String replaceToggle = 'action.advance.replace.toggle';
+  static const String replaceTradition = 'action.advance.replace.tradition';
+  static const String replaceSimplified = 'action.advance.replace.simplified';
+  static const String replaceSwapText = 'action.advance.replace.swapText';
+  static const String replaceReverse = 'action.advance.replace.reverse';
+  static const String replaceSeparator = 'action.advance.replace.separator';
+  static const String replaceSwapAll = 'action.advance.replace.swapAll';
+  static const String replaceSwapAllTip = 'action.advance.replace.swapAllTip';
+  static const String replaceWordHint = 'action.advance.replace.wordHint';
+  static const String replaceWordTip = 'action.advance.replace.wordTip';
   /* ---------- Action Advance Common---------- */
   static const String all = 'action.advance.common.all';
+  static const String advanceEnter = 'action.advance.common.enter';
   static const String regex = 'action.advance.common.regex';
-  static const String inputContent = 'action.advance.common.inputContent';
-  static const String inputPosition = 'action.advance.common.inputPosition';
+  static const String enterContent = 'action.advance.common.enterContent';
+  static const String enterPosition = 'action.advance.common.enterPosition';
   static const String matchPart = 'action.advance.common.matchPart';
   static const String ordinal = 'action.advance.common.ordinal';
   static const String ordinalUnit = 'action.advance.common.ordinalUnit';
@@ -104,6 +126,12 @@ class AppL10n {
   static const String empty2 = 'content.empty2';
   static const String loading = 'content.loading';
   static const String error = 'content.error';
+  static const String image = 'content.type.image';
+  static const String video = 'content.type.video';
+  static const String audio = 'content.type.audio';
+  static const String doc = 'content.type.doc';
+  static const String archive = 'content.type.archive';
+  static const String typeOther = 'content.type.other';
 
   /* ---------- Bottom ---------- */
   static const String save = 'bottom.save';

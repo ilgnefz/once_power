@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
-import 'package:once_power/enmu/advance.dart';
+import 'package:once_power/enmu/delete.dart';
 import 'package:once_power/widget/action/dialog_item.dart';
 import 'package:once_power/widget/base/checkbox.dart';
 

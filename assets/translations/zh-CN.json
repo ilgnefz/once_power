@@ -9,7 +9,7 @@
     "normal": {
       "match": "请输入匹配内容",
       "length": "输入数字或指定长度字符串",
-      "modify": "请输入修改内容",
+      "modify": "请输入替换内容",
       "case": "不区分大小写",
       "today": "今天的日期",
       "matchType": {
@@ -49,7 +49,6 @@
       "delete": {
         "label": "删除",
         "title": "删除菜单",
-        "input": "输入",
         "type": "类型",
         "part": "部分",
         "extension": "扩展",
@@ -61,7 +60,8 @@
         "nonLetter": "非字母",
         "punctuation": "标点符号",
         "space": "空格",
-        "deleteExtension": "删除扩展"
+        "deleteExtension": "删除扩展",
+        "extensionHint": "请输入扩展名"
       },
       "add": {
         "label":"添加",
@@ -69,13 +69,34 @@
       },
       "replace": {
         "label": "替换",
-        "title": "替换菜单"
+        "title": "替换菜单",
+        "convert": "转换",
+        "swap": "交换",
+        "word": "单词间隔",
+        "format": "格式化",
+        "formatText": "格式文本",
+        "front": "补全前面",
+        "behind": "补全后面",
+        "convertText": "转换文本",
+        "upper": "大写",
+        "lower": "小写",
+        "toggle": "大小写切换",
+        "tradition": "繁体",
+        "simplified": "简体",
+        "swapText": "交换文本",
+        "reverse": "反转",
+        "separator": "分隔符",
+        "swapAll": "所有",
+        "swapAllTip": "选中前，第2个\"_\"：A_B_C → A_C_B\n选中后，第2个\"_\"：A_B_C → C_A_B",
+        "wordHint": "请输入单词间插入的内容",
+        "wordTip": "大写字母开头识别为一个单词"
       },
       "common": {
         "all": "全部",
+        "enter": "输入",
         "regex": "使用正则",
-        "inputContent": "匹配内容",
-        "inputPosition": "匹配位置",
+        "enterContent": "匹配内容",
+        "enterPosition": "匹配位置",
         "matchPart": "匹配部分",
         "ordinal": "第",
         "ordinalUnit": "个",
@@ -111,7 +132,15 @@
     "empty1": "拖动文件（夹）到这里",
     "empty2": "拖动图片视频文件（夹）到这里",
     "loading": "加载中...",
-    "error": "图片加载失败"
+    "error": "图片加载失败",
+    "type": {
+      "image": "图片",
+      "video": "视频",
+      "audio": "音频",
+      "doc": "文档",
+      "archive": "压缩包",
+      "other": "其他"
+    }
   },
   "bottom": {
     "save": "保存输入内容和选项状态",

@@ -13,7 +13,7 @@ class const DialogDot({
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: selected ? 16 : 8,
+        width: selected ? 12 : 4,
         height: 4,
         decoration: BoxDecoration(
           borderRadius: .circular(4),

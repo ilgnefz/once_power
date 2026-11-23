@@ -24,6 +24,7 @@ import 'provider/value.dart';
 // TODO:关于获取子文件夹及其子子文件夹的问题
 // TODO:预览音频和电子书
 // TODO:灰色文字主题
+// TODO:添加关闭高级弹窗透明度变化的开关
 
 Future<void> main(List<String> args) async {
   await AppConfig.init(args);

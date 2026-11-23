@@ -14,10 +14,10 @@ class DeleteInputGroup extends StatelessWidget {
   const DeleteInputGroup({
     super.key,
     required this.selected,
-    required this.value,
+    required this.match,
+    required this.onMatchChanged,
     required this.regex,
-    required this.onIconPressed,
-    required this.onChanged,
+    required this.onRegexPressed,
     required this.content,
     required this.onContentChanged,
     required this.number,
@@ -31,10 +31,10 @@ class DeleteInputGroup extends StatelessWidget {
   });
 
   final bool selected;
-  final String value;
+  final String match;
+  final void Function(String) onMatchChanged;
   final bool regex;
-  final void Function() onIconPressed;
-  final void Function(String) onChanged;
+  final void Function() onRegexPressed;
   final MatchContent content;
   final void Function(MatchContent) onContentChanged;
   final int number;
@@ -59,11 +59,11 @@ class DeleteInputGroup extends StatelessWidget {
             icon: AppIcons.regex,
             tip: context.tr(AppL10n.regex),
             checked: regex,
-            onIconPressed: onIconPressed,
+            onIconPressed: onRegexPressed,
             child: EasyInput(
               hintText: context.tr(AppL10n.match),
-              value: value,
-              onChanged: onChanged,
+              value: match,
+              onChanged: onMatchChanged,
             ),
           ),
           MatchContentGroup(

@@ -14,7 +14,7 @@ class AppNumber {
   /// 网格条目最大宽度；图片解码缓存按它 × 设备像素比算，避免大图按原尺寸解码。
   static const double gridCellWidth = 136.0;
   static const double topIconWidth = 40.0;
-  static const double dialog = 512.0;
+  static const double dialog = 560.0;
   static const double settingDialog = 640;
   static const double settingTab = 152;
   // Padding
