@@ -66,7 +66,7 @@ class _TitleBarViewState extends State<TitleBarView> {
                 ),
               ],
             ),
-            SizedBox(width: AppNumber.spaceSmall),
+            const SizedBox(width: AppNumber.spaceSmall),
             Text(AppText.appName, style: titleBarTheme?.textStyle),
             const Spacer(),
             TitleBarIcon(

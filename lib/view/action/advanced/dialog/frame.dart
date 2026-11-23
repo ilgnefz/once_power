@@ -31,18 +31,12 @@ class AdvanceDialogFrame extends StatelessWidget {
   final void Function() onComplete;
   final void Function() onCompleteExit;
   final void Function(String) onGroupChange;
-
-  /// 内容区与底部按钮之间的间距，默认 spaceMedium。
-  /// 想给按钮上方更多留白就调大此值，框架会同步计入高度预留。
-  // TODO: 删除
   final double footerSpacing;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        // ButtonGroup 固定高 widgetHeight；内容区与按钮之间只有
-        // footerSpacing 这一处间距（Column.spacing），相加即底部固定预留。
         final double bottomReserve = AppNumber.widgetHeight + footerSpacing;
         final double contentMax = (constraints.maxHeight - bottomReserve)
             .clamp(0.0, double.infinity)

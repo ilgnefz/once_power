@@ -28,3 +28,43 @@ extension DateTypeExtension on DateType {
   bool get isEarliest => this == DateType.earliest;
   bool get isLatest => this == DateType.latest;
 }
+
+enum WeekdayStyle {
+  none(-1),
+  chineseShort(0),
+  chineseLong(1),
+  japanese(2),
+  english(3);
+
+  final int value;
+  const WeekdayStyle(this.value);
+}
+
+extension WeekdayStyleExtension on WeekdayStyle {
+  String get label {
+    switch (this) {
+      case WeekdayStyle.none:
+        return tr(AppL10n.dateSeparateHidden);
+      case WeekdayStyle.chineseShort:
+        return '周一';
+      case WeekdayStyle.chineseLong:
+        return '星期一';
+      case WeekdayStyle.japanese:
+        return '月曜日';
+      case WeekdayStyle.english:
+        return 'Monday';
+    }
+  }
+
+  bool get isNone => this == WeekdayStyle.none;
+}
+
+final List<List<String>> weekdayNames = [
+  ['周一', '星期一', '月曜日', 'Monday'],
+  ['周二', '星期二', '火曜日', 'Tuesday'],
+  ['周三', '星期三', '水曜日', 'Wednesday'],
+  ['周四', '星期四', '木曜日', 'Thursday'],
+  ['周五', '星期五', '金曜日', 'Friday'],
+  ['周六', '星期六', '土曜日', 'Saturday'],
+  ['周日', '星期日', '日曜日', 'Sunday'],
+];

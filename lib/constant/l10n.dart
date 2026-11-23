@@ -66,6 +66,47 @@ class AppL10n {
   /* ---------- Action Advance Add---------- */
   static const String addAction = 'action.advance.add.label';
   static const String addMenu = 'action.advance.add.title';
+  static const String addIndex = 'action.advance.add.index';
+  static const String addRandom = 'action.advance.add.random';
+  static const String addDirectory = 'action.advance.add.folder';
+  static const String addWidth = 'action.advance.add.width';
+  static const String addHeight = 'action.advance.add.height';
+  static const String addExtension = 'action.advance.add.extension';
+  static const String addGroup = 'action.advance.add.group';
+  static const String addDate = 'action.advance.add.date';
+  static const String addMeta = 'action.advance.add.meta';
+  static const String addHint = 'action.advance.add.addHint';
+  static const String dateType = 'action.advance.add.dateType';
+  static const String dateSeparate = 'action.advance.add.dateSeparate';
+  static const String dateSeparateNone = 'action.advance.add.dateNone';
+  static const String dateSeparateSpace = 'action.advance.add.dateSpace';
+  static const String dateSeparateHidden = 'action.advance.add.dateHidden';
+  static const String dateSeparateCustom = 'action.advance.add.dateCustom';
+  static const String dateSeparateCustomHint =
+      'action.advance.add.dateCustomHint';
+  static const String indexFormat = 'action.advance.add.indexFormat';
+  static const String indexStep = 'action.advance.add.step';
+  static const String addIndexRule = 'action.advance.add.indexRule';
+  static const String addIndexNone = 'action.advance.add.indexNone';
+  static const String addIndexDate = 'action.advance.add.indexDate';
+  static const String addIndexFolder = 'action.advance.add.indexFolder';
+  static const String addIndexFile = 'action.advance.add.indexFile';
+  static const String addIndexExtension = 'action.advance.add.indexExtension';
+  static const String addIndexGroup = 'action.advance.add.indexGroup';
+  static const String addRandomHint = 'action.advance.add.randomHint';
+  static const String addPosition = 'action.advance.add.addPosition';
+  static const String addPositionFront = 'action.advance.add.positionFront';
+  static const String addPositionBehind = 'action.advance.add.positionBehind';
+  static const String addPositionEnd = 'action.advance.add.positionEnd';
+  static const String addPositionInterval =
+      'action.advance.add.positionInterval';
+  static const String metaTitle = 'action.advance.add.metaTitle';
+  static const String metaArtist = 'action.advance.add.artist';
+  static const String metaAlbum = 'action.advance.add.album';
+  static const String metaYear = 'action.advance.add.year';
+  static const String metaMake = 'action.advance.add.make';
+  static const String metaModel = 'action.advance.add.model';
+  static const String metaLocation = 'action.advance.add.location';
   /* ---------- Action Advance Replace---------- */
   static const String replaceAction = 'action.advance.replace.label';
   static const String replaceMenu = 'action.advance.replace.title';
@@ -102,6 +143,9 @@ class AppL10n {
   static const String advanceSelf = 'action.advance.common.self';
   static const String advanceFront = 'action.advance.common.front';
   static const String advanceBehind = 'action.advance.common.behind';
+  static const String applyGroup = 'action.advance.common.apply';
+  static const String ok = 'action.advance.common.ok';
+  static const String okExist = 'action.advance.common.okExist';
 
   /* ---------- Action Organize ---------- */
   static const String target = 'action.organize.target';

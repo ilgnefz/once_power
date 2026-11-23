@@ -12,7 +12,7 @@ class const EasyDialog({
     return UnconstrainedBox(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.9,
+          maxHeight: MediaQuery.of(context).size.height * 0.95,
           // UnconstrainedBox 会把父级约束全部解除；只给 minWidth 的话
           // maxWidth 仍是 infinity，内部 Row + Expanded 会抛
           // 「RenderFlex ... incoming width constraints are unbounded」，

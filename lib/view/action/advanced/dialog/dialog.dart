@@ -34,9 +34,6 @@ class _AdvanceActionDialogState extends State<AdvanceActionDialog> {
       width: AppNumber.dialog,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // 高度预算必须和下面 Padding / 固定头部用同一份值，否则会差出
-          // padding 的改动量（之前 Padding 改成 padding+medium 却漏改这里，
-          // 导致撑满 bodyMaxHeight 的 add/replace 图片溢出 16px）。
           final double verticalPadding = AppNumber.padding;
           final double fixedHeight =
               titleHeight + dotHeight + AppNumber.spaceMedium;
@@ -67,7 +64,7 @@ class _AdvanceActionDialogState extends State<AdvanceActionDialog> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(height: AppNumber.spaceMedium),
+                const SizedBox(height: AppNumber.spaceMedium),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: bodyMaxHeight),
                   child: AnimatedSize(

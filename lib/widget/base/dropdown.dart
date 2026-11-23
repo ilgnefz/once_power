@@ -12,6 +12,7 @@ class const EasyTextDropdown<T extends Object>({
 }) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double num = 10, gap = 2;
     return TextDropdown<T>(
       value: value,
       items: items,
@@ -19,13 +20,17 @@ class const EasyTextDropdown<T extends Object>({
       textStyle: TextStyle(fontSize: 14, fontFamily: ThemeConfig.font),
       width: width,
       height: AppNumber.widgetHeight,
-      itemGap: AppNumber.spaceSmall / 2,
+      maxPanelHeight: AppNumber.widgetHeight * num + gap * (num - 1) + 8,
+      itemGap: gap,
       radius: AppNumber.radius,
       borderColor: Theme.of(context).inputDecorationTheme.outlineBorder!.color,
       style: DropdownStyle.of(context).copyWith(
         // 与输入框 / 菜单 / tooltip 共用控件底色（同步时跟随页面背景）。
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderColor: Theme.of(context).inputDecorationTheme.outlineBorder!.color,
+        borderColor: Theme.of(context)
+            .inputDecorationTheme
+            .outlineBorder!
+            .color,
         itemHeight: AppNumber.widgetHeight,
         itemPadding: .symmetric(horizontal: AppNumber.paddingMedium),
         fieldPadding: .symmetric(horizontal: AppNumber.paddingMedium),

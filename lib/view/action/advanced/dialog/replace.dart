@@ -2,14 +2,14 @@ import 'package:material_ui/material_ui.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/enmu/advance.dart';
 import 'package:once_power/enmu/replace.dart';
-import 'package:once_power/view/action/advanced/dialog/replace_format.dart';
-import 'package:once_power/view/action/advanced/dialog/replace_inserter.dart';
 import 'package:once_power/widget/action/mode_switch.dart';
 
 import 'frame.dart';
 import 'match_part.dart';
-import 'repalce_convert.dart';
-import 'repalce_swap.dart';
+import 'replace_convert.dart';
+import 'replace_format.dart';
+import 'replace_inserter.dart';
+import 'replace_swap.dart';
 import 'replace_input.dart';
 
 class ReplaceDialog extends StatefulWidget {
@@ -20,10 +20,10 @@ class ReplaceDialog extends StatefulWidget {
 }
 
 class _ReplaceDialogState extends State<ReplaceDialog> {
-  String match = '', modify = '', swapSeparator = '', word = '', group = '0';
+  String match = '', modify = '', swapSeparator = '', word = '', group = 'all';
   int number = 1, font = 1, behind = 1, start = 1, digit = 1, swapIndex = 1;
   bool regex = false, extension = false, swapAll = false;
-  ReplaceMode mode = .input;
+  ReplaceMode mode = .enter;
   MatchContent content = .number;
   MatchPosition position = .self;
   FillPosition fillPosition = .front;
@@ -34,7 +34,6 @@ class _ReplaceDialogState extends State<ReplaceDialog> {
   Widget build(BuildContext context) {
     Localizations.localeOf(context);
     return AdvanceDialogFrame(
-      // 按钮上方留白：等价于原先 spacing + SizedBox + spacing。
       footerSpacing: AppNumber.space,
       group: group,
       onComplete: () {},
@@ -42,8 +41,8 @@ class _ReplaceDialogState extends State<ReplaceDialog> {
       onGroupChange: (value) => setState(() => group = value),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: .center,
+          Wrap(
+            alignment: .center,
             spacing: AppNumber.space,
             children: ReplaceMode.values.map((e) {
               return ModeSwitchItem(
@@ -53,135 +52,135 @@ class _ReplaceDialogState extends State<ReplaceDialog> {
               );
             }).toList(),
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           ReplaceInputGroup(
-            selected: mode == ReplaceMode.input,
+            selected: mode.isEnter,
             match: match,
             onMatchChanged: (value) {
               match = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             regex: regex,
             onRegexPressed: () {
               regex = !regex;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             modify: modify,
             onModifyChanged: (value) {
               modify = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             extension: extension,
             onExtensionPressed: () {
               extension = !extension;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             content: content,
             onContentChanged: (value) {
               content = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             number: number,
             onNumberChanged: (value) {
               number = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             position: position,
             onPositionChanged: (value) {
               position = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             front: font,
             onFrontChanged: (value) {
               font = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
             behind: behind,
             onBehindChanged: (value) {
               behind = value;
-              mode = ReplaceMode.input;
+              mode = .enter;
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           MatchPartGroup(
-            selected: mode == ReplaceMode.part,
+            selected: mode.isPart,
             start: start,
             digit: digit,
             onStartChanged: (value) {
               start = value;
-              mode = ReplaceMode.part;
+              mode = .part;
               setState(() {});
             },
             onDigitChanged: (value) {
               digit = value;
-              mode = ReplaceMode.part;
+              mode = .part;
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           ReplaceFormatGroup(
-            selected: mode == ReplaceMode.format,
+            selected: mode.isFormat,
             fillPosition: fillPosition,
             onPositionChanged: (value) {
               fillPosition = value;
-              mode = ReplaceMode.format;
+              mode = .format;
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           ReplaceConvertGroup(
-            selected: mode == ReplaceMode.convert,
+            selected: mode.isConvert,
             type: convertType,
             onConvertChanged: (value) {
               convertType = value;
-              mode = ReplaceMode.convert;
+              mode = .convert;
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           ReplaceSwapGroup(
-            selected: mode == ReplaceMode.swap,
+            selected: mode.isSwap,
             type: swapType,
             onTypeChanged: (value) {
               swapType = value;
-              mode = ReplaceMode.swap;
+              mode = .swap;
               setState(() {});
             },
             index: swapIndex,
             onIndexChanged: (value) {
               swapIndex = value;
-              mode = ReplaceMode.swap;
+              mode = .swap;
               setState(() {});
             },
             separator: swapSeparator,
             onSeparatorChanged: (value) {
               swapSeparator = value;
-              mode = ReplaceMode.swap;
+              mode = .swap;
               setState(() {});
             },
             all: swapAll,
             onAllChanged: (value) {
               swapAll = value;
-              mode = ReplaceMode.swap;
+              mode = .swap;
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           ReplaceInserterGroup(
-            selected: mode == ReplaceMode.inserter,
+            selected: mode.isInserter,
             inserter: word,
             onInserterChanged: (value) {
               word = value;
-              mode = ReplaceMode.inserter;
+              mode = .inserter;
               setState(() {});
             },
           ),

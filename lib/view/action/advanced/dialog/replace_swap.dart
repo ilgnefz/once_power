@@ -44,9 +44,7 @@ class ReplaceSwapGroup extends StatelessWidget {
         onChanged: (value) => onTypeChanged(value!),
         child: DialogItem(
           title: context.tr(AppL10n.replaceSwapText),
-          padding: const .only(top: 4.0),
           spacing: AppNumber.space,
-          // runSpacing: AppNumber.spaceSmall,
           children: SwapType.values.map((e) {
             switch (e) {
               case SwapType.custom:
@@ -95,7 +93,7 @@ class ReplaceSwapCustom extends StatelessWidget {
       trailing: Row(
         crossAxisAlignment: .center,
         children: [
-          const SizedBox(width: AppNumber.spaceMedium),
+          const SizedBox(width: AppNumber.spaceSmall),
           SizedBox(
             width: 112,
             child: NumberInput(
@@ -105,7 +103,7 @@ class ReplaceSwapCustom extends StatelessWidget {
               onChanged: onIndexChanged,
             ),
           ),
-          const SizedBox(width: AppNumber.spaceMedium),
+          const SizedBox(width: AppNumber.spaceSmall),
           SizedBox(
             width: 108,
             child: EasyInput(

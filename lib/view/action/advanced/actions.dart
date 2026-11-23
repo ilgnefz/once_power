@@ -24,8 +24,8 @@ class ActionsGroup extends StatelessWidget {
               onPressed: () => showAdvanceView(context, e),
             );
           }),
-          Spacer(),
-          PresetButton(),
+          const Spacer(),
+          const PresetButton(),
         ],
       ),
     );

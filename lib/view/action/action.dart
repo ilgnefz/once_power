@@ -35,7 +35,7 @@ class ActionView extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(
-                children: [
+                children: const [
                   ActionNormal(true),
                   ActionNormal(false),
                   AdvancedView(),

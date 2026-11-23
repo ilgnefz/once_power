@@ -28,7 +28,7 @@ class ReplaceInserterGroup extends StatelessWidget {
         crossAxisAlignment: .center,
         children: [
           BaseText('${context.tr(AppL10n.replaceWord)}:'),
-          SizedBox(width: AppNumber.spaceMedium),
+          const SizedBox(width: AppNumber.spaceMedium),
           SizedBox(
             height: AppNumber.widgetHeight,
             width: 320.0,
@@ -37,7 +37,7 @@ class ReplaceInserterGroup extends StatelessWidget {
               onChanged: onInserterChanged,
             ),
           ),
-          SizedBox(width: AppNumber.spaceSmall),
+          const SizedBox(width: AppNumber.spaceSmall),
           EasyTooltip(
             waitDuration: .zero,
             tip: context.tr(AppL10n.replaceWordTip),

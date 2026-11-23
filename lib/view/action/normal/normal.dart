@@ -45,7 +45,7 @@ class ActionNormal extends StatelessWidget {
           ),
           const CaseGroup(),
           const AddGroup(),
-          SizedBox(height: AppNumber.spaceSmall),
+          const SizedBox(height: AppNumber.spaceSmall),
           const PickerGroup(),
         ],
       ),

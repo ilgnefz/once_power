@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:once_power/constant/l10n.dart';
 
-enum ReplaceMode { input, part, format, convert, swap, inserter }
+enum ReplaceMode { enter, part, format, convert, swap, inserter }
 
 extension ReplaceModeExtension on ReplaceMode {
   String get label {
     switch (this) {
-      case ReplaceMode.input:
+      case ReplaceMode.enter:
         return tr(AppL10n.advanceEnter);
       case ReplaceMode.part:
         return tr(AppL10n.deletePart);
@@ -21,12 +21,12 @@ extension ReplaceModeExtension on ReplaceMode {
     }
   }
 
-  bool get isNormal => this == ReplaceMode.input;
+  bool get isEnter => this == ReplaceMode.enter;
   bool get isPart => this == ReplaceMode.part;
   bool get isFormat => this == ReplaceMode.format;
   bool get isConvert => this == ReplaceMode.convert;
   bool get isSwap => this == ReplaceMode.swap;
-  bool get isSeparator => this == ReplaceMode.inserter;
+  bool get isInserter => this == ReplaceMode.inserter;
 }
 
 enum FillPosition { front, behind }

@@ -18,7 +18,7 @@ class PickerGroup extends StatelessWidget {
       child: Row(
         children: [
           EasyButton(label: context.tr(AppL10n.addFile), onPressed: () {}),
-          SizedBox(width: AppNumber.paddingSmall),
+          const SizedBox(width: AppNumber.paddingSmall),
           EasyButton(label: context.tr(AppL10n.selectFolder), onPressed: () {}),
           const Spacer(),
           ElevatedButton(

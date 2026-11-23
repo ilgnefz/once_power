@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:once_power/constant/l10n.dart';
 import 'package:once_power/constant/number.dart';
 import 'package:once_power/widget/base/dropdown.dart';
 import 'package:once_power/widget/base/text.dart';
@@ -26,10 +28,12 @@ class ButtonGroup extends StatelessWidget {
       child: Row(
         spacing: AppNumber.spaceSmall,
         children: [
-          BaseText('应用组:'),
+          BaseText('${context.tr(AppL10n.applyGroup)}:'),
           EasyTextDropdown<String>(
-            value: group,
+            value: group == 'all' ? context.tr(AppL10n.all) : group,
+            // TODO: 更改
             items: [
+              context.tr(AppL10n.all),
               '0',
               '1',
               '2',
@@ -37,8 +41,14 @@ class ButtonGroup extends StatelessWidget {
             onChanged: onGroupChange,
           ),
           const Spacer(),
-          TextButton(onPressed: onComplete, child: Text('确认')),
-          TextButton(onPressed: onCompleteExit, child: Text('确认并关闭')),
+          TextButton(
+            onPressed: onComplete,
+            child: Text(context.tr(AppL10n.ok)),
+          ),
+          TextButton(
+            onPressed: onCompleteExit,
+            child: Text(context.tr(AppL10n.okExist)),
+          ),
         ],
       ),
     );

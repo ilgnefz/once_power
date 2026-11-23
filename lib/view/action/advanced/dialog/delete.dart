@@ -20,12 +20,11 @@ class DeleteDialog extends StatefulWidget {
 
 class _DeleteDialogState extends State<DeleteDialog>
     with AutomaticKeepAliveClientMixin {
-  // TODO: 扩展删除自定义和全部、类型判断
-  String match = '', extension = '', group = '0';
+  String match = '', extension = '', group = 'all';
   bool regex = false, deleteExtension = false;
-  DeleteMode mode = DeleteMode.enter;
-  MatchContent content = MatchContent.number;
-  MatchPosition position = MatchPosition.self;
+  DeleteMode mode = .enter;
+  MatchContent content = .number;
+  MatchPosition position = .self;
   int number = 1, font = 1, behind = 1, start = 1, digit = 1;
   List<DeleteType> deleteTypes = [];
   DeleteExtensionType extensionType = .all;
@@ -42,8 +41,8 @@ class _DeleteDialogState extends State<DeleteDialog>
       onGroupChange: (value) => setState(() => group = value),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: .center,
+          Wrap(
+            alignment: .center,
             spacing: AppNumber.space,
             children: DeleteMode.values.map((e) {
               return ModeSwitchItem(
@@ -53,9 +52,9 @@ class _DeleteDialogState extends State<DeleteDialog>
               );
             }).toList(),
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           DeleteInputGroup(
-            selected: mode == .enter,
+            selected: mode.isEnter,
             match: match,
             onMatchChanged: (value) {
               match = value;
@@ -99,9 +98,9 @@ class _DeleteDialogState extends State<DeleteDialog>
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           MatchPartGroup(
-            selected: mode == .part,
+            selected: mode.isPart,
             start: start,
             digit: digit,
             onStartChanged: (value) {
@@ -115,9 +114,9 @@ class _DeleteDialogState extends State<DeleteDialog>
               setState(() {});
             },
           ),
-          SizedBox(height: AppNumber.spaceMedium),
+          const SizedBox(height: AppNumber.spaceMedium),
           DeleteTypeGroup(
-            selected: mode == .type,
+            selected: mode.isType,
             deleteTypes: deleteTypes,
             onChanged: (value) => setState(() {
               deleteTypes.contains(value)
@@ -133,7 +132,7 @@ class _DeleteDialogState extends State<DeleteDialog>
             }),
           ),
           DeleteExtensionGroup(
-            selected: mode == .extension,
+            selected: mode.isExtension,
             extensionType: extensionType,
             onExtensionTypeChanged: (value) {
               extensionType = value;

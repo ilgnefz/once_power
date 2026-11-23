@@ -25,6 +25,9 @@ import 'provider/value.dart';
 // TODO:预览音频和电子书
 // TODO:灰色文字主题
 // TODO:添加关闭高级弹窗透明度变化的开关
+// TODO:添加自定义打开时选择功能的选项
+// TODO: 输入框日期可以选择
+// TODO: 序列类型：罗马数字、中文
 
 Future<void> main(List<String> args) async {
   await AppConfig.init(args);
@@ -69,7 +72,7 @@ class MyApp extends ConsumerWidget {
       ],
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: HomeView(),
+      home: const HomeView(),
     );
   }
 }

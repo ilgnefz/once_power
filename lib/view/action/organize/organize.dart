@@ -14,13 +14,13 @@ class OrganizeView extends StatelessWidget {
     return Padding(
       padding: .symmetric(vertical: AppNumber.spaceMedium),
       child: Column(
-        children: [
+        children: const [
           Expanded(child: Column()),
-          const TargetInput(),
+          TargetInput(),
           space,
-          const AddGroup(),
+          AddGroup(),
           space,
-          const PickerGroup(),
+          PickerGroup(),
         ],
       ),
     );

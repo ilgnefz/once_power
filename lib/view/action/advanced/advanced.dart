@@ -14,13 +14,13 @@ class AdvancedView extends StatelessWidget {
     return Padding(
       padding: .symmetric(vertical: AppNumber.spaceMedium),
       child: Column(
-        children: [
+        children: const [
           Expanded(child: DirectiveEmpty()),
-          const ActionsGroup(),
+          ActionsGroup(),
           SizedBox(height: AppNumber.spaceSmall),
-          const AddGroup(),
+          AddGroup(),
           SizedBox(height: AppNumber.spaceSmall),
-          const PickerGroup(),
+          PickerGroup(),
         ],
       ),
     );

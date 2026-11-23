@@ -17,6 +17,11 @@ extension DeleteModeExtension on DeleteMode {
         return tr(AppL10n.deleteExtension);
     }
   }
+
+  bool get isEnter => this == DeleteMode.enter;
+  bool get isPart => this == DeleteMode.part;
+  bool get isType => this == DeleteMode.type;
+  bool get isExtension => this == DeleteMode.extension;
 }
 
 enum DeleteType { digit, capital, lowercase, nonLetter, punctuation, space }

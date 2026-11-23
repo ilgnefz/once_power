@@ -34,7 +34,6 @@ class MatchPositionGroup extends StatelessWidget {
         title: context.tr(AppL10n.enterPosition),
         spacing: AppNumber.space,
         runSpacing: AppNumber.spaceSmall,
-        // alignment: .spaceBetween,
         children: MatchPosition.values.map((e) {
           return EasyRadio(
             label: e.label,

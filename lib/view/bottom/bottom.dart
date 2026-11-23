@@ -20,7 +20,6 @@ class BottomView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
-    // 当前实际生效的明暗决定读哪一组偏好；跟随系统时也跟着变。
     final bool transparent = theme.brightness == Brightness.light
         ? ref.watch(isLightTransparentProvider)
         : ref.watch(isDarkTransparentProvider);

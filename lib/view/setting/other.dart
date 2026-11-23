@@ -11,7 +11,7 @@ class OtherView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingCard(
       title: context.tr(AppL10n.other),
-      children: [SizedBox(height: AppNumber.padding)],
+      children: [const SizedBox(height: AppNumber.padding)],
     );
   }
 }
